@@ -1,12 +1,11 @@
-# The Modern JavaScript Tutorial
+# Zamonaviy JavaScript darsligi
 
-This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+Ushbu darslik ingliz tilidan tarjima qilinmoqda. 
 
-## Translations
+## Tarjimalar
 
-We'd like to make the tutorial available in many languages. Please help us to translate.
-
-See <https://github.com/javascript-tutorial/translate> for the details.
+Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga tarjima qilishga yordam bering.
+Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-tutorial/translate>.
 
 ## Contributions
 

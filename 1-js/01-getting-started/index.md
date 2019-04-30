@@ -1,3 +1,3 @@
-# An introduction
+# Kirish bobi
 
-About the JavaScript language and the environment to develop with it.
+JavaScript tili va u bajarilanadigan muhitlar haqida.

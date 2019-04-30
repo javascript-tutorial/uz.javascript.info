@@ -1,38 +1,34 @@
-# Zamonaviy JavaScript darsligi
+# O'zbek tilida zamonaviy JavaScript darsligi
 
-Ushbu darslik ingliz tilidan tarjima qilinmoqda. 
+Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan. 
 
 ## Tarjimalar
 
 Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga tarjima qilishga yordam bering.
 Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-tutorial/translate>.
 
-## Contributions
+## Hissalar
 
-We'd also like to collaborate on the tutorial with other people.
+Shuningdek, biz boshqa odamlar bilan hamkorlikda ishlashni xohlaymiz.
 
-Something's wrong? A topic is missing? Explain it to people, add as PR 👏
+Biror narsa noto'g'rimi? Mavzu yo'qmi? Buni odamlarga tushuntirib, Pull Request (PR) sifatida qo'shing👏
 
 **You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.  
 
-The list of contributors is available at <https://javascript.info/about#contributors>.
+Tarjima ishtirokchilari ro'yxati <https://javascript.info/about#contributors>-da mavjud.
 
-## Structure
+## Loyihaning tuzilishi
 
-Every chapter, article or a task has its folder.
+Har bir bob, maqola yoki mashq o'z papkasiga ega.
 
-The folder is named like `N-url`, where `N` is a number for the sorting purposes and `url` is the URL part with title of the material.
+Papka `N-url` kabi nomlanadi, bu yerda `N` - saralash maqsadlari uchun raqam, `url` esa materiallarni URL qismi.
 
-The type of the material is defined by the file inside the folder:
+Materialning turi papka ichidagi fayl bilan belgilanadi:
 
-  - `index.md` stands for a chapter
-  - `article.md` stands for an article
-  - `task.md` stands for a task (solution must be provided in `solution.md` file aswell)
+  - `index.md` bobni belgilash uchun
+  - `article.md` maqolani belgilash uchun
+  - `task.md` mashqlarni belgilash uchun (yechimi esa `solution.md` faylida joylashishi kerak)
 
-Each of these files starts from the `# Main header`.
+Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi. 
 
-It's very easy to add something new.
-
----
-💓  
-Ilya Kantor @iliakan
+Yangi ma'lumotni kiritish juda oson...

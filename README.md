@@ -11,7 +11,7 @@ Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-
 
 Shuningdek, biz boshqa odamlar bilan hamkorlikda ishlashni xohlaymiz.
 
-Biror narsa noto'g'rimi? Mavzu yo'qmi? Buni odamlarga tushuntirib, Pull Request (PR) sifatida qo'shing👏
+Biror narsa noto'g'rimi? Mavzu yo'qmi? Buni odamlarga tushuntirib, Pull Request (PR) orqali qo'shing👏
 
 **You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.  
 

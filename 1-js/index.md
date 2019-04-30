@@ -1,6 +1,5 @@
-# The JavaScript language
+# JavaScript dasturlash tili
 
-Here we learn JavaScript, starting from scratch and go on to advanced concepts like OOP.
+Ushbu bobda biz JavaScript-ni noldan boshlab o'rganamiz va OAD (OOP) kabi ilg'or konsepsiyalarga o'tamiz.
 
-We concentrate on the language itself here, with the minimum of environment-specific notes.
-
+Birinchi bo'limda biz tilning o'ziga e'tibor qaratamiz, bu yerda JavaScript-ni ishlatilayotgan muhit haqida esa minimal ma'lumotlar mavjud.

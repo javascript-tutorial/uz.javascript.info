@@ -12,8 +12,6 @@ Skriptlar oddiy matn sifatida taqdim etiladi va amalga oshiriladi. Ularni ishga 
 
 Shu jihatdan, JavaScript [Java] (https://en.wikipedia.org/wiki/Java_(programming_language)) tilidan juda farq qiladi.
 
-JavaScript yaratilganda, u dastlab "LiveScript" nomi bilan boshqa nomga ega bo'ldi. Ammo Java o'sha paytlarda juda mashhur edi, shuning uchun Java tilining "kichik birodari" sifatida yangi tilni joylashtirishga yordam berishga qaror qilindi.
-
 ```smart header="Nega <u>Java</u>Script?"
 JavaScript yaratilganda, u dastlab "LiveScript" nomi bilan taqdim etilgan edi. Ammo Java o'sha paytlarda juda mashhur edi, shuning uchun Java tilining "ukasi" sifatida yangi tilni taqdim etish g'oyasi JS mashhur bo'lishga yordam beradi deb hisoblangan .
 

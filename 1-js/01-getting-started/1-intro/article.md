@@ -1,24 +1,26 @@
-# An Introduction to JavaScript
+# JavaScript-ga kirish
 
-Let's see what's so special about JavaScript, what we can achieve with it, and which other technologies play well with it.
+Keling, JavaScript-da nima muhimligini, u bilan nimaga erisha olishimizni va qanday boshqa texnologiyalar bilan ushbu til yaxshi qo'llanilishini ko'rib chiqaylik.
 
-## What is JavaScript?
+## JavaScript bu nima?
 
-*JavaScript* was initially created to *"make web pages alive"*.
+*JavaScript* dastlab *"veb-sahifalarni jonlantirish"* uchun yaratilgan edi.
 
-The programs in this language are called *scripts*. They can be written right in a web page's HTML and executed automatically as the page loads.
+Ushbu tilda dasturlar *skript* deb nomlanadi. Ular veb-sahifani HTML-da yozilishi mumkin va sahifa brauzer tomonidan yuklanganidan keyin ular avtomatik ravishda amalga oshiriladi.
 
-Scripts are provided and executed as plain text. They don't need special preparation or compilation to run.
+Skriptlar oddiy matn sifatida taqdim etiladi va amalga oshiriladi. Ularni ishga tushirish uchun maxsus tayyorgarlik yoki kompilatsiya kerak emas.
 
-In this aspect, JavaScript is very different from another language called [Java](https://en.wikipedia.org/wiki/Java_(programming_language)).
+Shu jihatdan, JavaScript [Java] (https://en.wikipedia.org/wiki/Java_(programming_language)) tilidan juda farq qiladi.
 
-```smart header="Why <u>Java</u>Script?"
-When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+JavaScript yaratilganda, u dastlab "LiveScript" nomi bilan boshqa nomga ega bo'ldi. Ammo Java o'sha paytlarda juda mashhur edi, shuning uchun Java tilining "kichik birodari" sifatida yangi tilni joylashtirishga yordam berishga qaror qilindi.
 
-But as it evolved, JavaScript became a fully independent language with its own specification called [ECMAScript](http://en.wikipedia.org/wiki/ECMAScript), and now it has no relation to Java at all.
+```smart header="Nega <u>Java</u>Script?"
+JavaScript yaratilganda, u dastlab "LiveScript" nomi bilan taqdim etilgan edi. Ammo Java o'sha paytlarda juda mashhur edi, shuning uchun Java tilining "ukasi" sifatida yangi tilni taqdim etish g'oyasi JS mashhur bo'lishga yordam beradi deb hisoblangan .
+
+Ammo, rivojlanish jarayonida, JavaScript [ECMAScript] (http://en.wikipedia.org/wiki/ECMAScript) deb ataladigan o'z xususiyatiga ega to'liq mustaqil tilga aylangan va hozirda Java tiliga hech qanday aloqasi yo'q.
 ```
 
-Today, JavaScript can execute not only in the browser, but also on the server, or actually on any device that has a special program called [the JavaScript engine](https://en.wikipedia.org/wiki/JavaScript_engine).
+Bugungi kunda JavaScript nafaqat brauzerda, balki serverda yoki aslida [JavaScript interpretatori](https://en.wikipedia.org/wiki/JavaScript_engine) deb nomlangan maxsus dasturga ega bo'lgan har qanday qurilmada ham bajarilishi mumkin.
 
 The browser has an embedded engine sometimes called a "JavaScript virtual machine".
 
@@ -79,42 +81,41 @@ Examples of such restrictions include:
 
 Such limits do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugin/extensions which may ask for extended permissions.
 
-## What makes JavaScript unique?
+## JavaScript-ni qaysi xususiyatlari uni noyob qiladi?
 
-There are at least *three* great things about JavaScript:
+JavaScript hech bo'lmaganda *uchta* ajoyib xususiyatga ega:
 
-```compare
-+ Full integration with HTML/CSS.
-+ Simple things are done simply.
-+ Support by all major browsers and enabled by default.
+```solishtiring
++ HTML/CSS bilan to'liq integratsiyasi.
++ Oson ishlar osongina amalga oshiriladi.
++ Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va ularda sukut bo'yicha yoqilgan.
 ```
-JavaScript is the only browser technology that combines these three things.
+JavaScript - bu uchta narsani birlashtirgan yagona brauzer texnologiyasidir.
 
-That's what makes JavaScript unique. That's why it's the most widespread tool for creating browser interfaces.
+Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer interfeyslarini yaratishda eng keng tarqalgan vositadir.
 
-While planning to learn a new technology, it's beneficial to check its perspectives. So let's move on to the modern trends affecting it,  including new languages and browser abilities.
+Yangi texnologiyani o'rganishni rejalashtirayotib, uning istiqbollarini tekshirish ham muhimdir. Keling, zamonaviy tendentsiyalarga o'taylik.
 
+## JavaScript "ustidan" qo'llanadigan tillar
 
-## Languages "over" JavaScript
+JavaScript-ning sintaksisi hammaning ehtiyojlariga mos kelmaydi. Turli odamlar turli xususiyatlarni xohlashadi.
 
-The syntax of JavaScript does not suit everyone's needs. Different people want different features.
+Bu kutilgan hodisa bo'lishi kerak edi, chunki loyihalar va talablar har bir kishi uchun farq qiladi.
 
-That's to be expected, because projects and requirements are different for everyone.
+Shunday qilib, yaqinda juda ko'p yangi tillar paydo bo'ldi va brauzer ularni ishlatishdan oldin JavaScript-ga aylantirib bajaradi.
 
-So recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+Zamonaviy asboblar transpilatsiyani juda tez va shaffof bajaradi, aslida dasturchilar kodni bitta tilda yozganda, ular uni avtomatik tarzda boshqa tilga aylantirish imkonini beradi.
 
-Modern tools make the transpilation very fast and transparent, actually allowing developers to code in another language and auto-converting it "under the hood".
+Bunday tillarning namunalari:
 
-Examples of such languages:
+- [CoffeeScript] (http://coffeescript.org/) JavaScript uchun "sintaktik shakar" dir. Ushbu til bizga qisqa sintaksisni va aniqroq kodni taqdim etadi. Odatda, Ruby dasurchilari shu tilni afzal ko'rishadi.
+- [TypeScript] (http://www.typescriptlang.org/) murakkab tizimlarni ishlab chiqish, soddalashtirish va qo'llab-quvvatlash uchun "strict data typing"ni qo'shishga qaratilgan. Microsoft tomonidan ishlab chiqilgan.
+- [Dart] (https://www.dartlang.org/) brauzer bo'lmagan muhitda (mobil ilovalar kabi) ishlaydigan o'z dvigateliga ega bo'lgan mustaqil til. Bu dastlab JavaScript uchun zaxira sifatida Google tomonidan taklif etildi, lekin hozirgi paytda, brauzerlar shu tilni ham JS-ga transpilatsiya bo'lishini talab qilishadi.
 
-- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
-- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
-- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps). It was initially offered by Google as a replacement for JavaScript, but as of now, browsers require it to be transpiled to JavaScript just like the ones above.
+Bundan ham ko'proq tillar mavjud. Albatta, biz bu tillardan birini ishlatsak ham, biz nima qilayotganimizni tushunish uchun JavaScript-ni bilishimiz kerak.
 
-There are more. Of course, even if we use one of these languages, we should also know JavaScript to really understand what we're doing.
+## Xulosa
 
-## Summary
-
-- JavaScript was initially created as a browser-only language, but is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration with HTML/CSS.
-- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+- JavaScript dastlab brauzer tili sifatida yaratilgan, ammo hozirgi paytda ko'pgina boshqa muhitlarda ham qo'llanilmoqda.
+- Bugun JavaScript HTML/CSS bilan to'la integratsiyalashgan va eng keng tarqalgan brauzer tili hisoblanadi.
+- JavaScript-ga "aylanadigan" va muayyan xususiyatlarni taqdim etadigan ko'plab tillar mavjud. Javascriptni o'zlashtirgandan so'ng kamida qisqacha ularga bir nazar tashlash tavsiya etiladi.

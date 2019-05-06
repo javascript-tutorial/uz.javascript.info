@@ -20,17 +20,17 @@ Ammo, rivojlanish jarayonida, JavaScript [ECMAScript] (http://en.wikipedia.org/w
 
 Bugungi kunda JavaScript nafaqat brauzerda, balki serverda yoki aslida [JavaScript interpretatori](https://en.wikipedia.org/wiki/JavaScript_engine) deb nomlangan maxsus dasturga ega bo'lgan har qanday qurilmada ham bajarilishi mumkin.
 
-The browser has an embedded engine sometimes called a "JavaScript virtual machine".
+Brauzerlar o'z JavaScript interpretatorlariga ega, ular gohida "JavaScript virtual mashinasi" deb atalanadi.
 
-Different engines have different "codenames". For example:
+Har bir interpretatorni o'z nomi mavjud. Masalan:
 
-- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
-- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- Chrome va Opera brauzerlarida qo'llanadi.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- Firefox brauzerida.
 - ...There are other codenames like "Trident" and "Chakra" for different versions of IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
 
 The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome and Opera.
 
-```smart header="How do engines work?"
+```smart header="Interpretatorlar ishni qanday bajarishadi?"
 
 Engines are complicated. But the basics are easy.
 
@@ -41,7 +41,7 @@ Engines are complicated. But the basics are easy.
 The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and applies optimizations to the machine code based on that knowledge. When it's done, scripts run quite fast.
 ```
 
-## What can in-browser JavaScript do?
+## What can in-browser JavaScript do? Brauzerdagi JavaScript nimani bajara oladi?
 
 Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or CPU, because it was initially created for browsers which do not require it.
 
@@ -49,7 +49,7 @@ JavaScript's capabilities greatly depend on the environment it's running in. For
 
 In-browser JavaScript can do everything related to webpage manipulation, interaction with the user, and the webserver.
 
-For instance, in-browser JavaScript is able to:
+Masalan: 
 
 - Add new HTML to the page, change the existing content, modify styles.
 - React to user actions, run on mouse clicks, pointer movements, key presses.

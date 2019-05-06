@@ -1,9 +1,9 @@
-# Data types
+# Ma'lumot turlari
 
 A variable in JavaScript can contain any data. A variable can at one moment be a string and at another be a number:
 
 ```js
-// no error
+// quyidagi kod xato emas
 let message = "hello";
 message = 123456;
 ```

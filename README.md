@@ -1,19 +1,20 @@
 # O'zbek tilida zamonaviy JavaScript darsligi
 
-Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan. 
+Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan.
+Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu repozitoriyning Issues[https://#] bo'limida bizga murojaat qilishingizni so'raymiz. 
 
 ## Tarjimalar
 
-Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga tarjima qilishga yordam bering.
+Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga o'z tilingizga tarjima qilishga yordam bering.
 Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-tutorial/translate>.
 
 ## Hissalar
 
-Shuningdek, biz boshqa odamlar bilan hamkorlikda ishlashni xohlaymiz.
+Bizning jamoamiz boshqa odamlar bilan hamkorlikda ishlashni xohlaydi. Shuning uchun o'zbek tili tarjimasiga o'z hissangizni qo'shing!
 
-Biror narsa noto'g'rimi? Mavzu yo'qmi? Buni odamlarga tushuntirib, Pull Request (PR) orqali qo'shing👏
+Darslikda biror narsa noto'g'rimi? Yoki kerakli mavzu yo'qmi? Buni bizga tushuntirib, Pull Request (PR) orqali o'z murojaatingizni qoldiring.
 
-**You can edit the text in any editor.** The tutorial uses enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.  
+**Tarjimani siz har bir matn mutaxarririda osonligicha yozishingiz mumkin** Darslikni matni oson va qulay Markdown tilida yozilgan. Agar siz darslikni loyihasini veb-sahifa tarzida ko'rmoqchi bo'lsangiz, unda siz mahalliy server tashkil etishingiz kerak. Shu mavzu haqida batafsil ma'lumot olish uchun quyidagi maqolaga o'ting <https://github.com/javascript-tutorial/server>.  
 
 Tarjima ishtirokchilari ro'yxati <https://javascript.info/about#contributors>-da mavjud.
 
@@ -21,14 +22,18 @@ Tarjima ishtirokchilari ro'yxati <https://javascript.info/about#contributors>-da
 
 Har bir bob, maqola yoki mashq o'z papkasiga ega.
 
-Papka `N-url` kabi nomlanadi, bu yerda `N` - saralash maqsadlari uchun raqam, `url` esa materiallarni URL qismi.
+Papka `N-url` kabi nomlanadi, bu yerda `N` - saralash maqsadlari uchun raqamlar, `url` esa materiallarni URL qismlari.
 
 Materialning turi papka ichidagi fayl bilan belgilanadi:
 
   - `index.md` bobni belgilash uchun
   - `article.md` maqolani belgilash uchun
-  - `task.md` mashqlarni belgilash uchun (yechimi esa `solution.md` faylida joylashishi kerak)
+  - `task.md` mashqlarni belgilash uchun (yechimi mavjud bo'lsa `solution.md` faylida joylanadi)
 
-Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi. 
+Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi.
 
-Yangi ma'lumotni kiritish juda oson...
+...
+
+E'tiboringiz uchun rahmat! 
+
+Elbek.

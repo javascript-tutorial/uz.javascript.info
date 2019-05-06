@@ -7,11 +7,11 @@ But we need a working environment to run our scripts and, since this book is onl
 So first, let's see how we attach a script to a webpage. For server-side environments (like Node.js), you can execute the script with a command like `"node my.js"`.
 
 
-## The "script" tag
+## HTML "script" tegi
 
 JavaScript programs can be inserted into any part of an HTML document with the help of the `<script>` tag.
 
-For instance:
+Masalan:
 
 ```html run height=100
 <!DOCTYPE HTML>
@@ -19,7 +19,7 @@ For instance:
 
 <body>
 
-  <p>Before the script...</p>
+  <p>Skriptdan oldin...</p>
 
 *!*
   <script>
@@ -27,7 +27,7 @@ For instance:
   </script>
 */!*
 
-  <p>...After the script.</p>
+  <p>...Skriptdan keyin.</p>
 
 </body>
 

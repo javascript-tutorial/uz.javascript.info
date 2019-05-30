@@ -8,7 +8,11 @@ Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu re
 Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga o'z tilingizga tarjima qilishga yordam bering.
 Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-tutorial/translate>.
 
+<<<<<<< HEAD
 ## Hissalar
+=======
+See <https://javascript.info/translate> for the details.
+>>>>>>> 08734734021aa128c13da2382fe8fa062677bb9f
 
 Bizning jamoamiz boshqa odamlar bilan hamkorlikda ishlashni xohlaydi. Shuning uchun o'zbek tili tarjimasiga o'z hissangizni qo'shing!
 

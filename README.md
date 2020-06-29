@@ -8,7 +8,11 @@ Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu re
 Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga o'z tilingizga tarjima qilishga yordam bering.
 Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-tutorial/translate>.
 
+<<<<<<< HEAD
 ## Hissalar
+=======
+See <https://javascript.info/translate> for the details.
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8
 
 Bizning jamoamiz boshqa odamlar bilan hamkorlikda ishlashni xohlaydi. Shuning uchun o'zbek tili tarjimasiga o'z hissangizni qo'shing!
 
@@ -36,4 +40,10 @@ Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi.
 
 E'tiboringiz uchun rahmat! 
 
+<<<<<<< HEAD
 Elbek.
+=======
+---
+♥  
+Ilya Kantor @iliakan
+>>>>>>> 340ce4342100f36bb3c4e42dbe9ffa647d8716c8

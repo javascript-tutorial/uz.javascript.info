@@ -1,6 +1,6 @@
 # Hello, world!
 
-The tutorial that you're reading is about core JavaScript, which is platform-independent. Later on, you'll learn about Node.js and other platforms that use it.
+This part of the tutorial is about core JavaScript, the language itself.
 
 But we need a working environment to run our scripts and, since this book is online, the browser is a good choice. We'll keep the amount of browser-specific commands (like `alert`) to a minimum so that you don't spend time on them if you plan to concentrate on another environment (like Node.js). We'll focus on JavaScript in the browser in the [next part](/ui) of the tutorial.
 
@@ -46,7 +46,7 @@ The `<script>` tag contains JavaScript code which is automatically executed when
 The `<script>` tag has a few attributes that are rarely used nowadays but can still be found in old code:
 
 The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard, HTML5, totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic; we'll talk about modules in another part of the tutorial. 
+: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
 
 The `language` attribute: <code>&lt;script <u>language</u>=...&gt;</code>
 : This attribute was meant to show the language of the script. This attribute no longer makes sense because JavaScript is the default language. There is no need to use it.
@@ -60,7 +60,7 @@ Comments before and after scripts.
     //--></script>
     ```
 
-    This trick isn't used in modern JavaScript. These comments hid JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
+    This trick isn't used in modern JavaScript. These comments hide JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
 
 
 ## External scripts
@@ -73,14 +73,12 @@ Script files are attached to HTML with the `src` attribute:
 <script src="/path/to/script.js"></script>
 ```
 
-Here, `/path/to/script.js` is an absolute path to the script file (from the site root).
-
-You can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
 
 We can give a full URL as well. For instance:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
 To attach several scripts, use multiple tags:

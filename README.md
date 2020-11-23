@@ -1,14 +1,22 @@
 # O'zbek tilida zamonaviy JavaScript darsligi
 
+<<<<<<< HEAD
 Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan.
 Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu repozitoriyning Issues[https://#] bo'limida bizga murojaat qilishingizni so'raymiz. 
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published in [https://javascript.info](https://javascript.info).
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 ## Tarjimalar
 
 Biz darslikni turli tillarda taqdim etishni xohlaymiz, shuning uchun, iltimos bizga o'z tilingizga tarjima qilishga yordam bering.
 Batafsil ma'lumot uchun quyidagi havolaga o'ting <https://github.com/javascript-tutorial/translate>.
 
+<<<<<<< HEAD
 ## Hissalar
+=======
+See <https://javascript.info/translate> for the details.
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 Bizning jamoamiz boshqa odamlar bilan hamkorlikda ishlashni xohlaydi. Shuning uchun o'zbek tili tarjimasiga o'z hissangizni qo'shing!
 
@@ -30,10 +38,22 @@ Materialning turi papka ichidagi fayl bilan belgilanadi:
   - `article.md` maqolani belgilash uchun
   - `task.md` mashqlarni belgilash uchun (yechimi mavjud bo'lsa `solution.md` faylida joylanadi)
 
+<<<<<<< HEAD
 Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi.
+=======
+  - `index.md` stands for a chapter
+  - `article.md` stands for an article
+  - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93
 
 ...
 
 E'tiboringiz uchun rahmat! 
 
+<<<<<<< HEAD
 Elbek.
+=======
+---
+♥  
+Ilya Kantor @iliakan
+>>>>>>> 23da191b58643387783f38e999f5b05be87d3d93

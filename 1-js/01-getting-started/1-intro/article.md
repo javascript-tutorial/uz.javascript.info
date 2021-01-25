@@ -1,19 +1,34 @@
 # JavaScript-ga kirish
 
+<<<<<<< HEAD
 Keling, JavaScript-da nima muhimligini, u bilan nimaga erisha olishimizni va qanday boshqa texnologiyalar bilan ushbu til yaxshi qo'llanilishini ko'rib chiqaylik.
+=======
+Let's see what's so special about JavaScript, what we can achieve with it, and what other technologies play well with it.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 ## JavaScript bu nima?
 
+<<<<<<< HEAD
 *JavaScript* dastlab *"veb-sahifalarni jonlantirish"* uchun yaratilgan edi.
 
 Ushbu tilda dasturlar *skript* deb nomlanadi. Ular veb-sahifani HTML-da yozilishi mumkin va sahifa brauzer tomonidan yuklanganidan keyin ular avtomatik ravishda amalga oshiriladi.
+=======
+*JavaScript* was initially created to "make web pages alive".
+
+The programs in this language are called *scripts*. They can be written right in a web page's HTML and run automatically as the page loads.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 Skriptlar oddiy matn sifatida taqdim etiladi va amalga oshiriladi. Ularni ishga tushirish uchun maxsus tayyorgarlik yoki kompilatsiya kerak emas.
 
 Shu jihatdan, JavaScript [Java] (https://en.wikipedia.org/wiki/Java_(programming_language)) tilidan juda farq qiladi.
 
+<<<<<<< HEAD
 ```smart header="Nega <u>Java</u>Script?"
 JavaScript yaratilganda, u dastlab "LiveScript" nomi bilan taqdim etilgan edi. Ammo Java o'sha paytlarda juda mashhur edi, shuning uchun Java tilining "ukasi" sifatida yangi tilni taqdim etish g'oyasi JS mashhur bo'lishga yordam beradi deb hisoblangan .
+=======
+```smart header="Why is it called <u>Java</u>Script?"
+When JavaScript was created, it initially had another name: "LiveScript". But Java was very popular at that time, so it was decided that positioning a new language as a "younger brother" of Java would help.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 Ammo, rivojlanish jarayonida, JavaScript [ECMAScript] (http://en.wikipedia.org/wiki/ECMAScript) deb ataladigan o'z xususiyatiga ega to'liq mustaqil tilga aylangan va hozirda Java tiliga hech qanday aloqasi yo'q.
 ```
@@ -24,9 +39,15 @@ Brauzerlar o'z JavaScript interpretatorlariga ega, ular gohida "JavaScript virtu
 
 Har bir interpretatorni o'z nomi mavjud. Masalan:
 
+<<<<<<< HEAD
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- Chrome va Opera brauzerlarida qo'llanadi.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- Firefox brauzerida.
 - ...There are other codenames like "Trident" and "Chakra" for different versions of IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+- [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
+- ...There are other codenames like "Chakra" for IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome and Opera.
 
@@ -38,7 +59,7 @@ Engines are complicated. But the basics are easy.
 2. Then it converts ("compiles") the script to the machine language.
 3. And then the machine code runs, pretty fast.
 
-The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and applies optimizations to the machine code based on that knowledge. When it's done, scripts run quite fast.
+The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and further optimizes the machine code based on that knowledge.
 ```
 
 ## What can in-browser JavaScript do? Brauzerdagi JavaScript nimani bajara oladi?
@@ -63,14 +84,14 @@ JavaScript's abilities in the browser are limited for the sake of the user's saf
 
 Examples of such restrictions include:
 
-- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS system functions.
+- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS functions.
 
     Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like "dropping" a file into a browser window or selecting it via an `<input>` tag.
 
     There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
 - Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
 
-    This is called the "Same Origin Policy". To work around that, *both pages* must contain a special JavaScript code that handles data exchange.
+    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and contain a special JavaScript code that handles it. We'll cover that in the tutorial.
 
     This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com` and steal information from there.
 - JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
@@ -92,9 +113,13 @@ JavaScript - bu uchta narsani birlashtirgan yagona brauzer texnologiyasidir.
 
 Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer interfeyslarini yaratishda eng keng tarqalgan vositadir.
 
+<<<<<<< HEAD
 Yangi texnologiyani o'rganishni rejalashtirayotib, uning istiqbollarini tekshirish ham muhimdir. Keling, zamonaviy tendentsiyalarga o'taylik.
 
 ## JavaScript "ustidan" qo'llanadigan tillar
+=======
+That said, JavaScript also allows to create servers, mobile applications, etc.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a
 
 JavaScript-ning sintaksisi hammaning ehtiyojlariga mos kelmaydi. Turli odamlar turli xususiyatlarni xohlashadi.
 
@@ -110,6 +135,7 @@ Bunday tillarning namunalari:
 - [TypeScript] (http://www.typescriptlang.org/) murakkab tizimlarni ishlab chiqish, soddalashtirish va qo'llab-quvvatlash uchun "strict data typing"ni qo'shishga qaratilgan. Microsoft tomonidan ishlab chiqilgan.
 - [Dart] (https://www.dartlang.org/) brauzer bo'lmagan muhitda (mobil ilovalar kabi) ishlaydigan o'z dvigateliga ega bo'lgan mustaqil til. Bu dastlab JavaScript uchun zaxira sifatida Google tomonidan taklif etildi, lekin hozirgi paytda, brauzerlar shu tilni ham JS-ga transpilatsiya bo'lishini talab qilishadi.
 
+<<<<<<< HEAD
 Bundan ham ko'proq tillar mavjud. Albatta, biz bu tillardan birini ishlatsak ham, biz nima qilayotganimizni tushunish uchun JavaScript-ni bilishimiz kerak.
 
 ## Xulosa
@@ -117,3 +143,19 @@ Bundan ham ko'proq tillar mavjud. Albatta, biz bu tillardan birini ishlatsak ham
 - JavaScript dastlab brauzer tili sifatida yaratilgan, ammo hozirgi paytda ko'pgina boshqa muhitlarda ham qo'llanilmoqda.
 - Bugun JavaScript HTML/CSS bilan to'la integratsiyalashgan va eng keng tarqalgan brauzer tili hisoblanadi.
 - JavaScript-ga "aylanadigan" va muayyan xususiyatlarni taqdim etadigan ko'plab tillar mavjud. Javascriptni o'zlashtirgandan so'ng kamida qisqacha ularga bir nazar tashlash tavsiya etiladi.
+=======
+- [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+- [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
+- [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
+
+There are more. Of course, even if we use one of transpiled languages, we should also know JavaScript to really understand what we're doing.
+
+## Summary
+
+- JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
+- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
+>>>>>>> 97ef86242f9f236b13152e1baf52a55c4db8728a

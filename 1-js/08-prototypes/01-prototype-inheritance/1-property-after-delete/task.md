@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Working with prototype
+# Prototip bilan ishlash
 
-Here's the code that creates a pair of objects, then modifies them.
+Obyekt juftligini yaratadigan, keyin ularni o'zgartiradigan kod.
 
-Which values are shown in the process?
+Jarayonda qaysi qiymatlar ko'rsatilgan?
 
 ```js
 let animal = {
@@ -28,4 +28,4 @@ delete animal.jumps;
 alert( rabbit.jumps ); // ? (3)
 ```
 
-There should be 3 answers.
+3 javob bo'lishi kerak.

@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Calculate factorial
+# Faktorialni hisoblang
 
-The [factorial](https://en.wikipedia.org/wiki/Factorial) of a natural number is a number multiplied by `"number minus one"`, then by `"number minus two"`, and so on till `1`. The factorial of `n` is denoted as `n!`
+Tabiiy sonning [factoriali](https://en.wikipedia.org/wiki/Factorial) - bu `"minus bitta"` ga, so'ngra `"minus ikki"` ga ko'paytiriladigan raqam va shunga o'xshash `1` gacha. `N` faktoriali `n!` bilan belgilanadi
 
-We can write a definition of factorial like this:
+Biz faktorial ta'rifini quyidagicha yozishimiz mumkin:
 
 ```js
 n! = n * (n - 1) * (n - 2) * ...*1
 ```
 
-Values of factorials for different `n`:
+Turli `n` uchun faktoriallarning qiymatlari:
 
 ```js
 1! = 1
@@ -22,10 +22,10 @@ Values of factorials for different `n`:
 5! = 5 * 4 * 3 * 2 * 1 = 120
 ```
 
-The task is to write a function `factorial(n)` that calculates `n!` using recursive calls.
+Vazifa rekursiv chaqiriqlar yordamida `n!` ni hisoblaydigan `factorial(n)` funktsiyani yozishdan iborat.
 
 ```js
 alert( factorial(5) ); // 120
 ```
 
-P.S. Hint: `n!` can be written as `n * (n-1)!` For instance: `3! = 3*2! = 3*2*1! = 6`
+P.S. Maslahat: `n!` ni `n * (n-1)!` deb yozish mumkin! Masalan: `3! = 3*2! = 3*2*1! = 6`

@@ -1,8 +1,8 @@
-The difference becomes obvious when we look at the code inside a function.
+Agar funktsiya ichidagi kodni ko'rib chiqsak, farq aniq bo'ladi.
 
-The behavior is different if there's a "jump out" of `try..catch`.
+Agar `try..catch` dan "sakrab" chiqsa, xatti-harakatlar boshqacha bo'ladi.
 
-For instance, when there's a `return` inside `try..catch`. The `finally` clause works in case of *any* exit from `try..catch`, even via the `return` statement: right after `try..catch` is done, but before the calling code gets the control.
+Masalan, `return` `try..catch` ichida mavjud bo'lganda. `finally` bandi `try..catch` dan *har qanday* chiqish holatida, hatto `return` ifodasi orqali ishlaydi: `try..catch` tugashi bilanoq, lekin chaqiruv kodidan oldin boshqaruvni oladi.
 
 ```js run
 function f() {
@@ -21,16 +21,16 @@ function f() {
 f(); // cleanup!
 ```
 
-...Or when there's a `throw`, like here:
+...Yoki `throw` bo'lganida, bu yerda bo'lgani kabi:
 
 ```js run
 function f() {
   try {
     alert('start');
-    throw new Error("an error");
+    throw new Error("xato");
   } catch (e) {
     // ...
-    if("can't handle the error") {
+    if("xatoni bartaraf eta olmaydi") {
 *!*
       throw e;
 */!*
@@ -44,4 +44,4 @@ function f() {
 f(); // cleanup!
 ```
 
-It's `finally` that guarantees the cleanup here. If we just put the code at the end of `f`, it wouldn't run.
+Bu yerda tozalashni kafolatlaydigan `finally` ifodasi. Agar biz kodni `f` ning oxiriga qo'ysak, u ishlamaydi.

@@ -1,7 +1,7 @@
 
-# Function in if
+# If ning ichidagi funktsiya
 
-Look at the code. What will be result of the call at the last line?
+Kodga qarang. So'nggi satrdagi chaqiruv natijasi qanday bo'ladi?
 
 ```js run
 let phrase = "Hello";

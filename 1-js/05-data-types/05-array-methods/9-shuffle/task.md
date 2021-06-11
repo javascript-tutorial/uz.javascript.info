@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Shuffle an array
+# Massivni aralashtirish
 
-Write the function `shuffle(array)` that shuffles (randomly reorders) elements of the array.
+Massiv elementlarini aralashtiruvchi (tasodifiy tartiblash) `shuffle(array)` funktsiyasini yozing.
 
-Multiple runs of `shuffle` may lead to different orders of elements. For instance:
+Bir necha marta `aralashtirish` elementlarning turli xil tartiblariga olib kelishi mumkin. Misol uchun:
 
 ```js
 let arr = [1, 2, 3];
@@ -22,4 +22,4 @@ shuffle(arr);
 // ...
 ```
 
-All element orders should have an equal probability. For instance, `[1,2,3]` can be reordered as `[1,2,3]` or `[1,3,2]` or `[3,1,2]` etc, with equal probability of each case.
+Barcha element chaqiruvlari teng ehtimolga ega bo'lishi kerak. Masalan, `[1,2,3]` teng ehtimollik bilan `[1,2,3]` yoki `[1,3,2]` yoki `[3,1,2]` va boshqalar sifatida o'zgartirilishi mumkin. 

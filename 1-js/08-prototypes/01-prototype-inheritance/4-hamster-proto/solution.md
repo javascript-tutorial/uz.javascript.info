@@ -1,18 +1,18 @@
-Let's look carefully at what's going on in the call `speedy.eat("apple")`.
+Keling, `speedy.eat("olma")` chaqiurvida nimalar bo'layotganini diqqat bilan ko'rib chiqamiz.
 
-1. The method `speedy.eat` is found in the prototype (`=hamster`), then executed with `this=speedy` (the object before the dot).
+1. `speedy.eat` usuli prototipda topilgan (`=hamster`), so'ngra `this=speedy` (nuqta oldidagi obyekt) bilan bajariladi.
 
-2. Then `this.stomach.push()` needs to find `stomach` property and call `push` on it. It looks for `stomach` in `this` (`=speedy`), but nothing found.
+2. Keyin `this.stomach.push()` `stomach` xususiyatini topishi va unga `push` ni chaqirishi kerak. `this` da (`=speedy`) `stomach` ni qidiradi, ammo hech narsa topilmadi.
 
-3. Then it follows the prototype chain and finds `stomach` in `hamster`.
+3. Keyin u prototip zanjiriga ergashib, `hamster` da `stomach` ni topadi.
 
-4. Then it calls `push` on it, adding the food into *the stomach of the prototype*.
+4. Keyin u *prototipning oshqozoniga* ovqatni qo'shib, ustiga `push` ni chaqiradi.
 
-So all hamsters share a single stomach!
+Shunday qilib, barcha hamsterlar bitta oshqozonni bo'lishadi!
 
-Every time the `stomach` is taken from the prototype, then `stomach.push` modifies it "at place".
+Har safar `stomach` prototipdan olinadigan bo'lsa, u holda `stomach.push` uni "joyida" o'zgartiradi.
 
-Please note that such thing doesn't happen in case of a simple assignment `this.stomach=`:
+Iltimos e'tibor bering, `this.stomach =` oddiy tayinlashda bunday narsa bo'lmaydi.
 
 ```js run
 let hamster = {
@@ -20,7 +20,7 @@ let hamster = {
 
   eat(food) {
 *!*
-    // assign to this.stomach instead of this.stomach.push
+    // this.stomach.push o'rniga this.stomach o'rnating
     this.stomach = [food];
 */!*
   }
@@ -34,17 +34,17 @@ let lazy = {
   __proto__: hamster
 };
 
-// Speedy one found the food
-speedy.eat("apple");
-alert( speedy.stomach ); // apple
+// Speedy bittasi ovqat topdi
+speedy.eat("olma");
+alert( speedy.stomach ); // olma
 
-// Lazy one's stomach is empty
+// Lazy birining qorni bo'sh
 alert( lazy.stomach ); // <nothing>
 ```
 
-Now all works fine, because `this.stomach=` does not perform a lookup of `stomach`. The value is written directly into `this` object.
+Endi barchasi yaxshi ishlaydi, chunki `this.stomach=` `stomach` izlamaydi. Qiymat to'g'ridan-to'g'ri `this` obyektiga yoziladi.
 
-Also we can totally evade the problem by making sure that each hamster has their own stomach:
+Shuningdek, har bir hamsterning o'z oshqozoniga ega ekanligiga ishonch hosil qilish orqali biz muammodan butunlay qochishimiz mumkin:
 
 ```js run
 let hamster = {
@@ -69,12 +69,12 @@ let lazy = {
 */!*
 };
 
-// Speedy one found the food
-speedy.eat("apple");
-alert( speedy.stomach ); // apple
+// Speedy bittasi ovqat topdi
+speedy.eat("olma");
+alert( speedy.stomach ); // olma
 
-// Lazy one's stomach is empty
+// Lazy birining qorni bo'sh
 alert( lazy.stomach ); // <nothing>
 ```
 
-As a common solution, all properties that describe the state of a particular object, like `stomach` above, are usually written into that object. That prevents such problems.
+Umumiy yechim sifatida, ma'lum bir obyektning holatini tavsiflovchi barcha xususiyatlar, masalan, yuqoridagi `stomach` odatda ushbu obyektga yoziladi. Bu bunday muammolarning oldini oladi.

@@ -1,7 +1,7 @@
 
-# Call async from non-async
+# Async-ga mos kelmaydigandan chaqiring
 
-We have a "regular" function. How to call `async` from it and use its result?
+Bizda "muntazam" funktsiya mavjud. Undan `async` ga qanday chaqiruv bajarish va uning natijasidan foydalanish kerak?
 
 ```js
 async function wait() {
@@ -11,10 +11,10 @@ async function wait() {
 }
 
 function f() {
-  // ...what to write here?
-  // we need to call async wait() and wait to get 10
-  // remember, we can't use "await"
+  // ...bu yerda nima yozish kerak?
+  // async wait() ni chaqirishimiz va 10 ni kutishimiz kerak 
+  // esda tuting, biz "await" dan foydalana olmaymiz
 }
 ```
 
-P.S. The task is technically very simple, but the question is quite common for developers new to async/await.
+P.S. Vazifa texnik jihatdan juda sodda, ammo async/await uchun yangi dasturchilar uchun savol juda keng tarqalgan.

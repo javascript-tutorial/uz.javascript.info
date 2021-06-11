@@ -1,1 +1,1 @@
-Just loop over the object and `return false` immediately if there's at least one property.
+Agar ob'ektda kamida bitta xususiyat bo'lsa, darhol `false` qiymatini qaytaring.

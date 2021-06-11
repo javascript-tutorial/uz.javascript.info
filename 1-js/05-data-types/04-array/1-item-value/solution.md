@@ -1,17 +1,16 @@
-The result is `4`:
+Natija `4`:
 
 
 ```js run
-let fruits = ["Apples", "Pear", "Orange"];
+let fruits = ["Olmalar", "Nok", "Apelsin"];
 
 let shoppingCart = fruits;
 
-shoppingCart.push("Banana");
+shoppingCart.push("Banan");
 
 *!*
 alert( fruits.length ); // 4
 */!*
 ```
 
-That's because arrays are objects. So both `shoppingCart` and `fruits` are the references to the same array.
-
+Buning sababi, massivlar obyektlardir. Shunday qilib, `shoppingCart` ham, `fruits` ham bir xil massivga murojaat qilishadi.

@@ -1,41 +1,41 @@
-# Comparisons
+# Taqqoslashlar
 
-We know many comparison operators from maths:
+Biz matematikadan ko'plab taqqoslash operatorlarini bilamiz:
 
-- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
-- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
-- Equals: `a == b` (please note the double equals sign `=`. A single symbol `a = b` would mean an assignment).
-- Not equals. In maths the notation is <code>&ne;</code>, but in JavaScript it's written as an assignment with an exclamation sign before it: <code>a != b</code>.
+- Katta/kichik: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Katta / kichik yoki teng: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- Teng: `a == b` (qo'shaloq teng belgisi `=` ga e'tibor bering. Bitta tenglik belgisi `a = b` tayinlash operatori edi).
+- Teng emas. Matematikada bu taqqoslash <code>&ne;</code> bo'lar edi, lekin JavaScript da u undov belgisi bilan tayinlash operatori sifatida yozilgan: <code>a != b</code>.
 
-## Boolean is the result
+## Bul ma'lumot turi bu natija
 
-Like all other operators, a comparison returns a value. In this case, the value is a boolean.
+Boshqa operatorlar singari taqqoslash ham qiymatni qaytaradi. Bunday holda, qiymat mantiqiy ma'lumot turida hisoblanadi.
 
-- `true` -- means "yes", "correct" or "the truth".
-- `false` -- means "no", "wrong" or "not the truth".
+- `true` -- "ha", "to'g'ri" yoki "haqiqat" degan ma'noni anglatadi.
+- `false` -- "yo'q", "noto'g'ri" yoki "haqiqat emas" degan ma'noni anglatadi.
 
-For example:
+Masalan:
 
 ```js run
-alert( 2 > 1 );  // true (correct)
-alert( 2 == 1 ); // false (wrong)
-alert( 2 != 1 ); // true (correct)
+alert( 2 > 1 );  // true (to'g'ri)
+alert( 2 == 1 ); // false (noto'g'ri)
+alert( 2 != 1 ); // true (to'g'ri)
 ```
 
-A comparison result can be assigned to a variable, just like any value:
+Taqqoslash natijasi har qanday qiymat singari o'zgaruvchanga tayinlash mumkin:
 
 ```js run
-let result = 5 > 4; // assign the result of the comparison
+let result = 5 > 4; // taqqoslash natijasini tayinlash
 alert( result ); // true
 ```
 
-## String comparison
+## Matnlarni taqqoslash
 
-To see whether a string is greater than another, JavaScript uses the so-called "dictionary" or "lexicographical" order.
+Bir matn boshqasidan kattaroqmi yoki yo'qligini bilish uchun JavaScript da "lug'at" yoki "leksikografiya" deb nomlangan tartib ishlatiladi.
 
-In other words, strings are compared letter-by-letter.
+Boshqacha qilib aytganda, matnlar harflar bilan taqqoslanadi.
 
-For example:
+Masalan:
 
 ```js run
 alert( 'Z' > 'A' ); // true
@@ -43,53 +43,53 @@ alert( 'Glow' > 'Glee' ); // true
 alert( 'Bee' > 'Be' ); // true
 ```
 
-The algorithm to compare two strings is simple:
+Ikki matni taqqoslash algoritmi oddiy:
 
-1. Compare the first character of both strings.
-2. If the first character from the first string is greater (or less) than the other string's, then the first string is greater (or less) than the second. We're done.
-3. Otherwise, if both strings' first characters are the same, compare the second characters the same way.
-4. Repeat until the end of either string.
-5. If both strings end at the same length, then they are equal. Otherwise, the longer string is greater.
+1. Ikkala matnning birinchi belgisini solishtiring.
+2. Agar birinchi matndagi birinchi belgi boshqa matndan kattaroq (yoki kichkinaroq) bo'lsa, unda birinchi matn ikkinchisidan kattaroq (yoki kichkinaroq) bo'ladi. 
+3. Agar ikkala matnning birinchi belgilari bir xil bo'lsa, ikkinchi belgilarni xuddi shunday taqqoslang.
+4. Matnning oxirigacha takrorlang.
+5. Agar ikkala matn ham bir xil uzunlikda tugasa, ular tengdir. Aks holda, uzunroq matn katta.
 
-In the examples above, the comparison `'Z' > 'A'` gets to a result at the first step while the strings `"Glow"` and `"Glee"` are compared character-by-character:
+Yuqoridagi misollarda `'Z' > 'A'` taqqoslash birinchi bosqichda natijaga erishganda, `"Glow"` va `"Glee"` matnlari belgi-belgi bilan taqqoslanadi:
 
-1. `G` is the same as `G`.
-2. `l` is the same as `l`.
-3. `o` is greater than `e`. Stop here. The first string is greater.
+1. `G` bilan `G` bir xil.
+2. `l` bilan `l` bir xil. 
+3. `o` `e` dan katta. Shu yerda tohtaymiz. Birinchi matn kattaroq.
 
-```smart header="Not a real dictionary, but Unicode order"
-The comparison algorithm given above is roughly equivalent to the one used in dictionaries or phone books, but it's not exactly the same.
+```smart header="Haqiqiy lug'at emas, balki Unicode tartibi"
+Yuqorida keltirilgan taqqoslash algoritmi lug'atlarda yoki telefon daftarlarida qo'llaniladiganga o'xshash, ammo bir xil emas.
 
-For instance, case matters. A capital letter `"A"` is not equal to the lowercase `"a"`. Which one is greater? The lowercase `"a"`. Why? Because the lowercase character has a greater index in the internal encoding table JavaScript uses (Unicode). We'll get back to specific details and consequences of this in the chapter <info:string>.
+Masalan, registr muhim. Tepa registr `"A"` past registr `"a"` ga teng emas. Qaysi biri kattaroq? Past registr `"a"`. Nima uchun? JavaScript-ning ichki kodlash jadvalida (Unicode) past registr belgi kattaroq ko'rsatkichga ega bo'lgani uchun. Buning aniq tafsilotlari va natijalariga <info:string> bobida qaytamiz.
 ```
 
-## Comparison of different types
+## Har xil turlarni taqqoslash
 
-When comparing values of different types, JavaScript converts the values to numbers.
+Turli xil qiymatlarni taqqoslashda JavaScript qiymatlarni raqamlarga o'zgartiradi.
 
-For example:
+Masalan:
 
 ```js run
-alert( '2' > 1 ); // true, string '2' becomes a number 2
-alert( '01' == 1 ); // true, string '01' becomes a number 1
+alert( '2' > 1 ); // true, '2' matni 2 raqamiga aylanadi
+alert( '01' == 1 ); // true, '01' matni 1 raqamiga aylanadi
 ```
 
-For boolean values, `true` becomes `1` and `false` becomes `0`. 
+Mantiqiy qiymatlar uchun `true` `1` ga va `false` `0` ga aylanadi.
 
-For example:
+Masalan:
 
 ```js run
 alert( true == 1 ); // true
 alert( false == 0 ); // true
 ```
 
-````smart header="A funny consequence"
-It is possible that at the same time:
+````smart header="Qiziqarli natija"
+Bir vaqtning o'zida bo'lishi mumkin:
 
-- Two values are equal.
-- One of them is `true` as a boolean and the other one is `false` as a boolean.
+- Ikki qiymat teng.
+- Ulardan biri mantiqiy sifatida `true`, ikkinchisi mantiqiy sifatida `false`.
 
-For example:
+Masalan:
 
 ```js run
 let a = 0;
@@ -101,70 +101,70 @@ alert( Boolean(b) ); // true
 alert(a == b); // true!
 ```
 
-From JavaScript's standpoint, this result is quite normal. An equality check converts values using the numeric conversion (hence `"0"` becomes `0`), while the explicit `Boolean` conversion uses another set of rules.
+JavaScript nuqtai nazaridan bu natija odatiy holdir. Tenglikni tekshirish qiymatlarni raqamli konvertatsiya yordamida o'zgartiradi (shu sababli `"0"` `0` ga aylanadi), aniq `mantiqiy` konvertatsiya qilish boshqa qoidalar to'plamidan foydalanadi.
 ````
 
-## Strict equality
+## Qat'iy tenglik
 
-A regular equality check `==` has a problem. It cannot differentiate `0` from `false`:
+Muntazam tenglikni tekshirishda muammo bor. `0` ni `false` dan farqlay olmaydi:
 
 ```js run
 alert( 0 == false ); // true
 ```
 
-The same thing happens with an empty string:
+Xuddi shu narsa bo'sh matn bilan ham sodir bo'ladi:
 
 ```js run
 alert( '' == false ); // true
 ```
 
-This happens because operands of different types are converted to numbers by the equality operator `==`. An empty string, just like `false`, becomes a zero.
+Bu har xil turdagi operandlar `==` tenglik operatori orqali sonlarga aylantirilganligi sababli sodir bo'ladi. Xuddi `false` kabi bo'sh satr nolga aylanadi.
 
-What to do if we'd like to differentiate `0` from `false`?
+`0` ni `false` dan farqlashni xohlasak nima qilishimiz kerak?
 
-**A strict equality operator `===` checks the equality without type conversion.**
+**Qat'iy tenglik operatori `===` turni o'zgartirmasdan tenglikni tekshiradi.**
 
-In other words, if `a` and `b` are of different types, then `a === b` immediately returns `false` without an attempt to convert them.
+Boshqacha qilib aytadigan bo'lsak, agar `a` va `b` har xil turdagi bo'lsa, u holda `a === b` ularni o'zgartirishga urinmasdan darhol `false` ni qaytaradi.
 
-Let's try it:
+Keling, sinab ko'raylik:
 
 ```js run
-alert( 0 === false ); // false, because the types are different
+alert( 0 === false ); // false, chunki turlari har xil
 ```
 
-There is also a "strict non-equality" operator `!==` analogous to `!=`.
+Shuningdek, `!=` ga o'xshash "qat'iy tengsizlik" `!==` operatori mavjud!
 
-The strict equality operator is a bit longer to write, but makes it obvious what's going on and leaves less room for errors.
+Qat'iy tenglik operatori yozish uchun biroz uzoqroq, ammo u nima bo'layotganini aniq ko'rsatib beradi va xatolarga yo'l qo'ymaydi.
 
-## Comparison with null and undefined
+## Null va undefined bilan taqqoslash
 
-Let's see more edge cases.
+Keling, ko'proq holatlarni ko'rib chiqaylik.
 
-There's a non-intuitive behavior when `null` or `undefined` are compared to other values.
+`Null` yoki `undefined` boshqa qiymatlar bilan taqqoslaganda intuitiv bo'lmagan xatti-harakatlar mavjud.
 
 
-For a strict equality check `===`
-: These values are different, because each of them is a different type.
+Qat'iy tenglikni tekshirish uchun `===`
+: Ushbu qiymatlarlar har xil, chunki ularning har biri har xil turda.
 
     ```js run
     alert( null === undefined ); // false
     ```
 
-For a non-strict check `==`
-: There's a special rule. These two are a "sweet couple": they equal each other (in the sense of `==`), but not any other value.
+Qat'iy bo'lmagan tekshirish uchun `==`
+: Maxsus qoida bor. Bu ikkisi "shirin juftlik" dir: ular bir-biriga teng (`==` ma'nosida), lekin boshqa qiymat emas.
 
     ```js run
     alert( null == undefined ); // true
     ```
 
-For maths and other comparisons `< > <= >=`
-: `null/undefined` are converted to numbers: `null` becomes `0`, while `undefined` becomes `NaN`.
+Matematik va boshqa taqqoslashlar uchun `< > <= >=`
+: `null/undefined` raqamlarga aylantiriladi: `null` `0` ga aylanadi, `undefined` esa `NaN` ga aylanadi.
 
-Now let's see some funny things that happen when we apply these rules. And, what's more important, how to not fall into a trap with them.
+Keling, ushbu qoidalarni qo'llaganimizda sodir bo'lgan ba'zi kulgili narsalarni ko'rib chiqaylik. Va, nima muhimroq, qanday qilib ular bilan tuzoqqa tushmaslikni bilib olaylik.
 
-### Strange result: null vs 0
+### G'alati natija: null va 0
 
-Let's compare `null` with a zero:
+`Null` ni nol bilan taqqoslaylik:
 
 ```js run
 alert( null > 0 );  // (1) false
@@ -172,15 +172,15 @@ alert( null == 0 ); // (2) false
 alert( null >= 0 ); // (3) *!*true*/!*
 ```
 
-Mathematically, that's strange. The last result states that "`null` is greater than or equal to zero", so in one of the comparisons above it must be `true`, but they are both false.
+Matematik jihatdan bu g'alati. Oxirgi natija "`null` noldan katta yoki unga teng" ekanligini bildiradi, shuning uchun yuqoridagi taqqoslashlardan birida u `true` bo'lishi kerak, ammo ularning ikkalasi ham yolg'ondir(false).
 
-The reason is that an equality check `==` and comparisons `> < >= <=` work differently. Comparisons convert `null` to a number, treating it as `0`. That's why (3) `null >= 0` is true and (1) `null > 0` is false.
+Sababi, tenglikni tekshirish `==` va taqqoslashlar `> <> = <=` boshqacha ishlaydi. Taqqoslashlar `null` ni `0` raqamga aylantiradi. Shuning uchun (3) `null >= 0` to'g'ri va (1) `null >0` noto'g'ri(false).
 
-On the other hand, the equality check `==` for `undefined` and `null` is defined such that, without any conversions, they equal each other and don't equal anything else. That's why (2) `null == 0` is false.
+Boshqa tomondan, tenglikni tekshirish `==` `undefined` va `null` uchun aniqlanadi, hech qanday konvertatsiyasiz ular bir-biriga tenglashadi va boshqa hech narsaga teng kelmaydi. Shuning uchun (2) `null == 0` noto'g'ri(false).
 
-### An incomparable undefined
+### Beqiyos undefined
 
-The value `undefined` shouldn't be compared to other values:
+`undefined` qiymati boshqa qiymatlar bilan taqqoslanmasligi kerak:
 
 ```js run
 alert( undefined > 0 ); // false (1)
@@ -188,25 +188,25 @@ alert( undefined < 0 ); // false (2)
 alert( undefined == 0 ); // false (3)
 ```
 
-Why does it dislike zero so much? Always false!
+Nega u nolni shunchalik yoqtirmaydi? Har doim false!
 
-We get these results because:
+Biz ushbu natijalarga erishamiz, chunki:
 
-- Comparisons `(1)` and `(2)` return `false` because `undefined` gets converted to `NaN` and `NaN` is a special numeric value which returns `false` for all comparisons.
-- The equality check `(3)` returns `false` because `undefined` only equals `null` and no other value.
+- `(1)` va `(2)` taqqoslashlar `false` ni qaytaradi, chunki `undefined` `NaN` ga aylanadi va `NaN` esa barcha taqqoslashlar uchun `false` ni qaytaradigan maxsus raqamli qiymatdir.
+- Tenglikni tekshirish `(3)` `false` ni qaytaradi, chunki `undefined` faqat `null` ga teng bo'ladi va boshqa qiymatga ega bo'lmaydi.
 
-### Evade problems
+### Muammolardan qochish
 
-Why did we go over these examples? Should we remember these peculiarities all the time? Well, not really. Actually, these tricky things will gradually become familiar over time, but there's a solid way to evade problems with them:
+Nima uchun biz ushbu misollarni ko'rib chiqdik? Ushbu o'ziga xos xususiyatlarni doimo eslab turishimiz kerakmi? Xo'sh, aslida yo'q. Aslida, bu hiyla-nayranglar vaqt o'tishi bilan asta-sekin tanish bo'lib qoladi, ammo ular bilan bog'liq muammolardan qochishning ishonchli usuli mavjud:
 
-Just treat any comparison with `undefined/null` except the strict equality `===` with exceptional care.
+Faqatgina har qanday taqqoslashni `undefined/null` bilan davolash kerak, faqat qat'iy tenglik bundan mustasno `===`.
 
-Don't use comparisons `>= > < <=` with a variable which may be `null/undefined`, unless you're really sure of what you're doing. If a variable can have these values, check for them separately.
+`>= > < <=` Taqqoslamalarni `null/undefined` bo'lishi mumkin bo'lgan o'zgaruvchi bilan foydalanmang, albatta, qilayotgan ishingizga ishonchingiz komil bo'lmasa. Agar o'zgaruvchi bu qiymatlarga ega bo'lishi mumkin bo'lsa, ularni alohida tekshiring.
 
-## Summary
+## Xulosa
 
-- Comparison operators return a boolean value.
-- Strings are compared letter-by-letter in the "dictionary" order.
-- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
-- The values `null` and `undefined` equal `==` each other and do not equal any other value.
-- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+- Taqqoslash operatorlari mantiqiy qiymatni qaytaradilar.
+- Matnlar "lug'at" tartibida harflar bilan taqqoslanadi.
+- Har xil turdagi qiymatlarni taqqoslaganda, ular raqamlarga o'tkaziladi (qat'iy tenglik operatori bundan mustasno).
+- `Null` va `undefined` qiymatlari bir-biriga teng `==` va boshqa qiymatlarga teng emas.
+- `>` yoki `<` kabi taqqoslashlarni vaqti bilan `null/undefined` bo'lishi mumkin bo'lgan o'zgaruvchanlar bilan ishlatishda ehtiyot bo'ling. `Null/undefined` ni alohida tekshirish yaxshi fikr.

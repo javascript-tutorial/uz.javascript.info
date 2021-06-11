@@ -2,8 +2,8 @@ importance: 5
 
 ---
 
-# Output even numbers in the loop
+# Tsikldan juft sonlarni chiqaring
 
-Use the `for` loop to output even numbers from `2` to `10`.
+`for` tsikldan foydalaning, `2` dan `10` gacha bo'lgan juft sonlarni chiqaring.
 
 [demo]

@@ -2,14 +2,14 @@ importance: 4
 
 ---
 
-# Sum input numbers
+# Kiritilgan raqamlarning yig'indisi
 
-Write the function `sumInput()` that:
+`sumInput()` funktsiyasini yozing:
 
-- Asks the user for values using `prompt` and stores the values in the array.
-- Finishes asking when the user enters a non-numeric value, an empty string, or presses "Cancel".
-- Calculates and returns the sum of array items.
+- Foydalanuvchidan `prompt` yordamida qiymatlarni so'raydi va qiymatlarni massivda saqlaydi.
+- Foydalanuvchi raqamli bo'lmagan qiymatni, bo'sh satrni kiritganda yoki "Cancel" tugmachasini bosganda so'rashni tugatadi.
+- Massiv elementlari yig'indisini hisoblab chiqadi va qaytaradi.
 
-P.S. A zero `0` is a valid number, please don't stop the input on zero.
+P.S. Nol `0` to'g'ri raqam, iltimos, nolda kiritishni to'xtatmang.
 
 [demo]

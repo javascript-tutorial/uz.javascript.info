@@ -1,7 +1,7 @@
 
-# Rewrite using async/await
+# Async/await yordamida qayta yozing
 
-Rewrite the one of examples from the chapter <info:promise-chaining> using `async/await` instead of `.then/catch`:
+<info:promise-chaining> bobidagi misollardan birini `.then/catch` o'rniga `async/await` yordamida qayta yozing:
 
 ```js run
 function loadJson(url) {

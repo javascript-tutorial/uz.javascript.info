@@ -1,20 +1,20 @@
-# Rest parameters and spread operator
+# Qoldiq parametrlari va kengaytirish operatori
 
-Many JavaScript built-in functions support an arbitrary number of arguments.
+Ko'pgina JavaScript-ning o'rnatilgan funktsiyalari ko'plab argumentlarni qo'llab-quvvatlaydi.
 
-For instance:
+Masalan:
 
-- `Math.max(arg1, arg2, ..., argN)` -- returns the greatest of the arguments.
-- `Object.assign(dest, src1, ..., srcN)` -- copies properties from `src1..N` into `dest`.
-- ...and so on.
+- `Math.max(arg1, arg2, ..., argN)` -- argumentlarning eng kattasini qaytaradi.
+- `Object.assign(dest, src1, ..., srcN)` -- xususiyatlarini `src1..N` dan `dest` ga ko'chiradi.
+- ...va hokazo.
 
-In this chapter we'll learn how to do the same. And, more importantly, how to feel comfortable working with such functions and arrays.
+Ushbu bobda biz ham xuddi shunday qilishni o'rganamiz. Va bundan ham muhimi, qanday qilib bunday funktsiyalar va massivlar bilan ishlashni qulay his qilish.
 
-## Rest parameters `...`
+## Qoldiq parametrlari `...`
 
-A function can be called with any number of arguments, no matter how it is defined.
+Funktsiyani qanday aniqlanishidan qat'i nazar, istalgan sonli argumentlar bilan chaqirish mumkin.
 
-Like here:
+Xuddi shunday:
 ```js run
 function sum(a, b) {
   return a + b;
@@ -23,14 +23,14 @@ function sum(a, b) {
 alert( sum(1, 2, 3, 4, 5) );
 ```
 
-There will be no error because of "excessive" arguments. But of course in the result only the first two will be counted.
+"Haddan tashqari" argumentlar tufayli xato bo'lmaydi. Ammo, albatta, natijada faqat dastlabki ikkitasi hisobga olinadi.
 
-The rest parameters can be mentioned in a function definition with three dots `...`. They literally mean "gather the remaining parameters into an array".
+Qoldiq parametrlarni funktsiya ta'rifida uchta nuqta bilan yozish mumkin `...`. Ular so'zma-so'z "qolgan parametrlarni qatorga yig'ish" degan ma'noni anglatadi.
 
-For instance, to gather all arguments into array `args`:
+Masalan, barcha argumentlarni `args` massiviga to'plash uchun:
 
 ```js run
-function sumAll(...args) { // args is the name for the array
+function sumAll(...args) { // args - bu massivning nomi
   let sum = 0;
 
   for (let arg of args) sum += arg;
@@ -43,15 +43,15 @@ alert( sumAll(1, 2) ); // 3
 alert( sumAll(1, 2, 3) ); // 6
 ```
 
-We can choose to get the first parameters as variables, and gather only the rest.
+Biz birinchi parametrlarni o'zgaruvchanlar sifatida olishni va faqat qolganlarini to'plashni tanlashimiz mumkin.
 
-Here the first two arguments go into variables and the rest go into `titles` array:
+Bu yerda dastlabki ikkita argument o'zgaruvchanga kiradi, qolganlari esa `titles` massiviga kiradi:
 
 ```js run
 function showName(firstName, lastName, ...titles) {
   alert( firstName + ' ' + lastName ); // Julius Caesar
 
-  // the rest go into titles array
+  // qolganlari titles massiviga kiradi
   // i.e. titles = ["Consul", "Imperator"]
   alert( titles[0] ); // Consul
   alert( titles[1] ); // Imperator
@@ -61,23 +61,23 @@ function showName(firstName, lastName, ...titles) {
 showName("Julius", "Caesar", "Consul", "Imperator");
 ```
 
-````warn header="The rest parameters must be at the end"
-The rest parameters gather all remaining arguments, so the following does not make sense and causes an error:
+````warn header="Qoldiq parametrlari oxirida bo'lishi kerak"
+Qoldiq parametrlar boshqa barcha argumentlarni to'playdi, shuning uchun ulardan keyin biror narsa yozish befoyda. Bu xatoga olib keladi:
 
 ```js
 function f(arg1, ...rest, arg2) { // arg2 after ...rest ?!
-  // error
+  // xato
 }
 ```
 
-The `...rest` must always be last.
+`...rest` har doim oxirgi bo'lishi kerak.
 ````
 
-## The "arguments" variable
+## "Argumentlar" o'zgaruvchani
 
-There is also a special array-like object named `arguments` that contains all arguments by their index.
+Barcha argumentlarni o'z indekslari bo'yicha o'z ichiga olgan `argumentlar` deb nomlangan maxsus massivga-o'xshash obyekt mavjud.
 
-For instance:
+Masalan:
 
 ```js run
 function showName() {
@@ -85,31 +85,31 @@ function showName() {
   alert( arguments[0] );
   alert( arguments[1] );
 
-  // it's iterable
+  // bu ketma-ket saraluvhan
   // for(let arg of arguments) alert(arg);
 }
 
-// shows: 2, Julius, Caesar
+// ko'rsatadi: 2, Julius, Caesar
 showName("Julius", "Caesar");
 
-// shows: 1, Ilya, undefined (no second argument)
+// ko'rsatadi: 1, Ilya, undefined (ikkinchi argument yo'q)
 showName("Ilya");
 ```
 
-In old times, rest parameters did not exist in the language, and using `arguments` was the only way to get all arguments of the function, no matter their total number.
+Qadimgi vaqtlarda, qoldiq parametrlari tilda mavjud emas edi va `argumentlar` dan foydalanish, ularning umumiy sonidan qat'i nazar, funktsiyalarning barcha argumentlarini olishning yagona usuli edi.
 
-And it still works, we can use it today.
+Va u hali ham ishlaydi, bugun uni ishlatishimiz mumkin.
 
-But the downside is that although `arguments` is both array-like and iterable, it's not an array. It does not support array methods, so we can't call `arguments.map(...)` for example.
+Ammo salbiy tomoni shundaki, `argumentlar` ham massivga-o'xshash, ham ketma-ket saraluvchan bo'lsa ham, bu massiv emas. Bu massiv usullarini qo'llab-quvvatlamaydi, shuning uchun biz `argument.map(...)` deb chaqira ololmaymiz.
 
-Also, it always contains all arguments. We can't capture them partially, like we did with rest parameters.
+Bundan tashqari, u har doim barcha argumentlarni o'z ichiga oladi. Biz ularni qisman bajara ololmaymiz, xuddi qoldiq parametrlari singari.
 
-So when we need these features, then rest parameters are preferred.
+Shunday qilib, ushbu xususiyatlar kerak bo'lganda, keyin qoldiq parametrlariga ustunlik beriladi.
 
-````smart header="Arrow functions do not have `\"arguments\"`"
-If we access the `arguments` object from an arrow function, it takes them from the outer "normal" function.
+````smart header="O'q funktsiyalari `\"arguments\"` ega emas"
+Agar biz `argumentlar` obyektiga o'q funktsiyasidan kirsak, bu ularni tashqi "normal" funktsiyadan oladi.
 
-Here's an example:
+Mana bir misol:
 
 ```js run
 function f() {
@@ -121,23 +121,23 @@ f(1); // 1
 ```
 ````
 
-As we remember, arrow functions don't have their own `this`. Now we know they don't have the special `arguments` object either.
+Esimizda bo'lsa, o'q funktsiyalari o'ziga xos `this` ga ega emas. Endi biz ularda maxsus `argumentlar` obyekti yo'qligini bilib oldik.
 
-## Spread operator [#spread-operator]
+## Kengaytirish operatori
 
-We've just seen how to get an array from the list of parameters.
+Parametrlar ro'yxatidan qanday qilib massivni olishni ko'rib chiqdik.
 
-But sometimes we need to do exactly the reverse.
+Ammo ba'zida biz buning aksini qilishimiz kerak.
 
-For instance, there's a built-in function [Math.max](mdn:js/Math/max) that returns the greatest number from a list:
+Masalan, ro'yxatdagi eng katta sonni qaytaradigan [Math.max](mdn:js/Math/max)funktsiyasi mavjud:
 
 ```js run
 alert( Math.max(3, 5, 1) ); // 5
 ```
 
-Now let's say we have an array `[3, 5, 1]`. How do we call `Math.max` with it?
+Endi bizda bir massiv bor deylik `[3, 5, 1]`. U bilan `Math.max` ni qanday chaqiramiz?
 
-Passing it "as is" won't work, because `Math.max` expects a list of numeric arguments, not a single array:
+Uni "boricha" topshirish ishlamaydi, chunki `Math.max` bitta massiv emas, balki raqamli argumentlar ro'yxatini kutadi:
 
 ```js run
 let arr = [3, 5, 1];
@@ -147,21 +147,21 @@ alert( Math.max(arr) ); // NaN
 */!*
 ```
 
-And surely we can't manually list items in the code `Math.max(arr[0], arr[1], arr[2])`, because we may be unsure how many there are. As our script executes, there could be a lot, or there could be none. And that would get ugly.
+Va, albatta, biz `Math.max(arr[0], arr[1], arr[2])` kodidagi elementlarni qo'lda ro'yxatlay olmaymiz, chunki ularning soni qancha ekanligiga ishonchimiz komil emas. Bizning skriptimiz bajarilayotganda juda ko'p bo'lishi mumkin yoki yo'q bo'lishi mumkin. Va bu juda hunuk bo'lar edi.
 
-*Spread operator* to the rescue! It looks similar to rest parameters, also using `...`, but does quite the opposite.
+*Kengaytirish operatori* qutqaruvhimiz! U qoldiq parametrlariga o'xshaydi, shuningdek `...` dan foydalanadi, ammo aksincha.
 
-When `...arr` is used in the function call, it "expands" an iterable object `arr` into the list of arguments.
+Funktsiya chaqiruvida `... arr` ishlatilganda, u `arr` takrorlanadigan obyektini argumentlar ro'yxatiga "kengaytiradi".
 
-For `Math.max`:
+`Math.max` uchun:
 
 ```js run
 let arr = [3, 5, 1];
 
-alert( Math.max(...arr) ); // 5 (spread turns array into a list of arguments)
+alert( Math.max(...arr) ); // 5 (kengaytirish massivni argumentlar ro'yxatiga aylantiradi)
 ```
 
-We also can pass multiple iterables this way:
+Shuningdek, biz bir nechta takrorlanadigan ma'lumotlarni shu tarzda o'tkaza olamiz:
 
 ```js run
 let arr1 = [1, -2, 3, 4];
@@ -170,7 +170,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(...arr1, ...arr2) ); // 8
 ```
 
-We can even combine the spread operator with normal values:
+Biz hatto kengaytirish operatorini normal qiymatlar bilan birlashtira olamiz:
 
 
 ```js run
@@ -180,7 +180,7 @@ let arr2 = [8, 3, -8, 1];
 alert( Math.max(1, ...arr1, 2, ...arr2, 25) ); // 25
 ```
 
-Also, the spread operator can be used to merge arrays:
+Shuningdek, kengaytirish operatoridan massivlarni birlashtirish uchun foydalanish mumkin:
 
 ```js run
 let arr = [3, 5, 1];
@@ -190,56 +190,57 @@ let arr2 = [8, 9, 15];
 let merged = [0, ...arr, 2, ...arr2];
 */!*
 
-alert(merged); // 0,3,5,1,2,8,9,15 (0, then arr, then 2, then arr2)
+alert(merged); // 0,3,5,1,2,8,9,15 (0, so'ng arr, so'ng 2, so'ng arr2)
 ```
 
-In the examples above we used an array to demonstrate the spread operator, but any iterable will do.
+Yuqoridagi misollarda biz kengaytirish operatorini namoyish qilish uchun massivdan foydalandik, ammo har qanday takrorlanadigan narsa bajaradi.
 
-For instance, here we use the spread operator to turn the string into array of characters:
+Masalan, bu yerda biz matnni belgilar massiviga aylantirish uchun kengaytirish operatoridan foydalanamiz:
 
 ```js run
-let str = "Hello";
+let str = "Salom";
 
-alert( [...str] ); // H,e,l,l,o
+alert( [...str] ); // S,a,l,o,m
 ```
 
-The spread operator internally uses iterators to gather elements, the same way as `for..of` does.
+Kengaytirish operatori elementlarni ichki yig'ish uchun ketma-ket saraluchanlardan foydalanadi.
 
-So, for a string, `for..of` returns characters and `...str` becomes `"H","e","l","l","o"`. The list of characters is passed to array initializer `[...str]`.
 
-For this particular task we could also use `Array.from`, because it converts an iterable (like a string) into an array:
+Shunday qilib, matn uchun `for..of` belgilarini qaytaradi va `... str` `"S", "a", "l", "o" "m"` ga aylanadi. Belgilar ro'yxati `[...str]` massivga uzatiladi.
+
+Ushbu maxsus topshiriq uchun biz `Array.from` dan ham foydalanishimiz mumkin, chunki u ketma-ket saraluchanni (matn kabi) massivga aylantiradi:
 
 ```js run
-let str = "Hello";
+let str = "Salom";
 
-// Array.from converts an iterable into an array
-alert( Array.from(str) ); // H,e,l,l,o
+// Array.from takrorlanuvchanni massivga o'zgartiradi
+alert( Array.from(str) ); // S,a,l,o,m
 ```
 
-The result is the same as `[...str]`.
+Natijada `[...str]` bilan bir xil bo'ladi.
 
-But there's a subtle difference between `Array.from(obj)` and `[...obj]`:
+Ammo `Array.from(obj)` va `[...obj]` o'rtasida juda katta farq bor:
 
-- `Array.from` operates on both array-likes and iterables.
-- The spread operator operates only on iterables.
+- `Array.from` massivga-o'xshash va takrorlanadigan qurilmalarda ishlaydi.
+- Kengaytirish operatori faqat takrorlanuvchi qurilmalarda ishlaydi.
 
-So, for the task of turning something into an array, `Array.from` tends to be more universal.
+Shunday qilib, biror narsani massivga aylantirish vazifasi uchun `Array.from` ko'proq universal bo'lishga intiladi.
 
 
-## Summary
+## Xulosa
 
-When we see `"..."` in the code, it is either rest parameters or the spread operator.
+Kodda `...` ni ko'rganimizda, bu qoldiq parametrlari yoki kengaytirish operatori.
 
-There's an easy way to distinguish between them:
+Ularni farqlashning oson yo'li mavjud:
 
-- When `...` is at the end of function parameters, it's "rest parameters" and gathers the rest of the list of arguments into an array.
-- When `...` occurs in a function call or alike, it's called a "spread operator" and expands an array into a list.
+- `...` funktsiya parametrlarining oxirida bo'lsa, u `qoldiq parametrlari` bo'ladi va argumentlar ro'yxatining qolgan qismini massivga to'playdi.
+- Agar `...` funktsiya chaqiruvida bo'lsa, u `kengaytirish operatori` deb nomlanadi va qatorni ro'yxatga kengaytiradi.
 
-Use patterns:
+Shablonlardan foydalaning:
 
-- Rest parameters are used to create functions that accept any number of arguments.
-- The spread operator is used to pass an array to functions that normally require a list of many arguments.
+- Qoldiq parametrlari istalgan miqdordagi argumentlarni qabul qiladigan funktsiyalarni yaratish uchun ishlatiladi.
+- Kengaytirish operatori odatda ko'plab argumentlar ro'yxatini talab qiladigan funktsiyalarga massivni uzatish uchun ishlatiladi.
 
-Together they help to travel between a list and an array of parameters with ease.
+Ular birgalikda ro'yxat va parametrlar massivi orasida osonlikcha harakatlanishga yordam beradi.
 
-All arguments of a function call are also available in "old-style" `arguments`: array-like iterable object.
+Funksiya chaqiruvining barcha argumentlari "eski uslub" `argumentlarida` ham mavjud: massivga-o'xshash takrorlanadigan obyekt.

@@ -1,1 +1,1 @@
-No difference.
+Hech qanday farq yo'q.

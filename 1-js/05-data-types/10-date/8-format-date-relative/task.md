@@ -2,24 +2,24 @@ importance: 4
 
 ---
 
-# Format the relative date
+# Nisbiy sanani formatlash
 
-Write a function `formatDate(date)` that should format `date` as follows:
+`formatDate(sana)` funktsiyasini yozing, u `sana` ni quyidagicha formatlashi kerak:
 
-- If since `date` passed less than 1 second, then `"right now"`.
-- Otherwise, if since `date` passed less than 1 minute, then `"n sec. ago"`.
-- Otherwise, if less than an hour, then `"m min. ago"`.
-- Otherwise, the full date in the format `"DD.MM.YY HH:mm"`. That is: `"day.month.year hours:minutes"`, all in 2-digit format, e.g. `31.12.16 10:00`.
+- Agar `sana` 1 soniyadan kam vaqt o'tgan bo'lsa, `"hozir"`.
+- Aks holda, agar `sana` 1 daqiqadan kam vaqt o'tgan bo'lsa, unda `"n soniya oldin"`.
+- Aks holda, agar bir soatdan kam bo'lsa, unda `"m min oldin"`.
+- Aks holda, `"DD.MM.YY HH:mm"` formatidagi to'liq sana. Ya'ni: `"kun.oy.yil soat:daqiqa"`, barchasi 2 xonali formatda, masalan, `31.12.16 10:00`.
 
-For instance:
+Misol uchun:
 
 ```js
-alert( formatDate(new Date(new Date - 1)) ); // "right now"
+alert( formatDate(new Date(new Date - 1)) ); // "hozir"
 
-alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 sec. ago"
+alert( formatDate(new Date(new Date - 30 * 1000)) ); // "30 soniya oldin"
 
-alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 min. ago"
+alert( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 daqiqa oldin"
 
-// yesterday's date like 31.12.2016, 20:00
+// 31.12.2016, 20:00 kabi kechagi sana
 alert( formatDate(new Date(new Date - 86400 * 1000)) );
 ```

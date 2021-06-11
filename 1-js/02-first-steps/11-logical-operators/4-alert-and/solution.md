@@ -1,10 +1,10 @@
-The answer: `1`, and then `undefined`.
+Javob: `1`, keyin `undefined`.
 
 ```js run
 alert( alert(1) && alert(2) );
 ```
 
-The call to `alert` returns `undefined` (it just shows a message, so there's no meaningful return).
+`alert` ni chaqirish `undefined` ni qaytaradi (u shunchaki xabarni ko'rsatadi, shuning uchun mazmunli qaytish bo'lmaydi).
 
-Because of that, `&&` evaluates the left operand (outputs `1`), and immediately stops, because `undefined` is a falsy value. And `&&` looks for a falsy value and returns it, so it's done.
+Shu sababli, `&&` chap operandni baholaydi (`1` ni qaytaradi) va darhol to'xtaydi, chunki `undefined` bu noto'g'ri qiymat. Va `&&` noto'g'ri qiymatni qidiradi va uni qaytaradi.
 

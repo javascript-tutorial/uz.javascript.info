@@ -1,3 +1,3 @@
-The result is **an error**.
+Natijada **xato** bo'ladi.
 
-The function `sayHi` is declared inside the `if`, so it only lives inside it. There is no `sayHi` outside.
+`sayHi` funktsiyasi `if` ichida e'lon qilinadi, shuning uchun u faqat uning ichida yashaydi. Tashqarida `sayHi` yo'q.

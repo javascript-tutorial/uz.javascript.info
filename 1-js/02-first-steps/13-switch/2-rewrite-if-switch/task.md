@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Rewrite "if" into "switch"
+# "If" ni "switch" ga qayta yozing
 
-Rewrite the code below using a single `switch` statement:
+Bitta `switch` ifodasu yordamida quyidagi kodni qayta yozing:
 
 ```js run
 let a = +prompt('a?', '');

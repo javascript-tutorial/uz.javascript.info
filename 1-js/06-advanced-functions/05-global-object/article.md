@@ -1,57 +1,57 @@
 
-# Global object
+# Global obyekt
 
-The global object provides variables and functions that are available anywhere. Mostly, the ones that are built into the language or the host environment.
+Global obyekt dasturning istalgan joyida mavjud bo'lgan o'zgaruvchanlar va funktsiyalarni taqdim etadi. Odatiy bo'lib, ular til yoki ishlash muhitiga o'rnatilganlardir.
 
-In a browser it is named "window", for Node.js it is "global", for other environments it may have another name.
+Brauzerda u "window" deb nomlangan, Node.js uchun "global", boshqa muhitlar uchun u boshqa nomga ega bo'lishi mumkin.
 
-For instance, we can call `alert` as a method of `window`:
+Masalan, biz `alert` ni `window` usuli sifatida chaqira olamiz:
 
 ```js run
-alert("Hello");
+alert("Salom");
 
-// the same as
-window.alert("Hello");
+// bilan bir xil
+window.alert("Salom");
 ```
 
-We can reference other built-in functions like `Array` as `window.Array` and create our own properties on it.
+Biz `Array` kabi boshqa o'rnatilgan funktsiyalarga `window.Array` deb murojaat qilishimiz va unda o'z xususiyatlarimizni yaratishimiz mumkin.
 
-## Browser: the "window" object
+## Brauzer: "window" obyekti
 
-For historical reasons, in-browser `window` object is a bit messed up.
+Tarixiy sabablarga ko'ra brauzer ichidagi `window` obyekti biroz chalkash.
 
-1. It provides the "browser window" functionality, besides playing the role of a global object.
+1. U global obyekt rolini o'ynashdan tashqari, "brauzer oynasi" funksiyasini taqdim etadi.
 
-    We can use `window` to access properties and methods, specific to the browser window:
+    Brauzer oynasiga xos xususiyatlar va usullarga kirish uchun `window` dan foydalanishimiz mumkin:
 
     ```js run
-    alert(window.innerHeight); // shows the browser window height
+    alert(window.innerHeight); // brauzer oynasining balandligini ko'rsatadi
 
-    window.open('http://google.com'); // opens a new browser window
+    window.open('http://google.com'); // yangi brauzer oynasini ochadi
     ```
 
-2. Top-level `var` variables and function declarations automatically become properties of `window`.
+2. Yuqori darajadagi `var` o'zgaruvchanlari va funktsiyalar deklaratsiyalari avtomatik ravishda `window` ning xususiyatlariga aylanadi.
 
-    For instance:
+    Masalan:
     ```js untrusted run no-strict refresh
     var x = 5;
 
-    alert(window.x); // 5 (var x becomes a property of window)
+    alert(window.x); // 5 (var x window xususiyatiga aylanadi)
 
     window.x = 0;
 
-    alert(x); // 0, variable modified
+    alert(x); // 0, o'zgaruvchan modifikatsiya qilingan
     ```
 
-    Please note, that doesn't happen with more modern `let/const` declarations:
+    Iltimos, e'tibor bering, bu zamonaviyroq `let/const` deklaratsiyalari bilan bo'lmaydi:
 
     ```js untrusted run no-strict refresh
     let x = 5;
 
-    alert(window.x); // undefined ("let" doesn't create a window property)
+    alert(window.x); // undefined ("let" window xususiyatini yaratmaydi)
     ```
 
-3. Also, all scripts share the same global scope, so variables declared in one `<script>` become visible in  another ones:
+3. Shuningdek, barcha skriptlar bir xil global muhitga ega, shuning uchun bitta `<script>` da e'lon qilingan o'zgaruvchanlar boshqasida ham ko'rinadi:
 
     ```html run
     <script>
@@ -65,25 +65,25 @@ For historical reasons, in-browser `window` object is a bit messed up.
     </script>
     ```
 
-4. And, a minor thing, but still: the value of `this` in the global scope is `window`.
+4. Va ahamiyatsiz narsa, ammo baribir: global miqyosda `this` ning qiymati `window` dir.
 
     ```js untrusted run no-strict refresh
     alert(this); // window
     ```
 
-Why was it made like this? At the time of the language creation, the idea to merge multiple aspects into a single `window` object was to "make things simple". But since then many things changed. Tiny scripts became big applications that require proper architecture.
+Nima uchun bunday qilingan? Til yaratilishida bir nechta jihatlarni bitta `window` obyektiga birlashtirish g'oyasi "narsalarni soddalashtirish" edi. Ammo o'shandan beri ko'p narsalar o'zgardi. Kichkina skriptlar to'g'ri arxitekturani talab qiladigan katta dasturlarga aylandi.
 
-Is it good that different scripts (possibly from different sources) see variables of each other?
+Turli xil skriptlar (ehtimol turli manbalardan) bir-birining o'zgaruvchanlarini ko'rishlari yaxshi emasmi?
 
-No, it's not, because it may lead to naming conflicts: the same variable name can be used in two scripts for different purposes, so they will conflict with each other.
+Yo'q, unday emas, chunki bu nomlash nizolariga olib kelishi mumkin: bir xil o'zgaruvchan nom turli xil maqsadlarda ikkita skriptda ishlatilishi mumkin, shuning uchun ular bir-biriga zid keladi.
 
-As of now, the multi-purpose `window` is considered a design mistake in the language.
+Hozirgi vaqtda ko'p maqsadli `window` tilda dizayndagi xato deb hisoblanadi.
 
-Luckily, there's a "road out of hell", called "JavaScript modules".
+Yaxshiyamki, "JavaScript modullari" deb nomlangan yechim mavjud.
 
-If we set `type="module"` attribute on a `<script>` tag, then such script is considered a separate "module" with its own top-level scope (lexical environment), not interfering with `window`.
+Agar biz `type="module"` atributini `<script>` yorlig'iga o'rnatgan bo'lsak, unda bunday skript o'zining `window` ga aralashmaydigan, o'zining yuqori darajadagi ko'lami (leksik muhiti) bo'lgan alohida "modul" hisoblanadi.
 
-- In a module, `var x` does not become a property of `window`:
+- Modulda `var x` `window` ning xususiyatiga aylanmaydi:
 
     ```html run
     <script type="module">
@@ -93,7 +93,7 @@ If we set `type="module"` attribute on a `<script>` tag, then such script is con
     </script>
     ```
 
-- Two modules that do not see variables of each other:
+- Bir-birining o'zgaruvchanlanlarini ko'rmaydigan ikkita modul:
 
     ```html run
     <script type="module">
@@ -106,7 +106,7 @@ If we set `type="module"` attribute on a `<script>` tag, then such script is con
     </script>
     ```
 
-- And, the last minor thing, the top-level value of `this` in a module is `undefined` (why should it be `window` anyway?):
+- Va oxirgi kichik narsa, moduldagi `this` ning yuqori darajadagi qiymati `undefined` (nima uchun u baribir `window` bo'lishi kerak?):
 
     ```html run
     <script type="module">
@@ -114,42 +114,42 @@ If we set `type="module"` attribute on a `<script>` tag, then such script is con
     </script>
     ```
 
-**Using `<script type="module">` fixes the design flaw of the language by separating top-level scope from `window`.**
+**`<script type="module">` dan foydalanib, tilning dizayndagi nuqsonlarini yuqori darajadagi muhitni `window` dan ajratish yo'li bilan tuzatadi.**
 
-We'll cover more features of modules later, in the chapter [](info:modules).
+Keyinchalik modullarning ko'proq xususiyatlarini [](info:modules) bo'limida ko'rib chiqamiz.
 
-## Valid uses of the global object
+## Global obyektdan to'g'ri foydalanish
 
-1. Using global variables is generally discouraged. There should be as few global variables as possible, but if we need to make something globally visible, we may want to put it into `window` (or `global` in Node.js).
+1. Odatda global o'zgaruvchanlardan foydalanish tavsiya etilmaydi. Iloji boricha kamroq global o'zgaruvchanlar bo'lishi kerak, ammo agar biz global ko'rinadigan narsani yaratishimiz kerak bo'lsa, uni `window` (yoki Node.js da `global`) ga qo'yishimiz mumkin.
 
-    Here we put the information about the current user into a global object, to be accessible from all other scripts:
+    Bu yerda biz boshqa foydalanuvchi skriptlaridan foydalanish uchun mavjud foydalanuvchi haqidagi ma'lumotlarni global obyektga joylashtiramiz:
 
     ```js run
-    // explicitly assign it to `window`
+    // uni "window" ga aniq belgilang
     window.currentUser = {
       name: "John",
       age: 30
     };
 
-    // then, elsewhere, in another script
+    // keyin, boshqa joyda, boshqa skriptda
     alert(window.currentUser.name); // John
     ```
 
-2. We can test the global object for support of modern language features.
+2. Zamonaviy til xususiyatlarini qo'llab-quvvatlashi uchun global obyektni sinab ko'rishimiz mumkin.
 
-    For instance, test if a build-in `Promise` object exists (it doesn't in really old browsers):
+    Masalan, o'rnatilgan `Promise` obyekti mavjudligini tekshirib ko'ring (u eski brauzerlarda mavjud emas):
     ```js run
     if (!window.Promise) {
-      alert("Your browser is really old!");
+      alert("Sizning brauzeringiz haqiqatan ham eski!");
     }
     ```
 
-3. We can create "polyfills": add functions that are not supported by the environment (say, an old browser), but exist in the modern standard.
+3. Biz "polifillarni" yaratishimiz mumkin: atrof-muhit tomonidan qo'llab-quvvatlanmaydigan funktsiyalarni qo'shing (masalan, eski brauzer), ammo zamonaviy standartda mavjud.
 
     ```js run
     if (!window.Promise) {
-      window.Promise = ... // custom implementation of the modern language feature
+      window.Promise = ... // zamonaviy til xususiyatini maxsus amalga oshirish
     }
     ```
 
-...And of course, if we're in a browser, using `window` to access browser window features (not as a global object) is completely fine.
+...Va, albatta, agar biz brauzerda bo'lsak, brauzer oynasi xususiyatlariga (global obyekt sifatida emas) kirish uchun `window` dan foydalanish juda yaxshi.

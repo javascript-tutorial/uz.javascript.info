@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Create an extendable calculator
+# Kengaytiriladigan kalkulyatorni yarating
 
-Create a constructor function `Calculator` that creates "extendable" calculator objects.
+"Kengaytiriladigan" kalkulyator obyektlarini yaratadigan `Calculator` konstruktor funktsiyasini yarating.
 
-The task consists of two parts.
+Vazifa ikki qismdan iborat.
 
-1. First, implement the method `calculate(str)` that takes a string like `"1 + 2"` in the format "NUMBER operator NUMBER" (space-delimited) and returns the result. Should understand plus `+` and minus `-`.
+1. Birinchidan, "NUMBER operatori NUMBER" (bo'shliq bilan ajratilgan) formatida `"1 + 2"` kabi matni qabul qiladigan va natijani qaytaradigan `calculate(str)` usulini qo'llang. Plyus `+` va minus `-` ni tushunishi kerak.
 
-    Usage example:
+    Foydalanish misoli:
 
     ```js
     let calc = new Calculator;
 
     alert( calc.calculate("3 + 7") ); // 10
     ```
-2. Then add the method `addMethod(name, func)` that teaches the calculator a new operation. It takes the operator `name` and the two-argument function `func(a,b)` that implements it.
+2. Keyin kalkulyatorga yangi operatsiyani o'rgatadigan `addMethod(name, func)` usulini qo'shing. Buning uchun `name` operatori va uni amalga oshiradigan ikkita argumentli funktsiya `func(a, b)` kerak bo'ladi.
 
-    For instance, let's add the multiplication `*`, division `/` and power `**`:
+    Masalan, ko'paytma `*`, bo'linma  `/` va darajani `**` qo'shamiz:
 
     ```js
     let powerCalc = new Calculator;
@@ -31,6 +31,6 @@ The task consists of two parts.
     alert( result ); // 8
     ```
 
-- No brackets or complex expressions in this task.
-- The numbers and the operator are delimited with exactly one space.
-- There may be error handling if you'd like to add it.
+- Ushbu topshiriqda qavs yoki murakkab ifodalar yo'q.
+- Raqamlar va operator to'liq bitta bo'sh joy bilan chegaralangan.
+- Agar uni qo'shmoqchi bo'lsangiz, ishlov berishda xato bo'lishi mumkin.

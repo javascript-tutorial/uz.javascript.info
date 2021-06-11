@@ -1,1 +1,1 @@
-# Objects: the basics
+# Ob'ektlar: asoslar

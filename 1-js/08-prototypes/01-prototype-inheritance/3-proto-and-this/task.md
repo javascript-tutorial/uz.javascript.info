@@ -2,11 +2,12 @@ importance: 5
 
 ---
 
-# Where it writes?
+# Qayerda yoziladi?
 
-We have `rabbit` inheriting from `animal`.
+Bizda `animal` dan meros qolgan `rabbit` bor.
 
 If we call `rabbit.eat()`, which object receives the `full` property: `animal` or `rabbit`? 
+Agar biz `rabbit.eat()` deb nomlasak, qaysi obyekt `to'liq` xususiyatini oladi: `animal` yoki `rabbit`?
 
 ```js
 let animal = {

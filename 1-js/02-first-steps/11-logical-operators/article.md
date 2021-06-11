@@ -1,24 +1,24 @@
-# Logical operators
+# Mantiqiy operatorlar
 
-There are three logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT).
+JavaScript-da uchta mantiqiy operator mavjud: `||` (YOKI), `&&` (VA), `!` (YO'Q).
 
-Although they are called "logical", they can be applied to values of any type, not only boolean. Their result can also be of any type.
+Garchi ular "mantiqiy" deb nomlangan bo'lsa-da, ularni faqat mantiqiy emas, balki har qanday turdagi qiymatlarga qo'llash mumkin. Ularning natijasi ham har qanday turdagi bo'lishi mumkin.
 
-Let's see the details.
+Keling, tafsilotlarni ko'rib chiqamiz.
 
-## || (OR)
+## || (YOKI)
 
-The "OR" operator is represented with two vertical line symbols:
+"YOKI" operatori ikkita vertikal chiziq belgisi bilan ifodalanadi:
 
 ```js
 result = a || b;
 ```
 
-In classical programming, the logical OR is meant to manipulate boolean values only. If any of its arguments are `true`, it returns `true`, otherwise it returns `false`.
+Klassik dasturlashda mantiqiy YOKI faqat mantiqiy qiymatlarni boshqarish uchun mo'ljallangan. Agar uning biron bir argumenti `true` bo'lsa, u `true` ni qaytaradi, aks holda `false` ni qaytaradi.
 
-In JavaScript, the operator is a little bit trickier and more powerful. But first, let's see what happens with boolean values.
+JavaScript-da operator biroz ayyorroq va kuchliroq. Avvalo, mantiqiy qiymatlar bilan nima sodir bo'lishini ko'rib chiqamiz.
 
-There are four possible logical combinations:
+To'rt mantiqiy kombinatsiya mavjud:
 
 ```js run
 alert( true || true );   // true
@@ -27,21 +27,21 @@ alert( true || false );  // true
 alert( false || false ); // false
 ```
 
-As we can see, the result is always `true` except for the case when both operands are `false`.
+Ko'rib turganimizdek, natija har doim `true` bo'ladi, faqat ikkala operand ham `false` bo'lgan holat bundan mustasno.
 
-If an operand is not a boolean, it's converted to a boolean for the evaluation.
+Agar operand mantiqiy bo'lmasa, uni baholash uchun mantiqiy qiymatga aylantiriladi.
 
-For instance, the number `1` is treated as `true`, the number `0` as `false`:
+Masalan, `1` raqami `true`, `0` raqami `false` sifatida qabul qilinadi:
 
 ```js run
-if (1 || 0) { // works just like if( true || false )
-  alert( 'truthy!' );
+if (1 || 0) { // xuddi if(true || false) kabi ishlaydi
+  alert( "to'g'ri!" );
 }
 ```
 
-Most of the time, OR `||` is used in an `if` statement to test if *any* of the given conditions is `true`.
+Ko'pincha, OR `||` berilgan shartlarning *birortasi* `to'g'ri` ekanligini tekshirish uchun `if` ifodasida ishlatiladi.
 
-For example:
+Masalan:
 
 ```js run
 let hour = 9;
@@ -49,61 +49,61 @@ let hour = 9;
 *!*
 if (hour < 10 || hour > 18) {
 */!*
-  alert( 'The office is closed.' );
+  alert( 'Ofis yopiq.' );
 }
 ```
 
-We can pass more conditions:
+Biz ko'proq shartlardan o'tishimiz mumkin:
 
 ```js run
 let hour = 12;
 let isWeekend = true;
 
 if (hour < 10 || hour > 18 || isWeekend) {
-  alert( 'The office is closed.' ); // it is the weekend
+  alert( 'Ofis yopiq.' ); // dam olish kun
 }
 ```
 
-## OR finds the first truthy value
+## YOKI(||) birinchi aniq qiymatni topadi
 
-The logic described above is somewhat classical. Now, let's bring in the "extra" features of JavaScript.
+Yuqorida tavsiflangan mantiq biroz klassikdir. Endi, JavaScript-ning "qo'shimcha" xususiyatlarini keltiramiz.
 
-The extended algorithm works as follows.
+Kengaytirilgan algoritm quyidagicha ishlaydi.
 
-Given multiple OR'ed values:
+Bir nechta YOKI(||) bir nechta qiymatlar bilan:
 
 ```js
 result = value1 || value2 || value3;
 ```
 
-The OR `||` operator does the following:
+YOKI `||` operatori quyidagilarni bajaradi:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to boolean. If the result is `true`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were `false`), returns the last operand.
+- Operandlarni chapdan o'ngga baholaydi.
+- Har bir operandni mantiqiy qiymatga o'zgartiradi. Agar natija `true` bo'lsa, to'xtaydi va shu operandning asl qiymatini qaytaradi.
+- Agar barcha operandlar baholangan bo'lsa (ya'ni barchasi `false` bo'lsa), oxirgi operandni qaytaradi.
 
-A value is returned in its original form, without the conversion.
+Qiymat konvertatsiya qilinmasdan asl shaklida qaytariladi.
 
-In other words, a chain of OR `"||"` returns the first truthy value or the last one if no such value is found.
+Boshqacha qilib aytganda, YOKI `"||"` zanjiri birinchi to'g'ri qiymatni yoki agar bunday qiymat topilmasa, oxirgisini qaytaradi.
 
-For instance:
+Masalan:
 
 ```js run
-alert( 1 || 0 ); // 1 (1 is truthy)
-alert( true || 'no matter what' ); // (true is truthy)
+alert( 1 || 0 ); // 1 (1 bu to'g'ri)
+alert( true || "nima bo'lganda ham" ); // (true bu to'g'ri)
 
-alert( null || 1 ); // 1 (1 is the first truthy value)
-alert( null || 0 || 1 ); // 1 (the first truthy value)
-alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+alert( null || 1 ); // 1 (1 bu birinchi to'g'ri qiymat)
+alert( null || 0 || 1 ); // 1 (birinchi to'g'ri qiymat)
+alert( undefined || null || 0 ); // 0 (barchasi noto'g'ri, ohirgi qiymat qaytariladi)
 ```
 
-This leads to some interesting usage compared to a "pure, classical, boolean-only OR".
+Bu "toza, mumtoz, faqat mantiqiy YOKI" bilan taqqoslaganda ba'zi qiziqarli foydalanishga olib keladi.
 
-1. **Getting the first truthy value from a list of variables or expressions.**
+1. **O'zgaruvchanlar yoki ifodalar ro'yxatidan birinchi aniq qiymatni olish.**
 
-    Imagine we have several variables which can either contain data or be `null/undefined`. How can we find the first one with data?
+    Tasavvur qiling, bizda ma'lumotlni o'z ichiga olgan yoki `null/undefined` bo'lishi mumkin bo'lgan bir nechta o'zgaruvchanlar mavjud. Biz qanday birinchi ma'lumotli o'zgaruvchani topishimiz mumkin?
 
-    We can use OR `||`:
+    YOKI `||` dan foydalanishimiz mumkin:
 
     ```js run
     let currentUser = null;
@@ -113,27 +113,28 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     let name = currentUser || defaultUser || "unnamed";
     */!*
 
-    alert( name ); // selects "John" – the first truthy value
+    alert( name ); // "John" ni tanlaydi - bu birinchi to'g'ri qiymat
     ```
 
-    If both `currentUser` and `defaultUser` were falsy, `"unnamed"` would be the result.
-2. **Short-circuit evaluation.**
+    Agar `currentUser` va `defaultUser` noto'g'ri bo'lsa, `"unnamed"` natijasi qaytariladi.
 
-    Operands can be not only values, but arbitrary expressions. OR evaluates and tests them from left to right. The evaluation stops when a truthy value is reached, and the value is returned. This process is called "a short-circuit evaluation" because it goes as short as possible from left to right.
+2. **Qisqartirilgan hisoblash.**
 
-    This is clearly seen when the expression given as the second argument has a side effect like a variable assignment.
+    Operandlar nafaqat qiymatlar, balki ixtiyoriy ifodalar ham bo'lishi mumkin. YOKI ularni chapdan o'ngga qarab baholaydi va sinovdan o'tkazadi. To'g'ri qiymatga erishilganda baholash to'xtatiladi va qiymat qaytariladi. Ushbu jarayon "isqartirilgan hisoblash" deb nomlanadi, chunki u chapdan o'ngga iloji boricha qisqa davom etadi.
 
-    In the example below, `x` does not get assigned:
+    Bu ikkinchi argument sifatida berilgan ifoda tayinlash kabi yon ta'sirga ega bo'lganda aniq ko'rinadi.
+
+    Quyidagi misolda `x` tayinlanmaydi:
 
     ```js run no-beautify
     let x;
 
     *!*true*/!* || (x = 1);
 
-    alert(x); // undefined, because (x = 1) not evaluated
+    alert(x); // undefined, chunki (x = 1) baholanmagan
     ```
 
-    If, instead, the first argument is `false`, `||` evaluates the second one, thus running the assignment:
+    Agar buning o'rniga birinchi argument `false` bo'lsa, `||` ikkinchisini baholaydi va shu bilan tayinlashni bajaradi:
 
     ```js run no-beautify
     let x;
@@ -143,21 +144,21 @@ This leads to some interesting usage compared to a "pure, classical, boolean-onl
     alert(x); // 1
     ```
 
-    An assignment is a simple case. Other side effects can also be involved.
+    Tayinlash bu oddiy hol. Boshqa yon ta'sirlar ham jalb qilinishi mumkin.
 
-    As we can see, such a use case is a "shorter way of doing `if`". The first operand is converted to boolean. If it's false, the second one is evaluated.
+    Ko'rib turganimizdek, bunday foydalanish holati "`if` ni qisqartirish usuli" hisoblanadi. Birinchi operand mantiqiy qiymatga aylantiriladi. Agar u not'og'ri bo'lsa, ikkinchisi baholanadi.
 
-    Most of time, it's better to use a "regular" `if` to keep the code easy to understand, but sometimes this can be handy.
+    Ko'pincha, kodni tushunishni osonlashtirish uchun "muntazam" `if` dan foydalanish yaxshiroq, lekin ba'zida bu qulay bo'lishi mumkin.
 
-## && (AND)
+## && (VA)
 
-The AND operator is represented with two ampersands `&&`:
+VA operatori ikkita ampersand bilan ifodalanadi `&&`:
 
 ```js
 result = a && b;
 ```
 
-In classical programming, AND returns `true` if both operands are truthy and `false` otherwise:
+Klassik dasturlashda AND har ikkala operand to'g'ri bo'lsa `true` ni qaytaradi, aks holda `false`:
 
 ```js run
 alert( true && true );   // true
@@ -166,138 +167,138 @@ alert( true && false );  // false
 alert( false && false ); // false
 ```
 
-An example with `if`:
+`if` bilan misol:
 
 ```js run
 let hour = 12;
 let minute = 30;
 
 if (hour == 12 && minute == 30) {
-  alert( 'The time is 12:30' );
+  alert( 'Vaqt 12:30' );
 }
 ```
 
-Just as with OR, any value is allowed as an operand of AND:
+Xuddi YOKI kabi, har qanday qiymatni VA operandi sifatida ishlatsa bo'ladi:
 
 ```js run
-if (1 && 0) { // evaluated as true && false
-  alert( "won't work, because the result is falsy" );
+if (1 && 0) { // true && false deb baholandi
+  alert( "ishlamaydi, chunki natija noto'g'ri" );
 }
 ```
 
 
-## AND finds the first falsy value
+## VA birinchi soxta qiymatni topadi
 
-Given multiple AND'ed values:
+Bir nechta VA qiymatlari berilgan:
 
 ```js
 result = value1 && value2 && value3;
 ```
 
-The AND `&&` operator does the following:
+AND `&&` operatori quyidagilarni amalga oshiradi:
 
-- Evaluates operands from left to right.
-- For each operand, converts it to a boolean. If the result is `false`, stops and returns the original value of that operand.
-- If all operands have been evaluated (i.e. all were truthy), returns the last operand.
+- Operandlarni chapdan o'ngga baholaydi.
+- Har bir operand uchun uni mantiqiy qiymatga o'zgartiradi. Agar natija `false` bo'lsa, to'xtaydi va shu operandning asl qiymatini qaytaradi.
+- Agar barcha operandlar baholangan bo'lsa (ya'ni barchasi to'g'ri bo'lsa), oxirgi operandni qaytaradi.
 
-In other words, AND returns the first falsy value or the last value if none were found.
+Boshqacha qilib aytganda, VA birinchi soxta qiymatni yoki topilmasa oxirgi qiymatni qaytaradi.
 
-The rules above are similar to OR. The difference is that AND returns the first *falsy* value while OR returns the first *truthy* one.
+Yuqoridagi qoidalar YOKI ga o'xshaydi. Farqi shundaki, VA birinchi *noto'g'ri* qiymatini qaytaradi, YOKI esa birinchi *to'g'ri* birini qaytaradi.
 
-Examples:
+Misollar:
 
 ```js run
-// if the first operand is truthy,
-// AND returns the second operand:
+// agar birinchi operand to'g'ri bo'lsa,
+// VA ikkinchi operandni qaytaradi:
 alert( 1 && 0 ); // 0
 alert( 1 && 5 ); // 5
 
-// if the first operand is falsy,
-// AND returns it. The second operand is ignored
+// agar birinchi operand noto'g'ri bo'lsa,
+// VA uni qaytaradi. Ikkinchi operand e'tiborga olinmaydi
 alert( null && 5 ); // null
-alert( 0 && "no matter what" ); // 0
+alert( 0 && "nima bo'lganda ham" ); // 0
 ```
 
-We can also pass several values in a row. See how the first falsy one is returned:
+Bundan tashqari, ketma-ket bir nechta qiymatlarni berishimiz mumkin. Birinchi noto'g'ri operand qanday qaytarilishini ko'ring:
 
 ```js run
 alert( 1 && 2 && null && 3 ); // null
 ```
 
-When all values are truthy, the last value is returned:
+Barcha qiymatlar to'g'ri bo'lsa, oxirgi qiymat qaytariladi:
 
 ```js run
-alert( 1 && 2 && 3 ); // 3, the last one
+alert( 1 && 2 && 3 ); // 3, oxirgisi
 ```
 
-````smart header="Precedence of AND `&&` is higher than OR `||`"
-The precedence of AND `&&` operator is higher than OR `||`.
+````smart header="VA `&&` ning ustunligi YOKI `||` dan yuqori"
+VA `&&` operatorining ustunligi YOKI `||` dan yuqori.
 
-So the code `a && b || c && d` is essentially the same as if the `&&` expressions were in parentheses: `(a && b) || (c && d)`.
+Shunday qilib `a && b || kodi c && d` ifodasi qavs ichida `&&` joylashgani bilan bir xil: `(a && b) || (c && d)`.
 ````
 
-Just like OR, the AND `&&` operator can sometimes replace `if`.
+Xuddi YOKI kabi VA va `&&` operatori ba'zida "if" o'rnini bosishi mumkin.
 
-For instance:
+Masalan:
 
 ```js run
 let x = 1;
 
-(x > 0) && alert( 'Greater than zero!' );
+(x > 0) && alert( 'Noldan kattaroq!' );
 ```
 
-The action in the right part of `&&` would execute only if the evaluation reaches it. That is, only if `(x > 0)` is true.
+`&&` ning o'ng qismidagi harakat faqatgina baholash unga yetganida amalga oshiriladi. Ya'ni, faqat `(x > 0)` to'g'ri bo'lsa.
 
-So we basically have an analogue for:
+Shunday qilib, biz asosan analogga egamiz:
 
 ```js run
 let x = 1;
 
 if (x > 0) {
-  alert( 'Greater than zero!' );
+  alert( 'Noldan kattaroq!' );
 }
 ```
 
-The variant with `&&` appears shorter. But `if` is more obvious and tends to be a little bit more readable.
+`&&` varianti qisqaroq ko'rinadi. Ammo `if` aniqroq va biroz o'qilishi oson.
 
-So we recommend using every construct for its purpose: use `if` if we want if and use `&&` if we want AND.
+Shuning uchun har bir konstruktsiyani o'z maqsadi uchun ishlatishni tavsiya etamiz: agarning xohlasak `if` dan foydalaning agar VA xohlasak `&&` dan foydalaning.
 
-## ! (NOT)
+## ! (YO'Q)
 
-The boolean NOT operator is represented with an exclamation sign `!`.
+Mantiqiy YO'Q operatori undov belgisi bilan ifodalanadi "!".
 
-The syntax is pretty simple:
+Sintaksis juda oddiy:
 
 ```js
 result = !value;
 ```
 
-The operator accepts a single argument and does the following:
+Operator bitta argumentni qabul qiladi va quyidagilarni bajaradi:
 
-1. Converts the operand to boolean type: `true/false`.
-2. Returns the inverse value.
+1. Operandni mantiqiy turga o'zgartiradi: `true/false`.
+2. Teskari qiymatni qaytaradi.
 
-For instance:
+Masalan:
 
 ```js run
 alert( !true ); // false
 alert( !0 ); // true
 ```
 
-A double NOT `!!` is sometimes used for converting a value to boolean type:
+Ba'zan qiymatni mantiqiy turga aylantirish uchun ikkilamchi YO'Q `!!` ishlatiladi:
 
 ```js run
-alert( !!"non-empty string" ); // true
+alert( !!"bo'sh bo'lmagan matn" ); // true
 alert( !!null ); // false
 ```
 
-That is, the first NOT converts the value to boolean and returns the inverse, and the second NOT inverses it again. In the end, we have a plain value-to-boolean conversion.
+Ya'ni, birinchisi YO'Q qiymatini mantiqiy turga o'zgartiradi va teskari qiymatni qaytaradi, ikkinchi YO'Q yana uni teskariga o'zgartiradi. Oxir-oqibat, biz oddiy qiymatdan mantiqiy konvertatsiyaga egamiz.
 
-There's a little more verbose way to do the same thing -- a built-in `Boolean` function:
+Xuddi shu narsani qilishning biroz aniq usuli mavjud -- o'rnatilgan `Boolean` funktsiyasi:
 
 ```js run
-alert( Boolean("non-empty string") ); // true
+alert( Boolean("bo'sh bo'lmagan matn") ); // true
 alert( Boolean(null) ); // false
 ```
 
-The precedence of NOT `!` is the highest of all logical operators, so it always executes first, before `&&` or `||`.
+YO'Q `!` ning ustunligi barcha mantiqiy operatorlarning eng yuqori ko'rsatkichidir, shuning uchun u har doim birinchi bo'lib `&&` yoki `||` dan oldin bajariladi.

@@ -1,53 +1,52 @@
 
-# The old "var"
+# Eski "var"
 
-In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+[O'zgaruvchanlar](info:variables) haqidagi birinchi bobda biz o'zgaruvchanlarni e'lon qilishning uchta usulini eslatib o'tdik:
 
 1. `let`
 2. `const`
 3. `var`
 
-`let` and `const` behave exactly the same way in terms of Lexical Environments.
+Leksik muhit uchun `let` va `const` bir xil yo'l tutishadi.
 
-But `var` is a very different beast, that originates from very old times. It's generally not used in modern scripts, but still lurks in the old ones.
+Ammo `var` - bu juda qadimgi zamonlardan kelib chiqqan juda boshqacha jonzod. Odatda zamonaviy skriptlarda ishlatilmaydi, ammo baribir eskilarida yashiringan.
 
-If you don't plan on meeting such scripts you may even skip this chapter or postpone it, but then there's a chance that it bites you later.
+Agar siz bunday skriptlar bilan tanishishni rejalashtirmasangiz, ushbu bobdan voz kechishingiz yoki uni kechiktirishingiz mumkin, ammo keyinroq sizni tishlab qolish ehtimoli bor.
 
-From the first sight, `var` behaves similar to `let`. That is, declares a variable:
+Birinchi qarashdanoq, `var` `let` ga o'xshash ish bajaradi. Ya'ni, o'zgaruvchanni e'lon qiladi:
 
 ```js run
 function sayHi() {
-  var phrase = "Hello"; // local variable, "var" instead of "let"
+  var phrase = "Salom"; // mahalliy o'zgaruvchan, "let" o'rniga "var"
 
-  alert(phrase); // Hello
-}
+  alert(phrase); // Salom
 
 sayHi();
 
 alert(phrase); // Error, phrase is not defined
 ```
 
-...But here are the differences.
+...Ammo bu yerda farqlar mavjud.
 
-## "var" has no block scope
+## "var" blok doirasiga ega emas
 
-`var` variables are either function-wide or global, they are visible through blocks.
+`var` o'zgaruvchanlari funktsiya miqyosida yoki global bo'lib, ular bloklar orqali ko'rinadi.
 
-For instance:
+Masalan:
 
 ```js
 if (true) {
-  var test = true; // use "var" instead of "let"
+  var test = true; // "let" o'rniga "var" ishlatildi
 }
 
 *!*
-alert(test); // true, the variable lives after if
+alert(test); // true, o'zgaruvchanni if dan keyin yashaydi
 */!*
 ```
 
-If we used `let test` on the 2nd line, then it wouldn't be visible to `alert`. But `var` ignores code blocks, so we've got a global `test`.
+Agar biz 2-satrda `let test` dan foydalansak, u holda `alert` ko'rinmaydi. Ammo `var` kod bloklarini e'tiborsiz qoldiradi, shuning uchun bizda global `test` mavjud.
 
-The same thing for loops: `var` cannot be block- or loop-local:
+Xuddi shu narsa tsiklar uchun: `var` blok-yoki tsikl-lokal bo'lishi mumkin emas:
 
 ```js
 for (var i = 0; i < 10; i++) {
@@ -55,38 +54,38 @@ for (var i = 0; i < 10; i++) {
 }
 
 *!*
-alert(i); // 10, "i" is visible after loop, it's a global variable
+alert(i); // 10, "i" tsikldan keyin ko'rinadi, bu global o'zgaruvchandir
 */!*
 ```
 
-If a code block is inside a function, then `var` becomes a function-level variable:
+Agar kod bloki funktsiya ichida bo'lsa, `var` funktsiya darajasidagi o'zgaruvchanga aylanadi:
 
 ```js
 function sayHi() {
   if (true) {
-    var phrase = "Hello";
+    var phrase = "Salom";
   }
 
-  alert(phrase); // works
+  alert(phrase); // ishlaydi
 }
 
 sayHi();
 alert(phrase); // Error: phrase is not defined
 ```
 
-As we can see, `var` pierces through `if`, `for` or other code blocks. That's because a long time ago in JavaScript blocks had no Lexical Environments. And `var` is a remnant of that.
+Ko'rib turganimizdek, `var` `if`, `for` yoki boshqa kod bloklari orqali parchalanadi. Buning sababi shundaki, uzoq vaqt oldin JavaScript-ni bloklarida leksik muhit yo'q edi. Va `var` - bu uning qoldig'i.
 
-## "var" are processed at the function start
+## "var" funktsiya boshlanganda bajariladi
 
-`var` declarations are processed when the function starts (or script starts for globals).
+`var` deklaratsiyalari funktsiya boshlanganda bajariladi (yoki global uchun skript boshlanadi).
 
-In other words, `var` variables are defined from the beginning of the function, no matter where the definition is (assuming that the definition is not in the nested function).
+Boshqacha qilib aytganda, `var` o'zgaruvchanlari funktsiya bajarilishidan boshlab, ta'rif qayerda bo'lishidan qat'i nazar (ta'rif ichki funktsiyada emas deb taxmin qilinadi).
 
-So this code:
+Shunday qilib, ushbu kod:
 
 ```js
 function sayHi() {
-  phrase = "Hello";
+  phrase = "Salom";
 
   alert(phrase);
 
@@ -96,7 +95,7 @@ function sayHi() {
 }
 ```
 
-...Is technically the same as this (moved `var phrase` above):
+...Texnik jihatdan shu bilan bir xil (yuqoridagi `var phrase`):
 
 ```js
 function sayHi() {
@@ -104,17 +103,17 @@ function sayHi() {
   var phrase;
 */!*
 
-  phrase = "Hello";
+  phrase = "Salom";
 
   alert(phrase);
 }
 ```
 
-...Or even as this (remember, code blocks are ignored):
+...Yoki shunday (esda tutingki, kod bloklari e'tiborga olinmaydi):
 
 ```js
 function sayHi() {
-  phrase = "Hello"; // (*)
+  phrase = "Salom"; // (*)
 
   *!*
   if (false) {
@@ -126,60 +125,60 @@ function sayHi() {
 }
 ```
 
-People also call such behavior "hoisting" (raising), because all `var` are "hoisted" (raised) to the top of the function.
+Odamlar bunday xatti-harakatni "hoisting" (ko'tarish) deb ham atashadi, chunki barcha `var` funktsiyalarni yuqori qismiga "yuzaga chiqadi" (ko'tarilgan).
 
-So in the example above, `if (false)` branch never executes, but that doesn't matter. The `var` inside it is processed in the beginning of the function, so at the moment of `(*)` the variable exists.
+Shunday qilib, yuqoridagi misolda, `if (false)` shox hech qachon bajarilmaydi, ammo bu muhim emas. Uning ichidagi `var` funktsiya boshida bajariladi, shuning uchun `(*)` momentida o'zgaruvchan mavjud.
 
-**Declarations are hoisted, but assignments are not.**
+**Deklaratsiyalar ko'tariladi, ammo tayinlashlar yo'q.**
 
-That's better to demonstrate with an example, like this:
+Buni quyidagi misol bilan namoyish qilish yaxshiroqdir:
 
 ```js run
 function sayHi() {
   alert(phrase);  
 
 *!*
-  var phrase = "Hello";
+  var phrase = "Salom";
 */!*
 }
 
 sayHi();
 ```
 
-The line `var phrase = "Hello"` has two actions in it:
+`var phrase = "Salom"` satrida ikkita amal mavjud:
 
-1. Variable declaration `var`
-2. Variable assignment `=`.
+1. O'zgaruvchan deklaratsiya `var`
+2. O'zgaruvchan tayinlash `=`
 
-The declaration is processed at the start of function execution ("hoisted"), but the assignment always works at the place where it appears. So the code works essentially like this:
+Deklaratsiya funktsiyani bajarish boshlanganda ("ko'tarilgan") bajariladi, ammo tayinlash har doim paydo bo'lgan joyda ishlaydi. Shunday qilib kod asosan shunday ishlaydi:
 
 ```js run
 function sayHi() {
 *!*
-  var phrase; // declaration works at the start...
+  var phrase; // deklaratsiya boshida ishlaydi...
 */!*
 
   alert(phrase); // undefined
 
 *!*
-  phrase = "Hello"; // ...assignment - when the execution reaches it.
+  phrase = "Hello"; // ...tayinlash - ijro etilishi unga yetganda.
 */!*
 }
 
 sayHi();
 ```
 
-Because all `var` declarations are processed at the function start, we can reference them at any place. But variables are undefined until the assignments.
+Barcha `var` deklaratsiyalari funktsiya boshlanganda bajarilganligi sababli, biz ularga istalgan joyda murojaat qilishimiz mumkin. Ammo o'zgaruvchanlar tayinlanmaguncha aniqlanmagan.
 
-In both examples above `alert` runs without an error, because the variable `phrase` exists. But its value is not yet assigned, so it shows `undefined`.
+Yuqoridagi ikkala misolda ham `alert` xatosiz ishlaydi, chunki `phrase` o'zgaruvchani mavjud. Ammo uning qiymati hali tayinlanmagan, shuning uchun u `undefined` ni ko'rsatadi.
 
-## Summary
+## Xulosa
 
-There are two main differences of `var`:
+`var` ning ikkita asosiy farqlari mavjud:
 
-1. Variables have no block scope, they are visible minimum at the function level.
-2. Variable declarations are processed at function start.
+1. O'zgaruvchanlar blok doirasiga ega emas, ular funktsiya darajasida minimal ko'rinadi.
+2. O'zgaruvchan deklaratsiyalar funktsiya boshlanganda bajarilinadi.
 
-There's one more minor difference related to the global object, we'll cover that in the next chapter.
+Global obyekt bilan bog'liq yana bir kichik farq bor, buni keyingi bobda ko'rib chiqamiz.
 
-These differences are actually a bad thing most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+Ushbu farqlar, aslida, ko'pincha yomon narsadir. Blok darajasidagi o'zgaruvchanlar - bu juda yaxshi narsa. Shuning uchun `let` standartga ancha oldin kiritilgan va endi o'zgaruvchanni e'lon qilishning asosiy usuli (`const` bilan birga).

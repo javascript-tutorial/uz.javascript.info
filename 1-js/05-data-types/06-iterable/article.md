@@ -1,20 +1,20 @@
 
-# Iterables
+# Tsiklda ko’rib chiqish imokniyatiga ega ma’lumot turlari
 
-*Iterable* objects is a generalization of arrays. That's a concept that allows to make any object useable in a `for..of` loop.
+*Ketma-ket sarraluvchan* obyektlar - bu massivlarni umumlashtirish. Bu har qanday obyektni `for..of` tsiklida foydalanishga imkon beradigan kontseptsiya.
 
-Of course, Arrays are iterable. But there are many other built-in objects, that are iterable as well. For instance, Strings are iterable also. As we'll see, many built-in operators and methods rely on them.
+Albatta, massivlar o'zlari ketma-ket sarraluvchandir. Biroq, masalan, matnlar kabi boshqa ichki ketma-ket sarraluvchan narsalar ham mavjud.
 
-If an object represents a collection (list, set) of something, then `for..of` is a great syntax to loop over it, so let's see how to make it work.
+Agar obyekt biron bir narsaning to'plamini (ro'yxati, to'plami) ifodalasa, unda `for..of` uni tsiklash uchun ajoyib sintaksis, shuning uchun uni qanday ishlashini ko'rib chiqamiz.
 
 
 ## Symbol.iterator
 
-We can easily grasp the concept of iterables by making one of our own.
+Biz ulardan birini yaratib, ketma-ket sarraluvchanning qurilma tamoyilini osongina tushunamiz.
 
-For instance, we have an object, that is not an array, but looks suitable for `for..of`.
+Masalan, bizda obyekt mavjud, bu massiv emas, lekin `for..of` ga mos keladi.
 
-Like a `range` object that represents an interval of numbers:
+Raqamlar oralig'ini ifodalovchi `range` obyekti kabi:
 
 ```js
 let range = {
@@ -22,18 +22,18 @@ let range = {
   to: 5
 };
 
-// We want the for..of to work:
+// Biz for..of ishlashni xohlaymiz:
 // for(let num of range) ... num=1,2,3,4,5
 ```
 
-To make the `range` iterable (and thus let `for..of` work) we need to add a method to the object named `Symbol.iterator` (a special built-in symbol just for that).
+`range` ni ketma-ket sarraluvchan qilish uchun (va shunday qilib `for..of` ishlash uchun) biz obyektga `Symbol.iterator` nomli usulni qo'shishimiz kerak (buning uchun maxsus o'rnatilgan belgi).
 
-1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
-2. Onward, `for..of` works *only with that returned object*.
-3. When `for..of` wants the next value, it calls `next()` on that object.
-4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true`  means that the iteration is finished, otherwise `value` must be the new value.
+1. `for..of` boshlanganda, u ushbu usulni bir marta chaqiradi (yoki topilmasa xatoni). Usul *ketma-ket sarraluvchan* -- obyektni `next` usuli bilan qaytarishi kerak.
+2. Aytgancha, `for..of` *faqat qaytib kelgan obyekt bilan ishlaydi*.
+3. Agar `for..of` keyingi qiymatni xohlasa, u obyektda `next()` ni chaqiradi.
+4. `next()` ning natijasi `{done: Boolean, value: any}` shaklida bo'lishi kerak, bu yerda `done = true` takrorlanish tugaganligini anglatadi, aks holda `value` yangi qiymat bo'lishi kerak.
 
-Here's the full implementation for `range`:
+`range` uchun to'liq dastur:
 
 ```js run
 let range = {
@@ -41,18 +41,18 @@ let range = {
   to: 5
 };
 
-// 1. call to for..of initially calls this
+// 1. for..of chaqiruvi this ni chaqiradi
 range[Symbol.iterator] = function() {
 
-  // ...it returns the iterator object:
-  // 2. Onward, for..of works only with this iterator, asking it for next values
+  // ...ketma-ket sarraluvchan obyektini qaytaradi:
+  // 2. for..of faqat ushbu ketma-ket sarraluvchan bilan ishlaydi, undan keyingi qiymatlarni so'raydi
   return {
     current: this.from,
     last: this.to,      
 
-    // 3. next() is called on each iteration by the for..of loop
+    // 3. next() for..of tsikldan har bir takrorlanishda chaqiriladi
     next() {
-      // 4. it should return the value as an object {done:.., value :...}
+      // 4. u qiymatni obyekt sifatida qaytarishi kerak {done:.., value :...}
       if (this.current <= this.last) {
         return { done: false, value: this.current++ };
       } else {
@@ -62,22 +62,22 @@ range[Symbol.iterator] = function() {
   };
 };
 
-// now it works!
+// endi u ishlaydi!
 for (let num of range) {
-  alert(num); // 1, then 2, 3, 4, 5
+  alert(num); // 1, so'ng 2, 3, 4, 5
 }
 ```
 
-Please note the core feature of iterables: an important separation of concerns:
+Iltimos, ketma-ket sarraluvchanning asosiy xususiyatiga e'tibor bering: muhim tashvislarni ajratish:
 
-- The `range` itself does not have the `next()` method.
-- Instead, another object, a so-called "iterator" is created by the call to `range[Symbol.iterator]()`, and it handles the whole iteration.
+- `range` ning o'zida `next()` usuli mavjud emas.
+- Buning o'rniga `range[Symbol.iterator]()` ga chaqiruv qilish orqali yana bir `ketma-ket sarraluvchan` deb nomlangan obyekt yaratiladi va u butun takrorlashni boshqaradi.
 
-So, the iterator object is separate from the object it iterates over.
+Shunday qilib, ketma-ket sarraluvchan obyekt takrorlanadigan obyektdan ajralib turadi.
 
-Technically, we may merge them and use `range` itself as the iterator to make the code simpler.
+Texnik jihatdan biz ularni birlashtira olamiz va kodni soddalashtirish uchun `range` ning o'zini ketma-ket sarraluvchan sifatida ishlatamiz.
 
-Like this:
+Shunga o'xshash:
 
 ```js run
 let range = {
@@ -99,57 +99,57 @@ let range = {
 };
 
 for (let num of range) {
-  alert(num); // 1, then 2, 3, 4, 5
+  alert(num); // 1, so'ng 2, 3, 4, 5
 }
 ```
 
-Now `range[Symbol.iterator]()` returns the `range` object itself:  it has the necessary `next()` method and remembers the current iteration progress in `this.current`. Shorter? Yes. And sometimes that's fine too.
+Endi `range[Symbol.iterator]()` `range` obyekti o'zini qaytaradi: u kerakli `next()` uslubiga ega va `this.current` da amaldagi takrorlanish jarayonini eslab qoladi. Qisqaroqmi? Ha. Va ba'zida bu ham yaxshi.
 
-The downside is that now it's impossible to have two `for..of` loops running over the object simultaneously: they'll share the iteration state, because there's only one iterator -- the object itself. But two parallel for-ofs is a rare thing, doable with some async scenarios.
+Salbiy tomoni shundaki, endi obyekt ustida bir vaqtning o'zida ikkita `for..of` tsikl o'tishi mumkin emas: ular takrorlanish holatini bo'lishadi, chunki faqat bitta ketma-ket sarraluvchan bor -- obyektning o'zi. Ammo ikkita parallel holat kamdan-kam uchraydigan narsa bo'lib, ba'zi bir asenkron stsenariylar bilan bajarilishi mumkin.
 
-```smart header="Infinite iterators"
-Infinite iterators are also possible. For instance, the `range` becomes infinite for `range.to = Infinity`. Or we can make an iterable object that generates an infinite sequence of pseudorandom numbers. Also can be useful.
+```smart header="Cheksiz ketma-ket sarraluvchanlar"
+Cheksiz ketma-ket sarraluvchanlar ham mumkin. Masalan, `range` cheksiz bo'ladi qachonki biz `range.to = Infinity` tayinlasak. Yoki, biz yolg'on tasodifiy sonlarning cheksiz ketma-ketligini yaratadigan `range` obyektini yaratishimiz mumkin. 
 
-There are no limitations on `next`, it can return more and more values, that's normal.
+`next` uchun cheklovlar yo'q, u tobora ko'proq qiymatlarni qaytarishi mumkin, bu normal holat.
 
-Of course, the `for..of` loop over such an iterable would be endless. But we can always stop it using `break`.
+Albatta, bunday takrorlanadigan `for..of` tsikli cheksiz bo'ladi. Ammo biz uni har doim `break` yordamida to'xtata olamiz.
 ```
 
 
-## String is iterable
+## String- ketma-ket sarraluvchan obyekt
 
-Arrays and strings are most widely used built-in iterables.
+Massivlar va matnlar eng ko'p ishlatiladigan ichki ketma-ket sarraluvchan dasturlardan biri.
 
-For a string, `for..of` loops over its characters:
+Matn uchun, `for..of` tsikli belgilarni ko'rib chiqadi:
 
 ```js run
 for (let char of "test") {
-  // triggers 4 times: once for each character
-  alert( char ); // t, then e, then s, then t
+  // 4 marta ishga tushiradi: har bir belgi uchun bir martadan
+  alert( char ); // t, so'ng e, so'ng s, so'ng t
 }
 ```
 
-And it works correctly with surrogate pairs!
+Va surrogat juftlari bilan to'g'ri ishlaydi!
 
 ```js run
 let str = '𝒳😂';
 for (let char of str) {
-    alert( char ); // 𝒳, and then 😂
+    alert( char ); // 𝒳, va so'ng 😂
 }
 ```
 
-## Calling an iterator explicitly
+## Ketma-ket sarraluvchanni aniq chaqirish
 
-Normally, internals of iterables are hidden from the external code. There's a `for..of` loop, that works, that's all it needs to know.
+Odatda, takrorlanadigan ma'lumotlarning ichki qismi tashqi koddan yashiringan. `for..of` tsikli mavjud, u ishlaydi, shuni bilishimiz kerak.
 
-But to understand things a little bit deeper let's see how to create an iterator explicitly.
+Ammo narsalarni biroz chuqurroq tushunish uchun keling, qanday qilib ketma-ket sarraluvchanni aniq yaratishni ko'rib chiqaylik.
 
-We'll iterate over a string the same way as `for..of`, but with direct calls. This code gets a string iterator and calls it "manually":
+Biz matnni `for..of` singari takrorlaymiz, lekin to'g'ridan-to'g'ri chaqiruvlar bilan. Ushbu kod matn ketma-ket sarraluvchanini oladi va uni "qo'lda" chaqiradi:
 
 ```js run
 let str = "Hello";
 
-// does the same as
+// xuddi shunday qiladi
 // for (let char of str) alert(char);
 
 let iterator = str[Symbol.iterator]();
@@ -157,47 +157,47 @@ let iterator = str[Symbol.iterator]();
 while (true) {
   let result = iterator.next();
   if (result.done) break;
-  alert(result.value); // outputs characters one by one
+  alert(result.value); // belgilarni birma-bir chiqaradi
 }
 ```
 
-That is rarely needed, but gives us more control over the process than `for..of`. For instance, we can split the iteration process: iterate a bit, then stop, do something else, and then resume later.
+Bu kamdan-kam hollarda kerak bo'ladi, lekin bizga `for..of` dan ko'ra ko'proq jarayonni boshqarish imkonini beradi. Masalan, takrorlash jarayonini ikkiga bo'lishimiz mumkin: biroz takrorlang, so'ng to'xtab, yana bir narsa qiling va keyinroq davom eting.
 
-## Iterables and array-likes [#array-like]
+## Ketma-ket sarraluvchan va massivga-o'xshash narsalar
 
-There are two official terms that look similar, but are very different. Please make sure you understand them well to avoid the confusion.
+Tashqi ko'rinishiga o'xshash, ammo juda farq qiladigan ikkita rasmiy atama mavjud. Chalkashmaslik uchun ularni yaxshi tushunganingizga ishonch hosil qiling.
 
-- *Iterables* are objects that implement the `Symbol.iterator` method, as described above.
-- *Array-likes* are objects that have indexes and `length`, so they look like arrays.
+- *Ketma-ket sarraluvchan* - bu yuqorida tavsiflanganidek, `Symbol.iterator` usulini amalga oshiruvchi obyektlar.
+- *Massivga-o'xshash* indekslari va `uzunligi` bo'lgan obyektlar, shuning uchun ular massivga o'xshaydi.
 
-Naturally, these properties can combine. For instance, strings are both iterable (`for..of` works on them) and array-like (they have numeric indexes and `length`).
+Tabiiyki, bu xususiyatlar birlashtirilishi mumkin. Masalan, satrlar ketma-ket sarraluvchan (`for..of` ularda ishlaydi) va massivga-o'xshash (ularning raqamli ko'rsatkichlari va `uzunligi` mavjud).
 
-But an iterable may be not array-like. And vice versa an array-like may be not iterable.
+Ammo ketma-ket sarraluvchan massivga-o'xshash bo'lmasligi mumkin. Va aksincha, massivga-o'xshash ketma-ket sarraluvchan bo'lmasligi mumkin.
 
-For example, the `range` in the example above is iterable, but not array-like, because it does not have indexed properties and `length`.
+Masalan, yuqoridagi misolda `range` ketma-ket sarraluvchan, lekin massivga-o'xshash emas, chunki u indekslangan xususiyatlarga va `uzunlikka` ega emas.
 
-And here's the object that is array-like, but not iterable:
+Va bu yerda obyekt massivga-o'xshash, ketma-ket sarraluvchan obyekt emas:
 
 ```js run
-let arrayLike = { // has indexes and length => array-like
+let arrayLike = { // indekslarga va uzunlikka ega => massivga-o'xshash
   0: "Hello",
   1: "World",
   length: 2
 };
 
 *!*
-// Error (no Symbol.iterator)
+// Xato (Symbol.iterator yo'q)
 for (let item of arrayLike) {}
 */!*
 ```
 
-What do they have in common? Both iterables and array-likes are usually *not arrays*, they don't have `push`, `pop` etc. That's rather inconvenient if we have such an object and want to work with it as with an array.
+Ularning umumiy jihatlari nimada? Ikkala ketma-ket sarraluvchan va massivga-o'xshash obyektlar odatda *massiv emas*, ularda `push`, `pop` va boshqa usullar yo'q. Agar bizda bunday obyekt bo'lsa va u bilan massivda ishlashni xohlasak, bu juda noqulay.
 
 ## Array.from
 
-There's a universal method [Array.from](mdn:js/Array/from) that brings them together. It takes an iterable or array-like value and makes a "real" `Array` from it. Then we can call array methods on it.
+Ularni birlashtiradigan universal usul [Array.from](mdn:js/Array/from) mavjud. Bu ketma-ket sarraluvchan yoki massivga-o'xshash qiymatni oladi va undan "haqiqiy" `Array` hosil qiladi. Keyin biz unga massiv usullarini chaqira olamiz.
 
-For instance:
+Masalan:
 
 ```js run
 let arrayLike = {
@@ -209,43 +209,43 @@ let arrayLike = {
 *!*
 let arr = Array.from(arrayLike); // (*)
 */!*
-alert(arr.pop()); // World (method works)
+alert(arr.pop()); // World (usul ishlaydi)
 ```
 
-`Array.from` at the line `(*)` takes the object, examines it for being an iterable or array-like, then makes a new array and copies there all items.
+`(*)` satridagi `Array.from` obyektni oladi, uni ketma-ket sarraluvchan yoki massivga-o'xshashligini tekshiradi, so'ngra yangi massiv hosil qiladi va u yerga barcha elementlarni ko'chiradi.
 
-The same happens for an iterable:
+Xuddi shu narsa ketma-ket sarraluvchan uchun sodir bo'ladi:
 
 ```js
-// assuming that range is taken from the example above
+// ushbu range yuqoridagi misoldan olingan deb taxmin qilsak
 let arr = Array.from(range);
-alert(arr); // 1,2,3,4,5 (array toString conversion works)
+alert(arr); // 1,2,3,4,5 (toString massivning konversiyasi ishlaydi)
 ```
 
-The full syntax for `Array.from` allows to provide an optional "mapping" function:
+`Array.from` uchun to'liq sintaksis ixtiyoriy "xaritalash" funktsiyasini ta'minlashga imkon beradi:
 ```js
 Array.from(obj[, mapFn, thisArg])
 ```
 
-The second argument `mapFn` should be the function to apply to each element before adding to the array, and `thisArg` allows to set `this` for it.
+Ikkinchi argument `mapFn` massivga qo'shilishdan oldin har bir elementga tatbiq etiladigan funktsiya bo'lishi kerak va `thisArg` buning uchun `this` ni o'rnatishga imkon beradi.
 
-For instance:
+Masalan:
 
 ```js
-// assuming that range is taken from the example above
+// ushbu range yuqoridagi misoldan olingan deb taxmin qilsak
 
-// square each number
+// har bir sonning kvadrati
 let arr = Array.from(range, num => num * num);
 
 alert(arr); // 1,4,9,16,25
 ```
 
-Here we use `Array.from` to turn a string into an array of characters:
+Bu erda biz qatorni belgilar massiviga aylantirish uchun `Array.from` dan foydalanamiz:
 
 ```js run
 let str = '𝒳😂';
 
-// splits str into array of characters
+// massivni belgilar qatoriga ajratadi
 let chars = Array.from(str);
 
 alert(chars[0]); // 𝒳
@@ -253,14 +253,14 @@ alert(chars[1]); // 😂
 alert(chars.length); // 2
 ```
 
-Unlike `str.split`, it relies on the iterable nature of the string and so, just like `for..of`, correctly works with surrogate pairs.
+`str.split` dan farqli o'laroq, u matnning takrorlanadigan xususiyatiga asoslanadi va shunga o'xshash, `for..of` uchun, surrogat juftlar bilan to'g'ri ishlaydi.
 
-Technically here it does the same as:
+Texnik jihatdan bu yerda u quyidagilarni bajaradi:
 
 ```js run
 let str = '𝒳😂';
 
-let chars = []; // Array.from internally does the same loop
+let chars = []; // Array.from ichki bir xil tsikl bajaradi
 for (let char of str) {
   chars.push(char);
 }
@@ -268,9 +268,9 @@ for (let char of str) {
 alert(chars);
 ```
 
-...But is shorter.    
+...Ammo qisqaroq.
 
-We can even build surrogate-aware `slice` on it:
+Hatto surrogat juftlarini qo'llab-quvvatlaydigan `slice` yaratishimiz mumkin:
 
 ```js run
 function slice(str, start, end) {
@@ -281,25 +281,25 @@ let str = '𝒳😂𩷶';
 
 alert( slice(str, 1, 3) ); // 😂𩷶
 
-// native method does not support surrogate pairs
-alert( str.slice(1, 3) ); // garbage (two pieces from different surrogate pairs)
+// mahalliy usul surrogat juftlarni qo'llab-quvvatlamaydi
+alert( str.slice(1, 3) ); // axlat (har xil surrogat juftlaridan ikki dona)
 ```
 
 
-## Summary
+## Xulosa
 
-Objects that can be used in `for..of` are called *iterable*.
+`for..of` da ishlatilishi mumkin bo'lgan obyektlar *ketma-ket sarraluvchan* deb nomlanadi.
 
-- Technically, iterables must implement the method named `Symbol.iterator`.
-    - The result of `obj[Symbol.iterator]` is called an *iterator*. It handles the further iteration process.
-    - An iterator must have the method named `next()` that returns an object `{done: Boolean, value: any}`, here `done:true` denotes the iteration end, otherwise the `value` is the next value.
-- The `Symbol.iterator` method is called automatically by `for..of`, but we also can do it directly.
-- Built-in iterables like strings or arrays, also implement `Symbol.iterator`.
-- String iterator knows about surrogate pairs.
+- Texnik jihatdan, takrorlanadigan ma'lumotlar `Symbol.iterator` nomli usulni amalga oshirishi kerak.
+    - `Obj[Symbol.iterator]` natijasi *ketma-ket sarraluvchan* deb nomlanadi. Bu keyingi takrorlash jarayonini boshqaradi.
+    - Takrorlash moslamasida `next()` deb nomlangan usul bo'lishi kerak, u `{done: Boolean, value: any}` obyektini qaytaradi, bu yerda `done: true` takrorlanish oxirini bildiradi, aks holda `value` keyingi qiymatdir.
+- `Symbol.iterator` usuli avtomatik ravishda `for..of` tomonidan chaqiriladi, lekin biz buni to'g'ridan-to'g'ri amalga oshirishimiz mumkin.
+- Matnlar yoki massivlar singari o'rnatilgan ketma-ket sarraluvchan narsalar, shuningdek, `Symbol.iterator` ni amalga oshiradi.
+- Matn ketma-ket sarraluvchani surrogat juftliklari haqida biladi.
 
 
-Objects that have indexed properties and `length` are called *array-like*. Such objects may also have other properties and methods, but lack the built-in methods of arrays.
+Indekslangan xususiyatlarga va `uzunlikka` ega bo'lgan obyektlar *massivga-o'xshash* deb nomlanadi. Bunday obyektlar boshqa xususiyat va usullarga ham ega bo'lishi mumkin, ammo massivlarning o'rnatilgan usullari yetishmayadi.
 
-If we look inside the specification -- we'll see that most built-in methods assume that they work with iterables or array-likes instead of "real" arrays, because that's more abstract.
+Agar biz spetsifikatsiyani ko'rib chiqsak -- aksariyat o'rnatilgan usullar ularni "haqiqiy" massivlar o'rniga ketma-ket sarraluvchan yoki massivga-o'xshash obyektlar bilan ishlaydi deb o'ylashadi, chunki bu mavhumroq.
 
-`Array.from(obj[, mapFn, thisArg])` makes a real `Array` of an iterable or array-like `obj`, and we can then use array methods on it. The optional arguments `mapFn` and `thisArg` allow us to apply a function to each item.
+`Array.from(obj[, mapFn, thisArg])` ketma-ket sarraluvchan yoki massivga-o'xshash `obj` ning haqiqiy `Array`ini hosil qiladi va biz undan keyin massiv usullaridan foydalanishimiz mumkin. `mapFn` va `thisArg` ixtiyoriy argumentlari har bir element uchun funktsiyani qo'llashimizga imkon beradi.

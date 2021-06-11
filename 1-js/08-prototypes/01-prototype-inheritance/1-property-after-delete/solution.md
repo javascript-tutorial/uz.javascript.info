@@ -1,4 +1,4 @@
 
-1. `true`, taken from `rabbit`.
-2. `null`, taken from `animal`.
-3. `undefined`, there's no such property any more.
+1. `true`, `rabbit` dan olingan.
+2. `null`, `animal` dan olingan.
+3. `undefined`, boshqa bunaqa xususiyat yo'q.

@@ -1,79 +1,87 @@
-# The modern mode, "use strict"
+# Qat'iy rejim, "use strict"
 
-For a long time, JavaScript evolved without compatibility issues. New features were added to the language while old functionality didn't change.
+Uzoq vaqt davomida JavaScript moslik muammosiz rivojlanib bordi. Eski funktsiyalar o'zgarmagan holda tilga yangi xususiyatlar qo'shildi.
 
-That had the benefit of never breaking existing code. But the downside was that any mistake or an imperfect decision made by JavaScript's creators got stuck in the language forever.
+Buning uchun mavjud kodni hech qachon buzmaslik foydasi bor edi. Ammo salbiy tomoni shundaki, JavaScript-ni yaratuvchilar tomonidan qilingan har qanday xato yoki nomukammal qaror tilda abadiy qolib ketgan.
 
-This was the case until 2009 when ECMAScript 5 (ES5) appeared. It added new features to the language and modified some of the existing ones. To keep the old code working, most modifications are off by default. You need to explicitly enable them with a special directive: `"use strict"`.
+Bu ECMAScript 5 (ES5) paydo bo'lgan 2009 yilgacha bo'lgan. Tilga yangi xususiyatlar qo'shilgan va mavjudlarining bir qismi o'zgartirilgan. Eski kodning ishlashini ta'minlash uchun ko'pgina o'zgartirishlar sukut bo'yicha o'chirilgan. Siz ularni maxsus ko'rsatma bilan yoqishingiz kerak: `"use strict"`.
 
 ## "use strict"
 
-The directive looks like a string: `"use strict"` or `'use strict'`. When it is located at the top of a script, the whole script works the "modern" way.
+Direktiv satrga o'xshaydi: `"use strict"` yoki `'use strict'`. U skriptning yuqori qismida joylashgan bo'lsa, butun skript "zamonaviy" usulda ishlaydi.
 
-For example:
+Masalan:
 
 ```js
 "use strict";
 
-// this code works the modern way
+// ushbu kod zamonaviy usulda ishlaydi
 ...
 ```
 
-We will learn functions (a way to group commands) soon.
+Yaqinda biz funktsiyalarni (buyruqlarni guruhlash usulini) o'rganamiz.
 
-Looking ahead, let's just note that `"use strict"` can be put at the start of most kinds of functions instead of the whole script. Doing that enables strict mode in that function only. But usually, people use it for the whole script.
+Oldinga qarab, shuni ta'kidlash kerakki, `"use strict"` butun skriptning o'rniga barcha funktsiyalarning boshiga qo'yilishi mumkin. Bu faqat ushbu funktsiyada qat'iy rejimni yoqadi. Ammo, odatda, odamlar uni butun skript uchun ishlatadilar.
 
 
-````warn header="Ensure that \"use strict\" is at the top"
-Please make sure that `"use strict"` is at the top of your scripts, otherwise strict mode may not be enabled.
+````warn header="\"use strict\" tepada ekanligiga ishonch hosil qiling"
+Iltimos, `"use strict"` skriptingizning yuqori qismida ekanligiga ishonch hosil qiling, aks holda qat'iy rejim yoqilmasligi mumkin.
 
-Strict mode isn't enabled here:
+Bu erda qa'tiy rejim yoqilmagan:
 
 ```js no-strict
 alert("some code");
-// "use strict" below is ignored--it must be at the top
+// "use strict" quyida e'tiborga olinmaydi--u yuqori qismida bo'lishi kerak
 
 "use strict";
 
-// strict mode is not activated
+// qat'iy rejim yoqilmagan
 ```
 
-Only comments may appear above `"use strict"`.
+`"use strict"` yuqorida faqat izohlar paydo bo'lishi mumkin .
 ````
 
-```warn header="There's no way to cancel `use strict`"
-There is no directive like `"no use strict"` that reverts the engine to old behavior.
+```warn header="`use strict` ni bekor qilishning iloji yo'q"
+Interpretatorni eski xatti-harakatga qaytaradigan `"no use strict"` kabi ko'rsatma mavjud emas.
 
-Once we enter strict mode, there's no return.
+Qat'iy rejimga o'tgandan so'ng, qaytish mumkin emas.
 ```
 
-## Browser console
+## Brauzer konsoli
 
-For the future, when you use a browser console to test features, please note that it doesn't `use strict` by default.
+Kelajakda funktsiyalarni sinash uchun brauzer konsolidan foydalanganda, u sukut bo'yicha `use strict(qat'iy rejim)` ishlatmasligini unutmang.
 
-Sometimes, when `use strict` makes a difference, you'll get incorrect results.
+Ba'zan, `use strict(qat'iy rejimni)` foydalanganda, siz noto'g'ri natijalarga erishasiz.
 
-Even if we press `key:Shift+Enter` to input multiple lines, and put `use strict` on top, it doesn't work. That's because of how the console executes the code internally.
+Siz bir nechta satrlarni kiritish uchun `key:Shift+Enter` tugmachani bosing va scriptning ustidan `use strict`(qat'iy rejim) dan foydalaning:
 
-The reliable way to ensure `use strict` would be to input the code into console like this:
+```js
+'use strict'; <Shift+Enter yangi satr uchun>
+//  ...sizning kodingiz
+<Enter to run>
+```
+
+Bu kod ko'pgina brauzerlarda, ya'ni Firefox va Chrome da ishlaydi.
+
+Agar shunday bo'lmasa, `use strict(qat'iy rejim)` ni ta'minlashning eng ishonchli usuli bu kabi konsolga kodni kiritish bo'ladi:
 
 ```js
 (function() {
   'use strict';
 
-  // ...your code...
+  // ...sizning kodingiz...
 })()
 ```
 
-## Always "use strict"
+## Har doim "use strict(qat'iy rejim)" ni foydalaning
 
-We have yet to cover the differences between strict mode and the "default" mode.
+Biz qat'iy rejimning va "standart" rejiming o'rtasidagi farqlarni qoplashimiz uchun hali bor.
 
-In the next chapters, as we learn language features, we'll note the differences between the strict and default modes. Luckily, there aren't many and they actually make our lives better.
+Keyingi boblarda til xususiyatlarini o'rganar ekanmiz, qat'iy va standart rejimlar o'rtasidagi farqlarni qayd etamiz. Yaxshiyamki, u erda ma'lumot ko'p emas va ular aslida hayotimizni yaxshiroq qilishadi.
 
-For now, it's enough to know about it in general:
+Hozircha bu haqda bilish kifoya:
 
-1. The `"use strict"` directive switches the engine to the "modern" mode, changing the behavior of some built-in features. We'll see the details later in the tutorial.
-2. Strict mode is enabled by placing `"use strict"` at the top of a script or function. Several language features, like "classes" and "modules", enable strict mode automatically.
-3. Strict mode is supported by all modern browsers.
-4. We recommended always starting scripts with `"use strict"`. All examples in this tutorial assume strict mode unless (very rarely) specified otherwise.
+1. `"use strict"` direktivasi interpretatorni "zamonaviy" rejimga o'tkazadi va ba'zi ichki xususiyatlarning xatti-harakatlarini o'zgartiradi. Tafsilotlarni keyinroq o'rganib chiqamiz.
+2. Qat'iy rejimi skript yoki funktsiya yuqoriga `"use strict"` ni joylashtirish tomonidan yoqiladi. Bir necha til xususiyatlari, "sinflar" va "modullar" kabi, avtomatik ravishda qat'iy rejimini faollashtirishadi.
+3. Qat'iy rejim barcha zamonaviy brauzerlar tomonidan qo'llab-quvvatlanadi.
+4. Biz har doim `"use strict"` bilan skriptlarni boshlash tavsiya qilamiz. Bu o'quv qo'llanmaning barcha misollar qat'iy rejimda (juda kamdan-kam hollarda) aks holda belgilangan.

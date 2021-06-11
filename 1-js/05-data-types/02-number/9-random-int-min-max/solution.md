@@ -1,6 +1,6 @@
-# The simple but wrong solution
+# Oddiy, ammo noto'g'ri yechim
 
-The simplest, but wrong solution would be to generate a value from `min` to `max` and round it:
+Eng sodda, ammo noto'g'ri yechim, `min` dan max" gacha qiymat hosil qilish va uni yaxlitlash:
 
 ```js run
 function randomInteger(min, max) {
@@ -11,28 +11,28 @@ function randomInteger(min, max) {
 alert( randomInteger(1, 3) );
 ```
 
-The function works, but it is incorrect. The probability to get edge values `min` and `max` is two times less than any other.
+Funktsiya ishlaydi, ammo bu noto'g'ri. `min` va `max` chekka qiymatlarini olish ehtimoli boshqalarga nisbatan ikki baravar kam.
 
-If you run the example above many times, you would easily see that `2` appears the most often.
+Yuqoridagi misolni bir necha bor takrorlasangiz, `2` ning tez-tez paydo bo'lishini osongina ko'rasiz.
 
-That happens because `Math.round()` gets random numbers from the interval `1..3` and rounds them as follows:
+Buning sababi, `Math.round()` tasodifiy sonlarni `1..3` oralig'idan oladi va ularni quyidagicha yaxlitlaydi:
 
 ```js no-beautify
-values from 1    ... to 1.4999999999  become 1
-values from 1.5  ... to 2.4999999999  become 2
-values from 2.5  ... to 2.9999999999  become 3
+1 ... dan 1.4999999999 gacha qiymatlar 1 ga aylanadi
+1.5 ... dan 2.4999999999 gacha qiymatlar 2 ga aylanadi
+2.5 ... dan 2.9999999999 gacha qiymatlar 3 ga aylanadi
 ```
 
-Now we can clearly see that `1` gets twice less values than `2`. And the same with `3`.
+Endi aniq ko'rishimiz mumkinki, `1` qiymati `2` dan ikki baravar kamroq qiymatga ega bo'ladi. Va `3` ham shunday.
 
-# The correct solution
+# To'g'ri yechim
 
-There are many correct solutions to the task. One of them is to adjust interval borders. To ensure the same intervals, we can generate values from `0.5 to 3.5`, thus adding the required probabilities to the edges:
+Vazifani hal qilishning ko'plab to'g'ri yechimlari mavjud. Ulardan biri intervalli chegaralarni sozlashdir. Xuddi shu intervallarni ta'minlash uchun biz `0,5 dan 3,5` gacha qiymatlarni yaratishimiz mumkin, shu bilan kerakli ehtimollarni qirralarga qo'shamiz:
 
 ```js run
 *!*
 function randomInteger(min, max) {
-  // now rand is from  (min-0.5) to (max+0.5)
+  // endi  (min-0.5) dan (max+0.5) gacha
   let rand = min - 0.5 + Math.random() * (max - min + 1);
   return Math.round(rand);
 }
@@ -41,12 +41,12 @@ function randomInteger(min, max) {
 alert( randomInteger(1, 3) );
 ```
 
-An alternative way could be to use `Math.floor` for a random number from `min` to `max+1`:
+Shu bilan bir qatorda tasodifiy son uchun `Math.floor` `min` dan `max + 1` gacha foydalanish mumkin:
 
 ```js run
 *!*
 function randomInteger(min, max) {
-  // here rand is from min to (max+1)
+  //bu yerda min dan (max+1) gacha
   let rand = min + Math.random() * (max + 1 - min);
   return Math.floor(rand);
 }
@@ -55,12 +55,12 @@ function randomInteger(min, max) {
 alert( randomInteger(1, 3) );
 ```
 
-Now all intervals are mapped this way:
+Endi barcha intervallar quyidagicha ishlaydi:
 
 ```js no-beautify
-values from 1  ... to 1.9999999999  become 1
-values from 2  ... to 2.9999999999  become 2
-values from 3  ... to 3.9999999999  become 3
+1 ... dan 1.9999999999 gacha qiymatlar 1 ga teng
+2 ... dan 2.9999999999 gacha qiymatlar 2 ga teng
+3 ... dan 3.9999999999 gacha qiymatlar 3 ga teng
 ```
 
-All intervals have the same length, making the final distribution uniform.
+Barcha intervallar bir xil uzunlikka ega bo'lib, yakuniy taqsimot bir xil bo'ladi.

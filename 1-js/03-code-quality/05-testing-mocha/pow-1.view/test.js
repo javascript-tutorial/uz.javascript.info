@@ -1,6 +1,6 @@
 describe("pow", function() {
 
-  it("raises to n-th power", function() {
+  it("x ni n darajaga ko'tariladi", function() {
     assert.equal(pow(2, 3), 8);
   });
 

@@ -1,20 +1,20 @@
-To precisely match the functionality of `switch`, the `if` must use a strict comparison `'==='`.
+`switch` funktsiyasiga to'liq mos kelish uchun `if` qat'iy taqqoslashni `'==='` ishlatishi kerak.
 
-For given strings though, a simple `'=='` works too.
+Berilgan satrlar uchun oddiy `'=='` ham ishlaydi.
 
 ```js no-beautify
 if(browser == 'Edge') {
-  alert("You've got the Edge!");
+  alert("Sizda Edge bor!");
 } else if (browser == 'Chrome'
  || browser == 'Firefox'
  || browser == 'Safari'
  || browser == 'Opera') {
-  alert( 'Okay we support these browsers too' );
+  alert( 'Yaxshi biz ushbu brauzerlarni ham qo'llab-quvvatlaymiz' );
 } else {
-  alert( 'We hope that this page looks ok!' );
+  alert( "Ushbu sahifa yaxshi ko'rinadi deb umid qilamiz!" );
 }
 ```
 
-Please note: the construct `browser == 'Chrome' || browser == 'Firefox' …` is split into multiple lines for better readability.
+Iltimos, e'tibor bering: `browser == 'Chrome' || browser == 'Firefox' …` yaxshi o'qilish uchun bir nechta satrlarga bo'lingan.
 
-But the `switch` construct is still cleaner and more descriptive.
+Ammo `switch` konstruktsiyasi tozaroq va tavsiflovchiroq.

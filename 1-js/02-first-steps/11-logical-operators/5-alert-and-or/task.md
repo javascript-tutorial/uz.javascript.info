@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The result of OR AND OR
+# OR VA YOKI natijasi
 
-What will the result be?
+Natija qanday bo'ladi?
 
 ```js
 alert( null || 2 && 3 || 4 );

@@ -3,21 +3,21 @@ libs:
 
 ---
 
-# Currying and partials
+# Qismalar
 
-Until now we have only been talking about binding `this`. Let's take it a step further.
+Hozirga qadar biz faqat `this` ni bog'lash haqida gaplashib kelmoqdamiz. Keling, yana bir qadam tashlaymiz.
 
-We can bind not only `this`, but also arguments. That's rarely done, but sometimes can be handy.
+Biz nafaqat `this` ni, balki argumentlarni ham bog'lashimiz mumkin. Bu kamdan-kam hollarda amalga oshiriladi, lekin ba'zida qulay bo'lishi mumkin.
 
-The full syntax of `bind`:
+`bind` ning to'liq sintaksisi:
 
 ```js
 let bound = func.bind(context, arg1, arg2, ...);
 ```
 
-It allows to bind context as `this` and starting arguments of the function.
+Bu kontekstni `this` va funktsiyalarning boshlang'ich argumentlari sifatida bog'lashga imkon beradi.
 
-For instance, we have a multiplication function `mul(a, b)`:
+Masalan, bizda `mul(a, b)` ko'paytma funktsiyasi mavjud:
 
 ```js
 function mul(a, b) {
@@ -25,7 +25,7 @@ function mul(a, b) {
 }
 ```
 
-Let's use `bind` to create a function `double` on its base:
+Uning asosida `double` funktsiyasini yaratish uchun `bind` dan foydalanamiz:
 
 ```js run
 function mul(a, b) {
@@ -41,13 +41,13 @@ alert( double(4) ); // = mul(2, 4) = 8
 alert( double(5) ); // = mul(2, 5) = 10
 ```
 
-The call to `mul.bind(null, 2)` creates a new function `double` that passes calls to `mul`, fixing `null` as the context and `2` as the first argument. Further arguments are passed "as is".
+`mul.bind(null, 2)` ga chaqiruv `mul` ga o'tuvchi yangi `double` funktsiyasini yaratadi, kontekst sifatida `null` ni va `2` ni birinchi argument sifatida belgilaydi. Boshqa argumentlar "boricha" o'tkaziladi.
 
-That's called [partial function application](https://en.wikipedia.org/wiki/Partial_application) -- we create a new function by fixing some parameters of the existing one.
+Bu [qisman funktsional dastur](https://en.wikipedia.org/wiki/Partial_application) deb nomlanadi -- biz mavjud bo'lgan parametrlarning bir qismini tuzatish orqali yangi funktsiya yaratamiz.
 
-Please note that here we actually don't use `this` here. But `bind` requires it, so we must put in something like `null`.
+Iltimos, e'tibor bering, biz bu erda `this` ni ishlatmaymiz. Ammo `bind` buni talab qiladi, shuning uchun biz `null` ga o'xshash narsalarni qo'yishimiz kerak.
 
-The function `triple` in the code below triples the value:
+Quyidagi koddagi `triple` funktsiyasi bu qiymatni uch baravar oshiradi:
 
 ```js run
 function mul(a, b) {
@@ -63,23 +63,23 @@ alert( triple(4) ); // = mul(3, 4) = 12
 alert( triple(5) ); // = mul(3, 5) = 15
 ```
 
-Why do we usually make a partial function?
+Nima uchun biz odatda qisman funktsiyani yaratamiz?
 
-The benefit is that we can create an independent function with a readable name (`double`, `triple`). We can use it and not provide first argument of every time as it's fixed with `bind`.
+Buning foydasi shundaki, biz o'qilishi mumkin bo'lgan nom bilan mustaqil funktsiyani yaratishimiz mumkin (`double`, `triple`). Biz uni ishlata olamiz va har safar birinchi argumentni keltirmaymiz, chunki u "bind" bilan o'rnatiladi.
 
-In other cases, partial application is useful when we have a very generic function and want a less universal variant of it for convenience.
+Boshqa hollarda, qisman dastur juda umumiy funktsiyaga ega bo'lganimizda va qulayligi uchun unchalik universal bo'lmagan variantni xohlaganimizda foydalidir.
 
-For instance, we have a function `send(from, to, text)`. Then, inside a `user` object we may want to use a partial variant of it: `sendTo(to, text)` that sends from the current user.
+Masalan, bizda `send(from, to, text)` funksiyasi mavjud. Keyin, `user` obyekti ichida uning qisman variantini ishlatishni xohlashimiz mumkin: joriy foydalanuvchidan yuboradigan `sendTo(to, text)`.
 
-## Going partial without context
+## Kontekstsiz qisman o'tish
 
-What if we'd like to fix some arguments, but not bind `this`?
+Agar biz ba'zi argumentlarni tuzatishni xohlasak, lekin `this` ni bog'lamasak nima bo'ladi?
 
-The native `bind` does not allow that. We can't just omit the context and jump to arguments.
+`bind` bunga yo'l qo'ymaydi. Biz shunchaki kontekstni qoldirib, argumentlarga o'tishimiz mumkin emas.
 
-Fortunately, a `partial` function for binding only arguments can be easily implemented.
+Yaxshiyamki, faqat argumentlarni bog'lash uchun `qisman` funktsiyani osongina amalga oshirish mumkin.
 
-Like this:
+Shunga o'xshash:
 
 ```js run
 *!*
@@ -90,7 +90,7 @@ function partial(func, ...argsBound) {
 }
 */!*
 
-// Usage:
+// Foydalanish:
 let user = {
   firstName: "John",
   say(time, phrase) {
@@ -98,36 +98,36 @@ let user = {
   }
 };
 
-// add a partial method that says something now by fixing the first argument
+// birinchi argumentni tuzatish orqali hozir biron bir narsani aytadigan qisman usulni qo'shing
 user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes());
 
-user.sayNow("Hello");
-// Something like:
-// [10:00] John: Hello!
+user.sayNow("Salom");
+// Shunga o'xshash narsa:
+// [10:00] John: Salom!
 ```
 
-The result of `partial(func[, arg1, arg2...])` call is a wrapper `(*)` that calls `func` with:
-- Same `this` as it gets (for `user.sayNow` call it's `user`)
-- Then gives it `...argsBound` -- arguments from the `partial` call (`"10:00"`)
-- Then gives it `...args` -- arguments given to the wrapper (`"Hello"`)
+`partial(func[, arg1, arg2...])` chaqiruvining natijasi `func` ni quyidagicha chaqiradigan `(*)` to'plamidir:
+- Xuddi shu `this` mavjud (`user.sayNow` uchun `user` ni chaqiring)
+- Keyin unga `...argsBound` beradi - `qisman` chaqiruvdan argumentlar (`"10:00"`)
+- Keyin uni qaytaradi `...args` - o'ramga(wrapper) berilgan argumentlar (`"Salom"`)
 
-So easy to do it with the spread operator, right?
+Buni tarqatish operatori bilan bajarish juda oson, shunday emasmi?
 
-Also there's a ready [_.partial](https://lodash.com/docs#partial) implementation from lodash library.
+Shuningdek, lodash kutubxonasidan tayyor [_.partial](https://lodash.com/docs#partial) dastur mavjud.
 
 ## Currying
 
-Sometimes people mix up partial function application mentioned above with another thing named "currying". That's another interesting technique of working with functions that we just have to mention here.
+Ba'zan odamlar yuqorida aytib o'tilgan qisman funktsiyani "currying" deb nomlangan boshqa narsa bilan aralashtiradilar. Bu yerda funktsiyalar bilan ishlashning yana bir qiziqarli uslubi, biz bu yerda eslatib o'tamiz.
 
-[Currying](https://en.wikipedia.org/wiki/Currying) is a transformation of functions that translates a function from callable as `f(a, b, c)` into callable as `f(a)(b)(c)`. In JavaScript, we usually make a wrapper to keep the original function.
+[Currying](https://en.wikipedia.org/wiki/Currying) - bu `f(a, b, c)` deb chaqiriladigan funktsiyadan `f(a)(b)(c)` ga aylantirish. JavaScript-da, biz asl funktsiyani saqlab qolish uchun odatda o'ramni yaratamiz.
 
-Currying doesn't call a function. It just transforms it.
+Currying funktsiyani chaqirmaydi. Bu shunchaki uni o'zgartiradi.
 
-Let's create a helper `curry(f)` function that performs currying for a two-argument `f`. In other words, `curry(f)` for two-argument `f(a, b)` translates it into `f(a)(b)`
+Keling, ikkita argumentli `f` uchun currying-ni bajaradigan yordamchi `curry(f)` funktsiyasini yarataylik. Boshqacha qilib aytganda,`curry(f)` ikki argumentli `f(a, b)` `f(a)(b)` ga aylantiradi
 
 ```js run
 *!*
-function curry(f) { // curry(f) does the currying transform
+function curry(f) { // curry(f) currying o'zgartiradi
   return function(a) {
     return function(b) {
       return f(a, b);
@@ -136,7 +136,7 @@ function curry(f) { // curry(f) does the currying transform
 }
 */!*
 
-// usage
+// foydalanish
 function sum(a, b) {
   return a + b;
 }
@@ -146,31 +146,31 @@ let carriedSum = curry(sum);
 alert( carriedSum(1)(2) ); // 3
 ```
 
-As you can see, the implementation is a series of wrappers.
+Ko'rib turganingizdek, amalga oshirish - bu bir qator o'ramalar.
 
-- The result of `curry(func)` is a wrapper `function(a)`.
-- When it is called like `sum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
-- Then `sum(1)(2)` finally calls `function(b)` providing `2`, and it passes the call to the original multi-argument `sum`.
+- `curry(func)` natijasi `function(a)` o'ralmasini hosil qiladi.
+- U `sum(1)` kabi chaqirilganda, argument leksik muhitda saqlanadi va yangi o'rash `function(b)`qaytariladi.
+- So'ngra `sum(1)(2)` nihoyat `2` ni ta'minlaydigan `function(b)` ni chaqiradi va u chaqiruvni asl ko'p argumentli `sum` ga o'tkazadi.
 
-More advanced implementations of currying like [_.curry](https://lodash.com/docs#curry) from lodash library do something more sophisticated. They return a wrapper that allows a function to be called normally when all arguments are supplied *or* returns a partial otherwise.
+Lodash kutubxonasidan [_.curry](https://lodash.com/docs#curry) kabi currying-ni yanada takomillashtirilgan dasturlari yanada murakkabroq narsani amalga oshiradi. Ular barcha argumentlar keltirilganda funktsiyani normal ravishda chaqirishga imkon beradigan o'ramni qaytaradi *yoki* aks holda qisman qaytaradi.
 
 ```js
 function curry(f) {
   return function(...args) {
-    // if args.length == f.length (as many arguments as f has),
-    //   then pass the call to f
-    // otherwise return a partial function that fixes args as first arguments
+    // agar args.length == f.length (f qancha argument bo'lsa),
+    //   keyin chaqiruvni f ga o'tkazadi
+    // aks holda argumentlarni birinchi argument sifatida tuzatadigan qisman funktsiyani qaytaradi
   };
 }
 ```
 
-## Currying? What for?
+## Currying? Nima uchun?
 
-To understand the benefits we definitely need a worthy real-life example.
+Imtiyozlarni tushunish uchun, albatta, munosib hayotiy misol kerak.
 
-Advanced currying allows the function to be both callable normally and partially.
+Kengaytirilgan currying funktsiyani odatdagi va qisman chaqiruv qilish imkoniyatini beradi.
 
-For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions also have many other useful features like sending logs over the network:
+Masalan, biz ma'lumotni formatlaydigan va chiqaradigan `log(date, importance, message)` logga yozish funktsiyasiga egamiz. Haqiqiy loyihalarda bunday funktsiyalar, shuningdek, tarmoq orqali loglarni yuborish kabi ko'plab boshqa foydali xususiyatlarga ega:
 
 ```js
 function log(date, importance, message) {
@@ -178,25 +178,25 @@ function log(date, importance, message) {
 }
 ```
 
-Let's curry it!
+Keling, buni curry chiqaylik!
 
 ```js
 log = _.curry(log);
 ```
 
-After that `log` still works the normal way:
+Shundan so'ng `log` hali ham normal ishlaydi:
 
 ```js
 log(new Date(), "DEBUG", "some debug");
 ```
 
-...But also can be called in the curried form:
+...Ammo, shuningdek, curry shaklida ham chaqirilishi mumkin:
 
 ```js
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
-Let's get a convenience function for today's logs:
+Bugungi logglar uchun qulaylik funktsiyasini olaylik:
 
 ```js
 // todayLog will be the partial of log with fixed first argument
@@ -206,7 +206,7 @@ let todayLog = log(new Date());
 todayLog("INFO", "message"); // [HH:mm] INFO message
 ```
 
-And now a convenience function for today's debug messages:
+Va bugungi koddagi nosozliklarni tuzatish xabarlari uchun qulaylik vazifasi:
 
 ```js
 let todayDebug = todayLog("DEBUG");
@@ -214,15 +214,15 @@ let todayDebug = todayLog("DEBUG");
 todayDebug("message"); // [HH:mm] DEBUG message
 ```
 
-So:
-1. We didn't lose anything after currying: `log` is still callable normally.
-2. We were able to generate partial functions such as for today's logs.
+Shunday qilib:
+1. Currying keyin biz hech narsani yo'qotmadik: `log` odatdagidek chaqiriladi.
+2. Bugungi logglar kabi qisman funktsiyalarni yaratishga muvaffaq bo'ldik.
 
-## Advanced curry implementation
+## Curry-ni takomillashtirish
 
-In case you'd like to get in details (not obligatory!), here's the "advanced" curry implementation that we could use above.
+Agar tafsilotlarni bilmoqchi bo'lsangiz (majburiy emas!), Mana yuqorida ishlatishimiz mumkin bo'lgan "ilg'or" curry dasturini taklif qilamiz.
 
-It's pretty short:
+Bu juda qisqa:
 
 ```js
 function curry(func) {
@@ -240,7 +240,7 @@ function curry(func) {
 }
 ```
 
-Usage examples:
+Foydalanish misollari:
 
 ```js
 function sum(a, b, c) {
@@ -249,17 +249,17 @@ function sum(a, b, c) {
 
 let curriedSum = curry(sum);
 
-alert( curriedSum(1, 2, 3) ); // 6, still callable normally
-alert( curriedSum(1)(2,3) ); // 6, currying of 1st arg
-alert( curriedSum(1)(2)(3) ); // 6, full currying
+alert( curriedSum(1, 2, 3) ); // 6, hali ham odatdagidek chaqiruv qilish mumkin
+alert( curriedSum(1)(2,3) ); // 6, currying 1 chi argumentni
+alert( curriedSum(1)(2)(3) ); // 6, to'la currying
 ```
 
-The new `curry` may look complicated, but it's actually easy to understand.
+Yangi `curry` murakkab ko'rinishi mumkin, ammo aslida uni tushunish oson.
 
-The result of `curry(func)` is the wrapper `curried` that looks like this:
+`curry(func)` natijasi quyidagicha ko'rinadigan `curried` o'ramidir:
 
 ```js
-// func is the function to transform
+// func konvertatsiya qilish funktsiyasi
 function curried(...args) {
   if (args.length >= func.length) { // (1)
     return func.apply(this, args);
@@ -271,39 +271,39 @@ function curried(...args) {
 };
 ```
 
-When we run it, there are two branches:
+Biz uni bajarganimizda, ikkita stsenariy mavjud:
 
-1. Call now: if passed `args` count is the same as the original function has in its definition (`func.length`) or longer, then just pass the call to it.
-2. Get a partial: otherwise, `func` is not called yet. Instead, another wrapper `pass` is returned, that will re-apply `curried` providing previous arguments together with the new ones. Then on a new call, again, we'll get either a new partial (if not enough arguments) or, finally, the result.
+1. Hozir chaqiruv qiling: agar o'tgan `args` soni asl funktsiya (`func.length`) funktsiyasida bir xil bo'lsa yoki undan ko'p bo'lsa, shunchaki chaqiruvni unga o'tkazing.
+2. Qismanni oling: aks holda, `func` hali chaqirilmagan. Buning o'rniga, avvalgi argumentlarni yangilari bilan birgalikda taqdim etgan `curried` ni qayta ishlatadigan yana bir `pass` qaytariladi. Keyin yana yangi chaqiruvda biz yana qisman (agar yetarli argument bo'lmasa) yoki natijada natijani olamiz.
 
-For instance, let's see what happens in the case of `sum(a, b, c)`. Three arguments, so `sum.length = 3`.
+Masalan, `sum(a, b, c)` misolida nima bo'lishini ko'rib chiqamiz. Uchta argument, shuning uchun `sum.length = 3`.
 
-For the call `curried(1)(2)(3)`:
+`curried(1)(2)(3)` chaqiruvi uchun:
 
-1. The first call `curried(1)` remembers `1` in its Lexical Environment, and returns a wrapper `pass`.
-2. The wrapper `pass` is called with `(2)`: it takes previous args (`1`), concatenates them with what it got `(2)` and calls `curried(1, 2)` with them together.
+1. Birinchi chaqiruv `curried(1)` leksik muhitda `1` ni eslaydi va `pass` o'ramasini qaytaradi.
+2. `pass` o'ramasi `(2)` bilan chaqiriladi: u oldingi argumentlarni (`1`) oladi, ularni `(2)` bilan birlashtiradi va `curried(1, 2)` ni ular bilan birga chaqiradi.
 
-    As the argument count is still less than 3, `curry` returns `pass`.
-3. The wrapper `pass` is called again with `(3)`,  for the next call `pass(3)` takes previous args (`1`, `2`) and adds `3` to them, making the call `curried(1, 2, 3)` -- there are `3` arguments at last, they are given to the original function.
+    Argumentlar soni hali 3 dan kam bo'lganligi sababli, `curry` `pass` ni qaytaradi.
+3. `pass` o'ramasi yana `(3)` bilan chaqiriladi, chunki keyingi chaqiruv `pass(3)` oldingi argumentlarni (`1`, `2`) oladi va ularga `3` qo'shib, chaqiruvni `curried(1, 2, 3)` qiladi - nihoyat `3` argumentlari bor, ular asl funktsiyaga qaytarilgan.
 
-If that's still not obvious, just trace the calls sequence in your mind or on the paper.
+Agar bu hali ham aniq bo'lmasa, chaqiruvlar ketma-ketligini yodda yoki qog'ozda kuzatib boring.
 
-```smart header="Fixed-length functions only"
-The currying requires the function to have a known fixed number of arguments.
+```smart header="Faqatgina belgilangan uzunlikdagi funktsiyalar"
+Currying funktsiyadan ma'lum bir aniq sonli argumentga ega bo'lishini talab qiladi.
 ```
 
-```smart header="A little more than currying"
-By definition, currying should convert `sum(a, b, c)` into `sum(a)(b)(c)`.
+```smart header="Currying-dan ko'ra biroz ko'proq"
+Ta'rifga ko'ra, currying `sum(a, b, c)` ni `sum(a)(b)(c)` ga aylantirishi kerak.
 
-But most implementations of currying in JavaScript are advanced, as described: they also keep the function callable in the multi-argument variant.
+Ammo JavaScript-dagi currying dasturlarining aksariyati ta'riflanganidek rivojlangan: ular funktsiyani ko'p argumentli variantda ham chaqirish mumkin.
 ```
 
-## Summary
+## Xulosa
 
-- When we fix some arguments of an existing function, the resulting (less universal) function is called *a partial*. We can use `bind` to get a partial, but there are other ways also.
+- Mavjud funktsiyani ba'zi argumentlarini tuzatsak, natijada (kamroq universal) funktsiya *qisman* deb nomlanadi. Qisman olish uchun `bind` dan foydalanishimiz mumkin, ammo boshqa usullar ham mavjud.
 
-    Partials are convenient when we don't want to repeat the same argument over and over again. Like if we have a `send(from, to)` function, and `from` should always be the same for our task, we can get a partial and go on with it.
+    Biz bir xil argumentni qayta-qayta takrorlashni xohlamasak, qismlar qulay. Agar bizda `send(from, to)` funktsiyasi mavjud bo'lsa va `from` har doim bizning vazifamiz uchun bir xil bo'lishi kerak bo'lsa, biz qismanni olamiz va shu bilan davom etamiz.
 
-- *Currying* is a transform that makes `f(a,b,c)` callable as `f(a)(b)(c)`. JavaScript implementations usually both keep the function callable normally and return the partial if arguments count is not enough.
+- *Currying* - bu `f(a,b,c)` ni `f(a)(b)(c)` deb chaqiradigan konvertatsiya. JavaScript dasturlari odatda funktsiyani odatdagidek chaqiradi va agar argumentlar soni yetarli bo'lmasa, qisman qaytaradi.
 
-    Currying is great when we want easy partials. As we've seen in the logging example: the universal function `log(date, importance, message)` after currying gives us partials when called with one argument like `log(date)` or two arguments `log(date, importance)`.  
+    Currying biz oson qismlarni xohlaganimizda juda yaxshi. Log misolida ko'rganimizdek: `log(date)` yoki ikkita argument `log(date, importance)` kabi bitta argument bilan chaqirilganda universal `log(date, importance, message)` funktsiyasi bizga qisman beradi.

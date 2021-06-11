@@ -1,13 +1,13 @@
-The answer: first `1`, then `2`.
+Javob: avval `1`, keyin `2`.
 
 ```js run
 alert( alert(1) || 2 || alert(3) );
 ```
 
-The call to `alert` does not return a value. Or, in other words, it returns `undefined`.
+`alert` qiymatni qaytarmaydi. Yoki, boshqacha qilib aytganda, u `undefined` ni qaytaradi.
 
-1. The first OR `||` evaluates it's left operand `alert(1)`. That shows the first message with `1`.
-2. The `alert` returns `undefined`, so OR goes on to the second operand searching for a truthy value.
-3. The second operand `2` is truthy, so the execution is halted, `2` is returned and then shown by the outer alert.
+1. Birinchi YOKI `||` chap operandni baholaydi `alert(1)`. Bu birinchi xabarni `1` ko'rsatadi.
+2. `alert` `undefined` ni qaytaradi, shuning uchun YOKI ikkinchi operandga o'tib, haqiqiy qiymatni qidiradi.
+3. Ikkinchi operand `2` haqiqatdir, shuning uchun ijro to'xtatiladi, `2` qaytariladi va keyin tashqi ogohlantirish(alert) bilan ko'rsatiladi.
 
-There will be no `3`, because the evaluation does not reach `alert(3)`.
+`3` bo'lmaydi, chunki baholash `alert(3)` ga yetib bormaydi.

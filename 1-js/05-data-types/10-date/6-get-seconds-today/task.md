@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# How many seconds has passed today?
+# Bugun necha soniya o'tdi?
 
-Write a function `getSecondsToday()` that returns the number of seconds from the beginning of today.
+Bugungi kunning boshidan boshlab soniya sonini qaytaradigan `getSecondsToday()` funktsiyasini yozing.
 
-For instance, if now `10:00 am`, and there was no daylight savings shift, then:
+Misol uchun, agar hozir `10:00` bo'lsa va qish/yoz vaqtiga o'tmasa, u holda:
 
 ```js
 getSecondsToday() == 36000 // (3600 * 10)
 ```
 
-The function should work in any day. That is, it should not have a hard-coded value of "today".
+Funktsiya har qanday kunda ishlashi kerak. Ya'ni, u "bugungi" ning qattiq kodlangan qiymatiga ega bo'lmasligi kerak.

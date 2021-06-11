@@ -1,11 +1,11 @@
-We need to "map" all values from the interval 0..1 into values from `min` to `max`.
+Biz 0..1 oralig'idan barcha qiymatlarni `min` dan `max` gacha bo'lgan qiymatlarga "map" qilishimiz kerak.
 
-That can be done in two stages:
+Buni ikki bosqichda amalga oshirish mumkin:
 
-1. If we multiply a random number from 0..1 by `max-min`, then the interval of possible values increases `0..1` to `0..max-min`.
-2. Now if we add `min`, the possible interval becomes from `min` to `max`.
+1. Agar tasodifiy sonni 0..1 dan `max-min` ga ko'paytirsak, u holda mumkin bo'lgan qiymatlar oralig'i `0..1` dan `0..max-min` gacha ko'tariladi.
+2. Endi `min` ni qo'shsak, mumkin bo'lgan interval `min` dan `max` gacha bo'ladi.
 
-The function:
+Funktsiya:
 
 ```js run
 function random(min, max) {

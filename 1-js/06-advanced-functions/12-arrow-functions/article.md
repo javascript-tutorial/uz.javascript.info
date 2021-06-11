@@ -1,30 +1,30 @@
-# Arrow functions revisited
+# O'q funktsiyalarni takrorlayamiz
 
-Let's revisit arrow functions.
+Keling, o'q funktsiyalarini qayta ko'rib chiqaylik.
 
-Arrow functions are not just a "shorthand" for writing small stuff.
+O'q funktsiyalari faqat kamroq yozish uchun "qisqartirish" emas. Ular boshqa foydali xususiyatlarga ega.
 
-JavaScript is full of situations where we need to write a small function, that's executed somewhere else.
+JavaScript biz boshqa joyda bajarilgan kichik funktsiyani yozishimiz kerak bo'lgan vaziyatlarga to'la.
 
-For instance:
+Masalan:
 
-- `arr.forEach(func)` -- `func` is executed by `forEach` for every array item.
-- `setTimeout(func)` -- `func` is executed by the built-in scheduler.
-- ...there are more.
+- `arr.forEach(func)` -- `func` har bir massiv elementi uchun` forEach` tomonidan bajariladi.
+- `setTimeout(func)` -- `func` o'rnatilgan rejalashtiruvchi tomonidan bajariladi.
+- ...ko'proq bor.
 
-It's in the very spirit of JavaScript to create a function and pass it somewhere.
+Funktsiyani yaratish va uni biron bir joyga yetkazish JavaScript-ni ruhiga mos keladi.
 
-And in such functions we usually don't want to leave the current context.
+Va bunday funktsiyalarda biz odatda hozirgi kontekstni tark etishni xohlamaymiz.
 
-## Arrow functions have no "this"
+## O'q funktsiyalarida "this" yo'q
 
-As we remember from the chapter <info:object-methods>, arrow functions do not have `this`. If `this` is accessed, it is taken from the outside.
+<info:object-methods> bobidan eslaganimizdek, o'q funktsiyalari `this` ega emas. Agar `this` ga kirilsa, u tashqaridan olinadi.
 
-For instance, we can use it to iterate inside an object method:
+Masalan, biz uni obyekt usuli ichida takrorlash uchun ishlatishimiz mumkin:
 
 ```js run
 let group = {
-  title: "Our Group",
+  title: "Bizning guruhimiz",
   students: ["John", "Pete", "Alice"],
 
   showList() {
@@ -39,13 +39,13 @@ let group = {
 group.showList();
 ```
 
-Here in `forEach`, the arrow function is used, so `this.title` in it is exactly the same as in the outer method `showList`. That is: `group.title`.
+Bu yerda `forEach` da o'q funktsiyasi ishlatiladi, shuning uchun undagi `this.title` tashqi ko'rinish `showList` bilan bir xil. Ya'ni: `group.title`.
 
-If we used a "regular" function, there would be an error:
+Agar biz "muntazam" funktsiyadan foydalansak, xato bo'ladi:
 
 ```js run
 let group = {
-  title: "Our Group",
+  title: "Bizning guruhimiz",
   students: ["John", "Pete", "Alice"],
 
   showList() {
@@ -61,28 +61,28 @@ let group = {
 group.showList();
 ```
 
-The error occurs because `forEach` runs functions with `this=undefined` by default, so the attempt to access `undefined.title` is made.
+Xatolik yuzaga keldi, chunki `forEach` sukut bo'yicha `this=undefined` bilan ishlaydi, shuning uchun `undefined.title` ga kirish uchun harakat amalga oshiriladi.
 
-That doesn't affect arrow functions, because they just don't have `this`.
+Bu o'q funktsiyalariga ta'sir qilmaydi, chunki ularda `this` yo'q.
 
-```warn header="Arrow functions can't run with `new`"
-Not having `this` naturally means another limitation: arrow functions can't be used as constructors. They can't be called with `new`.
+```warn header="O'q funktsiyalari `new` bilan ishlamaydi"
+`this` ga ega bo'lmaslik tabiiy ravishda yana bir cheklovni anglatadi: o'q funktsiyalarini konstruktor sifatida ishlatish mumkin emas. Ularni `new` bilan chaqirish mumkin emas.
 ```
 
-```smart header="Arrow functions VS bind"
-There's a subtle difference between an arrow function `=>` and a regular function called with `.bind(this)`:
+```smart header="O'q funktsiyalar VS bind"
+`=>` O'q funktsiyasi va `.bind(this)` bilan chaqirilgan muntazam funktsiya o'rtasida nozik farq bor:
 
-- `.bind(this)` creates a "bound version" of the function.
-- The arrow `=>` doesn't create any binding. The function simply doesn't have `this`. The lookup of `this` is made exactly the same way as a regular variable search: in the outer lexical environment.
+- `.bind(this)` funktsiyaning "bog'langan versiyasi" ni yaratadi.
+- `=>` o'qi hech qanday bog'lanish yaratmaydi. Funktsiyada oddiygina `this` mavjud emas. `this` ni qidirish doimiy o'zgaruvchan qidirish bilan bir xil tarzda amalga oshiriladi: tashqi leksik muhitda.
 ```
 
-## Arrows have no "arguments"
+## O'qlarda "argumentlar" yo'q
 
-Arrow functions also have no `arguments` variable.
+O'q funktsiyalarida `argumentlar` o'zgaruvchani yo'q.
 
-That's great for decorators, when we need to forward a call with the current `this` and `arguments`.
+Bu hozirgi `this` va `argumentlar` bilan chaqirishimiz kerak bo'lganda, bu dekorativlar uchun juda yaxshi.
 
-For instance, `defer(f, ms)` gets a function and returns a wrapper around it that delays the call by `ms` milliseconds:
+Masalan, `defer(f, ms)` funktsiyani oladi va atrofida chaqiruvni `ms` millisoniyalarda kechiktiradigan o'ramni(wrapper) qaytaradi:
 
 ```js run
 function defer(f, ms) {
@@ -92,14 +92,14 @@ function defer(f, ms) {
 }
 
 function sayHi(who) {
-  alert('Hello, ' + who);
+  alert('Salom, ' + who);
 }
 
 let sayHiDeferred = defer(sayHi, 2000);
-sayHiDeferred("John"); // Hello, John after 2 seconds
+sayHiDeferred("John"); // Salom, John 2 soniyadan so'ng
 ```
 
-The same without an arrow function would look like:
+Xuddi shu o'q funktsiyasiz quyidagicha ko'rinadi:
 
 ```js
 function defer(f, ms) {
@@ -112,15 +112,15 @@ function defer(f, ms) {
 }
 ```
 
-Here we had to create additional variables `args` and `ctx` so that the function inside `setTimeout` could take them.
+`setTimeout` ichidagi funktsiya ularni qabul qilishi uchun biz `args` va `ctx` qo'shimcha parametrlarini yaratishga majbur bo'ldik.
 
-## Summary
+## Xulosa
 
-Arrow functions:
+O'q funktsiyalari:
 
-- Do not have `this`.
-- Do not have `arguments`.
-- Can't be called with `new`.
-- (They also don't have `super`, but we didn't study it. Will be in the chapter <info:class-inheritance>).
+- `this` ga ega emas.
+- `argumentlar` ga ega emas.
+- `new` bilan chaqirib bo'lmaydi.
+- (Ularda `super` yo'q, lekin biz buni hali o'rganmadik. <info:class-inheritance> bo'limida bo'ladi).
 
-That's because they are meant for short pieces of code that do not have their own "context", but rather works in the current one. And they really shine in that use case.
+Buning sababi shundaki, ular o'zlarining "kontekstlari" bo'lmagan, aksincha hozirgi holatida ishlaydigan qisqa kodlar uchun mo'ljallangan. Va ular, albatta, ushbu foydalanish holatida porlaydilar.

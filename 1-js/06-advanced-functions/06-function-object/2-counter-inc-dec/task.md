@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Set and decrease for counter
+# Hisoblagichni o'rnating va kamaytiring
 
-Modify the code of `makeCounter()` so that the counter can also decrease and set the number:
+Hisoblagich ham kamayishi va raqamni o'rnatishi uchun `makeCounter()` kodini o'zgartiring:
 
-- `counter()` should return the next number (as before).
-- `counter.set(value)` should set the `count` to `value`.
-- `counter.decrease()` should decrease the `count` by 1.
+- `counter()` keyingi raqamni qaytarishi kerak (avvalgidek).
+- `counter.set(value)` `count` ni `value` ga o'rnatishi kerak.
+- `counter.decrease()` `count` ni 1 ga kamaytirishi kerak.
 
-See the sandbox code for the complete usage example.
+To'liq foydalanish namunasi uchun "sandbox" kodini ko'ring.
 
-P.S. You can use either a closure or the function property to keep the current count. Or write both variants.
+P.S. Joriy hisobni ushlab turish uchun siz yopilish yoki funktsiya xususiyatidan foydalanishingiz mumkin. Yoki ikkala variantni ham yozing.

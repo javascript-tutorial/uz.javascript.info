@@ -1,6 +1,6 @@
-That's because `i` would never equal `10`.
+Buning sababi, `i` hech qachon `10` ga teng bo'lmaydi.
 
-Run it to see the *real* values of `i`:
+`i` ning *haqiqiy* qiymatlarini ko'rish uchun uni ishga tushiring:
 
 ```js run
 let i = 0;
@@ -10,8 +10,8 @@ while (i < 11) {
 }
 ```
 
-None of them is exactly `10`.
+Ularning hech biri aniq `10` ga teng emas.
 
-Such things happen because of the precision losses when adding fractions like `0.2`.
+Bunday narsalar `0,2` kabi kasrlarni qo'shganda aniq yo'qotishlar tufayli sodir bo'ladi.
 
-Conclusion: evade equality checks when working with decimal fractions.
+Xulosa: o'nli kasrlar bilan ishlashda tenglikni tekshirishdan qoching.

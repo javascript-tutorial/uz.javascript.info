@@ -2,13 +2,13 @@ importance: 4
 
 ---
 
-# Extract the money
+# Pulni chiqarib oling
 
-We have a cost in the form `"$120"`. That is: the dollar sign goes first, and then the number.
+Matn shaklida narx bor `$120`. Ya'ni, birinchi navbatda dollar belgisi, keyin esa raqam.
 
-Create a function `extractCurrencyValue(str)` that would extract the numeric value from such string and return it. 
+Bunday satrdan sonli qiymatni chiqaradigan va qaytaradigan `extractCurrencyValue(str)` funktsiyasini yarating.
 
-The example:
+Masalan:
 
 ```js
 alert( extractCurrencyValue('$120') === 120 ); // true

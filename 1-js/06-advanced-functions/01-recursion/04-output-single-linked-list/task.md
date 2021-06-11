@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Output a single-linked list
+# Bir-biriga bog'langan ro'yxatni chiqaring
 
-Let's say we have a single-linked list (as described in the chapter <info:recursion>):
+Aytaylik, bizda bir-biriga bog'langanro'yxat bor (<info:recursion> bobda tasvirlanganidek):
 
 ```js
 let list = {
@@ -22,8 +22,8 @@ let list = {
 };
 ```
 
-Write a function `printList(list)` that outputs list items one-by-one.
+Ro'yxat elementlarini birma-bir chiqaradigan `printList(list)` funktsiyasini yozing.
 
-Make two variants of the solution: using a loop and using recursion.
+Yechimning ikkita variantini tuzing: tsikl yordamida va rekursiyadan foydalaning.
 
-What's better: with recursion or without it?
+Qanday yaxshi: rekursiya bilan yoki bo'lmasdan?

@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Sum the properties
+# Xususiyatlarni qo'shish
 
-There is a `salaries` object with arbitrary number of salaries. 
+Tasodifiy ish haqi miqdori bilan `salaries` obyekti mavjud.
 
-Write the function `sumSalaries(salaries)` that returns the sum of all salaries using `Object.values` and the `for..of` loop.
+`Object.values` va `for..of` tsikldan foydalanib, barcha ish haqi yig'indisini qaytaradigan `sumSalaries(salaries)` funktsiyasini yozing.
 
-If `salaries` is empty, then the result must be `0`.
+Agar `salaries` bo'sh bo'lsa, unda natija `0` bo'lishi kerak.
 
-For instance:
+Masalan:
 
 ```js
 let salaries = {

@@ -36,4 +36,4 @@ Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi.
 
 E'tiboringiz uchun rahmat! 
 
-Elbek.
+Elbek va Oybek.

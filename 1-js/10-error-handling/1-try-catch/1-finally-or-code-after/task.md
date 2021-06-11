@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Finally or just the code?
+# Finally yoki faqat kodmi?
 
-Compare the two code fragments.
+Ikkala kod fragmentlarini solishtiring.
 
-1. The first one uses `finally` to execute the code after `try..catch`:
+1. Birinchisi, `try..catch` dan so'ng kodni bajarish uchun `finally` dan foydalanadi:
 
     ```js
     try {
@@ -19,7 +19,7 @@ Compare the two code fragments.
     */!*
     }
     ```
-2. The second fragment puts the cleaning right after `try..catch`:
+2. Ikkinchi fragment tozalashni darhol `try..catch` dan so'ng qo'yadi:
 
     ```js
     try {
@@ -33,6 +33,6 @@ Compare the two code fragments.
     */!*
     ```
 
-We definitely need the cleanup after the work has started, doesn't matter if there was an error or not.
+Ish boshlangandan so'ng, albatta, bizga tozalash kerak, xato bor yoki yo'qligi muhim emas.
 
-Is there an advantage here in using `finally` or both code fragments are equal? If there is such an advantage, then give an example when it matters.
+Bu erda `finally` dan foydalanishning afzalligi bormi yoki ikkala kod fragmenti tengmi? Agar bunday ustunlik bo'lsa misol keltiring.

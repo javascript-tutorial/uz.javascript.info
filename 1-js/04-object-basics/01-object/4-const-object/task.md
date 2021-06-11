@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Constant objects?
+# Konstanta ob'ektlar?
 
-Is it possible to change an object declared with `const`? What do you think?
+`const` bilan e'lon qilingan ob'ektni o'zgartirish mumkinmi? Siz nima deb o'ylaysiz?
 
 ```js
 const user = {
@@ -12,7 +12,7 @@ const user = {
 };
 
 *!*
-// does it work?
+// bu ishlaydimi?
 user.name = "Pete";
 */!*
 ```

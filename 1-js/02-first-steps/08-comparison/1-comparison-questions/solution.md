@@ -10,12 +10,12 @@ null == "\n0\n" → false
 null === +"\n0\n" → false 
 ```
 
-Some of the reasons:
+Ba'zi sabablar:
 
-1. Obviously, true.
-2. Dictionary comparison, hence false.
-3. Again, dictionary comparison, first char of `"2"` is greater than the first char of `"1"`.
-4. Values `null` and `undefined` equal each other only.
-5. Strict equality is strict. Different types from both sides lead to false.
-6. See (4).
-7. Strict equality of different types.
+1. Shubhasiz, `true`.
+2. Simvol taqqoslash ishlatiladi, shuning uchun `false`.
+3. Yana, simvol taqqoslash ishlatiladi, birinchi simvol `"2"` ikkinchi simvol `"1"` dan katta, shuning uchun `true`.
+4. `null` va `undefined` qiymatlari teng.
+5. Qat'iy tenglik qat'iydir. Ikkala tomonning har xil turlari `false` ga olib keladi.
+6. (4) ga qarang.
+7. Har xil turdagi qat'iy tenglik.

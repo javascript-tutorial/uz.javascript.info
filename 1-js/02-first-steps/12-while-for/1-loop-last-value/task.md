@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Last loop value
+# Oxirgi tsiklning qiymati
 
-What is the last value alerted by this code? Why?
+Ushbu kod chiqaradigan oxirgi qiymat nima? Nima uchun?
 
 ```js
 let i = 3;

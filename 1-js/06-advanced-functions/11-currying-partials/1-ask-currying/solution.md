@@ -1,14 +1,14 @@
 
 
-1. Either use a wrapper function, an arrow to be concise:
+1. Yoki o'rash funktsiyasidan foydalaning, qisqacha bo'lishi uchun o'q:
 
     ```js 
     askPassword(() => user.login(true), () => user.login(false)); 
     ```
 
-    Now it gets `user` from outer variables and runs it the normal way.
+    Endi u tashqi o'zgaruvchanlardan `user` oladi va odatdagi usulda ishlaydi.
 
-2. Or create a partial function from `user.login` that uses `user` as the context and has the correct first argument:
+2. Yoki `user` ni kontekst sifatida ishlatadigan va to'g'ri birinchi argumentga ega bo'lgan `user.login` dan qisman funktsiya yarating:
 
 
     ```js 

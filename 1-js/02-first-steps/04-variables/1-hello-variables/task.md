@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Working with variables
+# O'zgaruvchilar blan ishlash
 
-1. Declare two variables: `admin` and `name`.
-2. Assign the value `"John"` to `name`.
-3. Copy the value from `name` to `admin`.
-4. Show the value of `admin` using `alert` (must output "John").
+1. Ikki o'zgaruvchini e'lon qiling: `admin` va `name`.
+2. `John` qiymatini `name` ga belgilang.
+3. `name` ni qiymatini `admin` ga ko'chiring.
+4. `alert` yordamida `admin` qiymatini ko'rsating ("John" chiqishi kerak).

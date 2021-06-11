@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Truncate the text
+# Matnni kesib oling
 
-Create a function `truncate(str, maxlength)` that checks the length of the `str` and, if it exceeds `maxlength` -- replaces the end of `str` with the ellipsis character `"…"`, to make its length equal to `maxlength`.
+`str` uzunligini tekshiradigan `truncate(str, maxlength)` funktsiyasini yarating va agar u `maxlength` dan oshib ketsa -- `str` ohirini `"..."` ellipsis belgisi bilan almashtiring, uzunlik `maxlength` ga teng.
 
-The result of the function should be the truncated (if needed) string.
+Funktsiyaning natijasi kesilgan (kerak bo'lsa) matn bo'lishi kerak.
 
-For instance:
+Masalan:
 
 ```js
 truncate("What I'd like to tell on this topic is:", 20) = "What I'd like to te…"

@@ -1,46 +1,46 @@
-# Custom errors, extending Error
+# Maxsus xatolar, Error kengaytmasi
 
-When we develop something, we often need our own error classes to reflect specific things that may go wrong in our tasks. For errors in network operations we may need `HttpError`, for database operations `DbError`, for searching operations `NotFoundError` and so on.
+Biz biron bir narsani ishlab chiqsak, ko'pincha xatolarimizni aniqlab olish uchun o'z xato klasslarimizga ehtiyoj sezamiz. Tarmoq operatsiyalaridagi xatolar uchun bizga `HttpError`, ma'lumotlar bazasi operatsiyalari uchun `DbError`, qidiruv operatsiyalari uchun `NotFoundError` va boshqalar kerak bo'lishi mumkin.
 
-Our errors should support basic error properties like `message`, `name` and, preferably, `stack`. But they also may have other properties of their own, e.g. `HttpError` objects may have `statusCode` property with a value like `404` or `403` or `500`.
+Bizning xatolarimiz `message`, `name` va `stack` kabi asosiy xato xususiyatlarini qo'llab-quvvatlashi kerak. Ammo ular o'zlarining boshqa xususiyatlariga ham ega bo'lishi mumkin, masalan, `HttpError` obyektlari `404` yoki `403` yoki `500` kabi qiymatga ega bo'lgan `statusCode` xususiyatiga ega bo'lishi mumkin.
 
-JavaScript allows to use `throw` with any argument, so technically our custom error classes don't need to inherit from `Error`. But if we inherit, then it becomes possible to use `obj instanceof Error` to identify error objects. So it's better to inherit from it.
+JavaScript har qanday argument bilan `throw` dan foydalanishga imkon beradi, shuning uchun texnik jihatdan bizning maxsus xato klasslarimiz `Error` dan meros bo'lib o'tishi shart emas. Ammo biz meros qilib olsak, xato obyektlarini aniqlash uchun `obj instanceof Error` dan foydalanish mumkin bo'ladi. Shunday qilib, undan meros olish yaxshiroqdir.
 
-As we build our application, our own errors naturally form a hierarchy, for instance `HttpTimeoutError` may inherit from `HttpError`, and so on.
+Ilovamizni tuzish jarayonida o'z xatolarimiz tabiiy ravishda iyerarxiyani shakllantiradi, masalan, `HttpTimeoutError` `HttpError` dan meros bo'lib o'tishi mumkin va hokazo.
 
-## Extending Error
+## Error kengaytmasi
 
-As an example, let's consider a function `readUser(json)` that should read JSON with user data.
+Masalan, JSON-ni foydalanuvchi ma'lumotlari bilan o'qishi kerak bo'lgan `readUser(json)` funktsiyasini ko'rib chiqamiz.
 
-Here's an example of how a valid `json` may look:
+Yaroqli `json` ko'rinishi mumkin bo'lgan misol:
 ```js
 let json = `{ "name": "John", "age": 30 }`;
 ```
 
-Internally, we'll use `JSON.parse`. If it receives malformed `json`, then it throws `SyntaxError`.
+Ichki sifatida biz `JSON.parse` dan foydalanamiz. Agar u noto'g'ri shakllangan `json` qabul qilsa, u holda `SyntaxError` yoziladi.
 
-But even if `json` is syntactically correct, that doesn't mean that it's a valid user, right? It may miss the necessary data. For instance, it may not have `name` and `age` properties that are essential for our users.
+Ammo `json` sintaktik jihatdan to'g'ri bo'lsa ham, bu uning haqiqiy foydalanuvchi ekanligini anglatmaydi, to'g'rimi? Kerakli ma'lumotlarni o'tkazib yuborishi mumkin. Masalan, u bizning foydalanuvchilarimiz uchun muhim bo'lgan `name` va `age` xususiyatlariga ega bo'lmasligi mumkin.
 
-Our function `readUser(json)` will not only read JSON, but check ("validate") the data. If there are no required fields, or the format is wrong, then that's an error. And that's not a `SyntaxError`, because the data is syntactically correct, but another kind of error. We'll call it `ValidationError` and create a class for it. An error of that kind should also carry the information about the offending field.
+Bizning `readUser(json)` funktsiyasi nafaqat JSONni o'qiydi, balki ma'lumotlarni tekshiradi ("tasdiqlaydi"). Agar talab qilinadigan maydonlar bo'lmasa yoki format noto'g'ri bo'lsa, demak bu xato. Va bu `SyntaxError` emas, chunki ma'lumotlar sintaktik jihatdan to'g'ri, ammo boshqa bir xato. Biz buni `ValidationError` deb ataymiz va buning uchun klass yaratamiz. Bunday xato, shuningdek, hatolik to'g'risidagi ma'lumotni o'z ichiga olishi kerak.
 
-Our `ValidationError` class should inherit from the built-in `Error` class.
+Bizning `ValidationError` klassi o'rnatilgan `Error` klassidan olinishi kerak.
 
-That class is built-in, but we should have its approximate code before our eyes, to understand what we're extending.
+Ushbu klass ichki o'rnatilgan, ammo biz nima kengaytirayotganimizni tushunish uchun uning taxminiy kodi bizning ko'z oldida bo'lishi kerak.
 
-So here you are:
+Mana:
 
 ```js
-// The "pseudocode" for the built-in Error class defined by JavaScript itself
+// O'rnatilgan Xatolar sinfi uchun "pseudocode" JavaScript-ning o'zi tomonidan belgilanadi
 class Error {
   constructor(message) {
     this.message = message;
-    this.name = "Error"; // (different names for different built-in error classes)
-    this.stack = <nested calls>; // non-standard, but most environments support it
+    this.name = "Error"; // (har xil o'rnatilgan xato klasslari uchun turli xil nomlar)
+    this.stack = <nested calls>; // nostandart, ammo aksariyat muhitlar uni qo'llab-quvvatlaydi
   }
 }
 ```
 
-Now let's go on and inherit `ValidationError` from it:
+Keling, undan `ValidationError` ni meros qilib olamiz:
 
 ```js run untrusted
 *!*
@@ -61,16 +61,16 @@ try {
 } catch(err) {
   alert(err.message); // Whoops!
   alert(err.name); // ValidationError
-  alert(err.stack); // a list of nested calls with line numbers for each
+  alert(err.stack); // har biri uchun satr raqamlari ko'rsatilgan ichki chaqiruvlar ro'yxati
 }
 ```
 
-Please take a look at the constructor:
+Iltimos, konstruktorga qarang:
 
-1. In the line `(1)` we call the parent constructor. JavaScript requires us to call `super` in the child constructor, so that's obligatory. The parent constructor sets the `message` property.
-2. The parent constructor also sets the `name` property to `"Error"`, so in the line `(2)` we reset it to the right value.
+1. `(1)` satrida biz ota-ona konstruktorini chaqiramiz. JavaScript bolalar konstruktorida `super` ni chaqirishni talab qiladi, shuning uchun bu majburiydir. Ota-ona konstruktor `message` xususiyatini o'rnatadi.
+2. Ota-ona konstruktor shuningdek, `name` xususiyatini `Error` ga o'rnatadi, shuning uchun `(2)` satrida biz uni kerakli qiymatga qaytaramiz.
 
-Let's try to use it in `readUser(json)`:
+Buni `readUser(json)` da ishlatishga harakat qilaylik:
 
 ```js run
 class ValidationError extends Error {
@@ -94,7 +94,7 @@ function readUser(json) {
   return user;
 }
 
-// Working example with try..catch
+// Try..catch bilan ishlash namunasi
 
 try {
   let user = readUser('{ "age": 25 }');
@@ -111,26 +111,26 @@ try {
 }
 ```
 
-The `try..catch` block in the code above handles both our `ValidationError` and the built-in `SyntaxError` from `JSON.parse`.
+Yuqoridagi koddagi `try..catch` bloki bizning `ValidationError` va `JSON.parse` dan o'rnatilgan `SyntaxError` bilan ishlaydi.
 
-Please take a look at how we use `instanceof` to check for the specific error type in the line `(*)`.
+Iltimos, `(*)` satridagi aniq xato turini tekshirish uchun `instanceof` dan qanday foydalanayotganimizni ko'rib chiqing.
 
-We could also look at `err.name`, like this:
+Quyidagi kabi `err.name` ga qarashimiz mumkin:
 
 ```js
 // ...
-// instead of (err instanceof SyntaxError)
+// (err instanceof SyntaxError) ning o'rniga
 } else if (err.name == "SyntaxError") { // (*)
 // ...
 ```  
 
-The `instanceof` version is much better, because in the future we are going to extend `ValidationError`, make subtypes of it, like `PropertyRequiredError`. And `instanceof` check will continue to work for new inheriting classes. So that's future-proof.
+`instanceof` versiyasi ancha yaxshi, chunki kelajakda biz `ValidationError` ni kengaytiramiz, uning `TypeRequiredError` kabi pastki turlarini yaratamiz. Va `instanceof` tekshiruvi yangi meros klasslari uchun ishlashni davom ettiradi. Demak, bu kelajakka ishonchli.
 
-Also it's important that if `catch` meets an unknown error, then it rethrows it in the line `(**)`. The `catch`  only knows how to handle validation and syntax errors, other kinds (due to a typo in the code or such) should fall through.
+Bundan tashqari, agar `catch` noma'lum xatoga duch kelsa, uni `(**)` satrida qayta tiklashi muhimdir. `catch` faqat tasdiqlash va sintaksis xatolarini qanday boshqarishni biladi, boshqa turlarni (koddagi xato yoki shunga o'xshash sabablarga ko'ra) boshqara ololmaydi.
 
-## Further inheritance
+## Keyinchalik meros
 
-The `ValidationError` class is very generic. Many things may go wrong. The property may be absent or it may be in a wrong format (like a string value for `age`). Let's make a more concrete class `PropertyRequiredError`, exactly for absent properties. It will carry additional information about the property that's missing.
+`ValidationError` klassi juda umumiy. Ko'p narsalar noto'g'ri ketishi mumkin. Xususiyat yo'q bo'lishi yoki noto'g'ri formatda bo'lishi mumkin (masalan, `age` uchun matn qiymati). Keling, aniq xususiyatlar uchun aniqroq `PropertyRequiredError` klassini yarataylik. Unda yetishmayotgan mulk to'g'risida qo'shimcha ma'lumotlar mavjud.
 
 ```js run
 class ValidationError extends Error {
@@ -150,7 +150,7 @@ class PropertyRequiredError extends ValidationError {
 }
 */!*
 
-// Usage
+// Foydalanish
 function readUser(json) {
   let user = JSON.parse(json);
 
@@ -164,7 +164,7 @@ function readUser(json) {
   return user;
 }
 
-// Working example with try..catch
+// Try..catch bilan ishlash namunasi
 
 try {
   let user = readUser('{ "age": 25 }');
@@ -178,18 +178,18 @@ try {
   } else if (err instanceof SyntaxError) {
     alert("JSON Syntax Error: " + err.message);
   } else {
-    throw err; // unknown error, rethrow it
+    throw err; // noma'lum xato, uni qayta tiklang
   }
 }
 ```
 
-The new class `PropertyRequiredError` is easy to use: we only need to pass the property name: `new PropertyRequiredError(property)`. The human-readable `message` is generated by the constructor.
+Yangi `PropertyRequiredError` klassidan foydalanish oson: biz faqat xususiyat nomini kiritishimiz kerak: `new PropertyRequiredError(property)`. Inson tomonidan o'qiladigan `message` konstruktor tomonidan yaratilgan.
 
-Please note that `this.name` in `PropertyRequiredError` constructor is again assigned manually. That may become a bit tedious -- to assign `this.name = <class name>` when creating each custom error. But there's a way out. We can make our own "basic error" class that removes this burden from our shoulders by using `this.constructor.name` for `this.name` in the constructor. And then inherit from it.
+Shuni esda tutingki, `PropertyRequiredError` konstruktoridagi `this.name` yana qo'lda tayinlangan. Bu biroz zerikarli bo'lishi mumkin -- har bir maxsus xatoni yaratishda `this.name = <class name>` ni belgilash. Ammo chiqishning bir usuli bor. Ushbu yukni yelkamizdan olib tashlaydigan o'zimizning "asosiy xatolar" klassimizni konstruktorda `this.name` uchun `this.constructor.name` dan foydalanishimiz mumkin. Va keyin undan meros olamiz.
 
-Let's call it `MyError`.
+Keling, uni `MyError` deb nomlaymiz.
 
-Here's the code with `MyError` and other custom error classes, simplified:
+Soddalashtirilgan `MyError` va boshqa maxsus xato klasslari bilan kod:
 
 ```js run
 class MyError extends Error {
@@ -210,23 +210,23 @@ class PropertyRequiredError extends ValidationError {
   }
 }
 
-// name is correct
+// ism to'g'ri
 alert( new PropertyRequiredError("field").name ); // PropertyRequiredError
 ```
 
-Now custom errors are much shorter, especially `ValidationError`, as we got rid of the `"this.name = ..."` line in the constructor.
+Endi konstruktordagi `"this.name = ..."` satridan xalos bo'lganimiz sababli, maxsus xatolar ancha qisqaroq, ayniqsa `ValidationError`.
 
-## Wrapping exceptions
+## Istisnolarni o'rash
 
-The purpose of the function `readUser` in the code above is "to read the user data", right? There may occur different kinds of errors in the process. Right now we have `SyntaxError` and `ValidationError`, but in the future `readUser` function may grow: the new code will probably generate other kinds of errors.
+Yuqoridagi koddagi `readUser` funktsiyasining maqsadi "foydalanuvchi ma'lumotlarini o'qish", shunday emasmi? Jarayonda turli xil xatolar bo'lishi mumkin. Hozir bizda `SyntaxError` va `ValidationError` mavjud, ammo kelajakda `readUser` funktsiyasi o'sishi mumkin: yangi kod boshqa turdagi xatolarni keltirib chiqarishi mumkin.
 
-The code which calls `readUser` should handle these errors. Right now it uses multiple `if` in the `catch` block to check for different error types and rethrow the unknown ones. But if `readUser` function generates several kinds of errors -- then we should ask ourselves: do we really want to check for all error types one-by-one in every code that calls `readUser`?
+`readUser` ni chaqiradigan kod ushbu xatolarni hal qilishi kerak. Hozirda u turli xil xato turlarini tekshirish va noma'lumlarini qayta tiklash uchun `catch` blokida bir nechta `if` dan foydalanadi. Agar `readUser` funktsiyasi bir nechta xatolarni keltirib chiqaradigan bo'lsa, unda biz o'zimizga savol berishimiz kerak: biz `readUser` ni chaqiradigan har bir kodda barcha xato turlarini birma-bir tekshirishni xohlaymizmi?
 
-Often the answer is "No": the outer code wants to be "one level above all that". It wants to have some kind of "data reading error". Why exactly it happened -- is often irrelevant (the error message describes it). Or, even better if there is a way to get error details, but only if we need to.
+Ko'pincha javob "Yo'q": tashqi kod "hamma narsadan bir daraja" bo'lishni xohlaydi. U qandaydir "ma'lumotlarni o'qish xatosi" ga ega bo'lishni xohlaydi. Nima uchun aynan shunday sodir bo'ldi -- ko'pincha ahamiyatsiz (xato xabari uni tavsiflaydi). Yoki xato tafsilotlarini olishning bir usuli bo'lsa ham yaxshiroq, lekin faqat agar kerak bo'lsa.
 
-So let's make a new class `ReadError` to represent such errors. If an error occurs inside `readUser`, we'll catch it there and generate `ReadError`. We'll also keep the reference to the original error in its `cause` property. Then the outer code will only have to check for `ReadError`.
+Shunday qilib, bunday xatolarni aks ettirish uchun yangi `ReadError` klassini yarataylik. Agar `readUser` da xatolik yuz bersa, biz uni o'sha yerda ushlaymiz va `ReadError` ni yaratamiz. Shuningdek, biz uning asl sababidagi asl xato haqida ma'lumotni saqlaymiz. Keyin tashqi kod faqat `ReadError` ni tekshirishi kerak.
 
-Here's the code that defines `ReadError` and demonstrates its use in `readUser` and `try..catch`:
+`ReadError` ni belgilaydigan va uni `readUser` va `try..catch` da ishlatilishini ko'rsatadigan kod:
 
 ```js run
 class ReadError extends Error {
@@ -294,14 +294,14 @@ try {
 }
 ```
 
-In the code above, `readUser` works exactly as described -- catches syntax and validation errors and throws `ReadError` errors instead (unknown errors are rethrown as usual).
+Yuqoridagi kodda `readUser` aniq ta'riflanganidek ishlaydi -- sintaksis va tasdiqlash xatolarini ushlaydi va uning o'rniga `ReadError` xatolarini chiqaradi (noma'lum xatolar odatdagidek qayta ko'rib chiqiladi).
 
-So the outer code checks `instanceof ReadError` and that's it. No need to list possible all error types.
+Shunday qilib tashqi kod `instanceof ReadError` ni tekshiradi. Mumkin bo'lgan barcha xato turlarini ro'yxatlashning hojati yo'q.
 
-The approach is called "wrapping exceptions", because we take "low level exceptions" and "wrap" them into `ReadError` that is more abstract and more convenient to use for the calling code. It is widely used in object-oriented programming.
+Ushbu yondashuv "istisnolarni o'rash" deb nomlanadi, chunki biz "past darajadagi istisnolarni" qabul qilamiz va ularni `ReadError` ga o'ramoqdamiz, bu esa chaqiruv kodi uchun qulayroq. U obyektga yo'naltirilgan dasturlashda keng qo'llaniladi.
 
-## Summary
+## Xulosa
 
-- We can inherit from `Error` and other built-in error classes normally, just need to take care of `name` property and don't forget to call `super`.
-- Most of the time, we should use `instanceof` to check for particular errors. It also works with inheritance. But sometimes we have an error object coming from the 3rd-party library and there's no easy way to get the class. Then `name` property can be used for such checks.
-- Wrapping exceptions is a widespread technique when a function handles low-level exceptions and makes a higher-level object to report about the errors. Low-level exceptions sometimes become properties of that object like `err.cause` in the examples above, but that's not strictly required.
+- Odatda `Error` va boshqa o'rnatilgan xato klasslaridan meros qilib olishimiz mumkin, faqat `name` xususiyati haqida g'amxo'rlik qilishimiz kerak va `super` ga chaqiruv qilishni unutmang.
+- Ko'pincha, ba'zi xatolarni tekshirish uchun `instanceof` dan foydalanishimiz kerak. Shuningdek, u meros bilan ishlaydi. Ammo ba'zida bizda uchinchi tomon kutubxonasidan xato obyekti kelib chiqadi va klassni olishning oson yo'li yo'q. Bunday tekshirishlar uchun `name` xususiyati ishlatilishi mumkin.
+- Istisnolarni o'rash - bu funktsiya past darajadagi istisnolarni ko'rib chiqishda va xatolar haqida xabar berish uchun yuqori darajadagi obyektni yaratishda keng tarqalgan usul. Ba'zan past darajadagi istisnolar yuqoridagi misollarda `err.cause` kabi obyektning xususiyatlariga aylanadi, ammo bu qat'iy talab qilinmaydi.

@@ -1,13 +1,13 @@
 
-The method can take all enumerable keys using `Object.keys` and output their list.
+Usul `Object.keys` yordamida barcha ro'yxatga olinadigan kalitlarni olishi va ularning ro'yxatini chiqarishi mumkin.
 
-To make `toString` non-enumerable, let's define it using a property descriptor. The syntax of `Object.create` allows us to provide an object with property descriptors as the second argument.
+`toString` ni sanoqsiz qilish uchun, uni xususiyat tavsiflovchisi yordamida aniqlaymiz. `Object.create` sintaksisi bizni obyektni ikkinchi argument sifatida xususiyat tavsiflovchilari bilan ta'minlashga imkon beradi.
 
 ```js run
 *!*
 let dictionary = Object.create(null, {
-  toString: { // define toString property
-    value() { // the value is a function
+  toString: { // toString xususiyatini aniqlang
+    value() { // qiymati funktsiya
       return Object.keys(this).join();
     }
   }
@@ -17,15 +17,15 @@ let dictionary = Object.create(null, {
 dictionary.apple = "Apple";
 dictionary.__proto__ = "test";
 
-// apple and __proto__ is in the loop
+// apple va __proto__ tsiklda
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple", so'ng "__proto__"
 }  
 
-// comma-separated list of properties by toString
+// toString tomonidan vergul bilan ajratilgan xususiyatlar ro'yxati
 alert(dictionary); // "apple,__proto__"
 ```
 
-When we create a property using a descriptor, its flags are `false` by default. So in the code above, `dictionary.toString` is non-enumerable.
+Agar xususiyatni deskriptor yordamida yaratadigan bo'lsak, uning bayroqlari sukut bo'yicha `false` bo'ladi. Shunday qilib, yuqoridagi kodda `dictionary.toString` ni sanab bo'lmaydi.
 
-See the the chapter [](info:property-descriptors) for review.
+Ko'rib chiqish uchun [](info:property-descriptors) bo'limiga qarang.

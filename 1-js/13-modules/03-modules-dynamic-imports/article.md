@@ -1,39 +1,39 @@
 
-# Dynamic imports
+# Dinamik import
 
-Export and import statements that we covered in previous chaters are called "static".
+Avvalgi boblarda ko'rib chiqilgan eksport va import ifodalari "statik" deb nomlanadi.
 
-That's because they are indeed static. The syntax is very strict.
+Buning sababi, ular haqiqatan ham statik. Sintaksis juda qat'iy.
 
-First, we can't dynamicaly generate any parameters of `import`.
+Birinchidan, biz `import` parametrlarini dinamik ravishda ishlab chiqa olmaymiz.
 
 The module path must be a primitive string, can't be a function call. This won't work:
 
 ```js
-import ... from *!*getModuleName()*/!*; // Error, only from "string" is allowed
+import ... from *!*getModuleName()*/!*; // Xato, faqat "string" dan ruxsat berilgan
 ```
 
-Second, we can't import conditionally or at run-time:
+Ikkinchidan, biz shartli ravishda yoki ish vaqtida import qila olmaymiz:
 
 ```js
 if(...) {
-  import ...; // Error, not allowed!
+  import ...; // Xato, ruxsat berilmagan!
 }
 
 {
-  import ...; // Error, we can't put import in any block
+  import ...; // Xato, biz importni biron bir blokga joylashtirolmaymiz
 }
 ```
 
-That's because, import/export aim to provide a backbone for the code structure. That's a good thing, as code structure can be analyzed, modules can be gathered and bundled together, unused exports can be removed (tree-shaken). That's possible only because everything is fixed.
+Buning sababi, import/eksport kod tuzilishi uchun magistralni ta'minlashdir. Bu yaxshi narsa, chunki kodlar tuzilishini tahlil qilish, modullarni yig'ish va birlashtirish, foydalanilmagan eksportlarni olib tashlash mumkin. Bu faqat hamma narsa aniqlanganligi sababli mumkin.
 
-But how do we import a module dynamically, on-demand?
+Ammo modulni talabga binoan qanday qilib dinamik ravishda import qilamiz?
 
-## The import() function
+## import() funktsiya
 
-The `import(module)` function can be called from anywhere. It returns a promise that resolves into a module object.
+`import(module)` funksiyasini istalgan joydan chaqirish mumkin. Bu modul obyektida hal qilinadigan va'dani qaytaradi.
 
-The usage pattern looks like this:
+Foydalanish tartibi quyidagicha:
 
 ```js run
 let modulePath = prompt("Module path?");
@@ -43,12 +43,12 @@ import(modulePath)
   .catch(err => <loading error, no such module?>)
 ```
 
-Or, we could use `let module = await import(modulePath)` if inside an async function.
+Yoki, agar mos kelmaydigan funktsiya ichida bo'lsa, `let module = await import(modulePath)` dan foydalanishimiz mumkin.
 
-Like this:
+Shunga o'xshash:
 
 [codetabs src="say" current="index.html"]
 
-So, dynamic imports are very simple to use.
+Shunday qilib, dinamik importni ishlatish juda oddiy.
 
-Also, dynamic imports work in regular scripts, they don't require `script type="module"`.
+Shuningdek, dinamik import oddiy skriptlarda ishlaydi, ular uchun `script type="module"` kerak emas.

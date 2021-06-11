@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- add mocha css, to show results -->
+  <!-- natija ko'rsatish uchun Mocha CSS-ni qo'shamiz -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
-  <!-- add mocha framework code -->
+  <!-- mocha framework-ini qo'shamiz -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
   <script>
-    // enable bdd-style testing
+    // bdd uslubidagi sinovni yoqamiz
     mocha.setup('bdd');
   </script>
-  <!-- add chai -->
+  <!-- chai ni qo'shamiz -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
   <script>
-    // chai has a lot of stuff, let's make assert global
+    // chai juda ko'p funktsiyalarga ega, keling, global deb ta'kidlaymiz
     let assert = chai.assert;
   </script>
 </head>
+
 
 <body>
 
@@ -29,16 +30,17 @@
     }
   </script>
 
-  <!-- the script with tests (describe, it...) -->
+  <!-- testlar bilan skript (describe, it ...) -->
   <script src="test.js"></script>
 
-  <!-- the element with id="mocha" will contain test results -->
+  <!-- id="mocha" elementi test natijalarini o'z ichiga oladi -->
   <div id="mocha"></div>
 
-  <!-- run tests! -->
+  <!-- testlarni o'tkazing! -->
   <script>
     mocha.run();
   </script>
 </body>
 
 </html>
+

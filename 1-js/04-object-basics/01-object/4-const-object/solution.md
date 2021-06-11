@@ -1,8 +1,8 @@
-Sure, it works, no problem.
+Albatta, u ishlaydi, hech qanday muammo bo'lmaydi.
 
-The `const` only protects the variable itself from changing. 
+`const` faqat o'zgaruvchanning o'zini o'zgarishdan himoya qiladi.
 
-In other words, `user` stores a reference to the object. And it can't be changed. But the content of the object can.
+Boshqacha qilib aytganda, `user` ob'ektga havolani saqlaydi. Va uni o'zgartirish mumkin emas. Ammo ob'ektning mazmuni mumkin.
 
 ```js run
 const user = {

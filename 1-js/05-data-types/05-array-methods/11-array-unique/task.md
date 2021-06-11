@@ -2,17 +2,17 @@ importance: 4
 
 ---
 
-# Filter unique array members
+# Noyob qator a'zolarini filtrlang
 
-Let `arr` be an array.
+Keling, `arr` massiv bo'lsin.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+`arr` ning noyob elementlari bo'lgan massivni qaytarishi kerak bo'lgan `unique(arr)` funktsiyasini yarating.
 
-For instance:
+Masalan:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* sizning kodingiz */
 }
 
 let strings = ["Hare", "Krishna", "Hare", "Krishna",

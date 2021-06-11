@@ -1,5 +1,5 @@
-The answer is:
+Javob:
 
-- `a = 4` (multiplied by 2)
-- `x = 5` (calculated as 1 + 4)
+- `a = 4` (2 ga ko'paytiriladi)
+- `x = 5` (1 + 4 sifatida hisoblanadi)
 

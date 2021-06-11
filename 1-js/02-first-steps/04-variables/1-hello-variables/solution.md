@@ -1,7 +1,7 @@
-In the code below, each line corresponds to the item in the task list.
+Quyidagi kodda har bir satr vazifa ro'yxatidagi elementga mos keladi.
 
 ```js run
-let admin, name; // can declare two variables at once
+let admin, name; // ikki o'zgaruvchini birdaniga e'lon qilish mumkin
 
 name = "John";
 

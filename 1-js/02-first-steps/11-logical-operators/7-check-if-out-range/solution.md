@@ -1,10 +1,10 @@
-The first variant:
+Birinchi variant:
 
 ```js
 if (!(age >= 14 && age <= 90))
 ```
 
-The second variant:
+Ikkinchi variant:
 
 ```js
 if (age < 14 || age > 90)

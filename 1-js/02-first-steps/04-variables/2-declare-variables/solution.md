@@ -1,21 +1,21 @@
-First, the variable for the name of our planet.
+Birinchidan, bizning sayyoramiz nomi uchun o'zgaruvchan.
 
-That's simple:
+Bu oddiy:
 
 ```js
-let ourPlanetName = "Earth";
+let ourPlanetName = "Earth"; // ourPlanetName bu ingliz tilidan bizning saroyamizning ismi degani Earth esa bu Yer
 ```
 
-Note, we could use a shorter name `planet`, but it might be not obvious what planet it refers to. It's nice to be more verbose. At least until the variable isNotTooLong.
+E'tibor bering, biz qisqaroq `planet(sayyora)` nomini ishatishimiz mumkin edi, ammo u qaysi sayyorani nazarda tutayotganini aniq bilish mumkin emas. Aniqroq bo'lgani yaxshi. Agar o'zgaruvhi judaUzunO'zgaruvchan bo'lmasa.
 
 Second, the name of the current visitor:
 
 ```js
-let currentUserName = "John";
+let currentUserName = "John"; // currentUser bu ingliz tilidan joriy foydalanuvchining ismi degani
 ```
 
-Again, we could shorten that to `userName` if we know for sure that the user is current.
+Yana, biz qizqaroq `userName(foydalanuvchining ismi)` nomini ishlatishimiz mumkin edi, agar biz bu foydalanuvchi aniq joriyligini bilsak.
 
-Modern editors and autocomplete make long variable names easy to write. Don't save on them. A name with 3 words in it is fine.
+Zamonaviy muharrirlar va avtomatik to'ldiruvchilar uzun o'zgaruvchanlar nomlarini yozishni osonlashtiradi. Ulardan tejamang. 3 ta so'zdan iborat ism yaxshi.
 
-And if your editor does not have proper autocompletion, get [a new one](/code-editors).
+Agar sizning muharriringiz tegishli avtomatik to'ldirishga ega bo'lmasa, [yangisini](/code-editors) yuklab oling.

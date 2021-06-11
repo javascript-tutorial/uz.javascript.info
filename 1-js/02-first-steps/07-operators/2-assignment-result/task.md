@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# Assignment result
+# Ifodaning natijasi
 
-What are the values of `a` and `x` after the code below?
+Quyidagi koddan keyin `a` va `x` ning qiymatlari qanday?
 
 ```js
 let a = 2;

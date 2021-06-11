@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Repeat until the input is a number
+# Kirish raqam bo'lguncha takrorlang
 
-Create a function `readNumber` which prompts for a number until the visitor enters a valid numeric value.
+Mehmon qiymatni kiritgunga qadar raqamli qiymatni kiritishni talab qiladigan `readNumber` funksiyasini yarating.
 
-The resulting value must be returned as a number.
+Olingan qiymat raqam sifatida qaytarilishi kerak.
 
-The visitor can also stop the process by entering an empty line or pressing "CANCEL". In that case, the function should return `null`.
+Shuningdek, tashrif buyuruvchi bo'sh qatorni kiritish yoki "CANCEL" tugmasini bosib jarayonni to'xtatishi mumkin. Bunday holda, funktsiya `null` ga qaytishi kerak.
 
 [demo]
 

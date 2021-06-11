@@ -1,15 +1,15 @@
 
-# Animated circle with callback
+# Qayta chaqiruv bilan animatsion doira
 
-In the task <info:task/animate-circle> an animated growing circle is shown.
+Vazifada <info:task/animate-circle> animatsion o'sib boruvchi doiralar ko'rsatilgan.
 
-Now let's say we need not just a circle, but to show a message inside it. The message should appear *after* the animation is complete (the circle is fully grown), otherwise it would look ugly.
+Endi aylana emas, balki uning ichida xabarni ko'rsatish uchun kerak deylik. Xabar animatsiya tugagandan *so'ng* paydo bo'lishi kerak (aylana to'liq kattalashgan), aks holda u xunuk ko'rinadi.
 
-In the solution of the task, the function `showCircle(cx, cy, radius)` draws the circle, but gives no way to track when it's ready.
+Vazifani hal qilishda `showCircle(cx, cy, radius)` funktsiyasi aylanani chizadi, ammo tayyorligini kuzatishga imkon bermaydi.
 
-Add a callback argument: `showCircle(cx, cy, radius, callback)` to be called when the animation is complete. The `callback` should receive the circle `<div>` as an argument.
+Qayta chaqiruv qilish argumentini qo'shing: animatsiya tugagandan so'ng chaqiriladigan `showCircle(cx, cy, radius, callback)`. `callback` `<div>` doirasini argument sifatida qabul qilishi kerak.
 
-Here's the example:
+Mana misol:
 
 ```js
 showCircle(150, 150, 100, div => {
@@ -22,4 +22,4 @@ Demo:
 
 [iframe src="solution" height=260]
 
-Take the solution of the task <info:task/animate-circle> as the base.
+<info:task/animate-circle> vazifasining yechimini asos qilib oling.

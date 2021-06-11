@@ -1,12 +1,12 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Show an alert
+# alert(ogohlantirishni) ko'rsating
 
-Create a page that shows a message "I'm JavaScript!".
+"Men JavaScriptman!" xabarni ko'rsatadigan sahifa yarating.
 
-Do it in a sandbox, or on your hard drive, doesn't matter, just ensure that it works.
+Buni sanbox("o'quv muhiti") yoki o'zingizning kod muharririda, muhim emas, faqat uning ishlashini ta'minlang.
 
 [demo src="solution"]
 

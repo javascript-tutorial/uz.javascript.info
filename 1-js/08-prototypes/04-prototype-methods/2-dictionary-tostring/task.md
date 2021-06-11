@@ -2,30 +2,30 @@ importance: 5
 
 ---
 
-# Add toString to the dictionary
+# ToStringni lug'atga qo'shing
 
-There's an object `dictionary`, created as `Object.create(null)`, to store any `key/value` pairs.
+Har qanday `key/value` juftligini saqlash uchun `Object.create(null)` shaklida yaratilgan `lug'at` obyekti mavjud.
 
-Add method `dictionary.toString()` into it, that should return a comma-delimited list of keys. Your `toString` should not show up in `for..in` over the object.
+Unga `dictionary.toString()` usulini qo'shing, bu kalitlarni vergul bilan ajratilgan ro'yxatini qaytarishi kerak. Sizning `toString` obyekt uchun `for..in` ko'rinishida bo'lmasligi kerak.
 
-Here's how it should work:
+Bu shunday ishlashi kerak:
 
 ```js
 let dictionary = Object.create(null);
 
 *!*
-// your code to add dictionary.toString method
+// dictionary.toString usulini qo'shish uchun sizning kodingiz
 */!*
 
-// add some data
+// ba'zi ma'lumotlarni qo'shing
 dictionary.apple = "Apple";
-dictionary.__proto__ = "test"; // __proto__ is a regular property key here
+dictionary.__proto__ = "test"; // __proto__ bu erda odatiy xususiyat kalitidir
 
-// only apple and __proto__ are in the loop
+// faqat apple va __proto__ tsiklda
 for(let key in dictionary) {
-  alert(key); // "apple", then "__proto__"
+  alert(key); // "apple", so'ng "__proto__"
 }  
 
-// your toString in action
+// sizning toString amalda
 alert(dictionary); // "apple,__proto__"
 ```

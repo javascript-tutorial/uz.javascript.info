@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Last day of month?
+# Oyning oxirgi kuni?
 
-Write a function `getLastDayOfMonth(year, month)` that returns the last day of month. Sometimes it is 30th, 31st or even 28/29th for Feb.
+Oyning oxirgi kunini qaytaradigan `getLastDayOfMonth(yil, oy)` funktsiyasini yozing. Ba'zan 30, 31 yoki fevral uchun hatto 28/29 bo'ladi.
 
-Parameters:
+Parametrlar:
 
-- `year` -- four-digits year, for instance 2012.
-- `month` -- month, from 0 to 11.
+- `year` -- to'rtta raqamli yil, masalan 2012 yil.
+- `month` -- oy, 0 dan 11 gacha.
 
-For instance, `getLastDayOfMonth(2012, 1) = 29` (leap year, Feb).
+Masalan, `getLastDayOfMonth(2012, 1) = 29` (pog'ona yili, Fevral).

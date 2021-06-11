@@ -34,13 +34,13 @@
             <g id="Group-3" transform="translate(484.000000, 54.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="189" height="28"></rect>
                 <text id="makeCounter:-functio" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="10" y="18.5">makeCounter: function</tspan>
+                    <tspan x="10" y="18.5">makeCounter: funktsiya</tspan>
                 </text>
             </g>
             <g id="Group-3" transform="translate(484.000000, 94.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="189" height="28"></rect>
                 <text id="counter:-function" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="10" y="19">counter: function</tspan>
+                    <tspan x="10" y="19">counter: funktsiya</tspan>
                 </text>
             </g>
             <g id="Group-5" transform="translate(336.000000, 28.000000)" stroke="#EE6B47" stroke-linecap="square">
@@ -60,25 +60,25 @@
             <g id="Group" transform="translate(679.000000, 46.000000)">
                 <path id="Line" d="M16.5,23.5 L2.5,23.5 L2.5,21.5 L16.5,21.5 L16.5,15.5 L30.5,22.5 L16.5,29.5 L16.5,23.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <g id="Group-Copy" transform="translate(433.000000, 46.000000)">
                 <path id="Line" d="M16.5,23.5 L2.5,23.5 L2.5,21.5 L16.5,21.5 L16.5,15.5 L30.5,22.5 L16.5,29.5 L16.5,23.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <text id="null" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="724" y="71">null</tspan>
             </text>
             <text id="[[Environment]]" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="195" y="73">[[Environment]]</tspan>
+                <tspan x="195" y="73">[[Muhit]]</tspan>
             </text>
             <path id="Line" d="M337.5,70.5 L323.5,70.5 L323.5,68.5 L337.5,68.5 L337.5,62.5 L351.5,69.5 L337.5,76.5 L337.5,70.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
             <polyline id="Rectangle-1-Copy-3" fill="#EC6B4E" points="0 212 0 199 9 205.5"></polyline>
             <text id="modified-here" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#EC6B4E">
-                <tspan x="360" y="36">modified here</tspan>
+                <tspan x="360" y="36">bu yerda o'zgartirilgan</tspan>
             </text>
         </g>
     </g>

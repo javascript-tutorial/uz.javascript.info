@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What is the result of AND?
+# VA(&&) ning natijasi qanday?
 
-What is this code going to show?
+Quyidagi kod nimani chiqaradi?
 
 ```js
 alert( 1 && null && 2 );

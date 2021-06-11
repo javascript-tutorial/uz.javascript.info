@@ -1,6 +1,6 @@
-To find all anagrams, let's split every word to letters and sort them. When letter-sorted, all anagrams are same.
+Barcha anagrammalarni topish uchun har bir so'zni harflarga ajratamiz va ularni saralaymiz. Xat tartibida barcha anagrammalar bir xil bo'ladi.
 
-For instance:
+Masalan:
 
 ```
 nap, pan -> anp
@@ -9,14 +9,14 @@ cheaters, hectares, teachers -> aceehrst
 ...
 ```
 
-We'll use the letter-sorted variants as map keys to store only one value per each key:
+Harflarga ajratilgan variantlarni xarita(map) kalitlari sifatida har bir kalit uchun bittadan qiymat saqlash uchun foydalanamiz:
 
 ```js run
 function aclean(arr) {
   let map = new Map();
 
   for (let word of arr) {
-    // split the word by letters, sort them and join back
+    // so'zni harflar bilan ajratadi, ularni saralaydi va qayta qo'shadi
 *!*
     let sorted = word.toLowerCase().split('').sort().join(''); // (*)
 */!*
@@ -31,9 +31,9 @@ let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 alert( aclean(arr) );
 ```
 
-Letter-sorting is done by the chain of calls in the line `(*)`.
+Xatlarni saralash `(*)` satridagi chaqiruvlar zanjiri orqali amalga oshiriladi.
 
-For convenience let's split it into multiple lines:
+Qulaylik uchun uni bir nechta satrlarga ajratamiz:
 
 ```js
 let sorted = arr[i] // PAN
@@ -43,21 +43,21 @@ let sorted = arr[i] // PAN
   .join(''); // anp
 ```
 
-Two different words `'PAN'` and `'nap'` receive the same letter-sorted form `'anp'`.
+Ikki xil so'z `'PAN'` va `'nap'` bir xil harflar tartibida `'anp'` shaklini oladi.
 
-The next line put the word into the map:
+Keyingi satr so'zni Map obyektga kiritdi:
 
 ```js
 map.set(sorted, word);
 ```
 
-If we ever meet a word the same letter-sorted form again, then it would overwrite the previous value with the same key in the map. So we'll always have at maximum one word per letter-form.
+Agar biz yana biron bir harf bilan saralangan shaklda so'zni uchratsak, u avvalgi qiymatni obyektdagi bir xil kalit bilan qayta yozib qo'yadi. Shunday qilib, biz har doim bitta harf uchun bitta so'zga ega bo'lamiz.
 
-At the end `Array.from(map.values())` takes an iterable over map values (we don't need keys in the result) and returns an array of them.
+Oxirida `Array.from(map.values())` obyekt qiymatlari bo'yicha ketma-ket saraluvchanni oladi (natijada bizga kalit kerak emas) va ularning massivini qaytaradi.
 
-Here we could also use a plain object instead of the `Map`, because keys are strings.
+Bu erda biz `Map` o'rniga oddiy obyektdan ham foydalanishimiz mumkin edi, chunki kalitlar matnlardir.
 
-That's how the solution can look:
+Yechim shu tarzda ko'rinishi mumkin:
 
 ```js run demo
 function aclean(arr) {

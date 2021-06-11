@@ -1,14 +1,14 @@
 
-Let's examine what's done inside `makeArmy`, and the solution will become obvious.
+Keling, `makeArmy` ichida nima bo'lganini ko'rib chiqamiz, va yechim aniq bo'ladi.
 
-1. It creates an empty array `shooters`:
+1. Bu bo'sh massivni yaratadi `shooters`:
 
     ```js
     let shooters = [];
     ```
-2. Fills it in the loop via `shooters.push(function...)`.
+2. Uni `shooters.push(function...)` orqali tsikldan to'ldiradi.
 
-    Every element is a function, so the resulting array looks like this:
+    Har bir element funktsiyadir, shuning uchun olingan massiv quyidagicha ko'rinadi:
 
     ```js no-beautify
     shooters = [
@@ -25,25 +25,25 @@ Let's examine what's done inside `makeArmy`, and the solution will become obviou
     ];
     ```
 
-3. The array is returned from the function.
+3. Massiv funktsiyadan qaytariladi.
 
-Then, later, the call to `army[5]()` will get the element `army[5]` from the array (it will be a function) and call it.
+Keyinchalik, `army[5]()` chaqiruvi massivdan `army[5]` elementini oladi (bu funktsiya bo'ladi) va uni chaqiradi.
 
-Now why all such functions show the same?
+Endi nima uchun bunday funktsiyalarning barchasi bir xil bo'ladi?
 
-That's because there's no local variable `i` inside `shooter` functions. When such a function is called, it takes `i` from its outer lexical environment.
+Buning sababi `shooter` funktsiyalarida mahalliy `i` o'zgaruvchani yo'q. Bunday funktsiya chaqirilganda, uning tashqi leksik muhitidan `i` olinadi.
 
-What will be the value of `i`?
+`i` qiymati qanday bo'ladi?
 
-If we look at the source:
+Agar manbaga qarasak:
 
 ```js
 function makeArmy() {
   ...
   let i = 0;
   while (i < 10) {
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function() { // shooter funktsiya
+      alert( i ); // uning raqamini ko'rsatishi kerak
     };
     ...
   }
@@ -51,11 +51,11 @@ function makeArmy() {
 }
 ```
 
-...We can see that it lives in the lexical environment associated with the current `makeArmy()` run. But when `army[5]()` is called, `makeArmy` has already finished its job, and `i` has the last value: `10` (the end of `while`).
+...Uning amaldagi `makeArmy()` ishlashi bilan bog'liq bo'lgan leksik muhitda yashayotganini ko'rishimiz mumkin. Ammo `army[5]()` chaqirilganda, `makeArmy` allaqachon o'z ishini tugatib bo'ladi va `i` oxirgi qiymatga ega: `10` (`while` ning oxirisi).
 
-As a result, all `shooter` functions get from the outer lexical envrironment the same, last value `i=10`.
+Natijada, barcha `shooter` funktsiyalari tashqi leksik muhitdan bir xil narsa oladi, oxirgi qiymat `i = 10`.
 
-We can fix it by moving the variable definition into the loop:
+O'zgaruvchan ta'rifni tsiklga ko'chirish orqali uni tuzatishimiz mumkin:
 
 ```js run demo
 function makeArmy() {
@@ -65,8 +65,8 @@ function makeArmy() {
 *!*
   for(let i = 0; i < 10; i++) {
 */!*
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function() { // shooter funktsiya
+      alert( i ); // uning raqamini ko'rsatishi kerak
     };
     shooters.push(shooter);
   }
@@ -80,15 +80,15 @@ army[0](); // 0
 army[5](); // 5
 ```
 
-Now it works correctly, because every time the code block in `for (let i=0...) {...}` is executed, a new Lexical Environment is created for it, with the corresponding variable `i`.
+Endi u to'g'ri ishlaydi, chunki har safar `for (let i=0...) {...}` dagi kod bloki bajarilganda u uchun mos keladigan `i` o'zgaruvchanga ega bo'lgan yangi leksik muhit yaratiladi.
 
-So, the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds the current loop iteration. That's why now it works.
+Shunday qilib, endi `i` qiymati biroz yaqinroq yashaydi. `makeArmy()` leksik muhitida emas, balki joriy tsiklning takrorlanishiga mos keladigan leksik muhitda. Shuning uchun endi u ishlaydi.
 
 ![](lexenv-makearmy.svg)
 
-Here we rewrote `while` into `for`.
+Bu erda biz `while` ni `for` ga qayta yozdik.
 
-Another trick could be possible, let's see it for better understanding of the subject:
+Yana bir hiyla-nayrang bo'lishi mumkin, keling, mavzuni yaxshiroq tushunish uchun buni ko'rib chiqaylik:
 
 ```js run
 function makeArmy() {
@@ -99,8 +99,8 @@ function makeArmy() {
 *!*
     let j = i;
 */!*
-    let shooter = function() { // shooter function
-      alert( *!*j*/!* ); // should show its number
+    let shooter = function() { // shooter funktsiya
+      alert( *!*j*/!* ); // uning raqamini ko'rsatishi kerak
     };
     shooters.push(shooter);
     i++;
@@ -115,6 +115,6 @@ army[0](); // 0
 army[5](); // 5
 ```
 
-The `while` loop, just like `for`, makes a new Lexical Environment for each run. So here we make sure that it gets the right value for a `shooter`.
+`while` tsikli, xuddi `for` singari, har bir ish uchun yangi leksik muhit yaratadi. Shunday qilib, biz uning `shooter` uchun to'g'ri qiymatga ega bo'lishiga ishonch hosil qilamiz.
 
-We copy `let j = i`. This makes a loop body local `j` and copies the value of `i` to it. Primitives are copied "by value", so we actually get a complete independent copy of `i`, belonging to the current loop iteration.
+Biz `let j = i` nusxasini olamiz. Bu lokal `j` ni tsikl tanasi qiladi va unga `i` qiymatini ko'chiradi. Ibtidoiyl narsalar `qiymat bo'yicha` ko'chiriladi, shuning uchun biz amaldagi tsiklning takrorlanishiga tegishli bo'lgan `i` ning to'liq mustaqil nusxasini olamiz.

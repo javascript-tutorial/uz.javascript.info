@@ -1,25 +1,25 @@
 
 
 ```js run demo
-let userName = prompt("Who's there?", '');
+let userName = prompt("Kim bu yerda?", '');
 
 if (userName == 'Admin') {
 
-  let pass = prompt('Password?', '');
+  let pass = prompt('Parol?', '');
 
-  if (pass == 'TheMaster') {
-    alert( 'Welcome!' );
+  if (pass == 'Master') {
+    alert( 'Xush kelibsiz!' );
   } else if (pass == '' || pass == null) {
-    alert( 'Canceled.' );
+    alert( 'Bekor qilindi.' );
   } else {
-    alert( 'Wrong password' );
+    alert( "Noto'g'ri parol" );
   }
 
 } else if (userName == '' || userName == null) {
-  alert( 'Canceled' );
+  alert( 'Bekor qilindi' );
 } else {
-  alert( "I don't know you" );
+  alert( "Men sizni tanimayman" );
 }
 ```
 
-Note the vertical indents inside the `if` blocks. They are technically not required, but make the code more readable.
+  `If` bloklar ichidagi vertikal chiziqlarga e'tibor bering. Ular texnik jihatdan talab qilinmaydi, lekin ular kodning o'qilishini yanada oson qiladilar.

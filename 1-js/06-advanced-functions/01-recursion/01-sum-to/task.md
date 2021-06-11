@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Sum all numbers till the given one
+# Berilgan raqamgacha barcha raqamlarni yig'ing
 
-Write a function `sumTo(n)` that calculates the sum of numbers `1 + 2 + ... + n`.
+`1 + 2 + ... + n` raqamlar yig'indisini hisoblaydigan "sumTo (n)" funktsiyasini yozing.
 
-For instance:
+Masalan:
 
 ```js no-beautify
 sumTo(1) = 1
@@ -17,20 +17,20 @@ sumTo(4) = 4 + 3 + 2 + 1 = 10
 sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
 ```
 
-Make 3 solution variants:
+3 ta yechim variantini yarating:
 
-1. Using a for loop.
-2. Using a recursion, cause `sumTo(n) = n + sumTo(n-1)` for `n > 1`.
-3. Using the [arithmetic progression](https://en.wikipedia.org/wiki/Arithmetic_progression) formula.
+1. For tsiklidan foydalanish.
+2. Rekursiyadan foydalanib, `n > 1` uchun `sumTo(n) = n + sumTo(n-1)`.
+3. [Arifmetik progresiya](https://en.wikipedia.org/wiki/Arithmetic_progression) formulasidan foydalanish.
 
-An example of the result:
+Natija misoli:
 
 ```js
-function sumTo(n) { /*... your code ... */ }
+function sumTo(n) { /*... sizning kodingiz ... */ }
 
 alert( sumTo(100) ); // 5050
 ```
 
-P.S. Which solution variant is the fastest? The slowest? Why?
+P.S. Qaysi yechim varianti eng tezkor? Eng sekini? Nima uchun?
 
-P.P.S. Can we use recursion to count `sumTo(100000)`? 
+P.P.S. `sumTo(100000)` ni hisoblash uchun rekursiyadan foydalanishimiz mumkinmi? 

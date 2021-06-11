@@ -2,11 +2,11 @@ importance: 4
 
 ---
 
-# Rewrite setTimeout with setInterval
+# SetTimeout-ni setInterval bilan qayta yozing
 
-Here's the function that uses nested `setTimeout` to split a job into pieces.
+Ishni qismlarga bo'lish uchun ichki `setTimeout` dan foydalanadigan funksiya.
 
-Rewrite it to `setInterval`:
+Uni `setInterval` ga qayta yozing:
 
 ```js run
 let i = 0;

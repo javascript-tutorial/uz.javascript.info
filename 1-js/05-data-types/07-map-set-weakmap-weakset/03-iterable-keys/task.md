@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Iterable keys
+# Ketma-ket sarraluvchan kalitlar
 
-We want to get an array of `map.keys()` and go on working with it (apart from the map itself).
+Biz `map.keys()` dan massivni olishni istaymiz va u bilan ishlashni davom ettiramiz (Map obyektdan tashqari).
 
-But there's a problem:
+Ammo muammo bor:
 
 ```js run
 let map = new Map();
@@ -16,9 +16,9 @@ map.set("name", "John");
 let keys = map.keys();
 
 *!*
-// Error: keys.push is not a function
+// Xato: keys.push funktsiya emas
 keys.push("more");
 */!*
 ```
 
-Why? How can we fix the code to make `keys.push` work?
+Nima uchun? `keys.push` ishlashi uchun kodni qanday tuzatishimiz mumkin?

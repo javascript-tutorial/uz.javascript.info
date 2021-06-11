@@ -1,42 +1,42 @@
 
 # Object.keys, values, entries
 
-Let's step away from the individual data structures and talk about the iterations over them. 
+Keling, alohida ma'lumotlar tuzilmalaridan uzoqlashamiz va ular ustida takrorlanishlar haqida gaplashamiz.
 
-In the previous chapter we saw methods `map.keys()`, `map.values()`, `map.entries()`.
+Oldingi bobda biz usullarni ko'rdik `map.keys()`, `map.values()`, `map.entries()`.
 
-These methods are generic, there is a common agreement to use them for data structures. If we ever create a data structure of our own, we should implement them too. 
+Ushbu usullar umumiydir, ularni ma'lumotlar tuzilmalari uchun ishlatish bo'yicha umumiy kelishuv mavjud. Agar biz o'zimizga xos ma'lumotlar tuzilishini yaratadigan bo'lsak, ularni ham amalga oshirishimiz kerak.
 
-They are supported for:
+Ular quyidagilar uchun qo'llab-quvvatlanadi:
 
 - `Map`
 - `Set`
-- `Array` (except `arr.values()`)
+- `Array` (`arr.values()` dan tashqari)
 
-Plain objects also support similar methods, but the syntax is a bit different.
+Oddiy obyektlar ham shunga o'xshash usullarni qo'llab-quvvatlaydi, ammo sintaksis biroz boshqacha.
 
 ## Object.keys, values, entries
 
-For plain objects, the following methods are available:
+Oddiy obyektlar uchun quyidagi usullar mavjud:
 
-- [Object.keys(obj)](mdn:js/Object/keys) -- returns an array of keys.
-- [Object.values(obj)](mdn:js/Object/values) -- returns an array of values.
-- [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of `[key, value]` pairs.
+- [Object.keys(obj)](mdn:js/Object/keys) -- kalitlar massivini qaytaradi.
+- [Object.values(obj)](mdn:js/Object/values) -- qiymatlar massivini qaytaradi
+- [Object.entries(obj)](mdn:js/Object/entries) -- `[key, value]` juftlik massivini qaytaradi.
 
-...But please note the distinctions (compared to map for example):
+...Iltimos, farqlarga e'tibor bering (masalan, map obyekti bilan taqqoslaganda):
 
 |             | Map              | Object       |
 |-------------|------------------|--------------|
-| Call syntax | `map.keys()`  | `Object.keys(obj)`, but not `obj.keys()` |
-| Returns     | iterable    | "real" Array                     |
+| Chaqiruv sintaksis | `map.keys()`  | `Object.keys(obj)`, lekin `obj.keys()` emas |
+| Qaytarish     | ketma-ket saraluchan    | "haqiqiy" Array                     |
 
-The first difference is that we have to call `Object.keys(obj)`, and not `obj.keys()`.
+Birinchi farq shundaki, biz `obj.keys()` emas, balki `Object.keys(obj)` deb chaqirishimiz kerak.
 
-Why so? The main reason is flexibility. Remember, objects are a base of all complex structures in JavaScript. So we may have an object of our own like `order` that implements its own `order.values()` method. And we still can call `Object.values(order)` on it.
+Nega shunday? Asosiy sabab - bu egiluvchanlik. Esingizda bo'lsa, obyektlar JavaScript-dagi barcha murakkab tuzilmalarning asosidir. Shunday qilib, bizda o'z `order.values​​()` usulini amalga oshiradigan `order` kabi obyektimiz bo'lishi mumkin. Va biz hali ham `Object.values​​(order)` deb chaqirishimiz mumkin.
 
-The second difference is that `Object.*` methods return "real" array objects, not just an iterable. That's mainly for historical reasons.
+Ikkinchi farq shundaki, `Object.*` usullari ketma-ket saraluchanni emas, balki "haqiqiy"  obyektlar massivini qaytaradi. Bu asosan tarixiy sabablarga ko'ra shunday.
 
-For instance:
+Masalan:
 
 ```js
 let user = {
@@ -49,7 +49,7 @@ let user = {
 - `Object.values(user) = ["John", 30]`
 - `Object.entries(user) = [ ["name","John"], ["age",30] ]`
 
-Here's an example of using `Object.values` to loop over property values:
+Xususiyat qiymatlarini tsiklash uchun `Object.values` dan foydalanish misoli:
 
 ```js run
 let user = {
@@ -57,14 +57,14 @@ let user = {
   age: 30
 };
 
-// loop over values
+// qiymatlarni tsiklash 
 for (let value of Object.values(user)) {
-  alert(value); // John, then 30
+  alert(value); // John, so'ng 30
 }
 ```
 
-## Object.keys/values/entries ignore symbolic properties
+## Object.keys/values/entries ramziy xususiyatlarni e'tiborsiz qoldiradi
 
-Just like a `for..in` loop, these methods ignore properties that use `Symbol(...)` as keys.
+Xuddi `for..in` tsikl kabi, bu usullar ham `Symbol(...)` ni kalit sifatida ishlatadigan xususiyatlarga e'tibor bermaydi.
 
-Usually that's convenient. But if we want symbolic keys too, then there's a separate method [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols) that returns an array of only symbolic keys. Also, the method [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) returns *all* keys.
+Odatda bu qulay. Agar biz ham ramziy kalitlarni xohlasak, unda alohida usul mavjud [Object.getOwnPropertySymbols](mdn:js/Object/getOwnPropertySymbols), bu faqat ramziy kalitlar massivini qaytaradi. Shuningdek, [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) usuli *hamma* kalitlarni qaytaradi.

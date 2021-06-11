@@ -2,21 +2,21 @@ importance: 4
 
 ---
 
-# Filter range
+# Filtr oralig'i
 
-Write a function `filterRange(arr, a, b)` that gets an array `arr`, looks for elements between `a` and `b` in it and returns an array of them. 
+`arr` massivini oladigan, undagi `a` va `b` orasidagi elementlarni qidiradigan va ularning massivini qaytaradigan `filterRange(arr,a,b)` funktsiyasini yozing.
 
-The function should not modify the array. It should return the new array.
+Funktsiya massivni o'zgartirmasligi kerak. Bu yangi massivni qaytarishi kerak.
 
-For instance:
+Masalan:
 
 ```js
 let arr = [5, 3, 8, 1];
 
 let filtered = filterRange(arr, 1, 4); 
 
-alert( filtered ); // 3,1 (matching values)
+alert( filtered ); // 3,1 (mos keladigan qiymatlar)
 
-alert( arr ); // 5,3,8,1 (not modified)
+alert( arr ); // 5,3,8,1 (o'zgartirilmagan)
 ```
 

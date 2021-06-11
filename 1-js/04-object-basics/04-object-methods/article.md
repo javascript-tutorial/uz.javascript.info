@@ -1,6 +1,6 @@
-# Object methods, "this"
+# Obyekt usullari, "this"
 
-Objects are usually created to represent entities of the real world, like users, orders and so on:
+Obyektlar odatda foydalanuvchilar, buyurtmalar va boshqalar kabi real dunyo subyektlarini aks ettirish uchun yaratiladi:
 
 ```js
 let user = {
@@ -9,13 +9,13 @@ let user = {
 };
 ```
 
-And, in the real world, a user can *act*: select something from the shopping cart, login, logout etc.
+Va, haqiqiy dunyoda, foydalanuvchi *harakat qilishi mumkin*: xarid qilish vositasidan biror narsani tanlash, kirish, chiqish va h.k.
 
-Actions are represented in JavaScript by functions in properties.
+Amallar JavaScript-da funktsiyadagi xususiyatlar bilan ifodalanadi.
 
-## Method examples
+## Usul misollari
 
-For the start, let's teach the `user` to say hello:
+Boshlash uchun `user` ga salom aytishni o'rgataylik:
 
 ```js run
 let user = {
@@ -25,22 +25,22 @@ let user = {
 
 *!*
 user.sayHi = function() {
-  alert("Hello!");
+  alert("Salom!");
 };
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // Salom!
 ```
 
-Here we've just used a Function Expression to create the function and assign it to the property `user.sayHi` of the object.
+Bu yerda biz funktsiyani yaratish va uni obyektning `user.sayHi` xususiyatiga tayinlash uchun funktsiya ifodasini ishlatdik.
 
-Then we can call it. The user can now speak!
+Keyin biz uni chaqira olamiz. Endi "user" gaplasha oladi!
 
-A function that is the property of an object is called its *method*.
+Obyektning xususiyati bo'lgan funktsiya uning *usuli* deb nomlanadi.
 
-So, here we've got a method `sayHi` of the object `user`.
+Shunday qilib, bu yerda bizda `user` obyektining `sayHi` usuli bor.
 
-Of course, we could use a pre-declared function as a method, like this:
+Albatta, biz oldindan e'lon qilingan funktsiyalardan usul sifatida foydalanishimiz mumkin:
 
 ```js run
 let user = {
@@ -48,61 +48,61 @@ let user = {
 };
 
 *!*
-// first, declare
+// birinchi, e'lon qiling
 function sayHi() {
   alert("Hello!");
 };
 
-// then add as a method
+// keyin usul sifatida qo'shing
 user.sayHi = sayHi;
 */!*
 
-user.sayHi(); // Hello!
+user.sayHi(); // Salom!
 ```
 
-```smart header="Object-oriented programming"
-When we write our code using objects to represent entities, that's called an [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming), in short: "OOP".
+```smart header="Obyektga yo'naltirilgan dasturlash"
+Subyektlarni namoyish qilish uchun obyektlar yordamida kodimizni yozganimizda, bu [obyektga yo'naltirilgan dasturlash](https://en.wikipedia.org/wiki/object-oriented_programming), qisqasi: "OOP".
 
-OOP is a big thing, an interesting science of its own. How to choose the right entities? How to organize the interaction between them? That's architecture, and there are great books on that topic, like "Design Patterns: Elements of Reusable Object-Oriented Software" by E.Gamma, R.Helm, R.Johnson, J.Vissides or "Object-Oriented Analysis and Design with Applications" by G.Booch, and more. 
+OOP - bu katta narsa, o'ziga xos qiziqarli fan. To'g'ri subyektlarni qanday tanlash kerak? Ularning o'zaro ta'sirini qanday tashkil qilish kerak? Bu arxitektura va bu mavzu bo'yicha E.Gamma, R.Helm, R.Jonson, J.Vissidesning "Dizayn naqshlari: qayta ishlatilishi mumkin bo'lgan obyektga yo'naltirilgan dasturiy ta'minot elementlari" yoki "Obyektga yo'naltirilgan tahlil va dizayn ilovalar" G.Booch tomonidan yozilgan va boshqalar.
 ```
-### Method shorthand
+### Usulni qisqartirish
 
-There exists a shorter syntax for methods in an object literal:
+Obyektdagi usullar uchun qisqa sintaksis mavjud:
 
 ```js
-// these objects do the same
+// bu obyektlar ham xuddi shunday qiladi
 
 let user = {
   sayHi: function() {
-    alert("Hello");
+    alert("Salom");
   }
 };
 
-// method shorthand looks better, right?
+// usulni qisqartirish yaxshiroq ko'rinadi, to'g'rimi?
 let user = {
 *!*
-  sayHi() { // same as "sayHi: function()"
+  sayHi() { // "sayHi: function()" bilan bir xil
 */!*
-    alert("Hello");
+    alert("Salom");
   }
 };
 ```
 
-As demonstrated, we can omit `"function"` and just write `sayHi()`.
+Ko'rsatilganidek, biz `"function"` ni qoldirib, faqat `sayHi()` yozishimiz mumkin.
 
-To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases the shorter syntax is preferred.
+Rostini aytsam, yozuvlar bir-biriga to'liq o'xshash emas. Obyektni meros qilib olish bilan bog'liq nozik farqlar mavjud (keyinroq ko'rib chiqiladi), ammo hozircha ularning ahamiyati yo'q. Deyarli barcha hollarda qisqa sintaksisga ustunlik beriladi.
 
-## "this" in methods
+## "this" usullarda
 
-It's common that an object method needs to access the information stored in the object to do its job.
+Obyekt usuli o'z ishini bajarish uchun obyektda saqlangan ma'lumotlarga kirish huquqiga ega bo'lishi odatiy holdir.
 
-For instance, the code inside `user.sayHi()` may need the name of the `user`.
+Masalan, `user.sayHi()` ichidagi kodga `user` nomi kerak bo'lishi mumkin.
 
-**To access the object, a method can use the `this` keyword.**
+**Obyektga kirish uchun usul `this` kalit so'zidan foydalanishi mumkin.**
 
-The value of `this` is the object "before dot", the one used to call the method.
+`this` qiymati - bu usulni chaqirish uchun ishlatiladigan "nuqta oldidagi" obyekt.
 
-For instance:
+Masalan:
 
 ```js run
 let user = {
@@ -120,9 +120,9 @@ let user = {
 user.sayHi(); // John
 ```
 
-Here during the execution of `user.sayHi()`, the value of `this` will be `user`.
+Bu erda `user.sayHi()` bajarilishi paytida `this` qiymati `user` bo'ladi.
 
-Technically, it's also possible to access the object without `this`, by referencing it via the outer variable:
+Texnik jihatdan, `this` kalit so'zisiz obyektga murojaat qilish mumkin, unga tashqi o'zgaruvchan orqali murojaat qilish mumkin.
 
 ```js
 let user = {
@@ -131,16 +131,16 @@ let user = {
 
   sayHi() {
 *!*
-    alert(user.name); // "user" instead of "this"
+    alert(user.name); // "user" "this" ning o'rniga
 */!*
   }
 
 };
 ```
 
-...But such code is unreliable. If we decide to copy `user` to another variable, e.g. `admin = user` and overwrite `user` with something else, then it will access the wrong object.
+...Ammo bunday kod ishonchli emas. Agar biz `user` ni boshqa o'zgaruvchanga nusxalashga qaror qilsak, masalan, `admin = user` va `user` ni boshqa narsa bilan qayta yozsak, shunda u noto'g'ri obyektga murojaat qiladi.
 
-That's demonstrated below:
+Bu quyida ko'rsatilgan:
 
 ```js run
 let user = {
@@ -149,7 +149,7 @@ let user = {
 
   sayHi() {
 *!*
-    alert( user.name ); // leads to an error
+    alert( user.name ); // xatoga olib keladi
 */!*
   }
 
@@ -157,18 +157,18 @@ let user = {
 
 
 let admin = user;
-user = null; // overwrite to make things obvious
+user = null; // narsalarni aniq qilib ko'rsatish uchun qayta yozamiz
 
-admin.sayHi(); // Whoops! inside sayHi(), the old name is used! error!
+admin.sayHi(); // Voy! sayHi() ning ichida eski nom ishlatiladi! xato!
 ```
 
-If we used `this.name` instead of `user.name` inside the `alert`, then the code would work.
+Agar biz `alert` ichida `user.name` o'rniga `this.name` dan foydalansak, u holda kod ishlaydi.
 
-## "this" is not bound
+## "this" bog'liq emas
 
-In JavaScript, "this" keyword behaves unlike most other programming languages. First, it can be used in any function.
+JavaScript-da, "this" kalit so'z boshqa dasturlash tillarining aksariyatidan farq qiladi. Birinchidan, u har qanday funktsiyada ishlatilishi mumkin.
 
-There's no syntax error in the code like that:
+Bu kabi kodda sintaksis xato yo'q:
 
 ```js
 function sayHi() {
@@ -176,9 +176,9 @@ function sayHi() {
 }
 ```
 
-The value of `this` is evaluated during the run-time. And it can be anything.
+`this` qiymati ish vaqtida baholanadi. Va u har qanday narsa bo'lishi mumkin.
 
-For instance, the same function may have different "this" when called from different objects:
+Masalan, bir xil funktsiya turli xil obyektlardan chaqirilganda boshqacha "this" bo'lishi mumkin:
 
 ```js run
 let user = { name: "John" };
@@ -189,20 +189,20 @@ function sayHi() {
 }
 
 *!*
-// use the same functions in two objects
+// ikkita obyektda bir xil funktsiyalardan foydalandik
 user.f = sayHi;
 admin.f = sayHi;
 */!*
 
-// these calls have different this
-// "this" inside the function is the object "before the dot"
+// chaqiruvlarda boshqacha this
+// "this" - bu funktsiyaning ichida "nuqta oldidagi" obyekt 
 user.f(); // John  (this == user)
 admin.f(); // Admin  (this == admin)
 
-admin['f'](); // Admin (dot or square brackets access the method – doesn't matter)
+admin['f'](); // Admin (nuqta yoki to'rtburchak qavslar usuliga kirish uchun ishlatiladi - bu muhim emas)
 ```
 
-Actually, we can call the function without an object at all:
+Aslida, biz funktsiyani umuman obyektsiz chaqira olamiz:
 
 ```js run
 function sayHi() {
@@ -212,73 +212,73 @@ function sayHi() {
 sayHi(); // undefined
 ```
 
-In this case `this` is `undefined` in strict mode. If we try to access `this.name`, there will be an error.
+Bunday holda `this` qat'iy rejimda `undefined`. Agar `this.name` ga kirishga harakat qilsak, xato bo'ladi.
 
-In non-strict mode the value of `this` in such case will be the *global object* (`window` in a browser, we'll get to it later in the chapter [](info:global-object)). This is a historical behavior that `"use strict"` fixes.
+Qat'iy bo'lmagan rejimda `this` qiymati *global obyekt* bo'ladi (brauzerda `window`, biz keyinroq [](info:global-objekt) bobida unga erishamiz. Bunday tarixiy xatti-harakatlarni tuzatish uchun, `"use strict"` dan foydalaning.
 
-Please note that usually a call of a function that uses `this` without an object is not normal, but rather a programming mistake. If a function has `this`, then it is usually meant to be called in the context of an object.
+Iltimos, shuni yodda tutingki, odatda `this` ni obyektsiz ishlatiladigan funktsiya chaqiruvi odatiy emas, aksincha dasturiy xato. Agar funktsiya `this` ga ega bo'lsa, unda odatda obyekt kontekstida chaqirilishi kerak.
 
-```smart header="The consequences of unbound `this`"
-If you come from another programming language, then you are probably used to the idea of a "bound `this`", where methods defined in an object always have `this` referencing that object.
+```smart header="Bog'lanmagan `this` ning oqibatlari"
+Agar ilgari boshqa dasturlash tillarini o'rgangan bo'lsangiz, unda siz "bog'liq `this`" g'oyasiga o'rganib qolgansiz – obyekt ichida aniqlangan usullar har doim o'z obyektiga havolasini saqlaydi.
 
-In JavaScript `this` is "free", its value is evaluated at call-time and does not depend on where the method was declared, but rather on what's the object "before the dot".
+JavaScript-da `this` "ozod", uning qiymati chaqiruv vaqtida baholanadi va usul qayerda e'lon qilinganiga bog'liq emas, balki "nuqta oldida" nima bo'lganiga bog'liq.
 
-The concept of run-time evaluated `this` has both pluses and minuses. On the one hand, a function can be reused for different objects. On the other hand, greater flexibility opens a place for mistakes.
+Ish vaqti tushunchasi `this` ijobiy va salbiy tomonlarga ega. Bir tomondan, funktsiyani turli xil ob'yktlar uchun qayta ishlatish mumkin. Boshqa tomondan, ko'proq moslashuvchanlik xatolar uchun joy ochadi.
 
-Here our position is not to judge whether this language design decision is good or bad. We'll understand how to work with it, how to get benefits and evade problems.
+Bu yerda bizning pozitsiyamiz ushbu tilni loyihalashtirish bo'yicha qarorning yaxshi yoki yomonligini baholash emas. U bilan qanday ishlashni, qanday foyda olish va muammolardan qanday qochish kerakligini organamiz.
 ```
 
-## Internals: Reference Type
+## Ichki dastur: havola turi
 
-```warn header="In-depth language feature"
-This section covers an advanced topic, to understand certain edge-cases better.
+```warn header="Ilg'or til imkoniyati"
+Ushbu bo'lim ba'zi murakkab vaziyatlarni yaxshiroq tushunish uchun murakkab mavzuni o'z ichiga oladi.
 
-If you want to go on faster, it can be skipped or postponed.
+Agar siz tezroq davom etmoqchi bo'lsangiz, uni o'tkazib yuborishingiz yoki qoldirishingiz mumkin.
 ```
 
-An intricate method call can lose `this`, for instance:
+Murakkab usul chaqiruvi `this` ning qiyamatini yo'qotishi mumkin, masalan:
 
 ```js run
 let user = {
   name: "John",
   hi() { alert(this.name); },
-  bye() { alert("Bye"); }
+  bye() { alert("Hayir"); }
 };
 
-user.hi(); // John (the simple call works)
+user.hi(); // John (oddiy chaqiruv ishlaydi)
 
 *!*
-// now let's call user.hi or user.bye depending on the name
-(user.name == "John" ? user.hi : user.bye)(); // Error!
+// endi nomiga qarab user.hi yoki user.bye ni chaqiramiz
+(user.name == "John" ? user.hi : user.bye)(); // Xato!
 */!*
 ```
 
-On the last line there is a ternary operator that chooses either `user.hi` or `user.bye`. In this case the result is `user.hi`.
+Oxirgi satrda `user.hi` yoki `user.bye` ni tanlaydigan uchlik operatori mavjud. Bu holda natija `user.hi` bo'ladi.
 
-The method is immediately called with parentheses `()`. But it doesn't work right!
+Usul darhol qavslar bilan chaqiriladi `()`. Ammo bu to'g'ri ishlamaydi!
 
-You can see that the call results in an error, because the value of `"this"` inside the call becomes `undefined`.
+Chaqiruv xatoga olib kelishini ko'rishingiz mumkin, chunki chaqiruv ichidagi `"this"` qiymati `undefined` bo'ladi.
 
-This works (object dot method):
+Bu ishlaydi (obyekt nuqta usuli):
 ```js
 user.hi();
 ```
 
-This doesn't (evaluated method):
+Bu ishlamaydi(baholangan usul):
 ```js
-(user.name == "John" ? user.hi : user.bye)(); // Error!
+(user.name == "John" ? user.hi : user.bye)(); // Xato!
 ```
 
-Why? If we want to understand why it happens, let's get under the hood of how `obj.method()` call works.
+Nima uchun? Agar nima uchun bunday bo'lishini tushunishni istasak, keling, `obj.method()` chaqiruvi qanday ishlashini ko'rib chiqaylik.
 
-Looking closely, we may notice two operations in `obj.method()` statement:
+Yaqindan qarab, `obj.method()` ifodasida ikkita operatsiyani ko'rishimiz mumkin:
 
-1. First, the dot `'.'` retrieves the property `obj.method`.
-2. Then parentheses `()` execute it.
+1. Birinchi nuqta operator `'.'` obyektning xususiyatini qaytaradi `obj.method`.
+2. Keyin qavslar `()` uni bajaradi.
 
-So, how does the information about `this` get passed from the first part to the second one?
+Xo'sh, `this` haqidagi ma'lumotlar birinchi qismdan ikkinchisiga qanday yetkaziladi?
 
-If we put these operations on separate lines, then `this` will be lost for sure:
+Agar biz ushbu operatsiyalarni alohida satrlarga qo'yadigan bo'lsak, unda `this` aniq yo'qoladi:
 
 ```js run
 let user = {
@@ -287,67 +287,67 @@ let user = {
 }
 
 *!*
-// split getting and calling the method in two lines
+// bo'linish va usulni ikki satrda chaqirish
 let hi = user.hi;
-hi(); // Error, because this is undefined
+hi(); // Xato, chunki this aniqlanmagan
 */!*
 ```
 
-Here `hi = user.hi` puts the function into the variable, and then on the last line it is completely standalone, and so there's no `this`.
+Bu yerda `hi = user.hi` funktsiyani o'zgaruvchanga qo'yadi, so'ngra oxirgi satrda u butunlay mustaqil bo'ladi va shuning uchun `this` yoqoladi.
 
-**To make `user.hi()` calls work, JavaScript uses a trick -- the dot `'.'` returns not a function, but a value of the special [Reference Type](https://tc39.github.io/ecma262/#sec-reference-specification-type).**
+**`user.hi()` chaqiruvi ishlash uchun JavaScript-da hiyla ishlatadi -- nuqta `'.'`  funktsiyani emas, balki maxsus [Reference Type](https://tc39.github.io/ecma262/#sec-reference-specification-type) qiymatini qaytaradi.**
 
-The Reference Type is a "specification type". We can't explicitly use it, but it is used internally by the language.
+The Reference Type bu "spetsifikatsiya turi" dir. Biz uni aniq ishlata olmaymiz, lekin tilning ichida avtomatik ishlatiladi.
 
-The value of Reference Type is a three-value combination `(base, name, strict)`, where:
+Reference Type qiymati uch qiymatli kombinatsiyadir `(base, name, strict)`, bu erda:
 
-- `base` is the object.
-- `name` is the property.
-- `strict` is true if `use strict` is in effect.
+- `base` bu obyekt.
+- `name` bu xususiyat.
+- `strict` bu true agar `use strict` amalda bo'sa
 
-The result of a property access `user.hi` is not a function, but a value of Reference Type. For `user.hi` in strict mode it is:
+`user.hi` xususiyatiga kirish natijasi funktsiya emas, balki Reference Type qiymatidir. `user.hi` qat'iy rejimda:
 
 ```js
-// Reference Type value
+// Reference Type qiymati
 (user, "hi", true)
 ```
 
-When parentheses `()` are called on the Reference Type, they receive the full information about the object and its method, and can set the right `this` (`=user` in this case).
+Reference Type-da qavslar `()` chaqirilganligida, ular obyekt va uning usuli haqida to'liq ma'lumot olishadi va to'g'ri `this` belgilashlari mumkin (`= user` shu holatda). 
 
-Any other operation like assignment `hi = user.hi` discards the reference type as a whole, takes the value of `user.hi` (a function) and passes it on. So any further operation "loses" `this`.
+`hi = user.hi` tayinlash kabi boshqa har qanday operatsiya havola turini umuman bekor qiladi, `user.hi` (funktsiya) qiymatini oladi va uzatadi. Shunday qilib, keyingi har qanday operatsiya `this` ni "yo'qotadi".
 
-So, as the result, the value of `this` is only passed the right way if the function is called directly using a dot `obj.method()` or square brackets `obj['method']()` syntax (they do the same here). Later in this tutorial, we will learn various ways to solve this problem such as [func.bind()](/bind#solution-2-bind).
+Shunday qilib, natija sifatida, funktsiya to'g'ridan-to'g'ri `obj.method()` nuqta yoki kvadrat qavslar `obj [' usuli ']()` sintaksisidan foydalanilsa (ular bu erda bir xil narsa bajarishadi) bo'ladi. Keyinchalik ushbu qo'llanmada biz ushbu muammoni hal qilishning turli xil usullarini o'rganamiz, masalan [func.bind()](/bind#solution-2-bind).
 
-## Arrow functions have no "this"
+## O'q funktsiyalarida "this" yo'q 
 
-Arrow functions are special: they don't have their "own" `this`. If we reference `this` from such a function, it's taken from the outer "normal" function.
+O'q funktsiyalari maxsus: ularda o'zlarining `this` yo'q. Agar biz `this` ni o'q funktsiyasi ichida ishlatsak, uning qiymati tashqi "normal" funktsiyadan olinadi.
 
-For instance, here `arrow()` uses `this` from the outer `user.sayHi()` method:
+Masalan, bu yerda `arrow()` tashqi `user.sayHi()` usulidan `this` ni ishlatadi:
 
 ```js run
 let user = {
-  firstName: "Ilya",
+  firstName: "Aziza",
   sayHi() {
     let arrow = () => alert(this.firstName);
     arrow();
   }
 };
 
-user.sayHi(); // Ilya
+user.sayHi(); // Aziza
 ```
 
-That's a special feature of arrow functions, it's useful when we actually do not want to have a separate `this`, but rather to take it from the outer context. Later in the chapter <info:arrow-functions> we'll go more deeply into arrow functions.
+Bu o'q funktsiyalarining o'ziga xos xususiyati, biz aslida alohida `this` ga ega bo'lishni xohlamasligimiz, aksincha uni tashqi kontekstdan olishimiz foydalidir. Keyinchalik <info:arrow-functions> bobida biz o'q funktsiyalarini chuqurroq kirib boramiz.
 
 
-## Summary
+## Xulosa
 
-- Functions that are stored in object properties are called "methods".
-- Methods allow objects to "act" like `object.doSomething()`.
-- Methods can reference the object as `this`.
+- Obyekt xususiyatlarida saqlanadigan funktsiyalar "usullar" deb nomlanadi.
+- Usullar obyektlarga `object.doSomething()` kabi "harakat qilish" imkonini beradi.
+- Usullar obyektga `this` orqali murojaat qilishi mumkin.
 
-The value of `this` is defined at run-time.
-- When a function is declared, it may use `this`, but that `this` has no value until the function is called.
-- That function can be copied between objects.
-- When a function is called in the "method" syntax: `object.method()`, the value of `this` during the call is `object`.
+`this` ning qiymati ish vaqtida aniqlanadi.
+- Funktsiya e'lon qilinganda, u `this` dan foydalanishi mumkin, ammo funktsiya chaqirilguncha `this` ning qiymati bo'lmaydi.
+- Ushbu funktsiyani obyektlar o'rtasida nusxalash mumkin.
+- "Usul" sintaksisida funktsiya chaqirilganda: `object.method()`, chaqiruv paytida `this` ning qiymati `object` dir.
 
-Please note that arrow functions are special: they have no `this`. When `this` is accessed inside an arrow function, it is taken from outside.
+Iltimos, o'q funktsiyalari alohida ekanligini unutmang: ularda `this` yo'q. O'q funktsiyaning ichida `this` ga e'lon qilinsa, uning qiymati tashqarida olinadi.

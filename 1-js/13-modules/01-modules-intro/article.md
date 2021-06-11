@@ -1,96 +1,96 @@
 
-# Modules, introduction
+# Modullar, tanishtirish
 
-As our application grows bigger, we want to split it into multiple files, so called 'modules'.
-A module usually contains a class or a library of useful functions.
+Bizning dasturimiz kattalashib borishi bilan biz uni "modullar" deb nomlangan bir nechta fayllarga ajratishni xohlaymiz.
+Modul odatda foydali funktsiyalar klassini yoki kutubxonasini o'z ichiga oladi.
 
-For a long time, JavaScript existed without a language-level module syntax. That wasn't a problem, because initially scripts were small and simple. So there was no need.
+Uzoq vaqt davomida JavaScript til darajasidagi modul sintaksisiz mavjud edi. Bu muammo emas edi, chunki dastlab skriptlar kichik va sodda edi. Shunday qilib, ehtiyoj yo'q edi.
 
-But eventually scripts became more and more complex, so the community invented a variety of ways to organize code into modules.
+Ammo oxir-oqibat skriptlar tobora murakkablashib bordi, shuning uchun hamjamiyat kodlarni modullarga joylashtirishning turli usullarini ixtiro qildi.
 
-For instance:
+Masalan:
 
-- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](http://requirejs.org/).
-- [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.
-- [UMD](https://github.com/umdjs/umd) -- one more module system, suggested as a universal one, compatible with AMD and CommonJS.
+- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- dastlab kutubxona tomonidan amalga oshirilgan eng qadimgi modul tizimlaridan biri [request.js](http://requirejs.org/).
+- [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- Node.js server uchun yaratilgan modul tizimi.
+- [UMD](https://github.com/umdjs/umd) -- yana bitta modul tizimi, universal sifatida tavsiya etilgan, AMD va CommonJS bilan mos keladi.
 
-Now all these slowly become a part of history, but we still can find them in old scripts. The language-level module system appeared in the standard in 2015, gradually evolved since then, and is now supported by all major browsers and in Node.js.
+Endi bularning barchasi asta-sekin tarixning bir qismiga aylanadi, ammo biz ularni eski skriptlarda topishimiz mumkin. Til darajasidagi modul tizimi standartda 2015 yilda paydo bo'lgan va o'sha paytdan boshlab asta-sekin rivojlanib borgan va hozirda barcha yirik brauzerlar va Node.js tomonidan qo'llab quvatlanadi.
 
-## What is a module?
+## Modul nima?
 
-A module is just a file, a single script, as simple as that.
+Modul - bu shunchaki fayl, bitta skript, shu kabi sodda.
 
-Directives `export` and `import` allow to interchange functionality between modules:
+`export` va `import` direktivalari modullar o'rtasida funksiyalarni almashtirishga imkon beradi:
 
-- `export` keyword labels variables and functions that should be accessible from outside the file.
-- `import` allows to import functionality from other modules.
+- `export` Fayl tashqarisidan kirish mumkin bo'lgan kalit so'zlar o'zgaruvchanlar va funktsiyalarni belgilaydi.
+- `import` funksiyalarni boshqa modullardan import qilishga imkon beradi.
 
-For instance, if we have a file `sayHi.js` exporting a function:
+Masalan, funktsiyani eksport qiladigan `sayHi.js` faylimiz bo'lsa:
 
 ```js
 // 📁 sayHi.js
 export function sayHi(user) {
-  alert(`Hello, ${user}!`);
+  alert(`Salom, ${user}!`);
 }
 ```
 
-...Then another file may import and use it:
+...Keyin boshqa fayl uni import qilishi va ishlatishi mumkin:
 
 ```js
 // 📁 main.js
 import {sayHi} from './sayHi.js';
 
-alert(sayHi); // function...
-sayHi('John'); // Hello, John!
+alert(sayHi); // funktisya...
+sayHi('John'); // Salom, John!
 ```
 
-In this tutorial we concentrate on the language itself, but we use browser as the demo environment, so let's see how modules work in the browser.
+Ushbu qo'llanmada biz diqqatni tilning o'ziga qaratamiz, ammo biz demo muhit sifatida brauzerdan foydalanamiz, shuning uchun brauzerda modullarning qanday ishlashini ko'rib chiqamiz.
 
-To use modules, we must set the attribute `<script type="module">`, like this:
+Modullardan foydalanish uchun biz `<script type="module">` atributini quyidagicha o'rnatishimiz kerak:
 
 [codetabs src="say" height="140" current="index.html"]
 
-The browser automatically fetches and evaluates imports, then runs the script.
+Brauzer avtomatik ravishda importni oladi va baholaydi, so'ngra skriptni bajaradi.
 
-## Core module features
+## Asosiy modul xususiyatlari
 
-What's different in modules, compared to "regular" scripts?
+"Oddiy" skriptlar bilan taqqoslaganda modullar bilan qanday farq bor?
 
-There are core features, valid both for browser and server-side JavaScript.
+Brauzerda ham, server tomonida ham JavaScript uchun amal qiladigan asosiy xususiyatlar mavjud.
 
-### Always "use strict"
+### Har doim "use strict"
 
-Modules always `use strict`. E.g. assigning to an undeclared variable will give an error.
+Modullar doimo `use strict` dan foydalanadilar. Masalan, e'lon qilinmagan o'zgaruvchanga tayinlash xatoga yo'l qo'yadi.
 
 ```html run
 <script type="module">
-  a = 5; // error
+  a = 5; // xato
 </script>
 ```
 
-Here we can see it in the browser, but the same is true for any module.
+Bu yerda biz uni brauzerda ko'rishimiz mumkin, ammo har qanday modul uchun ham xuddi shunday ishlaydi.
 
-### Module-level scope
+### Maxsus o'zgaruvchan ko'lam
 
-Each module has its own top-level scope. In other words, top-level variables and functions from a module are not seen in other scripts.
+Har bir modul o'zining yuqori darajadagi doirasiga ega. Boshqacha aytganda, moduldan yuqori darajadagi o'zgaruvchanlar va funktsiyalar boshqa skriptlarda ko'rinmaydi.
 
-In the example below, two scripts are imported, and `hello.js` tries to use `user` variable declared in `user.js`, and fails:
+Quyidagi misolda ikkita skript import qilingan va `hello.js` `user.js` da e'lon qilingan `user` o'zgaruvchanidan foydalanishga harakat qiladi va bajarilmaydi:
 
 [codetabs src="scopes" height="140" current="index.html"]
 
-Modules are expected to `export` what they want to be accessible from outside and `import` what they need.
+Modullar tashqaridan kirishni xohlagan narsalarini `export` qilishlari va kerakli narsalarini `import` qilishlari kutilmoqda.
 
-So we should import `user.js` directly into `hello.js` instead of `index.html`.
+Shuning uchun biz `user.js` ni `index.html` o'rniga to'g'ridan-to'g'ri `hello.js` ga import qilishimiz kerak.
 
-That's the correct variant:
+Bu to'g'ri variant:
 
 [codetabs src="scopes-working" height="140" current="hello.js"]
 
-In the browser, independant top-level scope also exists for each `<script type="module">`:
+Brauzerda har bir `<script type="module">` uchun mustaqil yuqori darajadagi ko'lam mavjud:
 
 ```html run
 <script type="module">
-  // The variable is only visible in this module script
+  // O'zgaruvchan faqat ushbu modul skriptida ko'rinadi
   let user = "John";
 </script>
 
@@ -101,36 +101,36 @@ In the browser, independant top-level scope also exists for each `<script type="
 </script>
 ```
 
-If we really need to make a "global" in-browser variable, we can explicitly assign it to `window` and access as `window.user`. But that's an exception requiring a good reason.
+Agar biz chindan ham "global" brauzer ichida o'zgaruvchanni yaratishimiz kerak bo'lsa, uni `window` ga aniq belgilashimiz va `window.user` sifatida kirishimiz mumkin. Ammo bu yaxshi sababni talab qiladigan istisno.
 
-### A module code is evaluated only the first time when imported
+### Import qilinganida modul kodi faqat birinchi marta baholanadi
 
-If the same module is imported into multiple other places, its code is executed only the first time, then exports are given to all importers.
+Agar bir xil modul boshqa bir qancha joylarga import qilingan bo'lsa, uning kodi faqat birinchi marta bajariladi, keyin eksport barcha importerlarga beriladi.
 
-That has important consequences. Let's see that on examples.
+Bu muhim oqibatlarga olib keladi. Keling, buni misollarda ko'rib chiqaylik.
 
-First, if executing a module code brings side-effects, like showing a message, then importing it multiple times will trigger it only once -- the first time:
+Birinchidan, agar modul kodini bajarish xabarni ko'rsatish kabi nojo'ya ta'sirlarni keltirib chiqarsa, uni bir necha marta import qilish uni faqat bir marta bajaradi, birinchi marta:
 
 ```js
 // 📁 alert.js
-alert("Module is evaluated!");
+alert("Modul baholandi!");
 ```
 
 ```js
-// Import the same module from different files
+// Xuddi shu modulni turli xil fayllardan import qiling
 
 // 📁 1.js
-import `./alert.js`; // Module is evaluated!
+import `./alert.js`; // Modul baholandi!
 
 // 📁 2.js
-import `./alert.js`; // (nothing)
+import `./alert.js`; // (hech narsa)
 ```
 
-In practice, top-level module code is mostly used for initialization. We create data structures, pre-fill them, and if we want something to be reusable -- export it.
+Amalda, yuqori darajadagi modul kodi asosan ishga tushirish uchun ishlatiladi. Biz ma'lumotlar tuzilmalarini yaratamiz, ularni oldindan to'ldiramiz va agar biror narsa qayta ishlatilishini istasak - uni eksport qilamiz.
 
-Now, a more advanced example.
+Endi yanada rivojlangan misol.
 
-Let's say, a module exports an object:
+Aytaylik, modul obyektni eksport qiladi:
 
 ```js
 // 📁 admin.js
@@ -139,9 +139,9 @@ export let admin = {
 };
 ```
 
-If this module is imported from multiple files, the module is only evaluated the first time, `admin` object is created, and then passed to all further importers.
+Agar ushbu modul bir nechta fayllardan import qilingan bo'lsa, modul faqat birinchi marta baholanadi, `admin` obyekti yaratiladi va keyinchalik barcha boshqa import qiluvchilarga beriladi.
 
-All importers get exactly the one and only `admin` object:
+Barcha importchilar aynan bitta `admin` obyektini oladi:
 
 ```js
 // 📁 1.js
@@ -153,27 +153,27 @@ import {admin} from './admin.js';
 alert(admin.name); // Pete
 
 *!*
-// Both 1.js and 2.js imported the same object
-// Changes made in 1.js are visible in 2.js
+// 1.js va 2.js ikkalasi ham bitta obyektni import qildilar
+// 1.js-da kiritilgan o'zgarishlar 2.js-da ko'rinadi
 */!*
 ```
 
-So, let's reiterate -- the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other modules will see that .
+Shunday qilib, yana takrorlaymiz -- modul faqat bir marta bajariladi. Eksportlar yaratiladi, so'ngra ular importchilar o'rtasida taqsimlanadi, shuning uchun agar biror narsa `admin` obyektini o'zgartirsa, boshqa modullar buni ko'rishadi.
 
-Such behavior is great for modules that require configuration. We can set required properties on the first import, and then in further imports it's ready.
+Bunday xatti-harakatlar konfiguratsiyani talab qiladigan modullar uchun juda yaxshi. Birinchi importda kerakli xususiyatlarni o'rnatishimiz mumkin, keyin esa keyingi importda u tayyor bo'ladi.
 
-For instance, `admin.js` module may provide certain functionality, but expect the credentials to come into the `admin` object from outside:
+Masalan, `admin.js` moduli ma'lum funktsiyalarni taqdim etishi mumkin, ammo hisobga olish ma'lumotlari `admin` obyektiga tashqaridan kirishini kutadi:
 
 ```js
 // 📁 admin.js
 export let admin = { };
 
 export function sayHi() {
-  alert(`Ready to serve, ${admin.name}!`);
+  alert(`Xizmat qilishga tayyor, ${admin.name}!`);
 }
 ```
 
-Now, in `init.js`, the first script of our app, we set `admin.name`. Then everyone will see it, including calls made from inside `admin.js` itself:
+Endi dasturimizning birinchi skripti bo'lgan `init.js` da biz `admin.name` ni o'rnatdik. Keyin hamma buni ko'radi, shu jumladan `admin.js` ning o'zi tomonidan qilingan chaqiruvlarni:
 
 ```js
 // 📁 init.js
@@ -187,26 +187,26 @@ import {admin, sayHi} from './admin.js';
 
 alert(admin.name); // *!*Pete*/!*
 
-sayHi(); // Ready to serve, *!*Pete*/!*!
+sayHi(); // Xizmat qilishga tayyor, *!*Pete*/!*!
 ```
 
 ### import.meta
 
-The object `import.meta` contains the information about the current module.
+`import.meta` obyekti joriy modul haqidagi ma'lumotlarni o'z ichiga oladi.
 
-Its content depends on the environment. In the browser, it contains the url of the script, or a current webpage url if inside HTML:
+Uning tarkibi atrof-muhitga bog'liq. Brauzerda u skriptning URL manzilini yoki HTML ichida mavjud veb-sahifaning URL-ini o'z ichiga oladi:
 
 ```html run height=0
 <script type="module">
-  alert(import.meta.url); // script url (url of the html page for an inline script)
+  alert(import.meta.url); // skript url (ichki skript uchun HTML sahifasining url)
 </script>
 ```
 
-### Top-level "this" is undefined
+### Yuqori darajadagi "this" aniqlanmagan
 
-That's kind of a minor feature, but for completeness we should mention it.
+Bu kichik xususiyatning bir turi, ammo to'liqligi uchun buni eslatib o'tishimiz kerak.
 
-In a module, top-level `this` is undefined, as opposed to a global object in non-module scripts:
+Modulda yuqori darajadagi `this`, modul bo'lmagan skriptlardagi global obyektdan farqli o'laroq, u aniqlanmagan:
 
 ```html run height=0
 <script>
@@ -218,62 +218,62 @@ In a module, top-level `this` is undefined, as opposed to a global object in non
 </script>
 ```
 
-## Browser-specific features
+## Brauzerga xos xususiyatlar
 
-There are also several browser-specific differences of scripts with `type="module"` compared to regular ones.
+Brauzerga xos bo'lgan `type="module"` skriptlarining bir nechta farqlari mavjud.
 
-You may want skip those for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+Agar siz birinchi marta o'qiyotgan bo'lsangiz yoki JavaScript-ni brauzerda ishlatmasangiz, ularni hozircha o'tkazib yuborishingiz mumkin.
 
-### Module scripts are deferred
+### Modul skriptlari keyinga qoldiriladi
 
-Module scripts are *always* deferred, same effect as `defer` attribute (described in the chapter [](info:script-async-defer)), for both external and inline scripts.
+Modul skriptlari *har doim* keyinga qoldiriladi, tashqi va ichki satrlar uchun `defer` atributi ([](info:script-async-defer) bobda tasvirlangan) bir xil ta'sirga ega.
 
-In other words:
-- external module scripts `<script type="module" src="...">` don't block HTML processing.
-- module scripts wait until the HTML document is fully ready.
-- relative order is maintained: scripts that go first in the document, execute first.
+Boshqa so'zlar bilan aytganda:
+- tashqi modul skriptlari `<script type="module" src="...">` HTML ishlov berishni bloklamang.
+- modul skriptlari HTML hujjat to'liq tayyor bo'lguncha kutib turadi.
+- nisbiy tartib saqlanib qoladi: hujjatda birinchi bo'lib turgan skriptlar birinchi bajariladi.
 
-As a side-effect, module scripts always see HTML elements below them.
+Yon effekt sifatida modul skriptlari doimo HTML ostidagi elementlarni ko'radi.
 
-For instance:
+Masalan:
 
 ```html run
 <script type="module">
 *!*
-  alert(typeof button); // object: the script can 'see' the button below
+  alert(typeof button); // object: skript quyidagi tugmani "ko'rishi" mumkin
 */!*
-  // as modules are deferred, the script runs after the whole page is loaded
+  // modullar keyinga qoldirilishi uchun, skript butun sahifa yuklangandan so'ng ishlaydi
 </script>
 
 <script>
 *!*
   alert(typeof button); // Error: button is undefined, the script can't see elements below
 */!*
-  // regular scripts run immediately, before the rest of the page is processed
+  // muntazam skriptlar darhol ishlaydi, sahifaning qolgan qismi qayta ishlanmasdan oldin
 </script>
 
 <button id="button">Button</button>
 ```
 
-Please note: the second script actually works before the first! So we'll see `undefined` first, and then `object`.
+Iltimos, diqqat qiling: ikkinchi skript aslida birinchisidan oldin ishlaydi! Shunday qilib, avval `undefined` ni, keyin esa `object` ko'ramiz.
 
-That's because modules are deferred, so way wait for the document to be processed. The regular scripts runs immediately, so we saw its output first.
+Buning sababi, modullarning keyinga qoldirilishi, shuning uchun hujjatning ishlashini kuting. Oddiy skriptlar darhol ishlaydi, shuning uchun birinchi navbatda uning chiqishini ko'rdik.
 
-When using modules, we should be aware that HTML-document can show up before the JavaScript application is ready. Some functionality may not work yet. We should put transparent overlays or "loading indicators", or otherwise ensure that the visitor won't be confused because of it.
+Modullardan foydalanganda HTML-hujjat JavaScript dasturi tayyor bo'lguncha paydo bo'lishi mumkinligini bilishimiz kerak. Ba'zi funktsiyalar hali ishlamasligi mumkin. Biz shaffof qoplamalar yoki "yuklash ko'rsatkichlari" ni qo'yishimiz kerak, yoki boshqa sabablarga ko'ra tashrif buyuruvchilar chalkashib ketmasligini ta'minlashimiz kerak.
 
-### Async works on inline scripts
+### Async ichki skriptlarda ishlaydi
 
-Async attribute `<script async type="module">` is allowed on both inline and external scripts. Async scripts run immediately when imported modules are processed, independantly of other scripts or the HTML document.
+Async atributiga `<script async type="module">` ichki va tashqi skriptlarda ruxsat beriladi. Async skriptlari import qilingan modullarni qayta ishlashda darhol ishlaydi, boshqa skriptlardan yoki HTML-hujjatdan mustaqil ravishda.
 
-For example, the script below has `async`, so it doesn't wait for anyone.
+Masalan, quyidagi skriptda `async` mavjud, shuning uchun u hech kimni kutmaydi.
 
-It performs the import (fetches `./analytics.js`) and runs when ready, even if HTML document is not finished yet, or if other scripts are still pending.
+U importni amalga oshiradi (`./analytics.js` olib keladi) va tayyor bo'lganda ishlaydi, hattoki HTML hujjati hali tugallanmagan bo'lsa yoki boshqa skriptlar hali kutilayotgan bo'lsa ham.
 
-That's good for functionality that doesn't depend on anything, like counters, ads, document-level event listeners.
+Bu hisoblagichlar, e'lonlar, hujjatlar darajasidagi tadbirlarni tinglovchilar kabi hech narsaga bog'liq bo'lmagan funksionallik uchun yaxshi.
 
 ```html
-<!-- all dependencies are fetched (analytics.js), and the script runs -->
-<!-- doesn't wait for the document or other <script> tags -->
+<!-- barcha bog'liqliklar olinadi (analytics.js) va skript ishlaydi -->
+<!-- hujjat yoki boshqa <script> teglarini kutmaydi -->
 <script *!*async*/!* type="module">
   import {counter} from './analytics.js';
 
@@ -281,95 +281,95 @@ That's good for functionality that doesn't depend on anything, like counters, ad
 </script>
 ```
 
-### External scripts
+### Tashqi skriptlar
 
-There are two notable differences of external module scripts:
+Tashqi modul skriptlarining ikkita sezilarli farqlari mavjud:
 
-1. External scripts with same `src` run only once:
+1. Xuddi shu `src` tashqi skriptlar faqat bir marta ishlaydi:
     ```html
-    <!-- the script my.js is fetched and executed only once -->
+    <!-- my.js skripti faqat bir marta olinadi va bajariladi -->
     <script type="module" src="my.js"></script>
     <script type="module" src="my.js"></script>
     ```
 
-2. External scripts that are fetched from another domain require [CORS](mdn:Web/HTTP/CORS) headers. In other words, if a module script is fetched from another domain, the remote server must supply a header `Access-Control-Allow-Origin: *` (may use fetching domain instead of `*`) to indicate that the fetch is allowed.
+2. Boshqa domendan olinadigan tashqi skriptlar [CORS](mdn:Web/HTTP/CORS) sarlavhalarini talab qiladi. Boshqacha qilib aytadigan bo'lsak, agar boshqa domendan modul skripti olinsa, masofaviy server   `Access-Control-Allow-Origin: *` sarlavhasini taqdim qilishi kerak (`*` o'rniga domenni olib kelishi mumkin). .
     ```html
-    <!-- another-site.com must supply Access-Control-Allow-Origin -->
-    <!-- otherwise, the script won't execute -->
+    <!-- another-site.com veb-saytini etkazib berishi kerak Access-Control-Allow-Origin -->
+    <!-- aks holda, skript bajarilmaydi -->
     <script type="module" src="*!*http://another-site.com/their.js*/!*"></script>
     ```
 
-    That ensures better security by default.
+    Bu sukut bo'yicha xavfsizlikni yaxshiroq ta'minlaydi.
 
-### No bare modules allowed
+### "Yalang'och" modullarga ruxsat berilmaydi
 
-In the browser, in scripts (not in HTML), `import` must get either a relative or absolute URL. So-called "bare" modules, without a path, are not allowed.
+Brauzerda skriptlarda (HTML-da emas) `import` nisbiy yoki mutlaq URLni olishi kerak. Yo'lsiz "yalang'och" modullarga ruxsat berilmaydi.
 
-For instance, this `import` is invalid:
+Masalan, ushbu `import` yaroqsiz:
 ```js
-import {sayHi} from 'sayHi'; // Error, "bare" module
-// must be './sayHi.js' or wherever the module is
+import {sayHi} from 'sayHi'; // Xato, "yalang'och" modul
+// './sayHi.js' bo'lishi kerak
 ```
 
-Certain environments, like Node.js or bundle tools allow bare modules, as they have own ways for finding modules and hooks to fine-tune them. But browsers do not support bare modules yet.
+Node.js yoki tug'un vositalari kabi ba'zi bir muhitlar yalang'och modullarga ruxsat beradi, chunki ularda modullarni topish usullari va ularni aniq sozlash uchun ilgaklar mavjud. Ammo brauzerlar hali yalang'och modullarni qo'llab-quvvatlamaydi.
 
-### Compatibility, "nomodule"
+### Moslik, "nomodule"
 
-Old browsers do not understand `type="module"`. Scripts of the unknown type are just ignored. For them, it's possible to provide a fallback using `nomodule` attribute:
+Eski brauzerlar `type="module"` ni tushunmaydilar. Noma'lum turdagi skriptlar shunchaki e'tiborsiz qoldiriladi. Ular uchun `nomodule` atributidan foydalanib, qaytarib berishni ta'minlash mumkin:
 
 ```html run
 <script type="module">
-  alert("Runs in modern browsers");
+  alert("Zamonaviy brauzerlarda ishlaydi");
 </script>
 
 <script nomodule>
-  alert("Modern browsers know both type=module and nomodule, so skip this")
-  alert("Old browsers ignore script with unknown type=module, but execute this.");
+  alert("Zamonaviy brauzerlar type=module va nomodule ikkalasini ham bilishadi, shuning uchun buni o'tkazib yuboring")
+  alert("Eski brauzerlar type=module noma'lum bo'lgan skriptni e'tiborsiz qoldiradi, lekin buni bajaradi.");
 </script>
 ```
 
-If we use bundle tools, then as modules are bundled together, their `import/export` statements are replaced by special bundler calls, so the resulting build does not require `type="module"`, and we can put it into a regular script:
+Agar biz to'plam vositalaridan foydalansak, unda modullar birlashtirilganligi sababli, ularning `import/export` so'zlari maxsus paketli chaqiruvlar bilan almashtiriladi, shuning uchun hosil bo'ladigan qurilish `type="module"` ni talab qilmaydi va biz uni odatiy skriptga keltira olamiz:
 
 ```html
-<!-- Assuming we got bundle.js from a tool like Webpack -->
+<!-- Bundle.js-ni Webpack kabi vositadan olganmiz deb taxmin qilamiz-->
 <script src="bundle.js"></script>
 ```
 
-## Build tools
+## O'rnatish vositalari
 
-In real-life, browser modules are rarely used in their "raw" form. Usually, we bundle them together with a special tool such as [Webpack](https://webpack.js.org/) and deploy to the production server.
+Haqiqiy hayotda brauzer modullari kamdan-kam hollarda "xom" shaklida qo'llaniladi. Odatda, biz ularni [Webpack](https://webpack.js.org/) kabi maxsus vosita bilan birlashtiramiz va ishlab chiqarish serveriga joylashtiramiz.
 
-One of the benefits of using bundlers -- they give more control over how modules are resolved, allowing bare modules and much more, like CSS/HTML modules.
+Paketlardan foydalanishning afzalliklaridan biri bu CSS/HTML modullari singari yalang'och modullarga va boshqalarga imkon beradigan modullarning yechimi ustidan ko'proq nazorat qilishdir.
 
-Build tools do the following:
+Qurilish vositalari quyidagilarni bajaradi:
 
-1. Take a "main" module, the one intended to be put in `<script type="module">` in HTML.
-2. Analyze its dependencies: imports and then imports of imports etc.
-3. Build a single file with all modules (or multiple files, that's tunable), replacing native `import` calls with bundler functions, so that it works. "Special" module types like HTML/CSS modules are also supported.
-4. In the process, other transforms and optimizations may be applied:
-    - Unreachable code removed.
-    - Unused exports removed ("tree-shaking").
-    - Development-specific statements like `console` and `debugger` removed.
-    - Modern, bleeding-edge JavaScript syntax may be transformed to older one with similar functionality using [Babel](https://babeljs.io/).
-    - The resulting file is minified (spaces removed, variables replaced with shorter named etc).
+1. HTML-da `<script type="module">` ga joylashtirilishi kerak bo'lgan "asosiy" modulni oladi.
+2. Uning bog'liqligini tahlil qiladi: import va undan keyin import importi va boshqalar.
+3. Mahalliy `import` chaqiruvlarini to'plami funktsiyalari bilan almashtirib, barcha modullar (yoki sozlanishi mumkin bo'lgan bir nechta fayllar) bilan bitta fayl yaratadi. HTML/CSS modullari kabi "maxsus" modul turlari ham qo'llab-quvvatlanadi.
+4. Jarayonda boshqa transformatsiyalar va optimallashtirishlar qo'llanilishi mumkin:
+    - Qabul qilinmaydigan kod olib tashlandi.
+    - Foydalanilmagan eksport olib tashlandi ("tree-shaking").
+    - `console` va `debugger` kabi ishlab chiqishga oid so'zlar olib tashlandi.
+    - Zamonaviy, qon ketishining cheklangan JavaScript-ni sintaksisini [Babel](https://babeljs.io/) yordamida o'xshash funktsional imkoniyatga ega bo'lgan eskisiga aylantirish mumkin.
+    - Olingan fayl kichraytiriladi (bo'shliqlar olib tashlanadi, o'zgaruvchanlar qisqa nom bilan almashtiriladi va hokazo).
 
-That said, native modules are also usable. So we won't be using Webpack here: you can configure it later.
+Ya'ni, mahalliy modullardan ham foydalanish mumkin. Shuning uchun biz bu erda Webpack-dan foydalanmaymiz: uni keyinroq sozlashingiz mumkin.
 
-## Summary
+## Xulosa
 
-To summarize, the core concepts are:
+Xulosa qilib aytganda, asosiy tushunchalar:
 
-1. A module is a file. To make `import/export` work, browsers need `<script type="module">`, that implies several differences:
-    - Deferred by default.
-    - Async works on inline scripts.
-    - External scripts need CORS headers.
-    - Duplicate external scripts are ignored.
-2. Modules have their own, local top-level scope and interchange functionality via `import/export`.
-3. Modules always `use strict`.
-4. Module code is executed only once. Exports are created once and shared between importers.
+1. Modul - bu fayl. `import/export` ishini bajarish uchun brauzerlarda `<script type="module">` bo'lishi kerak, bu bir nechta farqlarni anglatadi:
+    - Sukut bo'yicha keyinga qoldirigan(deferred).
+    - Async ichki skriptlarda ishlaydi.
+    - Tashqi skriptlarga CORS sarlavhalari kerak.
+    - Ikki nusxadagi tashqi skriptlarga e'tibor berilmaydi.
+2. Modullar o'zlarining mahalliy darajadagi yuqori darajalariga va `import/export` orqali almashinuv funktsiyalariga ega.
+3. Modullar har doim `use strict` dan foydalanadi.
+4. Modul kodi faqat bir marta bajariladi. Eksport bir marta tuziladi va importchilar o'rtasida taqsimlanadi.
 
-So, generally, when we use modules, each module implements the functionality and exports it. Then we use `import` to directly import it where it's needed. Browser loads and evaluates the scripts automatically.
+Umuman olganda, modullardan foydalanganda har bir modul funksionallikni amalga oshiradi va uni eksport qiladi. Keyin uni kerakli joyga to'g'ridan-to'g'ri import qilish uchun `import` dan foydalanamiz. Brauzer skriptlarni avtomatik ravishda yuklaydi va baholaydi.
 
-In production, people often use bundlers such as [Webpack](https://webpack.js.org) to bundle modules together for performance and other reasons.
+Ishlab chiqarishda odamlar ko'pincha [Webpack](https://webpack.js.org) kabi to'plamlardan ishlash va boshqa sabablarga ko'ra modullarni birlashtirish uchun foydalanadilar.
 
-In the next chapter we'll see more examples of modules, and how things can be exported/imported.
+Keyingi bobda biz modullarning ko'proq namunalarini va qanday qilib eksport/import qilish mumkinligini ko'rib chiqamiz.

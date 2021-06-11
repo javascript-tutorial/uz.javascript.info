@@ -1,3 +1,3 @@
-The output is: `1`.
+Chiqish: `1`.
 
-The second call to `resolve` is ignored, because only the first call of `reject/resolve` is taken into account. Further calls are ignored.
+`resolve` uchun ikkinchi chaqiruv e'tiborsiz qoldiriladi, chunki faqat `reject/resolve` ning birinchi chaqiruvi hisobga olinadi. Boshqa chaqiruvlar hisobga olinmaydi.

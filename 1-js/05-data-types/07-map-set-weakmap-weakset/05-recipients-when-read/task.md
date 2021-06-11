@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Store read dates
+# O'qilgan sanalarni saqlang
 
-There's an array of messages as in the [previous task](info:task/recipients-read). The situation is similar.
+[Oldingi topshiriq](info:task/recipients-read) kabi bir xabarlar massivi mavjud. Vaziyat shunga o'xshash.
 
 ```js
 let messages = [
@@ -14,6 +14,6 @@ let messages = [
 ];
 ```
 
-The question now is: which data structure you'd suggest to store the information: "when the message was read?".
+Endi savol tug'iladi: "xabar qachon o'qilgan?" ma'lumotni saqlash uchun qaysi ma'lumotlar tuzilishini taklif qilasiz.
 
-In the previous task we only needed to store the "yes/no" fact. Now we need to store the date and it, once again, should disappear if the message is gone.
+Oldingi vazifada biz "ha/yo'q" faktini saqlashimiz kerak edi. Endi biz sanani saqlashimiz kerak va agar xabar yo'qolsa, yana ma'lumot yo'qoladi.

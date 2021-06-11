@@ -2,18 +2,18 @@ importance: 5
 
 ---
 
-# Check for emptiness
+# Bo'shliqni tekshiring
 
-Write the function `isEmpty(obj)` which returns `true` if the object has no properties, `false` otherwise.
+Ob'ektning xusisiyatlari bo'lmasa, `true`, aks holda `false` ni qaytaradigan `isEmpty(obj)` funktsiyasini yozing.
 
-Should work like that:
+Bunday ishlashi kerak:
 
 ```js
 let schedule = {};
 
 alert( isEmpty(schedule) ); // true
 
-schedule["8:30"] = "get up";
+schedule["8:30"] = "turmoq";
 
 alert( isEmpty(schedule) ); // false
 ```

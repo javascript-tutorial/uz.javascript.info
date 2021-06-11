@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Rewrite 'if' into '?'
+# 'If' ni '?' ga qayta yozing
 
-Rewrite this `if` using the ternary operator `'?'`:
+`If` ni ternariy operatori yordamida `'?'` qayta yozing:
 
 ```js
 if (a + b < 4) {
-  result = 'Below';
+  result = 'Quyida';
 } else {
-  result = 'Over';
+  result = 'Ustida';
 }
 ```
 

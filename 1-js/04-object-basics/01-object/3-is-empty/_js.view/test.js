@@ -1,9 +1,9 @@
 describe("isEmpty", function() {
-  it("returns true for an empty object", function() {
+  it("bo'sh ob'ekt uchun true qiymatini qaytaradi", function() {
     assert.isTrue(isEmpty({}));
   });
 
-  it("returns false if a property exists", function() {
+  it("xususiyat mavjud bo'lsa, false qiymatini qaytaradi", function() {
     assert.isFalse(isEmpty({
       anything: false
     }));

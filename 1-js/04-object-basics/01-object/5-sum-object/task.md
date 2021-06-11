@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Sum object properties
+# Ob'ektning yig'indisi
 
-We have an object storing salaries of our team:
+Bizning jamoamizning ish haqini saqlaydigan ob'ektimiz bor:
 
 ```js
 let salaries = {
@@ -14,6 +14,6 @@ let salaries = {
 }
 ```
 
-Write the code to sum all salaries and store in the variable `sum`. Should be `390` in the example above.
+Barcha ish haqlarini yig'indisi uchun kodni yozing va `sum` o'zgaruvchisida saqlang. Yuqoridagi misolda `390` bo'lishi kerak.
 
-If `salaries` is empty, then the result must be `0`.
+Agar `salary` bo'sh bo'lsa, unda natija `0` bo'lishi kerak.

@@ -1,22 +1,22 @@
 
-# Class basic syntax
+# Klass: asosiy sintaksis
 
-```quote author="Wikipedia"
-In object-oriented programming, a *class* is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions or methods).
+```quote author="Vikipediya"
+Obyektga yo'naltirilgan dasturlashda klass - bu obyektlarni yaratish uchun kengaytiriladigan kod shabloni bo'lib, ularda dastlabki qadriyatlarni (xususiyatlarni) va xatti-harakatlarni(usullar) amalga oshirishni belgilaydi.
 ```
 
-In practice, we often need to create many objects of the same kind, like users, or goods or whatever.
+Amalda, biz ko'pincha foydalanuvchilar yoki tovarlar yoki boshqa narsalar kabi bir xil turdagi ko'plab obyektlarni yaratishimiz kerak.
 
-As we already know from the chapter <info:constructor-new>, `new function` can help with that.
+<info:constructor-new> bobidan allaqachon bilganimizdek, `new function` bunga yordam beradi.
 
-But in the modern JavaScript, there's a more advanced "class" construct, that introduces great new features which are useful for object-oriented programming.
+Ammo zamonaviy JavaScript-da obyektga yo'naltirilgan dasturlash uchun foydali bo'lgan juda yangi xususiyatlarni taqdim etadigan yanada rivojlangan "klass" tuzilishi mavjud.
 
-## The "class" syntax
+## "Klass" sintaksisi
 
-The basic syntax is:
+Asosiy sintaksis:
 ```js
 class MyClass {
-  // class methods
+  // klass ususllari
   constructor() { ... }
   method1() { ... }
   method2() { ... }
@@ -25,11 +25,11 @@ class MyClass {
 }
 ```
 
-Then `new MyClass()` creates a new object with all the listed methods.
+Keyin `new MyClass()` ro'yxatdagi barcha usullar bilan yangi obyekt yaratadi.
 
-The `constructor()` method is called automatically by `new`, so we can initialize the object there.
+`constructor()` usuli avtomatik ravishda `new` tomonidan chaqiriladi, shuning uchun biz u yerda obyektni ishga tushirishimiz mumkin.
 
-For example:
+Masalan:
 
 ```js run
 class User {
@@ -44,33 +44,33 @@ class User {
 
 }
 
-// Usage:
+// Foydalanish:
 let user = new User("John");
 user.sayHi();
 ```
 
-When `new User("John")` is called:
-1. A new object is created.
-2. The `constructor` runs with the given argument and assigns `this.name` to it.
+`new User("John")` chaqirilganda:
+1. Yangi obyekt yaratiladi.
+2. `constructor` berilgan argument bilan ishlaydi va unga `this.name` ni tayinlaydi.
 
-...Then we can call methods, such as `user.sayHi`.
+...Keyin biz `"user.sayHi"` kabi usullarni chaqira olamiz.
 
 
-```warn header="No comma between class methods"
-A common pitfall for novice developers is to put a comma between class methods, which would result in a syntax error.
+```warn header="Klass usullari o'rtasida vergul yo'q"
+Ajam dasturchilar uchun odatiy tuzoq - bu sinteksis xatolariga olib keladigan klass usullari orasida vergul qo'yishdir.
 
-The notation here is not to be confused with object literals. Within the class, no commas are required.
+Bu yerdagi yozuvlarni obyektlar soni bilan aralashtirish mumkin emas. Klass davomida vergul talab qilinmaydi.
 ```
 
-## What is a class?
+## Klass nima?
 
-So, what exactly is a `class`? That's not an entirely  new language-level entity, as one might think.
+Xo'sh, aniq `class` nima? Bu o'ylashi mumkin bo'lgan til darajasidagi mutlaqo yangi shaxs emas.
 
-Let's unveil any magic and see what a class really is. That'll help in understanding many complex aspects.
+Keling, barcha sehrni yo'qotaylik va aslida klass nima ekanligini ko'rib chiqaylik. Bu ko'plab murakkab jihatlarni tushunishda yordam beradi.
 
-In JavaScript, a class is a kind of a function.
+JavaScript-da klass funktsiyalarning bir turi.
 
-Here, take a look:
+Mana, qarang:
 
 ```js run
 class User {
@@ -78,24 +78,24 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// proof: User is a function
+// isbot: User bu funktsiya
 *!*
 alert(typeof User); // function
 */!*
 ```
 
-What `class User {...}` construct really does is:
-1. Creates a function named `User`, that becomes the result of the class declaration.
-    - The function code is taken from the `constructor` method (assumed empty if we don't write such method).
-3. Stores all methods, such as `sayHi`, in `User.prototype`.
+`class User {...}` tuzilishi aslida nima qiladi:
+1. `User` nomli funktsiyani yaratadi, bu klass deklaratsiyaning natijasi bo'ladi.
+    - Funktsiya kodi `constructor` usulidan olingan (agar biz bunday usulni yozmasak, bo'sh deb hisoblanadi).
+3. `sayHi` kabi barcha usullarni `User.prototype` da saqlaydi.
 
-Afterwards, for new objects, when we call a method, it's taken from the prototype, just as  described in the chapter <info:function-prototype>. So `new User` object has access to class methods.
+Keyinchalik, yangi obyektlar uchun usulni chaqirganda, prototipdan olinadi, xuddi <info:function-prototype> bobida tasvirlanganidek. Shunday qilib, `new User` obyekti klass usullariga kirish huquqiga ega.
 
-We can illustrate the result of `class User` as:
+Biz `class User` natijasini quyidagicha tasvirlashimiz mumkin:
 
 ![](class-user.svg)
 
-Here's the code to introspect it:
+Buni ko'rib chiqish uchun kod:
 
 
 ```js run
@@ -104,50 +104,50 @@ class User {
   sayHi() { alert(this.name); }
 }
 
-// class is a function
+// klass bu funktsiya
 alert(typeof User); // function
 
-// ...or, more precisely, the constructor method
+// ...yoki, aniqrog'i, konstruktor usuli
 alert(User === User.prototype.constructor); // true
 
-// The methods are in User.prototype, e.g:
+// usullar User.prototype-da:
 alert(User.prototype.sayHi); // alert(this.name);
 
-// there are exactly two methods in the prototype
+// prototipda to'liq ikkita usul mavjud
 alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 ```
 
-## Not just a syntax sugar
+## Faqat sintaksis shakar emas
 
-Sometimes people say that `class` is a "syntax sugar" in JavaScript, because we could actually declare the same without `class` keyword at all:
+Ba'zan odamlar `class` JavaScript-dagi "sintaksis shakar" deb aytishadi, chunki biz aslida `class` kalit so'zisiz bir xil narsani e'lon qilishimiz mumkin edi:
 
 ```js run
-// rewriting class User in pure functions
+// sof funktsiyalarda class User qayta yozish
 
-// 1. Create constructor function
+// 1. Konstruktor funktsiyasini yarating
 function User(name) {
   this.name = name;
 }
-// any function prototype has constructor property by default,
-// so we don't need to create it
+// har qanday funktsiya prototipi sukut bo'yicha konstruktor xususiyatiga ega,
+// shuning uchun biz uni yaratishga hojat yo'q
 
-// 2. Add the method to prototype
+// 2. Usulni prototipga qo'shing
 User.prototype.sayHi = function() {
   alert(this.name);
 };
 
-// Usage:
+// Foydalanish:
 let user = new User("John");
 user.sayHi();
 ```
 
-The result of this definition is about the same. So, there are indeed reasons why `class` can be considered a syntax sugar to define a constructor together with its prototype methods.
+Ushbu ta'rifning natijasi taxminan bir xil. Shunday qilib, konstruktorni prototip usullari bilan birgalikda aniqlash uchun `class` sintaksis shakar deb hisoblanishining haqiqatan ham sabablari bor.
 
-Although, there are important differences.
+Garchi, muhim farqlar mavjud.
 
-1. First, a function created by `class` is labelled by a special internal property `[[FunctionKind]]:"classConstructor"`. So it's not entirely the same as creating it manually.
+1. Birinchidan, `class` tomonidan yaratilgan funktsiya maxsus ichki xususiyat bilan belgilanadi `[[FunctionKind]]:"classConstructor"`. Shunday qilib, uni qo'lda yaratish bilan bir xil emas.
 
-    Unlike a regular function, a class constructor can't be called without `new`:
+    Oddiy funktsiyadan farqli o'laroq, klass konstruktorini `new` holda chaqirish mumkin emas:
 
     ```js run
     class User {
@@ -158,7 +158,7 @@ Although, there are important differences.
     User(); // Error: Class constructor User cannot be invoked without 'new'
     ```
 
-    Also, a string representation of a class constructor in most JavaScript engines starts with the "class..."
+    Shuningdek, aksariyat JavaScript interpretatorlarida klass konstruktorining matn vakilliki `class ...` bilan boshlanadi.
 
     ```js run
     class User {
@@ -168,54 +168,54 @@ Although, there are important differences.
     alert(User); // class User { ... }
     ```
 
-2. Class methods are non-enumerable
-    A class definition sets `enumerable` flag to `false` for all methods in the `"prototype"`.
+2. Klass usullarini sanab bo'lmaydi
+    Klass ta'rifi `"prototype"` dagi barcha usullar uchun `sanab o'tiladigan` bayroqni `false` ga o'rnatadi.
 
-    That's good, because if we `for..in` over an object, we usually don't want its class methods.
+    Bu yaxshi, chunki agar biz obyekt uchun `for..in` ishlatsak, biz odatda uning klass usullarini xohlamaymiz.
 
-3. Classes always `use strict`
-    All code inside the class construct is automatically in strict mode.
+3. Sinflar doimo `use strict` dan foydalanadi
+    Klass konstruktsiyasidagi barcha kodlar avtomatik ravishda qat'iy rejimda bo'ladi.
 
 
-Also, in addition to its basic operation, the `class` syntax brings many other features with it which we'll explore later.
+Bundan tashqari, `class` sintaksisining asosiy ishlashidan tashqari, biz u bilan birga keyinchalik o'rganib chiqadigan ko'plab boshqa xususiyatlarni ham o'z ichiga oladi.
 
-## Class Expression
+## Klass ifodasi
 
-Just like functions, classes can be defined inside another expression, passed around, returned, assigned etc.
+Xuddi funktsiyalar singari, klasslarni boshqa ifoda ichida aniqlash mumkin, ularni o'tkazish, qaytarish, tayinlash va h.k.
 
-Here's an example of a class expression:
+Mana, klass iborasiga misol:
 
 ```js
 let User = class {
   sayHi() {
-    alert("Hello");
+    alert("Salom");
   }
 };
 ```
 
-Similar to Named Function Expressions, class expressions may or may not have a name.
+Nomlangan funktsiya iboralariga o'xshash, klass iboralarining nomi bo'lishi yoki bo'lmasligi mumkin.
 
-If a class expression has a name, it's visible inside the class only:
+Agar klass ifodasini nomi bo'lsa, u faqat klass ichida ko'rinadi:
 
 ```js run
-// "Named Class Expression" (alas, no such term, but that's what's going on)
+// "Named Class Expression" (alas, bunday atama yo'q, lekin bu nima bo'layotgani)
 let User = class *!*MyClass*/!* {
   sayHi() {
-    alert(MyClass); // MyClass is visible only inside the class
+    alert(MyClass); // MyClass faqat klass ichida ko'rinadi
   }
 };
 
-new User().sayHi(); // works, shows MyClass definition
+new User().sayHi(); // ishlaydi, MyClass ta'rifini ko'rsatadi
 
-alert(MyClass); // error, MyClass not visible outside of the class
+alert(MyClass); // xato, MyClass klassdan tashqarida ko'rinmaydi
 ```
 
 
-We can even make classes dynamically "on-demand", like this:
+Hatto klasslar ham dinamik ravishda "talabga binoan" o'tkazishimiz mumkin, masalan:
 
 ```js run
 function makeClass(phrase) {
-  // declare a class and return it
+  // klass e'lon qiling va uni qaytaring
   return class {
     sayHi() {
       alert(phrase);
@@ -223,24 +223,24 @@ function makeClass(phrase) {
   };
 }
 
-// Create a new class
-let User = makeClass("Hello");
+// Yangi klass yarating
+let User = makeClass("Salom");
 
-new User().sayHi(); // Hello
+new User().sayHi(); // Salom
 ```
 
 
-## Getters/setters, other shorthands
+## Getters/setters, boshqa qisqartmalar
 
-Classes also include getters/setters, generators, computed properties etc.
+Shuningdek, klasslarga getter / setters, generatorlar, hisoblash xususiyatlari va boshqalar kiradi.
 
-Here's an example for `user.name` implemented using `get/set`:
+`get/set` yordamida amalga oshirilgan `user.name` uchun misol:
 
 ```js run
 class User {
 
   constructor(name) {
-    // invokes the setter
+    // setter ni chaqiradi
     this._name = name;
   }
 
@@ -254,7 +254,7 @@ class User {
   set name(value) {
 */!*
     if (value.length < 4) {
-      alert("Name is too short.");
+      alert("Ism juda qisqa.");
       return;
     }
     this._name = value;
@@ -265,10 +265,10 @@ class User {
 let user = new User("John");
 alert(user.name); // John
 
-user = new User(""); // Name too short.
+user = new User(""); // Ism juda qisqa.
 ```
 
-Internally, getters and setters are created on `User.prototype`, like this:
+Ichkarida, getter va setter-lar `User.prototype` da quyidagi kabi yaratilgan:
 
 ```js
 Object.defineProperties(User.prototype, {
@@ -283,14 +283,14 @@ Object.defineProperties(User.prototype, {
 });
 ```
 
-Here's an example with computed properties:
+Hisoblangan xususiyatlarga ega bo'lgan misol:
 
 ```js run
 function f() { return "sayHi"; }
 
 class User {
   [f()]() {
-    alert("Hello");
+    alert("Salom");
   }
 
 }
@@ -298,40 +298,40 @@ class User {
 new User().sayHi();
 ```
 
-For a generator method, similarly, prepend it with `*`.
+Generator usuli uchun, xuddi shunday, `*` bilan uni oldindan tayyorlang.
 
-## Class properties
+## Klass xususiyatlari
 
-```warn header="Old browsers may need a polyfill"
-Class-level properties are a recent addition to the language.
+```warn header="Eski brauzerlarda polifil kerak bo'lishi mumkin"
+Klass darajasidagi xususiyatlar tilga yaqinda qo'shilgan narsadir.
 ```
 
-In the example above, `User` only had methods. Let's add a property:
+Yuqoridagi misolda `User` da faqat usullar mavjud edi. Keling, xususiyat qo'shaylik:
 
 ```js run
 class User {
-  name = "Anonymous";
+  name = "Anonim";
 
   sayHi() {
-    alert(`Hello, ${this.name}!`);
+    alert(`Salom, ${this.name}!`);
   }
 }
 
 new User().sayHi();
 ```
 
-The property is not placed into `User.prototype`. Instead, it is created by `new`, separately for every object. So, the property will never be shared between different objects of the same class.
+Xususiyat `User.prototype` ga joylashtirilmagan. Buning o'rniga, u har bir obyekt uchun alohida, `new` tomonidan yaratiladi. Shunday qilib, xususiyat hech qachon bir klassning turli xil obyektlari o'rtasida taqsimlanmaydi.
 
 
-## Summary
+## Xulosa
 
-JavaScript provides many ways to create a class.
+JavaScript-da klass yaratishning ko'plab usullari mavjud.
 
-First, as per the general object-oriented terminology, a class is something that provides "object templates", allows to create same-structured objects.
+Birinchidan, umumiy obyektga yo'naltirilgan terminologiyaga ko'ra, klass "obyekt shablonlari" ni ta'minlaydigan, bir xil tuzilgan obyektlarni yaratishga imkon beradigan narsadir.
 
-When we say "a class", that doesn't necessary means the `class` keyword.
+"Class" deganda, bu har doim `class` kalit so'zini anglatmaydi.
 
-This is a class:
+Bu klass:
 
 ```js
 function User(name) {
@@ -341,9 +341,9 @@ function User(name) {
 }
 ```
 
-...But in most cases `class` keyword is used, as it provides great syntax and many additional features.
+...Ammo ko'p hollarda `class` kalit so'zidan foydalaniladi, chunki u ajoyib sintaksis va ko'plab qo'shimcha funktsiyalarni ta'minlaydi.
 
-The basic class syntax looks like this:
+Asosiy klass sintaksisi quyidagicha:
 
 ```js
 class MyClass {
@@ -363,6 +363,6 @@ class MyClass {
 }
 ```
 
-`MyClass` is technically a function, while methods are written to `MyClass.prototype`.
+`MyClass` texnik jihatdan funktsiyadir, metodlar esa `MyClass.prototype` ga yozilgan.
 
-In the next chapters we'll learn more about classes, including inheritance and other features.
+Keyingi boblarda biz kalitlar, jumladan meros va boshqa xususiyatlar haqida ko'proq bilib olamiz.

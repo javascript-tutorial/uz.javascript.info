@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Hello, object
+# Salom, ob'ekt
 
-Write the code, one line for each action:
+Kodni yozing, har bir amal uchun bitta satr:
 
-1. Create an empty object `user`.
-2. Add the property `name` with the value `John`.
-3. Add the property `surname` with the value `Smith`.
-4. Change the value of the `name` to `Pete`.
-5. Remove the property `name` from the object.
+1. Bo'sh ob'ekt yarating `user`.
+2. `John` qiymati bilan `name` xususiyatini qo'shing.
+3. `Smith` qiymati bilan `surname` xususiyatini qo'shing.
+4. `name` qiymatini `Pete` ga o'zgartiring.
+5. Ob'ektdan `name` xususiyatini olib tashlang.
 

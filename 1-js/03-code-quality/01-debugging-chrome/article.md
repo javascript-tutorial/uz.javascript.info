@@ -1,183 +1,183 @@
-# Debugging in Chrome
+# Chrome da koddagi nosozliklarni tuzatish
 
-Before writing more complex code, let's talk about debugging.
+Keyinchalik murakkab kodni yozishdan oldin, koddagi nosozliklar haqida gapiraylik.
 
-All modern browsers and most other environments support "debugging" -- a special UI in developer tools that makes finding and fixing errors much easier.
+Barcha zamonaviy brauzerlar va boshqa ko'pgina muhitlar "koddagi nosozliklarni tuzatish" ni qo'llab-quvvatlaydi -- ishlab chiquvchi vositalaridagi maxsus interfeys, bu xatolarni topish va tuzatishni ancha osonlashtiradi.
 
-We'll be using Chrome here, because it's probably the most feature-rich in this aspect.
+Biz bu erda Chrome-dan foydalanamiz, chunki u bu jihatlarga ko'ra eng boy xususiyatlarga ega.
 
-## The "sources" pane
+## "Manbalar" oynasi («Sources»)
 
-Your Chrome version may look a little bit different, but it still should be obvious what's there.
+Chrome versiyangiz biroz boshqacha ko'rinishi mumkin, ammo u yerda nima borligi aniq bo'lishi kerak.
 
-- Open the [example page](debugging/index.html) in Chrome.
-- Turn on developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
-- Select the `sources` pane.
+- Chrome-da [misol sahifasini](debugging/index.html) oching.
+- Dastruchi vositalarini oching `key:F12` (Mac: `key:Cmd+Opt+I`).
+- `manbalar` panelini tanlang.
 
-Here's what you should see if you are doing it for the first time:
+Agar buni birinchi marta qilsangiz, nimani ko'rishingiz kerak:
 
 ![](chrome-open-sources.svg)
 
-The toggler button <span class="devtools" style="background-position:-168px -76px"></span> opens the tab with files.
+Radio tugmasi <span class="devtools" style="background-position:-168px -76px"></span> fayllar ro'yxati bilan yorliqni ochadi.
 
-Let's click it and select `index.html` and then `hello.js` in the tree view. Here's what should show up:
+Keling, uni bosing va `index.html` ni tanlang va keyin daraxt ko'rinishida `hello.js` ni tanlang. Mana nimani ko'rsatishi kerak:
 
 ![](chrome-tabs.svg)
 
-Here we can see three zones:
+Bu yerda uchta zonani ko'rishimiz mumkin:
 
-1. The **Resources zone** lists HTML, JavaScript, CSS and other files, including images that are attached to the page. Chrome extensions may appear here too.
-2. The **Source zone** shows the source code.
-3. The **Information and control zone** is for debugging, we'll explore it soon.
+1. **Resurslar zonasi** HTML, JavaScript, CSS va boshqa fayllarni, shu jumladan sahifaga biriktirilgan rasmlarni ro'yxatlaydi. Chrome kengaytmalari bu yerda ham paydo bo'lishi mumkin.
+2. **Manba zonasi** manba kodini ko'rsatadi.
+3. **Axborot va boshqaruv zonasi** koddagi nosozliklarni tuzatish uchun mo'ljallangan, biz uni tez orada o'rganib chiqamiz.
 
-Now you could click the same toggler <span class="devtools" style="background-position:-200px -76px"></span> again to hide the resources list and give the code some space.
+Resurslar ro'yxatini yashirish va manba kodi uchun ekran maydonini bo'shatish uchun usha radio tugmasini bosing <span class="devtools" style="background-position:-200px -76px"></span>
 
-## Console
+## Konsol
 
-If we press `Esc`, then a console opens below. We can type commands there and press `key:Enter` to execute.
+Agar biz `Esc` tugmachasini bossak, u holda konsol quyida ochiladi. Biz u erga buyruqlar yozib, `key:Enter` tugma yordamida bajarishimiz mumkin.
 
-After a statement is executed, its result is shown below.
+Ifoda bajarilgandan so'ng uning natijasi quyida ko'rsatiladi.
 
-For example, here `1+2` results in `3`, and `hello("debugger")` returns nothing, so the result is `undefined`:
+Masalan, bu yerda `1+2` ning natijasi `3` ga teng, va `hello("debugger")` hech narsa qaytarmaydi, shuning uchun natijasi `undefined`:
 
 ![](chrome-sources-console.svg)
 
-## Breakpoints
+## To'xtash nuqtalari
 
-Let's examine what's going on within the code of the [example page](debugging/index.html). In `hello.js`, click at line number `4`. Yes, right on the `4` digit, not on the code.
+Keling, [misol sahifasi](debugging/index.html) kodida nimalar bo'layotganini ko'rib chiqaylik. `Hello.js` dagi `4` chi satrni bosing. Ha, kodda emas, balki `4` raqamni.
 
-Congratulations! You've set a breakpoint. Please also click on the number for line `8`.
+Tabriklaymiz! Siz to'xtash nuqtasini o'rnatdingiz. Iltimos, shuningdek, `8` satr raqamini bosing.
 
-It should look like this (blue is where you should click):
+Bu shunday ko'rinishi kerak (ko'k bu bosish kerak bo'lgan joy):
 
 ![](chrome-sources-breakpoint.svg)
 
-A *breakpoint* is a point of code where the debugger will automatically pause the JavaScript execution.
+*To'xtash nuqtasi* - bu koddagi nosozliklarni tuzatuvchi JavaScript-ni bajarilishini avtomatik ravishda to'xtatib turadigan kod nuqtasi.
 
-While the code is paused, we can examine current variables, execute commands in the console etc. In other words, we can debug it.
+Kod to'xtatib turilsa, biz mavjud o'zgaruvchanlarni tekshirib ko'rishimiz, konsolda buyruqlar bajarishimiz va h.k. Boshqacha qilib aytganda, koddagi nosozliklarni tuzatishimiz mumkin.
 
-We can always find a list of breakpoints in the right pane. That's useful when we have many breakpoints in various files. It allows us to:
-- Quickly jump to the breakpoint in the code (by clicking on it in the right pane).
-- Temporarily disable the breakpoint by unchecking it.
-- Remove the breakpoint by right-clicking and selecting Remove.
-- ...And so on.
+Biz har doim o'ng oynada to'xtash nuqtalarining ro'yxatini topishimiz mumkin. Bu turli xil fayllarda juda ko'p to'xtash nuqtalari mavjud bo'lganda foydalidir. Bu bizga quyidagilarga imkon beradi:
+- Koddagi to'xtash nuqtasiga tezda o'tish (o'ng oynada uni bosish orqali).
+- Tekshirish nuqtasini olib tashlab, uni o'chirib qo'yish.
+- Sichqonchaning o'ng tugmachasini bosib, remove(o'chirish)-ni tanlab, to'xtash nuqtasini olib tashlash.
+- ...Va hokazo.
 
-```smart header="Conditional breakpoints"
-*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression is truthy.
+```smart header="Shartli to'xtash nuqtalari"
+Satr raqamidagi *o'ng tugmachani* bosish *shartli* to'xtash nuqtasini yaratishga imkon beradi. Bu faqat berilgan ifoda haqiqat bo'lganda boshlanadi.
 
-That's handy when we need to stop only for a certain variable value or for certain function parameters.
+Bu faqat ma'lum bir o'zgaruvchan qiymat yoki funktsiya parametrlari uchun to'xtashimiz kerak bo'lganda qulay.
 ```
 
-## Debugger command
+## Koddagi nosozliklarni tuzatuvchi buyrug'i
 
-We can also pause the code by using the `debugger` command, like this:
+Kodni quyidagi kabi `koddagi nosozliklarni tuzatuvchi` buyrug'i yordamida to'xtatib turishimiz mumkin:
 
 ```js
 function hello(name) {
-  let phrase = `Hello, ${name}!`;
+  let phrase = `Salom, ${name}!`;
 
 *!*
-  debugger;  // <-- the debugger stops here
+  debugger;  // <-- koddagi nosozliklarni tuzatuvchi shu yerda to'xtaydi
 */!*
 
   say(phrase);
 }
 ```
 
-That's very convenient when we are in a code editor and don't want to switch to the browser and look up the script in developer tools to set the breakpoint.
+Bu biz kod muharririda bo'lganimizda va brauzerga o'tishni xohlamasak va to'xtash nuqtasini o'rnatish uchun ishlab chiquvchi vositalarida skriptni qidirishni istamasak, bu juda qulay.
 
 
-## Pause and look around
+## Kodni to'xtatib turing va atrofga nazar tashlang
 
-In our example, `hello()` is called during the page load, so the easiest way to activate the debugger is to reload the page. So let's press `key:F5` (Windows, Linux) or `key:Cmd+R` (Mac).
+Bizning misolimizda sahifani yuklash paytida `hello()` chaqiriladi, shuning uchun koddagi nosozliklarni tuzatuvchi faollashtirishning eng oson usuli bu sahifani qayta yuklashdir. Keling, `key:F5` (Windows, Linux) yoki `key:Cmd+R` (Mac) bosing.
 
-As the breakpoint is set, the execution pauses at the 4th line:
+To'xtash nuqtasi o'rnatilganda, ijro 4-satrda to'xtatiladi:
 
 ![](chrome-sources-debugger-pause.svg)
 
-Please open the informational dropdowns to the right (labeled with arrows). They allow you to examine the current code state:
+Iltimos, ma'lumotlar ochiladigan sahifalarni o'ng tomonga oching (o'qlar bilan belgilangan). Ular sizga joriy kod holatini tekshirishga imkon beradi:
 
-1. **`Watch` -- shows current values for any expressions.**
+1. **`Watch` -- har qanday ifodalar uchun joriy qiymatlarni ko'rsatadi.**
 
-    You can click the plus `+` and input an expression. The debugger will show its value at any moment, automatically recalculating it in the process of execution.
+    Siz ortiqcha `+` tugmachasini bosishingiz va ifodani kiritishingiz mumkin. Koddagi nosozliklarni tuzatuvchi har qanday vaqtda o'z qiymatini ko'rsatadi, uni bajarish jarayonida avtomatik ravishda qayta hisoblab chiqadi.
 
-2. **`Call Stack` -- shows the nested calls chain.**
+2. **`Call Stack` -- ulanish chaqiruvlar zanjirini ko'rsatadi.**
 
-    At the current moment the debugger is inside `hello()` call, called by a script in `index.html` (no function there, so it's called "anonymous").
+    Hozirgi vaqtda koddagi nosozliklarni tuzatuvchi `hello()` chaqiruvi ichida `index.html` dagi skript bilan chaqirilgan (u erda hech qanday funktsiya yo'q, shuning uchun "anonim" deb nomlanadi).
 
-    If you click on a stack item, the debugger jumps to the corresponding code, and all its variables can be examined as well.
-3. **`Scope` -- current variables.**
+    Agar siz stek elementini bosgan bo'lsangiz, koddagi nosozliklarni tuzatuvchi mos keladigan kodga o'tadi va uning barcha o'zgaruvchanlari ham tekshirishi mumkin.
+3. **`Scope` -- joriy o'zgaruvchanlar.**
 
-    `Local` shows local function variables. You can also see their values highlighted right over the source.
+    `Local` ichki funktsiya o'zgaruvchanlarini ko'rsatadi. Shuningdek, ularning ta'kidlangan qiymatlarini manba ustida ko'rishingiz mumkin.
 
-    `Global` has global variables (out of any functions).
+    `Global` global o'zgaruvchanlarga ega (har qanday funktsiyalardan tashqari).
 
-    There's also `this` keyword there that we didn't study yet, but we'll do that soon.
+    U erda biz hali o'rganmagan `this` kalit so'z ham bor, lekin buni tez orada o'rganamiz.
 
-## Tracing the execution
+## Ijro etilishini kuzatish
 
-Now it's time to *trace* the script.
+Endi skriptni *ijro etilishini kuzatish* vaqti keldi.
 
-There are buttons for it at the top of the right pane. Let's engage them.
+O'ng oynaning yuqori qismida buning uchun tugmalar mavjud. Keling, ularni o'rganib chiqaylik.
 
-<span class="devtools" style="background-position:-7px -76px"></span> -- continue the execution, hotkey `key:F8`.
-: Resumes the execution. If there are no additional breakpoints, then the execution just continues and the debugger loses control.
+<span class="devtools" style="background-position:-7px -76px"></span> -- ijro etishni davom eting, tezkor tugma `key:F8`.
+: Ijro etishni davom ettiradi. Agar qo'shimcha to'xtash nuqtalari bo'lmasa, unda bajarish davom etadi va koddagi nosozliklarni tuzatuvchi boshqaruvni yo'qotadi.
 
-    Here's what we can see after a click on it:
+    Uni bosgandan keyin nimani ko'rishimiz mumkin:
 
     ![](chrome-sources-debugger-trace-1.svg)
 
-    The execution has resumed, reached another breakpoint inside `say()` and paused there. Take a look at the "Call stack" at the right. It has increased by one more call. We're inside `say()` now.
+    Ijro etilish davom ettirilib, `say()` ichidagi boshqa to'xtash nuqtasiga yetdi va u yerda to'xtab qoldi. O'ng tarafdagi "Chaqiruvlar to'plami" ga qarang. Bu yana bitta chaqiruvga ko'paygan. Biz hozir `say()` ni ichidamiz.
 
-<span class="devtools" style="background-position:-137px -76px"></span> -- make a step (run the next command), but *don't go into the function*, hotkey `key:F10`.
-: If we click it now, `alert` will be shown. The important thing is that `alert` can be any function, the execution "steps over it", skipping the function internals.
+<span class="devtools" style="background-position:-137px -76px"></span> -- qadam qo'yish (keyingi buyruqni bajaring), lekin *funktsiyasiga kirmang*, tezkor tugma `key:F10`.
+: Agar hozir uni bossak, `alert` ko'rsatiladi. Muhimi shundaki, `alert` har qanday funktsiya bo'lishi mumkin, ijro etish "undan sakrab o'tadi", ichki funktsiyalarni o'tkazib yuboradi.
 
-<span class="devtools" style="background-position:-72px -76px"></span> -- make a step, hotkey `key:F11`.
-: The same as the previous one, but "steps into" nested functions. Clicking this will step through all script actions one by one.
+<span class="devtools" style="background-position:-72px -76px"></span> -- qadam qo'yish, tezkor tugma `key:F11`.
+: Oldingi bilan bir xil, ammo ichki qadam vazifalariga "qadam qo'yadi". Buni bosish barcha skript harakatlariga birma-bir qadam qo'yadi.
 
-<span class="devtools" style="background-position:-104px -76px"></span> -- continue the execution till the end of the current function, hotkey `key:Shift+F11`.
-: The execution would stop at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-72px -76px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+<span class="devtools" style="background-position:-104px -76px"></span> -- joriy funktsiyani oxirigacha bajarishni davom etish, tezkor tugma `key:Shift+F11`.
+: Ijro etilish joriy funktsiyalarning oxirgi satrda to'xtaydi. Biz tasodifan <span class="devtools" style="background-position:-72px -76px"></span> yordamida ichki chaqiruvni kiritganimizda bu juda qulay, ammo bu bizni qiziqtirmaydi va biz oxirigacha davom etishni imkoni boricha tezda xohlaymiz.
 
-<span class="devtools" style="background-position:-7px -28px"></span> -- enable/disable all breakpoints.
-: That button does not move the execution. Just a mass on/off for breakpoints.
+<span class="devtools" style="background-position:-7px -28px"></span> -- barcha to'xtash nuqtalarini yoqish/o'chirish.
+: Ushbu tugma ijro etishni harakatga keltirmaydi. To'xtash nuqtalarni faqat yoqadi/o'chiradi.
 
-<span class="devtools" style="background-position:-264px -4px"></span> -- enable/disable automatic pause in case of an error.
-: When enabled, and the developer tools is open, a script error automatically pauses the execution. Then we can analyze variables to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+<span class="devtools" style="background-position:-264px -4px"></span> -- xatolik yuz berganda avtomatik to'xtatishni yoqish/o'chirish.
+: Yoqilganda va dasturchi vositalari ochiq bo'lsa, skript xatosi avtomatik ravishda bajarilishini to'xtatadi. Keyin nima o'zgarganligini ko'rish uchun o'zgaruvchanlarni tahlil qilishimiz mumkin. Shunday qilib, agar bizning skriptimiz xato bilan to'xtasa, biz koddagi nosozliklarni tuzatuvchi vositasini ochib, ushbu parametrni yoqib, sahifani qayta yuklashimiz mumkin, u qayerda to'xtashini va o'sha paytda qanday qiymatda ekanligini bilib olishimiz mumkin.
 
-```smart header="Continue to here"
-Right click on a line of code opens the context menu with a great option called "Continue to here".
+```smart header="Bu erda davom eting"
+Kod satriga sichqonchaning o'ng tugmasi bilan bosish kontekst menyusini "Bu erda davom eting" ochadi.
 
-That's handy when we want to move multiple steps forward, but we're too lazy to set a breakpoint.
+Bu biz bir necha qadam oldinga siljishni xohlaganimizda qulay, ammo biz to'xtash nuqtasini o'rnatishga dangasa bo'lsak.
 ```
 
-## Logging
+## Konsolga chiqarish
 
-To output something to console, there's `console.log` function.
+Konsolga biror narsa chiqarish uchun `console.log` funktsiyasi mavjud.
 
-For instance, this outputs values from `0` to `4` to console:
+Masalan, bu konsolga `0` dan `4` gacha bo'lgan qiymatlarni chiqaradi:
 
 ```js run
-// open console to see
+// ko'rish uchun konsolni oching
 for (let i = 0; i < 5; i++) {
-  console.log("value", i);
+  console.log("qiymat", i);
 }
 ```
 
-Regular users don't see that output, it is in the console. To see it, either open the Console tab of developer tools or press `key:Esc` while in another tab: that opens the console at the bottom.
+Muntazam foydalanuvchilar ushbu chiqishni ko'rmaydilar, u konsolda. Buni ko'rish uchun dasturchi vositalarining konsol yorlig'ini oching yoki boshqa tugmachada: tugmachani ochadigan `key:Esc` tugmachasini bosing.
 
-If we have enough logging in our code, then we can see what's going on from the records, without the debugger.
+Agar bizning kodimizga kiritish yetarli bo'lsa, biz nima sodir bo'layotganini koddagi nosozliklarni tuzatuvchisiz ko'rishimiz mumkin.
 
-## Summary
+## Xulosa
 
-As we can see, there are three main ways to pause a script:
-1. A breakpoint.
-2. The `debugger` statements.
-3. An error (if dev tools are open and the button <span class="devtools" style="background-position:-264px -4px"></span> is "on").
+Ko'rib turganimizdek, skriptni to'xtatib turishning uchta asosiy usuli mavjud:
+1. To'xtash nuqtasi.
+2. "Koddagi nosozliklarni tuzatuvchi" ifodalari.
+3. Xato (agar dasturchi vositalari ochiq bo'lsa va <span class ="devtools" style ="background-position: -264px -4px"></span> tugmasi "yoqilgan" bo'lsa)
 
-Then we can examine variables and step on to see where the execution goes wrong.
+Keyin biz o'zgaruvchanlarni ko'rib chiqamiz va bajarilish qayerda noto'g'ri ketayotganini bilib olamiz.
 
-There are many more options in developer tools than covered here. The full manual is at <https://developers.google.com/web/tools/chrome-devtools>.
+Dasturchi vositalarda bu yerda ko'rib chiqilganidan ko'ra ko'proq imkoniyatlar mavjud. To'liq qo'llanma <https://developers.google.com/web/tools/chrome-devtools>.
 
-The information from this chapter is enough to begin debugging, but later, especially if you do a lot of browser stuff, please go there and look through more advanced capabilities of developer tools.
+Ushbu bobdan olingan ma'lumotlar koddagi nosozliklarni tuzatishni boshlash uchun yetarli, ammo keyinroq, ayniqsa brauzerda juda ko'p narsalarni qilsangiz, iltimos, u yerga o'ting va dasturchi vositalarning yanada rivojlangan imkoniyatlarini ko'rib chiqing.
 
-Oh, and also you can click at various places of dev tools and just see what's showing up. That's probably the fastest route to learn dev tools. Don't forget about the right click as well!
+Eh, shuningdek, siz dasturchi vositalarning turli joylarini bosishingiz va nima ko'rinishini bilishingiz mumkin. Bu, ehtimol, dasturchi vositalarini o'rganish uchun eng tez marshrut. Sichqonchaning o'ng tugmachasini bosishni ham unutmang!

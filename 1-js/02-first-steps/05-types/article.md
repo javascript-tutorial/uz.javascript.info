@@ -1,6 +1,6 @@
 # Ma'lumot turlari
 
-A variable in JavaScript can contain any data. A variable can at one moment be a string and at another be a number:
+JavaScript dagi o'zgaruvchanda har qanday ma'lumot bo'lishi mumkin. O'zgaruvchan bir vaqtning o'zida matnga, ikkinchisida esa raqamga ega bo'lishi mumkin:
 
 ```js
 // quyidagi kod xato emas
@@ -8,159 +8,160 @@ let message = "hello";
 message = 123456;
 ```
 
-Programming languages that allow such things are called "dynamically typed", meaning that there are data types, but variables are not bound to any of them.
+Bunday narsalarga imkon beradigan dasturlash tillari "dinamik ravishda terilgan" deb nomlanadi, ya'ni ma'lumotlar turlari mavjud, ammo o'zgaruvchilar ularning hech biriga bog'liq emas.
 
-There are seven basic data types in JavaScript. Here, we'll cover them in general and in the next chapters we'll talk about each of them in detail.
+JavaScript da yetti asosiy ma'lumotlar turi mavjud. Bu yerda biz ularni umuman ko'rib chiqamiz va keyingi boblarda ularning har biri haqida batafsil gaplashamiz.
 
-## A number
+## Raqam
 
 ```js
 let n = 123;
 n = 12.345;
 ```
 
-The *number* type represents both integer and floating point numbers.
+*Raqam* turi butun son va suzuvchi nuqta raqamlarini ifodalaydi.
 
-There are many operations for numbers, e.g. multiplication `*`, division `/`, addition `+`, subtraction `-`, and so on.
+Raqamlar uchun ko'plab operatsiyalar mavjud, masalan, ko'paytirish `*`, bo'linish `/`, qo'shish `+`, ayirish `-` va boshqalar.
 
 Besides regular numbers, there are so-called "special numeric values" which also belong to this data type: `Infinity`, `-Infinity` and `NaN`.
+Oddiy raqamlardan tashqari, ushbu ma'lumot turiga mansub "maxsus raqamli qiymatlar" ham mavjud: `Infinity`(Cheksizlik), `-Infinity` va `NaN`.
 
-- `Infinity` represents the mathematical [Infinity](https://en.wikipedia.org/wiki/Infinity) ∞. It is a special value that's greater than any number.
+- `Infinity` matematik [Cheksizlik] (https://en.wikipedia.org/wiki/Infinity) ni ifodalaydi. Bu har qanday raqamdan kattaroq maxsus qiymat.
 
-    We can get it as a result of division by zero:
-
-    ```js run
-    alert( 1 / 0 ); // Infinity
-    ```
-
-    Or just reference it directly:
+    Biz uni nolga bo'lish natijasida olishimiz mumkin:
 
     ```js run
-    alert( Infinity ); // Infinity
+    alert( 1 / 0 ); // Cheksizlik
     ```
-- `NaN` represents a computational error. It is a result of an incorrect or an undefined mathematical operation, for instance:
+
+    Yoki to'g'ridan-to'g'ri murojaat qilgan holda:
 
     ```js run
-    alert( "not a number" / 2 ); // NaN, such division is erroneous
+    alert( Infinity ); // Cheksizlik
+    ```
+- `NaN` hisoblash xatoligini anglatadi. Bu noto'g'ri yoki aniqlanmagan matematik operatsiya natijasidir, masalan:
+
+    ```js run
+    alert( "not a number" / 2 ); // NaN, bunday bo'linish noto'g'ri
     ```
 
-    `NaN` is sticky. Any further operation on `NaN` returns `NaN`:
+    `NaN` yopishqoq bo'ladi. `NaN` bo'yicha har qanday keyingi operatsiya `NaN` qaytaradi:
 
     ```js run
     alert( "not a number" / 2 + 5 ); // NaN
     ```
 
-    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result.
+    Shunday qilib, agar biror joyda matematik ifodada "NaN" bo'lsa, u butun natijaga tarqaladi.
 
-```smart header="Mathematical operations are safe"
-Doing maths is "safe" in JavaScript. We can do anything: divide by zero, treat non-numeric strings as numbers, etc.
+```smart header="Matematik operatsiyalar xavfsizdir"
+Matematikadan foydalanish JavaScript da "xavfsiz". Biz hamma narsani qila olamiz: nolga bo'lish, raqamsiz matnlarni raqamlar kabi ko'rib chiqish va hk.
 
-The script will never stop with a fatal error ("die"). At worst, we'll get `NaN` as the result.
+Skript hech qachon halokatli xato ("o'lish") bilan to'xtamaydi. Eng yomoni, natijada biz "NaN" ni olamiz.
 ```
 
-Special numeric values formally belong to the "number" type. Of course they are not numbers in the common sense of this word.
+Maxsus raqamli qiymatlar rasmiy ravishda "raqam" turiga tegishli. Albatta ular bu so'zning umumiy ma'nosida raqamlar emas.
 
-We'll see more about working with numbers in the chapter <info:number>.
+Raqamlar bilan ishlash haqida ko'proq ma'lumotni <info:number> bobida bilib olamiz.
 
-## A string
+## Matn
 
-A string in JavaScript must be surrounded by quotes.
+JavaScript dagi matn qoshtirnoq belgisi bilan o'ralgan bo'lishi kerak.
 
 ```js
 let str = "Hello";
-let str2 = 'Single quotes are ok too';
-let phrase = `can embed ${str}`;
+let str2 = 'Bitta qoshtirnoq belgisi ham yaxshi';
+let phrase = `${str} joylashtirish mumkin`;
 ```
 
-In JavaScript, there are 3 types of quotes.
+JavaScript da 3 ta qoshtirnoqning belgisining turi mavjud.
 
-1. Double quotes: `"Hello"`.
-2. Single quotes: `'Hello'`.
-3. Backticks: <code>&#96;Hello&#96;</code>.
+1. Ikki qoshtirnoq belgisi: `"Hello"`.
+2. Bitta qoshtirnoq belgisi `'Hello'`.
+3. Orqa qoshtirnoq belgisi: <code>&#96;Hello&#96;</code>.
 
-Double and single quotes are "simple" quotes. There's no difference between them in JavaScript.
+Ikki va bitta qoshtirnoq belgisi "oddiy" qoshtirnoqlardir. JavaScript da ular orasida hech qanday farq yo'q.
 
-Backticks are "extended functionality" quotes. They allow us to embed variables and expressions into a string by wrapping them in `${…}`, for example:
+Orqa qoshtirnoq belgisi - bu "kengaytirilgan funksionallik" qoshtirnoqlardir. Ular o'zgaruvchanlar va ifodalarni `${…}` ichiga o'rash orqali qatorga kiritishga imkon beradi, masalan:
 
 ```js run
 let name = "John";
 
-// embed a variable
+// o'zgaruvchini joylashtirish
 alert( `Hello, *!*${name}*/!*!` ); // Hello, John!
 
-// embed an expression
-alert( `the result is *!*${1 + 2}*/!*` ); // the result is 3
+// ifodani joylashtirish
+alert( `the result is *!*${1 + 2}*/!*` ); // natija 3 ga teng
 ```
 
-The expression inside `${…}` is evaluated and the result becomes a part of the string. We can put anything in there: a variable like `name` or an arithmetical expression like `1 + 2` or something more complex.
+`$ {…}` Ichidagi ifoda baholanadi va natija satrning bir qismiga aylanadi. Biz u yerga hamma narsani qo'yishimiz mumkin: `name` kabi o'zgaruvchan yoki `1 + 2` kabi arifmetik ibora yoki undan murakkab narsalar. 
 
-Please note that this can only be done in backticks. Other quotes don't have this embedding functionality!
+Iltimos, shuni unutmangki, bu faqat orqa qoshtirnoq belgisi orqali amalga oshiriladi. Boshqa qoshtirnoq belgilarda bu ichki funktsiya mavjud emas!
 ```js run
-alert( "the result is ${1 + 2}" ); // the result is ${1 + 2} (double quotes do nothing)
+alert( "natija ${1 + 2}" ); // natija $ {1 + 2} (ikki qoshtirnoq belgisi hech narsa qilmaydi)
 ```
 
-We'll cover strings more thoroughly in the chapter <info:string>.
+Biz matlarni <info:string> bobida batafsilroq ko'rib chiqamiz.
 
-```smart header="There is no *character* type."
-In some languages, there is a special "character" type for a single character. For example, in the C language and in Java it is `char`.
+```smart header="*Belgi* turi yo'q."
+Ba'zi tillarda bitta belgi uchun maxsus "belgi" turi mavjud. Masalan, C tilida va Java tilida bu `char`.
 
-In JavaScript, there is no such type. There's only one type: `string`. A string may consist of only one character or many of them.
+JavaScript da bunday tur mavjud emas. Faqat bitta tur bor: `string`. Matn faqat bitta belgidan yoki ularning ko'pchiligidan iborat bo'lishi mumkin.
 ```
 
-## A boolean (logical type)
+## Bul ma’lumot turi (Mantiq ma’lumot turi)
 
-The boolean type has only two values: `true` and `false`.
+Bul ma’lumot turlari ikkita qiymatga ega: `true` va `false`.
 
-This type is commonly used to store yes/no values: `true` means "yes, correct", and `false` means "no, incorrect".
+Ushbu tur odatda "ha" yoki "yo'q" qiymatlarini saqlash uchun ishlatiladi: `true` "ha, to'g'ri", `false` esa "yo'q, noto'g'ri" degan ma'noni anglatadi.
 
-For instance:
+Misol uchun:
 
 ```js
-let nameFieldChecked = true; // yes, name field is checked
-let ageFieldChecked = false; // no, age field is not checked
+let nameFieldChecked = true; // ha, nom maydoni tekshirildi
+let ageFieldChecked = false; // yo'q, yosh maydoni tekshirilmadi
 ```
 
-Boolean values also come as a result of comparisons:
+Bul qiymatlar taqqoslash natijasida ham paydo bo'ladi:
 
 ```js run
 let isGreater = 4 > 1;
 
-alert( isGreater ); // true (the comparison result is "yes")
+alert( isGreater ); // true (taqqoslash natijasi "ha")
 ```
 
-We'll cover booleans more deeply in the chapter <info:logical-operators>.
+Bul ma’lumot turlarini <info:logical-operatorlar> bobida chuqurroq ko'rib chiqamiz.
 
-## The "null" value
+## "Null" qiymat
 
-The special `null` value does not belong to any of the types described above.
+Maxsus `null` qiymati yuqorida tavsiflangan turlarning hech biriga tegishli emas.
 
-It forms a separate type of its own which contains only the `null` value:
+U faqat `null` qiymatini o'z ichiga olgan turini hosil qiladi:
 
 ```js
 let age = null;
 ```
 
-In JavaScript, `null` is not a "reference to a non-existing object" or a "null pointer" like in some other languages.
+JavaScript da, `null` "mavjud bo'lmagan obyektga havola" yoki ba'zi boshqa tillardagi kabi "null ko'rsatkich" emas.
 
-It's just a special value which represents "nothing", "empty" or "value unknown".
+Bu shunchaki "hech narsa", "bo'sh" yoki "noma'lum qiymat" ni ifodalovchi maxsus qiymat.
 
-The code above states that `age` is unknown or empty for some reason.
+Yuqoridagi kodda `age` ma'lum sabablarga ko'ra noma'lum yoki bo'sh ekanligi aytilgan.
 
-## The "undefined" value
+## "Undefined(Aniqlanmagan)" qiymat
 
-The special value `undefined` also stands apart. It makes a type of its own, just like `null`.
+Maxsus qiymat `undefined` ham ajralib turadi. U xuddi `null` singari o'ziga xos turini yaratadi.
 
-The meaning of `undefined` is "value is not assigned".
+`undefined` ning ma'nosi "qiymat tayinlanmagan".
 
-If a variable is declared, but not assigned, then its value is `undefined`:
+Agar o'zgaruvchan e'lon qilingan, ammo tayinlanmagan bo'lsa, unda uning qiymati `undefined`:
 
 ```js run
 let x;
 
-alert(x); // shows "undefined"
+alert(x); // "undefined" ko'rsatiladi
 ```
 
-Technically, it is possible to assign `undefined` to any variable:
+Texnik jihatdan istalgan o'zgaruvchanga `undefined` ni belgilash mumkin:
 
 ```js run
 let x = 123;
@@ -170,28 +171,28 @@ x = undefined;
 alert(x); // "undefined"
 ```
 
-...But we don't recommend doing that. Normally, we use `null` to assign an "empty" or "unknown" value to a variable, and we use `undefined` for checks like seeing if a variable has been assigned.
+...Ammo buni qilishni tavsiya etmaymiz. Odatda, biz o'zgaruvchiga "bo'sh" yoki "noma'lum" qiymatlarni berish uchun `null` dan foydalanamiz va o'zgaruvchanlar tayinlanganligini tekshirish uchun `undefined` dan foydalanamiz.
 
-## Objects and Symbols
+## Ob'yektlar va Belgilar
 
-The `object` type is special.
+`object` turi maxsusdir.
 
-All other types are called "primitive" because their values can contain only a single thing (be it a string or a number or whatever). In contrast, objects are used to store collections of data and more complex entities. We'll deal with them later in the chapter <info:object> after we learn more about primitives.
+Boshqa barcha turlar "ibtidoiy" deb nomlanadi, chunki ularning qiymatlari faqat bitta narsani o'z ichiga olishi mumkin (matn, raqam yoki boshqa narsalar). Aksincha, ob'yektlar ma'lumotlar to'plamlarini va murakkabroq subyektlarni saqlash uchun ishlatiladi. Biz ob'yekt haqida ko'proq kengi bobda <info:object> bilib olamiz.
 
-The `symbol` type is used to create unique identifiers for objects. We have to mention it here for completeness, but it's better to study this type after objects.
+`Symbol` turi ob'yektlar uchun noyob identifikatorlarni yaratish uchun ishlatiladi. To'liqlik uchun bu yerda eslatib o'tishimiz kerak, ammo ob'yektlardan keyin ushbu turni o'rganish yaxshiroqdir.
 
-## The typeof operator [#type-typeof]
+## Typeof operatori
 
-The `typeof` operator returns the type of the argument. It's useful when we want to process values of different types differently or just want to do a quick check.
+`Typeof` operatori argument turini qaytaradi. Bu biz har xil turdagi qiymatlarni boshqacha ishlov berishni xohlaganimizda yoki tezkor tekshirishni xohlaganimizda foydalidir.
 
-It supports two forms of syntax:
+Ikkita shakili sintaksisning  qo'llab-quvvatlaydi:
 
-1. As an operator: `typeof x`.
-2. As a function: `typeof(x)`.
+1. Operator sifatida: `typeof x`.
+2. Funktsiya sifatida: `typeof(x)`.
 
-In other words, it works with parentheses or without them. The result is the same.
+Boshqacha qilib aytganda, bu qavs bilan yoki ularsiz ishlaydi. Natija bir xil.
 
-The call to `typeof x` returns a string with the type name:
+`Typeof x`ning qo'ngiroq qilganda u matni argument turi bilan qaytaradi 
 
 ```js
 typeof undefined // "undefined"
@@ -217,29 +218,29 @@ typeof alert // "function"  (3)
 */!*
 ```
 
-The last three lines may need additional explanation:
+Oxirgi uchta satr qo'shimcha tushuntirishga muhtoj bo'lishi mumkin:
 
-1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's wrong. It is an officially recognized error in `typeof`, kept for compatibility. Of course, `null` is not an object. It is a special value with a separate type of its own. So, again, this is an error in the language.
-3. The result of `typeof alert` is `"function"`, because `alert` is a function of the language. We'll study functions in the next chapters where we'll see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently. Formally, it's incorrect, but very convenient in practice.
+1. `Math` - bu matematik operatsiyalarni ta'minlaydigan Javascriptning ichida o'rnatilgan ob'yekt. Biz buni <info:number> bobida bilib olamiz. Bu yerda u xuddi ob'yekt rolida bo'lib xizmat qiladi.
+2. `Typeof null`ning natijasi `"object"`. Bu noto'g'ri. Bu moslik uchun saqlanadigan `typeof` da rasmiy tan olingan xato. Albatta, `null` ob'yekt emas. Bu o'ziga xos alohida turga ega bo'lgan maxsus qiymatdir. Demak, bu tilning ichidagi xato.
+3. `typeof alert`ning natijasi `"function"`dir, chunki `alert` tilning funktsiyasidir. Keyingi boblarda biz funktsiyalarni o'rganamiz, bu yerda JavaScript da maxsus "funktsiya" turi yo'qligini ko'rasiz. Funktsiyalar ob'yekt turiga tegishli. Ammo `typeof` ularga boshqacha munosabatda. Rasmiy ravishda bu noto'g'ri, ammo amalda juda qulay.
 
 
-## Summary
+## Xulosa
 
-There are 7 basic types in JavaScript.
+JavaScript-da 7 ta asosiy ma'lumotlar turi mavjud.
 
-- `number` for numbers of any kind: integer or floating-point.
-- `string` for strings. A string may have one or more characters, there's no separate single-character type.
-- `boolean` for `true`/`false`.
-- `null` for unknown values -- a standalone type that has a single value `null`.
-- `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
-- `object` for more complex data structures.
-- `symbol` for unique identifiers.
+- `number` har qanday turdagi raqamlar uchun: butun son yoki suzuvchi nuqta.
+- `string` matnlar uchun. Matnda bir yoki bir nechta belgi bo'lishi mumkin, alohida bitta belgi turi yo'q.
+- `boolean` bul ma’lumot turi `true`/`false`.
+- `null` noma'lum qiymatlar uchun -- bitta `null` qiymatga ega bo'lgan mustaqil tur.
+- `undefined` tayinlanmagan qiymatlar uchun -- bitta qiymatga ega bo'lgan mustaqil tur, `undefined`.
+- `object` murakkab ma'lumotlar tuzilmalari uchun.
+- `symbol` noyob identifikatorlar uchun.
 
-The `typeof` operator allows us to see which type is stored in a variable.
+`Typeof` operatori bizga qaysi tur o'zgaruvchida saqlanganligini ko'rish imkonini beradi.
 
-- Two forms: `typeof x` or `typeof(x)`.
-- Returns a string with the name of the type, like `"string"`.
-- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+- Ikki shakl: `typeof x` yoki `typeof(x)`.
+- `"String"` kabi turdagi nomi bilan matni qaytaradi.
+- `Null` uchun `"object"` qaytaradi -- bu tilda xato, aslida bu ob'yekt emas.
 
-In the next chapters, we'll concentrate on primitive values and once we're familiar with them, we'll move on to objects.
+Keyingi boblarda biz ibtidoiy qadriyatlarga e'tibor qaratamiz va ular bilan tanishib bo'lgach, ob'yektlarga o'tamiz.

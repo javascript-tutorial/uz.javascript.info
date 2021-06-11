@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# What's wrong in the test?
+# Testda nima xatolik bor?
 
-What's wrong in the test of `pow` below?
+Quyidagi `pow` testida nima nosozlik?
 
 ```js
-it("Raises x to the power n", function() {
+it("x ni n darajaga ko'taradi", function() {
   let x = 5;
 
   let result = x;
@@ -21,4 +21,4 @@ it("Raises x to the power n", function() {
 });
 ```
 
-P.S. Syntactically the test is correct and passes.
+P.S. Sintaktik ravishda test to'g'ri va muvaffaqiyatli o'tadi.

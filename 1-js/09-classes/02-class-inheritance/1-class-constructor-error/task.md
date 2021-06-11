@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Error creating an instance
+# Namuna yaratishda xato
 
-Here's the code with `Rabbit` extending `Animal`.
+`Rabbit` kengaytirilgan `Animal` kodi.
 
-Unfortunately, `Rabbit` objects can't be created. What's wrong? Fix it.
+Afsuski, `Rabbit` obyektlarini yaratish mumkin emas. Nima bo'ldi? Tuzating.
 ```js run
 class Animal {
 

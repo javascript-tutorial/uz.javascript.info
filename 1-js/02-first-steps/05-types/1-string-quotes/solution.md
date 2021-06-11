@@ -1,15 +1,15 @@
 
-Backticks embed the expression inside `${...}` into the string.
+Orqa qoshtirnoq belgisi satrga `${...}` ichidagi ifodani joylashtiradi.
 
 ```js run
-let name = "Ilya";
+let name = "Elbek";
 
-// the expression is a number 1
+// ifoda - 1 raqami
 alert( `hello ${1}` ); // hello 1
 
-// the expression is a string "name"
+// ifoda - "name" matni
 alert( `hello ${"name"}` ); // hello name
 
-// the expression is a variable, embed it
-alert( `hello ${name}` ); // hello Ilya
+// ifoda name o'zgaruvchani, uning qiymati ko'rsatiladi nomi emas
+alert( `hello ${name}` ); // hello Elbek
 ```

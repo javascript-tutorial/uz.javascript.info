@@ -2,16 +2,16 @@ importance: 3
 
 ---
 
-# Output prime numbers
+# Tub sonlarni chiqaring
 
-An integer number greater than `1` is called a [prime](https://en.wikipedia.org/wiki/Prime_number) if it cannot be divided without a remainder by anything except `1` and itself.
+Agar `1` dan kattaroq butun son, `1` va o'zidan tashqari boshqa sonlarga qoldiqsiz bo'linmasa, u son [tub](https://en.wikipedia.org/wiki/Prime_number) deb nomlanadi.
 
-In other words, `n > 1` is a prime if it can't be evenly divided by anything except `1` and `n`.
+Boshqacha qilib aytganda, `n > 1` tub son hisoblanadi, agar uni `1` va `n` dan boshqa hech narsa bilan teng taqsimlash mumkin bo'lmasa.
 
-For example, `5` is a prime, because it cannot be divided without a remainder by `2`, `3` and `4`.
+Masalan, `5` tub son hisoblanadi, chunki uni `2`, `3` va `4` bilan qoldiqsiz bo'lish mumkin emas.
 
-**Write the code which outputs prime numbers in the interval from `2` to `n`.**
+**`2` dan `n` gacha bo`lgan oraliqda tub sonlarni chiqaradigan kodni yozing.**
 
-For `n = 10` the result will be `2,3,5,7`.
+`n = 10` uchun natija `2,3,5,7` bo'ladi.
 
-P.S. The code should work for any `n`, not be hard-tuned for any fixed value.
+P.S. Kod har qanday `n` uchun ishlashi kerak, har qanday belgilangan qiymat uchun sozlanmagan bo'lishi kerak.

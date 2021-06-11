@@ -1,38 +1,38 @@
-# Garbage collection
+# Axlat yig'ish
 
-Memory management in JavaScript is performed automatically and invisibly to us. We create primitives, objects, functions... All that takes memory.
+JavaScript-da xotirani boshqarish biz uchun avtomatik va ko'rinmas holda amalga oshiriladi. Biz ibtidoiylarni, ob'ektlarni, funktsiyalarni yaratamiz... Barchasi xotirani talab qiladigan narsa.
 
-What happens when something is not needed any more? How does the JavaScript engine discover it and clean it up?
+Biror narsa kerak bo'lmaganda nima bo'ladi? JavaScript interpretatori uni qanday kashf etadi va tozalaydi?
 
-## Reachability
+## Erishish imkoniyati
 
-The main concept of memory management in JavaScript is *reachability*.
+JavaScript-da xotirani boshqarishning asosiy kontseptsiyasi bu uning *erishish imkoniyati*.
 
-Simply put, "reachable" values are those that are accessible or usable somehow. They are guaranteed to be stored in memory.
+Oddiy qilib aytganda, "erishish mumkin" qiymatlar - bu kirish imkoniyati yoki qandaydir tarzda foydalanish mumkin bo'lgan qiymatlar. Ularning xotirada saqlanishi kafolatlangan.
 
-1. There's a base set of inherently reachable values, that cannot be deleted for obvious reasons.
+1. Muayyan sabablarga ko'ra o'chirib bo'lmaydigan tabiiy ravishda erishiladigan qiymatlarning asosiy to'plami mavjud.
 
-    For instance:
+    Masalan:
 
-    - Local variables and parameters of the current function.
-    - Variables and parameters for other functions on the current chain of nested calls.
-    - Global variables.
-    - (there are some other, internal ones as well)
+    - Joriy funktsiyalarning ichki o'zgaruvchanlari va parametrlari.
+    - Ichki chaqiruvlarning joriy zanjiridagi boshqa funktsiyalarning o'zgaruvchanlari va parametrlari.
+    - Global o'zgaruvchanlar.
+    - (ba'zi bir ichki narsalar ham bor)
 
-    These values are called *roots*.
+    Ushbu qiymatlar *ildizlar* deb nomlanadi.
 
-2. Any other value is considered reachable if it's reachable from a root by a reference or by a chain of references.
+2. Agar istalgan ma'lumotga havolalar zanjiri orqali ildizdan erishish mumkin bo'lsa, bu qiymat erishuvchi deb hisoblanadi.
 
-    For instance, if there's an object in a local variable, and that object has a property referencing another object, that object is considered reachable. And those that it references are also reachable. Detailed examples to follow.
+    Masalan, agar ichki o'zgaruvchanda ob'ekt mavjud bo'lsa va u boshqa ob'ektga tegishli xususiyatga ega bo'lsa, u ob'ektga erishish mumkin deb hisoblanadi. Va u qilgan havolalar ham erishuvchan. Batafsil misollar quyida.
 
-There's a background process in the JavaScript engine that is called [garbage collector](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)). It monitors all objects and removes those that have become unreachable.
+JavaScript dvigatelida [axlat yig'uvchi](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) deb nomlangan fon jarayoni mavjud. U barcha ob'ektlarni kuzatib boradi va erishib bo'lmaydigan narsalarni olib tashlaydi.
 
-## A simple example
+## Oddiy misol
 
-Here's the simplest example:
+Mana eng oddiy misol:
 
 ```js
-// user has a reference to the object
+// foydalanuvchi ob'ektga havolaga ega
 let user = {
   name: "John"
 };
@@ -40,9 +40,9 @@ let user = {
 
 ![](memory-user-john.svg)
 
-Here the arrow depicts an object reference. The global variable `"user"` references the object `{name: "John"}` (we'll call it John for brevity). The `"name"` property of John stores a primitive, so it's painted inside the object.
+Bu yerda o'q ob'ektga havola ko'rsatadi. `"user"` ning global o'zgaruvchani `{name: "John"}` ob'ektiga ishora qiladi (biz uni John deb ataymiz). John ob'ektining `"name"` xususiyatida primitiv saqlanadi, shuning uchun u ob'ekt ichida chizilgan.
 
-If the value of `user` is overwritten, the reference is lost:
+Agar `user` qiymati qayta yozilsa, havola yo'qoladi:
 
 ```js
 user = null;
@@ -50,14 +50,14 @@ user = null;
 
 ![](memory-user-john-lost.svg)
 
-Now John becomes unreachable. There's no way to access it, no references to it. Garbage collector will junk the data and free the memory.
+Endi Jonga yetib bo'lmaydi. Unga kirishning imkoni yo'q, unga havolalar yo'q. Axlat yig'uvchi ma'lumotlar axlatini va xotirani bo'shatadi.
 
-## Two references
+## Ikkita havolalar
 
-Now let's imagine we copied the reference from `user` to `admin`:
+Endi `user` dan `admin` ga havolani ko'chirib olganimizni tasavvur qilaylik:
 
 ```js
-// user has a reference to the object
+// user ob'ektga havolaga ega
 let user = {
   name: "John"
 };
@@ -69,16 +69,16 @@ let admin = user;
 
 ![](memory-user-john-admin.svg)
 
-Now if we do the same:
+Endi biz ham xuddi shunday qilsak:
 ```js
 user = null;
 ```
 
-...Then the object is still reachable via `admin` global variable, so it's in memory. If we overwrite `admin` too, then it can be removed.
+...Hozir ob'ektga `admin` global o'zgaruvchani orqali kirish mumkin, shuning uchun u xotirada. Agar biz `admin` ning qayta yozsak, u o'chirilishi mumkin.
 
-## Interlinked objects
+## O'zaro bog'langan ob'ektlar
 
-Now a more complex example. The family:
+Endi yanada murakkab misol. Oila:
 
 ```js
 function marry(man, woman) {
@@ -98,15 +98,15 @@ let family = marry({
 });
 ```
 
-Function `marry` "marries" two objects by giving them references to each other and returns a new object that contains them both.
+`marry` funktsiyasi ikkita ob'ektni birlashtiradi, ularni bir-biriga bog'laydi va ikkalasini ham o'z ichiga olgan yangi ob'ektni qaytaradi.
 
-The resulting memory structure:
+Qaytaruvchi xotira tuzilishi:
 
 ![](family.svg)
 
-As of now, all objects are reachable.
+Hozirgi vaqtda barcha ob'ektlarga erishish mumkin.
 
-Now let's remove two references:
+Endi ikkita havolani olib tashlaymiz:
 
 ```js
 delete family.father;
@@ -115,98 +115,99 @@ delete family.mother.husband;
 
 ![](family-delete-refs.svg)
 
-It's not enough to delete only one of these two references, because all objects would still be reachable.
+Ushbu ikkita havoladan faqat bittasini o'chirish kifoya emas, chunki barcha ob'ektlarga ulanish imkoniyati mavjud.
 
-But if we delete both, then we can see that John has no incoming reference any more:
+Ammo ikkalasini ham o'chirib tashlasak, John-da boshqa hech qanday ma'lumot yo'qligini ko'rishimiz mumkin:
 
 ![](family-no-father.svg)
 
 Outgoing references do not matter. Only incoming ones can make an object reachable. So, John is now unreachable and will be removed from the memory with all its data that also became unaccessible.
+Chiqish havolalari muhim emas. Faqat kirish havolalari ob'ektni erishuvchan qilishi mumkin. John endi eruvchan emas va xotiradan erishish mumkin bo'lmagan barcha ma'lumotlar bilan olib tashlanadi.
 
-After garbage collection:
+Axlat yig'ilgandan keyin:
 
 ![](family-no-father-2.svg)
 
-## Unreachable island
+## Erishish mumkin bo'lmaydigan orol
 
-It is possible that the whole island of interlinked objects becomes unreachable and is removed from the memory.
+O'zaro bog'liq ob'ektlarning butun "orollari" erishish bo'lmasligi va xotiradan o'chirilishi mumkin bo'lgan vaziyatlar mavjud.
 
-The source object is the same as above. Then:
+Manba ob'ekti yuqoridagi bilan bir xil. Keyin:
 
 ```js
 family = null;
 ```
 
-The in-memory picture becomes:
+Xotiraning rasmi shunday bo'ladi:
 
 ![](family-no-family.svg)
 
-This example demonstrates how important the concept of reachability is.
+Ushbu misol, erishishning imkoniyati tushunchasi qanchalik muhimligini ko'rsatadi.
 
-It's obvious that John and Ann are still linked, both have incoming references. But that's not enough.
+Jon va Enn hanuzgacha bir-biriga bog'langanligi aniq, ikkalasida ham kirish havolalari mavjud. Ammo bu yetarli emas.
 
-The former `"family"` object has been unlinked from the root, there's no reference to it any more, so the whole island becomes unreachable and will be removed.
+Avvalgi `"family"` ob'ekti ildizdan ajratib qo'yilgan, endi unga havola yo'q, shuning uchun butun orolga ulanish imkonsiz bo'lib qoladi va olib tashlanadi.
 
-## Internal algorithms
+## Ichki algoritmlar
 
-The basic garbage collection algorithm is called "mark-and-sweep".
+Axlat yig'ishning asosiy algoritmi "belgilash algoritmi" ("mark-and-sweep") deb nomlanadi.
 
-The following "garbage collection" steps are regularly performed:
+Quyidagi "axlat yig'ish" bosqichlari muntazam ravishda amalga oshiriladi:
 
-- The garbage collector takes roots and "marks" (remembers) them.
-- Then it visits and "marks" all references from them.
-- Then it visits marked objects and marks *their* references. All visited objects are remembered, so as not to visit the same object twice in the future.
-- ...And so on until there are unvisited references (reachable from the roots).
-- All objects except marked ones are removed.
+- Axlat yig'uvchi ildizni oladi va ularni "belgilaydi" (eslaydi).
+- Keyin u tashrif buyuradi va ulardan barcha murojaatlarni "belgilaydi".
+- Keyin u belgilangan ob'ektlarga tashrif buyuradi va ularning *havolalarini* belgilaydi. Kelajakda bitta ob'ektga ikki marta bormaslik uchun barcha tashrif buyurgan ob'ektlar eslab qolinadi.
+- ...Va shunga o'xshash barcha yo'nalishlarga (ildizlardan erishish mumkin) tashrif buyurilgunga qadar.
+- Belgilanganlardan tashqari barcha ob'ektlar o'chiriladi.
 
-For instance, let our object structure look like this:
+Masalan, bizning ob'ektimiz tuzilishi quyidagi ko'rinishga ega bo'lsin:
 
 ![](garbage-collection-1.svg)
 
-We can clearly see an "unreachable island" to the right side. Now let's see how "mark-and-sweep" garbage collector deals with it.
+Biz o'ng tomonga "erishib bo'lmaydigan orol" ni aniq ko'rishimiz mumkin. Keling, axlat yig'uvchilar u bilan qanday kurashayotganini ko'rib chiqaylik.
 
-The first step marks the roots:
+Birinchi qadam ildizlarni belgilaydi:
 
 ![](garbage-collection-2.svg)
 
-Then their references are marked:
+Keyin ularning havolalari belgilanadi:
 
 ![](garbage-collection-3.svg)
 
-...And their references, while possible:
+...Va ularning havolalari, iloji bo'lsa:
 
 ![](garbage-collection-4.svg)
 
-Now the objects that could not be visited in the process are considered unreachable and will be removed:
+Endi jarayonda tashrif buyurib bo'lmaydigan ob'ektlar erishish mumkin emas deb hisoblanadi va o'chirib tashlanadi:
 
 ![](garbage-collection-5.svg)
 
-That's the concept of how garbage collection works.
+Bu axlat yig'ish qanday ishlashining kontseptsiyasi.
 
-JavaScript engines apply many optimizations to make it run faster and not affect the execution.
+JavaScript interpretatori uni tezroq ishlashi va bajarilishiga ta'sir qilmasligi uchun ko'plab optimallashtirishlarni qo'llaydi.
 
-Some of the optimizations:
+Ba'zi optimallashtirishlar:
 
-- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". Many  objects appear, do their job and die fast, they can be cleaned up aggressively. Those that survive for long enough, become "old" and are examined less often.
-- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine tries to split the garbage collection into pieces. Then the pieces are executed one by one, separately. That requires some extra bookkeeping between them to track changes, but we have many tiny delays instead of a big one.
-- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+- **Avlodlar to'plami (Generational collection)** - ob'ektlar ikkita to'plamga bo'linadi: "yangilari" va "eskilari". Ko'p ob'ektlar paydo bo'ladi, o'z ishlarini bajarishadi va tezda o'lishadi, ularni tajovuzkor tarzda tozalash mumkin. Yetarlicha uzoq vaqt omon qolganlar, "eski" bo'lib, kamroq tekshiriladi.
+- **Qo'shimcha yig'ish (Incremental collection)** - agar ob'ektlar ko'p bo'lsa va biz birma-bir yurib, butun ob'ektni belgilashga harakat qilsak, bu biroz vaqt talab qilishi va bajarilishdagi kechikishlarni keltirib chiqarishi mumkin. Shunday qilib, interpretator axlat yig'ilishini qismlarga ajratishga harakat qiladi. Keyin qismlar birma-bir, alohida bajariladi. Buning uchun o'zgarishlarni kuzatib borish uchun ular o'rtasida qo'shimcha hisob olib borilishi kerak, ammo bizda aksariyat kechikishlar mavjud, ammo katta emas.
+- **Bo'sh vaqtni yig'ish (Idle-time collection)** - ishlashga ta'sirini kamaytirish uchun axlat yig'uvchi faqat protsessor uzilishlari vaqtida ishlashga harakat qiladi.
 
-There are other optimizations and flavours of garbage collection algorithms. As much as I'd like to describe them here, I have to hold off, because different engines implement different tweaks and techniques. And, what's even more important, things change as engines develop, so going deeper "in advance", without a real need is probably not worth that. Unless, of course, it is a matter of pure interest, then there will be some links for you below.
+Axlat yig'ish algoritmlarini optimallashtirish va turli xil usullar mavjud. Lekin bu yerda ularni qanday ta'riflashni istasam ham, men bundan kechishim kerak, chunki turli JavaScript interpretatorlari turli usullar va sozlamalardan foydalanadilar. Va bundan ham muhimi, interpretatorlarning rivojlanishi bilan hamma narsa o'zgaradi, shuning uchun bu mavzuni oldindan ko'rib chiqish, haqiqiy ehtiyojsiz, ehtimol bunga loyiq emas. Agar, albatta, bu sof qiziqish masalasi bo'lmasa, unda quyidagi ba'zi havolalar siz uchun foydali bo'ladi.
 
-## Summary
+## Xulosa
 
-The main things to know:
+Bilish kerak bo'lgan asosiy narsalar:
 
-- Garbage collection is performed automatically. We cannot force or prevent it.
-- Objects are retained in memory while they are reachable.
-- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole.
+- Axlat yig'ish avtomatik ravishda amalga oshiriladi. Biz uni majbuan oldini ololmaymiz.
+- Ob'ektlar erishuvchan bo'lganda xotirada saqlanadi.
+- Yo'naltiriladigan havola (ildizdan) erishish bilan bir xil emas: o'zaro bog'langan ob'ektlar to'plami umuman olganda yetib bo'lmaydigan bo'lib qolishi mumkin.
 
-Modern engines implement advanced algorithms of garbage collection.
+Zamonaviy interpretatorlar axlat yig'ishning zamonaviy algoritmlarini amalga oshirmoqdalar.
 
-A general book "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jones et al) covers some of them.
+Umumiy kitob "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jons va boshqalar) ularning ayrimlarini qamrab oladi.
 
-If you are familiar with low-level programming, the more detailed information about V8 garbage collector is in the article [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+Agar siz past darajadagi dasturlarni yaxshi bilsangiz, V8 axlatni yig'uvchi haqida batafsil ma'lumot [V8 tur: Axlat yig'ish](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection) maqolasida keltirilgan.
 
-[V8 blog](http://v8project.blogspot.com/) also publishes articles about changes in memory management from time to time. Naturally, to learn the garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](http://mrale.ph) who worked as one of V8 engineers. I'm saying: "V8", because it is best covered with articles in the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+Bundan tashqari, [V8 interpretatorning blogida](http://v8project.blogspot.com/) vaqti bilan xotira boshqaruvidagi o'zgarishlar haqida maqolalar chop etiladi. Albatta, axlat yig'ishni o'rganish uchun siz V8 interpretatori ichida qanday ishlashini tushunishingiz kerak. Buni V8-ni ishlab chiqqan muhandislardan biri [Vyacheslav Egorov](http://mrale.ph) blogida o'qishingiz mumkin. Men "V8" haqida gapiryapman, chunki u internetdagi maqolalar bilan eng yaxshi yoritilgan. Boshqa interpretatorda ko'plab yondashuvlar o'xshash, ammo axlat yig'ish ko'p jihatda farq qiladi.
 
-In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.  
+Interpretatorni chuqur bilish, past darajadagi optimallashtirish kerak bo'lganda yaxshi bo'ladi. Buni til bilan tanishganingizdan keyin keyingi qadam sifatida rejalashtirish oqilona bo'ladi.

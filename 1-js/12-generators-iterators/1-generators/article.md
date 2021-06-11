@@ -1,15 +1,15 @@
 
-# Generators
+# Generatorlar
 
-Regular functions return only one, single value (or nothing).
+Muntazam funktsiyalar faqat bitta, yagona qiymatni qaytaradi (yoki hech narsa).
 
-Generators can return ("yield") multiple values, possibly an infinite number of values, one after another, on-demand. They work great with [iterables](info:iterable), allowing to create data streams with ease.
+Generatorlar talabga binoan bir nechta qiymatlarni, ehtimol cheksiz ko'p qiymatlarni qaytarishlari mumkin. Ular ma'lumotlar oqimlarini osongina yaratishga imkon beradigan [ketma-ket saraluvchan](info:iterable) bilan juda yaxshi ishlaydi.
 
-## Generator functions
+## Generator funktsiyalari
 
-To create a generator, we need a special syntax construct: `function*`, so-called "generator function".
+Generator yaratish uchun biz maxsus sintaksis konstruktsiyasiga muhtojmiz: "generator funktsiyasi" deb nomlangan `function*`.
 
-It looks like this:
+Bunga o'xshaydi:
 
 ```js
 function* generateSequence() {
@@ -19,22 +19,22 @@ function* generateSequence() {
 }
 ```
 
-When `generateSequence()` is called, it does not execute the code. Instead, it returns a special object, called "generator".
+`generateSequence()` chaqirilganda, u kodni bajarmaydi. Buning o'rniga u "generator" deb nomlangan maxsus obyektni qaytaradi.
 
 ```js
-// "generator function" creates "generator object"
+// "generator funktsiya" "generator obyektni" yaratadi
 let generator = generateSequence();
 ```
 
-The `generator` object can be perceived as a "frozen function call":
+`Generator` obyekti "muzlatilgan funktsiya chaqiruvi" sifatida qabul qilinishi mumkin:
 
 ![](generateSequence-1.svg)
 
-Upon creation, the code execution is paused at the very beginning.
+Yaratilgandan so'ng, kodni bajarishning eng boshida to'xtatiladi.
 
-The main method of a generator is `next()`. When called, it resumes execution till the nearest `yield <value>` statement. Then the execution pauses, and the value is returned to the outer code.
+Generatorning asosiy usuli `next()`. Chaqirilganda, u eng yaqin `yield <value>` ifodagacha bajarilishni davom ettiradi. Keyin ijro to'xtaydi va qiymat tashqi kodga qaytariladi.
 
-For instance, here we create the generator and get its first yielded value:
+Masalan, bu yerda biz generatorni yaratamiz va uning dastlabki qiymatini olamiz:
 
 ```js run
 function* generateSequence() {
@@ -52,15 +52,15 @@ let one = generator.next();
 alert(JSON.stringify(one)); // {value: 1, done: false}
 ```
 
-The result of `next()` is always an object:
-- `value`: the yielded value.
-- `done`: `false` if the code is not finished yet, otherwise `true`.
+`next()` natijasi har doim obyekt:
+- `value`: olingan qiymat.
+- `done`: `false` agar kod hali tugamagan bo'lsa, aks holda `true`.
 
-As of now, we got the first value only:
+Hozirda biz faqat birinchi qiymatni oldik:
 
 ![](generateSequence-2.svg)
 
-Let's call `generator.next()` again. It resumes the execution and returns the next `yield`:
+Yana `generator.next()` ni chaqiraylik. U ijro etilishini davom ettiradi va keyingi `yield` ni qaytaradi:
 
 ```js
 let two = generator.next();
@@ -70,7 +70,7 @@ alert(JSON.stringify(two)); // {value: 2, done: false}
 
 ![](generateSequence-3.svg)
 
-And, if we call it the third time, then the execution reaches `return` statement that finishes the function:
+Va agar biz uni uchinchi marta chaqirsak, unda funktsiya tugaydigan `return` ifodasiga yetadi:
 
 ```js
 let three = generator.next();
@@ -80,25 +80,25 @@ alert(JSON.stringify(three)); // {value: 3, *!*done: true*/!*}
 
 ![](generateSequence-4.svg)
 
-Now the generator is done. We should see it from `done:true` and process `value:3` as the final result.
+Endi generator tugadi. Biz buni yakunlangan natija sifatida `done:true` va jarayonning `value:3` qiymatidan ko'rishimiz kerak.
 
-New calls `generator.next()` don't make sense any more. If we make them, they return the same object: `{done: true}`.
+`generator.next()` yangi chaqiruvlari endi mantiqiy emas. Agar biz ularni qilsak, ular xuddi shu obyektni qaytaradilar: `{done: true}`.
 
-There's no way to "roll back" a generator. But we can create another one by calling `generateSequence()`.
+Generatorni "orqaga qaytarish" imkoni yo'q. Ammo `generateSequence()` ni chaqirib boshqasini yaratishimiz mumkin.
 
-So far, the most important thing to understand is that generator functions, unlike regular function, do not run the code. They serve as "generator factories". Running `function*` returns a generator, and then we ask it for values.
+Hozircha eng muhim narsani tushunish kerakki, generator funktsiyalari, odatdagi funktsiyalardan farqi o'laroq, kodni bajarmaydi. Ular "generator zavodlari" sifatida xizmat qiladi. `function*` ishga tushirish generatorni qaytaradi va biz undan qiymatlarni so'raymiz.
 
-```smart header="`function* f(…)` or `function *f(…)`?"
-That's a minor religious question, both syntaxes are correct.
+```smart header="`function* f(…)` yoki `function *f(…)`?"
+Bu kichik diniy savol, ikkala sintaksis ham to'g'ri.
 
-But usually the first syntax is preferred, as the star `*` denotes that it's a generator function, it describes the kind, not the name, so it should stick with the `function` keyword.
+Ammo odatda birinchi sintaksisga afzallik beriladi, chunki `*` yulduzi bu generator funktsiyasi ekanligini anglatadi, u ismni emas, balki turini tavsiflaydi, shuning uchun u `function` kalit so'ziga ulanishi kerak.
 ```
 
-## Generators are iterable
+## Generatorlar ketma-ket saraluvchandir
 
-As you probably already guessed looking at the `next()` method, generators are [iterable](info:iterable).
+Ehtimol, `next()` usulini ko'rib chiqishni taxmin qilganingizdek, generatorlar [ketma-ket saraluvchan](info:iterable).
 
-We can get loop over values by `for..of`:
+Biz qiymatlar bo'yicha `for..of` orqali tsiklashimiz mumkin:
 
 ```js run
 function* generateSequence() {
@@ -114,11 +114,11 @@ for(let value of generator) {
 }
 ```
 
-That's a much better-looking way to work with generators than calling `.next().value`, right?
+Bu generatorlar bilan ishlashning `.next().value` chaqirishdan ko'ra ancha yaxshi usulidir, to'g'rimi?
 
-...But please note: the example above shows `1`, then `2`, and that's all. It doesn't show `3`!
+...Iltimos, diqqat qiling: yuqoridagi misolda `1`, keyin `2` ko'rsatilgan va barchasi shu. `3` ko'rsatilmaydi!
 
-It's because for-of iteration ignores the last `value`, when `done: true`. So, if we want all results to be shown by `for..of`, we must return them with `yield`:
+Buning sababi, takrorlash uchun oxirgi `value`, `done: true` ni e'tiborsiz qoldiradi. Shunday qilib, agar biz barcha natijalarni `for..of` bilan ko'rsatishni istasak, ularni `yield` bilan qaytarishimiz kerak:
 
 ```js run
 function* generateSequence() {
@@ -132,11 +132,11 @@ function* generateSequence() {
 let generator = generateSequence();
 
 for(let value of generator) {
-  alert(value); // 1, then 2, then 3
+  alert(value); // 1, so'ng 2, keyin 3
 }
 ```
 
-Naturally, as generators are iterable, we can call all related functionality, e.g. the spread operator `...`:
+Tabiiyki, generatorlar takrorlanadigan bo'lgani uchun biz barcha tegishli funktsiyalarni chaqira olamiz, masalan. tarqatish operatori `...`:
 
 ```js run
 function* generateSequence() {
@@ -150,30 +150,30 @@ let sequence = [0, ...generateSequence()];
 alert(sequence); // 0, 1, 2, 3
 ```
 
-In the code above, `...generateSequence()` turns the iterable into array of items (read more about the spread operator in the chapter [](info:rest-parameters-spread-operator#spread-operator))
+Yuqoridagi kodda `...generateSequence()` ketma-ket saraluvchanlarni narsalar massiviga aylantiradi ([](info:rest-parameters-spread-operator#spread-operator) bo'limidagi tarqatish operatori haqida ko'proq ma'lumot oling)
 
-## Using generators instead of iterables
+## Ketma-ket saraluvchanlarning o'rniga generatorlardan foydalanish
 
-Some time ago, in the chapter [](info:iterable) we created an iterable `range` object that returns values `from..to`.
+Bir muncha vaqt oldin, [](info:iterable) bo'limida biz qiymatlarni `from-to` ga qaytaradigan, ketma-ket saraluvchan `range` obyektini yaratdik.
 
-Here, let's remember the code:
+Keling, kodni eslab qolaylik:
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  // for..of calls this method once in the very beginning
+  // for..of bu usulni boshida bir marta chaqiradi
   [Symbol.iterator]() {
-    // ...it returns the iterator object:
-    // onward, for..of works only with that object, asking it for next values
+    // ...ketma-ket saraluvchan obyektini qaytaradi:
+    // oldinga, for..of faqat shu obyekt bilan ishlaydi, undan keyingi qiymatlarni so'raydi
     return {
       current: this.from,
       last: this.to,
 
-      // next() is called on each iteration by the for..of loop
+      // next() for..of tsikldan har bir iteratsiyada chaqiriladi
       next() {
-        // it should return the value as an object {done:.., value :...}
+        // u qiymatni obyekt sifatida qaytarishi kerak {done:.., value :...}
         if (this.current <= this.last) {
           return { done: false, value: this.current++ };
         } else {
@@ -187,7 +187,7 @@ let range = {
 alert([...range]); // 1,2,3,4,5
 ```
 
-Using a generator to make iterable sequences is so much more elegant:
+Ketma-ket saraluchanni yaratish uchun generatordan foydalanish juda ham oqlangan:
 
 ```js run
 function* generateSequence(start, end) {
@@ -201,18 +201,18 @@ let sequence = [...generateSequence(1,5)];
 alert(sequence); // 1, 2, 3, 4, 5
 ```
 
-...But what if we'd like to keep a custom `range` object?
+...Ammo, agar biz odatiy `range` obyektini saqlamoqchi bo'lsak nima bo'ladi?
 
-## Converting Symbol.iterator to generator
+## Symbol.iterator-ni generatorga aylantirish
 
-We can get the best from both worlds by providing a generator as `Symbol.iterator`:
+Biz generatorni `Symbol.iterator` sifatida taqdim etish orqali har ikkala dunyodan eng yaxshisini olishimiz mumkin:
 
 ```js run
 let range = {
   from: 1,
   to: 5,
 
-  *[Symbol.iterator]() { // a shorthand for [Symbol.iterator]: function*()
+  *[Symbol.iterator]() { // [Symbol.iterator]: function*() uchun qisqartirma
     for(let value = this.from; value <= this.to; value++) {
       yield value;
     }
@@ -222,39 +222,39 @@ let range = {
 alert( [...range] ); // 1,2,3,4,5
 ```
 
-The `range` object is now iterable.
+`range` obyekti endi ketma-ket saraluvchan.
 
-That works pretty well, because when `range[Symbol.iterator]` is called:
-- it returns an object (now a generator)
-- that has `.next()` method (yep, a generator has it)
-- that returns values in the form `{value: ..., done: true/false}` (check, exactly what generator does).
+Bu juda yaxshi ishlaydi, chunki qachon `range[Symbol.iterator]` chaqiriladi:
+- u obyektni qaytaradi (endi generator)
+- `.next()` usuliga ega (ha, generatorda mavjud)
+- qiymatlarni `{value: ..., done: true/false}` shaklida qaytaradi (tekshiring, aynan nimani generator bajaradi).
 
-That's not a coincidence, of course. Generators aim to make iterables easier, so we can see that.
+Bu tasodif emas, albatta. Generatorlar ketma-ket saraluvchanlarni osonlashtirishni maqsad qilib qo'yishgan, shuning uchun biz buni ko'rishimiz mumkin.
 
-The last variant with a generator is much more concise than the original iterable code, and keeps the same functionality.
+Generatordagi so'nggi variant asl takrorlanadigan kodga qaraganda ancha ixcham va bir xil funktsiyani saqlaydi.
 
-```smart header="Generators may continue forever"
-In the examples above we generated finite sequences, but we can also make a generator that yields values forever. For instance, an unending sequence of pseudo-random numbers.
+```smart header="Generatorlar abadiy davom etishi mumkin"
+Yuqoridagi misollarda biz cheklangan ketma-ketliklarni yaratdik, ammo abadiy qiymatlarni beradigan generatorni ham yaratishimiz mumkin. Masalan, soxta tasodifiy sonlarning tugamaydigan ketma-ketligi.
 
-That surely would require a `break` in `for..of`, otherwise the loop would repeat forever and hang.
+Buning uchun `for..of` ning `break` usuli kerak bo'ladi, aks holda bu halqa abadiy takrorlanib, osilib qoladi
 ```
 
-## Generator composition
+## Generatorlar tarkibi
 
-Generator composition is a special feature of generators that allows to transparently "embed" generators in each other.
+Generator tarkibi - generatorlarni bir-biriga shaffof ravishda "joylashtirish" imkonini beradigan generatorlarning o'ziga xos xususiyati.
 
-For instance, we'd like to generate a sequence of:
-- digits `0..9` (character codes 48..57),
-- followed by alphabet letters `a..z` (character codes 65..90)
-- followed by uppercased letters `A..Z` (character codes 97..122)
+Masalan, biz ketma-ketlikni yaratmoqchimiz:
+- `0..9` raqamlari (belgilar kodlari 48..57),
+- keyin alifbo harflari `a..z` (belgilar kodlari 65..90)
+- keyin katta harflar `A..Z` (belgilar kodlari 97..122)
 
-Then we plan to create passwords by selecting characters from it (could add syntax characters as well), but need to generate the sequence first.
+Keyin biz undan belgilarni tanlash orqali parollar yaratishni rejalashtirmoqdamiz (sintaksis belgilarini ham qo'shishi mumkin), lekin oldin ketma-ketlikni yaratishimiz kerak.
 
-We already have `function* generateSequence(start, end)`. Let's reuse it to deliver 3 sequences one after another, together they are exactly what we need.
+Bizda allaqachon `function* generateSequence(start, end)` mavjud. Keling, uni uchta ketma-ketlikni yetkazib berish uchun qayta ishlataylik, birgalikda ular bizga kerakli narsadir.
 
-In a regular function, to combine results from multiple other functions, we call them, store the results, and then join at the end.
+Muntazam funktsiyalarda bir nechta boshqa funktsiyalar natijalarini birlashtirish uchun biz ularni chaqiramiz, natijalarni saqlaymiz va so'ngra birlashtiramiz.
 
-For generators, we can do better, like this:
+Generatorlar uchun biz quyidagilarni yaxshiroq qilishimiz mumkin:
 
 ```js run
 function* generateSequence(start, end) {
@@ -285,9 +285,9 @@ for(let code of generatePasswordCodes()) {
 alert(str); // 0..9A..Za..z
 ```
 
-The special `yield*` directive in the example is responsible for the composition. It *delegates* the execution to another generator. Or, to say it simple, it runs generators and transparently forwards their yields outside, as if they were done by the calling generator itself.
+Misol uchun maxsus `yield*` direktivasi kompozitsiya uchun javobgardir. Bu ijroni boshqa generatorga *topshiradi*. Yoki, oddiy qilib aytganda, u generatorlarni bajaradi va shaffof ravishda ularning hosilini tashqarida, xuddi chaqiruvchi generatorning o'zi bajargandek qilib uzatadi.
 
-The result is the same as if we inlined the code from nested generators:
+Natija xuddi biz ichki o'rnatilgan generatorlardan kodni kiritganimiz bilan bir xil:
 
 ```js run
 function* generateSequence(start, end) {
@@ -318,26 +318,26 @@ for(let code of generateAlphaNum()) {
 alert(str); // 0..9A..Za..z
 ```
 
-A generator composition is a natural way to insert a flow of one generator into another.
+Generator tarkibi - bu bir generatorning oqimini boshqasiga kiritishning tabiiy usuli.
 
-It works even if the flow of values from the nested generator is infinite. It's simple and doesn't use extra memory to store intermediate results.
+Ichki generatordan qiymatlar oqimi cheksiz bo'lsa ham ishlaydi. Bu oddiy va oraliq natijalarni saqlash uchun qo'shimcha xotiradan foydalanilmaydi.
 
-## "yield" is a two-way road
+## "yield" bu ikki tomonlama yo'l
 
-Till this moment, generators were like "iterators on steroids". And that's how they are often used.
+Shu paytgacha generatorlar "steroidlardagi ketma-ket saraluvchan" kabi edi. Va shuning uchun ular tez-tez ishlatiladi.
 
-But in fact they are much more powerful and flexible.
+Ammo aslida ular ancha kuchli va moslashuvchan.
 
-That's because `yield` is a two-way road: it not only returns the result outside, but also can pass the value inside the generator.
+Buning sababi shundaki, `yield` ikki tomonlama yo'ldir: u nafaqat natijani tashqariga qaytaradi, balki generator ichidagi qiymatni ham o'tkazishi mumkin.
 
-To do so, we should call `generator.next(arg)`, with an argument. That argument becomes the result of `yield`.
+Buning uchun argument bilan `generator.next(arg)` ni chaqirishimiz kerak. Ushbu argument `yield` natijasiga aylanadi.
 
-Let's see an example:
+Keling, bir misolni ko'rib chiqaylik:
 
 ```js run
 function* gen() {
 *!*
-  // Pass a question to the outer code and wait for an answer
+  // Savolni tashqi kodga o'tkazing va javobni kuting
   let result = yield "2 + 2?"; // (*)
 */!*
 
@@ -346,27 +346,27 @@ function* gen() {
 
 let generator = gen();
 
-let question = generator.next().value; // <-- yield returns the value
+let question = generator.next().value; // <-- yield qiymatni qaytaradi
 
-generator.next(4); // --> pass the result into the generator  
+generator.next(4); // --> natijani generatorga o'tkazish
 ```
 
 ![](genYield2.svg)
 
-1. The first call `generator.next()` is always without an argument. It starts the execution and returns the result of the first `yield` ("2+2?"). At this point the generator pauses the execution (still on that line).
-2. Then, as shown at the picture above, the result of `yield` gets into the `question` variable in the calling code.
-3. On `generator.next(4)`, the generator resumes, and `4` gets in as the result: `let result = 4`.
+1. Birinchi chaqiruv `generator.next()` har doim argumentsiz. U ijroni boshlaydi va birinchi `yield` ("2+2?") natijasini qaytaradi. Shu nuqtada generator bajarilishini to'xtatadi (hali ham o'sha satrda).
+2. Keyin, yuqoridagi rasmda ko'rsatilgandek, `yield` natijasi chaqiruv kodidagi `question` o'zgaruvchanga tushadi.
+3. `generator.next(4)` da generator qayta ishlaydi va natijada `4` oladi: `let result = 4`.
 
-Please note, the outer code does not have to immediately call`next(4)`. It may take time to calculate the value. This is also a valid code:
+Iltimos, e'tibor bering, tashqi kod darhol `next(4)` chaqirish shart emas. Qiymatni hisoblash uchun vaqt kerak bo'lishi mumkin. Bu shuningdek yaroqli kod:
 
 ```js
-// resume the generator after some time
+// bir muncha vaqt o'tgach generatorni davom ettiring
 setTimeout(() => generator.next(4), 1000);
 ```
 
-The syntax may seem a bit odd. It's quite uncommon for a function and the calling code to pass values around to each other. But that's exactly what's going on.
+Sintaksis biroz g'alati tuyulishi mumkin. Funktsiya va chaqiruv kodi qiymatlarni bir-biriga o'tkazishi juda kam uchraydi. Ammo aynan shu narsa sodir bo'lmoqda.
 
-To make things more obvious, here's another example, with more calls:
+Ishni yanada aniqroq qilish uchun yana bir misol, qo'shimcha chaqiruvlar:
 
 ```js run
 function* gen() {
@@ -388,36 +388,36 @@ alert( generator.next(4).value ); // "3 * 3?"
 alert( generator.next(9).done ); // true
 ```
 
-The execution picture:
+Ijro etiladigan rasm:
 
 ![](genYield2-2.svg)
 
-1. The first `.next()` starts the execution... It reaches the first `yield`.
-2. The result is returned to the outer code.
-3. The second `.next(4)` passes `4` back to the generator as the result of the first `yield`, and resumes the execution.
-4. ...It reaches the second `yield`, that becomes the result of the generator call.
-5. The third `next(9)` passes `9` into the generator as the result of the second `yield` and resumes the execution that reaches the end of the function, so `done: true`.
+1. Birinchi `.next()` bajarilishini boshlaydi... Birinchi `yield` ga yetadi.
+2. Natijada tashqi kodga qaytariladi.
+3. Ikkinchi `.next(4)` birinchi `yield` natijasida `4` ni generatorga qaytaradi va bajarilishini davom ettiradi.
+4. ...U generatorning chaqiruvi natijasi bo'lgan ikkinchi `yield` ga yetadi.
+5. Uchinchi `.next(9)` ikkinchi `yield` natijasida generatorga `9` o'tadi va funktsiya oxirigacha bajarilishini davom ettiradi, shunday qilib `done: true`.
 
-It's like a "ping-pong" game. Each `next(value)` (excluding the first one) passes a value into the generator, that becomes the result of the current `yield`, and then gets back the result of the next `yield`.
+Bu "stol tennis" o'yiniga o'xshaydi. Har bir `next(value)` (birinchisidan tashqari) generatorga qiymatni o'tkazadi, bu joriy `yield` natijasiga aylanadi va keyin keyingi `yield` natijasini qaytaradi.
 
 ## generator.throw
 
-As we observed in the examples above, the outer code may pass a value into the generator, as the result of `yield`.
+Yuqoridagi misollarda kuzatganimizdek, tashqi kod `yield` natijasida generatorga qiymat o'tkazishi mumkin.
 
-...But it can also initiate (throw) an error there. That's natural, as an error is a kind of result.
+...Ammo u yerda ham xato boshlanishi (tashlanishi) mumkin. Bu tabiiy, chunki xato - bu natija.
 
-To pass an error into a `yield`, we should call `generator.throw(err)`. In that case, the `err` is thrown in the line with that `yield`.
+Xatolikni `yield` ga o'tkazish uchun biz `generator.throw(err)` deb nomlashimiz kerak. Bunday holda, `err` shu `yield` bilan bir satrga tashlanadi.
 
-For instance, here the yield of `"2 + 2?"` leads to an error:
+Masalan, `"2 + 2?"` hosilasi xatolikka olib keladi:
 
 ```js run
 function* gen() {
   try {
     let result = yield "2 + 2?"; // (1)
 
-    alert("The execution does not reach here, because the exception is thrown above");
+    alert("Ijro etish bu yerga yetib bormaydi, chunki istisno yuqoriga tashlangan");
   } catch(e) {
-    alert(e); // shows the error
+    alert(e); // xatoni ko'rsatadi
   }
 }
 
@@ -426,19 +426,19 @@ let generator = gen();
 let question = generator.next().value;
 
 *!*
-generator.throw(new Error("The answer is not found in my database")); // (2)
+generator.throw(new Error("Javob mening ma'lumotlar bazasida topilmadi")); // (2)
 */!*
 ```
 
-The error, thrown into the generator at the line `(2)` leads to an exception in the line `(1)` with `yield`. In the example above, `try..catch` catches it and shows.
+`(2)` satridagi generatorga tashlangan xato `(1)` satrida `yield` bilan istisnoga olib keladi. Yuqoridagi misolda `try..catch` uni ushlaydi va ko'rsatadi.
 
-If we don't catch it, then just like any exception, it "falls out" the generator into the calling code.
+Agar biz uni ushlamasak, unda har qanday istisno kabi, u generatorni chaqiruv kodiga "tushiradi".
 
-The current line of the calling code is the line with `generator.throw`, labelled as `(2)`. So we can catch it here, like this:
+Chaqiruv kodining joriy satri `(2)` deb belgilangan `generator.throw` satridir. Shunday qilib, biz uni shu yerda ushlashimiz mumkin:
 
 ```js run
 function* generate() {
-  let result = yield "2 + 2?"; // Error in this line
+  let result = yield "2 + 2?"; // Ushbu satrda xatolik yuz berdi
 }
 
 let generator = generate();
@@ -447,23 +447,23 @@ let question = generator.next().value;
 
 *!*
 try {
-  generator.throw(new Error("The answer is not found in my database"));
+  generator.throw(new Error("Javob mening ma'lumotlar bazasida topilmadi"));
 } catch(e) {
-  alert(e); // shows the error
+  alert(e); // xatoni ko'rsatadi
 }
 */!*
 ```
 
-If we don't catch the error there, then, as usual, it falls through to the outer calling code (if any) and, if uncaught, kills the script.
+Agar biz u yerda xatoga yo'l qo'ymasak, u odatdagidek, tashqi chaqiruv kodiga tushadi (agar mavjud bo'lsa) va agar tutilmasa, skriptni o'ldiradi.
 
-## Summary
+## Xulosa
 
-- Generators are created by generator functions `function*(…) {…}`.
-- Inside generators (only) there exists a `yield` operator.
-- The outer code and the generator may exchange results via `next/yield` calls.
+- Generatorlar generator funktsiyalari tomonidan yaratiladi `function*(…) {…}`.
+- Generatorlar ichida (faqat) `yield` operatori mavjud.
+- Tashqi kod va generator `next/yield` chaqiruvlar orqali natijalarni almashtirishi mumkin.
 
-In modern JavaScript, generators are rarely used. But sometimes they come in handy, because the ability of a function to exchange data with the calling code during the execution is quite unique.
+Zamonaviy JavaScript-da generatorlar kamdan kam qo'llaniladi. Ammo ba'zida ular foydali bo'ladi, chunki bajarilish paytida funktsiyani chaqirish kodi bilan ma'lumot almashish qobiliyati juda noyobdir.
 
-Also, in the next chapter we'll learn async generators, which are used to read streams of asynchronously generated data in `for` loop.
+Shuningdek, keyingi bobda biz `for` tsiklida mos kelmaydigan ma'lumotlar oqimlarini o'qish uchun ishlatiladigan asinxron generatorlarni o'rganamiz.
 
-In web-programming we often work with streamed data, e.g. need to fetch paginated results, so that's a very important use case.
+Veb-dasturlashda biz ko'pincha oqim ma'lumotlari bilan ishlaymiz, masalan, sahifalangan natijalarni olish kerak, shuning uchun bu juda muhim holat.

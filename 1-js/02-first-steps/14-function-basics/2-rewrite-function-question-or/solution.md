@@ -1,17 +1,17 @@
-Using a question mark operator `'?'`:
+`'?'` Savol belgisi operatoridan foydalanish:
 
 ```js
 function checkAge(age) {
-  return (age > 18) ? true : confirm('Did parents allow you?');
+  return (age > 18) ? true : confirm('Ota-onangiz sizga ruxsat berdimi?');
 }
 ```
 
-Using OR `||` (the shortest variant):
+YOKI `||` (eng qisqa variant) dan foydalanish:
 
 ```js
 function checkAge(age) {
-  return (age > 18) || confirm('Did parents allow you?');
+  return (age > 18) || confirm('Ota-onangiz sizga ruxsat berdimi?'');
 }
 ```
 
-Note that the parentheses around `age > 18` are not required here. They exist for better readabilty.
+Shuni esda tutingki, bu erda `age > 18` ga qavs kerak emas. Ular yaxshiroq o'qilish uchun mavjud.

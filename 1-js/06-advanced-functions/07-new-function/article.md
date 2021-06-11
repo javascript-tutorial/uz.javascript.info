@@ -1,19 +1,19 @@
 
-# The "new Function" syntax
+# "new Function" sintaksisi
 
-There's one more way to create a function. It's rarely used, but sometimes there's no alternative.
+Funktsiyani yaratishning yana bir usuli mavjud. U kamdan kam qo'llaniladi, ammo ba'zida boshqa alternativa yo'q.
 
-## Syntax
+## Sintaksis
 
-The syntax for creating a function:
+Funktsiyani yaratish uchun sintaksis:
 
 ```js
 let func = new Function ([arg1[, arg2[, ...argN]],] functionBody)
 ```
 
-In other words, function parameters (or, more precisely, names for them) go first, and the body is last. All arguments are strings.
+Boshqacha qilib aytganda, funktsiya parametrlari (yoki aniqrog'i, ularning nomlari) birinchi bo'lib, tanasi esa oxirgi bo'ladi. Barcha argumentlar matnlardir.
 
-It's easier to understand by looking at an example. Here's a function with two arguments:
+Misolga qarab tushunish osonroq. Ikkita argumentli funktsiya:
 
 ```js run
 let sum = new Function('a', 'b', 'return a + b'); 
@@ -21,34 +21,34 @@ let sum = new Function('a', 'b', 'return a + b');
 alert( sum(1, 2) ); // 3
 ```
 
-If there are no arguments, then there's only a single argument, the function body:
+Agar argumentlar bo'lmasa, funktsiya tanasida faqat bitta argument mavjud:
 
 ```js run
-let sayHi = new Function('alert("Hello")');
+let sayHi = new Function('alert("Salom")');
 
-sayHi(); // Hello
+sayHi(); // Salom
 ```
 
-The major difference from other ways we've seen is that the function is created literally from a string, that is passed at run time. 
+Biz ko'rgan boshqa usullardan asosiy farqi shundaki, funktsiya to'liq ma'noda matndan yaratilgan bo'lib, u ishga tushirish vaqtida uzatiladi.
 
-All previous declarations required us, programmers, to write the function code in the script.
+Oldingi barcha deklaratsiyalar bizdan, dasturchilardan, funktsiya kodini skriptga yozishni talab qildi.
 
-But `new Function` allows to turn any string into a function. For example, we can receive a new function from a server and then execute it:
+Ammo `new Function` har qanday matnni funktsiyaga aylantirishga imkon beradi. Masalan, biz serverdan yangi funktsiyani qabul qilib, keyin uni bajarishimiz mumkin:
 
 ```js
-let str = ... receive the code from a server dynamically ...
+let str = ... kodni serverdan dinamik ravishda qabul qilish ...
 
 let func = new Function(str);
 func();
 ```
 
-It is used in very specific cases, like when we receive code from a server, or to dynamically compile a function from a template. The need for that usually arises at advanced stages of development.
+U juda aniq holatlarda, masalan, serverdan kod olganda yoki shablondan funktsiyani dinamik ravishda kompilyatsiya qilishda ishlatiladi. Bunga ehtiyoj odatda dasturlashning rivojlangan bosqichlarida paydo bo'ladi.
 
-## Closure
+## Yopish
 
-Usually, a function remembers where it was born in the special property `[[Environment]]`. It references the Lexical Environment from where it's created.
+Odatda funktsiya `[[Environment]]` maxsus xususiyatida qayerda tug'ilganligini eslaydi. U yaratilgan joydan leksik muhitga murojaat qiladi.
 
-But when a function is created using `new Function`, its `[[Environment]]` references not the current Lexical Environment, but instead the global one.
+Ammo funktsiya `new Function` yordamida yaratilganda, uning `[[Environment]]` hozirgi leksik muhitga emas, aksincha global muhitga murojaat qiladi.
 
 ```js run
 
@@ -65,7 +65,7 @@ function getFunc() {
 getFunc()(); // error: value is not defined
 ```
 
-Compare it with the regular behavior:
+Uni odatdagi xatti-harakatlar bilan taqqoslang:
 
 ```js run 
 function getFunc() {
@@ -78,30 +78,30 @@ function getFunc() {
   return func;
 }
 
-getFunc()(); // *!*"test"*/!*, from the Lexical Environment of getFunc
+getFunc()(); // *!*"test"*/!*, getFunc leksik muhitidan
 ```
 
-This special feature of `new Function` looks strange, but appears very useful in practice.
+`new Function` ning bu o'ziga xos xususiyati g'alati ko'rinadi, ammo amalda juda foydali.
 
-Imagine that we must create a function from a string. The code of that function is not known at the time of writing the script (that's why we don't use regular functions), but will be known in the process of execution. We may receive it from the server or from another source.
+Tasavvur qiling, biz matndan funktsiyani yaratishimiz kerak. Ushbu funktsiya kodi skriptni yozish paytida ma'lum emas (shuning uchun biz oddiy funktsiyalardan foydalanmaymiz), lekin bajarish jarayonida ma'lum bo'ladi. Biz uni serverdan yoki boshqa manbadan olishimiz mumkin.
 
-Our new function needs to interact with the main script.
+Bizning yangi funktsiyamiz asosiy skript bilan o'zaro aloqada bo'lishi kerak.
 
-Perhaps we want it to be able to access outer local variables?
+Ehtimol, biz uni tashqi mahalliy o'zgaruvchanlarga kirishini xohlaymiz?
 
-The problem is that before JavaScript is published to production, it's compressed using a *minifier* -- a special program that shrinks code by removing extra comments, spaces and -- what's important, renames local variables into shorter ones.
+Muammo shundaki, JavaScript-ni ishlab chiqarishga nashr etishdan oldin, u *minifier* -- maxsus dastur yordamida siqiladi, bu qo'shimcha sharhlarni, bo'sh joylarni olib tashlash orqali kodni qisqartiradi va -- eng muhimi, mahalliy o'zgaruvchanlarning nomlarini qisqaroqlariga o'zgartiradi.
 
-For instance, if a function has `let userName`, minifier replaces it `let a` (or another letter if this one is occupied), and does it everywhere. That's usually a safe thing to do, because the variable is local, nothing outside the function can access it. And inside the function, minifier replaces every mention of it. Minifiers are smart, they analyze the code structure, so they don't break anything. They're not just a dumb find-and-replace.
+Masalan, agar funktsiya `userName` ga ega bo'lsa, minifier uni `let a` (yoki boshqa bir harf bo'lsa) o'rnini egallaydi va hamma joyda bajaradi. Odatda bu xavfsiz narsa, chunki o'zgaruvchan mahalliy, funktsiyadan tashqarida unga kirish mumkin emas. Va funktsiya ichida minifier har bir eslatmani almashtiradi. Minifikatorlar aqlli, ular kodlar tuzilishini tahlil qiladi, shuning uchun ular hech narsani buzmaydi. Ular shunchaki topib-almashtiradigan soqov emas.
 
-But, if `new Function` could access outer variables, then it would be unable to find `userName`, since this is passed in as a string *after* the code is minified.
+Ammo, agar `new Function` tashqi o'zgaruvchanlarga kira oladigan bo'lsa, u holda `userName` ni topib bo'lmaydi, chunki bu kod minifikatsiya qilinganidan *keyin* matn sifatida uzatiladi.
 
-**Even if we could access outer lexical environment in `new Function`, we would have problems with minifiers.**
+**Hatto tashqi leksik muhitga `new Function` da kira olsak ham minifikatorlar bilan muammolarga duch kelamiz.**
 
-The "special feature" of `new Function` saves us from mistakes.
+`new Function` ning "o'ziga xos xususiyati" bizni xatolardan xalos qiladi.
 
-And it enforces better code. If we need to pass something to a function created by `new Function`, we should pass it explicitly as an argument.
+Va u kodni yanada yaxshi amalga oshiradi. Agar biz `new Function` tomonidan yaratilgan funktsiyaga biron bir narsani uzatishimiz kerak bo'lsa, uni aniq argument sifatida yetkazishimiz kerak.
 
-Our "sum" function actually does that right:
+Bizning "sum" funktsiyamiz buni to'g'ri bajaradi:
 
 ```js run 
 *!*
@@ -111,27 +111,27 @@ let sum = new Function('a', 'b', 'return a + b');
 let a = 1, b = 2;
 
 *!*
-// outer values are passed as arguments
+// tashqi qiymatlar argument sifatida beriladi
 alert( sum(a, b) ); // 3
 */!*
 ```
 
-## Summary
+## Xulosa
 
-The syntax:
+Sintaksis:
 
 ```js
 let func = new Function(arg1, arg2, ..., body);
 ```
 
-For historical reasons, arguments can also be given as a comma-separated list. 
+Tarixiy sabablarga ko'ra argumentlarni vergul bilan ajratilgan ro'yxat sifatida ham berish mumkin.
 
-These three mean the same:
+Ushbu uch narsa bir xil ma'noni anglatadi:
 
 ```js 
-new Function('a', 'b', 'return a + b'); // basic syntax
-new Function('a,b', 'return a + b'); // comma-separated
-new Function('a , b', 'return a + b'); // comma-separated with spaces
+new Function('a', 'b', 'return a + b'); // asosiy sintaksis
+new Function('a,b', 'return a + b'); // vergul bilan ajratilgan
+new Function('a , b', 'return a + b'); // bo'shliqlar va vergul bilan ajratilgan
 ```
 
-Functions created with `new Function`, have `[[Environment]]` referencing the global Lexical Environment, not the outer one. Hence, they cannot use outer variables. But that's actually good, because it saves us from errors. Passing parameters explicitly is a much better method architecturally and causes no problems with minifiers.
+`new Function` bilan yaratilgan funktsiyalar tashqi leksik muhitga emas, balki global leksik muhitga ishora qiluvchi `[[Environment]]` ga ega. Demak, ular tashqi o'zgaruvchanlardan foydalana olmaydilar. Ammo bu aslida yaxshi, chunki bu bizni xatolardan xalos qiladi. Parametrlarni aniq o'tkazish arxitektura jihatdan ancha yaxshi usuldir va minifikatorlar bilan hech qanday muammo tug'dirmaydi.

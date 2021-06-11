@@ -8,7 +8,7 @@
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="240" y="93" width="198" height="58"></rect>
             <text id="toString:-function" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="250" y="116">toString: function</tspan>
-                <tspan x="250" y="131">other object methods</tspan>
+                <tspan x="250" y="131">boshqa obyekt usullari</tspan>
             </text>
             <text id="Object.prototype" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="239" y="85">Object.prototype</tspan>
@@ -21,7 +21,7 @@
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="14" y="224" width="198" height="58"></rect>
             <text id="slice:-function" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="24" y="247">slice: function</tspan>
-                <tspan x="24" y="262">other array methods</tspan>
+                <tspan x="24" y="262">boshqa obyekt usullari</tspan>
             </text>
             <text id="[[Prototype]]" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="66" y="174">[[Prototype]]</tspan>
@@ -50,7 +50,7 @@
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="243" y="224" width="198" height="58"></rect>
             <text id="call:-function-other" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="253" y="247">call: function</tspan>
-                <tspan x="253" y="262">other function methods</tspan>
+                <tspan x="253" y="262">boshqa obyekt usullari</tspan>
             </text>
             <text id="Function.prototype" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="242" y="216">Function.prototype</tspan>
@@ -58,7 +58,7 @@
             <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="474" y="224" width="198" height="58"></rect>
             <text id="toFixed:-function" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="484" y="247">toFixed: function</tspan>
-                <tspan x="484" y="262">other number methods</tspan>
+                <tspan x="484" y="262">boshqa obyekt usullari</tspan>
             </text>
             <text id="Number.prototype" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
                 <tspan x="473" y="216">Number.prototype</tspan>

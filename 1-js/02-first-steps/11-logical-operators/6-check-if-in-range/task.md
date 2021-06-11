@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range between
+# Oralig'ini tekshiring
 
-Write an "if" condition to check that `age` is between `14` and `90` inclusively.
+`Age` ning `14` dan `90` gacha bo'lganligini tekshirish uchun "if" shartini yozing.
 
-"Inclusively" means that `age` can reach the edges `14` or `90`.
+"Gacha" degani, `age` `14` yoki `90` chekkalarga yetishi mumkin.

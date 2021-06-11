@@ -1,6 +1,6 @@
-That's because the child constructor must call `super()`.
+Buning sababi, bola konstruktor `super()` ni chaqirishi kerak.
 
-Here's the corrected code:
+Mana tuzatilgan kod:
 
 ```js run
 class Animal {
@@ -21,7 +21,7 @@ class Rabbit extends Animal {
 }
 
 *!*
-let rabbit = new Rabbit("White Rabbit"); // ok now
+let rabbit = new Rabbit("White Rabbit"); //yaxshi hozir
 */!*
 alert(rabbit.name); // White Rabbit
 ```

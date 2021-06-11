@@ -1,22 +1,22 @@
 
-Here's the explanations.
+Quyida tushuntirishlar.
 
-1. That's a regular object method call.
+1. Bu odatiy obyekt usulini chaqiruvi.
 
-2. The same, brackets do not change the order of operations here, the dot is first anyway.
+2. Xuddi shu, qavslar bu yerda ishlash tartibini o'zgartirmaydi, nuqta baribir birinchi o'rinda turadi.
 
-3. Here we have a more complex call `(expression).method()`. The call works as if it were split into two lines:
+3. Bu erda biz `(ifoda).method()` yanada murakkab chaqiruvga egamiz. Chaqiruv xuddi ikkita satrga bo'linganidek ishlaydi:
 
     ```js no-beautify
-    f = obj.go; // calculate the expression
-    f();        // call what we have
+    f = obj.go; // ifodani hisoblang
+    f();        // paydo bo'lgan narsani chaqiring
     ```
 
-    Here `f()` is executed as a function, without `this`.
+    Bu yerda `f()` funktsiya sifatida `this` siz bajariladi.
 
-4. The similar thing as `(3)`, to the left of the dot `.` we have an expression.
+4. Shunga o'xshash narsa `(3)`, nuqta chap tomonida `.` bizda iboralar mavjud.
 
-To explain the behavior of `(3)` and `(4)` we need to recall that property accessors (dot or square brackets) return a value of the Reference Type.  
+`(3)` va `(4)` xatti-harakatlarini tushuntirish uchun xususiyatga kiruvchilar (nuqta yoki kvadrat qavslar) havola turining qiymatini qaytarishini esga olishimiz kerak.
 
-Any operation on it except a method call (like assignment `=` or `||`) turns it into an ordinary value, which does not carry the information allowing to set `this`.
+Unda usul chaqiruvidan tashqari har qanday operatsiya (masalan, `=` yoki `||` topshirig'i kabi) uni oddiy qiymatga aylantiradi, bu `this` o'rnatishga imkon beradigan ma'lumotni o'z ichiga olmaydi.
 

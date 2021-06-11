@@ -1,7 +1,7 @@
 
-That's because `map.keys()` returns an iterable, but not an array.
+Buning sababi, `map.keys()` ketma-ket saraluchanni qaytaradi, lekin massivni qaytarmaydi.
 
-We can convert it into an array using `Array.from`:
+Biz uni massivga aylantirishimiz mumkin `Array.from`:
 
 
 ```js run

@@ -1,4 +1,4 @@
-Please note the subtle, but important detail of the solution. We don't convert `value` to number instantly after `prompt`, because after `value = +value` we would not be able to tell an empty string (stop sign) from the zero (valid number). We do it later instead.
+Iltimos, yechimning nozik, ammo muhim tafsilotlariga e'tibor bering. Biz `value` ni `prompt` dan so'ng darhol raqamga aylantirmaymiz, chunki `value = +value` dan keyin biz bo'sh satrni (to'xtash belgisi) noldan (amaldagi raqam) ajrata olmaymiz. Buni biz keyinroq qilamiz.
 
 
 ```js run demo
@@ -8,9 +8,9 @@ function sumInput() {
 
   while (true) {
 
-    let value = prompt("A number please?", 0);
+    let value = prompt("Iltimos, raqamni kiriting", 0);
 
-    // should we cancel?
+    // bekor qilishimiz kerakmi?
     if (value === "" || value === null || !isFinite(value)) break;
 
     numbers.push(+value);

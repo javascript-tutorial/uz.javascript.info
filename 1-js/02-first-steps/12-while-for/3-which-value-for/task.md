@@ -2,18 +2,18 @@ importance: 4
 
 ---
 
-# Which values get shown by the "for" loop?
+# "For" tsikli qaysi qiymatlarni ko'rsatiladi?
 
-For each loop write down which values it is going to show. Then compare with the answer.
+Har bir tsikl uchun qaysi qiymatlarni ko'rsatishini yozing. Keyin javob bilan solishtiring.
 
-Both loops `alert` same values or not?
+Har ikki tsikl bir xil qiymatlarni qaytaradimi `alert` yoki yo'qmi?
 
-1. The postfix form:
+1. Postfiks shakli:
 
     ```js
     for (let i = 0; i < 5; i++) alert( i );
     ```
-2. The prefix form:
+2. Prefiks shakli:
 
     ```js
     for (let i = 0; i < 5; ++i) alert( i );

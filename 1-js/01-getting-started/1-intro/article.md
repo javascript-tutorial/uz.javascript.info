@@ -22,75 +22,77 @@ Bugungi kunda JavaScript nafaqat brauzerda, balki serverda yoki aslida [JavaScri
 
 Brauzerlar o'z JavaScript interpretatorlariga ega, ular gohida "JavaScript virtual mashinasi" deb atalanadi.
 
-Har bir interpretatorni o'z nomi mavjud. Masalan:
+Har bir intetptretatorni o'z nomi mavjud. Masalan:
 
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- Chrome va Opera brauzerlarida qo'llanadi.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- Firefox brauzerida.
-- ...There are other codenames like "Trident" and "Chakra" for different versions of IE, "ChakraCore" for Microsoft Edge, "Nitro" and "SquirrelFish" for Safari, etc.
+- ...net Explorer brauerning turli xil versiyalari uchun "Trident" va "Chakra", Microsoft Edge uchun "ChakraCore", Safari uchun "Nitro" va "SquirrelFish" va boshqalar kabi boshqa kod nomlari mavjud.
 
-The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome and Opera.
+Yuqoridagi atamalarni eslab qolish yaxshi, chunki ular netdagi ishlab chiquvchilar maqolalarida qo'llaniladi. Biz ulardan ham foydalanamiz. Masalan, agar "X funktsiyasini V8 qo'llab-quvvatlasa", ehtimol u Chrome va Opera-da ishlaydi.
 
-```smart header="Interpretatorlar ishni qanday bajarishadi?"
+```smart header="Intetptretatorlar ishni qanday bajarishadi?"
 
-Engines are complicated. But the basics are easy.
+Intetptretatorlar murakkab. Ammo asoslari oson.
 
 1. The engine (embedded if it's a browser) reads ("parses") the script.
 2. Then it converts ("compiles") the script to the machine language.
 3. And then the machine code runs, pretty fast.
+1. intetptretator (agar u brauzer bo'lsa, avtomatik o'rnatilgan) skriptni o'qiydi ("tahlil qiladi").
 
-The engine applies optimizations at each step of the process. It even watches the compiled script as it runs, analyzes the data that flows through it, and applies optimizations to the machine code based on that knowledge. When it's done, scripts run quite fast.
+Interpretatatsiya jarayonning har bir bosqichida optimallashtirishlarni qo'llaydi. U hattoki kompilyatsiya qilingan skriptni ishlayotganda kuzatib boradi, u orqali oqib o'tadigan ma'lumotlarni tahlil qiladi va shu bilimga asoslangan holda mashina kodiga optimallashtirishlarni qo'llaydi. Tugatgandan so'ng, skriptlar juda tez ishlaydi.
 ```
 
-## What can in-browser JavaScript do? Brauzerdagi JavaScript nimani bajara oladi?
+## Brauzerdagi JavaScript nimani bajara oladi?
 
-Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or CPU, because it was initially created for browsers which do not require it.
+Zamonaviy JavaScript - bu "xavfsiz" dasturlash tili. Bu xotira yoki protsessorga(CPU) past darajadagi kirishni ta'minlamaydi, chunki dastlab uni talab qilmaydigan brauzerlar uchun yaratilgan.
 
-JavaScript's capabilities greatly depend on the environment it's running in. For instance, [Node.js](https://wikipedia.org/wiki/Node.js) supports functions that allow JavaScript to read/write arbitrary files, perform network requests, etc.
+JavaScript-ning imkoniyatlari u ishlayotgan muhitga juda bog'liq. Masalan, [Node.js](https://wikipedia.org/wiki/Node.js) JavaScript-ga o'zboshimchalik bilan fayllarni o'qish / yozish, tarmoq so'rovlarini bajarish va hk.
 
-In-browser JavaScript can do everything related to webpage manipulation, interaction with the user, and the webserver.
+Brauzerda JavaScript veb-sahifani boshqarish, foydalanuvchi bilan o'zaro aloqasi va veb-server bilan bog'liq barcha narsani amalga oshirishi mumkin.
 
 Masalan: 
 
-- Add new HTML to the page, change the existing content, modify styles.
-- React to user actions, run on mouse clicks, pointer movements, key presses.
-- Send requests over the network to remote servers, download and upload files (so-called [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) and [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) technologies).
-- Get and set cookies, ask questions to the visitor, show messages.
-- Remember the data on the client-side ("local storage").
+- Sahifaga yangi HTML qo'shish, mavjud tarkibni o'zgartirish, uslublarni o'zgartirish.
+- Foydalanuvchining harakatlariga munosabat bildirish, sichqonchani bosish, ko'rsatgich harakatlari, tugmachalarni bosish bilan ishlash.
+- Uzoq serverlarga tarmoq orqali so'rov yuboring, fayllarni yuklab olish va yuklash(deb nomlangan [AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) va [COMET](https://en.wikipedia.org/wiki/Comet_(programming)) texnologiyalar).
+- Cookies-ni olish va o'rnatish, tashrif buyuruvchiga savollar berish, xabarlarni ko'rsatish.
+- Mijoz tomonidagi ma'lumotlarni eslab qolish("mahalliy saqlash").
 
-## What CAN'T in-browser JavaScript do?
+## JavaScript-da brauzerda nima qila olmaysiz?
 
-JavaScript's abilities in the browser are limited for the sake of the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+JavaScript-ning brauzerdagi imkoniyatlari foydalanuvchi xavfsizligi uchun cheklangan. Maqsad yomon veb-sahifaning shaxsiy ma'lumotlarga kirishini yoki foydalanuvchi ma'lumotlariga zarar etkazishini oldini olishdir.
 
-Examples of such restrictions include:
+Bunday cheklovlarga quyidagilar kiradi:
 
-- JavaScript on a webpage may not read/write arbitrary files on the hard disk, copy them or execute programs. It has no direct access to OS system functions.
+- Veb-sahifadagi JavaScript-ni qattiq diskdagi o'zboshimchalik bilan fayllarni o'qish / yozish, ularni nusxalash yoki dasturlarni bajarish mumkin emas. Uning OS tizimi funktsiyalariga to'g'ridan-to'g'ri kirish imkoniyati yo'q.
 
-    Modern browsers allow it to work with files, but the access is limited and only provided if the user does certain actions, like "dropping" a file into a browser window or selecting it via an `<input>` tag.
+    Zamonaviy brauzerlar unga fayllar bilan ishlashga imkon beradi, lekin kirish cheklangan va faqat foydalanuvchi brauzer oynasiga faylni "tushirish" yoki uni `<input>` yorlig'i orqali tanlash kabi ba'zi bir amallarni bajargan taqdirdagina taqdim etiladi.
 
-    There are ways to interact with camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
-- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other if they come from different sites (from a different domain, protocol or port).
+    Kamera / mikrofon va boshqa qurilmalar bilan o'zaro aloqa qilish usullari mavjud, ammo ular foydalanuvchidan aniq ruxsat talab qiladi. Shunday qilib, JavaScript-ni qo'llab-quvvatlaydigan sahifa veb-kamerani yashirincha yoqmasligi, atrofni kuzatishi va ma'lumotni[NSA](https://en.wikipedia.org/wiki/National_Security_Agency) ga yuborishi mumkin emas.
+- Turli xil yorliqlar / oynalar odatda bir-birlarini bilishmaydi. Ba'zan ular bilishadi, masalan, bitta oyna ikkinchisini ochish uchun JavaScript-ni ishlatganda. Ammo bu holatda ham bitta sahifadagi JavaScript-ni boshqa saytlarga kirish mumkin emas, agar ular turli saytlardan (boshqa domendan, protokoldan yoki portdan) bo'lsa.
 
-    This is called the "Same Origin Policy". To work around that, *both pages* must contain a special JavaScript code that handles data exchange.
+    Bu "Xuddi shu manba siyosati"(Same origin policy) deyiladi. Buning uchun *ikkala sahifa* ma'lumotlar almashinuvi to'g'risida kelishib olishlari va uni boshqaradigan maxsus JavaScript kodini o'z ichiga olishi kerak. Biz buni o'quv qo'llanmasida ko'rib chiqamiz.
 
-    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com` and steal information from there.
-- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+    Ushbu cheklov, yana foydalanuvchi xavfsizligi uchun. Foydalanuvchi ochgan sahifa `http://anysite.com` URL manzili bo'lgan boshqa brauzer yorlig'iga kira olmasligi kerak `http://gmail.com` va u erdan ma'lumotlarni o'g'irlash.
+    
+- JavaScript joriy sahifa kelgan serverga tarmoq orqali osongina aloqa qilish mumkin. Ammo uning boshqa saytlardan / domenlardan ma'lumotlarni qabul qilish qobiliyati nogiron. Iloji bo'lsa ham, bu uzoqdan aniq kelishuvni (HTTP sarlavhalarida ko'rsatilgan) talab qiladi. Yana bir bor bu xavfsizlikni cheklash.
 
 ![](limitations.svg)
 
-Such limits do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugin/extensions which may ask for extended permissions.
+Agar JavaScript brauzerdan tashqarida, masalan serverda ishlatilsa, bunday cheklovlar mavjud emas. Zamonaviy brauzerlar kengaytirilgan ruxsat so'rashi mumkin bo'lgan plagin / kengaytmalarga ham imkon beradi.
 
 ## JavaScript-ni qaysi xususiyatlari uni noyob qiladi?
 
 JavaScript hech bo'lmaganda *uchta* ajoyib xususiyatga ega:
 
 ```solishtiring
-+ HTML/CSS bilan to'liq integratsiyasi.
++ HTML va CSS bilan to'liq integratsiyasi.
 + Oson ishlar osongina amalga oshiriladi.
-+ Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va ularda sukut bo'yicha yoqilgan.
++ Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va ularda standart sifatida yoqilgan.
 ```
 JavaScript - bu uchta narsani birlashtirgan yagona brauzer texnologiyasidir.
 
-Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer interfeyslarini yaratishda eng keng tarqalgan vositadir.
+Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer feyslarini yaratishda eng keng tarqalgan vositadir.
 
 Yangi texnologiyani o'rganishni rejalashtirayotib, uning istiqbollarini tekshirish ham muhimdir. Keling, zamonaviy tendentsiyalarga o'taylik.
 

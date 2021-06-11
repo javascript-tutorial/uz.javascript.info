@@ -1,29 +1,29 @@
 
-# Pseudo-random generator
+# Psevdo-tasodifiy generator
 
-There are many areas where we need random data.
+Biz tasodifiy ma'lumotlarga muhtoj bo'lgan ko'plab joylar mavjud.
 
-One of them is testing. We may need random data: text, numbers etc, to test things out well.
+Ulardan biri testlar. Ishlarni yaxshi tekshirish uchun bizga tasodifiy ma'lumotlar kerak bo'ladi: matn, raqamlar va boshqalar.
 
-In JavaScript, we could use `Math.random()`. But if something goes wrong, we'd like to be able to repeat the test, using exactly the same data.
+JavaScript-da biz `Math.random()` dan foydalanishimiz mumkin. Lekin, agar biror narsa noto'g'ri bo'lsa, biz xuddi shu ma'lumotlardan foydalanib, testni takrorlashni xohlaymiz.
 
-For that, so called "seeded pseudo-random generators" are used. They take a "seed", the first value, and then generate next ones using a formula. So that the same seed yields the same sequence, and hence the whole flow is easily reproducible. We only need to remember the seed to repeat it.
+Buning uchun "urug'langan psevdo-tasodifiy generatorlar" ishlatiladi. Ular birinchi qiymat bo'lgan "urug 'ni" olishadi, so'ngra formuladan foydalanib keyingilarini hosil qilishadi. Shunday qilib, bir xil urug' bir xil ketma-ketlikni beradi va shuning uchun butun oqim osongina takrorlanadi. Biz uni takrorlash uchun faqat urug'ni eslashimiz kerak.
 
-An example of such formula, that generates somewhat uniformly distributed values:
+Bir xil taqsimlangan qiymatlarni yaratadigan bunday formulaning misoli:
 
 ```
 next = previous * 16807 % 2147483647
 ```
 
-If we use `1` as the seed, the values will be:
+Agar biz `1` ni urug' sifatida ishlatsak, qiymatlar quyidagicha bo'ladi:
 1. `16807`
 2. `282475249`
 3. `1622650073`
-4. ...and so on...
+4. ...va hokazo...
 
-The task is to create a generator function `pseudoRandom(seed)` that takes `seed` and creates the generator with this formula.
+Vazifa `pseudoRandom(seed)` generator funktsiyasini yaratishdir, u `seed` ni oladi va generatorni ushbu formulada yaratadi.
 
-Usage example:
+Foydalanish misoli:
 
 ```js
 let generator = pseudoRandom(1);

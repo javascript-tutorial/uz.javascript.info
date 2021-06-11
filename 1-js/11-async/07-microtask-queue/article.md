@@ -1,91 +1,91 @@
 
-# Microtasks and event loop
+# Mikrovazifalar va hodisalar tsikli
 
-Promise handlers `.then`/`.catch`/`.finally` are always asynchronous.
+`.then`/`.catch`/`.finally` ishlovchilari doimo asinxrondir.
 
-Even when a Promise is immediately resolved, the code on the lines *below* your `.then`/`.catch`/`.finally` will still execute first.
+Va'da zudlik bilan hal qilingan taqdirda ham, sizning `.then`/`.catch`/`.finally` satrlaringizdagidan *quyidagi* kod birinchi bo'lib bajariladi.
 
-Here's the code that demonstrates it:
+Buni ko'rsatadigan kod:
 
 ```js run
 let promise = Promise.resolve();
 
-promise.then(() => alert("promise done"));
+promise.then(() => alert("va'da bajarildi"));
 
-alert("code finished"); // this alert shows first
+alert("kod tugadi"); // birinchi navbatda ushbu ogohlantirish ko'rsatiladi
 ```
 
-If you run it, you see `code finished` first, and then `promise done`.
+Agar siz uni ishlatsangiz, avval `kod tugadi`, so'ngra `va'da tugadi` ni ko'rasiz.
 
-That's strange, because the promise is definitely done from the beginning.
+Bu g'alati, chunki va'da boshidanoq albatta amalga oshiriladi.
 
-Why did the `.then` trigger afterwards? What's going on?
+Nima uchun `.then` keyin bajariladi? Nima bo'lyapti?
 
-# Microtasks
+# Mikrovazifalar
 
-Asynchronous tasks need proper management. For that, the standard specifies an internal queue `PromiseJobs`, more often referred to as "microtask queue" (v8 term).
+Asinxron vazifalar to'g'ri boshqaruvga muhtoj. Buning uchun standart `PromiseJobs` ichki navbatini belgilaydi, ko'pincha "mikrovazifa navbat" deb nomlanadi (v8 atama).
 
-As said in the [specification](https://tc39.github.io/ecma262/#sec-jobs-and-job-queues):
+[Spetsifikatsiyada](https://tc39.github.io/ecma262/#sec-jobs-and-job-queues) aytilganidek:
 
-- The queue is first-in-first-out: tasks enqueued first are run first.
-- Execution of a task is initiated only when nothing else is running.
+- Navbat birinchi bo'lib amalga oshiriladi: birinchi navbatda vazifalar bo'lib bajariladi.
+- Vazifani bajarish faqat boshqa hech narsa ishlamay qolganda boshlanadi.
 
-Or, to say that simply, when a promise is ready, its `.then/catch/finally` handlers are put into the queue. They are not executed yet. JavaScript engine takes a task from the queue and executes it, when it becomes free from the current code.
+Yoki sodda qilib aytganda, va'da tayyor bo'lganda, uning `.then/catch/finally` ishlovchilari navbatga qo'yiladi. Ular hali bajarilmagan. JavaScript interpretatori navbatdan vazifani oladi va joriy koddan qutilganda uni bajaradi.
 
-That's why "code finished" in the example above shows first.
+Shuning uchun yuqoridagi misolda "kod tugadi" birinchi bo'lib ko'rsatilgan.
 
 ![](promiseQueue.svg)
 
-Promise handlers always go through that internal queue.
+Va'da beruvchilar doimo ushbu ichki navbatdan o'tadilar.
 
-If there's a chain with multiple `.then/catch/finally`, then every one of them is executed asynchronously. That is, it first gets queued, and executed when the current code is complete and previously queued handlers are finished.
+Agar bir nechta `.then/catch/finally` zanjiri mavjud bo'lsa, unda ularning har biri asinxron tarzda bajariladi. Ya'ni, u avval navbatga qo'yiladi va joriy kod tugagandan va avval navbatda turgan ishlovchilar tugagandan so'ng bajariladi.
 
-**What if the order matters for us? How can we make `code finished` work after `promise done`?**
+**Agar navbat biz uchun muhim bo'lsachi? Qanday qilib `kod tugadi` ni `va'da bajarilgandan` keyin ishlashimiz mumkin?**
 
-Easy, just put it into the queue with `.then`:
+Oson, uni `.then` bilan navbatga qo'ying.
 
 ```js run
 Promise.resolve()
-  .then(() => alert("promise done!"))
-  .then(() => alert("code finished"));
+  .then(() => alert("va'da bajarilgandan!"))
+  .then(() => alert("kod tugadi"));
 ```
 
-Now the order is as intended.
+Endi navbat maqsadga muvofiq.
 
-## Event loop
+## Hodisa tsikli
 
-In-browser JavaScript, as well as Node.js, is based on an *event loop*.
+Brauzer ichidagi JavaScript, shuningdek Node.js *hodisa tsikliga* asoslangan.
 
-"Event loop" is a process when the engine sleeps and waits for events, then reacts on those and sleeps again.
+"Hodisa tsikli" - bu interpretator uxlab yotgan va hodisalarni kutib turadgan, keyin ularga javob beradigan va yana uxlaydigan jarayon.
 
-Examples of events:
-- `mousemove`, a user moved their mouse.
-- `setTimeout` handler is to be called.
-- an external `<script src="...">` is loaded, ready to be executed.
-- a network operation, e.g. `fetch` is complete.
-- ...etc.
+Hodisalar misollari:
+- `mousemove`, foydalanuvchi sichqonchani harakatga keltirdi.
+- `setTimeout` ishlov beruvchi chaqirildi.
+- tashqi `<script src ="...">` yuklangan, bajarishga tayyor.
+- tarmoq operatsiyasi, masalan. `fetch` tugallandi.
+- ...va h.k.
 
-Things happen -- the engine handles them -- and waits for more to happen (while sleeping and consuming close to zero CPU).
+Hodisalar sodir bo'ladi - interpretator ularni boshqaradi - va yana ko'p narsalar bo'lishini kutadi (uxlash paytida va nolga yaqin CPU iste'mol qilganda).
 
 ![](eventLoop.svg)
 
-As you can see, there's also a queue here. A so-called "macrotask queue" (v8 term).
+Ko'rib turganingizdek, bu yerda ham navbat bor. "Makrovazifa navbat" deb nomlangan (v8 atama).
 
-When an event happens, while the engine is busy, its handling is enqueued.
+Hodisa sodir bo'lganda, interpretator band bo'lganda, uni boshqarish qulay bo'ladi.
 
-For instance, while the engine is busy processing a network `fetch`, a user may move their mouse causing `mousemove`, and `setTimeout` may be due and so on, just as painted on the picture above.
+Masalan, interpretator `fetch` tarmog'ini qayta ishlash bilan band bo'lganida, foydalanuvchi sichqonchani siljitib, `mousemove` keltirib chiqarishi mumkin, va `setTimeout` xuddi yuqoridagi rasmda tasvirlanganidek bo'lishi kerak.
 
-Events from the macrotask queue are processed on "first come – first served" basis. When the engine browser finishes with `fetch`, it handles `mousemove` event, then `setTimeout` handler, and so on.
+Makrovazifa navbatidagi hodisalar "birinchi kelish - birinchi xizmat" tamoyili asosida qayta ishlanadi. Interpretator brauzeri `fetch` tugagandan so'ng, u `mousemove` hodisasini, keyin `setTimeout` ishlov beruvchisini va boshqalarni boshqaradi.
 
-So far, quite simple, right? The engine is busy, so other tasks queue up.
+Hozircha juda sodda, to'g'rimi? Interpretator band, shuning uchun boshqa vazifalar navbatda turadi.
 
-Now the important stuff.
+Endi muhim narsalar.
 
-**Microtask queue has a higher priority than the macrotask queue.**
+**Mikrovazifa navbatida makrovazifa navbatiga qaraganda ustunlik yuqori.**
 
-In other words, the engine first executes all microtasks, and then takes a macrotask. Promise handling always has the priority.
+Boshqacha qilib aytganda, interpretator avval barcha mikrovazifalarni bajaradi, so'ngra makrovazifalarni oladi. Va'da bilan ishlash har doim birinchi o'ringa ega.
 
-For instance, take a look:
+Masalan, qarang:
 
 ```js run
 setTimeout(() => alert("timeout"));
@@ -96,17 +96,17 @@ Promise.resolve()
 alert("code");
 ```
 
-What's the order?
+Navbat qanday?
 
-1. `code` shows first, because it's a regular synchronous call.
-2. `promise` shows second, because `.then` passes through the microtask queue, and runs after the current code.
-3. `timeout` shows last, because it's a macrotask.
+1. `code` birinchi navbatda ko'rsatiladi, chunki bu muntazam sinxron chaqiruv.
+2. `promise` ikkinchi bo'lib ko'rsatiladi, chunki `.then` mikrovazifa navbatidan o'tadi va joriy koddan keyin ishlaydi.
+3. `timeout` oxirgi o'rinda ko'rsatiladi, chunki bu makrovazifa.
 
-It may happen that while handling a macrotask, new promises are created.
+Ehtimol, makrovazifada ishlash paytida yangi va'dalar paydo bo'lishi mumkin.
 
-Or, vice-versa, a microtask schedules a macrotask (e.g. `setTimeout`).
+Yoki, aksincha, mikrovazifa makrovazifani rejalashtiradi (masalan, `setTimeout`).
 
-For instance, here `.then` schedules a `setTimeout`:
+Masalan, `.then` `setTimeout` ni rejalashtiradi:
 
 ```js run
 Promise.resolve()
@@ -118,20 +118,20 @@ Promise.resolve()
   });
 ```
 
-Naturally, `promise` shows up first, because `setTimeout` macrotask awaits in the less-priority macrotask queue.
+Tabiiyki, avval `promise` paydo bo'ladi, chunki `setTimeout` makrovazifani unchalik ahamiyatga ega bo'lmagan makrovazifa navbatida kutmoqda.
 
-As a logical consequence, macrotasks are handled only when promises give the engine a "free time". So if we have a promise chain that doesn't wait for anything, then things like `setTimeout` or event handlers can never get in the middle.
+Mantiqiy natija sifatida makrovazifalar faqat interpretatorga "bo'sh vaqt" berganda amalga oshiriladi. Shunday qilib, agar bizda hech narsa kutmaydigan va'da zanjiri bo'lsa, unda `setTimeout` yoki hodisa ishlovchilari kabi narsalar hech qachon o'rtaga kira olmaydi.
 
 
-## Unhandled rejection
+## Ishlov berilmagan rad etish
 
-Remember "unhandled rejection" event from the chapter <info:promise-error-handling>?
+<info:promise-error-handling> bobidagi "ishlov berilmagan rad etish" hodisasini eslaysizmi?
 
-Now, with the understanding of microtasks, we can formalize it.
+Endi mikrovazifalarni tushunish bilan biz uni rasmiylashtira olamiz.
 
-**"Unhandled rejection" is when a promise error is not handled at the end of the microtask queue.**
+**"Ishlov berilmagan rad etish" - bu mikrovazifa navbatining oxirida va'da xatosi ko'rib chiqilmaganda sodir bo'ladi.**
 
-For instance, consider this code:
+Masalan, ushbu kodni ko'rib chiqing:
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
@@ -141,9 +141,9 @@ window.addEventListener('unhandledrejection', event => {
 });
 ```
 
-We create a rejected `promise` and do not handle the error. So we have the "unhandled rejection" event (printed in browser console too).
+Biz rad etilgan `promise` ni yaratamiz va xatoni ko'rib chiqmaymiz. Shunday qilib bizda "ishlov berilmagan rad etish" hodisasi mavjud (brauzer konsolida ham yozilgan).
 
-We wouldn't have it if we added `.catch`, like this:
+Agar `.catch` qo'shsak, bizda bunday bo'lmaydi:
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
@@ -151,11 +151,11 @@ let promise = Promise.reject(new Error("Promise Failed!"));
 promise.catch(err => alert('caught'));
 */!*
 
-// no error, all quiet
+// hech qanday xato yo'q, hammasi tinch
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-Now let's say, we'll be catching the error, but after `setTimeout`:
+Endi aytaylik, biz xatoga yo'l qo'yamiz, ammo `etTimeout` dan keyin:
 
 ```js run
 let promise = Promise.reject(new Error("Promise Failed!"));
@@ -167,24 +167,24 @@ setTimeout(() => promise.catch(err => alert('caught')));
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-Now the unhandled rejction appears again. Why? Because `unhandledrejection` triggers when the microtask queue is complete. The engine examines promises and, if any of them is in "rejected" state, then the event is generated.
+Endi ishlov berilmagan rad etish yana paydo bo'ladi. Nima uchun? Mikrovazifada navbat tugagandan so'ng, "ishlov berilmagan rad etish" paydo bo'ladi. Interpretator va'dalarni tekshiradi va agar ulardan biri "rad etilgan" holatda bo'lsa, unda hodisa sodir bo'ladi.
 
-In the example, the `.catch` added by `setTimeout` triggers too, of course it does, but later, after `unhandledrejection` has already occurred.
+Masalan, `setTimeout` tomonidan qo'shilgan `.catch` ham ishga tushadi, albatta, lekin `unhandledrejection` allaqachon sodir bo'lgandan so'ng.
 
-## Summary
+## Xulosa
 
-- Promise handling is always asynchronous, as all promise actions pass through the internal "promise jobs" queue, also called "microtask queue" (v8 term).
+- Va'dalarni boshqarish har doim ham mos kelmaydi, chunki barcha va'da qilingan harakatlar "mikrovazifa navbati" (v8 atama) deb nomlangan ichki "va'da ishi" navbatidan o'tadi.
 
-    **So, `.then/catch/finally` are called after the current code is finished.**
+    **Shunday qilib, `.then/catch/finally` joriy kod tugagandan so'ng chaqiriladi.**
 
-    If we need to guarantee that a piece of code is executed after `.then/catch/finally`, it's best to add it into a chained `.then` call.
+    Agar kodning bir qismi `.then/catch/finally` dan keyin bajarilishini kafolatlashimiz kerak bo'lsa, uni zanjirlangan `.then` chaqiruviga qo'shganimiz ma'qul.
 
-- There's also a "macrotask queue" that keeps various events, network operation results, `setTimeout`-scheduled calls, and so on. These are also called "macrotasks" (v8 term).
+- Shuningdek, turli xil hodisalarni, tarmoq ish natijalarini,`"setTimeout` rejalashtirilgan chaqiruvlarni va boshqalarni saqlaydigan "makrovazifa navbati" mavjud. Ular "makrovazifalar" (v8 atama) deb ham ataladi.
 
-    The engine uses the macrotask queue to handle them in the appearance order.
+    Interpretator ularni tashqi ko'rinish tartibida boshqarish uchun makrovazifalrdan foydalanadi.
 
-    **Macrotasks run after the code is finished *and* after the microtask queue is empty.**
+    **Makrovazifalar kod tugagandan so'ng ishlaydi *va* mikrovazifalar navbati bo'sh bo'lgandan keyin.**
 
-    In other words, they have lower priority.
+    Boshqacha qilib aytganda, ularning ustunligi pastroq.
 
-So the order is: regular code, then promise handling, then everything else, like events etc.
+Shunday qilib, navbat quyidagicha: odatdagi kod, keyin va'da bilan ishlash, so'ngra hamma narsa, masalan hodisalar va boshqalar.

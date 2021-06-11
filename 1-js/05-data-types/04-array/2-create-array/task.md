@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Array operations.
+# Massiv operatsiyalari.
 
-Let's try 5 array operations.
+Keling, 5 ta massiv operatsiyasini sinab ko'raylik.
 
-1. Create an array `styles` with items "Jazz" and "Blues".
-2. Append "Rock-n-Roll" to the end.
-3. Replace the value in the middle by "Classics". Your code for finding the middle value should work for any arrays with odd length.
-4. Strip off the first value of the array and show it.
-5. Prepend `Rap` and `Reggae` to the array.
+1. "Jazz" va "Blues" elementlari bilan massivni yarating.
+2. "Rock-n-Roll" ni oxiriga qo'shing.
+3. O'rtadagi qiymatni "Classics" bilan almashtiring. O'rtacha qiymatni topish uchun sizning kodingiz uzunlikdagi har qanday massivlar uchun ishlashi kerak.
+4. Massivning birinchi qiymatini o'chirib tashang va uni ko'rsating.
+5. Massivga `Rap` va `Reggae` ni oldinda qo'shing.
 
-The array in the process:
+Jarayondagi massiv:
 
 ```js no-beautify
 Jazz, Blues

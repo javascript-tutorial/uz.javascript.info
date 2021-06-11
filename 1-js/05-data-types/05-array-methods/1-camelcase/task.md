@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Translate border-left-width to borderLeftWidth
+# border-left-width ni borderLeftWidth ga o'zgartiring
 
-Write the function `camelize(str)` that changes dash-separated words like "my-short-string" into camel-cased "myShortString".
+"my-short-string" singari chiziqcha bilan ajratilgan so'zlarni tuya registr "myShortString" ga o'zgartiradigan `camelize(str)` funktsiyasini yozing.
 
-That is: removes all dashes, each word after dash becomes uppercased.
+Ya'ni: barcha chiziqlarni olib tashlaydi, chiziqdan keyingi har bir so'z tepa registr harfga aylanadi.
 
-Examples:
+Masalan:
 
 ```js
 camelize("background-color") == 'backgroundColor';
@@ -16,4 +16,4 @@ camelize("list-style-image") == 'listStyleImage';
 camelize("-webkit-transition") == 'WebkitTransition';
 ```
 
-P.S. Hint: use `split` to split the string into an array, transform it and `join` back.
+P.S. Maslahat: matnni massivga bo'lish, uni o'zgartirish  uchun `split` dan foydalaning va qo'shilish uchun `join`.

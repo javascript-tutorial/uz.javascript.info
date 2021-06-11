@@ -1,20 +1,20 @@
-The answer: the first and the third will execute.
+Javob: birinchi va uchinchisi ijro etiladi.
 
-Details:
+Tafsilotlar:
 
 ```js run
-// Runs.
-// The result of -1 || 0 = -1, truthy
-if (-1 || 0) alert( 'first' );
+// Ishga tushadi.
+// -1 || 0 = -1 ning natijasi, to'g'ri
+if (-1 || 0) alert( 'birinchi' );
 
-// Doesn't run
-// -1 && 0 = 0, falsy
-if (-1 && 0) alert( 'second' );
+// Ishga tushmaydi
+// -1 && 0 = 0 ning natijasi, noto'g'ri
+if (-1 && 0) alert( 'ikinchi' );
 
-// Executes
-// Operator && has a higher precedence than ||
-// so -1 && 1 executes first, giving us the chain:
+// Ijro etadi
+// Operator && ning ustunligi || ga qaraganda yuqori
+// Shunday qilib, birinchi navbatda -1 && 1 bajariladi:
 // null || -1 && 1  ->  null || 1  ->  1
-if (null || -1 && 1) alert( 'third' );
+if (null || -1 && 1) alert( 'uchinchi' );
 ```
 

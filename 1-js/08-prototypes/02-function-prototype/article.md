@@ -1,18 +1,18 @@
 # F.prototype
 
-Remember, new objects can be created with a constructor function, like `new F()`.
+Esingizda bo'lsin, yangi obyektlar `new F()` kabi konstruktor funktsiyasi bilan yaratilishi mumkin.
 
-If `F.prototype` is an object, then `new` operator uses it to set `[[Prototype]]` for the new object.
+Agar `F.prototype` obyekt bo'lsa, u holda `new` operator undan yangi obyekt uchun `[[Prototype]]` ni o'rnatishda foydalanadi.
 
 ```smart
-JavaScript had prototypal inheritance from the beginning. It was one of the core features of the language.
+Javascript boshidan prototip merosga ega edi. Bu tilning asosiy xususiyatlaridan biri edi.
 
-But in the old times, there was no direct access to it. The only thing that worked reliably was a `"prototype"` property of the constructor function, described in this chapter. So there are many scripts that still use it.
+Ammo qadimgi vaqtlarda unga to'g'ridan-to'g'ri kirish imkoni yo'q edi. Ishonchli ishlaydigan yagona narsa, ushbu bobda tasvirlangan konstruktor funktsiyasining `"prototype"` vxususiyati edi. Shunday qilib, uni ishlatadigan ko'plab skriptlar mavjud
 ```
 
-Please note that `F.prototype` here means a regular property named `"prototype"` on `F`. It sounds something similar to the term "prototype", but here we really mean a regular property with this name.
+Iltimos e'tibor bering, `F.prototype` bu yerda `F` da `"prototype"` nomli odatiy xususiyatni anglatadi. Bu "prototype" atamasiga o'xshash bir narsaga o'xshaydi, ammo bu yerda biz haqiqatan ham ushbu nomga ega odatiy xususiyatni nazarda tutamiz.
 
-Here's the example:
+Mana misol:
 
 ```js run
 let animal = {
@@ -32,39 +32,39 @@ let rabbit = new Rabbit("White Rabbit"); //  rabbit.__proto__ == animal
 alert( rabbit.eats ); // true
 ```
 
-Setting `Rabbit.prototype = animal` literally states the following: "When a `new Rabbit` is created, assign its `[[Prototype]]` to `animal`".
+`Rabbit.prototype = animal` sozlamasida so'zma-so'z quyidagicha ifodalanadi: "`new Rabbit` yaratilganda, uning `[[Prototype]]` ni `animal` ga belgilang".
 
-That's the resulting picture:
+Natijada paydo bo'lgan rasm:
 
 ![](proto-constructor-animal-rabbit.svg)
 
-On the picture, `"prototype"` is a horizontal arrow, meaning a regular property, and `[[Prototype]]` is vertical, meaning the inheritance of `rabbit` from `animal`.
+Rasmda `"prototype"` - gorizontal o'q, odatiy xususiyatni anglatadi va `[[Prototype]]` vertikal bo'lib, `rabbit` ning `animal` dan merosxo'rligini anglatadi.
 
-```smart header="`F.prototype` only used at `new F` time"
-`F.prototype` property is only used when `new F` is called, it assigns `[[Prototype]]` of the new object. After that, there's no connection between `F.prototype` and the new object. Think of it as a "one-time gift".
+```smart header="`F.prototype` faqat `new F` vaqtida ishlatiladi"
+`F.prototype` xususiyati faqat `new F` chaqirilganda ishlatiladi, u yangi obyektning `[[Prototype]]` ni tayinlaydi. Shundan so'ng, `F.prototype` va yangi obyekt o'rtasida hech qanday bog'liqlik yo'q. Buni "bir martalik sovg'a" deb o'ylang.
 
-If, after the creation, `F.prototype` property changes (`F.prototype = <another object>`), then new objects created by `new F` will have another object as `[[Prototype]]`, but already existing objects keep the old one.
+Agar yaratilgandan so'ng, `F.prototype` xususiyati o'zgarsa (`F.prototype = <another object>`) bo'lsa, unda `new F` tomonidan yaratilgan yangi obyektlar `[[Prototype]]` nomli boshqa obyektga ega bo'ladi, lekin allaqachon mavjud narsalar eskisini saqlab qoladi.
 ```
 
-## Default F.prototype, constructor property
+## Sukut bo'yicha F.prototype, constructor xususiyat
 
-Every function has the `"prototype"` property even if we don't supply it.
+Har qanday funktsiya `"prototype"` xususiyatiga ega, hatto biz uni ta'minlamasak ham.
 
-The default `"prototype"` is an object with the only property `constructor` that points back to the function itself.
+Odatiy `"prototype"` funktsiyani o'zi ko'rsatadigan yagona `constructor` xususiyatiga ega bo'lgan obyekt.
 
-Like this:
+Shunga o'xshash:
 
 ```js
 function Rabbit() {}
 
-/* default prototype
+/* standart prototip
 Rabbit.prototype = { constructor: Rabbit };
 */
 ```
 
 ![](function-prototype-constructor.svg)
 
-We can check it:
+Biz buni tekshirib ko'rishimiz mumkin:
 
 ```js run
 function Rabbit() {}
@@ -74,23 +74,23 @@ function Rabbit() {}
 alert( Rabbit.prototype.constructor == Rabbit ); // true
 ```
 
-Naturally, if we do nothing, the `constructor` property is available to all rabbits through  `[[Prototype]]`:
+Tabiiyki, agar biz hech narsa qilmasak, `constructor` xususiyati barcha quyonlarga `[[Prototype]]` orqali mavjud:
 
 ```js run
 function Rabbit() {}
 // by default:
 // Rabbit.prototype = { constructor: Rabbit }
 
-let rabbit = new Rabbit(); // inherits from {constructor: Rabbit}
+let rabbit = new Rabbit(); // {constructor: Rabbit} dan meros
 
-alert(rabbit.constructor == Rabbit); // true (from prototype)
+alert(rabbit.constructor == Rabbit); // true (prototipdan)
 ```
 
 ![](rabbit-prototype-constructor.svg)
 
-We can use `constructor` property to create a new object using the same constructor as the existing one.
+Mavjud bilan bir xil konstruktor yordamida yangi obyekt yaratish uchun `constructor` xususiyatidan foydalanishimiz mumkin.
 
-Like here:
+Buy erda bo'lgani kabi:
 
 ```js run
 function Rabbit(name) {
@@ -105,17 +105,17 @@ let rabbit2 = new rabbit.constructor("Black Rabbit");
 */!*
 ```
 
-That's handy when we have an object, don't know which constructor was used for it (e.g. it comes from a 3rd party library), and we need to create another one of the same kind.
+Obyektga ega bo'lganimizda, buning uchun qaysi konstruktor ishlatilganligini bilmasak (masalan, u uchinchi tomon kutubxonasidan kelib chiqadi) va biz yana bir xilini yaratishimiz kerak bo'lsa bu juda qulay.
 
-But probably the most important thing about `"constructor"` is that...
+Ehtimol, `"constructor"` haqida eng muhim narsa shu...
 
-**...JavaScript itself does not ensure the right `"constructor"` value.**
+**...JavaScript o'zi to'g'ri `"constructor"` qiymatini ta'minlamaydi.**
 
-Yes, it exists in the default `"prototype"` for functions, but that's all. What happens with it later -- is totally on us.
+Ha, bu funktsiyalar uchun standart `"prototype"` da mavjud, ammo barchasi shu. Keyinchalik u bilan nima sodir bo'ladi -- bu butunlay bizdadir.
 
-In particular, if we replace the default prototype as a whole, then there will be no `"constructor"` in it.
+Xususan, agar biz standart prototipni umuman almashtirsak, unda unda `"constructor"` bo'lmaydi.
 
-For instance:
+Masalan:
 
 ```js run
 function Rabbit() {}
@@ -129,18 +129,18 @@ alert(rabbit.constructor === Rabbit); // false
 */!*
 ```
 
-So, to keep the right `"constructor"` we can choose to add/remove properties to the default `"prototype"` instead of overwriting it as a whole:
+Shunday qilib, to'g'ri `"constructor"` ni saqlab qolish uchun biz `"prototype"` ga yozish o'rniga xususiyatlarni qo'shish/o'chirishni tanlashimiz mumkin:
 
 ```js
 function Rabbit() {}
 
-// Not overwrite Rabbit.prototype totally
-// just add to it
+// Rabbit.prototype-ni to'liq yozib bo'lmaydi
+// shunchaki qo'shib qo'ying
 Rabbit.prototype.jumps = true
-// the default Rabbit.prototype.constructor is preserved
+// standart Rabbit.prototype.constructor saqlanib qoladi
 ```
 
-Or, alternatively, recreate the `constructor` property manually:
+Yoki, muqobil ravishda, `constructor` xususiyatini qo'lda qayta yarating:
 
 ```js
 Rabbit.prototype = {
@@ -150,26 +150,26 @@ Rabbit.prototype = {
 */!*
 };
 
-// now constructor is also correct, because we added it
+// endi ham konstruktor to'g'ri, chunki biz uni qo'shdik
 ```
 
 
-## Summary
+## Xulosa
 
-In this chapter we briefly described the way of setting a `[[Prototype]]` for objects created via a constructor function. Later we'll see more advanced programming patterns that rely on it.
+Ushbu bobda biz konstruktor funktsiyasi orqali yaratilgan obyektlar uchun `[[Prototype]]` ni o'rnatish usulini qisqacha bayon qildik. Keyinchalik biz unga tayanadigan yanada rivojlangan dasturlash shablonlarni ko'rib chiqamiz.
 
-Everything is quite simple, just few notes to make things clear:
+Hammasi juda sodda, tushunarli bo'lishi uchun bir nechta eslatma:
 
-- The `F.prototype` property is not the same as `[[Prototype]]`. The only thing `F.prototype` does: it sets `[[Prototype]]` of new objects when `new F()` is called.
-- The value of `F.prototype` should be either an object or null: other values won't work.
--  The `"prototype"` property only has such a special effect when is set to a constructor function, and invoked with `new`.
+- `F.prototype` xususiyati `[[Prototype]]` bilan bir xil emas. `F.prototype` qiladigan yagona narsa: `new F()` chaqirilganda yangi obyektlarning `[[Prototype]]` ni o'rnatadi.
+- `F.prototype` qiymati obyekt yoki null bo'lishi kerak: boshqa qiymatlar ishlamaydi.
+-  `"prototype"` xususiyati faqat konstruktor funktsiyasiga o'rnatilganda va `new` bilan chaqirilganda bunday maxsus ta'sirga ega bo'ladi.
 
-On regular objects the `prototype` is nothing special:
+Oddiy obyektlarda `prototype` alohida ahamiyatga ega emas:
 ```js
 let user = {
   name: "John",
-  prototype: "Bla-bla" // no magic at all
+  prototype: "Bla-bla" // hech qanday sehr yo'q
 };
 ```
 
-By default all functions have `F.prototype = { constructor: F }`, so we can get the constructor of an object by accessing its `"constructor"` property.
+Odatiy bo'lib, barcha funktsiyalarda `F.prototype = {constructor: F}` mavjud, shuning uchun biz obyektning konstruktorini uning `"constructor"`  xususiyatiga kirish orqali olishimiz mumkin.

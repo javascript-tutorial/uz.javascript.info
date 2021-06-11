@@ -1,72 +1,71 @@
-# Function expressions and arrows
+# Funktsional ifodalar va o'qlar
 
-In JavaScript, a function is not a "magical language structure", but a special kind of value.
+JavaScript da funktsiya "sehrli til tuzilishi" emas, balki qiymatning bir turidir.
 
-The syntax that we used before is called a *Function Declaration*:
+Biz ilgari ishlatgan sintaks *funktsiya deklaratsiyasi* deyiladi:
 
 ```js
 function sayHi() {
-  alert( "Hello" );
+  alert( "Salom" );
 }
 ```
 
-There is another syntax for creating a function that is called a *Function Expression*.
+Funktsiyani yaratish uchun yana bir sintaksis mavjud, u *funktsiya ifodasi* deb nomlanadi.
 
-It looks like this:
+Bu shunday ko'rinishga ega:
 
 ```js
 let sayHi = function() {
-  alert( "Hello" );
+  alert( "Salom" );
 };
 ```
 
-Here, the function is created and assigned to the variable explicitly, like any other value. No matter how the function is defined, it's just a value stored in the variable `sayHi`.
+Bu yerda funktsiya boshqa qiymatlar singari aniq ravishda yaratiladi va o'zgaruvchanga tayinlanadi. Funktsiya qanday aniqlangan bo'lishidan qat'iy nazar, bu faqat `sayHi` o'zgaruvchanida saqlanadigan qiymat.
 
+Ushbu kod namunalarining ma'nosi bir xil: "funktsiyani yarating va uni `sayHi`" o'zgaruvchanida saqlang.
 
-The meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
-
-We can even print out that value using `alert`:
+Hatto `alert` yordamida ushbu qiymatni chiqarishimiz mumkin:
 
 ```js run
 function sayHi() {
-  alert( "Hello" );
+  alert( "Salom" );
 }
 
 *!*
-alert( sayHi ); // shows the function code
+alert( sayHi ); // funktsiya kodini ko'rsatadi
 */!*
 ```
 
-Please note that the last line does not run the function, because there are no parentheses after `sayHi`. There are programming languages where any mention of a function name causes its execution, but JavaScript is not like that.
+Iltimos, oxirgi satr funktsiyani bajarmasligini unutmang, chunki `sayHi` dan keyin qavslar yo'q. Bazi dasturlash tillari mavjud, funktsiya nomini eslatish uning bajarilishini keltirib chiqaradi, ammo JavaScript-ni bunday emas.
 
-In JavaScript, a function is a value, so we can deal with it as a value. The code above shows its string representation, which is the source code.
+JavaScript da funktsiya qiymatdir, shuning uchun biz uni qiymat sifatida ko'rib chiqishimiz mumkin. Yuqoridagi manba kod bo'lgan matni ko'rsatadi.
 
-It is a special value of course, in the sense that we can call it like `sayHi()`.
+Bu, albatta, `sayHi()` kabi chaqirishimiz alohida ahamiyatga ega.
 
-But it's still a value. So we can work with it like with other kinds of values.
+Ammo bu hali ham qiymatdir. Shunday qilib, biz u bilan boshqa turdagi qiymatlar singari ishlashimiz mumkin.
 
-We can copy a function to another variable:
+Biz funktsiyani boshqa o'zgaruvchanga nusxalashimiz mumkin:
 
 ```js run no-beautify
-function sayHi() {   // (1) create
-  alert( "Hello" );
+function sayHi() {   // (1) yaratmoq
+  alert( "Salom" );
 }
 
-let func = sayHi;    // (2) copy
+let func = sayHi;    // (2) nusxalamoq
 
-func(); // Hello     // (3) run the copy (it works)!
-sayHi(); // Hello    //     this still works too (why wouldn't it)
+func(); // Salom     // (3) nusxasini ishga tushirish (ishlaydi)!
+sayHi(); // Salom    //     bu hali ham ishlaydi (nega bunday bo'lishi kerak emas?)
 ```
 
-Here's what happens above in detail:
+Yuqorida nima batafsil sodir bo'lganligi:
 
-1. The Function Declaration `(1)` creates the function and puts it into the variable named `sayHi`.
-2. Line `(2)` copies it into the variable `func`.
+1. Funktsiya deklaratsiyasi `(1)` funktsiyani yaratadi va uni `sayHi` nomli o'zgaruvchanda saqlaydi.
+2. `(2)` satri uni `func` o'zgaruvchaniga ko'chiradi.
 
-    Please note again: there are no parentheses after `sayHi`. If there were, then `func = sayHi()` would write  *the result of the call* `sayHi()` into `func`, not *the function* `sayHi` itself.
-3. Now the function can be called as both `sayHi()` and `func()`.
+     Iltimos, yana bir bor e'tibor bering: `sayHi` dan keyin qavslar yo'q. Agar mavjud bo'lsa, unda `func = sayHi()` `sayHi` *funktsiyasini* emas, balki `sayHi()` ga *qo'ng'iroq natijasini* `func` ga yozadi.
+3. Endi funktsiyani `sayHi()` va `func()` deb atash mumkin.
 
-Note that we could also have used a Function Expression to declare `sayHi`, in the first line:
+E'tibor bering, biz birinchi satrda `sayHi` ni e'lon qilish uchun funktsiya ifodasidan foydalinishimiz mumkin edi:
 
 ```js
 let sayHi = function() { ... };
@@ -75,11 +74,11 @@ let func = sayHi;
 // ...
 ```
 
-Everything would work the same. Even more obvious what's going on, right?
+Hammasi bir xil ishlaydi. Nima sodir bo'layotgani yanada ravshanroq, to'g'rimi?
 
 
-````smart header="Why is there a semicolon at the end?"
-You might wonder, why does Function Expression have a semicolon `;` at the end, but Function Declaration does not:
+````smart header="Nima uchun oxirida nuqta-vergul bor?"
+Siz hayron bo'lishingiz mumkin, nima uchun funktsiya ifodasi oxirida nuqta-vergulga ega `;`, lekin funktsiya deklaratsiyasi ega emas:
 
 ```js
 function sayHi() {
@@ -91,301 +90,301 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
-The answer is simple:
-- There's no need for `;` at the end of code blocks and syntax structures that use them like `if { ... }`, `for {  }`, `function f { }` etc.
-- A Function Expression is used inside the statement: `let sayHi = ...;`, as a value. It's not a code block. The semicolon `;` is recommended at the end of statements, no matter what is the value. So the semicolon here is not related to the Function Expression itself in any way, it just terminates the statement.
+Javob oddiy:
+- Kod bloklari va ularni ishlatadigan `if {...}`, `for {}`, `function f {}` va hokazo kabi sintaksis tuzilmalarining oxirida nuqta-vergul `;` qo'yish kerak emas.
+- Funktsiya ifodasi ifoda ichida ishlatiladi: `let sayHi = ...;`, qiymat sifatida. Bu kod bloki emas. Nuqta-vergul `;`, qiymati qanday bo'lishidan qat'i nazar, ifodalar oxirida qo'yilishi tavsiya etiladi. Demak, bu yerdagi nuqta-vergul funktsiya ifodasining o'zi bilan hech qanday bog'liq emas, shunchaki ifodaning tugatadi.
 ````
 
-## Callback functions
+## Qayta chaqirish funktsiyalari
 
-Let's look at more examples of passing functions as values and using function expressions.
+Funksiyalarni qiymat sifatida uzatilishining va funktsiya ifodalaridan foydalanishning ko'proq misollarini ko'rib chiqamiz.
 
-We'll write a function `ask(question, yes, no)` with three parameters:
+Biz uchta parametr bilan `ask(savol, ha, yo'q)` funktsiyasini yozamiz:
 
-`question`
-: Text of the question
+`savol`
+: Savolning matni
 
-`yes`
-: Function to run if the answer is "Yes"
+`ha`
+: Agar javob "Ha" bo'lsa, funktsiya bajariladi
 
-`no`
-: Function to run if the answer is "No"
+`yo'q`
+: Agar javob "Yo'q" bo'lsa, funktsiya bajariladi
 
-The function should ask the `question` and, depending on the user's answer, call `yes()` or `no()`:
+Funktsiya `savol` berishi kerak va foydalanuvchining javobiga qarab `ha()` yoki `yo'q()` ni chaqirishi kerak:
 
 ```js run
 *!*
-function ask(question, yes, no) {
-  if (confirm(question)) yes()
-  else no();
+function ask(savol, ha, yoq) {
+  if (confirm(savol)) ha()
+  else yoq();
 }
 */!*
 
 function showOk() {
-  alert( "You agreed." );
+  alert( "Siz rozisiz." );
 }
 
 function showCancel() {
-  alert( "You canceled the execution." );
+  alert( "Siz ijroni bekor qildingiz." );
 }
 
-// usage: functions showOk, showCancel are passed as arguments to ask
-ask("Do you agree?", showOk, showCancel);
+// foydalanish: showOk, showCancel funktsiyalari ask funktsiyasi uchun argument sifatida 
+ask("Rozimisiz?", showOk, showCancel);
 ```
 
-Before we explore how we can write it in a much shorter way, let's note that in the browser (and on the server-side in some cases) such functions are quite popular. The major difference between a real-life implementation and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such a function usually draws a nice-looking question window. But that's another story.
+Qanday qilib uni qisqartirish kerakligini o'rgatishdan oldin, brauzerda (va ba'zi hollarda server tomonida) bunday funktsiyalar juda mashhurligini ta'kidlaymiz. Haqiqiy hayotdan tatbiq etish va yuqoridagi misol o'rtasidagi asosiy farq shundaki, real funktsiyalar foydalanuvchi bilan o'zaro aloqada oddiy `confirm` dan ko'ra murakkab usullardan foydalanadi. Brauzerda bunday funktsiya odatda chiroyli ko'rinadigan savollar oynasini chiqaradi. Ammo bu boshqa voqea.
 
-**The arguments of `ask` are called *callback functions* or just *callbacks*.**
+**`ask` argumentlari *qayta chaqirish funktsiyalari* yoki shunchaki *qayta chaqirish* deb nomlanadi.**
 
-The idea is that we pass a function and expect it to be "called back" later if necessary. In our case, `showOk` becomes the callback for the "yes" answer, and `showCancel` for the "no" answer.
+G'oya shundan iboratki, biz funktsiyani bajaramiz va agar kerak bo'lsa, uni keyinroq "qayta chaqirilgan" deb oylaymiz. Bizning holatimizda `showOk` "ha" javobi uchun, "yo'q" javobi uchun `showCancel` qayta chaqirish bo'ladi.
 
-We can use Function Expressions to write the same function much shorter:
+Xuddi shu funktsiyani ancha qisqa yozish uchun biz funktsiya ifodalaridan foydalanishimiz mumkin:
 
 ```js run no-beautify
-function ask(question, yes, no) {
-  if (confirm(question)) yes()
-  else no();
+function ask(savol, ha, yoq) {
+  if (confirm(savol)) ha()
+  else yoq();
 }
 
 *!*
 ask(
-  "Do you agree?",
-  function() { alert("You agreed."); },
-  function() { alert("You canceled the execution."); }
+  "Rozimisiz?",
+  function() { alert("Rozisiz."); },
+  function() { alert("Siz ijroni bekor qildingiz."); }
 );
 */!*
 ```
 
 
-Here, functions are declared right inside the `ask(...)` call. They have no name, and so are called *anonymous*. Such functions are not accessible outside of `ask` (because they are not assigned to variables), but that's just what we want here.
+Bu yerda funktsiyalar to'g'ridan-to'g'ri `ask(...)` chaqiruvi ichida e'lon qilinadi. Ularning ismlari yo'q va shuning uchun *anonim* deb nomlanadi. Bunday funktsiyalarga `ask` dan tashqarida kirish mumkin emas (chunki ular o'zgaruvchanlarga biriktirilmagan), ammo bu biz xohlagan narsadir.
 
-Such code appears in our scripts very naturally, it's in the spirit of JavaScript.
+Bunday kod bizning skriptlarimizda tabiiy ravishda paydo bo'ladi, bu JavaScript ruhida.
 
 
-```smart header="A function is a value representing an \"action\""
-Regular values like strings or numbers represent the *data*.
+```smart header="Funktsiya - bu \"harakat\" ni ifodalovchi qiymat"
+Matnlar yoki raqamlar kabi muntazam qiymatlar *ma'lumotlarni* ifodalaydi.
 
-A function can be perceived as an *action*.
+Funktsiyani *harakat* sifatida qabul qilish mumkin.
 
-We can pass it between variables and run when we want.
+Uni o'zgaruvchanlar orasidaga qo'yib, istagan paytda ishga tushirishimiz mumkin.
 ```
 
 
-## Function Expression vs Function Declaration
+## Funktsiya ifodasi va funktsiya deklaratsiyasi
 
-Let's formulate the key differences between Function Declarations and Expressions.
+Funktsiya deklaratsiyalari va ifodalar o'rtasidagi asosiy farqlarni shakllantiraylik.
 
-First, the syntax: how to see what is what in the code.
+Birinchidan, sintaksis: kod qanday ko'rinishag ega.
 
-- *Function Declaration:* a function, declared as a separate statement, in the main code flow.
+- *Funktsiya deklaratsiyasi:* asosiy kod oqimida alohida ifoda sifatida e'lon qilingan funktsiya.
 
     ```js
-    // Function Declaration
+    // Funktsiya deklaratsiyasi
     function sum(a, b) {
       return a + b;
     }
     ```
-- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created at the right side of the "assignment expression" `=`:
+- *Funktsiya ifodasi:* ifoda ichida yoki boshqa sintaksis tarkibida yaratilgan funktsiya. Bu erda funktsiya "tayinlash ifodasi" ning `=` 'o'ng tomonida yaratilgan:
     
     ```js
-    // Function Expression
+    // Funktsiya ifodasi
     let sum = function(a, b) {
       return a + b;
     };
     ```
 
-The more subtle difference is *when* a function is created by the JavaScript engine.
+Yanada nozikroq farqi *qachonki* JavaScript interpretatori funktsiyani yaratganda ko'rinadi.
 
-**A Function Expression is created when the execution reaches it and is usable from then on.**
+**Funktsiya ifodasi ijro etilgandan so'ng yaratiladi va shu vaqtdan boshlab foydalanishga yaroqlidir.**
 
-Once the execution flow passes to the right side of the assignment `let sum = function…` -- here we go, the function is created and can be used (assigned, called, etc. ) from now on.
+Bajarilish oqimi topshiriqning o'ng tomoniga o'tgandan so'ng `let sum = function...` -- funksiya yaratiladi va ishlatilishi mumkin (tayinlanishi, chaqirilishi va hokazo. ) bundan buyon.
 
-Function Declarations are different.
+Funktsiya deklaratsiyalari boshqacha.
 
-**A Function Declaration is usable in the whole script/code block.**
+**Funktsiya deklaratsiyasi butun skript/kod blokida ishlatilishi mumkin.**
 
-In other words, when JavaScript *prepares* to run the script or a code block, it first looks for Function Declarations in it and creates the functions. We can think of it as an "initialization stage".
+Boshqacha qilib aytganda, JavaScript skript yoki kod blokini ishga tushirishga *tayyorlanganda*, avval uni funktsiya deklaratsiyasini qidiradi va funktsiyalarni yaratadi. Buni "boshlang'ich bosqich" deb hisoblashimiz mumkin.
 
-And after all of the Function Declarations are processed, the execution goes on.
+Va barcha funktsiyalar deklaratsiyalari ko'rib chiqilgandan so'ng, ijro davom etadi.
 
-As a result, a function declared as a Function Declaration can be called earlier than it is defined.
+Natijada, funktsiya deklaratsiyasi sifatida e'lon qilingan funktsiyani belgilanganidan oldinroq chaqirish mumkin.
 
-For example, this works:
+Masalan, bu ishlaydi:
 
 ```js run refresh untrusted
 *!*
-sayHi("John"); // Hello, John
+sayHi("John"); // Salom, John
 */!*
 
 function sayHi(name) {
-  alert( `Hello, ${name}` );
+  alert( `Salom, ${name}` );
 }
 ```
 
-The Function Declaration `sayHi` is created when JavaScript is preparing to start the script and is visible everywhere in it.
+`sayHi` funktsiya deklaratsiyasi JavaScript skriptni ishga tushirishga tayyorlanayotganda yaratiladi va uning hamma joyda ko'rinadi.
 
-...If it was a Function Expression, then it wouldn't work:
+...Agar bu funktsiya ifodasi bo'lsa, u ishlamaydi:
 
 ```js run refresh untrusted
 *!*
-sayHi("John"); // error!
+sayHi("John"); // xato!
 */!*
 
-let sayHi = function(name) {  // (*) no magic any more
+let sayHi = function(name) {  // (*) endi sehr yo'q
   alert( `Hello, ${name}` );
 };
 ```
 
-Function Expressions are created when the execution reaches them. That would happen only in the line `(*)`. Too late.
+Funktsiya ifodalarining ijro etilishi ularga yetganda hosil bo'ladi. Bu faqat `(*)` satrida sodir bo'ladi. Juda kech.
 
-**When a Function Declaration is made within a code block, it is visible everywhere inside that block. But not outside of it.**
+**Kod blokining ichida funktsiyalar deklaratsiyasi tuzilganda, u blokning hamma joylarida ko'rinadi. Ammo uning tashqarisida emas.**
 
-Sometimes that's handy to declare a local function only needed in that block alone. But that feature may also cause problems.
+Ba'zan ichki funktsiyani faqat o'sha blokda ishlatish uchun e'lon qilish qulay. Ammo bu xususiyat ham muammolarni keltirib chiqarishi mumkin.
 
-For instance, let's imagine that we need to declare a function `welcome()` depending on the `age` variable that we get during runtime. And then we plan to use it some time later.
+Masalan, ish paytida olinadigan `age` o'zgaruvchanga qarab `welcome()` funktsiyasini yaratishimiz kerakligini tasavvur qilaylik. Vaqt o'tgach foydalanishni rejalashtirmoqdamiz.
 
-The code below doesn't work:
+Quyidagi kod ishlamaydi:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Yoshingiz nechida?", 18);
 
-// conditionally declare a function
+// funktsiyani shartli ravishda e'lon qilish
 if (age < 18) {
 
   function welcome() {
-    alert("Hello!");
+    alert("Salom!");
   }
 
 } else {
 
   function welcome() {
-    alert("Greetings!");
+    alert("Assalomu aleykum!");
   }
 
 }
 
-// ...use it later
+// ...keyinroq foydalanish
 *!*
-welcome(); // Error: welcome is not defined
+welcome(); // Xato: welcome belgilanmagan
 */!*
 ```
 
-That's because a Function Declaration is only visible inside the code block in which it resides.
+Funktsiya deklaratsiyasi faqat u joylashgan kod blokining ichida ko'rinadi.
 
-Here's another example:
+Mana yana bir misol:
 
 ```js run
-let age = 16; // take 16 as an example
+let age = 16; // misol sifatida 16 ni oling
 
 if (age < 18) {
 *!*
-  welcome();               // \   (runs)
+  welcome();               // \   (ishlaydi)
 */!*
                            //  |
   function welcome() {     //  |  
-    alert("Hello!");       //  |  Function Declaration is available
-  }                        //  |  everywhere in the block where it's declared
+    alert("Salom!");       //  |  Funktsiya deklaratsiyasi e'lon qilingan blokning 
+  }                        //  |  hamma joyida mavjud
                            //  |
 *!*
-  welcome();               // /   (runs)
+  welcome();               // /   (ishlaydi)
 */!*
 
 } else {
 
-  function welcome() {     //  for age = 16, this "welcome" is never created
-    alert("Greetings!");
+  function welcome() {     //  age = 16 uchun bu "welcome" hech qachon yaratilmaydi
+    alert("Assalomu aleykum!");
   }
 }
 
-// Here we're out of curly braces,
-// so we can not see Function Declarations made inside of them.
+// Bu erda biz jingalak qavslardan chiqib qoldik,
+// shuning uchun ularning ichida qilingan funktsiya deklaratsiyalarini ko'ra olmaymiz.
 
 *!*
-welcome(); // Error: welcome is not defined
+welcome(); // Xato: welcome belgilanmagan
 */!*
 ```
 
-What can we do to make `welcome` visible outside of `if`?
+`welcome` ni `if` dan tashqarida ko'rinadigan qilish uchun nima qilishimiz kerak?
 
-The correct approach would be to use a Function Expression and assign `welcome` to the variable that is declared outside of `if` and has the proper visibility.
+To'g'ri yondashuv funktsiya ifodasini ishlatish va `if` dan tashqarida e'lon qilingan va mos keladigan ko'rinishga ega o'zgaruvchanga `welcome` ni tayinlash dir.
 
-Now it works as intended:
+Endi u maqsadga muvofiq ishlaydi:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Yoshingiz nechida?", 18);
 
 let welcome;
 
 if (age < 18) {
 
   welcome = function() {
-    alert("Hello!");
+    alert("Salom!");
   };
 
 } else {
 
   welcome = function() {
-    alert("Greetings!");
+    alert("Assalomu aleykum!");
   };
 
 }
 
 *!*
-welcome(); // ok now
+welcome(); // endi ishlaydi
 */!*
 ```
 
-Or we could simplify it even further using a question mark operator `?`:
+Yoki savol belgisi operatori `?` yordamida uni yanada soddalashtira olamiz:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Yoshingiz nechida?", 18);
 
 let welcome = (age < 18) ?
-  function() { alert("Hello!"); } :
-  function() { alert("Greetings!"); };
+  function() { alert("Salom!"); } :
+  function() { alert("Assalomu aleykum!"); };
 
 *!*
-welcome(); // ok now
+welcome(); // endi ishlaydi
 */!*
 ```
 
 
-```smart header="When should you choose Function Declaration versus Function Expression?"
-As a rule of thumb, when we need to declare a function, the first to consider is Function Declaration syntax, the one we used before. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+```smart header="Funktsiya deklaratsiyasi va funktsiya ifodasini qachon tanlashingiz kerak?"
+Qoida tariqasida, funktsiyani e'lon qilishimiz kerak bo'lganida, birinchi bo'lib biz ilgari foydalangan funktsiya deklaratsiyasi sintaksisini ishlatishimiz kerak. Bu bizning kodimizni qanday tashkil qilishda ko'proq erkinlik beradi, chunki biz bunday funktsiyalarni e'lon qilinishidan oldin chaqirishimiz mumkin.
 
-It's also a little bit easier to look up `function f(…) {…}` in the code than `let f = function(…) {…}`. Function Declarations are more "eye-catching".
+Kodda `f(...) {…}` funktsiyasini izlash `f = function(...) {…}` ga qaraganda biroz osonroq. Funktsiya deklaratsiyalari ko'proq "ko'zga-yuqumli".
 
-...But if a Function Declaration does not suit us for some reason (we've seen an example above), then Function Expression should be used.
+...Agar biron bir sababga ko'ra funktsiyalar deklaratsiyasi bizga mos kelmasa (biz yuqorida bir misolni ko'rdik), unda funktsiyalar ifodasidan foydalanish kerak.
 ```
 
 
-## Arrow functions [#arrow-functions]
+## O'q funktsiyalari [#arrow-functions]
 
-There's one more very simple and concise syntax for creating functions, that's often better than Function Expressions. It's called "arrow functions", because it looks like this:
+Funktsiyalarni yaratish uchun yana bitta sodda va ixcham sintaksis mavjud, bu ko'pincha funktsiya ifodalaridan yaxshiroqdir. U "o'q funktsiyalari" deb nomlanadi, chunki u quyidagicha ko'rinadi:
 
 
 ```js
-let func = (arg1, arg2, ...argN) => expression
+let func = (arg1, arg2, ...argN) => ifoda
 ```
 
-...This creates a function `func` that has arguments `arg1..argN`, evaluates the `expression` on the right side with their use and returns its result.
+...Bu `arg1..argN` argumentlariga ega bo'lgan `func` funktsiyasini yaratadi, `ifodani` o'ng tomonda baholaydi va natijasini qaytaradi.
 
-In other words, it's roughly the same as:
+Boshqacha qilib aytganda, bu taxminan bir xil:
 
 ```js
 let func = function(arg1, arg2, ...argN) {
-  return expression;
+  return ifoda;
 };
 ```
 
-...But much more concise.
+...Ammo juda ham ixchamroq.
 
-Let's see an example:
+Keling, bir misolni ko'rib chiqaylik:
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* The arrow function is a shorter form of:
+/* O'q funktsiyasi quyidagini qisqartirilgan shakli:
 
 let sum = function(a, b) {
   return a + b;
@@ -396,10 +395,10 @@ alert( sum(1, 2) ); // 3
 
 ```
 
-If we have only one argument, then parentheses can be omitted, making that even shorter:
+Agar bizda faqat bitta argument bo'lsa, unda qavslarni olib tashlash mumkin, bu esa uni yanada qisqartiradi:
 
 ```js run
-// same as
+// bir xil
 // let double = function(n) { return n * 2 }
 *!*
 let double = n => n * 2;
@@ -408,71 +407,71 @@ let double = n => n * 2;
 alert( double(3) ); // 6
 ```
 
-If there are no arguments, parentheses should be empty (but they should be present):
+Agar argumentlar bo'lmasa, qavslar bo'sh bo'lishi kerak (lekin mavjud bo'lishi kerak):
 
 ```js run
-let sayHi = () => alert("Hello!");
+let sayHi = () => alert("Salom!");
 
 sayHi();
 ```
 
-Arrow functions can be used in the same way as Function Expressions.
+O'q funktsiyalaridan funktsiya ifodalari kabi foydalanish mumkin.
 
-For instance, here's the rewritten example with `welcome()`:
+Masalan, `welcome()` bilan qayta yozilgan misol:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Yoshingiz nechida?", 18);
 
 let welcome = (age < 18) ?
-  () => alert('Hello') :
-  () => alert("Greetings!");
+  () => alert('Salom') :
+  () => alert("Assalomu aleykum!");
 
-welcome(); // ok now
+welcome(); // endi ishlaydi
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+O'q funktsiyalari noma'lum bo'lib ko'rinishi va unchalik o'qib bo'lmaydigan ko'rinishi mumkin, ammo ko'zlar tuzilishga odatlanib qolganda, bu tezda o'zgaradi.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+Ular juda ko'p so'zlarni yozishga dangasa bo'lganimizda, oddiy bir satrli harakatlar uchun juda qulaydir.
 
-```smart header="Multiline arrow functions"
+```smart header="Ko'p satrli o'q funktsiyalari"
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+Yuqoridagi misollarda `=>` ning chap qismidan argumentlarni olinadi va ular bilan o'ng tomonda ifoda baholanadi.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
+Ba'zan bizga bir nechta iboralar yoki bayonotlar kabi biroz murakkabroq narsa kerak bo'ladi. Bu ham mumkin, lekin biz ularni jingalak qavslarga solib qo'yishimiz kerak. Keyin ular ichida normal `return` dan foydalanishimiz kerak.
 
-Like this:
+Shunga o'xshash:
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // jingalak qavs ko'p satrli funktsiyani ochadi
   let result = a + b;
 *!*
-  return result; // if we use curly braces, use return to get results
+  return result; // agar biz jingalak qavslardan foydalansak, natijaga erishish uchun return-dan foydalaning
 */!*
 };
 
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all! Arrow functions have other interesting features. We'll return to them later in the chapter <info:arrow-functions>.
+```smart header="Yanada ko'proq"
+Bu erda biz o'q funktsiyalarini qisqalik uchun maqtadik. Ammo bu hammasi emas! O'q funktsiyalari boshqa qiziqarli xususiyatlarga ega. Keyinchalik ularga <info:arrow-functions> bobida qaytamiz.
 
-For now, we can already use them for one-line actions and callbacks.
+Hozircha biz ularni bir qatorli harakatlar va qayta chaqirish uchun ishlatamiz.
 ```
 
-## Summary
+## Xulosa
 
-- Functions are values. They can be assigned, copied or declared in any place of the code.
-- If the function is declared as a separate statement in the main code flow, that's called a "Function Declaration".
-- If the function is created as a part of an expression, it's called a "Function Expression".
-- Function Declarations are processed before the code block is executed. They are visible everywhere in the block.
-- Function Expressions are created when the execution flow reaches them.
+- Funktsiyalar qiymatlardir. Ular kodning istalgan joyiga tayinlanishi, nusxalanishi yoki e'lon qilinishi mumkin.
+- Agar funktsiya asosiy kod oqimida alohida ifoda sifatida e'lon qilinsa, bu "Funktsiya Deklaratsiyasi" deb nomlanadi.
+- Agar funktsiya ifodaning bir qismi sifatida yaratilgan bo'lsa, u "Funktsiya ifodasi" deb nomlanadi.
+- Funktsiya deklaratsiyalari kod bloki bajarilishidan oldin qayta ishlanadi. Ular blokning hamma joylarida ko'rinadi.
+- Funktsiya iboralari ijro etish oqimi ularga yetganda hosil bo'ladi.
 
 
-In most cases when we need to declare a function, a Function Declaration is preferable, because it is visible prior to the declaration itself. That gives us more flexibility in code organization, and is usually more readable.
+Ko'pgina hollarda, biz funktsiyalarni e'lon qilishimiz kerak bo'lganda, funktsiyalar deklaratsiyasi afzalroqdir, chunki u deklaratsiyadan oldin ko'rinadi. Bu bizga kodni tashkil qilishda ko'proq moslashuvchanlikni beradi va odatda o'qilishi osonroq.
 
-So we should use a Function Expression only when a Function Declaration is not fit for the task. We've seen a couple of examples of that in this chapter, and will see more in the future.
+Shuning uchun biz funktsiya ifodasini faqat funktsiya deklaratsiyasi vazifaga mos kelmasa ishlatishimiz kerak. Biz ushbu bobda bunga bir nechta misollarni ko'rdik va kelajakda yana ko'p misollarni ko'rasiz.
 
-Arrow functions are handy for one-liners. They come in two flavors:
+O'q funktsiyalari bitta satrli ifoda uchun qulaydir. Ular ikkita turga ega:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. Jingalak qavslarsiz: `(...args) => ifoda` -- o'ng tomondagi ifoda: funktsiya uni baholaydi va natijani qaytaradi.
+2. Jingalak qavslar bilan: `(...args) => {kod tanasi}` -- qavslar funktsiya ichida bir nechta ifodalarni yozishimizga imkon beradi, ammo biron bir narsani qaytarish uchun `return` kerak bo'ladi.

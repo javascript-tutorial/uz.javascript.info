@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# if (a string with zero)
+# agar (nolga teng matn)
 
-Will `alert` be shown?
+`alert` ko'rsatiladimi?
 
 ```js
 if ("0") {

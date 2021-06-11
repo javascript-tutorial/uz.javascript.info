@@ -1,3 +1,3 @@
-# JavaScript Fundamentals
+# JavaScript asoslari
 
-Let's learn the fundamentals of script building.
+Skript tuzish asoslarini bilib olaylik.

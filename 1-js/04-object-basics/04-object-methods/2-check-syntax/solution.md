@@ -1,6 +1,6 @@
-**Error**!
+**Xato**!
 
-Try it:
+Urunib ko'ring:
 
 ```js run
 let user = {
@@ -8,22 +8,22 @@ let user = {
   go: function() { alert(this.name) }
 }
 
-(user.go)() // error!
+(user.go)() // xato!
 ```
 
-The error message in most browsers does not give understanding what went wrong.
+Ko'pgina brauzerlardagi xato xabari nima bo'lganligini tushunishga imkon bermaydi.
 
-**The error appears because a semicolon is missing after `user = {...}`.**
+**Xato `user = {...}` dan keyin paydo bo'ladi, chunki nuqta-vergul yo'q.**
 
-JavaScript does not assume a semicolon before a bracket `(user.go)()`, so it reads the code like:
+Javascript `(user.go)()` qavsidan oldin vergulni qabul qilmaydi, shuning uchun u quyidagi kodni o'qiydi:
 
 ```js no-beautify
 let user = { go:... }(user.go)()
 ```
 
-Then we can also see that such a joint expression is syntactically a call of the object `{ go: ... }` as a function with the argument `(user.go)`. And that also happens on the same line with `let user`, so the `user` object has not yet even been defined, hence the error. 
+Bundan tashqari, biz bunday qo'shma ifoda sintaktik ravishda `{go: ...}` ob'ektini `(user.go)` argumenti bilan funktsiya sifatida chaqirishini ko'rishimiz mumkin. Va bu xuddi shu satrda `let user` bilan sodir bo'ladi, shuning uchun `user` ob'ekti hali aniqlanmagan, shuning uchun xato.
 
-If we insert the semicolon, all is fine:
+Agar biz nuqta-vergul qo'shsak, barchasi yaxshi:
 
 ```js run
 let user = {
@@ -34,7 +34,7 @@ let user = {
 (user.go)() // John
 ```
 
-Please note that brackets around `(user.go)` do nothing here. Usually they setup the order of operations, but here the dot `.` works first anyway, so there's no effect. Only the semicolon thing matters.
+Iltimos e'tibor bering, `(user.go)` atrofidagi qavslar bu erda hech narsa qilmaydi. Odatda ular operatsiyalar tartibini o'rnatadilar, ammo bu erda nuqta `.` baribir avval ishlaydi, shuning uchun hech qanday ta'sir bo'lmaydi. Faqat nuqta-vergul muhim.
 
 
 

@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Using "this" in object literal
+# Obyektda "this" dan foydalanish
 
-Here the function `makeUser` returns an object.
+Bu erda `makeUser` funktsiyasi obyektni qaytaradi.
 
-What is the result of accessing its `ref`? Why?
+`ref` ga kirish natijasi qanday? Nima uchun?
 
 ```js
 function makeUser() {
@@ -18,6 +18,6 @@ function makeUser() {
 
 let user = makeUser();
 
-alert( user.ref.name ); // What's the result?
+alert( user.ref.name ); // Natijasi nma?
 ```
 

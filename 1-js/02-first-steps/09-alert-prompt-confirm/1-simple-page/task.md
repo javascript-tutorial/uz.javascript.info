@@ -2,8 +2,8 @@ importance: 4
 
 ---
 
-# A simple page
+# Oddiy sahifa
 
-Create a web-page that asks for a name and outputs it.
+Ism so'raydigan va uni chiqaradigan veb-sahifa yarating.
 
 [demo]

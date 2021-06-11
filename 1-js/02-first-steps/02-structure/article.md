@@ -1,44 +1,44 @@
-# Code structure
+# Kod tuzulishi
 
-The first thing we'll study is the building blocks of code.
+Biz o'rganadigan birinchi narsa bu kodning bloklari.
 
-## Statements
+## Ifodalar
 
-Statements are syntax constructs and commands that perform actions.
+Ifodalar - amallarni bajaruvchi sintaksis konstruktsiyalar va buyruqlardir.
 
-We've already seen a statement, `alert('Hello, world!')`, which shows the message "Hello, world!".
+Biz allaqachon bir ifoda ko'rgan edik, `alert('Hello, world!')`, qaysiki "Hello, world!" xabarni ko'rsatadi.
 
-We can have as many statements in our code as we want. Statements can be separated with a semicolon.
+Bizning kodimizda kerakli kabi ko'p ifodalar bo'lishi mumkin. Ifodalarni nuqtali vergul bilan ajratish mumkin.
 
-For example, here we split "Hello World" into two alerts:
+Misol uchun, bu erda biz "Hello World" ni ikkita alertga(ogohlantirishga) ajratdik:
 
 ```js run no-beautify
 alert('Hello'); alert('World');
 ```
 
-Usually, statements are written on separate lines to make the code more readable:
+Odatda, ifodalar, kodni yanada o'qish oson bo'lishi uchun, alohida satrlarga yoziladi:
 
 ```js run no-beautify
 alert('Hello');
 alert('World');
 ```
 
-## Semicolons [#semicolon]
+## Nuqta-vergul [#semicolon]
 
-A semicolon may be omitted in most cases when a line break exists.
+Nuqta-vergul ko'p hollarda yozilmashi mumkin, agar satr uzilishi bo'lsa.
 
-This would also work:
+Bu ham ishlaydi:
 
 ```js run no-beautify
 alert('Hello')
 alert('World')
 ```
 
-Here, JavaScript interprets the line break as an "implicit" semicolon. This is called an [automatic semicolon insertion](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion).
+Bu erda JavaScript satr uzilishini "yashirin" nuqta-vergul sifatida izohlaydi. Bu [avtomatik vergul kiritish](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) deyiladi.
 
-**In most cases, a newline implies a semicolon. But "in most cases" does not mean "always"!**
+**Ko'p hollarda yangi satrni nuqta-vergul dib nazarda tutadi. Lekin "ko'p hollarda" "har doim" degani emas!**
 
-There are cases when a newline does not mean a semicolon. For example:
+Yangi satr nuqta-vergulni anglatmaydigan holatlar mavjud. Misol uchun:
 
 ```js run no-beautify
 alert(3 +
@@ -46,114 +46,117 @@ alert(3 +
 + 2);
 ```
 
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so the semicolon is not required. And in this case that works as intended.
+Kod `6` ni chiqaradi, chunki JavaScript bu erga nuqta-vergul qo'shmaydi. Agar satr ortiqcha `"+"` bilan tugagan bo'lsa, u "to'liq bo'lmagan ifoda" ekanligi intuitiv ravishda aniq, shuning uchun nuqta-vergul shart emas. Va bu holda, hamma narsa maqsadga muvofiq ishlaydi.
 
-**But there are situations where JavaScript "fails" to assume a semicolon where it is really needed.**
+**Ammo shunday holatlar mavjudki, JavaScript haqiqatan ham zarur bo'lgan joyda nuqta-vergulni "unutadi".**
 
-Errors which occur in such cases are quite hard to find and fix.
+Bunday hollarda sodir bo'lgan xatolarni topish va tuzatish juda qiyin.
 
-````smart header="An example of an error"
-If you're curious to see a concrete example of such an error, check this code out:
+````smart header="Xatoning misoli"
+Agar bunday aniq xato misolni ko'rishning hohlasangiz, bu kodni tekshiring:
 
 ```js run
 [1, 2].forEach(alert)
 ```
 
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of the code: it shows `1` then `2`.
+Hali qavs `[]` va 'forEach (har biri uchun)' ma'nosi haqida o'ylashning hojati yo'q. Ularni keyinroq o'rganamiz. Hozircha, faqat kod natija eslab qoling: u `1` keyin `2` ko'rsatadi.
 
-Now, let's add an `alert` before the code and *not* finish it with a semicolon:
+Endi koddan oldin `alert(ogohlantirish)` ni qo'shaylik va uni nuqta-vergul bilan *tugatmaylik*:
 
 ```js run no-beautify
-alert("There will be an error")
+alert("Xato bo'ladi")
 
 [1, 2].forEach(alert)
 ```
 
-Now if we run the code, only the first `alert` is shown and then we have an error!
+Endi kodni ishlatsak, faqat birinchi `alert(ogohlantirish)` ko'rsatiladi va keyin bizda xato bor!
 
-But everything is fine again if we add a semicolon after `alert`:
+Lekin `alert` dan keyin nuqta-vergul qo'shsak, yana hamma narsa yaxshi:
+
 ```js run
-alert("All fine now");
+alert("Hozir barchasi yaxshi");
 
 [1, 2].forEach(alert)  
 ```
 
-Now we have the "All fine now" message followed by `1` and `2`.
+Endi biz `1` va `2` dan so'ng "Hozir barchasi yaxshi" xabar bor.
 
 
-The error in the no-semicolon variant occurs because JavaScript does not assume a semicolon before square brackets `[...]`.
+Nuqta-vergulsiz variantdagi xatolik JavaScript kvadrat qavslardan oldin nuqta-vergulni avtomatik qo'ymagani uchun yuzaga keladi `[...]`.
 
-So, because the semicolon is not auto-inserted, the code in the first example is treated as a single statement. Here's how the engine sees it:
+Shunday qilib, nuqta-vergul avtomatik joylashtirilmaganligi sababli, birinchi misoldagi kod bitta ifoda sifatida qabul qilinadi. Mana buni interpretator ko'radi:
 
 ```js run no-beautify
-alert("There will be an error")[1, 2].forEach(alert)
+alert("Xato bo'ladi")[1, 2].forEach(alert)
 ```
 
-But it should be two separate statements, not one. Such a merging in this case is just wrong, hence the error. This can happen in other situations.
+Ammo bu bitta emas, ikkita alohida ifoda bo'lishi kerak. Bunday holda birlashish noto'g'ri, shuning uchun xato. Bu turdagi hato boshqa holatlarda ham bo'lishi mumkin.
+
 ````
 
-We recommend putting semicolons between statements even if they are separated by newlines. This rule is widely adopted by the community. Let's note once again -- *it is possible* to leave out semicolons most of the time. But it's safer -- especially for a beginner -- to use them.
+Yangi satrlar bilan ajratilgan bo'lsa ham, ifodalar orasida nuqta-vergul qo'yishni tavsiya etamiz. Ushbu qoida jamiyat tomonidan keng qabul qilingan. Yana bir bor ta'kidlab o'tamiz -- *ko'pincha nuqta-vergul qoldirish mumkin*. Ammo ulardan foydalanish xavfsizroq -- ayniqsa, yangi boshlanuvchilar uchun.
 
-## Comments
+## Izohlar
 
-As time goes on, programs become more and more complex. It becomes necessary to add *comments* which describe what the code does and why.
+Vaqt o'tgan sayin dasturlar murakkablashib boradi. Shuning uchun *izohlar* qo'shish kerak bo'ladi, kod nima bajarilishini tasvirlab berish uchun.
 
-Comments can be put into any place of a script. They don't affect its execution because the engine simply ignores them.
+Izohlarni scirtlarning istalgan joyiga qo'yish mumkin. Ular uning bajarilishiga ta'sir qilmaydi, chunki interpretator ularni e'tiborsiz qoldiradi.
 
-**One-line comments start with two forward slash characters `//`.**
+**Bir qatorli izohlar ikkita oldinga siljish belgilaridan boshlanadi `//`.**
 
-The rest of the line is a comment. It may occupy a full line of its own or follow a statement.
+Satrning qolgan qismi izohdir. O'zining to'liq satrini egallashi yoki ifodadan kegin bolishi mumkin.
 
-Like here:
+Bu erda bo'lgani kabi:
 ```js run
-// This comment occupies a line of its own
+// Ushbu izoh o'ziga xos satrni egallaydi
 alert('Hello');
 
-alert('World'); // This comment follows the statement
+alert('World'); // Ushbu izoh ifodadan keyin
 ```
 
-**Multiline comments start with a forward slash and an asterisk <code>/&#42;</code> and end with an asterisk and a forward slash <code>&#42;/</code>.**
+**Ko'p qatorli izohlar oldinga siljish belgisi va yulduzcha bilan boshlanadi <code>/&#42;</code> so'ng yulduzcha va oldinga siljish belgisi bilan tugaydi<code>&#42;/</code>.**
 
-Like this:
+Shunga o'xshash:
 
 ```js run
-/* An example with two messages.
-This is a multiline comment.
+/* Ikki xabarli misol.
+Bu ko'p satrli izoh.
 */
 alert('Hello');
 alert('World');
 ```
 
-The content of comments is ignored, so if we put code inside <code>/&#42; ... &#42;/</code>, it won't execute.
+Izohlarning mazmuni e'tiborga olinmaydi, shuning uchun kodni <code>/&#42; ... &#42;/</code>, u bajarilmaydi.
 
-Sometimes it can be handy to temporarily disable a part of code:
+
+Ba'zan kodning bir qismini vaqtincha o'chirib qo'yish uchun qulay bo'lishi mumkin:
 
 ```js run
-/* Commenting out the code
+/* Kodni izohlash
 alert('Hello');
 */
 alert('World');
 ```
 
-```smart header="Use hotkeys!"
-In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl`.
+```smart header="Maxsus klavsishalar kombinatsiyalaridan foydalaning"
+Ko'p matn muharrirlarida, kod satrini bitta satrli izoh uchun: `key:Ctrl+/` tugmachasini bosish orqali izohlash mumkin va shunga o'xshash narsa: "Ctrl+Shift+/" - ko'p satrli izohlar uchun (kod qismini tanlang va maxsus klavsishalar kombinatsiyani bosing). Mac uchun `key:Ctrl` o'rniga `key:Cmd` ni sinab ko'ring.
 ```
 
-````warn header="Nested comments are not supported!"
-There may not be `/*...*/` inside another `/*...*/`.
+````warn header="Izohning ichida izoh qoldirish mumkin emas!"
+Mumkin emas `/*...* /` ichida `/*...*/`.
 
-Such code will die with an error:
+Bunday kod xato:
 
 ```js run no-beautify
 /*
-  /* nested comment ?!? */
+  /* Izohning ichida izoh ?!? */
 */
 alert( 'World' );
 ```
 ````
 
-Please, don't hesitate to comment your code.
+Iltimos, kodingizni izohlashdan tortinmang.
 
-Comments increase the overall code footprint, but that's not a problem at all. There are many tools which minify code before publishing to a production server. They remove comments, so they don't appear in the working scripts. Therefore, comments do not have negative effects on production at all.
+Izohlar umumiy kod hajmini oshiradi, ammo bu umuman muammo emas. Ishlab chiqarish serverida nashr etishdan oldin kodni minimallashtiradigan ko'plab vositalar mavjud. Ular izohlarni olib tashlashadi, shuning uchun ular ishlaydigan skriptlarda ko'rinmaydi. Shuning uchun izohlar ishlab chiqarishga umuman salbiy ta'sir ko'rsatmaydi.
 
-Later in the tutorial there will be a chapter <info:code-quality> that also explains how to write better comments.
+Keyinchalik o'quv qo'llanmada <info:code-quality> bo'limi paydo bo'ladi, unda yaxshiroq izohlar yozishni tushuntiriladi.

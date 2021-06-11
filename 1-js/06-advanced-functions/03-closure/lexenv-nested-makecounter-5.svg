@@ -28,13 +28,13 @@
             <g id="Group-3" transform="translate(481.000000, 54.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="188" height="28"></rect>
                 <text id="makeCounter:-functio" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="7" y="18.5">makeCounter: function</tspan>
+                    <tspan x="7" y="18.5">makeCounter: funktsiya</tspan>
                 </text>
             </g>
             <g id="Group-3" transform="translate(481.000000, 94.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="188" height="28"></rect>
                 <text id="counter:-function" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="7" y="19">counter: function</tspan>
+                    <tspan x="7" y="19">counter: funktsiya</tspan>
                 </text>
             </g>
             <g id="Group-5" transform="translate(325.000000, 28.000000)" stroke="#EE6B47" stroke-linecap="square">
@@ -59,25 +59,25 @@
             <g id="Group-2-Copy" transform="translate(223.000000, 66.000000)">
                 <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="68" height="27"></rect>
                 <text id="&lt;empty&gt;" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="10" y="18">&lt;empty&gt;</tspan>
+                    <tspan x="10" y="18">&lt;bo'sh&gt;</tspan>
                 </text>
             </g>
             <g id="Group" transform="translate(677.000000, 45.000000)">
                 <path id="Line" d="M16.5,24.5 L2.5,24.5 L2.5,22.5 L16.5,22.5 L16.5,16.5 L30.5,23.5 L16.5,30.5 L16.5,24.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <g id="Group-Copy" transform="translate(430.000000, 45.000000)">
                 <path id="Line" d="M16.5,24.5 L2.5,24.5 L2.5,22.5 L16.5,22.5 L16.5,16.5 L30.5,23.5 L16.5,30.5 L16.5,24.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <g id="Group-Copy-2" transform="translate(302.000000, 47.000000)">
                 <path id="Line" d="M16.5,24.5 L2.5,24.5 L2.5,22.5 L16.5,22.5 L16.5,16.5 L30.5,23.5 L16.5,30.5 L16.5,24.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <text id="null" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
@@ -85,7 +85,7 @@
             </text>
             <polyline id="Rectangle-1-Copy-3" fill="#EC6B4E" points="5 93 5 80 14 86.5"></polyline>
             <text id="[[Environment]]" opacity="0.6" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="184" y="192">[[Environment]]</tspan>
+                <tspan x="184" y="192">[[Muhit]]</tspan>
             </text>
             <path d="M276,168 L308,99" id="Line" stroke="#EE6B47" stroke-width="2" opacity="0.6" stroke-linecap="square" stroke-dasharray="4,8"></path>
             <path d="M309.5,94.5 L299.5,101.5" id="Line" stroke="#EE6B47" stroke-width="2" opacity="0.6" stroke-linecap="square"></path>

@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Create new Accumulator
+# Accumulator ni yaratish
 
-Create a constructor function `Accumulator(startingValue)`.
+`Accumulator(startingValue)` konstruktor funktsiyasini yarating.
 
-Object that it creates should:
+Yaratadigan obyekt:
 
-- Store the "current value" in the property `value`. The starting value is set to the argument of the constructor `startingValue`.
-- The `read()` method should use `prompt` to read a new number and add it to `value`.
+- "Joriy qiymat" ni `value` xususiyatida saqlang. Boshlang'ich qiymati `startValue` konstruktorining argumentiga o'rnatiladi.
+- `read()` usuli yangi raqamni o'qish va uni `value` ga qo'shish uchun `prompt` dan foydalanishi kerak.
 
-In other words, the `value` property is the sum of all user-entered values with the initial value  `startingValue`.
+Boshqacha qilib aytganda, `value` xususiyati - bu boshlang'ich qiymati `startValue` bilan foydalanuvchi tomonidan kiritilgan barcha qiymatlarning yig'indisi.
 
-Here's the demo of the code:
+Kodning demosi:
 
 ```js
-let accumulator = new Accumulator(1); // initial value 1
-accumulator.read(); // adds the user-entered value
-accumulator.read(); // adds the user-entered value
-alert(accumulator.value); // shows the sum of these values
+let accumulator = new Accumulator(1); // boshlang'ich qiymati 1
+accumulator.read(); // foydalanuvchi tomonidan kiritilgan qiymatni qo'shadi
+accumulator.read(); // foydalanuvchi tomonidan kiritilgan qiymatni qo'shadi
+alert(accumulator.value); // ushbu qiymatlarning yig'indisini ko'rsatadi
 ```
 
 [demo]

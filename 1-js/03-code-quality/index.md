@@ -1,3 +1,3 @@
-# Code quality
+# Kod sifati
 
-This chapter explains coding practices that we'll use further in the development. 
+Ushbu bobda biz rivojlanishda yanada ko'proq foydalanadigan kodlash usullari tushuntirilgan.

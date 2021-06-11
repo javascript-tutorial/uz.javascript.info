@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Map to objects
+# Obyektlarga xarita
 
-You have an array of `user` objects, each one has `name`, `surname` and `id`.
+Sizda `user` obyekyektlar massivi mavjud, ularning har birida `ism`, `familiya` va `id` mavjud.
 
-Write the code to create another array from it, of objects with `id` and `fullName`, where `fullName` is generated from `name` and `surname`.
+Undan `id` va `fullName` obyektlarining boshqa massivni yaratish uchun kodni yozing, bu yerda `to'liq ism` `ism` va `familiya` dan hosil bo'ladi.
 
-For instance:
+Masalan:
 
 ```js no-beautify
 let john = { name: "John", surname: "Smith", id: 1 };
@@ -18,7 +18,7 @@ let mary = { name: "Mary", surname: "Key", id: 3 };
 let users = [ john, pete, mary ];
 
 *!*
-let usersMapped = /* ... your code ... */
+let usersMapped = /* ... sizning kodingiz ... */
 */!*
 
 /*
@@ -33,4 +33,4 @@ alert( usersMapped[0].id ) // 1
 alert( usersMapped[0].fullName ) // John Smith
 ```
 
-So, actually you need to map one array of objects to another. Try using `=>` here. There's a small catch.
+Shunday qilib, aslida siz bir obyektlar massivini boshqasiga solishtirishingiz kerak. Bu erda `=>` dan foydalanib ko'ring. 

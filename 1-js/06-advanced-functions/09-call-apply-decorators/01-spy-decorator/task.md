@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Spy decorator
+# Dekorativ ayg'oqchi 
 
-Create a decorator `spy(func)` that should return a wrapper that saves all calls to function in its `calls` property.
+Barcha chaqiruvlarni `calls` xususiyatida ishlashga saqlaydigan o'ramni qaytaradigan dekorativ `spy(func)` yarating.
 
-Every call is saved as an array of arguments.
+Har bir chaqiruv argumentlar massivi sifatida saqlanadi.
 
-For instance:
+Masalan:
 
 ```js
 function work(a, b) {
-  alert( a + b ); // work is an arbitrary function or method
+  alert( a + b ); // ixtiyoriy funktsiya yoki usuldak ishlaydi
 }
 
 *!*
@@ -27,4 +27,4 @@ for (let args of work.calls) {
 }
 ```
 
-P.S. That decorator is sometimes useful for unit-testing. Its advanced form is `sinon.spy` in [Sinon.JS](http://sinonjs.org/) library.
+P.S. Ushbu dekorativ ba'zan birlik sinovi uchun foydalidir. Kengaytirilgan shakli - [Sinon.JS](http://sinonjs.org/) kutubxonasida `sinon.spy`.

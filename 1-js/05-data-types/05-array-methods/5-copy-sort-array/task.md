@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Copy and sort array
+# Massivni nusxalash va saralash
 
-We have an array of strings `arr`. We'd like to have a sorted copy of it, but keep `arr` unmodified.
+Bizda `arr` massivi mavjud. Biz uning tartiblangan nusxasini olishni xohlaymiz, ammo `arr` ni o'zgartirmasdan.
 
-Create a function `copySorted(arr)` that returns such a copy.
+Bunday nusxani qaytaradigan `copySorted(arr)` funktsiyasini yarating.
 
 ```js
 let arr = ["HTML", "JavaScript", "CSS"];
@@ -14,5 +14,5 @@ let arr = ["HTML", "JavaScript", "CSS"];
 let sorted = copySorted(arr);
 
 alert( sorted ); // CSS, HTML, JavaScript
-alert( arr ); // HTML, JavaScript, CSS (no changes)
+alert( arr ); // HTML, JavaScript, CSS (hech qanday o'zgarish yo'q)
 ```

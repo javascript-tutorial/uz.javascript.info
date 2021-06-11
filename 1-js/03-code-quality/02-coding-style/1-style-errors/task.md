@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Bad style
+# Yomon uslub
 
-What's wrong with the code style below?
+Quyidagi kod uslubida nima yomon?
 
 ```js no-beautify
 function pow(x,n)
@@ -17,7 +17,7 @@ function pow(x,n)
 let x=prompt("x?",''), n=prompt("n?",'')
 if (n<=0)
 {
-  alert(`Power ${n} is not supported, please enter an integer number greater than zero`);
+  alert(`${n} darajasi  qo'llab-quvvatlanmaydi, iltimos, noldan katta sonni kiriting`);
 }
 else
 {
@@ -25,4 +25,4 @@ else
 }
 ```
 
-Fix it.
+To'girlang.

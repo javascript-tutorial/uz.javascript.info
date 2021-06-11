@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Turn the object into JSON and back
+# Obyektni JSON-ga va orqaga qaytaring
 
-Turn the `user` into JSON and then read it back into another variable.
+`user`-ni JSON-ga o'zgartiring va keyin uni boshqa o'zgaruvchanga qaytaring.
 
 ```js
 let user = {

@@ -11,11 +11,11 @@ describe("calculator", function() {
     calculator.read();
   });
 
-  it("when 2 and 3 are entered, the sum is 5", function() {
+  it("2 va 3 kiritilganda, yig'indisi 5 ga teng", function() {
     assert.equal(calculator.sum(), 5);
   });
 
-  it("when 2 and 3 are entered, the product is 6", function() {
+  it("2 va 3 kiritilganda mahsuloti 6 ga teng", function() {
     assert.equal(calculator.mul(), 6);
   });
 

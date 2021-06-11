@@ -1,30 +1,30 @@
-The task demonstrates how postfix/prefix forms can lead to different results when used in comparisons.
+Vazifa postfiks / prefiks shakllari taqqoslashda foydalanilganda qanday qilib turli xil natijalarga olib kelishi mumkinligini namoyish etadi.
 
-1. **From 1 to 4**
+1. **1 dan 4 gacha**
 
     ```js run
     let i = 0;
     while (++i < 5) alert( i );
     ```
 
-    The first value is `i = 1`, because `++i` first increments `i` and then returns the new value. So the first comparison is `1 < 5` and the `alert` shows `1`.
+    Birinchi qiymat `i = 1` dir, chunki `++ i` avval `i` ni oshiradi va keyin yangi qiymatni qaytaradi. Shunday qilib, birinchi taqqoslash `1 < 5` va `alert` `1` ni ko'rsatadi.
 
-    Then follow `2, 3, 4…` -- the values show up one after another. The comparison always uses the incremented value, because `++` is before the variable.
+    Keyin `2,3,4...` ga amal qiling -- qiymatlar birin-ketin paydo bo'ladi. Taqqoslash har doim ko'paytirilgan qiymatdan foydalanadi, chunki `++` o'zgaruvchandan oldin.
 
-    Finally, `i = 4` is incremented to `5`, the comparison `while(5 < 5)` fails, and the loop stops. So `5` is not shown.
-2. **From 1 to 5**
+    Va nihoyat, `i = 4` `5` ga oshiriladi, taqqoslash `while(5 < 5)` ishlamay qoladi va tsikl to'xtaydi. Shunday qilib, `5` ko'rsatilmaydi.
+2. **1 dan 5 gacha**
 
     ```js run
     let i = 0;
     while (i++ < 5) alert( i );
     ```
 
-    The first value is again `i = 1`. The postfix form of `i++` increments `i` and then returns the *old* value, so the comparison `i++ < 5` will use `i = 0` (contrary to `++i < 5`).
+    Birinchi qiymat yana `i = 1` dir. `i++` ning postfiks shakli `i` ni oshiradi va keyin *eski* qiymatini qaytaradi, shuning uchun `i++ < 5` taqqoslashida `i = 0` ishlatiladi (`++i < 5` ga zid).
 
-    But the `alert` call is separate. It's another statement which executes after the increment and the comparison. So it gets the current `i = 1`.
+    Ammo `alert` chaqiruvi alohida. Bu o'sish va taqqoslashdan keyin bajariladigan yana bir ifoda. Shunday qilib, u joriy `i = 1` ni oladi.
 
-    Then follow `2, 3, 4…`
+    Keyin `2,3,4...`
 
-    Let's stop on `i = 4`. The prefix form `++i` would increment it and use `5` in the comparison. But here we have the postfix form `i++`. So it increments `i` to `5`, but returns the old value. Hence the comparison is actually `while(4 < 5)` -- true, and the control goes on to `alert`.
+    Keling, `i = 4` da to'xtaylik. `++i` prefiksi uni ko'paytiradi va taqqoslashda `5` dan foydalanadi. Ammo bu erda biz `i++` postfiksi shakliga egamiz. Shunday qilib, u `i` dan `5` gacha ko'tariladi, lekin eski qiymatni qaytaradi. Shuning uchun taqqoslash aslida `while (4 < 5)` -- to'g'ri va boshqaruv `alert` ga o'tadi.
 
-    The value `i = 5` is the last one, because on the next step `while(5 < 5)` is false.
+    `i = 5` qiymati oxirgi hisoblanadi, chunki keyingi bosqichda `while(5 < 5)` noto'g'ri.

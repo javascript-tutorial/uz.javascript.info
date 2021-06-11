@@ -1,6 +1,6 @@
 function isEmpty(obj) {
   for (let key in obj) {
-    // if the loop has started, there is a property
+    // agar tsikl boshlangan bo'lsa, unda xususiyat mavjud
     return false;
   }
   return true;

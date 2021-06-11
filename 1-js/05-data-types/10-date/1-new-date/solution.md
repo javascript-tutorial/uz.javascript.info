@@ -1,6 +1,6 @@
-The `new Date` constructor uses the local time zone by default. So the only important thing to remember is that months start from zero.
+`new Date` konstruktori sukut bo'yicha mahalliy vaqt zonasidan foydalanadi. Shunday qilib, eslash kerak bo'lgan yagona muhim narsa oylar noldan boshlanadi.
 
-So February has number 1.
+Shunday qilib, fevral 1 raqam.
 
 ```js run
 let d = new Date(2012, 1, 20, 3, 12);

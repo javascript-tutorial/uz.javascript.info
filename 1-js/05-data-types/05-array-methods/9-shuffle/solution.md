@@ -1,4 +1,4 @@
-The simple solution could be:
+Oddiy yechim bo'lishi mumkin:
 
 ```js run
 *!*
@@ -12,18 +12,18 @@ shuffle(arr);
 alert(arr);
 ```
 
-That somewhat works, because `Math.random() - 0.5` is a random number that may be positive or negative, so the sorting function reorders elements randomly.
+Bu biroz ishlaydi, chunki `Math.random() - 0.5` tasodifiy son bo'lib, u ijobiy yoki salbiy bo'lishi mumkin, shuning uchun saralash funktsiyasi elementlarni tasodifiy tartibda o'zgartiradi.
 
-But because the sorting function is not meant to be used this way, not all permutations have the same probability.
+Ammo saralash funktsiyasi shu tarzda ishlatilishi mumkin emasligi sababli, barcha almashtirishlar bir xil ehtimollikka ega emas.
 
-For instance, consider the code below. It runs `shuffle` 1000000 times and counts appearances of all possible results:
+Masalan, quyidagi kodni ko'rib chiqing. U `aralashtirib` 1000000 marta ishlaydi va barcha mumkin bo'lgan natijalarning ko'rinishini hisoblaydi:
 
 ```js run
 function shuffle(array) {
   array.sort(() => Math.random() - 0.5);
 }
 
-// counts of appearances for all possible permutations
+// barcha mumkin bo'lgan almashtirishlar uchun ko'rinishlarning soni
 let count = {
   '123': 0,
   '132': 0,
@@ -39,13 +39,13 @@ for (let i = 0; i < 1000000; i++) {
   count[array.join('')]++;
 }
 
-// show counts of all possible permutations
+// barcha mumkin bo'lgan almashtirishlarning sonlarini ko'rsatish
 for (let key in count) {
   alert(`${key}: ${count[key]}`);
 }
 ```
 
-An example result (for V8, July 2017):
+Misol natijasi (for V8, July 2017):
 
 ```js
 123: 250706
@@ -56,24 +56,24 @@ An example result (for V8, July 2017):
 321: 125223
 ```
 
-We can see the bias clearly: `123` and `213` appear much more often than others.
+Ikkilanishni aniq ko'rishimiz mumkin: `123` va `213` boshqalarga qaraganda tez-tez ko'rinadi.
 
-The result of the code may vary between JavaScript engines, but we can already see that the approach is unreliable.
+Kod natijasi JavaScript interpretator o'rtasida farq qilishi mumkin, ammo biz allaqachon yondashuv ishonchsizligini ko'rmoqdamiz.
 
-Why it doesn't work? Generally speaking, `sort` is a "black box": we throw an array and a comparison function into it and expect the array to be sorted. But due to the utter randomness of the comparison the black box goes mad, and how exactly it goes mad depends on the concrete implementation that differs between engines.
+Nima uchun u ishlamayapti? Umuman aytganda, `sort` "qora quti" dir: biz unga qator va taqqoslash funktsiyasini tashlaymiz va massivning tartiblanishini kutamiz. Ammo taqqoslashning mutlaqo tasodifiyligi tufayli qora quti aqldan ozadi va uning aynan qay darajada aqldan ozishi interpretator orasidagi farqning aniq bajarilishiga bog'liq.
 
-There are other good ways to do the task. For instance, there's a great algorithm called [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle). The idea is to walk the array in the reverse order and swap each element with a random one before it:
+Vazifani bajarishning boshqa yaxshi usullari mavjud. Masalan, [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle) deb nomlangan ajoyib algoritm mavjud. Maqsad massivni teskari tartibda o'tkazosh va har bir elementni tasodifiy element bilan almashtirishdir:
 
 ```js
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
-    [array[i], array[j]] = [array[j], array[i]]; // swap elements
+    let j = Math.floor(Math.random() * (i + 1)); // 0 dan i gacha bo'lgan tasodifiy indeks
+    [array[i], array[j]] = [array[j], array[i]]; // elementlarni almashtirish 
   }
 }
 ```
 
-Let's test it the same way:
+Keling, xuddi shu tarzda sinab ko'raylik:
 
 ```js run
 function shuffle(array) {
@@ -83,7 +83,7 @@ function shuffle(array) {
   }
 }
 
-// counts of appearances for all possible permutations
+// barcha mumkin bo'lgan almashtirishlar uchun ko'rinishlarning soni
 let count = {
   '123': 0,
   '132': 0,
@@ -99,13 +99,13 @@ for (let i = 0; i < 1000000; i++) {
   count[array.join('')]++;
 }
 
-// show counts of all possible permutations
+// barcha mumkin bo'lgan almashtirishlarning sonlarini ko'rsatish
 for (let key in count) {
   alert(`${key}: ${count[key]}`);
 }
 ```
 
-The example output:
+Misol natijasi:
 
 ```js
 123: 166693
@@ -116,6 +116,6 @@ The example output:
 321: 166316
 ```
 
-Looks good now: all permutations appear with the same probability.
+Hozir yaxshi ko'rinishga ega: barcha almashtirishlar bir xil ehtimollik bilan paydo bo'ladi.
 
-Also, performance-wise the Fisher-Yates algorithm is much better, there's no "sorting" overhead.
+Shuningdek, Fisher-Yates algoritmi ishlash samaradorligi jihatidan ancha yaxshi, ortiqcha "saralash" mavjud emas.

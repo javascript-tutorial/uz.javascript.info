@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# An occasional infinite loop
+# Tasodifan cheksiz tsikl yaratish
 
-This loop is infinite. It never ends. Why?
+Ushbu tsikl cheksizdir. Bu hech qachon tugamaydi. Nima uchun?
 
 ```js
 let i = 0;

@@ -1,6 +1,6 @@
-# Loop-based solution
+# Tsiklga asoslangan yechim
 
-The loop-based variant of the solution:
+Yechim tsiklga asoslangan varianti:
 
 ```js run
 let list = {
@@ -30,7 +30,7 @@ function printList(list) {
 printList(list);
 ```
 
-Please note that we use a temporary variable `tmp` to walk over the list. Technically, we could use a function parameter `list` instead:
+Iltimos, biz ro'yxat bo'ylab yurish uchun vaqtinchalik `tmp` o'zgaruvchanidan foydalanamiz. Texnik jihatdan biz buning o'rniga `list` funktsiya parametridan foydalanishimiz mumkin edi:
 
 ```js
 function printList(list) {
@@ -43,15 +43,15 @@ function printList(list) {
 }
 ```
 
-...But that would be unwise. In the future we may need to extend a function, do something else with the list. If we change `list`, then we loose such ability.
+...Ammo bu aqlsiz bo'ladi. Kelajakda biz funktsiyani kengaytirishimiz, ro'yxat bilan yana bir narsa qilishimiz kerak bo'lishi mumkin. Agar biz `list` ni o'zgartirsak, unda biz bunday qobiliyatni yo'qotamiz.
 
-Talking about good variable names, `list` here is the list itself. The first element of it. And it should remain like that. That's clear and reliable.
+Yaxshi o'zgaruvchanlar nomlari haqida gapiradigan bo'lsak, `list` bu yerda ro'yxatning o'zi. Buning birinchi elementi. Va u shunday qolishi kerak. Bu aniq va ishonchli.
 
-From the other side, the role of `tmp` is exclusively a list traversal, like `i` in the `for` loop.
+Boshqa tomondan, `tmp` ning roli faqatgina `for` tsiklidagi `i` singari ro'yxat o'tishidir.
 
-# Recursive solution
+# Rekursiv yechim
 
-The recursive variant of `printList(list)` follows a simple logic: to output a list we should output the current element `list`, then do the same for `list.next`:
+`printList(list)` ning rekursiv varianti oddiy mantiqqa amal qiladi: ro'yxatni chiqarish uchun `list` joriy elementini chiqarishimiz kerak, keyin `list.next` uchun ham shunday qilamiz:
 
 ```js run
 let list = {
@@ -70,10 +70,10 @@ let list = {
 
 function printList(list) {
 
-  alert(list.value); // output the current item
+  alert(list.value); // joriy elementni chiqarish
 
   if (list.next) {
-    printList(list.next); // do the same for the rest of the list
+    printList(list.next); // ro'yxatning qolgan qismida ham xuddi shunday qiling
   }
 
 }
@@ -81,8 +81,8 @@ function printList(list) {
 printList(list);
 ```
 
-Now what's better?
+Endi qaysi biri yaxshi?
 
-Technically, the loop is more effective. These two variants do the same, but the loop does not spend resources for nested function calls.
+Texnik jihatdan, tsikl samaraliroq. Ushbu ikkita variant bir xil, ammo tsikl funktsiya chaqiruvlari uchun resurslarni sarflamaydi.
 
-From the other side, the recursive variant is shorter and sometimes easier to understand.
+Boshqa tomondan, rekursiv variant qisqaroq va ba'zida tushunish osonroq.

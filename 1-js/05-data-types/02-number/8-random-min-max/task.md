@@ -2,13 +2,13 @@ importance: 2
 
 ---
 
-# A random number from min to max
+# Min dan max gacha bo'lgan tasodifiy son
 
-The built-in function `Math.random()` creates a random value from `0` to `1` (not including `1`).
+O'rnatilgan `Math.random()` funktsiyasi `0` dan `1` gacha (`1` dan tashqari) tasodifiy qiymat hosil qiladi.
 
-Write the function `random(min, max)` to generate a random floating-point number from `min` to `max` (not including `max`).
+Tasodifiy suzuvchi-nuqta sonini `min` dan `max` gacha hosil qilish uchun `random(min, max)` funktsiyasini yozing (`max` ni hisobga olmaganda).
 
-Examples of its work:
+Uning ishining namunalari:
 
 ```js
 alert( random(1, 5) ); // 1.2345623452

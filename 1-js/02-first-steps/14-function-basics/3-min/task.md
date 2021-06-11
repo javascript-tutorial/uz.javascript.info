@@ -2,11 +2,11 @@ importance: 1
 
 ---
 
-# Function min(a, b)
+# Funktsiya min(a, b)
 
-Write a function `min(a,b)` which returns the least of two numbers `a` and `b`.
+Ikkala `a` va `b` sonning kickikini qaytaradigan `min(a,b)` funktsiyasini yozing.
 
-For instance:
+Masalan:
 
 ```js
 min(2, 5) == 2

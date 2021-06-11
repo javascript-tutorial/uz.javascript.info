@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# String quotes
+# Matn tirnoqlari
 
-What is the output of the script?
+Skriptning natijasi qanday?
 
 ```js
 let name = "Ilya";

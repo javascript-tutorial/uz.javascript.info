@@ -1,6 +1,6 @@
-The call `arr[2]()` is syntactically the good old `obj[method]()`, in the role of `obj` we have `arr`, and in the role of `method` we have `2`.
+`arr[2]()` chaqiruvi  sintaktik ravishda eski `obj[method]()`, bizda `obj` – `arr` rolida va `2`– `method`  rolida.
 
-So we have a call of the function `arr[2]` as an object method. Naturally, it receives `this` referencing the object `arr` and outputs the array:
+Shunday qilib, biz obyekt usuli sifatida `arr[2]` funktsiyasini chaqiramiz. Tabiiyki, u `arr` obyektiga murojaat qilib `this` ni oladi va massivni chiqaradi:
 
 ```js run
 let arr = ["a", "b"];
@@ -12,4 +12,4 @@ arr.push(function() {
 arr[2](); // "a","b",function
 ```
 
-The array has 3 values: initially it had two, plus the function. 
+Massivda 3 ta qiymat mavjud: dastlab unda ikkita qiymat mavjud edi, funktsiya qiymati qo'shildi.

@@ -1,93 +1,91 @@
 
-# Object to primitive conversion
+# Obyektlarni ibtidoiylarga aylantirish
 
-What happens when objects are added `obj1 + obj2`, subtracted `obj1 - obj2` or printed using `alert(obj)`?
+Obyektlar `obj1 + obj2` qo'shilganda, `obj1 - obj2` ayirilganda yoki `alert(obj)` yordamida ekranga chiqarilganda nima bo'ladi?
 
-There are special methods in objects that do the conversion.
+Obyektlarda konvertatsiya qiladigan maxsus usullar mavjud.
 
-In the chapter <info:type-conversions> we've seen the rules for numeric, string and boolean conversions of primitives. But we left a gap for objects. Now, as we know about methods and symbols it becomes possible to close it.
+<info:type-convertions> bobida biz ibtidoiylarning raqamli, matn va mantiqiy konvertatsiya qilish qoidalarini ko'rdik. Ammo biz obyektlar uchun bo'sh joy qoldirdik. Endi usullar va belgilar to'g'risida bilganimizdan so'ng, bo'shlikni to'ldirish vaqti keldi.
 
-For objects, there's no to-boolean conversion, because all objects are `true` in a boolean context. So there are only string and numeric conversions.
+Obyektlar uchun mantiqiy konvertatsiya mavjud emas, chunki barcha obyektlar mantiqiy kontekstda `true`. Shunday qilib, faqat matn va raqamli konvertatsiyalar mavjud.
 
-The numeric conversion happens when we subtract objects or apply mathematical functions. For instance, `Date` objects (to be covered in the chapter <info:date>) can be subtracted, and the result of `date1 - date2` is the time difference between two dates.
+Raqamli konvertatsiya obyektlarni ayirganda yoki matematik funktsiyalarni qo'llaganimizda sodir bo'ladi. Masalan, `Date` obtektlari (<info:date> bobida ko'rib chiqilishi kerak) ayirilishi mumkin va `date1 - date2` natijasi ikki sana o'rtasidagi vaqt farqidir.
 
-As for the string conversion -- it usually happens when we output an object like `alert(obj)` and in similar contexts.
+Matn konvertatsiyasiga kelsak, bu odatda `alert(obj)` kabi obyektni chiqarganimizda va shunga o'xshash kontekstda sodir bo'ladi.
 
 ## ToPrimitive
 
-When an object is used in the context where a primitive is required, for instance, in an `alert` or mathematical operations, it's converted to a primitive value using the `ToPrimitive` algorithm ([specification](https://tc39.github.io/ecma262/#sec-toprimitive)).
+Obyekt ibtidoiy zarur bo'lgan kontekstda, masalan, `alert` yoki matematik operatsiyalarda ishlatilsa, u `ToPrimitive` algoritmi ([spetsifikatsiya](https://tc39.github.io/ecma262/#sec-toprimitive) yordamida ibtidoiy qiymatga aylantiriladi).
 
-That algorithm allows us to customize the conversion using a special object method.
+Bu algoritm bizga maxsus obyekt usuli yordamida konvertatsiyani sozlash imkonini beradi.
 
-Depending on the context, the conversion has a so-called "hint".
-
-There are three variants:
+Spetsifikatsiyada tavsiflangan uchta turdagi o'zgartirishlar ("uchta hintlar") mavjud:
 
 `"string"`
-: When an operation expects a string, for object-to-string conversions, like `alert`:
+: Amaliyot matni kutganda, obyektni matnga aylantirish uchun, masalan, `alert`:
 
     ```js
-    // output
+    // chiqish
     alert(obj);
 
-    // using object as a property key
+    // obyektni xususiyat kaliti sifatida ishlatish
     anotherObj[obj] = 123;
     ```
 
 `"number"`
-: When an operation expects a number, for object-to-number conversions, like maths:
+: Amaliyot matematikaga o'xshash raqamni konvertatsiya qilish uchun raqamni kutganda:
 
     ```js
-    // explicit conversion
+    // aniq konvertatsiya
     let num = Number(obj);
 
-    // maths (except binary plus)
-    let n = +obj; // unary plus
+    // matematika (unar plyusdan tashqari)
+    let n = +obj; // unar plyus
     let delta = date1 - date2;
 
-    // less/greater comparison
+    // kamroq/katta taqqoslash
     let greater = user1 > user2;
     ```
 
 `"default"`
-: Occurs in rare cases when the operator is "not sure" what type to expect.
+: Kamdan kam hollarda operator qanday turni kutishini "aniq bilmasa" paydo bo'ladi.
 
-    For instance, binary plus `+` can work both with strings (concatenates them) and numbers (adds them), so both strings and numbers would do. Or when an object is compared using `==` with a string, number or a symbol.
+    Masalan, unar plyus `+` ikkala matnlar (ularni birlashtiradi) va raqamlar (ularni qo'shadi) bilan ishlashi mumkin, shuning uchun ham matnlar, ham raqamlar bilan ishlaydi. Yoki obyektni `==` yordamida matn, raqam yoki belgi bilan taqqoslaganda.
 
     ```js
-    // binary plus
+    // binar plus
     let total = car1 + car2;
 
-    // obj == string/number/symbol
+    // obj == matn/raqam/belgi
     if (user == 1) { ... };
     ```
 
-    The greater/less operator `<>` can work with both strings and numbers too. Still, it uses "number" hint, not "default". That's for historical reasons.
+    Katta / kichik operator `<>` ikkala satr va raqamlar bilan ham ishlashi mumkin. Shunga qaramay, u "default" emas, balki "number" ishoradan foydalanadi. Bu tarixiy sabablarga ko'ra.
 
-    In practice, all built-in objects except for one case (`Date` object, we'll learn it later) implement `"default"` conversion the same way as `"number"`. And probably we should do the same.
+    Amalda, bitta holatdan tashqari barcha tilning ichida o'rnatilgan obyektlar (`Date` obyekti, biz keyinroq organib olamiz) `"default"` konvertatsiyasini `"number"` bilan bir xil tarzda amalga oshiradi. Va ehtimol biz ham shunday qilishimiz kerak.
 
-Please note -- there are only three hints. It's that simple. There is no "boolean" hint (all objects are `true` in boolean context) or anything else. And if we treat `"default"` and `"number"` the same, like most built-ins do, then there are only two conversions.
+Iltimos, diqqat qiling -- faqat uchta ishora mavjud. Bu juda oddiy. Hech qanday "mantiqiy" ishora yo'q (barcha obyektlar mantiqiy turdagi qiymatda `true`) yoki boshqa narsalar. Agar biz `"default"` va `"number"` ga bir xil munosabatda bo'lsak, aksariyat ichki o'rnatilganlar singari, faqat ikkita konvertatsiya mavjud.
 
-**To do the conversion, JavaScript tries to find and call three object methods:**
+**Konvertatsiyani amalga oshirish uchun JavaScript uchta obyekt usulini topishga va ularni chaqirishga harakat qiladi:**
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. Agar usul mavjud bo'lsa, `obj[Symbol.toPrimitive](hint)` ni chaqiring,
+2. Aks holda, agar ishora `"string"` bo'lsa
+    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
+3. Aks holda, agar ishora `"number"` yoki `"default"` bo'lsa
+    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
 
 ## Symbol.toPrimitive
 
-Let's start from the first method. There's a built-in symbol named `Symbol.toPrimitive` that should be used to name the conversion method, like this:
+Birinchi usuldan boshlaylik. Konvertatsiya usulini quyidagicha nomlash uchun ishlatilishi kerak bo'lgan `Symbol.toPrimitive` belgisi mavjud:
 
 ```js
 obj[Symbol.toPrimitive] = function(hint) {
-  // return a primitive value
-  // hint = one of "string", "number", "default"
+  // ibtidoiy qiymatni qaytaring
+  // hint = "string", "number", "default" dan biri
 }
 ```
 
-For instance, here `user` object implements it:
+Masalan, `user` obyekti buni amalga oshiradi:
 
 ```js run
 let user = {
@@ -100,37 +98,37 @@ let user = {
   }
 };
 
-// conversions demo:
+// konvertatsiya demo:
 alert(user); // hint: string -> {name: "John"}
 alert(+user); // hint: number -> 1000
 alert(user + 500); // hint: default -> 1500
 ```
 
-As we can see from the code, `user` becomes a self-descriptive string or a money amount depending on the conversion. The single method `user[Symbol.toPrimitive]` handles all conversion cases.
+Koddan ko'rinib turibdiki, `user` konvertatsiyaga qarab o'z-o'zini tavsiflovchi matnga yoki pul miqdoriga aylanadi. `user[Symbol.toPrimitive]` yagona usuli barcha konvertatsiyaga ishlaydi.
 
 
 ## toString/valueOf
 
-Methods `toString` and `valueOf` come from ancient times. They are not symbols (symbols did not exist that long ago), but rather "regular" string-named methods. They provide an alternative "old-style" way to implement the conversion.
+`toString` va `valueOf` usullari qadimgi davrlardan kelib chiqqan. Ular belgilar emas (belgilar ilgari mavjud bo'lmagan), aksincha "muntazam" matn nomli usullar. Ular konvertatsiyani amalga oshirishning muqobil "eski uslubi" ni taqdim etadi.
 
-If there's no `Symbol.toPrimitive` then JavaScript tries to find them and try in the order:
+Agar `Symbol.toPrimitive` bo'lmasa, JavaScript ularni topishga harakat qiladi va quyidagi tartibda sinab ko'radi:
 
-- `toString -> valueOf` for "string" hint.
-- `valueOf -> toString` otherwise.
+- `toString -> valueOf` "string" ishora uchun.
+- `valueOf -> toString` aks holda.
 
-For instance, here `user` does the same as above using a combination of `toString` and `valueOf`:
+Masalan, bu erda `user` yuqoridagi kabi `toString` va `valueOf` kombinatsiyasidan foydalangan holda ishlaydi:
 
 ```js run
 let user = {
   name: "John",
   money: 1000,
 
-  // for hint="string"
+  // hint="string" uchun
   toString() {
     return `{name: "${this.name}"}`;
   },
 
-  // for hint="number" or "default"
+  // hint="number" yoki "default" uchun
   valueOf() {
     return this.money;
   }
@@ -142,7 +140,7 @@ alert(+user); // valueOf -> 1000
 alert(user + 500); // valueOf -> 1500
 ```
 
-Often we want a single "catch-all" place to handle all primitive conversions. In this case we can implement `toString` only, like this:
+Ko'pincha biz barcha ibtidoiy konversiyalarni boshqarish uchun bitta "hamma narsani ushlab turadigan" joyni xohlaymiz. Bunday holda biz faqat `toString` -ni amalga oshirishimiz mumkin:
 
 ```js run
 let user = {
@@ -157,36 +155,36 @@ alert(user); // toString -> John
 alert(user + 500); // toString -> John500
 ```
 
-In the absence of `Symbol.toPrimitive` and `valueOf`, `toString` will handle all primitive conversions.
+`Symbol.toPrimitive` va `valueOf` bo'lmasa, `toString` barcha ibtidoiy konversiyalarni boshqaradi.
 
 
-## ToPrimitive and ToString/ToNumber
+## ToPrimitive va ToString/ToNumber
 
-The important thing to know about all primitive-conversion methods is that they do not necessarily return the "hinted" primitive.
+Barcha ibtidoiy konversiya usullari haqida bilish kerak bo'lgan narsa shundaki, ular "ishora qilingan" ibtidoiyni qaytarishligi shart.
 
-There is no control whether `toString()` returns exactly a string, or whether `Symbol.toPrimitive` method returns a number for a hint "number".
+`toString()` aniq bir matni qaytarishi yoki `Symbol.toPrimitive` usuli "raqam" ishora uchun aniq raqamni qaytarishi shart emas.
 
-**The only mandatory thing: these methods must return a primitive.**
+**Faqatgina majburiy narsa: ushbu usullar ibtidoiylarni qaytarishi kerak.**
 
-An operation that initiated the conversion gets that primitive, and then continues to work with it, applying further conversions if necessary.
+Konvertatsiyani boshlagan operatsiya ushbu ibtidoiylarni oladi va keyinchalik u bilan ishlashni davom ettiradi, agar kerak bo'lsa, keyingi konvertatsiyalarni qo'llaydi.
 
-For instance:
+Masalan:
 
-- Mathematical operations (except binary plus) perform `ToNumber` conversion:
+- Matematik operatsiyalar (binar plyusdan tashqari) `ToNumber` konvertatsiyasini bajaradi:
 
     ```js run
     let obj = {
-      toString() { // toString handles all conversions in the absence of other methods
+      toString() { // toString boshqa usullar bo'lmasa, barcha o'zgarishlarni ko'rib chiqadi
         return "2";
       }
     };
 
-    alert(obj * 2); // 4, ToPrimitive gives "2", then it becomes 2
+    alert(obj * 2); // 4, ToPrimitive "2" ni qaytaradi, keyin u 2 ga aylanadi
     ```
 
-- Binary plus checks the primitive -- if it's a string, then it does concatenation, otherwise it performs `ToNumber` and works with numbers.
+- Binar plyus ibtidoiylarni tekshiradi -- agar u matn bo'lsa, u holda birikma hosil qiladi, aks holda u `ToNumber` ni bajaradi va raqamlar bilan ishlaydi.
 
-    String example:
+    String misoli:
     ```js run
     let obj = {
       toString() {
@@ -194,10 +192,10 @@ For instance:
       }
     };
 
-    alert(obj + 2); // 22 (ToPrimitive returned string => concatenation)
+    alert(obj + 2); // 22 (ToPrimitive matn => birlashtirish qaytarildi)
     ```
 
-    Number example:
+    Number misoli:
     ```js run
     let obj = {
       toString() {
@@ -205,32 +203,32 @@ For instance:
       }
     };
 
-    alert(obj + 2); // 3 (ToPrimitive returned boolean, not string => ToNumber)
+    alert(obj + 2); // 3 (ToPrimitive mantiqiy turdagi qiymat qaytarildi, matn bo'lmasa => ToNumber)
     ```
 
-```smart header="Historical notes"
-For historical reasons, methods `toString` or `valueOf` *should* return a primitive: if any of them returns an object, then there's no error, but that object is ignored (like if the method didn't exist).
+```smart header="Tarixiy qaydlar"
+Tarixiy sabablarga ko'ra `toString` yoki `valueOf` usullari *ibtidoiylarni* qaytarishi kerak: agar ulardan birortasi obyektni qaytarsa, unda xato bo'lmaydi, ammo bu obyekt e'tiborga olinmaydi (masalan, uslub mavjud bo'lmagandak).
 
-In contrast, `Symbol.toPrimitive` *must* return a primitive, otherwise, there will be an error.
+Aksincha, `Symbol.toPrimitive` ibtidoiylarni qaytarishi *shart*, aks holda xato bo'ladi.
 ```
 
-## Summary
+## Xulosa
 
-The object-to-primitive conversion is called automatically by many built-in functions and operators that expect a primitive as a value.
+Obyektni ibtidoiy konvertatsiya qilish ko'plab o'rnatilgan funktsiyalar va operatorlar tomonidan avtomatik ravishda chaqiriladi, ular qiymat sifatida ibtidoiylarni kutadilar.
 
-There are 3 types (hints) of it:
-- `"string"` (for `alert` and other string conversions)
-- `"number"` (for maths)
-- `"default"` (few operators)
+Uning 3 turi (ishoralari) mavjud:
+- `"string"` (`alert` va boshqa matn konvertatsiyalari uchun)
+- `"number"` (matematika uchun)
+- `"default"` (ba'zi operatorlar uchun)
 
-The specification describes explicitly which operator uses which hint. There are very few operators that "don't know what to expect" and use the `"default"` hint. Usually for built-in objects `"default"` hint is handled the same way as `"number"`, so in practice the last two are often merged together.
+Spetsifikatsiyada qaysi operator qaysi maslahatni ishlatishi aniq tasvirlangan. "Nima kutishni bilmaydigan" va `"default"` ishorasidan foydalanadigan operatorlar juda kam. Odatda tilning ichida o'rnatilgan obyektlar uchun `"default"` ishora `"number"` bilan bir xil tarzda ko'rib chiqiladi, shuning uchun amalda oxirgi ikkitasi ko'pincha birlashtiriladi.
 
-The conversion algorithm is:
+Konvertatsiya qilish algoritmi:
 
-1. Call `obj[Symbol.toPrimitive](hint)` if the method exists,
-2. Otherwise if hint is `"string"`
-    - try `obj.toString()` and `obj.valueOf()`, whatever exists.
-3. Otherwise if hint is `"number"` or `"default"`
-    - try `obj.valueOf()` and `obj.toString()`, whatever exists.
+1. Agar usul mavjud bo'lsa, `obj[Symbol.toPrimitive](hint)` ni chaqiring,
+2. Aks holda, agar ishora `"string"` bo'lsa
+    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
+3. Aks holda, agar ishora `"number"` yoki `"default"` bo'lsa
+    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
 
-In practice, it's often enough to implement only `obj.toString()` as a "catch-all" method for all conversions that return a "human-readable" representation of an object, for logging or debugging purposes.  
+Amalda, faqat `obj.toString()` ni amalga oshirish juda keng tarqalgan, barcha turdagi transformatsiyalar uchun "universal" usul bo'lib, obyektning "o'qiladigan" ko'rinishini qaytaradigan barcha konvertatsiyalar uchun, koddagi nosozliklarni maqsadida amalga oshirish kifoya.

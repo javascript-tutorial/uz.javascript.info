@@ -2,19 +2,19 @@ importance: 4
 
 ---
 
-# Which values does the while loop show?
+# While tsikli qaysi qiymatlarni ko'rsatadi?
 
-For every loop iteration, write down which value it outputs and then compare it with the solution.
+Har bir tsikl iteratsiyasi uchun qaysi qiymatni chiqarishini yozing va keyin uni natija bilan solishtiring.
 
-Both loops `alert` the same values, or not?
+Har ikki tsikl bir xil qiymatlarni `alert` orqali chiqariladimi, yoki yo'qmi?
 
-1. The prefix form `++i`:
+1. `++i` prefiks shakli:
 
     ```js
     let i = 0;
     while (++i < 5) alert( i );
     ```
-2. The postfix form `i++`
+2. Postfiks shakli `i++`
 
     ```js
     let i = 0;

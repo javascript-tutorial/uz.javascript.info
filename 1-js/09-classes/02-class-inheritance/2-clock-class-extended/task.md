@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Extended clock
+# Kengaytirilgan soat
 
-We've got a `Clock` class. As of now, it prints the time every second.
+Bizda `soat` klassi bor. Hozirda u har soniyada vaqtni bosib chiqaradi.
 
 
 [js src="source.view/clock.js"]
 
-Create a new class `ExtendedClock` that inherits from `Clock` and adds the parameter `precision` -- the number of `ms` between "ticks". Should be `1000` (1 second) by default.
+`Clock` dan meros qilib yangi `ExtendedClock` klassini yarating va `aniqlik` parametrini qo'shadi - "shomlar" orasidagi `ms` soni. Sukut bo'yicha `1000` (1 soniya) bo'lishi kerak.
 
-- Your code should be in the file `extended-clock.js`
-- Don't modify the original `clock.js`. Extend it.
+- Sizning kodingiz `Extended-clock.js` faylida bo'lishi kerak
+- Asl `clock.js` ni o'zgartirmang. Uni kengaytiring.

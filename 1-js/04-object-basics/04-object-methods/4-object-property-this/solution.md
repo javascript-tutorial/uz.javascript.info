@@ -1,4 +1,4 @@
-**Answer: an error.**
+**Javob: xato**
 
 Try it:
 ```js run
@@ -14,15 +14,15 @@ let user = makeUser();
 alert( user.ref.name ); // Error: Cannot read property 'name' of undefined
 ```
 
-That's because rules that set `this` do not look at object literals. 
+Buning sababi, `this` ni belgilaydigan qoidalar obyektlar soniga qarab bo'lmaydi.
 
-Here the value of `this` inside `makeUser()` is `undefined`, because it is called as a function, not as a method.
+`makeUser()` ichidagi `this`" qiymati `undefined`, chunki u usul sifatida emas, balki funktsiya sifatida chaqirilgan.
 
-And the object literal itself has no effect on `this`. The value of `this` is one for the whole function, code blocks and object literals do not affect it.
+Obyektning o'zi `this` ga ta'sir qilmaydi. `this` ning qiymati butun funktsiya uchun bitta, kod bloklari va obyektlar  unga ta'sir qilmaydi.
 
-So `ref: this` actually takes current `this` of the function.
+Shunday qilib, `ref: bu` aslida joriy funktsiyani `this` ni oladi.
 
-Here's the opposite case:
+Qarama-qarshi holat:
 
 ```js run
 function makeUser() {
@@ -41,6 +41,6 @@ let user = makeUser();
 alert( user.ref().name ); // John
 ```
 
-Now it works, because `user.ref()` is a method. And the value of `this` is set to the object before dot `.`.
+Endi u ishlaydi, chunki `user.ref()` bu usul. Va `this` ning qiymati obyektga nuqtadan `.` oldin o'rnatiladi.
 
 

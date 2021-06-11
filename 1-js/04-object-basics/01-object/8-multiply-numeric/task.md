@@ -2,32 +2,32 @@ importance: 3
 
 ---
 
-# Multiply numeric properties by 2
+# Barcha sonli xususiyatlarni 2 ga ko'paytiradi
 
-Create a function `multiplyNumeric(obj)` that multiplies all numeric properties of `obj` by `2`.
+`obj` ning barcha raqamli xususiyatlarini `2` ga ko'paytiradigan `multiplyNumeric(obj)` funktsiyasini yarating.
 
-For instance:
+Masalan:
 
 ```js
-// before the call
+// chaqiruvdan oldin
 let menu = {
   width: 200,
   height: 300,
-  title: "My menu"
+  title: "Mening menyuim"
 };
 
 multiplyNumeric(menu);
 
-// after the call
+// chaqiruvdan so'ng
 menu = {
   width: 400,
   height: 600,
-  title: "My menu"
+  title: "Mening menyuim"
 };
 ```
 
-Please note that `multiplyNumeric` does not need to return anything. It should modify the object in-place.
+Shuni esda tutingki, `multiplyNumeric` hech narsa qaytarmasligi kerak. Ob'ektni to'g'ridan-to'g'ri o'zgartirish kerak.
 
-P.S. Use `typeof` to check for a number here.
+P.S. Bu yerda raqamni tekshirish uchun `typeof` dan foydalaning.
 
 

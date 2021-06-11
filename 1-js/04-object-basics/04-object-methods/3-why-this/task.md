@@ -2,11 +2,11 @@ importance: 3
 
 ---
 
-# Explain the value of "this"
+# "This" ning qiymatini tushuntiring
 
-In the code below we intend to call `user.go()` method 4 times in a row.
+Quyidagi kodda biz ketma-ket 4 marta `user.go()` usulini chaqirmoqchimiz.
 
-But calls `(1)` and `(2)` works differently from `(3)` and `(4)`. Why?
+Ammo `(1)` va `(2)` chaqiruvlari `(3)` va `(4)` dan farq qiladi. Nima uchun?
 
 ```js run no-beautify
 let obj, method;

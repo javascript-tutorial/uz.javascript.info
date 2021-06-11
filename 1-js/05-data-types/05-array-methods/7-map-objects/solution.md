@@ -25,9 +25,9 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // John Smith
 ```
 
-Please note that in for the arrow functions we need to use additional brackets. 
+Iltimos, o'q funktsiyalari uchun biz qo'shimcha qavslardan foydalanishimiz kerakligini unutmang.
 
-We can't write like this:
+Biz bunday yozolmaymiz:
 ```js
 let usersMapped = users.map(user => *!*{*/!*
   fullName: `${user.name} ${user.surname}`,
@@ -35,9 +35,9 @@ let usersMapped = users.map(user => *!*{*/!*
 });
 ```
 
-As we remember, there are two arrow functions: without body `value => expr` and with body `value => {...}`.
+Yodimizda bo'lganidek, ikkita o'q funktsiyasi mavjud: tanasiz `value => expr` va tanali `value => {...}`.
 
-Here JavaScript would treat `{` as the start of function body, not the start of the object. The workaround is to wrap them in the "normal" brackets:
+Bu erda JavaScript `{` ni obyektning boshlanishi emas, balki funktsiya tanasining boshlanishi sifatida qabul qiladi. Vaqtinchalik yechim ularni "oddiy" qavslarga o'rashdan iborat:
 
 ```js
 let usersMapped = users.map(user => *!*({*/!*
@@ -46,6 +46,6 @@ let usersMapped = users.map(user => *!*({*/!*
 }));
 ```
 
-Now fine.
+Endi yaxshi.
 
 

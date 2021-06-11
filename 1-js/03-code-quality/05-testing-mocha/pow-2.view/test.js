@@ -1,10 +1,10 @@
 describe("pow", function() {
 
-  it("2 raised to power 3 is 8", function() {
+  it("2 ning 3 chi darajasi 8 ga teng", function() {
     assert.equal(pow(2, 3), 8);
   });
 
-  it("3 raised to power 3 is 27", function() {
+  it("3 ning 3 chi darajasi 27 ga teng", function() {
     assert.equal(pow(3, 3), 27);
   });
 

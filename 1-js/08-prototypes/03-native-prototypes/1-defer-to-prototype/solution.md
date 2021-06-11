@@ -6,8 +6,8 @@ Function.prototype.defer = function(ms) {
 };
 
 function f() {
-  alert("Hello!");
+  alert("Salom!");
 }
 
-f.defer(1000); // shows "Hello!" after 1 sec
+f.defer(1000); // 1 soniyadan keyin "Salom!" ko'rsatadi
 ```

@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Create a calculator
+# Kalkulyator yarating
 
-Create an object `calculator` with three methods:
+Uch usul bilan `calculator` obyektini yarating:
 
-- `read()` prompts for two values and saves them as object properties.
-- `sum()` returns the sum of saved values.
-- `mul()` multiplies saved values and returns the result.
+- `read()` ikkita qiymatni so'raydi va ularni obyekt xususiyatlari sifatida saqlaydi.
+- `sum()` saqlangan qiymatlar yig'indisini qaytaradi.
+- `mul()` saqlangan qiymatlarni ko'paytiradi va natijani qaytaradi.
 
 ```js
 let calculator = {
-  // ... your code ...
+  // ... sizning kodingiz ...
 };
 
 calculator.read();

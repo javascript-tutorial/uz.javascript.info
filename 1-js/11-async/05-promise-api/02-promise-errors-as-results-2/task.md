@@ -1,8 +1,8 @@
-# Fault-tolerant fetch with JSON
+# Xatolarga bardoshli fetch JSON bilan
 
-Improve the solution of the previous task <info:task/promise-errors-as-results>. Now we need not just to call `fetch`, but to load the JSON objects from the given URLs.
+Oldingi vazifa yechimini yaxshilang <info:task/task-response-as-results>. Endi biz `fetch` ni faqat chaqirmastan, balki berilgan URL-lardan JSON moslamalarini yuklashimiz kerak.
 
-Here's the example code to do that:
+Buni amalga oshirish uchun misol kodi:
 
 ```js run
 let urls = [
@@ -11,13 +11,13 @@ let urls = [
   'https://api.github.com/users/jeresig'
 ];
 
-// make fetch requests
+// fetch so'rovlarni qilish
 Promise.all(urls.map(url => fetch(url)))
-  // map each response to response.json()
+  // har bir javobni response.json() ga map qilish
   .then(responses => Promise.all(
     responses.map(r => r.json())
   ))
-  // show name of each user
+  // har bir foydalanuvchining ismini ko'rsatish
   .then(users => {  // (*)
     for(let user of users) {
       alert(user.name);
@@ -25,10 +25,10 @@ Promise.all(urls.map(url => fetch(url)))
   });
 ```
 
-The problem is that if any of requests fails, then `Promise.all` rejects with the error, and we lose results of all the other requests. So the code above is not fault-tolerant, just like the one in the previous task.
+Muammo shundaki, agar biron bir so'rov bajarilmasa, `Promise.all` xato bilan rad etadi va biz boshqa barcha so'rovlarning natijalarini yo'qotamiz. Shunday qilib, yuqoridagi kod xuddi oldingi topshiriqdagi kabi xatolarga chidamli emas.
 
-Modify the code so that the array in the line `(*)` would include parsed JSON for successful requests and error for errored ones.
+`(*)` satridagi massiv muvaffaqiyatli so'rovlar uchun tahlil qilingan JSON va xatolar uchun xato bo'lishi uchun kodni o'zgartiring.
 
-Please note that the error may occur both in `fetch` (if the network request fails) and in `response.json()` (if the response is invalid JSON). In both cases the error should become a member of the results object.
+Iltimos, xato `fetch` da (agar tarmoq so'rovi bajarilmasa) va `response.json()` da (javob noto'g'ri bo'lsa JSON) sodir bo'lishi mumkinligini unutmang. Ikkala holatda ham xato natijalar obyekti a'zosi bo'lishi kerak.
 
-The sandbox has both of these cases.
+Sandboxda bu ikkala holat mavjud.

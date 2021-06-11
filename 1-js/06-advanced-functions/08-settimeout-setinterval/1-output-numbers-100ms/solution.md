@@ -1,5 +1,5 @@
 
-Using `setInterval`:
+`setInterval` dan foydalanish:
 
 ```js run
 function printNumbers(from, to) {
@@ -18,7 +18,7 @@ function printNumbers(from, to) {
 printNumbers(5, 10);
 ```
 
-Using recursive `setTimeout`:
+`setTimeout` dan foydalanish:
 
 
 ```js run
@@ -34,9 +34,8 @@ function printNumbers(from, to) {
   }, 1000);
 }
 
-// usage:
+// foydalanish:
 printNumbers(5, 10);
 ```
 
-Note that in both solutions, there is an initial delay before the first output. Sometimes we need to add a line to make the first output immediately, that's easy to do.
-
+Shuni esda tutingki, ikkala echimda ham birinchi chiqishdan oldin dastlabki kechikish mavjud. Ba'zan darhol birinchi chiqishni amalga oshirish uchun satr qo'shishimiz kerak, buni bajarish oson.

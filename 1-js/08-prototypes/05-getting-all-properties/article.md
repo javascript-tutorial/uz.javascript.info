@@ -1,31 +1,31 @@
 
-# Getting all properties
+# Barcha xususiyatlarni olish
 
-There are many ways to get keys/values from an object.
+Obyektdan kalitlarni/qiymatlarni olishning ko'plab usullari mavjud.
 
-Most of them operate on the object itself, excluding the prototype, let's recall them:
+Ularning aksariyati obyektning o'zida ishlaydi, prototipni hisobga olmaganda, keling ularni esga olamiz:
 
-- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- returns an array of enumerable own string property names/values/key-value pairs. These methods only list *enumerable* properties, and those that have *strings as keys*.
+- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- sanab o'tiladigan o'z matnlar nomlari/qiymatlari/kalit-qiymat juftliklari massivini qaytaradi. Ushbu usullar faqat *sanab o'tiladigan* xususiyatlarni va *matnlarni kalit sifatida* ro'yxatini beradi.
 
-If we want symbolic properties:
+Agar biz ramziy xususiyatlarni istasak:
 
-- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- returns an array of all own symbolic property names.
+- [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) -- barcha o'ziga xos ramziy xususiyat nomlari massivini qaytaradi.
 
-If we want non-enumerable properties:
+Agar biz sanab bo'lmaydigan xususiyatlarni xohlasak:
 
-- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- returns an array of all own string property names.
+- [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- o'zlarining barcha matn xususiyatlarining nomlarini qaytaradi.
 
-If we want *all* properties:
+Agar biz *barcha* xususiyatlarni xohlasak:
 
-- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- returns an array of all own property names.
+- [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- barcha mulk nomlari massivini qaytaradi.
 
-These methods are a bit different about which properties they return, but all of them operate on the object itself. Properties from the prototype are not listed.
+Ushbu usullar ularning qaysi xususiyatlarini qaytarishi haqida bir oz farq qiladi, ammo ularning barchasi obyektning o'zida ishlaydi. Prototipdagi xususiyatlar ro'yxatga kiritilmagan.
 
-## for..in loop
+## for..in tsikl
 
-The `for..in` loop is different: it loops over inherited properties too.
+`for..in` tsikli boshqacha: u ham meros qilib olingan xususiyatlarni ko'rib chiqadi.
 
-For instance:
+Masalan:
 
 ```js run
 let animal = {
@@ -38,19 +38,19 @@ let rabbit = {
 };
 
 *!*
-// only own keys
+// faqat o'z kalitlari
 alert(Object.keys(rabbit)); // jumps
 */!*
 
 *!*
-// inherited keys too
+// meros kalitlari ham
 for(let prop in rabbit) alert(prop); // jumps, then eats
 */!*
 ```
 
-If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+Agar biz xohlamagan narsa bo'lsa va biz merosxo'rlik xususiyatlarini istisno qilmoqchi bo'lsak, o'rnatilgan usul mavjud [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): u `true` ni qaytaradi, agar `obj` o'ziga xos `key` nomli (merosxo'r bo'lmagan) xususiyatga ega bo'lsa.
 
-So we can filter out inherited properties (or do something else with them):
+Shunday qilib, biz meros qilib olingan xususiyatlarni filtrlashimiz mumkin (yoki ular bilan boshqa biror narsa qilishimiz mumkin):
 
 ```js run
 let animal = {
@@ -68,16 +68,16 @@ for(let prop in rabbit) {
 }
 ```
 
-Here we have the following inheritance chain: `rabbit`, then `animal`, then `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
+Bu yerda bizda quyidagi meros zanjiri mavjud: `rabbit`, keyin `animal`, so'ngra `Object.prototype` (chunki `animal` literal obyekt `{...}`, shuning uchun u sukut bo'yicha) va keyin `null` yuqorida:
 
 ![](rabbit-animal-object.svg)
 
-Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` coming from? Looking at the chain we can see that the method is provided by `Object.prototype.hasOwnProperty`. In other words, it's inherited.
+E'tibor bering, bitta kulgili narsa bor. `rabbit.hasOwnProperty` usuli qayerdan keladi? Zanjirga qarab, usul `Object.prototype.hasOwnProperty` tomonidan taqdim etilganligini ko'rishimiz mumkin. Boshqacha qilib aytganda, bu meros bo'lib qolgan.
 
-...But why `hasOwnProperty` does not appear in `for..in` loop, if it lists all inherited properties?  The answer is simple: it's not enumerable. Just like all other properties of `Object.prototype`. That's why they are not listed.
+...Lekin nima uchun `hasOwnProperty` ko'rinmaydi `for..in` tsikl, u barcha meros xususiyatlarini ro'yxatlar bo'lsa? Javob oddiy: uni sanab bo'lmaydi. Xuddi `Object.prototype` ning barcha boshqa xususiyatlari kabi. Shuning uchun ular ro'yxatga olinmagan.
 
-## Summary
+## Xulosa
 
-Most methods ignore inherited properties, with a notable exception of `for..in`.
+Aksariyat usullar meros qilib olingan xususiyatlarni e'tiborsiz qoldiradi, bundan tashqari `for..in` bundan mustasno.
 
-For the latter we can use [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+Ikkinchisi uchun biz [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty) dan foydalanishimiz mumkin: agar `obj` ning `key` nomli o'ziga xos (meros emas) xususiyati bo'lsa, u `true` ni qaytaradi.

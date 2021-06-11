@@ -2,15 +2,15 @@ importance: 2
 
 ---
 
-# A maximal subarray
+# Maksimal submassiv
 
-The input is an array of numbers, e.g. `arr = [1, -2, 3, 4, -9, 6]`.
+Kirish raqamlar massivi, masalan. `arr = [1, -2, 3, 4, -9, 6]`.
 
-The task is: find the contiguous subarray of `arr` with the maximal sum of items.
+Vazifa quyidagicha: elementlarning maksimal yig'indisi bilan `arr` ning tutashgan submassivini toping.
 
-Write the function `getMaxSubSum(arr)` that will return that sum.
+Ushbu summani qaytaradigan `getMaxSubSum(arr)` funktsiyasini yozing.
 
-For instance: 
+Masalan: 
 
 ```js
 getMaxSubSum([-1, *!*2, 3*/!*, -9]) = 5 (the sum of highlighted items)
@@ -21,10 +21,10 @@ getMaxSubSum([*!*100*/!*, -9, 2, -3, 5]) = 100
 getMaxSubSum([*!*1, 2, 3*/!*]) = 6 (take all)
 ```
 
-If all items are negative, it means that we take none (the subarray is empty), so the sum is zero:
+Agar barcha narsalar salbiy bo'lsa, demak biz hech narsani olmaymiz (submasssiv bo'sh), shuning uchun yig'indisi nolga teng:
 
 ```js
 getMaxSubSum([-1, -2, -3]) = 0
 ```
 
-Please try to think of a fast solution: [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation) or even O(n) if you can.
+Iltimos, tezkor echimni o'ylab ko'ring: [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation) yoki hatto imkoningiz bo'lsa, O(n).

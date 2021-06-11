@@ -1,186 +1,185 @@
-# Ninja code
+# Ninja kodi
 
 
-```quote author="Confucius"
-Learning without thought is labor lost; thought without learning is perilous.
+```quote author="Konfutsiy"
+O'ylamasdan o'rganish mehnatni yo'qotadi; o'rganmasdan o'ylash xavfli.
 ```
 
-Programmer ninjas of the past used these tricks to sharpen the mind of code maintainers.
+O'tmishdagi dasturchi ninjalar ushbu hiyla-nayranglardan foydalanib, kod saqlovchilarning ongini charxlashdi.
 
-Code review gurus look for them in test tasks.
+Ishga qabul qilish uchun dastruchi gurusi test topshiriqlarida ulardan foydalanishni diqqat bilan izlaydi.
 
-Novice developers sometimes use them even better than programmer ninjas.
+Boshlang'ich dasturchilar ba'zan ularni dasturchi ninjalardan ham yaxshiroq foydalanadilar.
 
-Read them carefully and find out who you are -- a ninja, a novice, or maybe a code reviewer?
+Ularni diqqat bilan o'qing va kimligingizni bilib oling -- ninja, boshlang'ich dasturchi yoki kod gurusi?
 
 
-```warn header="Irony detected"
-Many try to follow ninja paths. Few succeed.
+```warn header="Ironiya aniqlandi"
+Ko'pchilik ninja yo'llaridan yurishga harakat qiladi. Muvaffaqiyatli bo'lganlar oz.
 ```
 
 
-## Brevity is the soul of wit
+## Qisqalik aqlning ruhidir
 
-Make the code as short as possible. Show how smart you are.
+Kodni iloji boricha qisqa qiling. O'zingizni qanchalik aqlli ekanligingizni ko'rsating.
 
-Let subtle language features guide you.
+Nozik til xususiyatlari sizga yo'l bo'lsin.
 
-For instance, take a look at this ternary operator `'?'`:
+Masalan; misol uchun, uchlik operatorga, bir ko'z tashlang `'?'`:
 
 ```js
-// taken from a well-known javascript library
+// taniqli javascript kutubxonasidan olingan
 i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
 ```
 
-Cool, right? If you write like that, a developer who comes across this line and tries to understand what is the value of `i` is going to have a merry time. Then come to you, seeking for an answer.
+Ajoyib, to'g'rimi? Agar siz shunday yozsangiz, ushbu satrga duch kelgan va `i` ning qiymati nima ekanligini tushunishga harakat qilgan dastruchi quvnoq vaqt o'tkazishini aytadi. Keyin javob izlab huzuringizga keladi.
 
-Tell them that shorter is always better. Initiate them into the paths of ninja.
+Qisqasi har doim yaxshiroq ekanligini ularga ayting. Ularni ninja yo'llariga boshlang.
 
-## One-letter variables
+## Bir harfli o'zgaruvchanlar
 
 ```quote author="Laozi (Tao Te Ching)"
-The Dao hides in wordlessness. Only the Dao is well begun and well
-completed.
+Kim biladi - gapirmaydi. Kim aytadi - bilmaydi.
 ```
 
-Another way to code faster is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
+Tezroq kodlashning yana bir usuli - hamma joyda bitta harfli o'zgaruvchan nomlardan foydalanish. `a`, `b` yoki `c` kabi.
 
-A short variable disappears in the code like a real ninja in the forest. No one will be able to find it using "search" of the editor. And even if someone does, they won't be able to "decipher" what the name `a` or `b` means.
+Qisqa o'zgaruvchi kodda o'rmondagi haqiqiy ninja singari yo'qoladi. Hech kim uni muharrirning "qidiruvi" yordamida topa olmaydi. Va hatto kimdir buni tushungan taqdirda ham, u `a` yoki `b` ismlari nimani anglatishini "hal qila olmaydi".
 
-...But there's an exception. A real ninja will never use `i` as the counter in a `"for"` loop. Anywhere, but not here. Look around, there are many more exotic letters. For instance, `x` or `y`.
+...Ammo istisno mavjud. Haqiqiy ninja hech qachon `i` ni hisoblagich sifatida `for` tsiklda foydalanmaydi. Har qanday joyda, lekin bu yerda emas. Atrofga nazar sol, yana ko'plab ekzotik harflar bor. Masalan, `x` yoki `y`.
 
-An exotic variable as a loop counter is especially cool if the loop body takes 1-2 pages (make it longer if you can). Then if someone looks deep inside the loop, they won't be able to quickly figure out that the variable named `x` is the loop counter.
+Ekzotik hisoblagich sifatida ekzotik o'zgaruvchan ayniqsa ajoyib bo'ladi (agar iloji bo'lsa, uni uzoqroq qiling), agar tsikl tanasi 1-2 sahifani tashkil etsa. Agar kimdir tsiklning ichiga chuqur qarasa, u tezda `x` nomli o'zgaruvchanning tsikl hisoblagichi ekanligini aniqlay olmaydi.
 
-## Use abbreviations
+## Qisqartmalardan foydalaning
 
-If the team rules forbid the use of one-letter and vague names -- shorten them, make abbreviations.
+Agar jamoa qoidalari bitta harfli va noaniq nomlardan foydalanishni taqiqlasa -- ularni qisqartiring, qisqartirishlardan foydalaning.
 
-Like this:
+Shunday:
 
 - `list` -> `lst`.
 - `userAgent` -> `ua`.
 - `browser` -> `brsr`.
-- ...etc
+- ...va h.k
 
-Only the one with truly good intuition will be able to understand such names. Try to shorten everything. Only a worthy person should be able to uphold the development of your code.
+Bunday nomlarni chindan ham yaxshi sezgi egasi anglay oladi. Hamma narsani qisqartirishga harakat qiling. Faqatgina munosib odam sizning kodingizni ishlab chiqishni qo'llab-quvvatlashi kerak.
 
-## Soar high. Be abstract.
-
-```quote author="Laozi (Tao Te Ching)"
-The great square is cornerless<br>
-The great vessel is last complete,<br>
-The great note is rarified sound,<br>
-The great image has no form.
-```
-
-While choosing a name try to use the most abstract word. Like `obj`, `data`, `value`, `item`, `elem` and so on.
-
-- **The ideal name for a variable is `data`.** Use it everywhere you can. Indeed, every variable holds *data*, right?
-
-    ...But what to do if `data` is already taken? Try `value`, it's also universal. After all, a variable eventually gets a *value*.
-
-- **Name a variable by its type: `str`, `num`...**
-
-    Give them a try. A young initiate may wonder -- are such names really useful for a ninja? Indeed, they are!
-
-    Sure, the variable name still means something. It says what's inside the variable: a string, a number or something else. But when an outsider tries to understand the code, they'll be surprised to see that there's actually no information at all! And will ultimately fail to alter your well-thought code.
-
-    The value type is easy to find out by debugging. But what's the meaning of the variable? Which string/number does it store?
-
-    There's just no way to figure out without a good meditation!
-
-- **...But what if there are no more such names?** Just add a number: `data1, item2, elem5`...
-
-## Attention test
-
-Only a truly attentive programmer should be able to understand your code. But how to check that?
-
-**One of the ways -- use similar variable names, like `date` and `data`.**
-
-Mix them where you can.
-
-A quick read of such code becomes impossible. And when there's a typo... Ummm... We're stuck for long, time to drink tea.
-
-
-## Smart synonyms
-
-```quote author="Confucius"
-The hardest thing of all is to find a black cat in a dark room, especially if there is no cat.
-```
-
-Using *similar* names for *same* things makes life more interesting and shows your creativity to the public.
-
-For instance, consider function prefixes. If a function shows a message on the screen -- start it with `display…`, like `displayMessage`. And then if another function shows on the screen something else, like a user name, start it with `show…` (like `showName`).
-
-Insinuate that there's a subtle difference between such functions, while there is none.
-
-Make a pact with fellow ninjas of the team: if John starts "showing" functions with `display...` in his code, then Peter could use `render..`, and Ann -- `paint...`. Note how much more interesting and diverse the code became.
-
-...And now the hat trick!
-
-For two functions with important differences -- use the same prefix!
-
-For instance, the function `printPage(page)` will use a printer. And the function `printText(text)` will put the text on-screen. Let an unfamiliar reader think well over similarly named function `printMessage`: "Where does it put the message? To a printer or on the screen?". To make it really shine, `printMessage(message)` should output it in the new window!
-
-## Reuse names
+## Ismni tanlashda mavhum bo'ling.
 
 ```quote author="Laozi (Tao Te Ching)"
-Once the whole is divided, the parts<br>
-need names.<br>
-There are already enough names.<br>
-One must know when to stop.
+Buyuk kvadrat burchaksiz<br>
+Eng yaxshi vaza butun hayot shakllantiriladdi,<br>
+Baland musiqani eshitish mumkin emas,<br>
+Buyuk tasvirning shakli yo'q.
 ```
 
-Add a new variable only when absolutely necessary.
+Ism tanlashda eng mavhum so'zdan foydalanishga harakat qiling. `obj`, `data`, `value`, `itrem`, `elem` va boshqalar.
 
-Instead, reuse existing names. Just write new values into them.
+- **O'zgaruvchan uchun ideal nom bu `data`.** Uni iloji boricha hamma joyda ishlating. Darhaqiqat, har bir o'zgaruvchanlarda *ma'lumotlar* saqlanadi, to'g'rimi?
 
-In a function try to use only variables passed as parameters.
+    ...Agar `data` allaqachon olingan bo'lsa, nima qilish kerak? `value` ni sinab ko'ring, u ham universaldir. Axir o'zgaruvchan oxir oqibat *qiymat* oladi.
 
-That would make it really hard to identify what's exactly in the variable *now*. And also where it comes from. A person with weak intuition would have to analyze the code line-by-line and track the changes through every code branch.
+- **O'zgaruvchani turiga qarab nomlang: `str`, `num`...**
 
-**An advanced variant of the approach is to covertly (!) replace the value with something alike in the middle of a loop or a function.**
+    Ularni sinab ko'ring. Yosh tashabbuskor hayron bo'lishi mumkin -- bunday nomlar ninja uchun haqiqatan ham foydalimi? Albatta!
 
-For instance:
+    Albatta, o'zgaruvchanning nomi hali ham nimanidirni anglatadi. Bu o'zgaruvchanning ichida nima borligini aytadi: matn, raqam yoki boshqa narsa. Tashqaridan kelgan kishi kodni tushunishga harakat qilganda, aslida umuman ma'lumot yo'qligini ko'rib hayron bo'ladi! Va oxir-oqibat sizning yaxshi o'ylangan kodingizni o'zgartira olmaydi.
+
+    Koddagi nosozliklarni tuzatuvchi orqali qiymat turini topish oson. Ammo o'zgaruvchanning ma'nosi nima? U qaysi matni/raqamni saqlaydi?
+
+    Kod ustida uzoq meditatsiya qilmasdan, bu kodni chuna ololmaysiz!
+
+- **...Ammo endi bunday nomlar qolmasa nima bo'ladi?** Raqam qo'shing: `data1, item2, elem5`...
+
+## Diqqatlik testi
+
+Sizning kodingizni faqat chindan ham diqqatli dasturchi tushunishi kerak. Ammo buni qanday tekshirish kerak?
+
+**Ulardan biri - `date` va `data` kabi o'xshash o'zgaruvchanlar nomlaridan foydalaning.**
+
+Imkoningiz bor joyda ularni aralashtiring.
+
+Bunday kodni tez o'qish imkonsiz bo'lib qoladi. Xato bo'lsa ... Ummm ... Biz uzoq vaqtga tiqilib qoldik, choy tayyorlasayam bo'ladi. 
+
+
+## Aqlli sinonimlar
+
+```quote author="Konfutsiy"
+Eng qiyin narsa - qorong'i xonada qora mushukni topishdir, ayniqsa agar u yerda mushuk bo'lmasa.
+```
+
+*Bir xil* narsalarga *o'xshash* nomlardan foydalanish hayotni yanada qiziqarli qiladi va jamoatchilikka ijodingizni namoyish etadi.
+
+Masalan, funktsiya prefikslarini ko'rib chiqing. Agar funktsiya ekranda xabarni ko'rsatsa - uni `displayMessage` kabi `display...` bilan boshlang. Va agar boshqa funktsiya ekranda foydalanuvchi nomi kabi yana bir narsani ko'rsatsa, uni `show...` bilan boshlang (`showName` kabi).
+
+Bunday funktsiyalar o'rtasida juda katta farq borligini tasavvur qiling, ammo farq yo'q bo'lsa.
+
+Jamoadagi boshqa ninjalar bilan shartnoma tuzing: agar Elbek o'z kodida `display...` bilan funktsiyalarni "ko'rsatishni" boshlasa, unda Oybek `render...` va Aziza -- `paint...` ni ishlatishi mumkin. Kod qanchalik qiziqarli va xilma-xil bo'lganiga e'tibor bering.
+
+...Va endi xet-trik!
+
+Muhim farqlarga ega ikkita funktsiya uchun -- bir xil prefiksdan foydalaning!
+
+Masalan, `printPage(page)` funktsiyasi printerdan foydalanadi. Va `printText(text)` funktsiyasi matnni ekranga chiqaradi. Noma'lum o'quvchi shu kabi nomlangan `printMessage` funktsiyasi haqida o'ylab ko'rsin: "Bu xabarni qayerga chiqaradi? Printerda yoki ekranda?". Buni chindan ham porlashi uchun `printMessage(message)` uni yangi oynada chiqarishi kerak!
+
+## Nomlarni qayta ishlatish
+
+```quote author="Laozi (Tao Te Ching)"
+Butun , qismlarga bo'linganda<br>
+nomlar kerak.<br>
+Nomlar allaqachon yetarli.<br>
+Qachon to'xtashni bilish kerak.
+```
+
+Yangi o'zgaruvchanni faqat o'ta zarurat bo'lganda qo'shing.
+
+Buning o'rniga mavjud nomlarni qayta ishlating. Ularga faqat yangi qiymatlarni yozing.
+
+Funksiyada faqat parametr sifatida berilgan o'zgaruvchanlardan foydalanishga harakat qiling.
+
+Bu o'zgaruvchanda *hozir* nima borligini aniqlashni qiyinlashtirishi mumkin. Va bu qayerdan kelib chiqqanligi. Intuitivligi zaif odam kodni satrma-bosqich tahlil qilishi va har bir kod bo'limi orqali o'zgarishlarni kuzatishi kerak boladi.
+
+**Yondashuvning ilg'or varianti - bu qiymatni tsikl yoki funktsiya o'rtasida yashirin ravishda (!) almashtirish.**
+
+Masalan:
 
 ```js
 function ninjaFunction(elem) {
-  // 20 lines of code working with elem
+  // elem bilan ishlaydigan 20 ta kod satri
 
   elem = clone(elem);
 
-  // 20 more lines, now working with the clone of the elem!
+  // yana 20 ta qator, endi elem kloni bilan ishlaydi!
 }
 ```
 
-A fellow programmer who wants to work with `elem` in the second half of the function will be surprised... Only during the debugging, after examining the code they will find out that they're working with a clone!
+Funktsiyaning ikkinchi yarmida `elem` bilan ishlashni istagan boshqa dasturchi hayron qoladi ... Faqat koddagi nosozliklarni tuzatish paytida, kodni o'rganib chiqib, ular klon bilan ishlashayotganini bilib olishadi!
 
-Seen in code regularly. Deadly effective even against an experienced ninja. 
+Ushbu texnikani muntazam ravishda kodda ko'rdik. Tajribali ninjaga qarshi ham samarali.
 
-## Underscores for fun
+## O'yin-kulgi uchun pastki chiziqlar
 
-Put underscores `_` and `__` before variable names. Like `_name` or `__value`. It would be great if only you knew their meaning. Or, better, add them just for fun, without particular meaning at all. Or different meanings in different places.
+O'zgaruvchan nomlardan oldin `_` va `__` pastki chiziqlarini qo'ying. `_name` yoki `__value` kabi. Agar faqat siz ularning ma'nosini bilsangiz juda yaxshi bo'lar edi. Yoki yaxshiroq, ularni faqat o'yin-kulgi uchun qo'shing, umuman ma'lum ma'noga ega bo'lmasdan. Yoki turli joylarda turli xil ma'nolar sifatida qo'shing.
 
-You kill two rabbits with one shot. First, the code becomes longer and less readable, and the second, a fellow developer may spend a long time trying to figure out what the underscores mean.
+Siz bitta o'q bilan ikkita quyonni o'ldirasiz. Birinchidan, kod uzunroq va qiyin o'qiladigan bo'lib qoladi, ikkinchidan, boshqa dasturchi pastki chiziqlar nimani anglatishini aniqlash uchun uzoq vaqt sarf qilishi mumkin.
 
-A smart ninja puts underscores at one spot of code and evades them at other places. That makes the code even more fragile and increases the probability of future errors.
+Aqlli ninja pastki chiziqlarni kodning bir joyiga qo'yadi va boshqa joylarda qo'shishdan qochadi. Bu kodni yanada nozik qiladi va kelajakdagi xatolar ehtimolini oshiradi.
 
-## Show your love
+## Sevgingizni ko'rsating
 
-Let everyone see how magnificent your entities are! Names like `superElement`, `megaFrame` and `niceItem` will definitely enlighten a reader.
+Hamma sizning subyektlaringiz qanchalik ajoyibligini ko'rsin! `superElement`, `megaFrame` va `niceItem` kabi nomlar o'quvchini ravshanlashtiradi.
 
-Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two.
+Darhaqiqat, bir tomondan, bir narsa yozilgan: `super...`, `mega...`, `nice...`. Ammo boshqa tomondan - bu tafsilotlarni keltirib chiqarmaydi. O'quvchi yashirin ma'no izlashga qaror qilishi va bir-ikki soat davomida mulohaza yuritishi mumkin.
 
 
 
-## Overlap outer variables
+## Tashqi o'zgaruvchanlarni bir-biriga bog'lab qo'ying
 
 ```quote author="Guan Yin Zi"
-When in the light, can't see anything in the darkness.<br>
-When in the darkness, can see everything in the light.
+Nurda bo'lganingizda, zulmatda hech narsa ko'rmaysiz.<br>
+Zulmatda bo'lganingizda, hamma narsani nurda ko'rishingiz mumkin.
 ```
 
-Use same names for variables inside and outside a function. As simple. No efforts required.
+Funktsiya ichidagi va tashqarisidagi o'zgaruvchanlar uchun bir xil nomlardan foydalaning. Oddiy. Hech qanday harakat talab etilmaydi.
 
 ```js
 let *!*user*/!* = authenticateUser();
@@ -188,54 +187,55 @@ let *!*user*/!* = authenticateUser();
 function render() {
   let *!*user*/!* = anotherValue();
   ...
-  ...many lines...
+  ...bir nechta satrlar...
   ...
-  ... // <-- a programmer wants to work with user here and...
+  ... // <-- dasturchi bu yerda foydalanuvchi bilan ishlashni xohlaydi va ...
   ...
 }
 ```
 
-A programmer who jumps inside the `render` will probably fail to notice that there's a local `user` shadowing the outer one.
-
-Then they'll try to work with `user` assuming that it's the external variable, the result of `authenticateUser()`... The trap is sprung! Hello, debugger...
+`render` ichiga sakrab tushgan dasturchi, ehtimol tashqi foydalanuvchini soya qilingan ichki `user` mavjudligini sezmaydi.
 
 
-## Side-effects everywhere!
-
-There are functions that look like they don't change anything. Like `isReady()`, `checkPermission()`, `findTags()`... They are assumed to carry out calculations, find and return the data, without changing anything outside of them. In other words, without "side-effects".
-
-**A really beautiful trick is to add a "useful" action to them, besides the main task.**
-
-An expression of dazed surprise on the face of your colleague when they see a function named `is..`, `check..` or `find...` changing something -- will definitely broaden your boundaries of reason.
-
-**Another way to surprise is to return a non-standard result.**
-
-Show your original thinking! Let the call of `checkPermission` return not `true/false`, but a complex object with the results of the check.
-
-Those developers who try to write `if (checkPermission(..))`, will wonder why it doesn't work. Tell them: "Read the docs!". And give this article.
+Keyin ular tashqi o'zgaruvchanni, `authenticateUser()` natijasini hisobga olib, `user` bilan ishlashga harakat qilishadi... Tuzoq paydo bo'ldi! Salom, koddagi nosozliklarni tuzatuvchi...
 
 
-## Powerful functions!
+## Hamma joyda yon ta'sir mavjud!
+
+Hech narsani o'zgartirmaydiganga o'xshash funktsiyalar mavjud. `IsReady()`, `checkPermission()`, `findTags()` ... Ular hisob-kitoblarni amalga oshirishlari, ma'lumotlarni topishlari va ulardan tashqarida hech narsa o'zgartirmasdan qaytarishlari kerak. Boshqacha qilib aytganda, "yon ta'sirlarsiz".
+
+**Haqiqatan ham ajoyib hiyla - bu ularga asosiy vazifadan tashqari, "foydali" harakatlarni qo'shishdir.**
+
+Funktsiya `is..`, `check..` yoki `find...` deb nomlangan bo'lib, ijro etganda biror qiymatni o'zgartirsa, sizning hamkasbingizning dunyo qarashi juda kengayadi!
+
+**Ajablanishning yana bir usuli - nostandart natijani qaytarish.**
+
+O'zingizning asl fikringizni ko'rsating! `checkPermission` chaqiruvi `true/false` emas, balki tekshirish natijalarini murakkab obyektga qaytaring.
+
+`If(checkPermission(..))` yozishga urinayotgan dasturchilar, nima uchun u ishlamayapti, deb hayron bo'lishadi. Ularga ayting: "Hujjatlarni o'qing!". Va ushbu maqolani bering.
+
+
+## Kuchli funktsiyalar!
 
 ```quote author="Laozi (Tao Te Ching)"
-The great Tao flows everywhere,<br>
-both to the left and to the right.
+Dao hamma joyda va hamma narsada,<br>
+ham chapda, ham o'ngda.
 ```
 
-Don't limit the function by what's written in its name. Be broader.
+Funktsiyani uning nomiga yozilgan narsalar bilan cheklamang. Kengroq bo'ling.
 
-For instance, a function `validateEmail(email)` could (besides checking the email for correctness) show an error message and ask to re-enter the email.
+Masalan, `validateEmail(email)` funktsiyasi (elektron pochtani to'g'riligini tekshirishdan tashqari) xato xabari ko'rsatishi va elektron pochtani qayta kiritishni so'rashi mumkin.
 
-Additional actions should not be obvious from the function name. A true ninja coder will make them not obvious from the code as well.
+Qo'shimcha harakatlar funktsiya nomidan aniq bo'lmasligi kerak. Haqiqiy ninja kodlovchi ularni koddan ham ko'rinmas qiladi.
 
-**Joining several actions into one protects your code from reuse.**
+**Bir nechta amallarni birlashtirish sizning kodingizni qayta ishlatishdan himoya qiladi.**
 
-Imagine, another developer wants only to check the email, and not output any message. Your function  `validateEmail(email)` that does both will not suit them. So they won't break your meditation by asking anything about it.
+Tasavvur qiling, boshqa dasturchi faqat elektron pochtani tekshirishni istaydi va hech qanday xabar chiqarmashini. Sizning funktsiyangiz `validateEmail(email)` ikkalasini ham qiladigan ularga mos kelmaydi. Shunday qilib, ular bu haqda hech narsa so'rab, sizning meditatsiyangizni buzmaydi.
 
-## Summary
+## Xulosa
 
-All "pieces of advice" above are from the real code... Sometimes, written by experienced developers. Maybe even more experienced than you are ;)
+Yuqoridagi barcha "maslahatlar" haqiqiy koddan olingan .. Ba'zan tajribali dasturchilar tomonidan yoziladi. Ehtimol sizdan ham tajribali ;)
 
-- Follow some of them, and your code will become full of surprises.
-- Follow many of them, and your code will become truly yours, no one would want to change it.
-- Follow all, and your code will become a valuable lesson for young developers looking for enlightenment.
+- Ulardan ba'zilariga amal qiling, shunda kodingiz kutilmagan hodisalarga boy bo'ladi.
+- Ularning ko'pchiligiga amal qiling, shunda kodingiz sizniki bo'ladi, hech kim uni o'zgartirishni xohlamaydi.
+- Barchasini amal qiling, shunda sizning kodingiz ma'rifatni izlayotgan yosh dasturchilar uchun qimmatli dars bo'ladi.

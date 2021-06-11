@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Uppercast the first character
+# Birinchi belgi tepa registrda
 
-Write a function `ucFirst(str)` that returns the string `str` with the uppercased first character, for instance:
+`str` matnini katta bosh harf bilan qaytaradigan `ucFirst(string)` funktsiyasini yozing, masalan:
 
 ```js
 ucFirst("john") == "John";

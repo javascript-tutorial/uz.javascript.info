@@ -1,14 +1,14 @@
 
-# Delay with a promise
+# Va'da bilan kechiktirish
 
-The built-in function `setTimeout` uses callbacks. Create a promise-based alternative.
+O'rnatilgan `setTimeout` funktsiyasi qayta chaqiruvlardan foydalanadi. Va'daga asoslangan alternativani yarating.
 
-The function `delay(ms)` should return a promise. That promise should resolve after `ms` milliseconds, so that we can add `.then` to it, like this:
+`delay(ms)` funktsiyasi va'da berishi kerak. Ushbu va'da `ms` milisoniyadan keyin hal qilinishi kerak, shunda biz unga `.then` qo'sha olamiz, shunga o'xshash:
 
 ```js
 function delay(ms) {
-  // your code
+  // sizning kodingiz
 }
 
-delay(3000).then(() => alert('runs after 3 seconds'));
+delay(3000).then(() => alert('3 soniyadan keyin ishlaydi'));
 ```

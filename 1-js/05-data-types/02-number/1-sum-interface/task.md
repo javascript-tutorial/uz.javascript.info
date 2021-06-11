@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Sum numbers from the visitor
+# Foydalanuvchi kiritgan raqamlarning yig'indisi
 
-Create a script that prompts the visitor to enter two numbers and then shows their sum.
+Ikki raqamni kiritishni talab qiladigan skript yarating (prompt-dan foydalaning) va keyin ularning yig'indisini ko'rsatadi.
 
 [demo]
 
-P.S. There is a gotcha with types.
+P.S. turlar bilan ishlashda "to'siqlar" mavjud.

@@ -1,4 +1,4 @@
-The first two checks turn into two `case`. The third check is split into two cases:
+Dastlabki ikkita tekshiruv ikkita `case` ga aylanadi. Uchinchi tekshirish ikki holatga bo'linadi:
 
 ```js run
 let a = +prompt('a?', '');
@@ -21,6 +21,6 @@ switch (a) {
 }
 ```
 
-Please note: the `break` at the bottom is not required. But we put it to make the code future-proof.
+Iltimos, diqqat qiling: pastki qismida `break` shart emas. Ammo biz buni kodni kelajakka ishonchli qilish uchun qo'ydik.
 
-In the future, there is a chance that we'd want to add one more `case`, for example `case 4`. And if we forget to add a break before it, at the end of `case 3`, there will be an error. So that's a kind of self-insurance.
+Kelajakda yana bitta `case`, masalan `case 4` ni qo'shishni xohlashimiz mumkin. Agar bundan oldin tanaffus qo'shishni unutib qo'ysak, `case 3` oxirida xato bo'ladi. Demak, bu o'z-o'zini sug'urtalashning bir turi.

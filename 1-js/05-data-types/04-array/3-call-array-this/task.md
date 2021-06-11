@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Calling in an array context
+# Massiv kontekstida chaqirish
 
-What is the result? Why?
+Natija qanday? Nima uchun?
 
 ```js
 let arr = ["a", "b"];

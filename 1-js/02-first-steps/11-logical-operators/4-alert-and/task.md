@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# What is the result of AND'ed alerts?
+# VA(&&) ogohlantirishlarining natijasi nima?
 
-What will this code show?
+Quyidagi kod nimani chiqaradi?
 
 ```js
 alert( alert(1) && alert(2) );

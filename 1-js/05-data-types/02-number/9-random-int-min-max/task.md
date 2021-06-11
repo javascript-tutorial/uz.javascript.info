@@ -2,14 +2,14 @@ importance: 2
 
 ---
 
-# A random integer from min to max
+# Min dan max gacha bo'lgan tasodifiy tamsayi son
 
-Create a function `randomInteger(min, max)` that generates a random *integer* number from `min` to `max` including both `min` and `max` as possible values.
+Tasodifiy *tamsayı* sonini `min` dan `max` gacha, shu jumladan `min` va `max` qiymatlarini ham hosil qiladigan `randomInteger(min, max)` funktsiyasini yarating.
 
-Any number from the interval `min..max` must appear with the same probability.
+`min..max` intervalidan istalgan raqam bir xil ehtimollik bilan paydo bo'lishi kerak.
 
 
-Examples of its work:
+Uning ishining namunalari:
 
 ```js
 alert( randomInteger(1, 5) ); // 1
@@ -17,4 +17,4 @@ alert( randomInteger(1, 5) ); // 3
 alert( randomInteger(1, 5) ); // 5
 ```
 
-You can use the solution of the [previous task](info:task/random-min-max) as the base.
+Siz [oldingi topshiriq](info:task/random-min-max) yechimini asos sifatida ishlatishingiz mumkin.

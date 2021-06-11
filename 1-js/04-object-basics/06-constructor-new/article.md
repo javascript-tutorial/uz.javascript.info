@@ -1,17 +1,17 @@
-# Constructor, operator "new"
+# Konstruktor, operator "new"
 
-The regular `{...}` syntax allows to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+Oddiy `{...}` sintaksisi bitta obyektni yaratishga imkon beradi. Ammo ko'pincha biz shunga o'xshash ko'plab obyektlarni yaratishimiz kerak, masalan, bir nechta foydalanuvchi yoki menyu elementlari va boshqalar.
 
-That can be done using constructor functions and the `"new"` operator.
+Buni konstruktor funktsiyalari va `"new"` operator yordamida amalga oshirish mumkin.
 
-## Constructor function
+## Konstruktor funktsiyalari
 
-Constructor functions technically are regular functions. There are two conventions though:
+Konstruktor funktsiyalari texnik jihatdan muntazam funktsiyalardir. Ammo ikkita shart mavjud:
 
-1. They are named with capital letter first.
-2. They should be executed only with `"new"` operator.
+1. Ular birinchi bo'lib katta harf bilan nomlangan.
+2. Ular faqat `"new"` operatori bilan bajarilishi kerak.
 
-For instance:
+Masalan:
 
 ```js run
 function User(name) {
@@ -20,210 +20,210 @@ function User(name) {
 }
 
 *!*
-let user = new User("Jack");
+let user = new User("Elbek");
 */!*
 
-alert(user.name); // Jack
+alert(user.name); // Elbek
 alert(user.isAdmin); // false
 ```
 
-When a function is executed as `new User(...)`, it does the following steps:
+Agar funktsiya `new User(...)` sifatida bajarilsa, u quyidagi amallarni bajaradi:
 
-1. A new empty object is created and assigned to `this`.
-2. The function body executes. Usually it modifies `this`, adds new properties to it.
-3. The value of `this` is returned.
+1. Yangi bo'sh ob'ekt yaratilib, `this` ga tayinlangan.
+2. Funktsiya tanasi bajariladi. Odatda u `this` ni o'zgartiradi, unga yangi xususiyatlar qo'shadi.
+3. `this` ning qiymati qaytariladi.
 
-In other words, `new User(...)` does something like:
+Boshqacha qilib aytganda, `new User(...)` quyidagicha ishlaydi:
 
 ```js
 function User(name) {
 *!*
-  // this = {};  (implicitly)
+  // this = {};  (bevosita)
 */!*
 
-  // add properties to this
+  // bunga xususiyatlarni qo'shish
   this.name = name;
   this.isAdmin = false;
 
 *!*
-  // return this;  (implicitly)
+  // return this;  (bevosita)
 */!*
 }
 ```
 
-So the result of `new User("Jack")` is the same object as:
+Shunday qilib, `new User("Elbek")` ning natijasi quyidagicha:
 
 ```js
 let user = {
-  name: "Jack",
+  name: "Elbek",
   isAdmin: false
 };
 ```
 
-Now if we want to create other users, we can call `new User("Ann")`, `new User("Alice")` and so on. Much shorter than using literals every time, and also easy to read.
+Endi biz boshqa foydalanuvchilarni yaratmoqchi bo'lsak, `new User("Oybek")`, `new User("Aziza")` va boshqalarni chaqirishimiz mumkin. Har safar literallardan foydalanishdan ancha qisqa, shuningdek o'qish oson.
 
-That's the main purpose of constructors -- to implement reusable object creation code.
+Bu konstruktorlarning asosiy maqsadi -- qayta foydalanish mumkin bo'lgan obyekt yaratish kodini amalga oshirish.
 
-Let's note once again -- technically, any function can be used as a constructor. That is: any function can be run with `new`, and it will execute the algorithm above. The "capital letter first" is a common agreement, to make it clear that a function is to be run with `new`.
+Yana bir bor ta'kidlab o'tamiz -- texnik jihatdan har qanday funktsiyani konstruktor sifatida ishlatish mumkin. Ya'ni: har qanday funktsiyani `new` bilan ishlatish mumkin va u yuqoridagi algoritmni bajaradi. "Birinchi bo'lib katta harf" funktsiya `new` bilan bajarilishini tushuntirish uchun umumiy kelishuvdir.
 
 ````smart header="new function() { ... }"
-If we have many lines of code all about creation of a single complex object, we can wrap them in constructor function, like this:
+Agar bitta murakkab ko'plab satrli obyekt yaratish kerak bo'lsa, ularni quyidagi kabi konstruktor funktsiyasiga o'rashimiz mumkin:
 
 ```js
 let user = new function() {
-  this.name = "John";
+  this.name = "Elbek";
   this.isAdmin = false;
 
-  // ...other code for user creation
-  // maybe complex logic and statements
-  // local variables etc
+  // ...foydalanuvchi yaratish uchun boshqa kod
+  // balki murakkab mantiq va ifodalar
+  // ichki o'zgaruvchanlar va boshqalar
 };
 ```
 
-The constructor can't be called again, because it is not saved anywhere, just created and called. So this trick aims to encapsulate the code that constructs the single object, without future reuse.
+Konstruktorni qayta chaqirish mumkin emas, chunki u hech qaerda saqlanmaydi, shunchaki yaratiladi va chaqiriladi. Shunday qilib, bu hiyla-nayrang kelajakda qayta ishlatmasdan bitta obyektni tuzadigan kodni qamrab olishga qaratilgan.
 ````
 
-## Dual-syntax constructors: new.target
+## Ikki sintaksisli konstruktorlar: new.target
 
-```smart header="Advanced stuff"
-The syntax from this section is rarely used, skip it unless you want to know everything.
+```smart header="Murakkab narsalar"
+Ushbu bo'limdagi sintaksis juda kam ishlatiladi, agar hamma narsani bilmoqchi bo'lmasangiz, uni o'tkazib yuboring.
 ```
 
-Inside a function, we can check whether it was called with `new` or without it, using a special `new.target` property.
+Funktsiyaning ichida biz uni `new` bilan yoki yo'q holda, `new.target` maxsus xususiyati yordamida tekshirishimiz mumkin.
 
-It is empty for regular calls and equals the function if called with `new`:
+Oddiy chaqiruvlar uchun bo'sh va agar `new` bilan chaqirilsa, funktsiyaga teng:
 
 ```js run
 function User() {
   alert(new.target);
 }
 
-// without "new":
+// "new" siz:
 *!*
 User(); // undefined
 */!*
 
-// with "new":
+// "new" bilan:
 *!*
 new User(); // function User { ... }
 */!*
 ```
 
-That can be used to allow both `new` and regular calls to work the same. That is, create the same object:
+Buning yordamida `new` va oddiy chaqiruvlar bir xil ishlashiga imkon berish uchun foydalanish mumkin. Ya'ni, xuddi shu obyektni yarating:
 
 ```js run
 function User(name) {
-  if (!new.target) { // if you run me without new
-    return new User(name); // ...I will add new for you
+  if (!new.target) { // agar siz meni new siz bajarsangiz
+    return new User(name); // ...Men siz uchun new ni qo'shaman
   }
 
   this.name = name;
 }
 
-let john = User("John"); // redirects call to new User
-alert(john.name); // John
+let john = User("Elbek"); // new User ga yo'naltiradi
+alert(john.name); // Elbek
 ```
 
-This approach is sometimes used in libraries to make the syntax more flexible. So that people may call the function with or without `new`, and it still works.
+Ushbu yondashuv ba'zan sintaksisni yanada moslashuvchan qilish uchun kutubxonalarda qo'llaniladi. Shunday qilib, odamlar funktsiyani `new` yoki oddiy chaqirishlari mumkin va u hali ham ishlaydi.
 
-Probably not a good thing to use everywhere though, because omitting `new` makes it a bit less obvious what's going on. With `new` we all know that the new object is being created.
+Ehtimol, hamma joyda foydalanish yaxshi narsa emas, chunki `new` ni tashlab qo'yish nima sodir bo'layotganini chunish uchun biroz qiyinroq. `new` bilan hammamiz bilamizki, yangi obyekt yaratilmoqda.
 
-## Return from constructors
+## Konstruktorlardan qiymatni qaytarish
 
-Usually, constructors do not have a `return` statement. Their task is to write all necessary stuff into `this`, and it automatically becomes the result.
+Odatda, konstruktorlarda `return` ifodasi mavjud emas. Ularning vazifasi barcha kerakli narsalarni `this` ga yozishdir va bu avtomatik ravishda natijaga aylanadi.
 
-But if there is a `return` statement, then the rule is simple:
+Agar `return` ifodasi bo'lsa, unda qoida oddiy:
 
-- If `return` is called with object, then it is returned instead of `this`.
-- If `return` is called with a primitive, it's ignored.
+- Agar `return` obyekt bilan chaqirilsa, u `this` o'rniga qaytariladi.
+- Agar `return` ibtidoiy bilan chaqirilsa, unga e'tibor berilmaydi.
 
-In other words, `return` with an object returns that object, in all other cases `this` is returned.
+Boshqacha qilib aytganda, obyekt bilan `return` ushbu obyektni qaytaradi, qolgan barcha hollarda `this` qaytariladi.
 
-For instance, here `return` overrides `this` by returning an object:
+Masalan, `return` orqali obyektni qaytarish bu yerda  `this` ni bekor qiladi:
 
 ```js run
 function BigUser() {
 
-  this.name = "John";
+  this.name = "Elbek";
 
-  return { name: "Godzilla" };  // <-- returns an object
+  return { name: "Godzilla" };  // <-- obyektni qaytaradi
 }
 
-alert( new BigUser().name );  // Godzilla, got that object ^^
+alert( new BigUser().name );  // Godzilla, bu obyektni oldi ^^
 ```
 
-And here's an example with an empty `return` (or we could place a primitive after it, doesn't matter):
+Va bu yerda bo'sh `return` bilan bir misol (yoki biz undan keyin ibtidoiylarni qo'yishimiz mumkin, muhim emas):
 
 ```js run
 function SmallUser() {
 
-  this.name = "John";
+  this.name = "Elbek";
 
-  return; // finishes the execution, returns this
+  return; // bajarilishini tugatadi, this ni qaytaradi
 
   // ...
 
 }
 
-alert( new SmallUser().name );  // John
+alert( new SmallUser().name );  // Elbek
 ```
 
-Usually constructors don't have a `return` statement. Here we mention the special behavior with returning objects mainly for the sake of completeness.
+Odatda konstruktorlarda `return` ifodasi mavjud emas. Ushbu blokda tilni o'rganishdagi bo'shliqlarni qoldirmaslik uchun obyektni qaytarish bilan bog'liq alohida xatti-harakatlar haqida so'z yuritdik.
 
-````smart header="Omitting parentheses"
-By the way, we can omit parentheses after `new`, if it has no arguments:
+````smart header="Qavslar chushirib qo'yish"
+Aytgancha, agar bizda argument bo'lmasa, qavslarni `new` dan keyin olib tashlashimiz mumkin:
 
 ```js
-let user = new User; // <-- no parentheses
-// same as
+let user = new User; // <-- qavslar yo'q
+// bir xil
 let user = new User();
 ```
 
-Omitting parentheses here is not considered a "good style", but the syntax is permitted by specification.
+Bu yerda qavslarni tashlab qo'yish "yaxshi uslub" deb hisoblanmaydi, ammo sintaksisda spetsifikatsiya bo'yicha ruxsat beriladi.
 ````
 
-## Methods in constructor
+## Konstruktorda usullar
 
-Using constructor functions to create objects gives a great deal of flexibility. The constructor function may have parameters that define how to construct the object, and what to put in it.
+Obyektlarni yaratish uchun konstruktor funktsiyalaridan foydalanish katta moslashuvchanlikni beradi. Konstruktor funktsiyasi obyektni qanday qurish va unga nimani kiritish kerakligini belgilaydigan parametrlarga ega bo'lishi mumkin.
 
-Of course, we can add to `this` not only properties, but methods as well.
+Albatta, biz `this` ga nafaqat xususiyatlarni, balki usullarni ham qo'shishimiz mumkin.
 
-For instance, `new User(name)` below creates an object with the given `name` and the method `sayHi`:
+Masalan, quyida `new User(name)` berilgan `name` va `sayHi` usuli bilan obyekt yaratadi:
 
 ```js run
 function User(name) {
   this.name = name;
 
   this.sayHi = function() {
-    alert( "My name is: " + this.name );
+    alert( "Mening ismim: " + this.name );
   };
 }
 
 *!*
-let john = new User("John");
+let john = new User("Oybek");
 
-john.sayHi(); // My name is: John
+john.sayHi(); // Mening ismim: Oybek
 */!*
 
 /*
 john = {
-   name: "John",
+   name: "Oybek",
    sayHi: function() { ... }
 }
 */
 ```
 
-## Summary
+## Xulosa
 
-- Constructor functions or, briefly, constructors, are regular functions, but there's a common agreement to name them with capital letter first.
-- Constructor functions should only be called using `new`. Such a call implies a creation of empty `this` at the start and returning the populated one at the end.
+- Konstruktor funktsiyalari yoki qisqacha konstruktorlar muntazam funktsiyalardir, ammo ularni birinchi bo'lib katta harf bilan nomlash bo'yicha umumiy kelishuv mavjud.
+- Konstruktor funktsiyalari faqat `new` yordamida chaqirilishi kerak. Bunday chaqiruv boshida bo'sh `this` ni yaratishni va oxirida to'liqni qaytarish nazarda tutadi.
 
-We can use constructor functions to make multiple similar objects.
+Biz bir nechta o'xshash obyektlarni yaratish uchun konstruktor funktsiyalaridan foydalanishimiz mumkin.
 
-JavaScript provides constructor functions for many built-in language objects: like `Date` for dates, `Set` for sets and others that we plan to study.
+JavaScript ko'plab o'rnatilgan til ob'ektlari uchun konstruktor funktsiyalarini taqdim etadi: sanalar uchun `Data`, to'plamlar uchun `Set` va biz o'rganishni rejalashtirgan boshqa narsalar.
 
-```smart header="Objects, we'll be back!"
-In this chapter we only cover the basics about objects and constructors. They are essential for learning more about data types and functions in the next chapters.
+```smart header="Obyektlar, biz qaytib kelamiz!"
+Ushbu bobda biz faqat obyektlar va konstruktorlar haqida asoslarni ko'rib chiqdik. Ular keyingi boblarda ma'lumotlar turlari va funktsiyalari haqida ko'proq bilish uchun juda muhimdir.
 
-After we learn that, we return to objects and cover them in-depth in the chapters <info:prototypes> and <info:classes>.
+Buni bilib olganimizdan so'ng, biz obyektlarga qaytamiz va ularni <info:prototypes> va <info:class> boblarida chuqur yoritamiz.
 ```

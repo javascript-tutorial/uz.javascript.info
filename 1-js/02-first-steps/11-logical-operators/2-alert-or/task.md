@@ -2,9 +2,9 @@ importance: 3
 
 ---
 
-# What's the result of OR'ed alerts?
+# YOKI(||) ogohlantirishlarining natijasi nima?
 
-What will the code below output?
+Quyidagi kod nimani chiqaradi?
 
 ```js
 alert( alert(1) || 2 || alert(3) );

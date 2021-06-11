@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Repeat until the input is correct
+# Kiritish to'g'ri bo'lguncha takrorlang
 
-Write a loop which prompts for a number greater than `100`. If the visitor enters another number -- ask them to input again.
+`100` dan katta raqamni talab qiladigan tsiklni yozing. Agar mehmon boshqa raqamni kiritsa -- ularni qayta kiritishni so'rang.
 
-The loop must ask for a number until either the visitor enters a number greater than `100` or cancels the input/enters an empty line.
+Tsiklga tashrif buyuruvchilar `100` dan katta raqam kiritmaguncha yoki kirishni bekor qilmaguncha/bo'sh matni kiritmaguncha raqam so'ralishi kerak.
 
-Here we can assume that the visitor only inputs numbers. There's no need to implement a special handling for a non-numeric input in this task.
+Bu yerda biz mehmon faqat raqamlarni kiritadi deb taxmin qilishimiz mumkin. Ushbu topshiriqda raqamsiz kiritish uchun maxsus ishlov berishni amalga oshirishning hojati yo'q.
 
 [demo]

@@ -16,13 +16,13 @@ function debounce(f, ms) {
 }
 ```
 
-A call to `debounce` returns a wrapper. There may be two states:
+`debounce` ga chaqiruv o'ramni qaytaradi. Ikki variant bo'lishi mumkin:
 
-- `isCooldown = false` -- ready to run.
-- `isCooldown = true` -- waiting for the timeout.
+- `isCooldown = false` -- bajarilishga tayyor.
+- `isCooldown = true` -- vaqt tugashini kutmoqda.
 
-In the first call `isCooldown` is falsy, so the call proceeds, and the state changes to `true`.
+Birinchi chaqiruvda `isCooldown` `false`, shuning uchun chaqiruv davom etadi va holat `true` ga o'zgaradi.
 
-While `isCooldown` is true, all other calls are ignored.
+`isCooldown` `true` bo'lsa, boshqa barcha chaqiruvlar e'tiborga olinmaydi.
 
-Then `setTimeout` reverts it to `false` after the given delay.
+Keyin `setTimeout` berilgan kechikishdan keyin uni `false` ga qaytaradi.

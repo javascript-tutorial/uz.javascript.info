@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# What's the result of OR?
+# YOKI ning natijasi nma?
 
-What is the code below going to output?
+Quyidagi kod qanday natijani chiqaradi?
 
 ```js
 alert( null || 2 || undefined );

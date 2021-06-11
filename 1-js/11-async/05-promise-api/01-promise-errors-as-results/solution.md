@@ -1,6 +1,6 @@
-The solution is actually pretty simple.
+Yechim aslida juda oddiy.
 
-Take a look at this:
+Bunga qarang:
 
 ```js
 Promise.all(
@@ -10,11 +10,11 @@ Promise.all(
 )
 ```
 
-Here we have an array of `fetch(...)` promises that goes to `Promise.all`.
+Bu yerda bizda `Promise.all` ga ketadigan `fetch(...)` massivlari mavjud.
 
-We can't change the way `Promise.all` works: if it detects an error, then it rejects with it. So we need to prevent any error from occurring. Instead, if a `fetch` error happens, we need to treat it as a "normal" result.
+Biz "Promise.all" ning ishlash usulini o'zgartira olmaymiz: agar u xato aniqlasa, u holda u rad etadi. Shunday qilib, biz biron bir xato yuzaga kelishining oldini olishimiz kerak. Buning o'rniga, agar `fetch` xatosi yuzaga kelsa, biz unga "normal" natija sifatida qarashimiz kerak.
 
-Here's how:
+Mana qanday:
 
 ```js
 Promise.all(
@@ -24,18 +24,18 @@ Promise.all(
 )
 ```
 
-In other words, the `.catch` takes an error for all of the promises and returns it normally. By the rules of how promises work, if a `.then/catch` handler returns a value (doesn't matter if it's an error object or something else), then the execution continues the "normal" flow.
+Boshqacha qilib aytganda, `.catch` barcha va'dalar uchun xatoga yo'l qo'yadi va uni normal ravishda qaytaradi. Va'dalar qanday ishlashining qoidalariga ko'ra, agar `.then/catch` ishlovchisi qiymatni qaytarsa (bu xato obyekti yoki boshqa biron bir narsaning ahamiyati yo'q), u holda "normal" oqim davom etadi.
 
-So the `.catch` returns the error as a "normal" result into the outer `Promise.all`.
+Shunday qilib `.catch` xatoni "normal" natija sifatida tashqi `Promise.all` ga qaytaradi.
 
-This code:
+Ushbu kod:
 ```js
 Promise.all(
   urls.map(url => fetch(url))
 )
 ```
 
-Can be rewritten as:
+Quyidagidek, qayta yozish mumkin:
 
 ```js
 Promise.all(

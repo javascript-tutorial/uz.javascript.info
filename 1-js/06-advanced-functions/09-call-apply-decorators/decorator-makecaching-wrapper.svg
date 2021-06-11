@@ -56,7 +56,7 @@
                 <tspan x="265" y="75">wrapper</tspan>
             </text>
             <text id="around-the-function" font-family="Consolas" font-size="14" font-weight="normal" fill="#8A704D">
-                <tspan x="282" y="160">around the function</tspan>
+                <tspan x="282" y="160">funktsiya atrofida</tspan>
             </text>
             <path id="Line" d="M229,155 L262,155 L262,158 L229,158 L229,166 L210,156.5 L229,147 L229,155 Z" fill="#EE6B47" fill-rule="nonzero"></path>
         </g>

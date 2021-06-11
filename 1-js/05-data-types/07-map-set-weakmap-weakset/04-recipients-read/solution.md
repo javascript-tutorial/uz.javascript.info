@@ -1,4 +1,4 @@
-The sane choice here is a `WeakSet`:
+Bu yerda aql-idrokka asoslangan tanlov `WeakSet`:
 
 ```js
 let messages = [
@@ -9,33 +9,33 @@ let messages = [
 
 let readMessages = new WeakSet();
 
-// two messages have been read
+// ikkita xabar o'qildi
 readMessages.add(messages[0]);
 readMessages.add(messages[1]);
 // readMessages has 2 elements
 
-// ...let's read the first message again!
+// ...birinchi xabarni yana o'qiymiz!
 readMessages.add(messages[0]);
-// readMessages still has 2 unique elements
+// readMessages hali ham 2 ta noyob elementga ega
 
-// answer: was the message[0] read?
+// javob: [0] xabar o'qilganmi?
 alert("Read message 0: " + readMessages.has(messages[0])); // true
 
 messages.shift();
-// now readMessages has 1 element (technically memory may be cleaned later)
+// endi readMessages 1 ta elementga ega (texnik xotira keyinroq tozalanishi mumkin)
 ```
 
-The `WeakSet` allows to store a set of messages and easily check for the existance of a message in it.
+`WeakSet` xabarlar to'plamini saqlash va unda xabar mavjudligini osongina tekshirish imkonini beradi.
 
-It cleans up itself automatically. The tradeoff is that we can't iterate over it. We can't get "all read messages" directly. But we can do it by iterating over all messages and filtering those that are in the set.
+U o'zini avtomatik ravishda tozalaydi. Qizig'i shundaki, biz uni takrorlay olmaymiz. Biz "barcha o'qilgan xabarlarni" to'g'ridan-to'g'ri ololmaymiz. Ammo biz buni barcha xabarlarni takrorlash va to'plamdagi xabarlarni filtrlash orqali amalga oshirishimiz mumkin.
 
-P.S. Adding a property of our own to each message may be dangerous if messages are managed by someone else's code, but we can make it a symbol to evade conflicts.
+P.S. Har bir xabarga o'ziga xos xususiyatni qo'shish xavfli bo'lishi mumkin, agar xabarlar boshqa birovning kodi tomonidan boshqarilsa, lekin biz uni nizolardan qochish uchun belgiga aylantira olamiz.
 
-Like this:
+Shunga o'xshash:
 ```js
-// the symbolic property is only known to our code
+// ramziy xususiyat faqat bizning kodimizga ma'lum
 let isRead = Symbol("isRead");
 messages[0][isRead] = true;
 ```
 
-Now even if someone else's code uses `for..in` loop for message properties, our secret flag won't appear.
+Endi boshqa birovning kodi xabar xususiyatlari uchun `for..in` tsikldan foydalansa ham, bizning maxfiy bayrog'imiz ko'rinmaydi.

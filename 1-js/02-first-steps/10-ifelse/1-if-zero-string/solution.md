@@ -1,8 +1,8 @@
-**Yes, it will.**
+**Ha, shunday bo'ladi.**
 
-Any string except an empty one (and `"0"` is not empty) becomes `true` in the logical context.
+Bo'sh satrdan tashqari har qanday satr (va `"0"` bo'sh emas) mantiqiy kontekstda `true` bo'ladi.
 
-We can run and check:
+Biz ishlatish va tekshirishimiz mumkin:
 
 ```js run
 if ("0") {

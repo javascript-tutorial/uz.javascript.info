@@ -1,3 +1,3 @@
-# Object properties configuration
+# Obyekt xususiyatlarini sozlash
 
-In this section we return to objects and study their properties even more in-depth.
+Ushbu bo'limda biz obyektlarga qaytamiz va ularning xususiyatlarini yanada chuqurroq o'rganamiz.

@@ -1,24 +1,24 @@
 
-# Export and Import
+# Eksport va Import
 
-Export and import directives are very versatile.
+Eksport va import direktivalari bir nechta chaqiruv variantlariga ega.
 
-In the previous chapter we saw a simple use, now let's explore more examples.
+Oldingi bobda biz oddiy foydalanishni ko'rdik, endi ko'proq misollarni ko'rib chiqaylik.
 
-## Export before declarations
+## Deklaratsiyadan oldin eksport qilish
 
-We can label any declaration as exported by placing `export` before it, be it a variable, function or a class.
+Biz har qanday deklaratsiyani o'zgaruvchan, funktsiya yoki klass bo'lishidan oldin `export` ni qo'yib eksport qilingan deb belgilashimiz mumkin.
 
-For instance, here all exports are valid:
+Masalan, bu yerda barcha eksportlar yaroqli:
 
 ```js
-// export an array
+// massivni eksport qilish
 *!*export*/!* let months = ['Jan', 'Feb', 'Mar','Apr', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// export a constant
+// konstantani eksport qilish
 *!*export*/!* const MODULES_BECAME_STANDARD_YEAR = 2015;
 
-// export a class
+// klassni eksport qilish
 *!*export*/!* class User {
   constructor(name) {
     this.name = name;
@@ -26,47 +26,47 @@ For instance, here all exports are valid:
 }
 ```
 
-````smart header="No semicolons after export class/function"
-Please note that `export` before a class or a function does not make it a [function expression](info:function-expressions-arrows). It's still a function declaration, albeit exported.
+````smart header="export class/function dan keyin nuqta-vergul yo'q"
+Iltimos, `export` klass yoki funktsiyadan oldin uni [funktsiya ifodasi](info:function-expressions-arrows) ga aylantirmasligini unutmang. Hali eksport qilingan bo'lsa ham bu funktsiya deklaratsiyasi.
 
-Most JavaScript style guides recommend semicolons after statements, but not after function and class declarations.
+Ko'pgina JavaScript uslubidagi qo'llanmalar ifodalardan so'ng nuqta-vergulni tavsiya qiladi, lekin funktsiyalar va klass deklaratsiyalaridan keyin emas.
 
-That's why there should be no semicolons at the end of `export class` and `export function`.
+Shuning uchun `export class` va `export function` ning  oxirida nuqta-vergul bo'lmasligi kerak.
 
 ```js
 export function sayHi(user) {
   alert(`Hello, ${user}!`);
-} *!* // no ; at the end */!*
+} *!* // ; oxirida yo'q */!*
 ```
 
 ````
 
-## Export apart from declarations
+## Deklaratsiyadan tashqari eksport qilish
 
-Also, we can put `export` separately.
+Bundan tashqari, biz `export` ni alohida-alohida qo'yishimiz mumkin.
 
-Here we first declare, and then export:
+Bu yerda biz avval e'lon qilamiz, keyin eksport qilamiz:
 
 ```js  
 // 📁 say.js
 function sayHi(user) {
-  alert(`Hello, ${user}!`);
+  alert(`Salom, ${user}!`);
 }
 
 function sayBye(user) {
-  alert(`Bye, ${user}!`);
+  alert(`Hayir, ${user}!`);
 }
 
 *!*
-export {sayHi, sayBye}; // a list of exported variables
+export {sayHi, sayBye}; // eksport qilingan o'zgaruvchanlar ro'yxati
 */!*
 ```
 
-...Or, technically we could put `export` above functions as well.
+...Yoki texnik jihatdan biz `export` funktsiyalarini ham yuqoriga qo'yishimiz mumkin.
 
-## Import *
+## Import*
 
-Usually, we put a list of what to import into `import {...}`, like this:
+Odatda, `import {...}` ga nimani import qilish kerakligi ro'yxatini qo'yamiz:
 
 ```js
 // 📁 main.js
@@ -74,11 +74,11 @@ Usually, we put a list of what to import into `import {...}`, like this:
 import {sayHi, sayBye} from './say.js';
 */!*
 
-sayHi('John'); // Hello, John!
-sayBye('John'); // Bye, John!
+sayHi('John'); // Salom, John!
+sayBye('John'); // Hayir, John!
 ```
 
-But if the list is long, we can import everything as an object using `import * as <obj>`, for instance:
+Ammo agar ro'yxat uzun bo'lsa, biz hamma narsani `import * as <obj>` yordamida obyekt sifatida import qilishimiz mumkin, masalan:
 
 ```js
 // 📁 main.js
@@ -90,13 +90,13 @@ say.sayHi('John');
 say.sayBye('John');
 ```
 
-At first sight, "import everything" seems such a cool thing, short to write, why should we ever explicitly list what we need to import?
+Bir qarashda "hamma narsani import qilish" juda ajoyib narsa bo'lib tuyuladi, qisqasi, nima uchun biz import qilishimiz kerak bo'lgan narsalarni aniq ro'yxatlashimiz kerak?
 
-Well, there are few reasons.
+Xo'sh, ozgina sabablar bor.
 
-1. Modern build tools ([webpack](http://webpack.github.io) and others) bundle modules together and optimize them to speedup loading and remove unused stuff.
+1. Zamonaviy qurilish vositalari ([webpack](http://webpack.github.io) va boshqalar) modullarni birlashtiradilar va yuklashni tezlashtirish va foydalanilmayotgan narsalarni olib tashlash uchun ularni optimallashtirish.
 
-    Let's say, we added a 3rd-party library `lib.js` to our project with many functions:
+    Aytaylik, biz o'z loyihamizga uchinchi tomon kutubxonasini qo'shdik `lib.js` ko'plab funktsiyalar bilan:
     ```js
     // 📁 lib.js
     export function sayHi() { ... }
@@ -104,21 +104,21 @@ Well, there are few reasons.
     export function becomeSilent() { ... }
     ```
 
-    Now if we in fact need only one of them in our project:
+    Endi bizning loyihamizda ulardan faqat bittasi kerak bo'lsa:
     ```js
     // 📁 main.js
     import {sayHi} from './lib.js';
     ```
-    ...Then the optimizer will automatically detect it and totally remove the other functions from the bundled code, thus making the build smaller. That is called "tree-shaking".
+    ...Keyin optimallashtiruvchi uni avtomatik ravishda aniqlaydi va to'plamdagi koddan boshqa funktsiyalarni butunlay olib tashlaydi va shu bilan tuzilishini kichiklashtiradi. Bu "tree-shaking" deyiladi.
 
-2. Explicitly listing what to import gives shorter names: `sayHi()` instead of `lib.sayHi()`.
-3. Explicit imports give better overview of the code structure: what is used and where. It makes code support and refactoring easier.
+2. Import qilinadigan narsalarning aniq ro'yxati qisqartirilgan ismlarni beradi: `lib.sayHi()` o'rniga `sayHi()`.
+3. Aniq import kod tuzilishi haqida yaxshiroq ma'lumot beradi: nima ishlatiladi va qayerda. Bu kodni qo'llab-quvvatlash va qayta ishlashni osonlashtiradi.
 
-## Import "as"
+## Import "qanday qilib"
 
-We can also use `as` to import under different names.
+Shuningdek, biz turli xil nomlar ostida import qilish uchun `as` dan foydalanishimiz mumkin.
 
-For instance, let's import `sayHi` into the local variable `hi` for brevity, and same for `sayBye`:
+Masalan, qisqacha uchun `sayHi` ni mahalliy `hi` o'zgaruvchaniga, `sayBye` uchun ham import qilaylik:
 
 ```js
 // 📁 main.js
@@ -126,15 +126,15 @@ For instance, let's import `sayHi` into the local variable `hi` for brevity, and
 import {sayHi as hi, sayBye as bye} from './say.js';
 */!*
 
-hi('John'); // Hello, John!
-bye('John'); // Bye, John!
+hi('John'); // Salom, John!
+bye('John'); // Hayir, John!
 ```
 
-## Export "as"
+## Eksport "qanday qilib"
 
-The similar syntax exists for `export`.
+Shunga o'xshash sintaksis `export` uchun mavjud.
 
-Let's export functions as `hi` and `bye`:
+Keling, funktsiyalarni `hi` va `bye` sifatida eksport qilaylik:
 
 ```js
 // 📁 say.js
@@ -142,107 +142,107 @@ Let's export functions as `hi` and `bye`:
 export {sayHi as hi, sayBye as bye};
 ```
 
-Now `hi` and `bye` are official names for outsiders:
+Endi `hi` va `bye` - bu begonalarning rasmiy ismlari:
 
 ```js
 // 📁 main.js
 import * as say from './say.js';
 
-say.hi('John'); // Hello, John!
-say.bye('John'); // Bye, John!
+say.hi('John'); // Salom, John!
+say.bye('John'); // Hayir, John!
 ```
 
-## export default
+## Standart eksport
 
-So far, we've seen how to import/export multiple things, optionally "as" other names.
+Hozirgacha biz bir nechta narsalarni qanday qilib import/eksport qilishni ko'rdik, ixtiyoriy ravishda boshqa ismlar "sifatida".
 
-In practice, modules contain either:
-- A library, pack of functions, like `lib.js`.
-- Or an entity, like `class User` is described in `user.js`, the whole module has only this class.
+Amalda, modullar quyidagilarni o'z ichiga oladi:
+- `lib.js` kabi kutubxona, funktsiyalar to'plami.
+- Yoki `user.js` da `class User` singari obyekt, butun modulda faqat shu klass mavjud.
 
-Mostly, the second approach is preferred, so that every "thing" resides in its own module.
+Har bir "narsa" o'z modulida joylashgan bo'lishi uchun, asosan, ikkinchi yondashuvga ustunlik beriladi.
 
-Naturally, that requires a lot of files, as everything wants its own module, but that's not a problem at all. Actually, code navigation becomes easier, if files are well-named and structured into folders.
+Tabiiyki, bu juda ko'p fayllarni talab qiladi, chunki hamma narsa o'z modulini xohlaydi, ammo bu umuman muammo emas. Aslida, fayllar yaxshi nomlangan va papkalarga tuzilgan bo'lsa, kodni boshqarish osonroq bo'ladi.
 
-Modules provide special `export default` syntax to make "one thing per module" way look better.
+"Modulda bitta narsa" ko'rinishini yaxshilash uchun modullar `standart eksport` sintaksisini taqdim etadi.
 
-It requires following `export` and `import` statements:
+Buning uchun `export` va `import` so'zlari kerak:
 
-1. Put `export default` before the "main export" of the module.
-2. Call `import` without curly braces.
+1. Modulning "asosiy eksporti" oldidan `standart eksporti` qo'ying.
+2. Jingalak qavslarsiz `import` ni chaqirish.
 
-For instance, here `user.js` exports `class User`:
+Masalan, bu yerda `user.js` `class User` ni eksport qiladi:
 
 ```js
 // 📁 user.js
-export *!*default*/!* class User { // just add "default"
+export *!*default*/!* class User { // faqat qo'shing "default"
   constructor(name) {
     this.name = name;
   }
 }
 ```
 
-...And `main.js` imports it:
+...Va `main.js` uni import qiladi:
 
 ```js
 // 📁 main.js
-import *!*User*/!* from './user.js'; // not {User}, just User
+import *!*User*/!* from './user.js'; // {User} emas, balki User
 
 new User('John');
 ```
 
-Imports without curly braces look nicer. A common mistake when starting to use modules is to forget curly braces at all. So, remember, `import` needs curly braces for named imports and doesn't need them for the default one.
+Jingalak qavssiz import yanada chiroyli ko'rinishga ega. Modullardan foydalanishni boshlashda keng tarqalgan xato bu jingalak qavslarni umuman unutishdir. Esda tutingki, `import` nomlangan import uchun jingalak qavslarga muhtoj va ularni asl qiymati uchun kerak emas.
 
-| Named export | Default export |
+| Nomlangan eksport | Standart eksport |
 |--------------|----------------|
 | `export class User {...}` | `export default class User {...}` |
 | `import {User} from ...` | `import User from ...`|
 
-Naturally, there may be only one "default" export per file.
+Tabiiyki, bitta faylga bitta "standart" eksport bo'lishi mumkin.
 
-We may have both default and named exports in a single module, but in practice people usually don't mix them. A module has either named exports or the default one.
+Biz bitta modulda ham standart, ham nomlangan eksportga ega bo'lishimiz mumkin, ammo amalda odamlar odatda ularni aralashtirmaydilar. Modulda nomlangan yoki standart eksport bor.
 
-**Another thing to note is that named exports must (naturally) have a name, while `export default` may be anonymous.**
+**Shuni ta'kidlash kerakki, nomlangan eksportlar (tabiiy ravishda) nomga ega bo'lishi kerak, `standart eksport` esa noma'lum bo'lishi mumkin.**
 
-For instance, these are all perfectly valid default exports:
+Masalan, bularning barchasi to'liq amal qiladigan standart eksport:
 
 ```js
-export default class { // no class name
+export default class { // klass nomi yo'q
   constructor() { ... }
 }
 
-export default function(user) { // no function name
-  alert(`Hello, ${user}!`);
+export default function(user) { // funktsiya nomi yo'q
+  alert(`Salom, ${user}!`);
 }
 
-// export a single value, without making a variable
+// o'zgarmaydigan holda bitta qiymatni eksport qilish
 export default ['Jan', 'Feb', 'Mar','Apr', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 ```
 
-That's fine, because `export default` is only one per file, so `import` always knows what to import.
- Contrary to that, omitting a name for named imports would be an error:
+Bu juda yaxshi, chunki `standart eksport` har bir fayl uchun bittadan, shuning uchun `import` har doim nimani import qilishni biladi.
+  Buning aksincha, nomlangan import uchun nomni tashlab qo'yish xato bo'ladi:
 
 ```js
-export class { // Error! (non-default export needs a name)
+export class { // Xato! (standart bo'lmagan eksport uchun nom kerak)
   constructor() {}
 }
 ```     
 
-### "Default" alias
+### "Standart" taxallus
 
-The "default" word is a kind of "alias" for the default export, for scenarios when we need to reference it somehow.
+"Default" so'zi sukut bo'yicha eksport qilish uchun biron bir "taxallus" dir, biz unga qandaydir murojaat qilishimiz kerak bo'lganda ishlatamiz.
 
-For example, if we already have a function declared, that's how to `export default` it:
+Masalan, agar bizda allaqachon e'lon qilingan funktsiya mavjud bo'lsa, uni qanday qilib `standart eksport` qilish mumkin:
 
 ```js
 function sayHi(user) {
-  alert(`Hello, ${user}!`);
+  alert(`Salom, ${user}!`);
 }
 
-export {sayHi as default}; // same as if we added "export default" before the function
+export {sayHi as default}; // xuddi biz funktsiyadan oldin "standart eksportni" qo'shganimiz bilan bir xil
 ```
 
-Or, let's say a module `user.js` exports one main "default" thing and a few named ones (rarely the case, but happens):
+Yoki, deylik `user.js` moduli bitta asosiy "standart" narsani va bir nechta nomlangan narsalarni eksport qiladi (kamdan-kam hollarda bo'ladi, lekin shunday):
 
 ```js
 // 📁 user.js
@@ -253,11 +253,11 @@ export default class User {
 }
 
 export function sayHi(user) {
-  alert(`Hello, ${user}!`);
+  alert(`Salom, ${user}!`);
 }
 ```
 
-Here's how to import the default export along with a named one:
+Standart eksportni nomi bilan birga qanday import qilish mumkin:
 
 ```js
 // 📁 main.js
@@ -266,7 +266,7 @@ import {*!*default as User*/!*, sayHi} from './user.js';
 new User('John');
 ```
 
-Or, if we consider importing `*` as an object, then the `default` property is exactly the default export:
+Yoki `*` ni obyekt sifatida import qilishni ko'rib chiqsak, u holda `default` xususiyati asl eksport hisoblanadi:
 
 ```js
 // 📁 main.js
@@ -277,27 +277,27 @@ new User('John');
 ```
 
 
-### Should I use default exports?
+### Standart eksportdan foydalanishimiz kerakmi?
 
-One should be careful about using default exports, because they are somewhat more different to maintain.
+Standart eksportdan foydalanishda ehtiyot bo'lish kerak, chunki ularni saqlab qolish biroz boshqacha.
 
-Named exports are explicit. They exactly name what they import, so we have that information from them, that's a good thing.
+Nomlangan eksport aniq. Ular import qilgan narsalarini aniq nomlashadi, shuning uchun bizda ulardan ma'lumot bor, bu yaxshi narsa.
 
-Also, named exports enforce us to use exactly the right name to import:
+Shuningdek, nomlangan eksport bizni import qilish uchun to'g'ri nomdan foydalanishga majbur qiladi:
 
 ```js
 import {User} from './user.js';
 ```
 
-For default exports, we need to create a name on our own:
+Standart eksport uchun biz o'zimiz nom yaratishimiz kerak:
 
 ```js
-import MyUser from './user.js'; // could be import Anything..., and it'll work
+import MyUser from './user.js'; // import Anywhere ... bo'lishi mumkin va u ishlaydi
 ```
 
-So, there's a little bit more freedom that can be abused, so that team members may use different names for the same thing.
+Shunday qilib, jamoa a'zolari bitta narsa uchun turli xil nomlarni ishlatishlari uchun biroz ko'proq erkinlik ishlatilishi mumkin.
 
-Usually, to avoid that and keep the code consistent, there's a rule that imported variables should correspond to file names, e.g:
+Odatda, bunga yo'l qo'ymaslik va kodni izchil saqlash uchun import qilinadigan o'zgaruvchanlar fayl nomlariga mos kelishi kerak bo'lgan qoida mavjud, masalan:
 
 ```js
 import User from './user.js';
@@ -306,24 +306,24 @@ import func from '/path/to/func.js';
 ...
 ```
 
-Another solution would be to use named exports everywhere. Even if only a single thing is exported, it's still exported under a name, without `default`.
+Boshqa bir yechim - hamma joyda nomlangan eksportlardan foydalanish. Faqat bitta narsa eksport qilingan bo'lsa ham, u `default` holda nom ostida eksport qilinadi.
 
-That also makes re-export (see below) a little bit easier.
+Bu shuningdek qayta eksportni (pastga qarang) biroz osonlashtiradi.
 
-## Re-export
+## Qayta eksport
 
-"Re-export" syntax `export ... from ...` allows to import things and immediately export them (possibly under another name), like this:
+"Qayta eksport" sintaksisini `export ... from ...` narsalarni import qilish va ularni darhol eksport qilishga imkon beradi (ehtimol boshqa nom ostida), masalan:
 
 ```js
 export {sayHi} from './say.js';
 export {default as User} from './user.js';
 ```
 
-What's the point, why that's needed? Let's see a practical use case.
+Buning ma'nosi nima, nima uchun bunga ehtiyoj bor? Keling, amaliy foydalanish misolini ko'rib chiqaylik.
 
-Imagine, we're writing a "package": a folder with a lot of modules, mostly needed internally, with some of the functionality exported outside (tools like NPM allow to publish and distribute packages, but here it doesn't matter).
+Tasavvur qiling, biz "paket" yozmoqdamiz: ko'pgina modullarga ega papka, asosan ichki qismga kerak, ba'zi funktsiyalari tashqariga eksport qilinadi (NPM kabi vositalar paketlarni nashr etish va tarqatishga imkon beradi, ammo bu yerda bu muhim emas).
 
-A directory structure could be like this:
+Direkrora tuzilishi shunday bo'lishi mumkin:
 ```
 auth/
   index.js  
@@ -337,15 +337,15 @@ auth/
     ...
 ```
 
-We'd like to expose the package functionality via a single entry point, the "main file" `auth/index.js`, to be used like this:
+Paketning ishlashini bitta kirish nuqtasi, ya'ni `auth/index.js` "asosiy fayl" orqali quyidagi tarzda ishlatishni istaymiz:
 
 ```js
 import {login, logout} from 'auth/index.js'
 ```
 
-The idea is that outsiders, developers who use our package, should not meddle with its internal structure. They should not search for files inside our package folder. We export only what's necessary in `auth/index.js` and keep the rest hidden from prying eyes.
+G'oya shundan iboratki, bizning paketimizdan foydalanadigan begonalar, ishlab chiquvchilar uning ichki tuzilishiga aralashmasliklari kerak. Ular bizning paket papkamizdagi fayllarni qidirmasliklari kerak. Biz faqat `auth/index.js` da kerakli narsalarni eksport qilamiz va qolganlarini qiziquvchan ko'zlardan yashiramiz.
 
-Now, as the actual exported functionality is scattered among the package, we can gather and "re-export" it in `auth/index.js`:
+Endi, haqiqiy eksport qilingan funktsiyalar paket orasida tarqalib ketganligi sababli, biz uni `auth/index.js` da to'plashimiz va "qayta eksport" qilishimiz mumkin:
 
 ```js
 // 📁 auth/index.js
@@ -360,12 +360,12 @@ export {Github};
 ...
 ```
 
-"Re-exporting" is just a shorter notation for that:
+"Qayta eksport" bu shunchaki qisqartirilgan belgi:
 
 ```js
 // 📁 auth/index.js
 export {login, logout} from './helpers.js';
-// or, to re-export all helpers, we could use:
+// yoki barcha yordamchilarni qayta eksport qilish uchun foydalanishimiz mumkin:
 // export * from './helpers.js';
 
 export {default as User} from './user.js';
@@ -374,65 +374,65 @@ export {default as Github} from './providers/github.js';
 ...
 ```
 
-````warn header="Re-exporting default is tricky"
-Please note: `export User from './user.js'` won't work. It's actually a syntax error. To re-export the default export, we must mention it explicitly `{default as ...}`, like in the example above.
+````warn header="Qayta eksport qilish juda qiyin"
+Iltimos, diqqat qiling: `export User from './user.js'` ishlamaydi. Bu aslida sintaksis xatosi. Standart eksportni qayta eksport qilish uchun uni yuqoridagi misolda bo'lgani kabi `{default as ...}` deb aniq aytib o'tishimiz kerak.
 
-Also, there's another oddity: `export * from './user.js'` re-exports only named exports, exluding the default one. Once again, we need to mention it explicitly.
+Bundan tashqari, yana bir g'alati narsa bor: `export * from './user.js'` standart eksportdan tashqari faqat nomlangan eksportni qayta eksport qiladi. Yana bir bor buni aniq aytib o'tishimiz kerak.
 
-For instance, to re-export everything, two statements will be necessary:
+Masalan, hamma narsani qayta eksport qilish uchun ikkita ifoda kerak bo'ladi:
 ```js
-export * from './module.js'; // to re-export named exports
-export {default} from './module.js'; // to re-export default
+export * from './module.js'; // nomlangan eksportni qayta eksport qilish
+export {default} from './module.js'; // standart qayta eksport qilish
 ```
 
-The default should be mentioned explicitly only when re-exporting: `import * as obj` works fine. It imports the default export as `obj.default`. So there's a slight asymmetry between import and export constructs here.
+Sukut bo'yicha faqat qayta eksport qilishda aniq ko'rsatilishi kerak: `import * as obj` yaxshi ishlaydi. Standart eksportni `obj.default` sifatida import qiladi. Shunday qilib, bu yerda import va eksport konstruktsiyalari o'rtasida bir oz assimetriya mavjud.
 ````
 
-## Summary
+## Xulosa
 
-There are following types of `export`:
+`Eksportning` quyidagi turlari mavjud:
 
-- Before declaration:
+- Deklaratsiyadan oldin:
   - `export [default] class/function/variable ...`
-- Standalone:
+- Mustaqil:
   - `export {x [as y], ...}`.
-- Re-export:
+- Qayta eksport:
   - `export {x [as y], ...} from "mod"`
-  - `export * from "mod"` (doesn't re-export default).
-  - `export {default [as y]} from "mod"` (re-export default).
+  - `export * from "mod"` (sukut bo'yicha qayta eksport qilmaydi).
+  - `export {default [as y]} from "mod"` (standart qayta eksport qilish).
 
 Import:
 
-- Named exports from module:
+- Moduldan nomlangan eksport:
   - `import {x [as y], ...} from "mod"`
-- Default export:  
+- Standart eksport: 
   - `import x from "mod"`
   - `import {default as x} from "mod"`
-- Everything:
+- Hammasi:
   - `import * as obj from "mod"`
-- Only fetch/evalute the module, don't import:
+- Faqat modulni olib keling/baholang, import qilmang:
   - `import "mod"`
 
-We can put import/export statements below or after other code, that doesn't matter.
+Import/eksport ifodalarini boshqa kodning ostiga yoki undan keyin qo'yishimiz mumkin, bu muhim emas.
 
-So this is technically fine:
+Shunday qilib, bu texnik jihatdan yaxshi:
 ```js
 sayHi();
 
-import {sayHi} from './say.js'; // import at the end of the file
+import {sayHi} from './say.js'; // fayl oxirida import qilish
 ```
 
-In practice imports are usually at the start of the file, but that's only for better convenience.
+Amalda import odatda faylning boshida bo'ladi, lekin bu faqat qulaylik uchun.
 
-**Please note that import/export statements don't work if inside `{...}`.**
+**`{...}` ichida import/eksport ifodalari ishlamayotganligini unutmang.**
 
-A conditional import, like this, won't work:
+Shunga o'xshash shartli import ishlamaydi:
 ```js
 if (something) {
-  import {sayHi} from "./say.js"; // Error: import must be at top level
+  import {sayHi} from "./say.js"; // Xato: import yuqori darajada bo'lishi kerak
 }
 ```
 
-...But what if we really need to import something conditionally? Or at the right time? Like, load a module upon request, when it's really needed?
+...Ammo, albatta, biror narsani shartli ravishda import qilishimiz kerak bo'lsachi? Yoki o'z vaqtida? Shunga o'xshab, modulni iltimosiga binoan yuklang, qachon kerak bo'lsa.
 
-We'll see dynamic imports in the next chapter.
+Dinamik importni keyingi bobda ko'rib chiqamiz.

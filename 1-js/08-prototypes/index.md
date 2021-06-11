@@ -1,1 +1,1 @@
-# Prototypes, inheritance
+# Prototiplar, meros

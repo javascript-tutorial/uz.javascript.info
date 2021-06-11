@@ -1,37 +1,37 @@
 describe("getMaxSubSum", function() {
-  it("maximal subsum of [1, 2, 3] equals 6", function() {
+  it("[1, 2, 3] ning maksimal subsummasi 6 ga teng", function() {
     assert.equal(getMaxSubSum([1, 2, 3]), 6);
   });
 
-  it("maximal subsum of [-1, 2, 3, -9] equals 5", function() {
+  it("[-1, 2, 3, -9] ning maksimal subsummasi 5 ga teng", function() {
     assert.equal(getMaxSubSum([-1, 2, 3, -9]), 5);
   });
 
-  it("maximal subsum of [-1, 2, 3, -9, 11] equals 11", function() {
+  it("[-1, 2, 3, -9, 11] ning maksimal subsummasi 11 ga teng", function() {
     assert.equal(getMaxSubSum([-1, 2, 3, -9, 11]), 11);
   });
 
-  it("maximal subsum of [-2, -1, 1, 2] equals 3", function() {
+  it("[-2, -1, 1, 2] ning maksimal subsummasi 3 ga teng", function() {
     assert.equal(getMaxSubSum([-2, -1, 1, 2]), 3);
   });
 
-  it("maximal subsum of [100, -9, 2, -3, 5] equals 100", function() {
+  it("[100, -9, 2, -3, 5] ning maksimal subsummasi 100 ga teng", function() {
     assert.equal(getMaxSubSum([100, -9, 2, -3, 5]), 100);
   });
 
-  it("maximal subsum of [] equals 0", function() {
+  it("[] ning maksimal subsummasi 0 ga teng", function() {
     assert.equal(getMaxSubSum([]), 0);
   });
 
-  it("maximal subsum of [-1] equals 0", function() {
+  it("[-1] ning maksimal subsummasi 0 ga teng", function() {
     assert.equal(getMaxSubSum([-1]), 0);
   });
 
-  it("maximal subsum of [-1, -2] equals 0", function() {
+  it("[-1, -2] ning maksimal subsummasi 0 ga teng", function() {
     assert.equal(getMaxSubSum([-1, -2]), 0);
   });
 
-  it("maximal subsum of [2, -8, 5, -1, 2, -3, 2] equals 6", function() {
+  it("[2, -8, 5, -1, 2, -3, 2] ning maksimal subsummasi 6 ga teng", function() {
     assert.equal(getMaxSubSum([2, -8, 5, -1, 2, -3, 2]), 6);
   });
 });

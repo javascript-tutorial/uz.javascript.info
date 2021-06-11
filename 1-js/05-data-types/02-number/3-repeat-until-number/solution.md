@@ -4,7 +4,7 @@ function readNumber() {
   let num;
 
   do {
-    num = prompt("Enter a number please?", 0);
+    num = prompt("Iltimos raqam kiriting?", 0);
   } while ( !isFinite(num) );
 
   if (num === null || num === '') return null;
@@ -15,9 +15,9 @@ function readNumber() {
 alert(`Read: ${readNumber()}`);
 ```
 
-The solution is a little bit more intricate that it could be because we need to handle `null`/empty lines.
+Yechim biroz murakkabroq, chunki biz `null`/bo'sh satrlarni boshqarishimiz kerak.
 
-So we actually accept the input until it is a "regular number". Both `null` (cancel) and empty line also fit that condition, because in numeric form they are `0`.
+Shunday qilib, biz "raqam" bo'lguncha kirishni qabul qilamiz. Ikkala `null` (bekor qilish) va bo'sh satr ham ushbu shartga mos keladi, chunki raqamli shaklda ular `0` dir.
 
-After we stopped, we need to treat `null` and empty line specially (return `null`), because converting them to a number would return `0`.
+To'xtaganimizdan so'ng, biz `null` va bo'sh satrga maxsus ishlov berishimiz kerak (`null` ni qaytarish), chunki ularni raqamga aylantirish `0` ga teng.
 

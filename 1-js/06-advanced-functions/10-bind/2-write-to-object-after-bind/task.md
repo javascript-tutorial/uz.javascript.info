@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Bound function as a method
+# Funktsiyani usul sifatida bog'lang 
 
-What will be the output?
+Chiqish qanday bo'ladi?
 
 ```js
 function f() {

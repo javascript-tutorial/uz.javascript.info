@@ -2,18 +2,18 @@ importance: 3
 
 ---
 
-# Is array copied?
+# Massiv ko'chiriladimi?
 
-What is this code going to show?
+Ushbu kod nimani ko'rsatishi kerak?
 
 ```js
-let fruits = ["Apples", "Pear", "Orange"];
+let fruits = ["Olamalar", "Nok", "Apelsin"];
 
-// push a new value into the "copy"
+// yangi qiymatni "nusxaga" ga qo'shish
 let shoppingCart = fruits;
-shoppingCart.push("Banana");
+shoppingCart.push("Banan");
 
-// what's in fruits?
+// fruits ning ichida nma bor?
 alert( fruits.length ); // ?
 ```
 

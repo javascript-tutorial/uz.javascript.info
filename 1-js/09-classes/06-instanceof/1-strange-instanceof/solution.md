@@ -1,7 +1,7 @@
-Yeah, looks strange indeed.
+Ha, haqiqatan ham g'alati ko'rinadi.
 
-But `instanceof` does not care about the function, but rather about its `prototype`, that it matches against the prototype chain.
+Ammo `instanceof` funktsiyaga ahamiyat bermaydi, aksincha uning `prototype`, prototip zanjiriga mos kelishi muhim.
 
-And here `a.__proto__ == B.prototype`, so `instanceof` returns `true`.
+Va bu yerda `a.__proto__ == B.prototype`, shuning uchun `instanceof` `true` ni qaytaradi.
 
-So, by the logic of `instanceof`, the `prototype` actually defines the type, not the constructor function.
+Shunday qilib, `instanceof` mantig'iga ko'ra, `prototype` aslida konstruktor funktsiyasini emas, balki turini belgilaydi.

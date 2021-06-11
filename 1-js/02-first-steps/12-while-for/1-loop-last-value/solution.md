@@ -1,4 +1,4 @@
-The answer: `1`.
+Javob: `1`.
 
 ```js run
 let i = 3;
@@ -8,18 +8,18 @@ while (i) {
 }
 ```
 
-Every loop iteration decreases `i` by `1`. The check `while(i)` stops the loop when `i = 0`.
+Har bir tsiklning takrorlanishida `i` `1` ga kamayadi. `While(i)` tekshiruvi, `i = 0` bo'lganda tsiklni to'xtatadi.
 
-Hence, the steps of the loop form the following sequence ("loop unrolled"):
+Demak, tsiklning qadamlari quyidagi ketma-ketlikni hosil qiladi:
 
 ```js
 let i = 3;
 
-alert(i--); // shows 3, decreases i to 2
+alert(i--); // 3 ni ko'rsatadi, i ni 2 ga kamaytiradi
 
-alert(i--) // shows 2, decreases i to 1
+alert(i--) // 2 ni ko'rsatadi, i ni 1 ga kamaytiradi
 
-alert(i--) // shows 1, decreases i to 0
+alert(i--) // 1 ni ko'rsatadi, i ni 0 ga kamaytiradi
 
-// done, while(i) check stops the loop
+// tugadi, while(i) tekshuruvi esa tsiklni to'xtatadi
 ```

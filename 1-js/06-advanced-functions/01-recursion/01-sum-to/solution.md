@@ -1,4 +1,4 @@
-The solution using a loop:
+Tsikl yordamidagi yechim:
 
 ```js run
 function sumTo(n) {
@@ -12,7 +12,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using recursion:
+Rekursiyadan foydalangan holdagi yechim:
 
 ```js run
 function sumTo(n) {
@@ -23,7 +23,7 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-The solution using the formula: `sumTo(n) = n*(n+1)/2`:
+Formuladan foydalangan holdagi yechim: `sumTo(n) = n*(n+1)/2`:
 
 ```js run
 function sumTo(n) {
@@ -33,8 +33,8 @@ function sumTo(n) {
 alert( sumTo(100) );
 ```
 
-P.S. Naturally, the formula is the fastest solution. It uses only 3 operations for any number `n`. The math helps!
+P.S. Tabiiyki, formulalar eng tezkor yechimdir. Har qanday `n` raqami uchun atigi 3 ta operatsiyadan foydalaniladi. Matematika yordam beradi!
 
-The loop variant is the second in terms of speed. In both the recursive and the loop variant we sum the same numbers. But the recursion involves nested calls and execution stack management. That also takes resources, so it's slower.
+Tsikl varianti tezligi bo'yicha ikkinchi o'rinda turadi. Rekursiv va tsikl variantida biz bir xil sonlarni qo'shamiz. Ammo rekursiya ichki o'rnatilgan qo'ng'iroqlarni va ijro stekini boshqarishni o'z ichiga oladi. Bu shuningdek resurslarni talab qiladi, shuning uchun bu sekinroq.
 
-P.P.S. The standard describes a "tail call" optimization: if the recursive call is the very last one in the function (like in `sumTo` above), then the outer function will not need to resume the execution and we don't need to remember its execution context. In that case `sumTo(100000)` is countable. But if your JavaScript engine does not support it, there will be an error: maximum stack size exceeded, because there's usually a limitation on the total stack size.
+P.P.S. Standart "quyruq chaqiruvini" optimallashtirishni tavsiflaydi: agar rekursiv chaqiruv funktsiyadagi eng so'nggi (yuqoridagi `sumTo` kabi) bo'lsa, tashqi funktsiya bajarilishini davom ettirishga hojat qolmaydi va biz uning bajarilish konteksti eslashimiz shart emas. Bunday holda `sumTo(100000)` hisoblash mumkin. Ammo agar sizning JavaScript-ni interpretaori qo'llab-quvvatlamasa, unda xato bo'ladi: maksimal to'plam hajmi oshib ketdi, chunki odatda to'plamning umumiy hajmida cheklov mavjud.

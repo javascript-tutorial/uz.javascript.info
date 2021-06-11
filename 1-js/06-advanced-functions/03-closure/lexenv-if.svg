@@ -32,7 +32,7 @@
             <g id="Group-3" transform="translate(469.000000, 63.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="142" height="28"></rect>
                 <text id="phrase:-&quot;Hello&quot;" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="10" y="18.5">phrase: "Hello"</tspan>
+                    <tspan x="10" y="18.5">phrase: "Salom"</tspan>
                 </text>
             </g>
             <g id="Group-5" transform="translate(276.000000, 45.000000)" stroke="#EE6B47" stroke-linecap="square">
@@ -46,13 +46,13 @@
             <g id="Group" transform="translate(622.000000, 58.000000)">
                 <path id="Line" d="M16.5,23.5 L2.5,23.5 L2.5,21.5 L16.5,21.5 L16.5,15.5 L30.5,22.5 L16.5,29.5 L16.5,23.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <g id="Group-Copy" transform="translate(417.000000, 58.000000)">
                 <path id="Line" d="M16.5,23.5 L2.5,23.5 L2.5,21.5 L16.5,21.5 L16.5,15.5 L30.5,22.5 L16.5,29.5 L16.5,23.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <text id="null" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
@@ -61,7 +61,7 @@
             <g id="Group-3" transform="translate(303.000000, 63.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="106" height="28"></rect>
                 <text id="user:-&quot;John&quot;" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="5" y="18.5102041">user: "John"</tspan>
+                    <tspan x="5" y="18.5102041">user: "Oybek"</tspan>
                 </text>
             </g>
         </g>

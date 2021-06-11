@@ -3,13 +3,13 @@
 let num;
 
 do {
-  num = prompt("Enter a number greater than 100?", 0);
+  num = prompt("100 dan katta raqam kiritingizmi?", 0);
 } while (num <= 100 && num);
 ```
 
-The loop `do..while` repeats while both checks are truthy:
+Ikkala tekshiruv ham to'g'ri bo'lsa, `do... while` tsikli takrorlanadi:
 
-1. The check for `num <= 100` -- that is, the entered value is still not greater than `100`.
-2. The check `&& num` is false when `num` is `null` or a empty string. Then the `while` loop stops too.
+1. `num <= 100` tekshiruvi -- ya'ni kiritilgan qiymat hali ham `100` dan katta emas.
+2. `num` `null` yoki bo'sh satr bo'lganda `&& num` tekshiruvi noto'g'ri. Agar tekshuruv noto'g'ri bolsa `while` tsikli ham to'xtaydi.
 
-P.S. If `num` is `null` then `num <= 100` is `true`, so without the 2nd check the loop wouldn't stop if the user clicks CANCEL. Both checks are required.
+P.S. Agar `num` `null` bo'lsa, u holda `num <= 100` haqiqiy bo'ladi, shuning uchun 2-chi tekshiruvsiz foydalanuvchi CANCEL tugmasini bosmaganicha tsikl to'xtamaydi. Ikkala tekshiruv ham talab qilinadi.

@@ -1,52 +1,52 @@
 
-# Function object, NFE
+# Funktsiya obyekti, NFE
 
-As we already know, functions in JavaScript are values.
+Bizga ma'lumki, JavaScript-dagi funktsiyalar qiymatlardir.
 
-Every value in JavaScript has a type. What type is a function?
+JavaScript-dagi har qanday qiymat turga ega. Funktsiya qaysi turga kiradi?
 
-In JavaScript, functions are objects.
+JavaScript-da funktsiyalar obyektlardir.
 
-A good way to imagine functions is as callable "action objects". We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.
+Funktsiyalarni tasavvur qilishning yaxshi usuli - bu chaqiriladigan "harakat obyektlari". Biz ularni nafaqat chaqira olamiz, balki ularni obyektlar sifatida ko'rib chiqishimiz mumkin: xususiyatlarni qo'shish/olib tashlash, ma'lumotnoma orqali o'tish va hk.
 
 
-## The "name" property
+## "name" xususiyati
 
-Function objects contain a few useable properties.
+Funktsiya obyektlari bir nechta ishlatilishi mumkin bo'lgan xususiyatlarni o'z ichiga oladi.
 
-For instance, a function's name is accessible as the "name" property:
+Masalan, funktsiya nomiga "name" xususiyati sifatida kirish mumkin:
 
 ```js run
 function sayHi() {
-  alert("Hi");
+  alert("Salom");
 }
 
 alert(sayHi.name); // sayHi
 ```
 
-What's more funny, the name-assigning logic is smart. It also assigns the correct name to functions that are used in assignments:
+Qizig'i shundaki, nom berish mantiqi juda aqlli. Shuningdek, tayinlashda ishlatiladigan funktsiyalarga to'g'ri nom beriladi:
 
 ```js run
 let sayHi = function() {
-  alert("Hi");
+  alert("Salom");
 }
 
-alert(sayHi.name); // sayHi (works!)
+alert(sayHi.name); // sayHi (ishlaydi!)
 ```
 
-It also works if the assignment is done via a default value:
+Agar tayinlash oldingan berilgan qiymat orqali bajarilgan bo'lsa, u ham ishlaydi:
 
 ```js run
 function f(sayHi = function() {}) {
-  alert(sayHi.name); // sayHi (works!)
+  alert(sayHi.name); // sayHi (ishlaydi!)
 }
 
 f();
 ```
 
-In the specification, this feature is called a "contextual name". If the function does not provide one, then in an assignment it is figured out from the context.
+Spetsifikatsiyada ushbu xususiyat "kontekstual ism" deb nomlanadi. Agar funktsiya uni ta'minlamasa, topshiriqda u kontekstdan aniqlanadi.
 
-Object methods have names too:
+Obyekt usullari ham nomlarga ega:
 
 ```js run
 let user = {
@@ -65,21 +65,21 @@ alert(user.sayHi.name); // sayHi
 alert(user.sayBye.name); // sayBye
 ```
 
-There's no magic though. There are cases when there's no way to figure out the right name. In that case, the name property is empty, like here:
+Bunda hech sehr yo'q. To'g'ri ismni aniqlashning imkoni bo'lmagan holatlar ham mavjud. Bunday holda, ism xususiyati bo'sh, masalan:
 
 ```js
-// function created inside array
+// massiv ichida yaratilgan funktsiya
 let arr = [function() {}];
 
-alert( arr[0].name ); // <empty string>
-// the engine has no way to set up the right name, so there is none
+alert( arr[0].name ); // <bo'sh matn>
+// interpretatorda to'g'ri nomni o'rnatish imkoniyati yo'q, shuning uchun bo'sh
 ```
 
-In practice, however, most functions do have a name.
+Amalda esa aksariyat funktsiyalarning nomi bor.
 
-## The "length" property
+## "length" xususiyati
 
-There is another built-in property "length" that returns the number of function parameters, for instance:
+Funktsiya parametrlari sonini qaytaradigan yana bir "length" xususiyati mavjud, masalan:
 
 ```js run
 function f1(a) {}
@@ -91,20 +91,20 @@ alert(f2.length); // 2
 alert(many.length); // 2
 ```
 
-Here we can see that rest parameters are not counted.
+Bu erda dam qoldiq parametrlari hisoblanmaganligini ko'rishimiz mumkin.
 
-The `length` property is sometimes used for introspection in functions that operate on other functions.
+`length` xususiyati ba'zan boshqa funktsiyalarda ishlaydigan funktsiyalarni introspektsiya qilish uchun ishlatiladi.
 
-For instance, in the code below the `ask` function accepts a `question` to ask and an arbitrary number of `handler` functions to call.
+Masalan, quyida joylashgan kodda `ask` funktsiyasi so'raladigan savolni va chaqiruv qilish uchun tasodifiy sonlarni qabul qiladi.
 
-Once a user provides their answer, the function calls the handlers. We can pass two kinds of handlers:
+Agar foydalanuvchi o'z javobini taqdim qilsa, funktsiya ishlovchilarni chaqiradi. Ikki xil ishlov beruvchidan o'tishimiz mumkin:
 
-- A zero-argument function, which is only called when the user gives a positive answer.
-- A function with arguments, which is called in either case and returns an answer.
+- Nol-argumentli funktsiya, bu faqat foydalanuvchi ijobiy javob berganida chaqiriladi.
+- Ikkala holatda ham chaqiriladigan va javobni qaytaradigan argumentlarga ega funktsiya.
 
-The idea is that we have a simple, no-arguments handler syntax for positive cases (most frequent variant), but are able to provide universal handlers as well.
+Ushbu g'oya shundaki, bizda ijobiy holatlar uchun argumentlarsiz ishlov beruvchi sintaksis mavjud (eng tez-tez uchraydigan variant), lekin universal ishlovchilarni ham taqdim etishga qodir.
 
-To call `handlers` the right way, we examine the `length` property:
+`handlers` ni to'g'ri chaqirish uchun biz `length` xususiyatini ko'rib chiqamiz:
 
 ```js run
 function ask(question, ...handlers) {
@@ -120,43 +120,43 @@ function ask(question, ...handlers) {
 
 }
 
-// for positive answer, both handlers are called
-// for negative answer, only the second one
-ask("Question?", () => alert('You said yes'), result => alert(result));
+// ijobiy javob uchun ikkala ishlovchilar ham chaqiriladi
+// salbiy javob uchun faqat ikkinchisi
+ask("Savol?", () => alert('Siz ha dedingiz'), result => alert(result));
 ```
 
-This is a particular case of so-called [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) -- treating arguments differently depending on their type or, in our case depending on the `length`. The idea does have a use in JavaScript libraries.
+Bu [polimorfizm](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)) deb nomlangan alohida holat -- argumentlarni turiga qarab turlicha muomala qilish, yoki bizda `length` ga qarab. Ushbu g'oya JavaScript-ni kutubxonalarida ishlatilishi mumkin.
 
-## Custom properties
+## Maxsus xususiyatlar
 
-We can also add properties of our own.
+Biz o'zimizga xos xususiyatlarni ham qo'shishimiz mumkin.
 
-Here we add the `counter` property to track the total calls count:
+Bu erda biz chaqiruvlarning umumiy sonini kuzatib borish uchun `counter` xususiyatini qo'shamiz:
 
 ```js run
 function sayHi() {
   alert("Hi");
 
   *!*
-  // let's count how many times we run
+  // keling, necha marta bajarilganini hisoblaymiz
   sayHi.counter++;
   */!*
 }
-sayHi.counter = 0; // initial value
+sayHi.counter = 0; // boshlang'ich qiymati
 
 sayHi(); // Hi
 sayHi(); // Hi
 
-alert( `Called ${sayHi.counter} times` ); // Called 2 times
+alert( `Called ${sayHi.counter} times` ); // 2 marta chaqirildi
 ```
 
-```warn header="A property is not a variable"
-A property assigned to a function like `sayHi.counter = 0` does *not* define a local variable `counter` inside it. In other words, a property `counter` and a variable `let counter` are two unrelated things.
+```warn header="Xususiyat o'zgaruvchan emas"
+`sayHi.counter = 0` kabi funktsiyaga tayinlangan xususiyat ichida `counter` mahalliy o'zgaruvchanni *aniqlamaydi*. Boshqacha qilib aytganda, xususiyat `counter` va `let counter` - bu o'zaro bog'liq bo'lmagan ikkita narsa.
 
-We can treat a function as an object, store properties in it, but that has no effect on its execution. Variables never use function properties and vice versa. These are just parallel worlds.
+Biz funktsiyani obyekt sifatida ko'rib chiqishimiz, unda xususiyatlarni saqlashimiz mumkin, ammo bu uning bajarilishiga ta'sir qilmaydi. O'zgaruvchanlar hech qachon funktsiya xususiyatlaridan foydalanmaydi va aksincha. Bu shunchaki parallel olamlar.
 ```
 
-Function properties can replace closures sometimes. For instance, we can rewrite the counter function example from the chapter <info:closure> to use a function property:
+Funktsiya xususiyatlari ba'zida yopilishni o'zgartirishi mumkin. Masalan, funktsiya xususiyatidan foydalanish uchun hisoblagich funktsiyasi misolini <info:closure> bobidan qayta yozishimiz mumkin:
 
 ```js run
 function makeCounter() {
@@ -177,11 +177,11 @@ alert( counter() ); // 0
 alert( counter() ); // 1
 ```
 
-The `count` is now stored in the function directly, not in its outer Lexical Environment.
+Endi `counter` tashqi leksik muhitida emas, balki to'g'ridan-to'g'ri funktsiyalarda saqlanadi.
 
-Is it better or worse than using a closure?
+Yopishni ishlatishdan ko'ra yaxshiroqmi yoki yomonmi?
 
-The main difference is that if the value of `count` lives in an outer variable, then external code is unable to access it. Only nested functions may modify it. And if it's bound to a function, then such a thing is possible:
+Asosiy farq shundaki, agar `count` qiymati tashqi o'zgaruvchanda yashasa, tashqi kod unga kira olmaydi. Faqatgina ichki funktsiyalar uni o'zgartirishi mumkin. Agar u funktsiyaga bog'liq bo'lsa, unda bunday narsa bo'lishi mumkin:
 
 ```js run
 function makeCounter() {
@@ -203,86 +203,86 @@ alert( counter() ); // 10
 */!*
 ```
 
-So the choice of implementation depends on our aims.
+Shunday qilib, amalga oshirishni tanlash bizning maqsadlarimizga bog'liq.
 
 ## Named Function Expression
 
-Named Function Expression, or NFE, is a term for Function Expressions that have a name.
+Named Function Expression, yoki NFE, nomi bo'lgan Funktsiya ifodalari uchun atama.
 
-For instance, let's take an ordinary Function Expression:
+Masalan, oddiy funktsiya ifodasini olaylik:
 
 ```js
 let sayHi = function(who) {
-  alert(`Hello, ${who}`);
+  alert(`Salom, ${who}`);
 };
 ```
 
-And add a name to it:
+Va unga ism qo'shaylik:
 
 ```js
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`Salom, ${who}`);
 };
 ```
 
-Did we achieve anything here? What's the purpose of that additional `"func"` name?
+Bu yerda biror narsaga erishdikmi? Ushbu qo'shimcha `"func"` nomining maqsadi nima?
 
-First let's note, that we still have a Function Expression. Adding the name `"func"` after `function` did not make it a Function Declaration, because it is still created as a part of an assignment expression.
+Birinchidan, bizda hali ham funktsiya ifodasi borligini ta'kidlaymiz. `function` dan keyin `"func"` ismining qo'shilishi uni funktsiya deklaratsiyasiga aylantirmadi, chunki u hali ham tayinlash ifodasining bir qismi sifatida yaratilgan.
 
-Adding such a name also did not break anything.
+Bunday nomni qo'shish hech narsani buzmadi.
 
-The function is still available as `sayHi()`:
+Funktsiya hanuzgacha `sayHi()` sifatida mavjud:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
-  alert(`Hello, ${who}`);
+  alert(`Salom, ${who}`);
 };
 
-sayHi("John"); // Hello, John
+sayHi("John"); // Salom, John
 ```
 
-There are two special things about the name `func`:
+`func` nomi haqida ikkita alohida narsa mavjud:
 
-1. It allows the function to reference itself internally.
-2. It is not visible outside of the function.
+1. Bu funktsiya o'ziga havola qilishiga imkon beradi.
+2. Bu funksiya tashqaridan ko'rinmaydi.
 
-For instance, the function `sayHi` below calls itself again with `"Guest"` if no `who` is provided:
+Masalan, quyida joylashgan `sayHi` funktsiyasi yana o'zini `"Mehmon"` bilan chaqiradi, agar chaqirmasa, `who` taqdim etiladi:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Salom, ${who}`);
   } else {
 *!*
-    func("Guest"); // use func to re-call itself
+    func("Mehmon"); // o'zini qayta chaqirish uchun func-dan foydalaning
 */!*
   }
 };
 
-sayHi(); // Hello, Guest
+sayHi(); // Salom, Guest
 
-// But this won't work:
-func(); // Error, func is not defined (not visible outside of the function)
+// Ammo bu ishlamaydi:
+func(); // Error, func is not defined (funktsiya tashqaridan ko'rinmaydi)
 ```
 
-Why do we use `func`? Maybe just use `sayHi` for the nested call?
+Nima uchun `func` dan foydalandik? Ehtimol, ichki chaqiruv uchun `sayHi` dan foydalanamiz?
 
 
-Actually, in most cases we can:
+Darhaqiqat, aksariyat hollarda biz:
 
 ```js
 let sayHi = function(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Salom, ${who}`);
   } else {
 *!*
-    sayHi("Guest");
+    sayHi("Mehmon");
 */!*
   }
 };
 ```
 
-The problem with that code is that the value of `sayHi` may change. The function may go to another variable, and the code will start to give errors:
+Ushbu kod bilan bog'liq muammo shundaki, `sayHi` qiymati o'zgarishi mumkin. Funktsiya boshqa o'zgaruvchanga o'tishi mumkin va kod xatolarga yo'l qo'yishni boshlaydi:
 
 ```js run
 let sayHi = function(who) {
@@ -290,7 +290,7 @@ let sayHi = function(who) {
     alert(`Hello, ${who}`);
   } else {
 *!*
-    sayHi("Guest"); // Error: sayHi is not a function
+    sayHi("Mehmon"); // Error: sayHi is not a function
 */!*
   }
 };
@@ -301,19 +301,19 @@ sayHi = null;
 welcome(); // Error, the nested sayHi call doesn't work any more!
 ```
 
-That happens because the function takes `sayHi` from its outer lexical environment. There's no local `sayHi`, so the outer variable is used. And at the moment of the call that outer `sayHi` is `null`.
+Buning sababi shundaki, funktsiya `sayHi` ni tashqi leksik muhitdan oladi. Mahalliy `sayHi` yo'q, shuning uchun tashqi o'zgaruvchandan foydalaniladi. Chaqiruv paytida tashqi `sayHi` `null`.
 
-The optional name which we can put into the Function Expression is meant to solve exactly these kinds of problems.
+Funktsiya ifodasiga kiritishimiz mumkin bo'lgan ixtiyoriy nom aynan shu turdagi muammolarni hal qilish uchun mo'ljallangan.
 
-Let's use it to fix our code:
+Kodimizni tuzatish uchun undan foydalanamiz:
 
 ```js run
 let sayHi = function *!*func*/!*(who) {
   if (who) {
-    alert(`Hello, ${who}`);
+    alert(`Salom, ${who}`);
   } else {
 *!*
-    func("Guest"); // Now all fine
+    func("Mehmon"); // Endi barchasi yaxshi
 */!*
   }
 };
@@ -321,32 +321,32 @@ let sayHi = function *!*func*/!*(who) {
 let welcome = sayHi;
 sayHi = null;
 
-welcome(); // Hello, Guest (nested call works)
+welcome(); // Salom, Mehmon (ichki chaqiruv ishlamoqda)
 ```
 
-Now it works, because the name `"func"` is function-local. It is not taken from outside (and not visible there). The specification guarantees that it will always reference the current function.
+Endi u ishlaydi, chunki `"func"` nomi funktsional-lokal hisoblanadi. U tashqaridan olinmaydi (va u yerda ko'rinmaydi). Spetsifikatsiya har doim mavjud funktsiyaga murojaat qilishiga kafolat beradi.
 
-The outer code still has it's variable `sayHi` or `welcome`. And `func` is an "internal function name", how the function can call itself internally.
+Tashqi kod hali ham `sayHi` yoki `welcome` o'zgaruvchanga ega. Va `func` - bu "ichki funktsiya nomi", funktsiya o'zini o'zi ichkaridan chaqira oladi.
 
-```smart header="There's no such thing for Function Declaration"
-The "internal name" feature described here is only available for Function Expressions, not to Function Declarations. For Function Declarations, there's just no syntax possibility to add a one more "internal" name.
+```smart header="Funktsiya deklaratsiyasi uchun bunday narsa yo'q"
+Bu yerda tasvirlangan "ichki ism" xususiyati faqat funktsiya ifodalari uchun mavjud, funktsiya deklaratsiyalari uchun emas. Funktsiya deklaratsiyalari uchun yana bitta "ichki" ism qo'shish uchun sintaksis imkoniyati mavjud emas.
 
-Sometimes, when we need a reliable internal name, it's the reason to rewrite a Function Declaration to Named Function Expression form.
+Ba'zan, bizga ishonchli ichki nom kerak bo'lganda, funktsiya deklaratsiyasini nomlangan funktsiya ifodasi shakliga qayta yozish uchun sabab bo'ladi.
 ```
 
-## Summary
+## Xulosa
 
-Functions are objects.
+Funktsiyalar obyektlardir.
 
-Here we covered their properties:
+Bu yerda biz ularning xususiyatlarini ko'rib chiqdik:
 
-- `name` -- the function name. Exists not only when given in the function definition, but also for assignments and object properties.
-- `length` -- the number of arguments in the function definition. Rest parameters are not counted.
+- `name` -- funktsiya nomi. Nafaqat funktsiya ta'rifida berilganida, balki tayinlashlar va obyekt xususiyatlari uchun ham mavjud.
+- `length` -- funktsiya ta'rifidagi argumentlar soni. Qoldiq parametrlari hisoblanmaydi.
 
-If the function is declared as a Function Expression (not in the main code flow), and it carries the name, then it is called a Named Function Expression. The name can be used inside to reference itself, for recursive calls or such.
+Agar funktsiya funktsiya ifodasi deb e'lon qilingan bo'lsa (asosiy kod oqimida emas) va u nomni olib yuradigan bo'lsa, u holda Named Function Expression deyiladi. Ism ichida rekursiv chaqiruvlar yoki shunga o'xshash ma'lumotlarga murojaat qilish uchun ishlatilishi mumkin.
 
-Also, functions may carry additional properties. Many well-known JavaScript libraries make great use of this feature.
+Shuningdek, funktsiyalar qo'shimcha xususiyatlarga ega bo'lishi mumkin. Ko'pgina taniqli JavaScript kutubxonalari ushbu xususiyatdan juda yaxshi foydalanadi.
 
-They create a "main" function and attach many other "helper" functions to it. For instance, the [jquery](https://jquery.com) library creates a function named `$`. The [lodash](https://lodash.com) library creates a function `_`. And then adds `_.clone`, `_.keyBy` and other properties to (see the [docs](https://lodash.com/docs) when you want learn more about them). Actually, they do it to lessen their pollution of the global space, so that a single library gives only one global variable. That reduces the possibility of naming conflicts.
-
-So, a function can do a useful job by itself and also carry a bunch of other functionality in properties.
+Ular "asosiy" funktsiyani yaratadilar va unga boshqa ko'plab "yordamchi" funktsiyalarni biriktiradilar. Masalan, [jquery](https://jquery.com) kutubxonasi `$` nomli funktsiyani yaratadi. [Lodash](https://lodash.com) kutubxonasi `_` funktsiyasini yaratadi. Va keyin ularga `_.clone`, `_.keyBy` va boshqa xususiyatlarni qo'shib qo'yadilar (ular haqida ko'proq ma'lumotga ega bo'lishni xohlagan vaqtingizda [docs](https://lodash.com/docs) ga qarang). Aslida, ular buni global makonning ifloslanishini kamaytirish uchun qilishadi, shuning uchun bitta kutubxona faqat bitta global o'zgaruvchanni beradi. Bu nizolarni nomlash imkoniyatini kamaytiradi.
+ 
+Shunday qilib, funktsiya nafaqat o'z-o'zidan biror narsa qila oladi, balki uning xususiyatlari orqali foydali funksiyalarni ham ta'minlaydi. 

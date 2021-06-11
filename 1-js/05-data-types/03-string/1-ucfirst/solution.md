@@ -1,19 +1,19 @@
-We can't "replace" the first character, because strings in JavaScript are immutable.
+Biz birinchi belgini "o'zgartira olmaymiz", chunki JavaScript-dagi matnlar o'zgarmasdir.
 
-But we can make a new string based on the existing one, with the uppercased first character:
+Ammo biz mavjud bo'lgan matnga asosan birinchi belgini katta registr qilishimiz mumkin:
 
 ```js
 let newStr = str[0].toUpperCase() + str.slice(1);
 ```
 
-There's a small problem though. If `str` is empty, then `str[0]` is undefined, so we'll get an error.
+Ammo kichik bir muammo bor. Agar `str` bo'sh bo'lsa, unda `str[0]` aniqlanmagan(undefined), shuning uchun xato bo'ladi.
 
-There are two variants here:
+Bu yerda ikkita variant mavjud:
 
-1. Use `str.charAt(0)`, as it always returns a string (maybe empty).
-2. Add a test for an empty string.
+1. `str.charAt(0)` dan foydalanish, chunki u har doim matni qaytaradi (ehtimol bo'sh).
+2. Bo'sh satr uchun test qo'shish.
 
-Here's the 2nd variant:
+Mana, ikkinchi variant:
 
 ```js run
 function ucFirst(str) {

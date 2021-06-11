@@ -1,117 +1,118 @@
-# Conditional operators: if, '?'
+# Shartli operatorlar: if, '?'
 
-Sometimes, we need to perform different actions based on different conditions.
+Ba'zan, biz har xil sharoitlarda har xil harakatlarni bajarishimiz kerak.
 
-To do that, we use the `if` statement and the conditional (ternary) operator which we will be referring to as the “question mark” operator `?` for simplicity.
+Buning uchun `if` ifodasidan va "savol belgisi" operatori deb yuritiladigan uchlik operatoridan soddalik uchun foydalanamiz `?`.
 
-## The "if" statement
+## "If" ifodasi
 
-The `if` statement evaluates a condition and, if the condition's result is `true`, executes a block of code.
+`If` ifodasi shartni baholaydi va agar natijaning natijasi `true` bo'lsa, kod blokini bajaradi.
 
-For example:
+Masalan:
 
 ```js run
-let year = prompt('In which year was ECMAScript-2015 specification published?', '');
+let year = prompt('ECMAScript-2015 spetsifikatsiyasi qaysi yilda nashr etilgan??', '');
 
 *!*
-if (year == 2015) alert( 'You are right!' );
+if (year == 2015) alert( 'Siz haqsiz!' );
 */!*
 ```
 
-In the example above, the condition is a simple equality check (`year == 2015`), but it can be much more complex.
+Yuqoridagi misolda shart oddiy tenglikni tekshirish (`yil == 2015`), ammo u ancha murakkab bo'lishi mumkin.
 
-If we want to execute more than one statement, we have to wrap our code block inside curly braces:
+Agar biz bir nechta ifodalarni bajarishni istasak, kod blokimizni jingalak qavs ichiga o'rashimiz kerak:
 
 ```js
 if (year == 2015) {
-  alert( "That's correct!" );
-  alert( "You're so smart!" );
+  alert( "Bu to'g'ri!" );
+  alert( "Siz juda aqllisiz!" );
 }
 ```
 
-We recommend wrapping your code block with curly braces `{}` every time you use an `if` statement, even if there is only one statement to execute. Doing so improves readability.
+Kod blokingizni jingalak qo'shtirnoq bilan o'rashni tavsiya etamiz `{}` har safar `if` ifodadan foydalansangizda, bajarish uchun bitta ifoda bo'lsa ham. Bunday qilish,kodning o'qilishini yaxshilaydi.
 
-## Boolean conversion
+## Mantiqiy malumot turiga konvertatsiya
 
-The `if (…)` statement evaluates the expression in its parentheses and converts the result to a boolean.
+`If(...)` ifodasi uning qavsidagi ifodani baholaydi va natijani mantiqiy holatga o'tkazadi.
 
-Let's recall the conversion rules from the chapter <info:type-conversions>:
+<info:type-convertions> bobidagi konvertatsiya qoidalarini eslaylik:
 
-- A number `0`, an empty string `""`, `null`, `undefined`, and `NaN` all become `false`. Because of that they are called "falsy" values.
-- Other values become `true`, so they are called "truthy".
+- `0` raqami, bo'sh satr `""`,`null`, `undefined` va `NaN` barchasi `false` bo'ladi. Shu sababli ularni "soxta" qiymatlar deb atashadi.
+- Boshqa qiymatlar `true` bo'ladi, shuning uchun ular "aniq" deb nomlanadi.
 
-So, the code under this condition would never execute:
+Shunday qilib, ushbu shartdagi kod hech qachon bajarilmaydi:
 
 ```js
-if (0) { // 0 is falsy
+if (0) { // 0 bu soxta
   ...
 }
 ```
 
-...and inside this condition -- it always will:
+...va bu shart ichida -- bu har doim to'g'ri bo'ladi:
 
 ```js
-if (1) { // 1 is truthy
+if (1) { // 1 bu to'g'ri
   ...
 }
 ```
 
-We can also pass a pre-evaluated boolean value to `if`, like this:
+Bundan tashqari, oldindan baholangan mantiqiy qiymatni `if` ga kiritishingiz mumkin, masalan:
 
 ```js
-let cond = (year == 2015); // equality evaluates to true or false
+let cond = (year == 2015); // tenglik rost yoki yolg'on qiymatini baholaydi
 
 if (cond) {
   ...
 }
 ```
 
-## The "else" clause
+## "Else" ifodasi
 
-The `if` statement may contain an optional "else" block. It executes when the condition is false.
+`If` ifodasi ixtiyoriy `else` blokini o'z ichiga olishi mumkin. U shart noto'g'ri bo'lganida amalga oshiriladi.
 
-For example:
+Masalan:
 ```js run
-let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+let year = prompt('ECMAScript-2015 spetsifikatsiyasi qaysi yilda nashr etilgan?', '');
 
 if (year == 2015) {
-  alert( 'You guessed it right!' );
+  alert( "Siz buni to'g'ri taxmin qildingiz!" );
 } else {
-  alert( 'How can you be so wrong?' ); // any value except 2015
+  alert( "Qanday qilib shunday noto'g'ri bo'lishi mumkin?" ); // 2015 yildan tashqari har qanday qiymat
 }
 ```
 
-## Several conditions: "else if"
+## Bir nechta shartlar: "else if"
 
 Sometimes, we'd like to test several variants of a condition. The `else if` clause lets us do that.
+Ba'zan, biz shartning bir nechta variantlarini sinab ko'rmoqchi bolamiz. `Else if` ifodasi bunga imkon beradi.
 
-For example:
+Masalan:
 
 ```js run
-let year = prompt('In which year was the ECMAScript-2015 specification published?', '');
+let year = prompt('ECMAScript-2015 spetsifikatsiyasi qaysi yilda nashr etilgan?', '');
 
 if (year < 2015) {
-  alert( 'Too early...' );
+  alert( 'Juda erta...' );
 } else if (year > 2015) {
-  alert( 'Too late' );
+  alert( 'Juda kech' );
 } else {
-  alert( 'Exactly!' );
+  alert( 'Aynan!' );
 }
 ```
 
-In the code above, JavaScript first checks `year < 2015`. If that is falsy, it goes to the next condition `year > 2015`. If that is also falsy, it shows the last `alert`.
+Yuqoridagi kodda JavaScript avval `year < 2015` ni tekshiradi. Agar bu noto'g'ri bo'lsa, u keyingi `year > 2015` shartiga o'tadi. Agar bu ham noto'g'ri bo'lsa, u oxirgi `alert` ni ko'rsatadi.
 
-There can be more `else if` blocks. The final `else` is optional.
+Ko'proq `else if` bloklari bo'lishi mumkin. Oxirgi `else` ixtiyoriy.
 
-## Ternary operator '?'
+## Uchlik operator '?'
 
-Sometimes, we need to assign a variable depending on a condition.
+Ba'zan, biz shartga qarab o'zgaruvchani tayinlashimiz kerak.
 
-For instance:
+Masalan:
 
 ```js run no-beautify
 let accessAllowed;
-let age = prompt('How old are you?', '');
+let age = prompt('Yoshingiz nechida?', '');
 
 *!*
 if (age > 18) {
@@ -124,116 +125,116 @@ if (age > 18) {
 alert(accessAllowed);
 ```
 
-The so-called "ternary" or "question mark" operator lets us do that in a shorter and simpler way.
+"Uchlik" yoki "savol belgisi" deb nomlangan operator bizga buni qisqa va sodda qilib bajarishga imkon beradi.
 
-The operator is represented by a question mark `?`.  The formal term "ternary" means that the operator has three operands. It is actually the one and only operator in JavaScript which has that many.
+Operator `?` savol belgisi bilan ifodalanadi. "Uchlik" rasmiy atamasi operatorda uchta operand borligini anglatadi. Bu aslida JavaScript-da juda ko'p operandli bitta va yagona operator.
 
-The syntax is:
+Sintaksis:
 ```js
-let result = condition ? value1 : value2;
+let result = shart ? qiymat1 : qiymat2;
 ```
 
-The `condition` is evaluated: if it's truthy then `value1` is returned, otherwise -- `value2`.
+`Shart` baholanadi: agar u to'g'ri bo'lsa, u holda `qiymat1` qaytariladi, aks holda -- `qiymat2`.
 
-For example:
+Masalan:
 
 ```js
 let accessAllowed = (age > 18) ? true : false;
 ```
 
-Technically, we can omit the parentheses around `age > 18`. The question mark operator has a low precedence, so it executes after the comparison `>`. 
+Texnik jihatdan `age > 18` atrofidagi qavslarni tashlab qo'yishimiz mumkin. Savol belgisi operatori past ustunlikka ega, shuning uchun u `>` taqqoslashidan so'ng amalga oshiriladi.
 
-This example will do the same thing as the previous one:
+Ushbu misol avvalgisiga o'xshash narsani bajaradi:
 
 ```js
-// the comparison operator "age > 18" executes first anyway
-// (no need to wrap it into parentheses)
+// taqqoslash operatori "age > 18" baribir birinchi bo'lib bajariladi
+// (uni qavs ichiga o‘rab olishning hojati yo‘q)
 let accessAllowed = age > 18 ? true : false;
 ```
 
-But parentheses make the code more readable, so we recommend using them.
+Ammo qavslar kodning o'qilishini yanada oson qiladi, shuning uchun ulardan foydalanishni tavsiya etamiz.
 
 ````smart
-In the example above, you can avoid using the question mark operator because the comparison itself returns `true/false`:
+Yuqoridagi misolda siz savol belgisi operatorini foydalanishdan saqlanishingiz mumkin, chunki taqqoslash o'zi `true/false` ni qaytaradi:
 
 ```js
-// the same
+// xuddi shu
 let accessAllowed = age > 18;
 ```
 ````
 
-## Multiple '?'
+## Bir nechta '?'
 
-A sequence of question mark operators `?` can return a value that depends on more than one condition.
+Savol belgi operatorlari ketma-ketligi `?` bir nechta shartlarga bog'liq bo'lgan qiymatni qaytarishi mumkin.
 
-For instance:
+Masalan:
 ```js run
 let age = prompt('age?', 18);
 
-let message = (age < 3) ? 'Hi, baby!' :
-  (age < 18) ? 'Hello!' :
-  (age < 100) ? 'Greetings!' :
-  'What an unusual age!';
+let message = (age < 3) ? 'Salom bolakay!' :
+  (age < 18) ? 'Salom!' :
+  (age < 100) ? 'Assalomu aleykum!' :
+  "Qanday g'ayrioddiy yosh!";
 
 alert( message );
 ```
 
-It may be difficult at first to grasp what's going on. But after a closer look, we can see that it's just an ordinary sequence of tests:
+Avvaliga nima bo'layotganini tushunish qiyin bo'lishi mumkin. Ammo yaqindan ko'rib chiqqach, bu oddiy testlar ketma-ketligi ekanligini ko'rishimiz mumkin:
 
-1. The first question mark checks whether `age < 3`.
-2. If true -- it returns `'Hi, baby!'`. Otherwise, it continues to the expression after the colon '":"', checking `age < 18`.
-3. If that's true -- it returns `'Hello!'`. Otherwise, it continues to the expression after the next colon '":"', checking `age < 100`.
-4. If that's true -- it returns `'Greetings!'`. Otherwise, it continues to the expression after the last colon '":"', returning `'What an unusual age!'`.
+1. Birinchi savol belgisi `age < 3` ni tekshiradi.
+2. Agar rost bo'lsa -- u qaytadi `'Salom bolakay!'`. Aks holda, u yo'g'on ichakdan '":"' keyingi ifodaga davom etadi, `age < 18` ni tekshirishadi.
+3. Agar shu rost bo'lsa -- u qaytadi `'Salom!'`. Aks holda, u yo'g'on ichakdan '":"' keyingi ifodaga davom etadi, `age < 100` ni tekshirishadi.
+4. Agar shu rost bo'lsa -- u qaytadi `'Assalomu aleykum!'`. Aks holda, u yo'g'on ichakdan '":"' ohirgi ifodaga davom etadi, `Qanday g'ayrioddiy yosh!` ni qaytaradi.
 
-Here's how this looks using `if..else`:
+Bu `if..else` yordamida qanday ko'rinishga ega:
 
 ```js
 if (age < 3) {
-  message = 'Hi, baby!';
+  message = 'Salom bolakay!';
 } else if (age < 18) {
-  message = 'Hello!';
+  message = 'Salom!';
 } else if (age < 100) {
-  message = 'Greetings!';
+  message = 'Assalomu aleykum!';
 } else {
-  message = 'What an unusual age!';
+  message = "Qanday g'ayrioddiy yosh!";
 }
 ```
 
-## Non-traditional use of '?'
+## "?" dan noan'anaviy foydalanish
 
-Sometimes the question mark `?` is used as a replacement for `if`:
+Ba'zan `?` savol belgisi `if` o'rnini bosuvchi sifatida ishlatiladi:
 
 ```js run no-beautify
-let company = prompt('Which company created JavaScript?', '');
+let company = prompt('JavaScript-ni qaysi kompaniya yaratgan?', '');
 
 *!*
 (company == 'Netscape') ?
-   alert('Right!') : alert('Wrong.');
+   alert("To'g'ri!") : alert("Noto'g'ri!");
 */!*
 ```
 
-Depending on the condition `company == 'Netscape'`, either the first or the second expression after the `?` gets executed and shows an alert.
+`Company == 'Netscape'` shartiga qarab, `?` dan keyin birinchi yoki ikkinchi ifoda bajariladi va ogohlantirish ko'rsatiladi.
 
-We don't assign a result to a variable here. Instead, we execute different code depending on the condition.
+Biz bu yerda o'zgaruvchanga natija bermaymiz. Buning o'rniga, biz shartga qarab turli xil kodlarni bajaramiz.
 
-**We don't recommend using the question mark operator in this way.**
+**Savol belgisi operatoridan shu tarzda foydalanishni tavsiya etmaymiz.**
 
-The notation is shorter than the equivalent `if` statement, which appeals to some programmers. But it is less readable.
+Yozuv ba'zi dasturchilarga yoqadigan `if` ekvivalentidan qisqa. Ammo uning o'qilishi qiyin.
 
-Here is the same code using `if` for comparison:
+Taqqoslash uchun `if` dan foydalanilgan usha kod:
 
 ```js run no-beautify
-let company = prompt('Which company created JavaScript?', '');
+let company = prompt('JavaScript-ni qaysi kompaniya yaratgan?', '');
 
 *!*
 if (company == 'Netscape') {
-  alert('Right!');
+  alert("To'g'ri!");
 } else {
-  alert('Wrong.');
+  alert("Noto'g'ri!");
 }
 */!*
 ```
 
-Our eyes scan the code vertically. Code blocks which span several lines are easier to understand than a long, horizontal instruction set.
+Bizning ko'zlarimiz kodni vertikal ravishda skanerlaydi. Bir nechta satrlarni qamrab oladigan kod bloklarini uzoq, lekin gorizontal ko'rsatmalar to'plamidan ko'ra tushunishga osonroq bo'lishi mumkin.
 
-The purpose of the question mark operator `?` is to return one value or another depending on its condition. Please use it for exactly that. Use `if` when you need to execute different branches of code.
+`?` Savol belgisi operatorining maqsadi uning shartiga qarab u yoki bu qiymatni qaytarishdir. Iltimos, faqat shu maqsad uchun foydalaning. Kodning turli tarmoqlarini bajarish kerak bo'lganda `if` dan foydalaning.

@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Searching algorithm
+# Qidiruv algoritmi
 
-The task has two parts.
+Vazifa ikki qismdan iborat.
 
-We have an object:
+Bizning obyektimiz bor:
 
 ```js
 let head = {
@@ -27,5 +27,5 @@ let pockets = {
 };
 ```
 
-1. Use `__proto__` to assign prototypes in a way that any property lookup will follow the path: `pockets` -> `bed` -> `table` -> `head`. For instance, `pockets.pen` should be `3` (found in `table`), and `bed.glasses` should be `1` (found in `head`).
-2. Answer the question: is it faster to get `glasses` as `pockets.glasses` or `head.glasses`? Benchmark if needed.
+1. `__proto__` dan foydalanib, prototiplarni har qanday xususiyatni qidirish yo'liga mos keladigan tarzda belgilang: `pockets` -> `bed` -> `table` -> `head`. Masalan, `pockets.pen` `3` (`table` da topildi) va `bed.glasses` `1` (`head` da topildi) bo'lishi kerak.
+2. Savolga javob bering: `glasses` ni `pockets.glasses` yoki `head.glasses` sifatida olish tezroq? Agar kerak bo'lsa, benchmark.

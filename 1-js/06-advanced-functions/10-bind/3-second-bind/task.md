@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Second bind
+# Ikkinchi bog'lash
 
-Can we change `this` by additional binding?
+Qo'shimcha bog'lash orqali `this` ni o'zgartira olamizmi?
 
-What will be the output?
+Chiqish qanday bo'ladi?
 
 ```js no-beautify
 function f() {

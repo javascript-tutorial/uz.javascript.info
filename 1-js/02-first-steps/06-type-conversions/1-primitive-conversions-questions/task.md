@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Type conversions
+# Konvertatsiya turi
 
-What are results of these expressions?
+Ushbu ifodalarning natijalari qanday?
 
 ```js no-beautify
 "" + 1 + 0
@@ -23,4 +23,4 @@ null + 1
 undefined + 1
 ```
 
-Think well, write down and then compare with the answer.
+Yaxshilab o'ylab yozing va keyin javob bilan taqqoslang.

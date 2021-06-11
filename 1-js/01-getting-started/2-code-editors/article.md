@@ -1,57 +1,45 @@
-# Code editors
+# Kod muharrirlari
 
-A code editor is the place where programmers spend most of their time.
+Kod muharriri bu dasturchilarning ko'p vaqtini sarflaydigan joy.
 
-There are two main types of code editors: IDEs and lightweight editors. Many people use one tool of each type.
+Kod muharrirlarining ikkita asosiy turi mavjud: IDE va engil muharrirlar. Ko'p odamlar har bir turdagi bitta vositadan foydalanadilar.
 
 ## IDE
 
-The term [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) (Integrated Development Environment) refers to a powerful editor with many features that usually operates on a "whole project." As the name suggests, it's not just an editor, but a full-scale "development environment."
+[IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) atamasi (Integrated Development Environment, "Integratsiyalashgan rivojlanish muhiti") odatda "butun loyiha" da ishlaydigan ko'plab xususiyatlarga ega kuchli muharrirni nazarda tutadi. Nomidan ko'rinib turibdiki, bu nafaqat muharrir, balki keng ko'lamli "taraqqiyot muhiti".
 
-An IDE loads the project (which can be many files), allows navigation between files, provides autocompletion based on the whole project (not just the open file), and integrates with a version management system (like [git](https://git-scm.com/)), a testing environment, and other "project-level" stuff.
+IDE loyihani yuklaydi (bu juda ko'p fayl bo'lishi mumkin), fayllar o'rtasida navigatsiyani amalga oshirishga imkon beradi, butun loyiha (faqat ochiq faylga emas) asosida avtomatik to'ldirishni ta'minlaydi va versiyalarni boshqarish tizimiga (masalan, [git](https://git-scm.com/)), sinov muhiti va boshqa "loyiha-darajasidagi" narsalar.
 
-If you haven't selected an IDE yet, consider the following options:
+Agar siz IDE ni tanlamagan bo'lsangiz, quyidagi variantlarni ko'rib chiqing:
 
-- [WebStorm](http://www.jetbrains.com/webstorm/) for frontend development. The same company offers other editors for other languages (paid).
-- [Netbeans](http://netbeans.org/) (free).
+- [Visual Studio Code](https://code.visualstudio.com/) (o'zaro faoliyatli platforma, bepul).
+- [WebStorm](http://www.jetbrains.com/webstorm/) (o'zaro faoliyatli platforma, pullik).
 
-All of these IDEs are cross-platform.
+Windows uchun "Visual Studio" ham mavjud, "Visual Studio Code" bilan aralashmaslik kerak. "Visual Studio" - bu pullik va qudratli Windows muharriri .NET platformasi uchun juda mos keladi. Bundan tashqari, JavaScript-da yaxshi. Bepul versiyasi ham mavjud [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
-For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code." "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. A free version of it is called [Visual Studio Community](https://www.visualstudio.com/vs/community/).
+Ko'pgina IDElar pullik, ammo bepul sinov muddati bor. Ularning narxi malakali dasturchilarning ish haqi bilan taqqoslaganda odatda ahamiyatsiz, shuning uchun ozingizga eng qulayini tanlang.
 
-Many IDEs are paid but have a trial period. Their cost is usually negligible compared to a qualified developer's salary, so just choose the best one for you.
+## Engil muharrirlar
 
-## Lightweight editors
+"Yengil muharrirlar" IDE'lar kabi kuchli emas, lekin ular tezkor, nafis va sodda.
 
-"Lightweight editors" are not as powerful as IDEs, but they're fast, elegant and simple.
+Ular asosan faylni bir zumda ochish va tahrirlash uchun ishlatiladi.
 
-They are mainly used to open and edit a file instantly.
+"Yengil muharrir" va "IDE" ning asosiy farqi shundaki, IDE loyiha darajasida ishlaydi, shuning uchun u boshlanganda juda ko'p ma'lumotlarni yuklaydi, kerak bo'lsa loyiha tuzilishini tahlil qiladi va hokazo. Agar bizga bitta fayl kerak bo'lsa, engil muharrir juda tez ishlaydi.
 
-The main difference between a "lightweight editor" and an "IDE" is that an IDE works on a project-level, so it loads much more data on start, analyzes the project structure if needed and so on. A lightweight editor is much faster if we need only one file.
+Amalda yengil muharrirlarda juda ko'p plaginlar bo'lishi mumkin, shu jumladan direktoriya-darajasidagi sintaksis analizatorlari va avtokompleterlar, shuning uchun engil muharrir va IDE o'rtasida qat'iy chegara yo'q.
 
-In practice, lightweight editors may have a lot of plugins including directory-level syntax analyzers and autocompleters, so there's no strict border between a lightweight editor and an IDE.
+Quyidagi variantlar sizning e'tiboringizga loyiqdir:
 
-The following options deserve your attention:
+- [Atom](https://atom.io/) (o'zaro faoliyatli platforma, bepul).
+- [Sublime Text](http://www.sublimetext.com) (o'zaro faoliyatli platforma, shartli ravishda bepul).
+- [Notepad++](https://notepad-plus-plus.org/) (Windows, bepul).
+- [Vim](http://www.vim.org/) va [Emacs](https://www.gnu.org/software/emacs/) ham zo'r agar ularni qanday foydalanishni bilsangiz.
 
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free) also has many IDE-like features.
-- [Atom](https://atom.io/) (cross-platform, free).
-- [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
-- [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+## Tortishmaylik
 
-## My favorites
+Yuqoridagi ro'yxatlardagi muharrirlar men yoki men yaxshi dasturchi deb hisoblaydigan do'stlarim uzoq vaqt davomida foydalanishgan va baxtli bo'lganlar.
 
-The personal preference of the author is to have both an IDE for projects and a lightweight editor for quick and easy file editing.
+Bizning katta dunyoda boshqa buyuk muharrirlar ham bor. Iltimos, o'zingizga eng yoqqanini tanlang.
 
-I'm using:
-
-- As an IDE for JS -- [WebStorm](http://www.jetbrains.com/webstorm/) (I switch to one of the other JetBrains offerings when using other languages)
-- As a lightweight editor -- [Sublime Text](http://www.sublimetext.com) or [Atom](https://atom.io/).
-
-## Let's not argue
-
-The editors in the lists above are those that either I or my friends whom I consider good developers have been using for a long time and are happy with.
-
-There are other great editors in our big world. Please choose the one you like the most.
-
-The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+Muharriri tanlash, boshqa har qanday vositasi kabi, individual va loyihalar bog'liq, odatlar, va shaxsiy imtiyozlar.

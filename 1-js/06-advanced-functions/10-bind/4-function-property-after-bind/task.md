@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Function property after bind
+# Bind-dan keyin funktsiya xususiyati
 
-There's a value in the property of a function. Will it change after `bind`? Why, elaborate?
+Funksiya xususiyatida qiymat mavjud. U `bind` dan keyin o'zgaradimi? Javobingizni asoslang.
 
 ```js run
 function sayHi() {
@@ -17,7 +17,7 @@ let bound = sayHi.bind({
   name: "John"
 });
 
-alert( bound.test ); // what will be the output? why?
+alert( bound.test ); // chiqishi qanday bo'ladi? nega?
 */!*
 ```
 

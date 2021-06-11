@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Can I add a string property?
+# String xususiyatini qo'shsam bo'ladimi?
 
 
-Consider the following code:
+Quyidagi kodni ko'rib chiqing:
 
 ```js
-let str = "Hello";
+let str = "Salom";
 
 str.test = 5;
 
 alert(str.test);
 ```
 
-How do you think, will it work? What will be shown?
+Sizningcha, u qanday ishlaydi? Nima ko'rsatiladi?

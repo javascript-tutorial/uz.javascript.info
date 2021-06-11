@@ -1,33 +1,33 @@
-# Patterns and flags
+# Naqshlar va bayroqlar
 
-Regular expressions is a powerful way of searching and replacing inside a string.
+Doimiy ifodalar - bu mag'lubiyatni izlash va almashtirishning kuchli usuli.
 
-In JavaScript regular expressions are implemented using objects of a built-in `RegExp` class and integrated with strings.
+JavaScript-da oddiy ifodalar o'rnatilgan `RegExp` klassidagi obyektlar yordamida va satrlar bilan birlashtirilgan.
 
-Please note that regular expressions vary between programming languages. In this tutorial we concentrate on JavaScript. Of course there's a lot in common, but they are a somewhat different in Perl, Ruby, PHP etc.
+Iltimos, muntazam ifodalar dasturlash tillarida turlicha bo'lishiga e'tibor bering. Ushbu qo'llanmada biz JavaScript-ni jamlaymiz. Albatta, umumiy jihatlar juda ko'p, ammo ular Perl, Ruby, PHP va boshqalarda bir-biridan farq qiladi.
 
-## Regular expressions
+## Oddiy ifodalar
 
-A regular expression (also "regexp", or just "reg") consists of a *pattern* and optional *flags*.
+Oddiy ifoda (shuningdek, "regexp" yoki shunchaki "reg") *naqsh* va ixtiyoriy *bayroqlardan* iborat.
 
-There are two syntaxes to create a regular expression object.
+Muntazam ifoda obyektini yaratish uchun ikkita sintaksis mavjud.
 
-The long syntax:
+Uzoq sintaksis:
 
 ```js
 regexp = new RegExp("pattern", "flags");
 ```
 
-...And the short one, using slashes `"/"`:
+...Va `"/"` chiziqlaridan foydalangan holda qisqa:
 
 ```js
-regexp = /pattern/; // no flags
-regexp = /pattern/gmi; // with flags g,m and i (to be covered soon)
+regexp = /pattern/; // bayroqlar yo'q
+regexp = /pattern/gmi; // g, m va i bayroqlari bilan (yaqin orada qoplanadi)
 ```
 
-Slashes `"/"` tell JavaScript that we are creating a regular expression. They play the same role as quotes for strings.
+Slashes `"/"` biz JavaScript-ga oddiy ifodani yaratayotganimizni aytadi. Ular matnlar uchun qosh-tirnoqlar bilan bir xil rol o'ynaydi.
 
-## Usage
+## Foydalanish
 
 To search inside a string, we can use method [search](mdn:js/String/search).
 

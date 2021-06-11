@@ -2,17 +2,17 @@ importance: 5
 
 ---
 
-# Filter unique array members
+# Noyob massiv a'zolarini filtrlang
 
-Let `arr` be an array.
+Keling, `arr` massiv bo'lsin.
 
-Create a function `unique(arr)` that should return an array with unique items of `arr`.
+`arr` ning noyob elementlari bo'lgan qatorni qaytaradigan `unique(arr)` funktsiyasini yarating.
 
-For instance:
+Masalan:
 
 ```js
 function unique(arr) {
-  /* your code */
+  /* sizning kodingiz */
 }
 
 let values = ["Hare", "Krishna", "Hare", "Krishna",
@@ -22,6 +22,6 @@ let values = ["Hare", "Krishna", "Hare", "Krishna",
 alert( unique(values) ); // Hare, Krishna, :-O
 ```
 
-P.S. Here strings are used, but can be values of any type.
+P.S. Bu erda matnlar ishlatildi, lekin har qanday turdagi qiymatlar ishlatilishi mumkin.
 
-P.P.S. Use `Set` to store unique values.
+P.P.S. Noyob qiymatlarni saqlash uchun `Set` dan foydalaning.

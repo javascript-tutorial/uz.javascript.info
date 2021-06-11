@@ -1,286 +1,284 @@
-# Arrays 
+# Massivlar
 
-Objects allow you to store keyed collections of values. That's fine.
+Obyektlar qadriyatlar to'plamini saqlashga imkon beradi. Juda soz.
 
-But quite often we find that we need an *ordered collection*, where we have a 1st, a 2nd, a 3rd element and so on. For example, we need that to store a list of something: users, goods, HTML elements etc. 
+Ammo ko'pincha biz *ro'yhatlangan to'plamga* ehtiyoj sezamiz, bu yerda bizda 1 chi, 2 chi, 3 chi element va h.k. Masalan, biz biror narsaning ro'yxatini saqlashimiz kerak: foydalanuvchilar, tovarlar, HTML elementlari va boshqalar.
 
-It is not convenient to use an object here, because it provides no methods to manage the order of elements. We can’t insert a new property “between” the existing ones. Objects are just not meant for such use.
+Bu erda obyektni ishlatish qulay emas, chunki u elementlarning tartibini boshqarish usullarini taqdim etmaydi. Mavjud bo'lganlar orasida "o'rtasiga" yangi xususiyat kiritolmaymiz. Obyektlar bunday foydalanish uchun mo'ljallanmagan.
 
-There exists a special data structure named `Array`, to store ordered collections. 
+Ro'yhatlangan to'plamlarni saqlash uchun `Array` nomli maxsus ma'lumotlar tuzilishi mavjud.
 
-## Declaration
+## Deklaratsiya
 
-There are two syntaxes for creating an empty array:
+Bo'sh massiv yaratish uchun ikkita sintaksis mavjud:
 
 ```js
 let arr = new Array();
 let arr = [];
 ```
 
-Almost all the time, the second syntax is used. We can supply initial elements in the brackets:
+Deyarli har doim ikkinchi sintaksis ishlatiladi. Qavsda dastlabki elementlarni yetkazib berishimiz mumkin:
 
 ```js
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Olma", "Apelsin", "Uzum"];
 ```
 
-Array elements are numbered, starting with zero.
+Massiv elementlari noldan boshlab raqamlangan.
 
-We can get an element by its number in square brackets:
+Elementni to'rtburchak qavs ichida uning soniga ko'ra olishimiz mumkin:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Olma", "Apelsin", "Uzum"];
 
-alert( fruits[0] ); // Apple
-alert( fruits[1] ); // Orange
-alert( fruits[2] ); // Plum
+alert( fruits[0] ); // Olma
+alert( fruits[1] ); // Apelsin
+alert( fruits[2] ); // Uzum
 ```
 
-We can replace an element:
+Biz elementni almashtirishimiz mumkin:
 
 ```js
-fruits[2] = 'Pear'; // now ["Apple", "Orange", "Pear"]
+fruits[2] = 'Nok'; // now ["Olma", "Apelsin", "Nok"]
 ```
 
-...Or add a new one to the array:
+...Yoki massivga yangisini qo'shish:
 
 ```js
-fruits[3] = 'Lemon'; // now ["Apple", "Orange", "Pear", "Lemon"]
+fruits[3] = 'Limon'; // now ["Olma", "Apelsin", "Nok", "Limon"]
 ```
 
-The total count of the elements in the array is its `length`:
+Massivdagi elementlarning umumiy soni uning uzunligi `length` dir:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Olma", "Apelsin", "Uzum"];
 
 alert( fruits.length ); // 3
 ```
 
-We can also use `alert` to show the whole array.
+Biz massivni to'liq ko'rsatish uchun `alert` dan ham foydalanishimiz mumkin.
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Olma", "Apelsin", "Uzum"];
 
-alert( fruits ); // Apple,Orange,Plum
+alert( fruits ); // Olma,Apelsin,Uzum
 ```
 
-An array can store elements of any type.
+Massiv har qanday turdagi elementlarni saqlashi mumkin.
 
-For instance:
+Masalan:
 
 ```js run no-beautify
-// mix of values
-let arr = [ 'Apple', { name: 'John' }, true, function() { alert('hello'); } ];
+// qiymatlar aralashmasi
+let arr = [ 'Olma', { name: 'Oybek' }, true, function() { alert('salom'); } ];
 
-// get the object at index 1 and then show its name
-alert( arr[1].name ); // John
+// obyektni 1 chi indeksini oling va keyin uning nomini ko'rsating
+alert( arr[1].name ); // Oybek
 
-// get the function at index 3 and run it
-arr[3](); // hello
+// funktsiyani 3 chi indeksini oling va uni ishga tushiring
+arr[3](); // salom
 ```
 
 
-````smart header="Trailing comma"
-An array, just like an object, may end with a comma:
+````smart header="Osilgan vergul"
+Massiv, xuddi obyekt singari, vergul bilan tugashi mumkin:
 ```js 
 let fruits = [
-  "Apple", 
-  "Orange", 
-  "Plum"*!*,*/!*
+  "Olma", 
+  "Apelsin", 
+  "Uzum"*!*,*/!*
 ];
 ```
 
-The "trailing comma" style makes it easier to insert/remove items, because all lines become alike.
+"Osilgan vergul" uslubi elementlarni kiritishni/olib tashlashni osonlashtiradi, chunki barcha satrlar bir xil bo'ladi.
 ````
 
 
-## Methods pop/push, shift/unshift
+## Usullar pop/push, shift/unshift
 
-A [queue](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) is one of most common uses of an array. In computer science, this means an ordered collection of elements which supports two operations:
+A [navbat](https://en.wikipedia.org/wiki/Queue_(abstract_data_type)) - bu massivning eng keng tarqalgan ishlatilishlaridan biri. Kompyuter fanida bu ikkita operatsiyani qo'llab-quvvatlaydigan elementlarning tartiblangan to'plamini anglatadi:
 
-- `push` appends an element to the end.
-- `shift` get an element from the beginning, advancing the queue, so that the 2nd element becomes the 1st.
+- `push` elementni oxiriga qo'shib qo'yadi.
+- `shift` boshidagi element olib tashlanadi, shunday qilib, ikkinchi element birinchiga aylanadi.
 
 ![](queue.svg)
 
-Arrays support both operations.
+Massivlar ikkala operatsiyani qo'llab-quvvatlaydi.
 
-In practice we need it very often. For example, a queue of messages that need to be shown on-screen.
+Amalda bu bizga ko'pincha kerak. Masalan, ekranda ko'rsatilishi kerak bo'lgan xabarlar navbati.
 
-There's another use case for arrays -- the data structure named [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). 
+Massivlar uchun yana bir holat mavjud - [stek](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)) deb nomlangan ma'lumotlar tuzilishi .
 
-It supports two operations:
+U ikkita operatsiyani qo'llab-quvvatlaydi:
 
-- `push` adds an element to the end.
-- `pop` takes an element from the end.
+- `push` oxiriga element qo'shadi.
+- `pop` oxiridan element oladi.
 
-So new elements are added or taken always from the "end".
+Shunday qilib, yangi elementlar har doim "oxiridan" qo'shiladi yoki olinadi.
 
-A stack is usually illustrated as a pack of cards: new cards are added to the top or taken from the top:
+Stek odatda kartalar to'plami sifatida tasvirlanadi: yuqoriga yangi kartalar qo'shiladi yoki yuqoridan olinadi:
 
 ![](stack.svg)
 
-For stacks, the latest pushed item is received first, that's also called LIFO (Last-In-First-Out) principle. For queues, we have FIFO (First-In-First-Out).
+JavaScript-dagi massivlar navbat sifatida ham, stek sifatida ham ishlashi mumkin. Ular sizga elementlarni boshiga yoki oxiriga qo'shish/olib tashlash imkonini beradi.
 
-Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end. 
+Kompyuter fanida bunga imkon beradigan ma'lumotlar tuzilishi [deque](https://en.wikipedia.org/wiki/Double-ended_queue) deb nomlanadi.
 
-In computer science the data structure that allows it is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
-
-**Methods that work with the end of the array:**
+**Massiv oxiri bilan ishlaydigan usullar:**
 
 `pop`
-: Extracts the last element of the array and returns it:
+: Massivning oxirgi elementini ajratib oladi va qaytaradi:
 
     ```js run
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Olma", "Apelsin", "Nok"];
 
-    alert( fruits.pop() ); // remove "Pear" and alert it
+    alert( fruits.pop() ); // "Nok" ni olib tashlang va chiqaring
 
-    alert( fruits ); // Apple, Orange
+    alert( fruits ); // Olma, Apelsin
     ```
 
 `push`
-: Append the element to the end of the array:
+: Elementni massivning oxiriga qo'shadi:
 
     ```js run
-    let fruits = ["Apple", "Orange"];
+    let fruits = ["Olma", "Apelsin"];
 
-    fruits.push("Pear");
+    fruits.push("Nok");
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Olma, Apelsin, Nok
     ```
 
-    The call `fruits.push(...)` is equal to `fruits[fruits.length] = ...`.
+    `fruits.push(...) chaqiruvi `fruits[fruits.length] = ...` ga teng.
 
-**Methods that work with the beginning of the array:**
+**Massivning boshi bilan ishlaydigan usullar:**
 
 `shift`
-: Extracts the first element of the array and returns it:
+: Massivning birinchi elementini ajratib oladi va uni qaytaradi:
 
     ```js
-    let fruits = ["Apple", "Orange", "Pear"];
+    let fruits = ["Olma", "Apelsin", "Nok"];
 
-    alert( fruits.shift() ); // remove Apple and alert it
+    alert( fruits.shift() ); // Olmani olib tashlaydi va qaytaradi
 
-    alert( fruits ); // Orange, Pear
+    alert( fruits ); // Apelsin, Nok
     ```
 
 `unshift`
-: Add the element to the beginning of the array:
+: Elementni massiv boshiga qo'shadi:
 
     ```js
-    let fruits = ["Orange", "Pear"];
+    let fruits = ["Apelsin", "Nok"];
 
-    fruits.unshift('Apple');
+    fruits.unshift('Olma');
 
-    alert( fruits ); // Apple, Orange, Pear
+    alert( fruits ); // Olma, Apelsin, Nok
     ```
 
-Methods `push` and `unshift` can add multiple elements at once:
+`push` va `unshift` usullari bir vaqtning o'zida bir nechta elementlarni qo'shishi mumkin:
 
 ```js run
-let fruits = ["Apple"];
+let fruits = ["Olma"];
 
-fruits.push("Orange", "Peach");
-fruits.unshift("Pineapple", "Lemon");
+fruits.push("Apelsin", "Nok");
+fruits.unshift("Ananas", "Limon");
 
-// ["Pineapple", "Lemon", "Apple", "Orange", "Peach"]
+// ["Ananas", "Limon", "Olma", "Apelsin", "Nok"]
 alert( fruits );
 ```
 
-## Internals
+## Ichki massiv qurilma
 
-An array is a special kind of object. The square brackets used to access a property `arr[0]` actually come from the object syntax. Numbers are used as keys. 
+Massiv - obyektlarning maxsus turdagi ko'rinishi. `arr[0]` xususiyatiga kirish uchun ishlatiladigan kvadrat qavslar asosan `obj[key]` kabi oddiy kalit kirish sintaksisidir, bu yerda `obj` rolida massiv va `key` sifatida raqamli indeks mavjud.
 
-They extend objects providing special methods to work with ordered collections of data and also the `length` property. But at the core it's still an object.
+Ular ro'yhatlangan ma'lumotlar to'plamlari va `length` xususiyati bilan ishlash uchun maxsus usullarni taqdim etadigan obyektlarni kengaytiradi. Ammo aslida bu hali ham obyekt.
 
-Remember, there are only 7 basic types in JavaScript. Array is an object and thus behaves like an object. 
+Esingizda bo'lsa, JavaScript-da faqat 7 ta asosiy tur mavjud. Massiv obyektdir va shu bilan obyekt kabi o'zini tutadi.
 
-For instance, it is copied by reference:
+Masalan, u havola orqali ko'chiriladi:
 
 ```js run
-let fruits = ["Banana"]
+let fruits = ["Banan"]
 
-let arr = fruits; // copy by reference (two variables reference the same array)
+let arr = fruits; // havola orqali nusxalash (ikkita o'zgaruvchan bir massivga murojaat qiladi)
 
 alert( arr === fruits ); // true
  
-arr.push("Pear"); // modify the array by reference
+arr.push("Nok"); // havola yordamida massivni o'zgartiring
 
-alert( fruits ); // Banana, Pear - 2 items now
+alert( fruits ); // Banan, Nok - 2 items now
 ```
 
-...But what makes arrays really  special is their internal representation. The engine tries to store its elements in the contiguous memory area, one after another, just as depicted on the illustrations in this chapter, and there are other optimizations as well, to make arrays work really fast.
+...Ammo massivlarni chindan ham maxsus qiladigan narsa ularning ichki ko'rinishi. Interpretatorlar o'z elementlarini tutashgan xotira maydonida, xuddi shu bobdagi rasmlarda tasvirlanganidek, ketma-ket saqlashga harakat qiladi va massivlarni chindan ham tez ishlashini ta'minlash uchun boshqa optimallashtirishlar ham mavjud.
 
-But they all break if we quit working with an array as with an "ordered collection" and start working with it as if it were a regular object.
+Ammo biz "ro'yhatlangan to'plam" singari massiv bilan ishlashni to'htatsak va u bilan odatdagi obyekt kabi ishlay boshlasak, ularning barchasi buziladi.
 
-For instance, technically we can do this:
+Masalan, texnik jihatdan biz buni qila olamiz:
 
 ```js
-let fruits = []; // make an array
+let fruits = []; // massiv yaratish
 
-fruits[99999] = 5; // assign a property with the index far greater than its length
+fruits[99999] = 5; // indeks uzunligidan ancha kattaroq xususiyatni tayinlash
 
-fruits.age = 25; // create a property with an arbitrary name
+fruits.age = 25; // hohlagan nom bilan xususiyat yaratish
 ```
 
-That's possible, because arrays are objects at their base. We can add any properties to them.
+Bu mumkin, chunki massivlar aslida obyektlardir. Biz ularga har qanday xususiyatlarni qo'shishimiz mumkin.
 
-But the engine will see that we're working with the array as with a regular object. Array-specific optimizations are not suited for such cases and will be turned off, their benefits disappear.
+Ammo interpretator biz oddiy obyekt kabi massiv bilan ishlayotganimizni ko'radi. Massivga xos optimallashtirish bunday holatlarga mos kelmaydi va o'chiriladi, ularning foydalari yo'qoladi.
 
-The ways to misuse an array:
+Massivni noto'g'ri ishlatish usullari:
 
-- Add a non-numeric property like `arr.test = 5`. 
-- Make holes, like: add `arr[0]` and then `arr[1000]` (and nothing between them).
-- Fill the array in the reverse order, like `arr[1000]`, `arr[999]` and so on.
+- `arr.test = 5` kabi raqamli bo'lmagan xususiyatni qo'shish. 
+- Teshiklarni yaratish, masalan: `arr[0]` va keyin `arr[1000]` qo'shish (va ular orasida hech narsa yo'q).
+- Massivni teskari tartibda to'ldirish, masalan `arr[1000]`, `arr[999]` va boshqalar.
 
-Please think of arrays as special structures to work with the *ordered data*. They provide special methods for that. Arrays are carefully tuned inside JavaScript engines to work with contiguous ordered data, please use them this way. And if you need arbitrary keys, chances are high that you actually require a regular object `{}`.
+Iltimos, *ro'yhatlangan massivlar* bilan ishlash uchun massivlarni maxsus tuzilmalar deb hisoblang. Buning uchun ular maxsus usullarni taqdim etishadi. Massivlar ketma ket ro'yhatlangan ma'lumotlar bilan ishlash uchun JavaScript interpretatorining ichida ehtiyotkorlik bilan sozlangan, iltimos ularni shu tarzda ishlating. Agar sizga kalitlangan xususiyatlar kerak bo'lsa, ehtimol siz odatdagi obyektni `{}` ishlatishiz kerak.
 
-## Performance
+## Samaradorlik
 
-Methods `push/pop` run fast, while `shift/unshift` are slow.
+`push/pop` tez ishlaydi, `shift/unshift` esa sekin ishlaydi.
 
 ![](array-speed.svg)
 
-Why is it faster to work with the end of an array than with its beginning? Let's see what happens during the execution:
+Nega massivning boshidan ko'ra uning oxiri bilan ishlash tezroq? Keling, ijro paytida nima bo'lishini ko'rib chiqaylik:
 
 ```js
-fruits.shift(); // take 1 element from the start
+fruits.shift(); // boshidan 1 ta elementni oling
 ```
 
-It's not enough to take and remove the element with the number `0`. Other elements need to be renumbered as well.
+Elementni `0` raqami bilan olib tashlash yetarli emas. Boshqa elementlarning ham raqamlarini o'zgartirish kerak.
 
-The `shift` operation must do 3 things:
+`shift` operatsiyasi uchta narsani bajarishi kerak:
 
-1. Remove the element with the index `0`.
-2. Move all elements to the left, renumber them from the index `1` to `0`, from `2` to `1` and so on.
-3. Update the `length` property.
+1. `0` indeksli elementni olib tashlash.
+2. Barcha elementlarni chapga siljitish, ularning raqamlarini `1` dan `0` ga, `2` dan `1` ga va hokazo.
+3. `length` xususiyatini yangilash.
 
 ![](array-shift.svg)
 
-**The more elements in the array, the more time to move them, more in-memory operations.**
+**Massivda qancha element bo'lsa, ularni siljitish uchun ko'proq vaqt, xotira ishlari ko'proq bo'ladi.**
 
-The similar thing happens with `unshift`: to add an element to the beginning of the array, we need first to move existing elements to the right, increasing their indexes.
+Shunga o'xshash narsa `unshift` bilan sodir bo'ladi: massiv boshiga element qo'shish uchun avval mavjud elementlarni indekslarini oshirib, o'ng tomonga siljitishi kerak.
 
-And what's with `push/pop`? They do not need to move anything. To extract an element from the end, the `pop` method cleans the index and shortens `length`.
+Va `push/pop` nima? Ular hech narsani siljitishga hojat yo'q. Elementni oxiridan ajratib olish uchun `pop` usuli indeksni tozalaydi va `length` ni qisqartiradi.
 
-The actions for the `pop` operation:
+`pop` operatsiyasi uchun harakatlar:
 
 ```js
-fruits.pop(); // take 1 element from the end
+fruits.pop(); // oxiridan 1 ta elementni oling
 ```
 
 ![](array-pop.svg)
 
-**The `pop` method does not need to move anything, because other elements keep their indexes. That's why it's blazingly fast.**
+**`pop` usuli hech narsani siljitishni hojat yo'q, chunki boshqa elementlar o'z indekslarini saqlaydi. Shuning uchun u juda tezkor.**
 
-The similar thing with the `push` method.
+Shunga o'xshash narsa `push` usuli bilan.
 
-## Loops
+## Tsiklar
 
-One of the oldest ways to cycle array items is the `for` loop over indexes:
+Elementlarni ro'yhatlashning eng qadimgi usullaridan biri bu `for` tsikli:
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Olma", "Apelsin", "Nok"];
 
 *!*
 for (let i = 0; i < arr.length; i++) {
@@ -289,103 +287,102 @@ for (let i = 0; i < arr.length; i++) {
 }
 ```
 
-But for arrays there is another form of loop, `for..of`:
+Ammo massivlar uchun `for..of` tsiklning yana bir shakli mavjud:
 
 ```js run
-let fruits = ["Apple", "Orange", "Plum"];
+let fruits = ["Olma", "Apelsin", "Uzum"];
 
-// iterates over array elements
+// massiv elementlari ustida takrorlanadi
 for (let fruit of fruits) {
   alert( fruit ); 
 }
 ```
 
-The `for..of` doesn't give access to the number of the current element, just its value, but in most cases that's enough. And it's shorter.
+`for..of` joriy element raqamiga kirish huquqini bermaydi, faqat uning qiymatiga, lekin aksariyat hollarda bu yetarli. Va bu qisqaroq.
 
-Technically, because arrays are objects, it is also possible to use `for..in`:
+Texnik jihatdan, massivlar ob'ekt bo'lgani uchun `for..in` dan foydalanish ham mumkin:
 
 ```js run
-let arr = ["Apple", "Orange", "Pear"];
+let arr = ["Olma", "Apelsin", "Nok"];
 
 *!*
 for (let key in arr) {
 */!*
-  alert( arr[key] ); // Apple, Orange, Pear
+  alert( arr[key] ); // Olma, Apelsin, Nok
 }
 ```
 
-But that's actually a bad idea. There are potential problems with it:
+Ammo bu aslida yomon fikr. U bilan bog'liq muammolar mavjud:
 
-1. The loop `for..in` iterates over *all properties*, not only the numeric ones.
+1. `For..in` tsikli nafaqat raqamli xususiyatlarni, balki *barcha xususiyatlarni* takrorlaydi.
+    Brauzerda va boshqa muhitda "massivga o'xshash" deb nomlangan ob'ektlar mavjud, ular *massivlarga o'xshaydi*. Ya'ni, ular `length` va indekslar xususiyatlariga ega, ammo ular boshqa raqamli bo'lmagan xususiyatlar va usullarga ham ega bo'lishi mumkin, ular odatda bizga kerak emas. `for..in` tsikl ularni ro'yxatlaydi. Agar biz massivga o'xshash narsalar bilan ishlashimiz kerak bo'lsa, unda bu "qo'shimcha" xususiyatlar muammoga aylanishi mumkin.
 
-    There are so-called "array-like" objects in the browser and in other environments, that *look like arrays*. That is, they have `length` and indexes properties, but they may also have other non-numeric properties and methods, which we usually don't need. The `for..in` loop will list them though. So if we need to work with array-like objects, then these "extra" properties can become a problem.
+2. `for..in` tsikli massivlar uchun emas, balki umumiy obyektlar uchun optimallashtirilgan va shuning uchun 10-100 marta sekinroq. Albatta, bu hali ham juda tez. Tezlashish faqat to'siqlarda muhim bo'lishi mumkin yoki ahamiyatsiz bo'lib tuyulishi mumkin. Ammo shunga qaramay, farqni bilishimiz kerak.
 
-2. The `for..in` loop is optimized for generic objects, not arrays, and thus is 10-100 times slower. Of course, it's still very fast. The speedup may only matter in bottlenecks or seem irrelevant. But still we should be aware of the difference.
-
-Generally, we shouldn't use `for..in` for arrays.
+Odatda, biz `for..in` massivlar uchun ishlatmasligimiz kerak.
 
 
-## A word about "length"
+## "Length" haqida so'z
 
-The `length` property automatically updates when we modify the array. To be precise, it is actually not the count of values in the array, but the greatest numeric index plus one.
+Biz massivni o'zgartirganda `length` xususiyati avtomatik ravishda yangilanadi. Aniqroq aytganda, bu aslida massivdagi qiymatlar soni emas, balki eng katta sonli indeks va plyus bir.
 
-For instance, a single element with a large index gives a big length:
+Masalan, katta indeksli bitta element katta uzunlikni beradi:
 
 ```js run
 let fruits = [];
-fruits[123] = "Apple";
+fruits[123] = "Olma";
 
 alert( fruits.length ); // 124
 ```
 
-Note that we usually don't use arrays like that. 
+E'tibor bering, biz odatda bunday massivlardan foydalanmaymiz.
 
-Another interesting thing about the `length` property is that it's writable.
+`length` xususiyati bilan bog'liq yana bir qiziq narsa shundaki, u tayinlanishi mumkin.
 
-If we increase it manually, nothing interesting happens. But if we decrease it, the array is truncated. The process is irreversible, here's the example:
+Agar uni qo'lda oshirsak, qiziq narsa bo'lmaydi. Ammo biz uni kamaytirsak, massiv qisqartiriladi. Jarayon qaytarib bo'lmaydigan, bu yerda misol:
 
 ```js run
 let arr = [1, 2, 3, 4, 5];
 
-arr.length = 2; // truncate to 2 elements
+arr.length = 2; // 2 ta elementgacha qisqartiring
 alert( arr ); // [1, 2]
 
-arr.length = 5; // return length back
-alert( arr[3] ); // undefined: the values do not return
+arr.length = 5; // uzunlikni qaytaring
+alert( arr[3] ); // undefined: qiymatlar qayta qaytarilmaydi
 ```
 
-So, the simplest way to clear the array is: `arr.length = 0;`.
+Shunday qilib, massivni tozalashning eng oddiy usuli: `arr.length = 0;`.
 
 
-## new Array() [#new-array]
+## new Array() 
 
-There is one more syntax to create an array:
+Massiv yaratish uchun yana bitta sintaksis mavjud:
 
 ```js
-let arr = *!*new Array*/!*("Apple", "Pear", "etc");
+let arr = *!*new Array*/!*("Olma", "Nok", "va hokazo");
 ```
 
-It's rarely used, because square brackets `[]` are shorter. Also there's a tricky feature with it.
+U kamdan-kam qo'llaniladi, chunki to'rtburchaklar `[]` qisqaroq. Bundan tashqari, bu bilan juda ayyor xususiyati mavjud.
 
-If `new Array` is called with a single argument which is a number, then it creates an array *without items, but with the given length*.
+Agar `new Array` raqamli bitta argument bilan chaqirilsa, u *elementlarsiz, lekin berilgan uzunlikdagi* massivni yaratadi.
 
-Let's see how one can shoot themself in the foot:
+Keling, qanday qilib ayanchli xizmatni taqdim etishni ko'rib chiqaylik:
 
 ```js run
-let arr = new Array(2); // will it create an array of [2] ?
+let arr = new Array(2); // u [2] massiv yaratadimi?
 
-alert( arr[0] ); // undefined! no elements.
+alert( arr[0] ); // undefined! elementlar yo'q.
 
 alert( arr.length ); // length 2
 ```
 
-In the code above, `new Array(number)` has all elements `undefined`.
+Yuqoridagi kodda `new Array(raqam)` barcha elementlari `undefined`.
 
-To evade such surprises, we usually use square brackets, unless we really know what we're doing.
+Bunday kutilmagan hodisalardan qochish uchun, odatda nima qilayotganimizni bilmasak, to'rtburchak qavslardan foydalanamiz.
 
-## Multidimensional arrays
+## Ko'p o'lchovli massivlar
 
-Arrays can have items that are also arrays. We can use it for multidimensional arrays, to store matrices:
+Massivlar massiv bo'lgan elementlarga ega bo'lishi mumkin. Matritsalarni saqlash uchun biz uni ko'p o'lchovli massivlar uchun ishlatishimiz mumkin:
 
 ```js run
 let matrix = [
@@ -394,14 +391,14 @@ let matrix = [
   [7, 8, 9]
 ];
 
-alert( matrix[1][1] ); // the central element
+alert( matrix[1][1] ); // markaziy element
 ```
 
 ## toString
 
-Arrays have their own implementation of `toString` method that returns a comma-separated list of elements.
+Massivlar elementlarning vergul bilan ajratilgan ro'yxatini qaytaradigan `toString` usulini o'z ichiga oladi.
 
-For instance:
+Masalan:
 
 
 ```js run
@@ -411,7 +408,7 @@ alert( arr ); // 1,2,3
 alert( String(arr) === '1,2,3' ); // true
 ```
 
-Also, let's try this:
+Bundan tashqari, buni sinab ko'raylik:
 
 ```js run
 alert( [] + 1 ); // "1"
@@ -419,9 +416,9 @@ alert( [1] + 1 ); // "11"
 alert( [1,2] + 1 ); // "1,21"
 ```
 
-Arrays do not have `Symbol.toPrimitive`, neither a viable `valueOf`, they implement only `toString` conversion, so here `[]` becomes an empty string, `[1]` becomes `"1"` and `[1,2]` becomes `"1,2"`.
+Massivlarda `Symbol.toPrimitive`, shuningdek, hatto `valueOf` yo'q, ular faqat `toString` konvertatsiyasini amalga oshiradilar, shuning uchun bu erda `[]` bo'sh satrga aylanadi, `[1]` `"1"` "va `[1,2]` `"1,2"` ga aylanadi.
 
-When the binary plus `"+"` operator adds something to a string, it converts it to a string as well, so the next step looks like this:
+Binar plyus `"+"` operatori massivga biror narsa qo'shganda, u matnga aylantiriladi, shuning uchun keyingi qadam quyidagicha ko'rinadi:
 
 ```js run
 alert( "" + 1 ); // "1"
@@ -429,36 +426,36 @@ alert( "1" + 1 ); // "11"
 alert( "1,2" + 1 ); // "1,21"
 ```
 
-## Summary
+## Xulosa
 
-Array is a special kind of object, suited to storing and managing ordered data items.
+Array - ro'yhatlangan ma'lumotlar elementlarini saqlash va boshqarish uchun mos bo'lgan maxsus ob'ekt turi.
 
-- The declaration:
+- Deklaratsiya:
 
     ```js
-    // square brackets (usual)
+    // kvadrat qavslar (odatiy)
     let arr = [item1, item2...];
 
-    // new Array (exceptionally rare)
+    // new Array (juda kam ishlatiladi)
     let arr = new Array(item1, item2...);
     ```
 
-    The call to `new Array(number)` creates an array with the given length, but without elements.
+    `new Arryay(raqam)` berilgan uzunlikdagi, ammo elementlarsiz massivni yaratadi.
 
-- The `length` property is the array length or, to be precise, its last numeric index plus one. It is auto-adjusted by array methods. 
-- If we shorten `length` manually, the array is truncated.
+- `length` xususiyati - bu massiv uzunligi yoki aniqrog'i, uning oxirgi son ko'rsatkichi plyus bir. U massiv usullari bilan avtomatik ravishda o'rnatiladi.
+- Agar `length` ni qo`lda qisqartirsak, massiv qisqartiriladi.
 
-We can use an array as a deque with the following operations:
+Biz quyidagi amallar bilan massivni ishlatishimiz mumkin:
 
-- `push(...items)` adds `items` to the end.
-- `pop()` removes the element from the end and returns it.
-- `shift()` removes the element from the beginning and returns it.
-- `unshift(...items)` adds items to the beginning.
+- `push(...ma'lumot)` oxiriga `ma'lumot` qo'shiladi.
+- `pop()` elementni oxiridan olib tashlaydi va qaytaradi.
+- `shift()` elementni boshidan olib tashlaydi va qaytaradi.
+- `unshift(...ma'lumot)` elementlarni boshiga qo'shadi.
 
-To loop over the elements of the array:
-  - `for (let i=0; i<arr.length; i++)` -- works fastest, old-browser-compatible.
-  - `for (let item of arr)` -- the modern syntax for items only,
-  - `for (let i in arr)` -- never use.
+Massiv elementlari bo'ylab yurish uchun:
+  - `for (let i=0; i<arr.length; i++)` -- eng tez ishlaydi, eski brauzerga mos keladi.
+  - `for (let items of arr)` -- faqat buyumlar(items) uchun zamonaviy sintaksis,
+  - `for (let i in arr)` -- hech qachon foydalanmang.
 
-We will return to arrays and study more methods to add, remove, extract elements and sort arrays in the chapter <info:array-methods>.
+Biz qatorlarga qaytamiz va <info:array-methods> bobida elementlarni qo'shish, olib tashlash, ajratish va saralash uchun ko'proq usullarni o'rganamiz.
 

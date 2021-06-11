@@ -2,8 +2,8 @@ importance: 3
 
 ---
 
-# Check the range outside
+# Qiymatdan tashqari qiymatni tekshirish
 
-Write an `if` condition to check that `age` is NOT between 14 and 90 inclusively.
+`Age` ning 14 dan 90 gacha bo'lmaganligini tekshirish uchun `if` shartini yozing.
 
-Create two variants: the first one using NOT `!`, the second one -- without it.
+Ikkita variant yarating: birinchisi YO'Q `!` yordamida, ikkinchisi -- usiz.

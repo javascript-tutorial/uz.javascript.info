@@ -1,17 +1,17 @@
 
 ```js run
-function ask(question, yes, no) {
-  if (confirm(question)) yes()
-  else no();
+function ask(savol, ha, yoq) {
+  if (confirm(savol)) ha()
+  else yoq();
 }
 
 ask(
-  "Do you agree?",
+  "Rozimisiz?",
 *!*
-  () => alert("You agreed."),
-  () => alert("You canceled the execution.")
+  () => alert("Rozisiz."),
+  () => alert("Siz ijroni bekor qildingiz.")
 */!*
 );
 ```
 
-Looks short and clean, right?
+Qisqa va toza ko'rinadi, to'g'rimi?

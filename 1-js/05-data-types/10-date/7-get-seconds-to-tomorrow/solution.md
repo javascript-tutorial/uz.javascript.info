@@ -1,20 +1,20 @@
-To get the number of milliseconds till tomorrow, we can from "tomorrow 00:00:00" substract the current date.
+Milisekundalar sonini ertangi kunga qadar olish uchun "ertangi 00:00:00" dan boshlab joriy sanani qisqartirishimiz mumkin.
 
-First, we generate that "tomorrow", and then do it:
+Birinchidan, biz "ertangi vaqti" hosil qilamiz, so'ngra buni bajaramiz:
 
 ```js run
 function getSecondsToTomorrow() {
   let now = new Date();
 
-  // tomorrow date
+  // ertangi sana
   let tomorrow = new Date(now.getFullYear(), now.getMonth(), *!*now.getDate()+1*/!*);
 
-  let diff = tomorrow - now; // difference in ms
-  return Math.round(diff / 1000); // convert to seconds
+  let diff = tomorrow - now; // millisekundlardagi farq
+  return Math.round(diff / 1000); // soniyalarga aylantirish
 }
 ```
 
-Alternative solution:
+Muqobil yechim:
 
 ```js run
 function getSecondsToTomorrow() {
@@ -29,4 +29,4 @@ function getSecondsToTomorrow() {
 }
 ```
 
-Please note that many countries have Daylight Savings Time (DST), so there may be days with 23 or 25 hours. We may want to treat such days separately.
+Iltimos, unutmangki, ko'plab mamlakatlarda yozgi tejash vaqti (DST) mavjud, shuning uchun 23 yoki 25 soatlik kunlar bo'lishi mumkin. Bunday kunlarni alohida davolashni xohlashimiz mumkin.

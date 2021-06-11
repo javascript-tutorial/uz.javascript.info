@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# How many seconds till tomorrow?
+# Ertagachan necha soniya qoldi?
 
-Create a function `getSecondsToTomorrow()` that returns the number of seconds till tomorrow.
+Ertagacha qolgan soniya sonini qaytaradigan `getSecondsToTomorrow()` funktsiyasini yarating.
 
-For instance, if now is `23:00`, then:
+Masalan, agar hozir `23:00` bo'lsa, unda:
 
 ```js
 getSecondsToTomorrow() == 3600
 ```
 
-P.S. The function should work at any day, the "today" is not hardcoded.
+P.S. Funktsiya har qanday vaqtda ishlashi kerak, faqat "bugun" uchun kodlangan emas.

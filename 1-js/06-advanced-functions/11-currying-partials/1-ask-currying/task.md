@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Partial application for login
+# Kirish uchun qisman dastur
 
-The task is a little more complex variant of <info:task/question-use-bind>. 
+Vazifa <info:task/question-use-bind> ning biroz murakkab variantidir.
 
-The `user` object was modified. Now instead of two functions `loginOk/loginFail`, it has a single function `user.login(true/false)`.
+`user` obyekti o'zgartirildi. Endi ikkita funktsiya `loginOk/loginFail` o'rniga, unda bitta `user.login(true/false)` funktsiyasi mavjud.
 
-What to pass `askPassword` in the code below, so that it calls `user.login(true)` as `ok` and `user.login(false)` as `fail`?
+Quyidagi kodda `askPassword`-ni `user.login(true)` `ok` va `user.login(false)` `fail` deb chaqirishi uchun nima qilish kerak?
 
 ```js
 function askPassword(ok, fail) {
@@ -30,5 +30,5 @@ askPassword(?, ?); // ?
 */!*
 ```
 
-Your changes should only modify the highlighted fragment.
+Siz faqat ajratilgan qismni o'zgartirishiz kerak.
 

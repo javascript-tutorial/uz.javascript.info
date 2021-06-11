@@ -1,22 +1,22 @@
-To get the number of seconds, we can generate a date using the current day and time 00:00:00, then substract it from "now".
+Soniya sonini olish uchun biz hozirgi kun va soat 00:00:00 dan foydalanib sana hosil qilamiz, so'ngra uni "hozir" dan mavhumlashtiramiz.
 
-The difference is the number of milliseconds from the beginning of the day, that we should divide by 1000 to get seconds:
+Farq kunning boshidan boshlab millisekundalar sonidir, biz soniyalarni olish uchun 1000 ga bo'lishimiz kerak:
 
 ```js run
 function getSecondsToday() {
   let now = new Date();
 
-  // create an object using the current day/month/year
+  // joriy kun/oy/yil yordamida obyekt yaratish
   let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-  let diff = now - today; // ms difference
-  return Math.round(diff / 1000); // make seconds
+  let diff = now - today; // millisekundlardagi farq
+  return Math.round(diff / 1000); // soniyalarni yaratish
 }
 
 alert( getSecondsToday() );
 ```
 
-An alternative solution would be to get hours/minutes/seconds and convert them to seconds:
+Muqobil echim soat/daqiqa/soniyani olish va ularni soniyalarga aylantirishdir:
 
 ```js run
 function getSecondsToday() {

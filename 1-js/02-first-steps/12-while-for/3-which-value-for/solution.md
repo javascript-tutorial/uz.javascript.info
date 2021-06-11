@@ -1,4 +1,4 @@
-**The answer: from `0` to `4` in both cases.**
+**Javob: ikkala holatda ham `0` dan `4` gacha.**
 
 ```js run
 for (let i = 0; i < 5; ++i) alert( i );
@@ -6,12 +6,12 @@ for (let i = 0; i < 5; ++i) alert( i );
 for (let i = 0; i < 5; i++) alert( i );
 ```
 
-That can be easily deducted from the algorithm of `for`:
+Buni `for` algoritmidan osongina ajratish mumkin:
 
-1. Execute once `i = 0` before everything (begin).
-2. Check the condition `i < 5`
-3. If `true` -- execute the loop body `alert(i)`, and then `i++`
+1. Hamma narsadan oldin `i = 0` ifodani bir marta bajaring(boshlang).
+2. `i < 5` shartni tekshiring
+3. Agar `true` bo'lsa -- `alert(i)` tsiklning tanasini va keyin `i++` ni bajaring
 
-The increment `i++` is separated from the condition check (2). That's just another statement.
+Shartni tekshirishdan (2) `i++` kattalashmasi ajratilgan. Bu yana bir ifoda.
 
-The value returned by the increment is not used here, so there's no difference between `i++` and `++i`.
+O'sish bilan qaytarilgan qiymat bu erda ishlatilmaydi, shuning uchun `i++` va `++i` o'rtasida farq yo'q.

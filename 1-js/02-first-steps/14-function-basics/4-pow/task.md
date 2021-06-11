@@ -2,9 +2,9 @@ importance: 4
 
 ---
 
-# Function pow(x,n)
+# Funktsiya pow(x,n)
 
-Write a function `pow(x,n)` that returns `x` in power `n`. Or, in other words, multiplies `x` by itself `n` times and returns the result.
+`x` ni `n` darajasiga chiqaradigan `pow(x,n)` funktsiyasini yozing. Yoki, boshqacha qilib aytganda, `x` ni o'z-o'ziga `n` marta ko'paytiradi va natijani qaytaradi.
 
 ```js
 pow(3, 2) = 3 * 3 = 9
@@ -12,8 +12,8 @@ pow(3, 3) = 3 * 3 * 3 = 27
 pow(1, 100) = 1 * 1 * ...* 1 = 1
 ```
 
-Create a web-page that prompts for `x` and `n`, and then shows the result of `pow(x,n)`.
+`x` va `n` so'raladigan va keyin `pow(x,n)` natijasini ko'rsatadigan veb-sahifa yarating.
 
 [demo]
 
-P.S. In this task the function should support only natural values of `n`: integers up from `1`.
+P.S. Ushbu vazifada funktsiya faqat `n` ning natural qiymatlarini qo'llab-quvvatlashi kerak: `1` dan butun sonlar.

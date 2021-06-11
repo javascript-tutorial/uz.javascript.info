@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# The difference between calls
+# Chaqiruvlar o'rtasidagi farq
 
-Let's create a new `rabbit` object:
+Keling, yangi `rabbit` obyekti yarataylik:
 
 ```js
 function Rabbit(name) {
@@ -17,7 +17,7 @@ Rabbit.prototype.sayHi = function() {
 let rabbit = new Rabbit("Rabbit");
 ```
 
-These calls do the same thing or not?
+Ushbu chaqiruvlar xuddi shu narsani qiladimi yoki yo'qmi?
 
 ```js
 rabbit.sayHi();

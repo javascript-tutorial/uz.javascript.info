@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Why two hamsters are full?
+# Nima uchun ikkita hamster to'la?
+ 
+Bizda ikkita hamster bor: `speedy` va `lazy` umumiy `hamster` obyektidan merosxo'r.
 
-We have two hamsters: `speedy` and `lazy` inheriting from the general `hamster` object. 
-
-When we feed one of them, the other one is also full. Why? How to fix it?
+Ulardan birini boqsak, ikkinchisi ham to'yadi. Nima uchun? Buni qanday tuzatish kerak?
 
 ```js run
 let hamster = {
@@ -25,11 +25,11 @@ let lazy = {
   __proto__: hamster
 };
 
-// This one found the food
-speedy.eat("apple");
-alert( speedy.stomach ); // apple
+// Bu ovqat topdi
+speedy.eat("olma");
+alert( speedy.stomach ); // olma
 
-// This one also has it, why? fix please.
-alert( lazy.stomach ); // apple
+// Unda ham bor, nega? iltimos tuzating
+alert( lazy.stomach ); // olma
 ```
 

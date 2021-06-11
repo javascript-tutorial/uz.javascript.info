@@ -2,21 +2,21 @@ importance: 5
 
 ---
 
-# Rewrite 'if..else' into '?'
+# 'If..else' ni '?' ga qayta yozing
 
-Rewrite `if..else` using multiple ternary operators `'?'`.
+`If` ni bir nechta ternariy operator yordamida `'?'` qayta yozing.
 
-For readability, it's recommended to split the code into multiple lines.
+Kod oson o'qilish uchun biz kodning bir nechta satrlarga bo'lisni tavsiya etamiz.
 
 ```js
 let message;
 
-if (login == 'Employee') {
-  message = 'Hello';
-} else if (login == 'Director') {
-  message = 'Greetings';
+if (login == 'Xodim') {
+  message = 'Salom';
+} else if (login == 'Direktor') {
+  message = 'Assalomu aleykum';
 } else if (login == '') {
-  message = 'No login';
+  message = "Kirish yo'q";
 } else {
   message = '';
 }

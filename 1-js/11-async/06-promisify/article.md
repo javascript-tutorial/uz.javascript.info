@@ -1,12 +1,12 @@
-# Promisification
+# Promisifikatsiya
 
-Promisification -- is a long word for a simple transform. It's conversion of a function that accepts a callback into a function returning a promise.
+Promisifikatsiya -- oddiy o'zgarish uchun uzun so'z. Qayta chaqiruvni qabul qiladigan funktsiyani va'da beradigan funktsiyaga aylantirish.
 
-In other words, we create a wrapper-function that does the same, internally calling the original one, but returns a promise.
+Boshqacha qilib aytganda, biz xuddi shu narsani bajaradigan, asl nusxasini ichki sifatida chaqiradigan, lekin va'da qaytaradigan funktsiyani yaratamiz.
 
-Such transforms are often needed in real-life, as many functions and libraries are callback-based. But promises are more convenient. So it makes sense to promisify those.
+Bunday o'zgartirishlar ko'pincha hayotda kerak bo'ladi, chunki ko'plab funktsiyalar va kutubxonalar qayta chaqiruvga asoslangan. Ammo va'dalar yanada qulayroq. Shunday qilib, ularni va'da qilish mantiqan.
 
-For instance, we have `loadScript(src, callback)` from the chapter <info:callbacks>.
+Masalan, bizda <info:callbacks> bo'limidan `loadScript(src, callback)` mavjud.
 
 ```js run
 function loadScript(src, callback) {
@@ -23,7 +23,7 @@ function loadScript(src, callback) {
 // loadScript('path/script.js', (err, script) => {...})
 ```
 
-Let's promisify it. The new `loadScriptPromise(src)` function will do the same, but accept only `src` (no callback) and return a promise.
+Keling, buni va'da qilaylik. Yangi `loadScriptPromise(src)` funktsiyasi ham xuddi shunday qiladi, lekin faqat `src` ni qabul qiladi (qayta chaqiruv qilinmaydi) va va'da qaytaradi.
 
 ```js
 let loadScriptPromise = function(src) {
@@ -39,21 +39,21 @@ let loadScriptPromise = function(src) {
 // loadScriptPromise('path/script.js').then(...)
 ```
 
-Now `loadScriptPromise` fits well in our promise-based code.
+Endi `loadScriptPromise` bizning va'damizga asoslangan kodga mos keladi.
 
-As we can see, it delegates all the work to the original `loadScript`, providing its own callback that translates to promise `resolve/reject`.
+Ko'rib turganimizdek, u barcha ishni asl `loadScript` - ga topshiradi va `resolve/reject` va'dasini tarjima qiladigan o'z chaqiruvini qaytaradi.
 
-As we may need to promisify many functions, it makes sense to use a helper.
+Ko'p funktsiyalarni va'da qilishimiz kerak bo'lishi mumkinligi sababli, yordamchidan foydalanish mantiqan to'g'ri keladi.
 
-That's actually very simple -- `promisify(f)` below takes a to-promisify function `f` and returns a wrapper function.
+Bu aslida juda oddiy -- `promisify(f)` quyida va'da berish uchun `f` funktsiyasini oladi va o'rash funktsiyasini qaytaradi.
 
-That wrapper does the same as in the code above: returns a promise and passes the call to the original `f`, tracking the result in a custom callback:
+Ushbu o'ram yuqoridagi kodda bo'lgani kabi ishlaydi: va'dani qaytaradi va chaqiruvni asl holatiga qaytaradi, natijada maxsus qayta chaqiruv natijasini kuzatadi:
 
 ```js
 function promisify(f) {
-  return function (...args) { // return a wrapper-function
+  return function (...args) { // o'ram funktsiyasini qaytaradi
     return new Promise((resolve, reject) => {
-      function callback(err, result) { // our custom callback for f
+      function callback(err, result) { //
         if (err) {
           return reject(err);
         } else {
@@ -61,34 +61,34 @@ function promisify(f) {
         }
       }
 
-      args.push(callback); // append our custom callback to the end of arguments
+      args.push(callback); // argumentlar oxiriga qadar bizning maxsus qayta chaqiruvni qo'shing
 
-      f.call(this, ...args); // call the original function
+      f.call(this, ...args); // asl funktsiyani chaqiring
     });
   };
 };
 
-// usage:
+// Foydalanish:
 let loadScriptPromise = promisify(loadScript);
 loadScriptPromise(...).then(...);
 ```
 
-Here we assume that the original function expects a callback with two arguments `(err, result)`. That's what we encounter most often. Then our custom callback is in exactly the right format, and `promisify` works great for such a case.
+Bu yerda biz asl funktsiya ikkita argumentli qayta chaqiruvni kutadi deb o'ylaymiz `(err, result)`. Biz tez-tez duch keladigan narsa. Keyin bizning odatiy qaytchaqiruv qilishimiz to'g'ri formatga ega va `promisify` bunday holat uchun juda yaxshi ishlaydi.
 
-But what if the original `f` expects a callback with more arguments `callback(err, res1, res2)`?
+Ammo asl `f` `callback(err, res1, res2)` ni ko'proq argumentlar bilan qayta chaqirishni kutsa nima bo'ladi?
 
-Here's a modification of `promisify` that returns an array of multiple callback results:
+Ko'p sonli qayta chaqiruv natijalarini qaytaradigan `promisify` modifikatsiyasi:
 
 ```js
-// promisify(f, true) to get array of results
+// promisify(f, true) natijalar massivini olish uchun
 function promisify(f, manyArgs = false) {
   return function (...args) {
     return new Promise((resolve, reject) => {
-      function *!*callback(err, ...results*/!*) { // our custom callback for f
+      function *!*callback(err, ...results*/!*) { //  bizning odatiy callback f uchun
         if (err) {
           return reject(err);
         } else {
-          // resolve with all callback results if manyArgs is specified
+          // manyArgs ko'rsatilgan bo'lsa, barcha callback natijalari bilan hal qiling
           *!*resolve(manyArgs ? results : results[0]);*/!*
         }
       }
@@ -100,19 +100,19 @@ function promisify(f, manyArgs = false) {
   };
 };
 
-// usage:
+// Foydalanish:
 f = promisify(f, true);
 f(...).then(arrayOfResults => ..., err => ...)
 ```
 
-In some cases, `err` may be absent at all: `callback(result)`, or there's something exotic in the callback format, then we can promisify such functions manually.
+Ba'zi hollarda, `err` umuman yo'q bo'lishi mumkin: `callback(result)`, yoki qayta chaqiruv qilish formatida ekzotik narsa bo'lsa, biz bunday funktsiyalarni qo'lda va'da qila olamiz.
 
-There are also modules with a bit more flexible promisification functions, e.g. [es6-promisify](https://github.com/digitaldesignlabs/es6-promisify). In Node.js, there's a built-in `util.promisify` function for that.
+Promisifikatsiya funktsiyalaridan biroz moslashuvchan bo'lgan modullar ham mavjud, masalan, [es6-promisify](https://github.com/digitaldesignlabs/es6-promisify). Node.js-da buning uchun o'rnatilgan `util.promisify` funktsiyasi mavjud.
 
 ```smart
-Promisification is a great approach, especially when you use `async/await` (see the next chapter), but not a total replacement for callbacks.
+Promisifikatsiya - bu ajoyib yondashuv, ayniqsa `async/await` dan foydalanganda (keyingi bobga qarang), ammo qayta chaqiruvlarni to'liq almashtirish emas.
 
-Remember, a promise may have only one result, but a callback may technically be called many times.
+Yodda tuting, va'da faqat bitta natijaga ega bo'lishi mumkin, ammo texnik qayta chaqiruv ko'p marta chaqirilishi mumkin.
 
-So promisification is only meant for functions that call the callback once. Further calls will be ignored.
+Shunday qilib, promisifikatsiya faqat qayta chaqiruvni chaqiradigan funktsiyalar uchun mo'ljallangan. Boshqa chaqiruvlar e'tiborga olinmaydi.
 ```

@@ -1,147 +1,148 @@
-# Automated testing with mocha
+# Mocha bilan avtomatlashtirilgan test
 
-Automated testing will be used in further tasks.
+Keyingi vazifalarda avtomatlashtirilgan testdan foydalaniladi.
 
-It's actually a part of the "educational minimum" of a developer.
+Bu aslida dasturchining "minimum ta'limi" ning bir qismidir.
 
-## Why we need tests?
+## Nega biz testlarga muhtojmiz?
 
-When we write a function, we can usually imagine what it should do: which parameters give which results.
+Funktsiyani yozganimizda, odatda, u nima qilishligini tasavvur qilishimiz mumkin: qaysi parametrlar qaysi natijalarni beradi.
 
-During development, we can check the function by running it and comparing the outcome with the expected one. For instance, we can do it in the console.
+Rivojlanish jarayonida funktsiyani ishga tushirish va natijani kutilgan natijalar bilan taqqoslash orqali tekshirishimiz mumkin. Masalan, biz buni konsolda qilishimiz mumkin.
 
-If something is wrong -- then we fix the code, run again, check the result -- and so on till it works.
+Agar biror narsa noto'g'ri bo'lsa -- biz kodni tuzatamiz, qayta bajaramiz, natijani tekshiramiz -- va shu qadar kod to'g'ri ishlagunicha.
 
-But such manual "re-runs" are imperfect.
+Ammo bunday qo'lda "qayta ishlash" nomukammaldir.
 
-**When testing a code by manual re-runs, it's easy to miss something.**
+**Kodni qayta ishlash orqali sinovdan o'tkazayotganda, biror narsani o'tkazib yuborish oson.**
 
-For instance, we're creating a function `f`. Wrote some code, testing: `f(1)` works, but `f(2)` doesn't work. We fix the code and now `f(2)` works. Looks complete? But we forgot to re-test `f(1)`. That may lead to an error.
+Masalan, biz `f` funktsiyasini yaratmoqdamiz. Ba'zi kodlarni yozib, test o'tkazamiz: `f(1)` ishlaydi, lekin `f(2)` ishlamaydi. Biz kodni tuzatamiz va endi `f(2)` ishlaydi. To'liqmi? Ammo biz `f(1)` ni qayta tekshirishni unutdik. Bu xatoga olib kelishi mumkin.
 
-That's very typical. When we develop something, we keep a lot of possible use cases in mind. But it's hard to expect a programmer to check all of them manually after every change. So it becomes easy to fix one thing and break another one.
+Bu juda odatiy. Biror narsani ishlab chiqsak, biz foydalanish mumkin bo'lgan ko'p holatlarni yodda tutamiz. Ammo dasturchi har bir o'zgarishidan keyin ularning hammasini qo'lda tekshirishi qiyin. Shunday qilib, bitta narsani tuzatish va boshqasini sindirish osonroq bo'ladi.
 
-**Automated testing means that tests are written separately, in addition to the code. They can be executed easily and check all the main use cases.**
+**Avtomatik test sinovlari kodga qo'shimcha ravishda alohida yoziladi. Ular osongina bajarilishi va barcha asosiy foydalanish holatlarini tekshirishlari mumkin.**
 
 ## Behavior Driven Development (BDD)
 
-Let's use a technique named [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) or, in short, BDD. That approach is used among many projects. BDD is not just about testing. That's more.
+Keling, [Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development) yoki qisqasi BDD nomli texnikadan foydalanamiz. Ushbu yondashuv ko'plab loyihalarda qo'llaniladi. BDD faqat sinovdan iborat emas. Bu ko'proq.
 
-**BDD is three things in one: tests AND documentation AND examples.**
+**BDD bitta uchta narsa: testlar, hujjatlar va misollar.**
 
-Enough words. Let's see the example.
+So'zlar etarli. Keling, misolni ko'rib chiqaylik.
 
-## Development of "pow": the spec
+## "Pow" funktsiyasining rivojlanishi: spetsifikatsiya
 
-Let's say we want to make a function `pow(x, n)` that raises `x` to an integer power `n`. We assume that `n≥0`.
+Aytaylik, biz `x` ni `n` butun sonli darajaga ko'taradigan `pow(x,n)` funktsiyasini yaratishni xohlaymiz. Biz `n≥0` deb taxmin qilamiz.
 
-That task is just an example: there's the `**` operator in JavaScript that can do that, but here we concentrate on the development flow that can be applied to more complex tasks as well.
+Bu vazifa shunchaki misol: JavaScript-da buni amalga oshiradigan `**` operatori mavjud, ammo biz bu erda yanada murakkab vazifalarda ham qo'llanilishi mumkin bo'lgan rivojlanish oqimiga e'tibor qaratamiz.
 
-Before creating the code of `pow`, we can imagine what the function should do and describe it.
+`pow` ning kodini yaratishdan oldin, biz funktsiya nimani bajarishi kerakligini tasavvur qila olamiz va uni tavsiflaymiz.
 
-Such description is called a *specification* or, in short, a spec, and looks like this:
+Bunday tavsif *spetsifikatsiya* quyidagicha ko'rinadi:
 
 ```js
 describe("pow", function() {
 
-  it("raises to n-th power", function() {
+  it("n darajaga ko'taradi", function() {
     assert.equal(pow(2, 3), 8);
   });
 
 });
 ```
 
-A spec has three main building blocks that you can see above:
+Spetsifikatsiyada yuqorida ko'rishingiz mumkin bo'lgan uchta asosiy qurilish bloklari mavjud:
 
-`describe("title", function() { ... })`
+`describe("sarlavha", function() { ... })`
 : What functionality we're describing. Uses to group "workers" -- the `it` blocks. In our case we're describing the function `pow`.
+Biz qaysi funktsiyalarni tasvirlaymiz. Bizning holatda biz `pow` funktsiyasini tasvirlaymiz. Ishchi otlarni - `it` bloklarni guruhlash uchun ishlatiladi.
 
-`it("title", function() { ... })`
-: In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
+`it("sarlavha", function() { ... })`
+: `it` blokining birinchi argumentida biz *inson tilida* funktsiyadan foydalanishning aniq usulini tasvirlaymiz, ikkinchisida esa bu ishni sinab ko'radigan funktsiyani yozamiz.
 
-`assert.equal(value1, value2)`
-: The code inside `it` block, if the implementation is correct, should execute without errors.
+`assert.equal(qiymat1, qiymat2)`
+: `it` blok ichidagi kod, agar bajarilishi to'g'ri bo'lsa, xatosiz bajarilishi kerak.
 
-    Functions `assert.*` are used to check whether `pow` works as expected. Right here we're using one of them -- `assert.equal`, it compares arguments and yields an error if they are not equal. Here it checks that the result of `pow(2, 3)` equals `8`.
+    `assert.*` funktsiyalari `pow` ning kutilganidek ishlashini tekshirish uchun ishlatiladi. Aynan shu yerda biz ulardan birini ishlatamiz -- `assert.equal`, u argumentlarni taqqoslaydi va agar ular teng bo'lmasa, xatoga yo'l qo'yadi. Bu yerda u `pow(2,3)` ning natijasi `8` ga tengligini tekshiradi.
 
-    There are other types of comparisons and checks that we'll see further.
+    Taqqoslash va tekshirishning boshqa turlari mavjud, biz ularni ham ko'rib chiqamiz.
 
-## The development flow
+## Rivojlanish oqimi
 
-The flow of development usually looks like this:
+Rivojlanish oqimi odatda quyidagicha ko'rinadi:
 
-1. An initial spec is written, with tests for the most basic functionality.
-2. An initial implementation is created.
-3. To check whether it works, we run the testing framework [Mocha](http://mochajs.org/) (more details soon) that runs the spec. Errors are displayed. We make corrections until everything works.
-4. Now we have a working initial implementation with tests.
-5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
-6. Go to 3, update the implementation till tests give no errors.
-7. Repeat steps 3-6 till the functionality is ready.
+1. Dastlabki spetsifikatsiya asosiy funksiyani tekshiradigan testlar bilan yoziladi.
+2. Dastlabki dastur yaratiladi.
+3. Uning ishlashini tekshirish uchun biz spetsifikatsiyani boshqaradigan sinov tizimini [Mocha](http://mochajs.org/) (yaqinda batafsil ma'lumot) ishlatamiz. Xatolar ko'rsatiladi. Hamma narsa ishlamaguncha biz tuzatishlar kiritamiz.
+4. Endi bizda testlar bilan ishlaydigan dastlabki dastur mavjud.
+5. Sinov kodida hali amalga oshirilmagan bo'lishi mumkin bo'lgan foydalanishning yangi usullarini qo'shamiz. Testlar "tushib" (xatolar berish) boshlaydi.
+6. 3-ga o'ting, testlar xato qilmaguncha dasturni yangilang.
+7. Dastur tayyor bo'lguncha 3-6 bosqichlarni takrorlang.
 
-So, the development is *iterative*. We write the spec, implement it, make sure tests pass, then write more tests, make sure they work etc. At the end we have both a working implementation and tests for it.
+Shunday qilib, rivojlanish *takrorlanadigan*. Biz spetsifikatsiyani yozamiz, uni amalga oshiramiz, testlar o'tganligiga ishonch hosil qilamiz, so'ngra ko'proq testlarni yozamiz, ularning ishlashiga ishonch hosil qilamiz va hokazo. Oxirida bizda ishlaydigan dastur ham, testlar ham mavjud.
 
-In our case, the first step is complete: we have an initial spec for `pow`. So let's make an implementation. But before that let's make a "zero" run of the spec, just to see that tests are working (they will all fail).
+Bizning holatlarimizda birinchi qadam tugallandi: bizda `pow` uchun boshlang'ich spetsifikatsiya mavjud. Keling, amalga oshiraylik. Ammo bundan oldin testlarning ishlayotganligini ko'rish uchun spetsifikatsiyani "nolga" o'tkazamiz (barchasi muvaffaqiyatsiz bo'ladi).
 
-## The spec in action
+## Amaldagi spetsifikatsiya
 
-Here in the tutorial we'll be using the following JavaScript libraries for tests:
+Bu qo'llanmada biz testlar uchun quyidagi JavaScript kutubxonalaridan foydalanamiz:
 
-- [Mocha](http://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
-- [Chai](http://chaijs.com) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
-- [Sinon](http://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+- [Mocha](http://mochajs.org/) -- asosiy framework: u `describe` va `it` va testlarni boshqaradigan asosiy funktsiyalarni o'z ichiga olgan umumiy sinov funktsiyalarini taqdim etadi.
+- [Chai](http://chaijs.com) -- ko'plab tasdiqlar bilan kutubxona. Bu juda ko'p tasdiqlardan foydalanishga imkon beradi, hozirda bizga faqat `assert.equal` kerak.
+- [Sinon](http://sinonjs.org/) -- funksiyalarni kuzatish, ichki xususiyatlarni taqlid qilish va boshqa ko'p narsalarni ko'rish imkonini beruvchi kutubxona. Keyinchalik biz uchun foydali bo'ladi.
 
-These libraries are suitable for both in-browser and server-side testing. Here we'll consider the browser variant.
+Ushbu kutubxonalar brauzerda ham, serverda ham sinov uchun javob beradi. Bu erda biz brauzer variantini ko'rib chiqamiz.
 
-The full HTML page with these frameworks and `pow` spec:
+Ushbu framework-lar va `pow` spetsifikatsiya bilan to'liq HTML-sahifa:
 
 ```html src="index.html"
 ```
 
-The page can be divided into five parts:
+Sahifani besh qismga bo'lish mumkin:
 
-1. The `<head>` -- add third-party libraries and styles for tests.
-2. The `<script>` with the function to test, in our case -- with the code for `pow`.
-3. The tests -- in our case an external script `test.js` that has `describe("pow", ...)` from above.
-4. The HTML element `<div id="mocha">` will be used by Mocha to output results.
-5. The tests are started by the command `mocha.run()`.
+1. `<head>` tegi uchinchi tomon kutubxonalari va test uslublarini o'z ichiga oladi.
+2. `<script>` tegi sinovdan o'tayotgan funktsiyani o'z ichiga oladi, bizning holatimizda – pow.
+3. Testlar - bizning holatda tashqi test skripti `describe("pow",...)` xususiyatlarini o'z ichiga olgan `test.js` yuqorida keltirilgan.
+4. HTML elementi `<div id="mocha">` Mocha tomonidan natijalarni chiqarish uchun ishlatiladi.
+5. Testlar `mocha.run()` buyrug'i bilan boshlanadi.
 
-The result:
+Natija:
 
 [iframe height=250 src="pow-1" border=1 edit]
 
-As of now, the test fails, there's an error. That's logical: we have an empty function code in `pow`, so `pow(2,3)` returns `undefined` instead of `8`.
+Hozircha test muvaffaqiyatsiz tugadi, xato yuz berdi. Bu aniq: bizda `pow` da bo'sh funktsiya kodi mavjud, shuning uchun `pow(2,3)` `8` o'rniga `undefined` ni qaytaradi.
 
-For the future, let's note that there are advanced test-runners, like [karma](https://karma-runner.github.io/) and others. So it's generally not a problem to setup many different tests.
+Kelajak uchun shuni ta'kidlaymizki, [karma](https://karma-runner.github.io/) va boshqalar kabi ilg'or sinovchilar mavjud. Shuning uchun odatda turli xil testlarni o'rnatish muammo emas.
 
-## Initial implementation
+## Dastlabki dastur
 
-Let's make a simple implementation of `pow`, for tests to pass:
+Testlar o'tishi uchun `pow` ning sodda dasturini yarataylik:
 
 ```js
 function pow(x, n) {
-  return 8; // :) we cheat!
+  return 8; // :) biz g'irromlik qildik!
 }
 ```
 
-Wow, now it works!
+Vau, endi u ishlaydi!
 
 [iframe height=250 src="pow-min" border=1 edit]
 
-## Improving the spec
+## Texnik xususiyatlarini takomillashtirish
 
-What we've done is definitely a cheat. The function does not work: an attempt to calculate `pow(3,4)` would give an incorrect result, but tests pass.
+Biz qilgan narsa, albatta, g'irromlik. Funktsiya ishlamayapti: `pow(3,4)` ni hisoblash urinishi noto'g'ri natija berishi mumkin, ammo testlar o'tib ketadi.
 
-...But the situation is quite typical, it happens in practice. Tests pass, but the function works wrong. Our spec is imperfect. We need to add more use cases to it.
+...Ammo vaziyat odatiy holdir, bu amalda sodir bo'ladi. Sinovlar muvaffaqiyatli o'tadi, ammo funktsiya noto'g'ri ishlaydi. Bizning xususiyatlarimiz nomukammal. Biz unga ko'proq foydalanish holatlarini qo'shishimiz kerak.
 
-Let's add one more test to see if `pow(3, 4) = 81`.
+`pow(3, 4) = 81` ekanligini tekshirish uchun yana bitta testni qo'shamiz.
 
-We can select one of two ways to organize the test here:
+Testni tashkil qilishning ikkita usulidan birini bu yerda tanlashimiz mumkin:
 
-1. The first variant -- add one more `assert` into the same `it`:
+1. Birinchi variant - yana bitta `assert` ni xuddi shu `it` ga qo'shish:
 
     ```js
     describe("pow", function() {
 
-      it("raises to n-th power", function() {
+      it("n darajaga ko'taradi", function() {
         assert.equal(pow(2, 3), 8);
     *!*
         assert.equal(pow(3, 4), 81);
@@ -150,43 +151,43 @@ We can select one of two ways to organize the test here:
 
     });
     ```
-2. The second -- make two tests:
+2. Ikkinchisi - ikkinchi testni yaratish:
 
     ```js
     describe("pow", function() {
 
-      it("2 raised to power 3 is 8", function() {
+      it("2 ning 3 chi darajasi 8 ga teng", function() {
         assert.equal(pow(2, 3), 8);
       });
 
-      it("3 raised to power 3 is 27", function() {
+      it("3 ning 3 chi darajasi 27 ga teng", function() {
         assert.equal(pow(3, 3), 27);
       });
 
     });
     ```
 
-The principal difference is that when `assert` triggers an error, the `it` block immediately terminates. So, in the first variant if the first `assert` fails, then we'll never see the result of the second `assert`.
+Asosiy farq shundaki, `assert` xatoga yo'l qo'yganda, `it` bloki darhol tugaydi. Shunday qilib, birinchi variantda birinchi `assert` bajarilmasa, biz ikkinchi `assert` natijasini hech qachon ko'rmaymiz.
 
-Making tests separate is useful to get more information about what's going on, so the second variant is better.
+Testlarni alohida qilish nima bo'layotgani haqida ko'proq ma'lumot olish uchun foydalidir, shuning uchun ikkinchi variant yaxshiroqdir.
 
-And besides that, there's one more rule that's good to follow.
+Va bundan tashqari, yana bitta qoidaga amal qilish kerak.
 
-**One test checks one thing.**
+**Bitta test bitta narsani tekshiradi.**
 
-If we look at the test and see two independent checks in it, it's better to split it into two simpler ones.
+Agar biz testni ko'rib chiqsak va unda ikkita mustaqil tekshiruvni ko'rsak, uni yana ikkita oddiyroq tekshiruvga ajratganimiz ma'qul.
 
-So let's continue with the second variant.
+Keling, ikkinchi variant bilan davom etamiz.
 
-The result:
+Natija:
 
 [iframe height=250 src="pow-2" edit border="1"]
 
-As we could expect, the second test failed. Sure, our function always returns `8`, while the `assert` expects `27`.
+Biz kutganimizdek, ikkinchi sinov muvaffaqiyatsiz tugadi. Albatta, bizning funktsiyamiz har doim `8` ni qaytaradi, `assert` esa `27` ni kutadi.
 
-## Improving the implementation
+## Dasturni yaxshilash
 
-Let's write something more real for tests to pass:
+Sinovlar muvaffaqiyatli o'tishi uchun aniq narsani yozaylik:
 
 ```js
 function pow(x, n) {
@@ -200,14 +201,14 @@ function pow(x, n) {
 }
 ```
 
-To be sure that the function works well, let's test it for more values. Instead of writing `it` blocks manually, we can generate them in `for`:
+Funktsiyaning yaxshi ishlashiga ishonch hosil qilish uchun uni ko'proq qiymatlar uchun sinab ko'raylik. `it` bloklarini qo'lda yozish o'rniga ularni `for` tsiklida yaratishimiz mumkin:
 
 ```js
 describe("pow", function() {
 
   function makeTest(x) {
     let expected = x * x * x;
-    it(`${x} in the power 3 is ${expected}`, function() {
+    it(`${x} ning 3 darajasi ${expected} ga teng`, function() {
       assert.equal(pow(x, 3), expected);
     });
   }
@@ -219,26 +220,26 @@ describe("pow", function() {
 });
 ```
 
-The result:
+Natija:
 
 [iframe height=250 src="pow-3" edit border="1"]
 
-## Nested describe
+## Ichki describe bloklari 
 
-We're going to add even more tests. But before that let's note that the helper function `makeTest` and `for` should be grouped together. We won't need `makeTest` in other tests, it's needed only in `for`: their common task is to check how `pow` raises into the given power.
+Biz bundan ham ko'proq testlarni qo'shmoqchimiz. Ammo bundan oldin yordamchi funktsiya `makeTest` va `for` birlashtirilishi kerak. Bizga boshqa testlarda `makeTest` kerak bo'lmaydi, faqat `for` da kerak bo'ladi: ularning umumiy vazifasi `pow` ning ushbu darajaga qanday ko'tarilishini tekshirish.
 
-Grouping is done with a nested `describe`:
+Guruhlash ichki `describe` bloklari bilan amalga oshiriladi:
 
 ```js
 describe("pow", function() {
 
 *!*
-  describe("raises x to power 3", function() {
+  describe("x ni 3 chi darajaga ko'taradi", function() {
 */!*
 
     function makeTest(x) {
       let expected = x * x * x;
-      it(`${x} in the power 3 is ${expected}`, function() {
+      it(`${x} ning 3 darajasi ${expected} ga teng`, function() {
         assert.equal(pow(x, 3), expected);
       });
     }
@@ -251,29 +252,29 @@ describe("pow", function() {
   });
 */!*
 
-  // ... more tests to follow here, both describe and it can be added
+  // ... ko'proq testlar yaratilsa bo'ladi
 });
 ```
 
-The nested `describe` defines a new "subgroup" of tests. In the output we can see the titled indentation:
+Ichki `describe` testlarning yangi "kichik guruhini" tashkil qiladi. Natijada biz nomlangan sinovlani ko'rishimiz mumkin.
 
 [iframe height=250 src="pow-4" edit border="1"]
 
-In the future we can add more `it` and `describe` on the top level with helper functions of their own, they won't see `makeTest`.
+Kelajakda biz o'z yordamchi funktsiyalari bilan yuqori darajadagi yangi `it` va `describe` bloklarini yozishimiz mumkin. Yuqoridagi misoldan `makeTest` xususiyati mavjud bo'lmaydi.
 
-````smart header="`before/after` and `beforeEach/afterEach`"
-We can setup `before/after` functions that execute before/after running tests, and also `beforeEach/afterEach` functions that execute before/after *every* `it`.
+````smart header="`before/after` va `beforeEach/afterEach`"
+Sinovlarni boshlashdan oldin/keyin bajaradigan `before/after` funktsiyalarini, shuningdek *har* `it` dan oldin/keyin bajaradigan `beforeEach/afterEach` funktsiyalarini sozlashimiz mumkin.
 
-For instance:
+Masalan:
 
 ```js no-beautify
 describe("test", function() {
 
-  before(() => alert("Testing started – before all tests"));
-  after(() => alert("Testing finished – after all tests"));
+  before(() => alert("Sinov boshlandi - barcha testlardan oldin"));
+  after(() => alert("Sinov tugadi - barcha testlardan so'ng"));
 
-  beforeEach(() => alert("Before a test – enter a test"));
-  afterEach(() => alert("After a test – exit a test"));
+  beforeEach(() => alert("Test oldidan - testni kiriting"));
+  afterEach(() => alert("Testdan so'ng - testdan chiqing"));
 
   it('test 1', () => alert(1));
   it('test 2', () => alert(2));
@@ -281,46 +282,46 @@ describe("test", function() {
 });
 ```
 
-The running sequence will be:
+Bajarilish ketma-ketligi quyidagicha bo'ladi:
 
 ```
-Testing started – before all tests (before)
-Before a test – enter a test (beforeEach)
+Sinov boshlandi - barcha testlardan oldin (before)
+Test oldidan - testni kiriting (beforeEach)
 1
-After a test – exit a test   (afterEach)
-Before a test – enter a test (beforeEach)
+Testdan so'ng - testdan chiqing  (afterEach)
+Test oldidan - testni kiriting (beforeEach)
 2
-After a test – exit a test   (afterEach)
-Testing finished – after all tests (after)
+Testdan so'ng - testdan chiqing   (afterEach)
+Sinov tugadi - barcha testlardan so'ng (after)
 ```
 
-[edit src="beforeafter" title="Open the example in the sandbox."]
+[edit src="beforeafter" title="Misolni sandbox-da oching."]
 
-Usually, `beforeEach/afterEach` (`before/after`) are used to perform initialization, zero out counters or do something else between the tests (or test groups).
+Odatda, `beforeEach/afterEach` (`before/after`) ishga tushirishni amalga oshirish, hisoblagichlarni nolga chiqarish yoki testlar (yoki test guruhlari) o'rtasida boshqa bir narsa qilish uchun ishlatiladi.
 ````
 
-## Extending the spec
+## Texnik xususiyatni kengaytirish
 
-The basic functionality of `pow` is complete. The first iteration of the development is done. When we're done celebrating and drinking champagne -- let's go on and improve it.
+`pow` ning asosiy funktsionalligi to'liq. Rivojlanishning birinchi takrorlanishi amalga oshirildi. Biz nishonlashni va qanday aqlli ekanligimizni aytib bo'lgach, keling, texnik xususiyatlarni yaxshilaymiz.
 
-As it was said, the function `pow(x, n)` is meant to work with positive integer values `n`.
+Yuqorida aytib o'tilganidek, `pow(x,n)` funktsiyasi musbat tamsayı `n` qiymatlari bilan ishlashni anglatadi.
 
-To indicate a mathematical error, JavaScript functions usually return `NaN`. Let's do the same for invalid values of `n`.
+Matematik xatoni ko'rsatish uchun JavaScript funktsiyalari odatda `NaN` ni qaytaradi. Yaroqsiz `n` qiymatlari uchun ham shunday qilaylik.
 
-Let's first add the behavior to the spec(!):
+Birinchidan, bu xatti-harakatni spetsifikatsiyada tasvirlaylik(!).
 
 ```js
 describe("pow", function() {
 
   // ...
 
-  it("for negative n the result is NaN", function() {
+  it("salbiy n uchun natija NaN bo'ladi", function() {
 *!*
     assert.isNaN(pow(2, -1));
 */!*
   });
 
-  it("for non-integer n the result is NaN", function() {
+  it("n butun son bo'lasa natija NaN bo'ladi", function() {
 *!*
     assert.isNaN(pow(2, 1.5));    
 */!*
@@ -329,27 +330,27 @@ describe("pow", function() {
 });
 ```
 
-The result with new tests:
+Natija yangi testlar bilan:
 
 [iframe height=530 src="pow-nan" edit border="1"]
 
-The newly added tests fail, because our implementation does not support them. That's how BDD is done: first we write failing tests, and then make an implementation for them.
+Yangi qo'shilgan testlar muvaffaqiyatsiz tugadi, chunki bizning dasturimiz ularni qo'llab-quvvatlamaydi. BDD shunday amalga oshirilgan: avval biz muvaffaqiyatsiz testlarni yozamiz, so'ngra ularni amalga oshiramiz.
 
-```smart header="Other assertions"
+```smart header="Boshqa tasdiqlar"
 
-Please note the assertion `assert.isNaN`: it checks for `NaN`.
+Iltimos, `assert.isNaN` tasdiqiga e'tibor bering: u `NaN` ni tekshiradi.
 
-There are other assertions in Chai as well, for instance:
+Chai-da boshqa tasdiqlar ham mavjud, masalan:
 
-- `assert.equal(value1, value2)` -- checks the equality  `value1 == value2`.
-- `assert.strictEqual(value1, value2)` -- checks the strict equality `value1 === value2`.
-- `assert.notEqual`, `assert.notStrictEqual` -- inverse checks to the ones above.
-- `assert.isTrue(value)` -- checks that `value === true`
-- `assert.isFalse(value)` -- checks that `value === false`
-- ...the full list is in the [docs](http://chaijs.com/api/assert/)
+- `assert.equal(qiymat1, qiymat2)` -- tenglikni tekshiradi `qiymat1 == qiymat2`.
+- `assert.strictEqual(qiymat1, qiymat2)` -- qat'iy tenglikni tekshiradi `qiymat1 === qiymat2`.
+- `assert.notEqual`, `assert.notStrictEqual` -- yuqoridagilarga teskari tekshiruvlar.
+- `assert.isTrue(qiymat)` -- `qiymat === true` tekshiradi
+- `assert.isFalse(qiymat)` -- `qiymat === false` tekshiradi
+- ...to'liq ro'yxat [hujjatlar](http://chaijs.com/api/assert/)
 ```
 
-So we should add a couple of lines to `pow`:
+Shunday qilib, biz `pow` ga bir nechta satr qo'shishimiz kerak:
 
 ```js
 function pow(x, n) {
@@ -368,45 +369,45 @@ function pow(x, n) {
 }
 ```
 
-Now it works, all tests pass:
+Endi u ishlaydi, barcha testlar o'tadi:
 
 [iframe height=300 src="pow-full" edit border="1"]
 
-[edit src="pow-full" title="Open the full final example in the sandbox."]
+[edit src="pow-full" title="To'liq yakuniy namunani sandbox-da oching."]
 
-## Summary
+## Xulosa
 
-In BDD, the spec goes first, followed by implementation. At the end we have both the spec and the code.
+BDD-da, birinchi navbatda, spetsifikatsiyani yozing va keyin amalga oshiring. Oxir-oqibat bizda ham xususiyat, ham kod mavjud.
 
-The spec can be used in three ways:
+Spetsifikatsiyani uchta usulda ishlatish mumkin:
 
-1. **Tests** guarantee that the code works correctly.
-2. **Docs** -- the titles of `describe` and `it` tell what the function does.
-3. **Examples** -- the tests are actually working examples showing how a function can be used.
+1. **Testlar** kodning to'g'ri ishlashiga kafolat beradi.
+2. **Hujjatlar** -- `describe` va `it` funktsiya nimani anglatishini bildiradi.
+3. **Misollar** -- testlar aslida funktsiyalardan qanday foydalanish mumkinligini ko'rsatadigan ishchi misollardir.
 
-With the spec, we can safely improve, change, even rewrite the function from scratch and make sure it still works right.
+Xususiyatlar bilan biz funktsiyani noldan xavfsiz ravishda yaxshilay olamiz, o'zgartiramiz, hatto qayta yozamiz va uning hali ham to'g'ri ishlashiga ishonch hosil qilamiz.
 
-That's especially important in large projects when a function is used in many places. When we change such a function, there's just no way to manually check if every place that uses it still works right.
+Bu katta loyihalarda funktsiyalar ko'p joylarda ishlatilganda, ayniqsa muhimdir. Bunday funktsiyani o'zgartirganimizda, uni ishlatadigan har qanday joyi hali ham to'g'ri ishlashini qo'lda tekshirishni imkoniyati yo'q.
 
-Without tests, people have two ways:
+Testlarsiz odamlar ikkita yo'lga ega:
 
-1. To perform the change, no matter what. And then our users meet bugs and report them. If we can afford that.
-2. Or people become afraid to modify such functions, if the punishment for errors is harsh. Then it becomes old, overgrown with cobwebs, no one wants to get into it, and that's not good.
+1. O'zgarishlarni nima bo'lishidan qat'iy nazar amalga oshirish. Keyin bizning foydalanuvchilarimizda xatolar paydo bo'ladi, chunki biz, albatta, biror narsani qo'lda tekshirishni unutamiz.
+2. Yoki koddagi xatolar uchun jazo jiddiy bo'lsa, odamlar bunday funktsiyalarda o'zgarishlar qilishdan qo'rqishadi. Keyin u eski, o'rgimchak to'ri bilan o'ralgan bo'lib, hech kim unga kirishni xohlamaydi. Bu rivojlanish uchun yaxshi emas.
 
-**Automatically tested code is contrary to that!**
+**Avtomatik testdan o'tgan kod bunga ziddir!**
 
-If the project is covered with tests, there's just no such problem. We can run tests and see a lot of checks made in a matter of seconds.
+Agar loyiha testlar bilan qoplangan bo'lsa, unda bunday muammo yo'q. Biz testlarni o'tkazib, bir necha soniya ichida ko'plab tekshiruvlarni ko'rishimiz mumkin.
 
-**Besides, a well-tested code has better architecture.**
+**Bundan tashqari, yaxshi sinovdan o'tgan kod yaxshi arxitekturaga ega.**
 
-Naturally, that's because it's easier to change and improve it. But not only that.
+Tabiiyki, uni o'zgartirish va takomillashtirish osonroq. Ammo bu nafaqat.
 
-To write tests, the code should be organized in such a way that every function has a clearly described task, well-defined input and output. That means a good architecture from the beginning.
+Sinovlarni yozish uchun kodni shunday tuzish kerakki, har bir funktsiya aniq tavsiflangan vazifa, kirish va chiqish belgilangan bo'lishi kerak. Bu boshidanoq yaxshi arxitekturani anglatadi.
 
-In real life that's sometimes not that easy. Sometimes it's difficult to write a spec before the actual code, because it's not yet clear how it should behave. But in general writing tests makes development faster and more stable.
+Haqiqiy hayotda bu ba'zan oson emas. Ba'zan haqiqiy koddan oldin spetsifikatsiyani yozish qiyin, chunki u qanday ishlashi kerakligi hali aniq emas. Ammo umuman yozma testlar rivojlanishni tezroq va barqaror qiladi.
 
-## What now?
+## Endi nima?
 
-Later in the tutorial you will meet many tasks with tests baked-in. So you'll see more practical examples.
+Keyinchalik, o'quv qo'llanmada, testlar bilan ko'plab vazifalarni uchratamiz, shuning uchun siz ko'plab amaliy misollarni ko'rasiz.
 
-Writing tests requires good JavaScript knowledge. But we're just starting to learn it. So, to settle down everything, as of now you're not required to write tests, but you should already be able to read them even if they are a little bit more complex than in this chapter.
+Testlarni yozish uchun JavaScript-ni yaxshi bilish kerak. Ammo biz buni endi o'rganishni boshladik. Shunday qilib, hamma narsani hal qilish uchun, hozirgi kunga kelib sizdan test yozish talab qilinmaydi, lekin siz ushbu bobdan bir oz murakkabroq bo'lsa ham, ularni o'qaolishingiz kerak.

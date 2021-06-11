@@ -1,33 +1,33 @@
-# Native prototypes
+# Mahalliy prototiplar
 
-The `"prototype"` property is widely used by the core of JavaScript itself. All built-in constructor functions use it.
+`"prototype"` xususiyati JavaScript-ning o'zi tomonidan keng qo'llaniladi. Konstruktorning barcha funktsiyalari undan foydalanadi.
 
-We'll see how it is for plain objects first, and then for more complex ones.
+Avval oddiy narsalar uchun, keyin esa murakkab narsalar uchun qanday ekanligini bilib olamiz.
 
 ## Object.prototype
 
-Let's say we output an empty object:
+Aytaylik, biz bo'sh obyektni chiqaramiz:
 
 ```js run
 let obj = {};
 alert( obj ); // "[object Object]" ?
 ```
 
-Where's the code that generates the string `"[object Object]"`? That's a built-in `toString` method, but where is it? The `obj` is empty!
+`"[object Object]"` massivini yaratadigan kod qayerda? Bu o'rnatilgan `toString` usuli, ammo u qayerda? `Obj` bo'sh!
 
-...But the short notation `obj = {}` is the same as `obj = new Object()`, where `Object` is a built-in object constructor function, with its own `prototype` referencing a huge object with `toString` and other methods.
+...Ammo `obj = {}` qisqa yozuvi `obj = new Object()` bilan bir xil, bu yerda `Object` o'rnatilgan konstruktor funktsiyasi bo'lib, o'zining `prototype` ga `toString` bilan va boshqa usullar bilan ulkan obyektga murojaat qiladi.
 
-Here's what's going on:
+Mana nima bo'lmoqda:
 
 ![](object-prototype.svg)
 
-When `new Object()` is called (or a literal object `{...}` is created), the `[[Prototype]]` of it is set to `Object.prototype` according to the rule that we discussed in the previous chapter:
+`new Object()` deb nomlanganda (yoki `{...}` so'zma-so'z obyekti yaratiladi), uning `[[Prototype]]` biz muhokama qilgan qoidaga muvofiq `Object.prototype` ga o'rnatiladi oldingi bobda muhokama qilindi:
 
 ![](object-prototype-1.svg)
 
-So then when `obj.toString()` is called the method is taken from `Object.prototype`.
+Shunday qilib, `obj.toString()` deb nomlanganda usul `Object.prototype` dan olinadi.
 
-We can check it like this:
+Buni quyidagicha tekshirishimiz mumkin:
 
 ```js run
 let obj = {};
@@ -36,80 +36,80 @@ alert(obj.__proto__ === Object.prototype); // true
 // obj.toString === obj.__proto__.toString == Object.prototype.toString
 ```
 
-Please note that there is no additional `[[Prototype]]` in the chain above `Object.prototype`:
+Iltimos, `Object.prototype` ustidagi zanjirda qo'shimcha `[[Prototype]]` mavjud emasligini unutmang:
 
 ```js run
 alert(Object.prototype.__proto__); // null
 ```
 
-## Other built-in prototypes
+## Boshqa o'rnatilgan prototiplar
 
-Other built-in objects such as `Array`, `Date`, `Function` and others also keep methods in prototypes.
+`Array`, `Date`, `Function` va boshqa o'rnatilgan narsalar ham prototiplarda usullarni saqlaydi.
 
-For instance, when we create an array `[1, 2, 3]`, the default `new Array()` constructor is  used internally. So the array data is written into the new object, and `Array.prototype` becomes its prototype and provides methods. That's very memory-efficient.
+Masalan, `[1, 2, 3]` massivini yaratganimizda, ichidagi sukut bo'yicha yangi `new Array()` konstruktoridan foydalaniladi. Shunday qilib, massiv ma'lumotlari yangi obyektga yoziladi va `Array.prototype` uning prototipiga aylanadi va usullarni taqdim etadi. Bu juda samarali xotira.
 
-By specification, all of the built-in prototypes have `Object.prototype` on the top. Sometimes people say that "everything inherits from objects".
+Spetsifikatsiya bo'yicha, barcha o'rnatilgan prototiplarning yuqori qismida `Object.prototype` mavjud. Ba'zan odamlar "hamma narsa obyektlardan meros qilib oladi" deyishadi.
 
-Here's the overall picture (for 3 built-ins to fit):
+Bu yerda umumiy rasm (3 ta ichki o'rnatilgan bo'lishi uchun):
 
 ![](native-prototypes-classes.svg)
 
-Let's check the prototypes manually:
+Keling, prototiplarni qo'lda tekshiramiz:
 
 ```js run
 let arr = [1, 2, 3];
 
-// it inherits from Array.prototype?
+// u Array.prototype-dan meros qilib oladimi?
 alert( arr.__proto__ === Array.prototype ); // true
 
-// then from Object.prototype?
+// keyin Object.prototype danmi?
 alert( arr.__proto__.__proto__ === Object.prototype ); // true
 
-// and null on the top.
+// va tepada null.
 alert( arr.__proto__.__proto__.__proto__ ); // null
 ```
 
-Some methods in prototypes may overlap, for instance, `Array.prototype` has its own `toString` that lists comma-delimited elements:
+Prototiplardagi ba'zi usullar bir-biriga to'g'ri kelishi mumkin, masalan, `Array.prototype` ning vergul bilan ajratilgan elementlarini sanab o'tadigan `toString` ga ega:
 
 ```js run
 let arr = [1, 2, 3]
-alert(arr); // 1,2,3 <-- the result of Array.prototype.toString
+alert(arr); // 1,2,3 <-- Array.prototype.toString natijasi
 ```
 
-As we've seen before, `Object.prototype` has `toString` as well, but `Array.prototype` is closer in the chain, so the array variant is used.
+Avval ko'rganimizdek, `Object.prototype` da `toString` mavjud, ammo `Array.prototype` zanjirda yaqinroq, shuning uchun massiv variantidan foydalaniladi.
 
 
 ![](native-prototypes-array-tostring.svg)
 
 
-In-browser tools like Chrome developer console also show inheritance (`console.dir` may need to be used for built-in objects):
+Chrome-ning dasturchi konsoliga o'xshash brauzer vositalari merosni ham ko'rsatadi (`console.dir` ichki obyektlar uchun ishlatilishi kerak bo'lishi mumkin):
 
 ![](console_dir_array.png)
 
-Other built-in objects also work the same way. Even functions -- they are objects of a built-in `Function` constructor, and their methods (`call`/`apply` and others) are taken from `Function.prototype`. Functions have their own `toString` too.
+Boshqa o'rnatilgan obyektlar ham xuddi shu tarzda ishlaydi. Hatto funktsiyalar -- ular o'rnatilgan `Function` konstruktorining obyektlari va ularning usullari (`call`/`apply` va boshqalar) `Function.prototype` dan olingan. Funksiyalarda o'ziga xos `toString` mavjud.
 
 ```js run
 function f() {}
 
 alert(f.__proto__ == Function.prototype); // true
-alert(f.__proto__.__proto__ == Object.prototype); // true, inherit from objects
+alert(f.__proto__.__proto__ == Object.prototype); // true, obyektdan meros olish
 ```
 
-## Primitives
+## Primitivlar
 
-The most intricate thing happens with strings, numbers and booleans.
+Eng murakkab narsa matnlar, raqamlar va mantiqiy turdagi qiymatlar bilan sodir bo'ladi.
 
-As we remember, they are not objects. But if we try to access their properties, then temporary wrapper objects are created using built-in constructors `String`, `Number`, `Boolean`, they provide the methods and disappear.
+Esimizda bo'lganidek, ular obyekt emas. Ammo biz ularning xususiyatlariga kirishga harakat qilsak, u holda vaqtinchalik o'rash moslamalari o'rnatilgan `String`, `Number`, `Boolean` konstruktorlari yordamida yaratiladi, ular usullarni beradi va yo'qoladi.
 
-These objects are created invisibly to us and most engines optimize them out, but the specification describes it exactly this way. Methods of these objects also reside in prototypes, available as `String.prototype`, `Number.prototype` and `Boolean.prototype`.
+Ushbu obyektlar biz uchun ko'rinmas tarzda yaratilgan va aksariyat interpretatorlar ularni optimallashtiradi, ammo spetsifikatsiya uni aynan shu tarzda tasvirlaydi. Ushbu obyektlarning usullari `String.prototype`, `Number.prototype` va `Boolean.prototype` kabi prototiplarda mavjud.
 
-```warn header="Values `null` and `undefined` have no object wrappers"
-Special values `null` and `undefined` stand apart. They have no object wrappers, so methods and properties are not available for them. And there are no corresponding prototypes too.
+```warn header="`null` va `undefined` qiymatlarida hech qanday moslama mavjud emas"
+`null` va `undefined` maxsus qiymatlari ajralib turadi. Ularda obyekt o'ramlari yo'q, shuning uchun usullar va xususiyatlar ular uchun mavjud emas. Va tegishli prototiplar ham yo'q.
 ```
 
-## Changing native prototypes [#native-prototype-change]
+## Mahalliy prototiplarni o'zgartirish
 
-Native prototypes can be modified. For instance, if we add a method to `String.prototype`,  it becomes available to all strings:
+Mahalliy prototiplarni o'zgartirish mumkin. Masalan, `String.prototype` ga usul qo'shsak, u barcha matnlar uchun mavjud bo'ladi:
 
 ```js run
 String.prototype.show = function() {
@@ -119,32 +119,32 @@ String.prototype.show = function() {
 "BOOM!".show(); // BOOM!
 ```
 
-During the process of development, we may have ideas for new built-in methods we'd like to have, and we may be tempted to add them to native prototypes. But that is generally a bad idea.
+Rivojlanish jarayonida biz xohlagan yangi o'rnatilgan usullar haqida g'oyalarimiz bo'lishi mumkin va ularni mahalliy prototiplarga qo'shishni xohlashimiz mumkin. Ammo bu umuman yomon fikr.
 
 ```warn
-Prototypes are global, so it's easy to get a conflict. If two libraries add a method `String.prototype.show`, then one of them will be overwriting the other.
+Prototiplar globaldir, shuning uchun ziddiyatni topish oson. Agar ikkita kutubxona `String.prototype.show` usulini qo'shsa, ulardan biri boshqasining ustiga yoziladi.
 
-So, generally, modifying a native prototype is considered a bad idea.
+Shunday qilib, odatda, mahalliy prototipni o'zgartirish yomon fikr deb hisoblanadi.
 ```
 
-**In modern programming, there is only one case where modifying native prototypes is approved. That's polyfilling.**
+**Zamonaviy dasturlashda mahalliy prototiplarni o'zgartirishni tasdiqlaydigan bitta holat mavjud. Bu juda ko'p to'ldirish.**
 
-Polyfilling is a term for making a substitute for a method that exists in JavaScript specification, but not yet supported by current JavaScript engine.
+Polyfilling - bu JavaScript spetsifikatsiyasida mavjud bo'lgan, ammo hozirgi JavaScript interpretatori tomonidan qo'llab-quvvatlanmagan usulning o'rnini bosuvchi so'z.
 
-Then we may implement it manually and populate the built-in prototype with it.
+Keyin biz uni qo'lda amalga oshirishimiz va u bilan o'rnatilgan prototipni to'ldirishimiz mumkin.
 
-For instance:
+Masalan:
 
 ```js run
-if (!String.prototype.repeat) { // if there's no such method
-  // add it to the prototype
+if (!String.prototype.repeat) { // agar bunday usul bo'lmasa
+  // uni prototipga qo'shing
 
   String.prototype.repeat = function(n) {
-    // repeat the string n times
+    // matni n marta takrorlang
 
-    // actually, the code should be a little bit more complex than that
-    // (the full algorithm is in the specification)
-    // but even an imperfect polyfill is often considered good enough
+    // aslida, kod bundan biroz murakkabroq bo'lishi kerak
+    // (to'liq algoritm spetsifikatsiyada)
+    // ammo hatto nomukammal polyfill ham ko'pincha yetarlicha yaxshi deb hisoblanadi
     return new Array(n + 1).join(this);
   };
 }
@@ -153,17 +153,17 @@ alert( "La".repeat(3) ); // LaLaLa
 ```
 
 
-## Borrowing from prototypes
+## Prototiplardan qarz olish
 
-In the chapter <info:call-apply-decorators#method-borrowing> we talked about method borrowing.
+<info:call-apply-decorators#method-loaning> bobida biz qarz olish usuli haqida suhbatlashdik.
 
-That's when we take a method from one object and copy it into another.
+Ana shunda biz bir obyektdan usul olib, boshqasiga ko'chiramiz.
 
-Some methods of native prototypes are often borrowed.
+Mahalliy prototiplarning ba'zi usullari ko'pincha qarzga olinadi.
 
-For instance, if we're making an array-like object, we may want to copy some array methods to it.
+Masalan, agar biz massivga-o'xshash obyekt qilsak, unga ba'zi bir massiv usullarni ko'chirishni xohlashimiz mumkin.
 
-E.g.
+Masalan:
 
 ```js run
 let obj = {
@@ -179,18 +179,18 @@ obj.join = Array.prototype.join;
 alert( obj.join(',') ); // Hello,world!
 ```
 
-It works, because the internal algorithm of the built-in `join` method only cares about the correct indexes and the `length` property, it doesn't check that the object is indeed the array. And many built-in methods are like that.
+U ishlaydi, chunki o'rnatilgan `join` usulining ichki algoritmi faqat to'g'ri indekslar va `length` xususiyati haqida qayg'uradi, chunki bu obyekt haqiqatan ham massiv ekanligini tekshirmaydi. Va ko'plab o'rnatilgan usullar shunga o'xshashdir.
 
-Another possibility is to inherit by setting `obj.__proto__` to `Array.prototype`, so all `Array` methods are automatically available in `obj`.
+Yana bir imkoniyat - `obj.__proto__` ni `Array.prototype` ga o'rnatish orqali meros olish, shunday qilib barcha `Array` usullari avtomatik ravishda `obj` da mavjud.
 
-But that's impossible if `obj` already inherits from another object. Remember, we only can inherit from one object at a time.
+Ammo `obj` boshqa obyektdan meros bo'lib qolgan bo'lsa, bu mumkin emas. Esingizda bo'lsa, biz bir vaqtning o'zida faqat bitta obyektdan meros olishimiz mumkin.
 
-Borrowing methods is flexible, it allows to mix functionality from different objects if needed.
+Qarz olish usullari moslashuvchan, agar kerak bo'lsa, turli xil narsalardan funksionallikni aralashtirishga imkon beradi.
 
-## Summary
+## Xulosa
 
-- All built-in objects follow the same pattern:
-    - The methods are stored in the prototype (`Array.prototype`, `Object.prototype`, `Date.prototype` etc).
-    - The object itself stores only the data (array items, object properties, the date).
-- Primitives also store methods in prototypes of wrapper objects: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Only `undefined` and `null` do not have wrapper objects.
-- Built-in prototypes can be modified or populated with new methods. But it's not recommended to change them. Probably the only allowable cause is when we add-in a new standard, but not yet supported by the engine JavaScript method.
+- Barcha o'rnatilgan obyektlar bir xil shablonga amal qiladi:
+    - Usullar prototipda saqlanadi (`Array.prototype`, `Object.prototype`, `Date.prototype`).
+    - Obyektning o'zi faqat ma'lumotlarni saqlaydi (massiv elementlari, obyekt xususiyatlari, sana).
+- Ibtidoiy usullar o'rash moslamalari prototiplarida ham saqlanadi: `Number.prototype`, `String.prototype`, `Boolean.prototype`. Faqat `undefined` va `null` da o'rash moslamalari yo'q.
+- O'rnatilgan prototiplarni o'zgartirish yoki yangi usullar bilan to'ldirish mumkin. Ammo ularni o'zgartirish tavsiya etilmaydi. Ehtimol, bu faqat bitta ruxsat etilgan sabab - biz yangi standartni qo'shganimizda, ammo hali JavaScript-ni interpretatorda tomonidan qo'llab-quvvatlanmaganimizda.

@@ -2,9 +2,9 @@ importance: 2
 
 ---
 
-# Syntax check
+# Sintaksisni tekshirish
 
-What is the result of this code?
+Ushbu kod natijasi qanday?
 
 
 ```js no-beautify
@@ -16,4 +16,4 @@ let user = {
 (user.go)()
 ```
 
-P.S. There's a pitfall :)
+P.S. Xatolik bor :)

@@ -1,57 +1,57 @@
 
-# Polyfills
+# Polifillar
 
-The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](http://www.ecma-international.org/publications/standards/Ecma-262.htm).
+JavaScript tili doimiy ravishda rivojlanib boradi. Tilga oid yangi takliflar muntazam ravishda paydo bo'lib, ular tahlil qilinadi va agar munosib deb topilsa, <https://tc39.github.io/ecma262/> ro'yxatiga qo'shiladi va keyin [spetsifikatsiya](http://www.ecma-international.org/publications/standards/Ecma-262.htm) ga o'tiladi .
 
-Teams behind JavaScript engines have their own ideas about what to implement first. They may decide to implement proposals that are in draft and postpone things that are already in the spec, because they are less interesting or just harder to do.
+JavaScript interpretatorini ortida turgan jamoalar avval nimani amalga oshirish kerakligi to'g'risida qaror qilishadi. Ular loyihadagi takliflarni amalga oshirishga qaror qilishlari va oldindan aytib o'tilgan narsalarni keyinga qoldirishlari mumkin, chunki ular unchalik qiziq emas yoki ularni bajarish qiyinroq bo'lsa.
 
-So it's quite common for an engine to implement only the part of the standard.
+Shunday qilib, interpretator uchun standartning faqat bir qismini amalga oshirish odatiy holdir.
 
-A good page to see the current state of support for language features is <https://kangax.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+Til xususiyatlarini qo'llab-quvvatlashning hozirgi holatini ko'rish uchun yaxshi sahifa <https://kangax.github.io/compat-table/es6/> (bu juda katta, biz hali o'rganadigan ko'p narsalarimiz bor).
 
 ## Babel
 
-When we use modern features of the language, some engines may fail to support such code. Just as said, not all features are implemented everywhere.
+Tilning zamonaviy xususiyatlaridan foydalansak, ba'zi interpretatorlar bunday kodni qo'llab-quvvatlamasligi mumkin. Yuqorida aytib o'tilganidek, hamma xususiyatlar hamma joyda ham amalga oshirilmaydi.
 
-Here Babel comes to the rescue.
+Bu erda Babel yordamga keladi.
 
-[Babel](https://babeljs.io) is a [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). It rewrites modern JavaScript code into the previous standard.
+[Babel](https://babeljs.io) - bu [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler). U zamonaviy JavaScript kodini avvalgi standartga qayta yozadi.
 
-Actually, there are two parts in Babel:
+Aslida, Babel-da ikkita qism mavjud:
 
-1. First, the transpiler program, which rewrites the code. The developer runs it on their own computer. It rewrites the code into the older standard. And then the code is delivered to the website for users. Modern project build system like [webpack](http://webpack.github.io/) or [brunch](http://brunch.io/) provide means to run transpiler automatically on every code change, so that doesn't involve any time loss from our side.
+1. Birinchidan, kodni qayta yozadigan transpiler dasturi. Dasturchi uni o'z kompyuterida ishlatadi. Kodni eski standartga qayta yozadi. Va keyin kod veb-saytga foydalanuvchilar uchun yetkazib beriladi. [Webpack](http://webpack.github.io/) yoki [brunch](http://brunch.io/) kabi zamonaviy loyiha tuzish tizimi har bir kod o'zgarganda avtomatik ravishda transpilerni ishga tushirish vositasini taqdim etadi, biz tomondan hech qanday vaqt yo'qotilmaydi.
 
-2. Second, the polyfill.
+2. Ikkinchidan, polifill.
 
-    The transpiler rewrites the code, so syntax features are covered. But for new functions we need to write a special script that implements them. JavaScript is a highly dynamic language, scripts may not just add new functions, but also modify built-in ones, so that they behave according to the modern standard.
+    Transpiler kodni qayta yozadi, shuning uchun sintaksis xususiyatlari qoplanadi. Ammo yangi funktsiyalar uchun ularni amalga oshiradigan maxsus skript yozishimiz kerak. JavaScript - bu juda dinamik tildir, skriptlar nafaqat yangi funktsiyalarni qo'shibgina qolmay, balki ichki funktsiyalarni ham o'zgartirishi mumkin, shunda ular o'zlarini zamonaviy standartlarga muvofiq tutishadi.
 
-    There's a term "polyfill" for scripts that "fill in" the gap and add missing implementations.
+    Bo'shliqni "to'ldiradigan" va skriptlar uchun yetishmayotgan dasturlarni qo'shadigan "polifil" atamasi mavjud.
 
-    Two interesting polyfills are:
-    - [babel polyfill](https://babeljs.io/docs/usage/polyfill/) that supports a lot, but is big.
-    - [polyfill.io](http://polyfill.io) service that allows to load/construct polyfills on-demand, depending on the features we need.
+    Ikkita qiziqarli polifillar:
+    - [babel polifil](https://babeljs.io/docs/usage/polyfill/) juda ko'p narsani qo'llab-quvvatlaydi, lekin katta.
+    - [polyfill.io](http://polyfill.io) xizmati, bizga kerak bo'lgan xususiyatlarga qarab, talabga binoan polifillalarni yuklash/qurish imkonini beradi.
 
-So, we need to setup the transpiler and add the polyfill for old engines to support modern features.
+Shunday qilib, biz zamonaviy funktsiyalarni qo'llab-quvvatlash uchun transpiletorni o'rnatishimiz va eski interpretatorlar uchun polifillni qo'shishimiz kerak.
 
-If we orient towards modern engines and do not use features except those supported everywhere, then we don't need to use Babel.
+Agar biz zamonaviy interpretatorga yo'naltirilgan va hamma joyda qo'llab-quvvatlanadigan funktsiyalardan tashqari funktsiyalardan foydalanmasak, unda Babel-dan foydalanishimiz shart emas.
 
-## Examples in the tutorial
+## O'quv qo'llanmasidagi misollar
 
 
 ````online
-Most examples are runnable at-place, like this:
+Ko'pgina misollar joyida ishlaydi, masalan:
 
 ```js run
-alert('Press the "Play" button in the upper-right corner to run');
+alert('Ishlash uchun yuqori o'ng burchakdagi "Play" tugmasini bosing);
 ```
 
-Examples that use modern JS will work only if your browser supports it.
+Zamonaviy JS dan foydalanadigan misollar faqat sizning brauzeringiz uni qo'llab-quvvatlasa ishlaydi.
 ````
 
 ```offline
-As you're reading the offline version, examples are not runnable. But they usually work :)
+Oflayn versiyasini o'qiyotgan bo'sangiz, misollarni ishlatish mumkin emas. Ammo ular odatda ishlaydi :)
 ```
 
-[Chrome Canary](https://www.google.com/chrome/browser/canary.html) is good for all examples, but other modern browsers are mostly fine too.
+[Chrome Canary](https://www.google.com/chrome/browser/canary.html) barcha misollar uchun yaxshi, ammo boshqa zamonaviy brauzerlar ham yaxshi.
 
-Note that on production we can use Babel to translate the code into suitable for less recent browsers, so there will be no such limitation, the code will run everywhere.
+E'tibor bering, ishlab chiqarishda biz Babel-da kodni eskirgan brauzerlarga mos ravishda tarjima qilishimiz mumkin, shuning uchun bunday cheklov bo'lmaydi, kod hamma joyda ishlaydi.

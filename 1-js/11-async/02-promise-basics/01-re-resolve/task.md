@@ -1,8 +1,8 @@
 
-# Re-resolve a promise?
+# Va'dani qayta hal qilasizmi?
 
 
-What's the output of the code below? 
+Quyidagi kodning chiqishi qanday?
 
 ```js
 let promise = new Promise(function(resolve, reject) {

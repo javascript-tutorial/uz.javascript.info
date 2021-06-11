@@ -2,14 +2,14 @@ importance: 5
 
 ---
 
-# Create an object with the same constructor
+# Xuddi shu konstruktor bilan obyekt yarating
 
-Imagine, we have an arbitrary object `obj`, created by a constructor function -- we don't know which one, but we'd like to create a new object using it.
+Tasavvur qiling, bizda konstruktor funktsiyasi tomonidan yaratilgan `obj` tasodif obyekti bor -- qaysi biriligini bilmaymiz, lekin undan foydalanib yangi obyekt yaratmoqchimiz.
 
-Can we do it like that?
+Biz buni shunday qila olamizmi?
 
 ```js
 let obj2 = new obj.constructor();
 ```
 
-Give an example of a constructor function for `obj` which lets such code work right. And an example that makes it work wrong.
+Bunday kodni to'g'ri ishlashiga imkon beradigan `obj` uchun konstruktor funktsiyasiga misol keltiring. Va uni noto'g'ri ishlashga olib keladigan misol.

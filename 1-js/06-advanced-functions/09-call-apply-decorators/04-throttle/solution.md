@@ -30,10 +30,10 @@ function throttle(func, ms) {
 }
 ```
 
-A call to `throttle(func, ms)` returns `wrapper`.
+`throttle(func, ms)` ga chaqiruv `wrapper` qaytaradi.
 
-1. During the first call, the `wrapper` just runs `func` and sets the cooldown state (`isThrottled = true`).
-2. In this state all calls memorized in `savedArgs/savedThis`. Please note that both the context and the arguments are equally important and should be memorized. We need them simultaneously to reproduce the call.
-3. ...Then after `ms` milliseconds pass, `setTimeout` triggers. The cooldown state is removed (`isThrottled = false`). And if we had ignored calls, then `wrapper` is executed with last memorized arguments and context.
+1. Birinchi chaqiruv paytida, `wrapper` shunchaki `func` funktsiyasini bajaradi va sovutish holatini o'rnatadi (`isThrottled = true`).
+2. Ushbu holatda barcha `savedArgs/savedThis` da yodlangan chaqiruvlar. Iltimos, kontekst va argumentlar bir xil ahamiyatga ega va ularni yodlash kerak. Chaqiruvni takrorlash uchun ularga bir vaqtning o'zida kerak.
+3. ...Keyin `ms` millisoniyalar o'tgandan so'ng, `setTimeout` triggerlar. Sovutish holati olib tashlandi (`isThrottled = false`). Agar biz chaqiruvni e'tiborsiz qoldirgan bo'lsak, u holda `wrapper` oxirgi yodlangan argumentlar va kontekst bilan bajariladi.
 
-The 3rd step runs not `func`, but `wrapper`, because we not only need to execute `func`, but once again enter the cooldown state and setup the timeout to reset it.
+3-qadam `func` emas, balki `wrapper` ni ishga tushiradi, chunki biz nafaqat `func` ni bajarishimiz kerak, balki yana bir marta kutish holatiga kiramiz va uni tiklash uchun vaqt tugashini o'rnatamiz.

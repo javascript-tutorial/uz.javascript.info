@@ -1,12 +1,12 @@
 
 
 ```js run demo
-let a = +prompt("The first number?", "");
-let b = +prompt("The second number?", "");
+let a = +prompt("Birinchi raqam?", "");
+let b = +prompt("Ikkinchi raqam?", "");
 
 alert( a + b );
 ```
 
-Note the unary plus `+` before `prompt`. It immediately converts the value to a number.
+`prompt` oldidan unar plyusga `+` e'tibor bering. U darhol qiymatni raqamga o'zgartiradi.
 
-Otherwise, `a` and `b` would be string their sum would be their concatenation, that is: `"1" + "2" = "12"`.
+Aks holda, `a` va `b` matn bo'ladi, ularning yig'indisi ularning birikmasi bo'ladi, ya'ni: `"1" + "2" = "12"`.

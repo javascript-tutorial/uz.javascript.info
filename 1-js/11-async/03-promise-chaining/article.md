@@ -1,13 +1,13 @@
 
-# Promises chaining
+# Va'dalar zanjiri
 
-Let's return to the problem mentioned in the chapter <info:callbacks>: we have a sequence of asynchronous tasks to be done one after another. For instance, loading scripts. How can we code it well?
+<info:callbacks> bobida aytib o'tilgan muammoga qaytaylik: bizda birin-ketin bajariladigan asinxron vazifalar ketma-ketligi mavjud. Masalan, skriptlarni yuklash. Qanday qilib biz uni yaxshi kodlashimiz mumkin?
 
-Promises provide a couple of recipes to do that.
+Buning uchun va'dalar bir nechta retseptlarni taqdim etadi.
 
-In this chapter we cover promise chaining.
+Ushbu bobda biz va'da zanjirini yoritamiz.
 
-It looks like this:
+Bu shunday ko'rinadi:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -32,23 +32,23 @@ new Promise(function(resolve, reject) {
 });
 ```
 
-The idea is that the result is passed through the chain of `.then` handlers.
+G'oya shundan iboratki, natija `.then` ishlovchilar zanjiri orqali o'tadi.
 
-Here the flow is:
-1. The initial promise resolves in 1 second `(*)`,
-2. Then the `.then` handler is called `(**)`.
-3. The value that it returns is passed to the next `.then` handler `(***)`
-4. ...and so on.
+Mana oqim:
+1. Dastlabki va'da 1 soniyada hal qilinadi `(*)`,
+2. Keyin `.then` ishlov beruvchisi `(**)` chaqiriladi.
+3. Qaytgan qiymat keyingi `.then` ishlov beruvchiga `(***)` uzatiladi
+4. ...va hokazo.
 
-As the result is passed along the chain of handlers, we can see a sequence of `alert` calls: `1` -> `2` -> `4`.
+Natijada ishlovchilar zanjiri bo'ylab uzatilganda biz `alert` chaqiruvlari ketma-ketligini ko'rishimiz mumkin: `1` -> `2` -> `4`.
 
 ![](promise-then-chain.svg)
 
-The whole thing works, because a call to `promise.then` returns a promise, so that we can call the next `.then` on it.
+Hammasi ishlaydi, chunki `promise.then` degan chaqiriq va'dani qaytaradi, shunda biz keyingi `.then` ni chaqira olamiz.
 
-When a handler returns a value, it becomes the result of that promise, so the next `.then` is called with it.
+Qayta ishlovchi qiymatni qaytarganda, bu va'daning natijasi bo'ladi, shuning uchun keyingi `.then` u bilan chaqiriladi.
 
-To make these words more clear, here's the start of the chain:
+Ushbu so'zlarni aniqroq qilish uchun, mana zanjirning boshlanishi:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -64,11 +64,11 @@ new Promise(function(resolve, reject) {
 // .then…
 ```
 
-The value returned by `.then` is a promise, that's why we are able to add another `.then` at `(2)`. When the value is returned in `(1)`, that promise becomes resolved, so the next handler runs with the value.
+`.then` tomonidan qaytarilgan qiymat va'da, shuning uchun biz `(2)` da yana bir `.then` qo'sha olamiz. Qiymat `(1)` ga qaytarilganda, bu va'da hal qilinadi, shuning uchun keyingi ishlov beruvchi qiymat bilan ishlaydi.
 
-**A classic newbie error: technically we can also add many `.then` to a single promise. This is not chaining.**
+**Klassik yangilar xatosi: texnik jihatdan biz bitta va'daga ko'p `.then` qo'sha olamiz. Bu zanjir emas.**
 
-For example:
+Masalan:
 ```js run
 let promise = new Promise(function(resolve, reject) {
   setTimeout(() => resolve(1), 1000);
@@ -90,23 +90,23 @@ promise.then(function(result) {
 });
 ```
 
-What we did here is just several handlers to one promise. They don't pass the result to each other, instead they process it independently.
+Bu yerda qilgan narsamiz bu bitta va'daga bir nechta ishlovchilar qo'yganimiz. Ular natijani bir-biriga yetkazishmaydi, aksincha uni mustaqil ravishda qayta ishlashadi.
 
-Here's the picture (compare it with the chaining above):
+Mana rasm (yuqoridagi zanjir bilan taqqoslang):
 
 ![](promise-then-many.svg)
 
-All `.then` on the same promise get the same result -- the result of that promise. So in the code above all `alert` show the same: `1`.
+Barchasi `.then`, bitta va'da bo'yicha bir xil natijaga erishiladi - bu va'da natijasi. Shunday qilib, yuqoridagi kodda `alert` bir xil bo'ladi: `1`.
 
-In practice we rarely need multiple handlers for one promise. Chaining is used much more often.
+Amalda biz kamdan-kam hollarda bitta va'da uchun bir nechta ishlov beruvchiga muhtojmiz. Zanjirlash juda tez-tez ishlatiladi.
 
-## Returning promises
+## Va'dalarni qaytarish
 
-Normally, a value returned by a `.then` handler is immediately passed to the next handler. But there's an exception.
+Odatda, `.then` ishlov beruvchisi tomonidan qaytarilgan qiymat darhol keyingi ishlov beruvchiga uzatiladi. Ammo istisno mavjud.
 
-If the returned value is a promise, then the further execution is suspended until it settles. After that, the result of that promise is given to the next `.then` handler.
+Agar qaytarib berilgan qiymat va'da bo'lsa, unda keyingi ijro to'xtaguncha to'xtatiladi. Shundan so'ng, ushbu va'daning natijasi keyingi `.then` ishlov beruvchiga beriladi.
 
-For instance:
+Masalan:
 
 ```js run
 new Promise(function(resolve, reject) {
@@ -138,15 +138,15 @@ new Promise(function(resolve, reject) {
 });
 ```
 
-Here the first `.then` shows `1` returns `new Promise(…)` in the line `(*)`. After one second it resolves, and the result (the argument of `resolve`, here it's `result*2`) is passed on to handler of the second `.then` in the line `(**)`. It shows `2` and does the same thing.
+Bu yerda birinchi `.then` `1` `(*)` satrida `new Promise(…)` ni qaytaradi. Bir soniyadan so'ng u hal bo'ladi va natija (`resolve` argumenti, bu yerda `result*2`) `(**)` satridagi ikkinchi `.then` ishlov beruvchiga uzatiladi. Bu `2` ni ko'rsatadi va xuddi shu narsani qiladi.
 
-So the output is again 1 -> 2 -> 4, but now with 1 second delay between `alert` calls.
+Shunday qilib, chiqish yana 1 -> 2 -> 4 ni tashkil qiladi, ammo endi `alert` chaqiruvlari o'rtasida 1 soniya kechikish mavjud.
 
-Returning promises allows us to build chains of asynchronous actions.
+Va'dalarni qaytarish bizga asinxron harakatlar zanjirlarini yaratishga imkon beradi.
 
-## Example: loadScript
+## Misol: loadScript
 
-Let's use this feature with `loadScript` to load scripts one by one, in sequence:
+Skriptlarni navbatma-navbat yuklash uchun ushbu funktsiyani `loadScript` bilan ishlatamiz:
 
 ```js run
 loadScript("/article/promise-chaining/one.js")
@@ -157,22 +157,22 @@ loadScript("/article/promise-chaining/one.js")
     return loadScript("/article/promise-chaining/three.js");
   })
   .then(function(script) {
-    // use functions declared in scripts
-    // to show that they indeed loaded
+    // skriptlarda e'lon qilingan funktsiyalardan foydalaning
+    // haqiqatan ham yuklanganligini ko'rsatish uchun
     one();
     two();
     three();
   });
 ```
 
-This code can be made bit shorter with arrow functions:
+Ushbu kod o'q funktsiyalari bilan biroz qisqartirilishi mumkin:
 
 ```js run
 loadScript("/article/promise-chaining/one.js")
   .then(script => loadScript("/article/promise-chaining/two.js"))
   .then(script => loadScript("/article/promise-chaining/three.js"))
   .then(script => {
-    // scripts are loaded, we can use functions declared there
+    // skriptlar yuklangan, biz u erda e'lon qilingan funktsiyalardan foydalanishimiz mumkin
     one();
     two();
     three();
@@ -180,17 +180,17 @@ loadScript("/article/promise-chaining/one.js")
 ```
 
 
-Here each `loadScript` call returns a promise, and the next `.then` runs when it resolves. Then it initiates the loading of the next script. So scripts are loaded one after another.
+Bu yerda har bir `loadScript` chaqiruvi va'da qaytaradi va keyingi `.then` hal bo'lganda ishlaydi. So'ng u keyingi skriptni yuklashni boshlaydi. Shunday qilib, skriptlar birin-ketin yuklanadi.
 
-We can add more asynchronous actions to the chain. Please note that code is still "flat", it grows down, not to the right. There are no signs of "pyramid of doom".
+Biz zanjirga ko'proq asinxron harakatlarni qo'shishimiz mumkin. Iltimos, unutmangki, kod hali ham "tekis" bo'lib, u o'ngga emas, pastga qarab o'sadi. "Halokat piramidasi" ning alomatlari yo'q.
 
-Please note that technically we can add `.then` directly to each `loadScript`, like this:
+Iltimos, shuni e'tiborga olingki, texnik jihatdan biz har bir `loadScript` ga to'g'ridan-to'g'ri `.then` qo'sha olamiz:
 
 ```js run
 loadScript("/article/promise-chaining/one.js").then(script1 => {
   loadScript("/article/promise-chaining/two.js").then(script2 => {
     loadScript("/article/promise-chaining/three.js").then(script3 => {
-      // this function has access to variables script1, script2 and script3
+      // bu funktsiya script1, script2 va script3 o'zgaruvchanlarga kirish huquqiga ega
       one();
       two();
       three();
@@ -199,21 +199,21 @@ loadScript("/article/promise-chaining/one.js").then(script1 => {
 });
 ```
 
-This code does the same: loads 3 scripts in sequence. But it "grows to the right". So we have the same problem as with callbacks.
+Ushbu kod ham xuddi shunday: 3 ta skriptni ketma-ket yuklaydi. Ammo u "o'ng tomonga o'sadi". Shunday qilib, biz chaqiruvlarni qaytarish bilan bir xil muammolarga duch kelamiz.
 
-People who start to use promises sometimes don't know about chaining, so they write it this way. Generally, chaining is preferred.
+Va'dalardan foydalanishni boshlagan odamlar ba'zida zanjirlash haqida bilishmaydi, shuning uchun ular shunday yozadilar. Odatda, zanjirlash afzaldir.
 
-Sometimes it's ok to write `.then` directly, because the nested function has access to the outer scope. In the example above the most nested callback has access to all variables `script1`, `script2`, `script3`. But that's an exception rather than a rule.
+Ba'zan to'g'ridan-to'g'ri `.then` yozish yaxshi bo'ladi, chunki ichki funktsiya tashqi doiraga kirish huquqiga ega. Yuqoridagi misolda eng uyali qayta chaqirish `skript1`, `skript2`, `skript3` barcha o'zgaruvchanlariga kirish huquqiga ega. Ammo bu qoidadan ko'ra istisno.
 
 
 ````smart header="Thenables"
-To be precise, `.then` may return an arbitrary "thenable" object, and it will be treated the same way as a promise.
+Aniqroq qilib aytganda, `.then` tasodifiy "thenable" obyektni qaytarishi mumkin va unga va'da kabi munosabatda bo'lishadi.
 
-A "thenable" object is any object with a method `.then`.
+"Thenable" obyekt `.then` usuli bo'lgan har qanday obyekt.
 
-The idea is that 3rd-party libraries may implement "promise-compatible" objects of their own. They can have extended set of methods, but also be compatible with native promises, because they implement `.then`.
+Ushbu g'oya shundan iboratki, uchinchi tomon kutubxonalari o'zlariga tegishli "va'dalarga mos" obyektlarni amalga oshirishi mumkin. Ular kengaytirilgan usullar to'plamiga ega bo'lishi mumkin, shuningdek, mahalliy va'dalarga mos kelishi mumkin, chunki ular `.then` ni amalga oshiradilar.
 
-Here's an example of a thenable object:
+Thenable obyektga misol:
 
 ```js run
 class Thenable {
@@ -231,70 +231,70 @@ new Promise(resolve => resolve(1))
   .then(result => {
     return new Thenable(result); // (*)
   })
-  .then(alert); // shows 2 after 1000ms
+  .then(alert); // 1000ms dan keyin 2 ni ko'rsatadi
 ```
 
-JavaScript checks the object returned by `.then` handler in the line `(*)`: if it has a callable method named `then`, then it calls that method providing native functions `resolve`, `reject` as arguments (similar to executor) and waits until one of them is called. In the example above `resolve(2)` is called after 1 second `(**)`. Then the result is passed further down the chain.
+JavaScript `.then` `(*)` satridagi `.then` ishlov beruvchisi tomonidan qaytarilgan obyektni tekshiradi: agar u `then` deb nomlanadigan usulga ega bo'lsa, u holda bu tabiiy funktsiyalarni taqdim etadigan ushbu usulni `resolve`, `reject` argument sifatida chaqiradi (ijrochiga o'xshash) va ulardan biri chaqirilguncha kutadi. Yuqoridagi misolda `resolve(2)` 1 soniyadan so'ng chaqiriladi `(**)`. Keyin natija zanjirning pastki qismiga uzatiladi.
 
-This feature allows to integrate custom objects with promise chains without having to inherit from `Promise`.
+Ushbu xususiyat `Promise` dan meros olmasdan, moslashtirilgan moslamalarni va'da zanjirlari bilan birlashtirishga imkon beradi.
 ````
 
 
-## Bigger example: fetch
+## Kattaroq misol: fetch
 
-In frontend programming promises are often used for network requests. So let's see an extended example of that.
+Frontend dasturlash va'dalari ko'pincha tarmoq so'rovlari uchun ishlatiladi. Keling, buning kengaytirilgan namunasini ko'rib chiqaylik.
 
-We'll use the [fetch](mdn:api/WindowOrWorkerGlobalScope/fetch) method to load the information about the user from the remote server. The method is quite complex, it has many optional parameters, but the basic usage is quite simple:
+Uzoq serverdan foydalanuvchi haqidagi ma'lumotlarni yuklash uchun [fetch](mdn:api/WindowOrWorkerGlobalScope/fetch) usulidan foydalanamiz. Usul juda murakkab, ko'plab ixtiyoriy parametrlarga ega, ammo asosiy foydalanish juda oddiy:
 
 ```js
 let promise = fetch(url);
 ```
 
-This makes a network request to the `url` and returns a promise. The promise resolves with a `response` object when the remote server responds with headers, but *before the full response is downloaded*.
+Bu `url` ga tarmoq so'rovini yuboradi va va'da qaytaradi. Masofaviy server sarlavhalar bilan javob berganida, va *to'liq javob yuklab olinmasdan oldin* va'da `response` obyekti bilan hal qilinadi.
 
-To read the full response, we should call a method `response.text()`: it returns a promise that resolves  when the full text downloaded from the remote server, with that text as a result.
+To'liq javobni o'qish uchun biz `response.text()` usulini chaqirishimiz kerak: bu to'liq matnni uzoq serverdan yuklab olganda va natijada ushbu matn bilan hal qilinadigan va'dani qaytaradi.
 
-The code below makes a request to `user.json` and loads its text from the server:
+Quyidagi kod `user.json` ga so'rov yuboradi va uning matnini serverdan yuklaydi:
 
 ```js run
 fetch('/article/promise-chaining/user.json')
-  // .then below runs when the remote server responds
+  // .then masofaviy server javob berganida quyida ishlaydi
   .then(function(response) {
-    // response.text() returns a new promise that resolves with the full response text
-    // when we finish downloading it
+    // response.text() javobning to'liq matni bilan hal qilinadigan yangi va'dani qaytaradi
+    // uni yuklab olishni tugatgandan so'ng
     return response.text();
   })
   .then(function(text) {
-    // ...and here's the content of the remote file
+    // ...va bu erda masofaviy faylning mazmuni
     alert(text); // {"name": "iliakan", isAdmin: true}
   });
 ```
 
-There is also a method `response.json()` that reads the remote data and parses it as JSON. In our case that's even more convenient, so let's switch to it.
+Masofaviy ma'lumotlarni o'qiydigan va ularni JSON sifatida tahlil qiladigan `response.json()` usuli ham mavjud. Bizning holatda bu yanada qulayroq, shuning uchun unga o'taylik.
 
-We'll also use arrow functions for brevity:
+Qisqartirish uchun biz o'q funktsiyalaridan foydalanamiz:
 
 ```js run
-// same as above, but response.json() parses the remote content as JSON
+// yuqoridagi kabi, ammo response.json() masofaviy tarkibni JSON sifatida ajratadi
 fetch('/article/promise-chaining/user.json')
   .then(response => response.json())
   .then(user => alert(user.name)); // iliakan
 ```
 
-Now let's do something with the loaded user.
+Endi yuklangan foydalanuvchi bilan nimadir qilaylik.
 
-For instance, we can make one more request to github, load the user profile and show the avatar:
+Masalan, github-ga yana bir so'rov yuborishimiz, foydalanuvchi profilini yuklashimiz va avatarni ko'rsatishimiz mumkin:
 
 ```js run
-// Make a request for user.json
+// User.json uchun so'rov yuboring
 fetch('/article/promise-chaining/user.json')
-  // Load it as json
+  // Json sifatida yuklang
   .then(response => response.json())
-  // Make a request to github
+  // Github-ga so'rov yuboring
   .then(user => fetch(`https://api.github.com/users/${user.name}`))
-  // Load the response as json
+  // Javobni json sifatida yuklang
   .then(response => response.json())
-  // Show the avatar image (githubUser.avatar_url) for 3 seconds (maybe animate it)
+  // Avatar rasmini ko'rsating (githubUser.avatar_url) 3 soniya davomida (balki uni jonlantirish mumkin)
   .then(githubUser => {
     let img = document.createElement('img');
     img.src = githubUser.avatar_url;
@@ -305,13 +305,13 @@ fetch('/article/promise-chaining/user.json')
   });
 ```
 
-The code works, see comments about the details, but it should be quite self-descriptive. Although, there's a potential problem in it, a typical error of those who begin to use promises.
+Kod ishlaydi, tafsilotlar haqidagi sharhlarni ko'ring, lekin u o'zi tavsiflovchi bo'lishi kerak. Garchi unda potentsial muammo mavjud bo'lsa ham, va'da ishlatishni boshlaganlar uchun odatiy xato.
 
-Look at the line `(*)`: how can we do something *after* the avatar has finished showing and gets removed? For instance, we'd like to show a form for editing that user or something else. As of now, there's no way.
+`(*)` satriga qarang: avatar ko'rsatilgandan so'ng va olib tashlanganidan *keyin* qanday qilib biron bir narsa qilishimiz mumkin? Masalan, biz ushbu foydalanuvchini yoki boshqa biron bir narsani tahrirlash uchun shaklni ko'rsatmoqchimiz. Hozircha iloj yo'q.
 
-To make the chain extendable, we need to return a promise that resolves when the avatar finishes showing.
+Zanjirni uzaytiradigan qilish uchun, biz avatarni ko'rsatishni tugatgandan so'ng hal qiladigan va'dani qaytarishimiz kerak.
 
-Like this:
+Shunga o'xshash:
 
 ```js run
 fetch('/article/promise-chaining/user.json')
@@ -333,17 +333,17 @@ fetch('/article/promise-chaining/user.json')
 */!*
     }, 3000);
   }))
-  // triggers after 3 seconds
-  .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+  // 3 soniyadan keyin namoyish etadi
+  .then(githubUser => alert(`Namoyishni tugadi ${githubUser.name}`));
 ```
 
-Now right after `setTimeout` runs `img.remove()`, it calls `resolve(githubUser)`, thus passing the control to the next `.then` in the chain and passing forward the user data.
+Endi `setTimeout` `img.remove()` ni ishga tushirgandan so'ng, `resolve(githubUser)` ni chaqiradi, shu bilan boshqaruvni zanjirdagi keyingi `.then` ga uzatadi va foydalanuvchi ma'lumotlarini uzatadi.
 
-As a rule, an asynchronous action should always return a promise.
+Qoida tariqasida, asinxron harakat har doim va'dani qaytarishi kerak.
 
-That makes it possible to plan actions after it. Even if we don't plan to extend the chain now, we may need it later.
+Bu undan keyin harakatlarni rejalashtirishga imkon beradi. Agar biz hozirda zanjirni kengaytirishni rejalashtirmagan bo'lsak ham, keyinroq kerak bo'lishi mumkin.
 
-Finally, we can split the code into reusable functions:
+Va nihoyat, biz kodni qayta ishlatiladigan funktsiyalarga bo'lishimiz mumkin:
 
 ```js run
 function loadJson(url) {
@@ -370,18 +370,18 @@ function showAvatar(githubUser) {
   });
 }
 
-// Use them:
+// Ulardan foydalaning:
 loadJson('/article/promise-chaining/user.json')
   .then(user => loadGithubUser(user.name))
   .then(showAvatar)
-  .then(githubUser => alert(`Finished showing ${githubUser.name}`));
+  .then(githubUser => alert(`Namoyish tugadi ${githubUser.name}`));
   // ...
 ```
 
-## Summary
+## Xulosa
 
-If a `.then` (or `catch/finally`, doesn't matter) handler returns a promise, the rest of the chain waits until it settles. When it does, its result (or error) is passed further.
+Agar `.then` (yoki `catch/finally` ahamiyati yo'q) ishlov beruvchisi va'da bersa, qolgan zanjir o'rnashguncha kutadi. Qachonki u bajarilsa, uning natijasi (yoki xatosi) yana uzatiladi.
 
-Here's a full picture:
+Mana to'liq rasm:
 
 ![](promise-handler-variants.svg)

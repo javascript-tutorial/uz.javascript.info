@@ -1,30 +1,30 @@
-# Comments
+# Izohlar
 
-As we know from the chapter <info:structure>, comments can be single-line: starting with `//` and multiline: `/* ... */`.
+<Info:structure> bobidan ma'lum bo'lganidek, sharhlar bitta satrli `//` va ko'p satrli: `/ * ... * /` bo'lishi mumkin.
 
-We normally use them to describe how and why the code works.
+Odatda ularni kod qanday va nima uchun ishlashini tavsiflash uchun ishlatamiz.
 
-From the first sight, commenting might be obvious, but novices in programming usually get it wrong.
+Birinchi qarashdanoq, izohlar oson va aniq tuyulishi mumkin, ammo boshlang'ich dasturchilar odatda uni noto'g'ri qabul qilishadi.
 
-## Bad comments
+## Yomon izohlar
 
-Novices tend to use comments to explain "what is going on in the code". Like this:
+Boshlang'ich dasturchilar "kodda nima bo'layotganini" tushuntirish uchun izohlardan foydalanadilar. Shunga o'xshash:
 
 ```js
-// This code will do this thing (...) and that thing (...)
-// ...and who knows what else...
-very;
-complex;
-code;
+// Ushbu kod bu narsani (...) va (...) shu narsani qiladi
+// ...va yana kim biladi nimani...
+juda;
+murakkab;
+kod;
 ```
 
-But in good code the amount of such "explanatory" comments should be minimal. Seriously, code should be easy to understand without them.
+Ammo yaxshi kodda bunday "tushuntirish" izohlarni miqdori minimal bo'lishi kerak. Jiddiy ravishda, ularsiz kodni tushunish oson bo'lishi kerak.
 
-There's a great rule about that: "if the code is so unclear that it requires a comment, then maybe it should be rewritten instead".
+Bu borada ajoyib qoida mavjud: "agar kod shunchalik noaniq bo'lib, u izohni talab qiladigan bo'lsa, ehtimol uning o'rniga uni qayta yozish kerak".
 
-### Recipe: factor out functions
+### Yo'nalish: kodni funktsiyaga kiriting
 
-Sometimes it's beneficial to replace a code piece with a function, like here:
+Ba'zan kod qismini funktsiya bilan almashtirish foydali bo'ladi, masalan:
 
 ```js
 function showPrimes(n) {
@@ -32,7 +32,7 @@ function showPrimes(n) {
   for (let i = 2; i < n; i++) {
 
 *!*
-    // check if i is a prime number
+    // i bosh son ekanligini tekshiring
     for (let j = 2; j < i; j++) {
       if (i % j == 0) continue nextPrime;
     }
@@ -43,7 +43,7 @@ function showPrimes(n) {
 }
 ```
 
-The better variant, with a factored out function `isPrime`:
+Eng yaxshi variant – alohida `isPrime` funksiyasidan foydalanish:
 
 
 ```js
@@ -65,21 +65,21 @@ function isPrime(n) {
 }
 ```
 
-Now we can understand the code easily. The function itself becomes the comment. Such code is called *self-descriptive*.
+Endi biz kodni osongina tushunamiz. Funktsiyaning o'zi izohga aylanadi. Bunday kod *o'zini o'zi tavsiflovchi* deb nomlanadi.
 
-### Recipe: create functions
+### Yo'nalish: funksiyalarni yaratish
 
-And if we have a long "code sheet" like this:
+Va agar bizda shunday uzun "kod oqimi" bo'lsa:
 
 ```js
-// here we add whiskey
+// bu erda biz viski qo'shamiz
 for(let i = 0; i < 10; i++) {
   let drop = getWhiskey();
   smell(drop);
   add(drop, glass);
 }
 
-// here we add juice
+// bu erda biz sharbat qo'shamiz
 for(let t = 0; t < 3; t++) {
   let tomato = getTomato();
   examine(tomato);
@@ -90,7 +90,7 @@ for(let t = 0; t < 3; t++) {
 // ...
 ```
 
-Then it might be a better variant to refactor it into functions like:
+Bu funksiyalar yordamida uni qayta yozish yaxshiroq bo'ladi:
 
 ```js
 addWhiskey(glass);
@@ -111,70 +111,70 @@ function addJuice(container) {
 }
 ```
 
-Once again, functions themselves tell what's going on. There's nothing to comment. And also the code structure is better when split. It's clear what every function does, what it takes and what it returns.
+Bu erda sharhlar ham kerak emas: funktsiyalar o'zlari nima qilishlarini aytishadi (agar siz ingliz tilini tushunsangiz). Va shuningdek, kod tuzilishi bo'linganda yaxshiroqdir. Har bir funktsiya nimani bajarishi, nimani talab qilishi va nimani qaytarishi aniq.
 
-In reality, we can't totally avoid "explanatory" comments. There are complex algorithms. And there are smart "tweaks" for purposes of optimization. But generally we should try to keep the code simple and self-descriptive.
+Aslida biz "tushuntirish" izohlaridan butunlay qochib qutula olmaymiz. Murakkab algoritmlar mavjud. Va optimallashtirish uchun aqlli "tweaks" lar mavjud. Ammo, odatda, biz kodni sodda va o'z-o'zini tavsiflovchi qilishga harakat qilishimiz kerak.
 
-## Good comments
+## Yaxshi izohlar
 
-So, explanatory comments are usually bad. Which comments are good?
+Shunday qilib, tushuntirish izohlari odatda yomon. Qaysi izohlar yaxshi?
 
-Describe the architecture
-: Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special diagram language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) for high-level architecture diagrams. Definitely worth studying.
+Arxitekturasini tavsiflang
+: Komponentlarning yuqori darajadagi sharhini, ular qanday ta'sir o'tkazayotganini, turli vaziyatlarda nazorat oqimining nima ekanligini... agar qisqacha bo'lsa, qushning ko'zidan kodni ko'rib chiqing. Kod arxitekturasini tushuntiruvchi diagrammalarni yaratish uchun maxsus [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) tili mavjud. Bu, albatta, o'rganishga arziydi.
 
-Document a function usage
-: There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+Funktsiyadan foydalanishni hujjatlashtiring
+: Funktsiyani hujjatlashtirish uchun [JSDoc](http://en.wikipedia.org/wiki/JSDoc) maxsus sintaksis mavjud: foydalanish, parametrlar, qaytarilgan qiymat.
 
-    For instance:
+    Masalan:
     ```js
     /**
-     * Returns x raised to the n-th power.
+     * n-darajaga ko'tarilgan x ni qaytaradi.
      *
-     * @param {number} x The number to raise.
-     * @param {number} n The power, must be a natural number.
-     * @return {number} x raised to the n-th power.
+     * @param {number} x Ko'payishi kerak bo'lgan raqam.
+     * @param {number} n Daraja, tabiiy son bo'lishi kerak.
+     * @return {number} x n-darajaga ko'tarildi.
      */
     function pow(x, n) {
       ...
     }
     ```
 
-    Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+    Bunday izohlar funktsiya maqsadini tushunmasdan va uning kodiga qaramasdan uni to'g'ri ishlatishga imkon beradi.
 
-    By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+    Aytgancha, [WebStorm](https://www.jetbrains.com/webstorm/) kabi ko'plab tahrirlovchilar ularni ham tushunishlari mumkin va ularni avtomatik to'ldirish va ba'zi bir avtomatik kodlarni tekshirish uchun ishlatishlari mumkin.
 
-    Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+    Shuningdek, [JSDoc 3] (https://github.com/jsdoc3/jsdoc) kabi vositalar mavjud, ular izohlardan HTML-hujjatlarni yaratishlari mumkin. JSDoc haqida ko'proq ma'lumotni <http://usejsdoc.org/> sahifasida o'qishingiz mumkin.
 
-Why is the task solved this way?
-: What's written is important. But what's *not* written may be even more important to understand what's going on. Why is the task solved exactly this way? The code gives no answer.
+Nima uchun vazifa shu tarzda hal qilinadi?
+: Yozilgan kod muhim. Ammo nima yozilganini tushunish uchun *yozilmagan* narsalar yanada muhimroq bo'lishi mumkin. Nima uchun vazifa aynan shu tarzda hal qilinadi? Kod hech qanday javob bermaydi.
 
-    If there are many ways to solve the task, why this one? Especially when it's not the most obvious one.
+    Agar vazifani hal qilishning bir necha yo'li mavjud bo'lsa, unda nima uchun buni tanladingiz? Ayniqsa, sizning usulingiz eng aniq bo'lmasa.
 
-    Without such comments the following situation is possible:
-    1. You (or your colleague) open the code written some time ago, and see that it's "suboptimal".
-    2. You think: "How stupid I was then, and how much smarter I'm now", and rewrite using the "more obvious and correct" variant.
-    3. ...The urge to rewrite was good. But in the process you see that the "more obvious" solution is actually lacking. You even dimly remember why, because you already tried it long ago. You revert to the correct variant, but the time was wasted.
+    Izohlarsiz quyidagi holatlar sodir bo'lishi mumkin:
+    1. Siz (yoki sizning hamkasbingiz) bir muncha vaqt oldin yozilgan kodni ochasiz va uning "suboptimal" ekanligini ko'rasiz.
+    2. Siz shunday deb o'ylaysiz: "Men o'sha paytda qanday ahmoq edim va hozir qanchalik aqlliroqman" va "aniqroq va to'g'ri" variantidan foydalanib qayta yozasiz.
+    3. ...Qayta yozish istagi yaxshi edi. Ammo bu jarayonda "aniqroq" yechim aslida yetishmayotganini ko'rasiz. Siz hatto nima uchun unday bo'lganini xira eslaysiz, chunki siz buni allaqachon sinab ko'rgansiz. Siz to'g'ri variantga qaytdingiz, ammo vaqt behuda ketdi.
 
-    Comments that explain the solution are very important. They help to continue development the right way.
+    Yechimni tushuntiradigan izohlar juda muhimdir. Ular rivojlanishni to'g'ri yo'lda davom ettirishga yordam beradi.
 
-Any subtle features of the code? Where they are used?
-: If the code has anything subtle and counter-intuitive, it's definitely worth commenting.
+Kodning nozik xususiyatlari bormi? Ular qayerda ishlatiladi?
+: Agar kodda nozik va qarshi intuitiv narsa bo'lsa, albatta izoh berishga arziydi.
 
-## Summary
+## Xulosa
 
-An important sign of a good developer is comments: their presence and even their absence.
+Yaxshi dasturchining muhim belgisi bu izohlar: ularning mavjudligi va hatto yo'qligi.
 
-Good comments allow us to maintain the code well, come back to it after a delay and use it more effectively.
+Yaxshi sharhlar bizga kodni yaxshi saqlashga imkon beradi, vaqt o'tgach keyin unga qaytamiz va undan samarali foydalanamiz.
 
-**Comment this:**
+**Bunga izoh bering:**
 
-- Overall architecture, high-level view.
+- Umumiy arxitektura, yuqori darajadagi ko'rinish.
 - Function usage.
-- Important solutions, especially when not immediately obvious.
+- Muhim yechimlar, ayniqsa darhol aniq bo'lmaganda.
 
-**Avoid comments:**
+**Izohlashdan saqlaning:**
 
-- That tell "how code works" and "what it does".
-- Put them only if it's impossible to make the code so simple and self-descriptive that it doesn't require those.
+- Bu "kod qanday ishlaydi" va "u nima qiladi".
+- Ularni faqat oddiy va o'zini o'zi tavsiflovchi kodni bajarish mumkin bo'lmagan hollarda foydalaning, bu izohni talab qilmaydi.
 
-Comments are also used for auto-documenting tools like JSDoc3: they read them and generate HTML-docs (or docs in another format).
+Izohlar JSDoc3 kabi avtomatik hujjatlashtirish vositalari uchun ham qo'llaniladi: ularni o'qiydilar va HTML-hujjatlarni (yoki boshqa formatdagi hujjatlarni) yaratadilar.

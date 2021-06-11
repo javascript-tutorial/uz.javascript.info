@@ -1,10 +1,10 @@
 describe("test", function() {
 
-  before(() => alert("Testing started – before all tests"));
-  after(() => alert("Testing finished – after all tests"));
+  before(() => alert("Sinov boshlandi - barcha testlardan oldin"));
+  after(() => alert("Sinov tugadi - barcha testlardan so'ng"));
 
-  beforeEach(() => alert("Before a test – enter a test"));
-  afterEach(() => alert("After a test – exit a test"));
+  beforeEach(() => alert("Test oldidan - testni kiriting"));
+  afterEach(() => alert("Testdan so'ng - testdan chiqing"));
 
   it('test 1', () => alert(1));
   it('test 2', () => alert(2));

@@ -2,11 +2,11 @@ importance: 5
 
 ---
 
-# Changing "prototype"
+# "Prototip" ni o'zgartirish
 
-In the code below we create `new Rabbit`, and then try to modify its prototype.
+Quyidagi kodda biz `new Rabbit` ni yaratamiz va keyin uning prototipini o'zgartirishga harakat qilamiz.
 
-In the start, we have this code:
+Boshida bizda ushbu kod mavjud:
 
 ```js run
 function Rabbit() {}
@@ -20,7 +20,7 @@ alert( rabbit.eats ); // true
 ```
 
 
-1. We added one more string (emphasized), what `alert` shows now?
+1. Biz yana bitta matn qo'shdik (ta'kidlangan), hozir qanday `alert` ko'rsatilmoqda?
 
     ```js
     function Rabbit() {}
@@ -37,7 +37,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-2. ...And if the code is like this (replaced one line)?
+2. ...Va agar kod shunga o'xshash bo'lsa (bitta satr o'rni o'zgartirildi)?
 
     ```js
     function Rabbit() {}
@@ -54,7 +54,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-3. Like this (replaced one line)?
+3. Bu kabi (bitta satr o'rni o'zgartirildi)?
 
     ```js
     function Rabbit() {}
@@ -71,7 +71,7 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
-4. The last variant:
+4. Oxirgi variant:
 
     ```js
     function Rabbit() {}

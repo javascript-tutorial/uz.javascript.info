@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Exclude backreferences
+# Qayta havolalarni chiqarib tashlash
 
-In simple cases of circular references, we can exclude an offending property from serialization by its name.
+Oddiy holatlarda, tsiklik bog'lanishlarda, biz uning nomidan ketma-ketlikdan kelib chiqadigan mulkni chiqarib tashlashimiz mumkin.
 
-But sometimes there are many backreferences. And names may be used both in circular references and normal properties.
+Ammo ba'zida ko'plab qayta havolalar mavjud. Va ismlar tsiklik ma'lumotnomalar ham, oddiy xususiyatlarda ham ishlatilishi mumkin.
 
-Write `replacer` function to stringify everything, but remove properties that reference `meetup`:
+Hamma narsani torlashtirish uchun `replacer` funktsiyasini yozing, lekin `meetup` ga havola qilingan xususiyatlarni olib tashlang:
 
 ```js run
 let room = {
@@ -16,24 +16,24 @@ let room = {
 };
 
 let meetup = {
-  title: "Conference",
+  title: "Konferensiya",
   occupiedBy: [{name: "John"}, {name: "Alice"}],
   place: room
 };
 
 *!*
-// circular references 
+// tsiklik ma'lumotnomalar 
 room.occupiedBy = meetup;
 meetup.self = meetup;
 */!*
 
 alert( JSON.stringify(meetup, function replacer(key, value) {
-  /* your code */
+  /* sizning kodingiz */
 }));
 
-/* result should be:
+/* natija quyidagicha bo'lishi kerak:
 {
-  "title":"Conference",
+  "title":"Konferensiya",
   "occupiedBy":[{"name":"John"},{"name":"Alice"}],
   "place":{"number":23}
 }

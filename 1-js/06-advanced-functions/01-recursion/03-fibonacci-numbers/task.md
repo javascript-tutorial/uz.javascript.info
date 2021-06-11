@@ -2,24 +2,24 @@ importance: 5
 
 ---
 
-# Fibonacci numbers
+# Fibonachchi raqamlari
 
-The sequence of [Fibonacci numbers](https://en.wikipedia.org/wiki/Fibonacci_number) has the formula <code>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></code>. In other words, the next number is a sum of the two preceding ones.
+[Fibonachchi raqamlari](https://en.wikipedia.org/wiki/Fibonacci_number) ketma-ketligi <code>F<sub>n</sub> = F<sub>n-1</sub> + F<sub>n-2</sub></code> formulasiga ega. Boshqacha qilib aytganda, keyingi raqam oldingi ikkitasining yig'indisi.
 
-First two numbers are `1`, then `2(1+1)`, then `3(1+2)`, `5(2+3)` and so on: `1, 1, 2, 3, 5, 8, 13, 21...`.
+Birinchi ikkita raqam `1`, keyin `2(1+1)`, keyin `3(1+2)`, `5(2+3)` va boshqalar: `1, 1, 2, 3, 5, 8, 13, 21...`.
 
-Fibonacci numbers are related to the [Golden ratio](https://en.wikipedia.org/wiki/Golden_ratio) and many natural phenomena around us.
+Fibonachchi raqamlari [Oltin nisbat](https://en.wikipedia.org/wiki/Golden_ratio) va atrofimizdagi ko'plab tabiiy hodisalar bilan bog'liq.
 
-Write a function `fib(n)` that returns the `n-th` Fibonacci number.
+`n-chi` fibonachchi raqamini qaytaradigan `fib(n)` funktsiyasini yozing.
 
-An example of work:
+Kod namunasi:
 
 ```js
-function fib(n) { /* your code */ }
+function fib(n) { /* sizning kodingiz */ }
 
 alert(fib(3)); // 2
 alert(fib(7)); // 13
 alert(fib(77)); // 5527939700884757
 ```
 
-P.S. The function should be fast. The call to `fib(77)` should take no more than a fraction of a second.
+P.S. Funktsiya tez bo'lishi kerak. `fib(77)` ga chaqiruv soniyaning bir qismidan oshmasligi kerak.

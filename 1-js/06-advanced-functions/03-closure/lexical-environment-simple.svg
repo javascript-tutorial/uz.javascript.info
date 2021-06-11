@@ -16,26 +16,26 @@
             <g id="Group-3" transform="translate(492.000000, 51.000000)">
                 <rect id="Rectangle-1" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="135" height="47"></rect>
                 <text id="say:-function" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="7" y="19">say: function</tspan>
-                    <tspan x="7" y="34">phrase: "Hello"</tspan>
+                    <tspan x="7" y="19">say: funktsiya</tspan>
+                    <tspan x="7" y="34">phrase: "Salom"</tspan>
                 </text>
             </g>
             <g id="Group-2" transform="translate(317.000000, 61.000000)">
                 <rect id="Rectangle-1-Copy" stroke="#E8C48E" stroke-width="2" fill="#FFF9EB" x="1" y="1" width="110" height="27"></rect>
                 <text id="name:-&quot;John&quot;" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
-                    <tspan x="7.7" y="17">name: "John"</tspan>
+                    <tspan x="7.7" y="17">name: "Elbek"</tspan>
                 </text>
             </g>
             <g id="Group" transform="translate(434.000000, 61.000000)">
                 <path id="Line" d="M16.5,19.5 L2.5,19.5 L2.5,17.5 L16.5,17.5 L16.5,11.5 L30.5,18.5 L16.5,25.5 L16.5,19.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <g id="Group" transform="translate(637.000000, 61.000000)">
                 <path id="Line" d="M16.5,19.5 L2.5,19.5 L2.5,17.5 L16.5,17.5 L16.5,11.5 L30.5,18.5 L16.5,25.5 L16.5,19.5 Z" fill="#EE6B47" fill-rule="nonzero"></path>
                 <text id="outer" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#8A704D">
-                    <tspan x="0" y="11">outer</tspan>
+                    <tspan x="0" y="11">tashqi</tspan>
                 </text>
             </g>
             <text id="null" font-family="PTMono-Regular, PT Mono" font-size="14" font-weight="normal" fill="#8A704D">
@@ -59,7 +59,7 @@
             </g>
             <polyline id="Rectangle-1-Copy" fill="#EC6B4E" points="0 83.7741935 0 71 9 77.3870968"></polyline>
             <text id="the-new-function-Lex" font-family="PTMono-Regular, PT Mono" font-size="12" font-weight="normal" fill="#708090">
-                <tspan x="226" y="26">the new function Lexical Environment</tspan>
+                <tspan x="226" y="26">leksik muhitning yangi funktsiyasi</tspan>
             </text>
             <path id="Line" d="M353,48 L353,31 L354,31 L354,48 L358,48 L353.5,57 L349,48 L353,48 Z" fill="#708090" fill-rule="nonzero" opacity="0.502774004"></path>
         </g>

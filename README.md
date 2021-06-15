@@ -33,12 +33,7 @@ Materialning turi papka ichidagi fayl bilan belgilanadi:
 
 Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi.
 
-  - `index.md` stands for a chapter
-  - `article.md` stands for an article
-  - `task.md` stands for a task (solution must be provided in `solution.md` file as well)
-
 ...
 
 E'tiboringiz uchun rahmat!
 Elbek va Oybek.
-

@@ -1,8 +1,13 @@
 # Ninja kodi
 
 
+<<<<<<< HEAD
 ```quote author="Konfutsiy"
 O'ylamasdan o'rganish mehnatni yo'qotadi; o'rganmasdan o'ylash xavfli.
+=======
+```quote author="Confucius (Analects)"
+Learning without thought is labor lost; thought without learning is perilous.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 O'tmishdagi dasturchi ninjalar ushbu hiyla-nayranglardan foydalanib, kod saqlovchilarning ongini charxlashdi.
@@ -42,7 +47,11 @@ Qisqasi har doim yaxshiroq ekanligini ularga ayting. Ularni ninja yo'llariga bos
 Kim biladi - gapirmaydi. Kim aytadi - bilmaydi.
 ```
 
+<<<<<<< HEAD
 Tezroq kodlashning yana bir usuli - hamma joyda bitta harfli o'zgaruvchan nomlardan foydalanish. `a`, `b` yoki `c` kabi.
+=======
+Another way to code shorter is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Qisqa o'zgaruvchi kodda o'rmondagi haqiqiy ninja singari yo'qoladi. Hech kim uni muharrirning "qidiruvi" yordamida topa olmaydi. Va hatto kimdir buni tushungan taqdirda ham, u `a` yoki `b` ismlari nimani anglatishini "hal qila olmaydi".
 
@@ -103,8 +112,13 @@ Bunday kodni tez o'qish imkonsiz bo'lib qoladi. Xato bo'lsa ... Ummm ... Biz uzo
 
 ## Aqlli sinonimlar
 
+<<<<<<< HEAD
 ```quote author="Konfutsiy"
 Eng qiyin narsa - qorong'i xonada qora mushukni topishdir, ayniqsa agar u yerda mushuk bo'lmasa.
+=======
+```quote author="Laozi (Tao Te Ching)"
+The Tao that can be told is not the eternal Tao. The name that can be named is not the eternal name.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 *Bir xil* narsalarga *o'xshash* nomlardan foydalanish hayotni yanada qiziqarli qiladi va jamoatchilikka ijodingizni namoyish etadi.
@@ -136,7 +150,11 @@ Buning o'rniga mavjud nomlarni qayta ishlating. Ularga faqat yangi qiymatlarni y
 
 Funksiyada faqat parametr sifatida berilgan o'zgaruvchanlardan foydalanishga harakat qiling.
 
+<<<<<<< HEAD
 Bu o'zgaruvchanda *hozir* nima borligini aniqlashni qiyinlashtirishi mumkin. Va bu qayerdan kelib chiqqanligi. Intuitivligi zaif odam kodni satrma-bosqich tahlil qilishi va har bir kod bo'limi orqali o'zgarishlarni kuzatishi kerak boladi.
+=======
+That would make it really hard to identify what's exactly in the variable *now*. And also where it comes from. The purpose is to develop the intuition and memory of a person reading the code. A person with weak intuition would have to analyze the code line-by-line and track the changes through every code branch.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 **Yondashuvning ilg'or varianti - bu qiymatni tsikl yoki funktsiya o'rtasida yashirin ravishda (!) almashtirish.**
 
@@ -154,7 +172,11 @@ function ninjaFunction(elem) {
 
 Funktsiyaning ikkinchi yarmida `elem` bilan ishlashni istagan boshqa dasturchi hayron qoladi ... Faqat koddagi nosozliklarni tuzatish paytida, kodni o'rganib chiqib, ular klon bilan ishlashayotganini bilib olishadi!
 
+<<<<<<< HEAD
 Ushbu texnikani muntazam ravishda kodda ko'rdik. Tajribali ninjaga qarshi ham samarali.
+=======
+Seen in code regularly. Deadly effective even against an experienced ninja.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## O'yin-kulgi uchun pastki chiziqlar
 
@@ -168,8 +190,12 @@ Aqlli ninja pastki chiziqlarni kodning bir joyiga qo'yadi va boshqa joylarda qo'
 
 Hamma sizning subyektlaringiz qanchalik ajoyibligini ko'rsin! `superElement`, `megaFrame` va `niceItem` kabi nomlar o'quvchini ravshanlashtiradi.
 
+<<<<<<< HEAD
 Darhaqiqat, bir tomondan, bir narsa yozilgan: `super...`, `mega...`, `nice...`. Ammo boshqa tomondan - bu tafsilotlarni keltirib chiqarmaydi. O'quvchi yashirin ma'no izlashga qaror qilishi va bir-ikki soat davomida mulohaza yuritishi mumkin.
 
+=======
+Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two of their paid working time.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 
 ## Tashqi o'zgaruvchanlarni bir-biriga bog'lab qo'ying
@@ -179,7 +205,11 @@ Nurda bo'lganingizda, zulmatda hech narsa ko'rmaysiz.<br>
 Zulmatda bo'lganingizda, hamma narsani nurda ko'rishingiz mumkin.
 ```
 
+<<<<<<< HEAD
 Funktsiya ichidagi va tashqarisidagi o'zgaruvchanlar uchun bir xil nomlardan foydalaning. Oddiy. Hech qanday harakat talab etilmaydi.
+=======
+Use same names for variables inside and outside a function. As simple. No efforts to invent new names.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let *!*user*/!* = authenticateUser();

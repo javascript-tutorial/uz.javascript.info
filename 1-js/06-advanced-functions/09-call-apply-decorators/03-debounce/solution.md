@@ -1,19 +1,12 @@
 ```js demo
-function debounce(f, ms) {
-
-  let isCooldown = false;
-
+function debounce(func, ms) {
+  let timeout;
   return function() {
-    if (isCooldown) return;
-
-    f.apply(this, arguments);
-
-    isCooldown = true;
-
-    setTimeout(() => isCooldown = false, ms);
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, arguments), ms);
   };
-
 }
+<<<<<<< HEAD
 ```
 
 `debounce` ga chaqiruv o'ramni qaytaradi. Ikki variant bo'lishi mumkin:
@@ -26,3 +19,10 @@ Birinchi chaqiruvda `isCooldown` `false`, shuning uchun chaqiruv davom etadi va 
 `isCooldown` `true` bo'lsa, boshqa barcha chaqiruvlar e'tiborga olinmaydi.
 
 Keyin `setTimeout` berilgan kechikishdan keyin uni `false` ga qaytaradi.
+=======
+
+```
+
+A call to `debounce` returns a wrapper. When called, it schedules the original function call after given `ms` and cancels the previous such timeout.
+
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

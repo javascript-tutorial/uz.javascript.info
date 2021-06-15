@@ -35,4 +35,8 @@ alert(generator()); // 282475249
 alert(generator()); // 1622650073
 ```
 
+<<<<<<< HEAD
 Bu kontekst uchun juda yaxshi. Ammo keyin biz `for..of` bilan takrorlash va boshqa joyda foydali bo'lishi mumkin bo'lgan generator tarkibidan foydalanish qobiliyatimizni yo'qotamiz.
+=======
+That also works. But then we lose ability to iterate with `for..of` and to use generator composition, that may be useful elsewhere.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

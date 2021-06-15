@@ -2,7 +2,11 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # this yo'qotishni so'rang
+=======
+# Fix a function that loses "this"
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Quyidagi koddagi `askPassword()` ga chaqiruv parolni tekshirishi kerak va keyin javobga qarab `user.loginOk/loginFail` chaqirishi kerak.
 
@@ -34,5 +38,3 @@ let user = {
 askPassword(user.loginOk, user.loginFail);
 */!*
 ```
-
-

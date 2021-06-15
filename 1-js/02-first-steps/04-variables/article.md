@@ -12,7 +12,11 @@ O'zgaruvchanlar bu ma'lumotlarni saqlash uchun ishlatiladi.
 
 JavaScript da o'zgaruvchani yaratish uchun `let` kalit so'zidan foydalaning.
 
+<<<<<<< HEAD
 Quyidagi ifoda "xabar" nomli o'zgaruvchini yaratadi (boshqacha aytganda: *e'lon qiladi* yoki *belgilaydi*):
+=======
+The statement below creates (in other words: *declares*) a variable with the name "message":
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let message;
@@ -82,7 +86,6 @@ let user = 'John'
 
 Texnik jihatdan, barcha bu varyantlar bir xil narsani bildiradi. Demak, bu shaxsiy did va estetika masalasidir.
 
-
 ````smart header="`var` instead of `let`"
 Eski skriptlarda siz yana bitta kalit so'zni uchratishingiz mumkin: `let` o'rniga `var`:
 
@@ -138,8 +141,27 @@ alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
+<<<<<<< HEAD
 ```smart header="Funktsional tillar"
 [Scala](http://www.scala-lang.org/) yoki [Erlang](http://www.erlang.org/) kabi [funktsional](https://en.wikipedia.org/wiki/Functional_programming) dasturlash tillari mavjudligini ta'kidlash qiziq. Ular o'zgaruvchan qiymatlarini o'zgartirishni taqiqlaydi.
+=======
+````warn header="Declaring twice triggers an error"
+A variable should be declared only once.
+
+A repeated declaration of the same variable is an error:
+
+```js run
+let message = "This";
+
+// repeated 'let' leads to an error
+let message = "That"; // SyntaxError: 'message' has already been declared
+```
+So, we should declare a variable once and then refer to it without `let`.
+````
+
+```smart header="Functional languages"
+It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Bunday tillarda qiymat "qutiga" saqlangandan so'ng, u abadiy mavjud. Agar biz boshqa narsalarni saqlashimiz kerak bo'lsa, til bizni yangi quti yaratishga majbur qiladi (yangi o'zgaruvchini e'lon qiling). Biz eskisini qayta ishlata ololmaymiz.
 
@@ -186,15 +208,24 @@ let my-name; // defisni '-' nomlashda ishlatish mumkin emas
 `apple` va` AppLE` nomli o'zgaruvchanlar ikki xil o'zgaruvchandir.
 ```
 
+<<<<<<< HEAD
 ````smart header="Lotin bo'lmagan harflarga ruxsat beriladi, ammo tavsiya etilmaydi"
 Bu kabi har qanday tilni, shu jumladan kirill harflarini yoki hatto ierogliflarni ishlatish mumkin:
+=======
+````smart header="Non-Latin letters are allowed, but not recommended"
+It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
+<<<<<<< HEAD
 Texnik jihatdan, bu erda hech qanday xato yo'q, bunday nomlarga ruxsat berilgan, ammo o'zgaruvchan nomlarda ingliz tilidan foydalanish bo'yicha xalqaro an'ana mavjud. Kichik skript yozayotgan bo'lsak ham, uni uzoq umr kutishi mumkin. Boshqa mamlakatlardan kelgan odamlar uni o'qishlari kerak bo'lishi mumkin.
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ````
 
 ````warn header="Himoyalangan ismlar"
@@ -241,7 +272,11 @@ Doimiy(o'zgarmas) o'zgaruvchani e'lon qilish uchun `let` o'rniga `const` dan foy
 const myBirthday = '18.04.1982';
 ```
 
+<<<<<<< HEAD
 `Const` yordamida e'lon qilingan o'zgaruvchanlar "konstantalar" deyiladi. Ularni o'zgartirib bo'lmaydi. Bunga urinish xatolikka olib keladi:
+=======
+Variables declared using `const` are called "constants". They cannot be reassigned. An attempt to do so would cause an error:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -258,7 +293,11 @@ Amalga oshirilishidan oldin eslab qolishi qiyin bo'lgan qiymatlar uchun konstant
 
 Bunday doimiylar tepa registr va pastki chiziqlar yordamida nomlanadi.
 
+<<<<<<< HEAD
 Masalan, "veb"(o'n oltinchi) formatidagi ranglar uchun konstantalarni yarataylik:
+=======
+For instance, let's make constants for colors in so-called "web" (hexadecimal) format:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 const COLOR_RED = "#F00";
@@ -294,7 +333,11 @@ Boshqacha qilib aytganda, tepa registr bilan nomlangan konstantalar faqat "qatti
 
 O'zgaruvchanlar haqida gapirganda, yana bir muhim narsa bor.
 
+<<<<<<< HEAD
 O'zgaruvchanning ismi toza, aniq ma'noga ega, saqlanadigan ma'lumotlarni tasvirlaydigon bo'lishi kerak.
+=======
+A variable name should have a clean, obvious meaning, describing the data that it stores.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 O'zgaruvchanning nomlash dasturlashning eng muhim va murakkab ko'nikmalaridan biridir. O'zgaruvchan nomlarga qarab, tajribali dasturchi yoki boshlang'ich tomonidan kod yozilganligini aniqlashi mumkin.
 
@@ -327,8 +370,14 @@ Zamonaviy JavaScript minifikatorlari va brauzerlari kodni yetarlicha optimallash
 
 Ma'lumotlarni saqlash uchun o'zgaruvchanlarni `var`, `let` yoki `const` kalit sozlar yordamida e'lon qilishimiz mumkin.
 
+<<<<<<< HEAD
 - 'let` -- zamonaviy o'zgaruvchan deklaratsiya hisoblanadi. Kod Chrome(V8) da `let` ni ishlatish uchun qat'iy rejimda bo'lishi kerak.
 - `var` -- eskirgan o'zgaruvchan deklaratsiya hisoblanadi. Odatda, biz uni ishlatmaymiz, lekin biz `let` dan nozik farqlarni <info:var> bobda qamrab olamiz, agar sizga kerak bo'lsa.
 - `const` -- `let` ga o'xshaydi, lekin o'zgaruvchanning qiymatini o'zgartirib bo'lmaydi.
+=======
+- `let` -- is a modern variable declaration.
+- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
+- `const` -- is like `let`, but the value of the variable can't be changed.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 O'zgaruvchanlar ularni ichida nima borligini osongina tushunishga imkon beradigan tarzda nomlanishi kerak.

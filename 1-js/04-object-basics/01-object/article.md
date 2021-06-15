@@ -1,7 +1,11 @@
 
 # Ob'ektlar
 
+<<<<<<< HEAD
 <info:types> bobidan ma'lum bo'lganidek, JavaScript-da ma'lumotlarning yetti turi mavjud. Ularning oltitasi "ibtidoiy" deb nomlanadi, chunki ularning qadriyatlari faqat bitta narsani o'z ichiga oladi (u matn yoki raqam yoki boshqa narsalar).
+=======
+As we know from the chapter <info:types>, there are eight data types in JavaScript. Seven of them are called "primitive", because their values contain only a single thing (be it a string or a number or whatever).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Aksincha, ob'ektlar turli xil ma'lumotlarning va yanada murakkab shaxslarning kalitli to'plamlarini saqlash uchun ishlatiladi. JavaScript-da ob'ektlar tilning deyarli barcha jihatlariga kirib boradi. Shunday qilib, biz boshqa biron bir joyga chuqur kirib borishdan oldin ularni avval anglashimiz kerak.
 
@@ -49,7 +53,11 @@ Undan istalgan vaqtda fayllarni qo'shishimiz, olib tashlashimiz va o'qishimiz mu
 Xususiyat qiymatlariga nuqta belgisi yordamida murojat qilish mumkin:
 
 ```js
+<<<<<<< HEAD
 // ob'ektning xususiyatlarini olamiz:
+=======
+// get property values of the object:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 alert( user.name ); // John
 alert( user.age ); // 30
 ```
@@ -101,10 +109,17 @@ Ko'p so'zli xususiyatlar uchun "nuqta orqali" qiymatiga kirish ishlamaydi:
 user.likes birds = true
 ```
 
+<<<<<<< HEAD
 Buning sababi shundaki, nuqta kalitning o'zgaruvchan identifikatori bo'lishini talab qiladi. Ya'ni: bo'shliqlar va boshqa cheklovlar yo'q.
 
 Har qanday matn bilan ishlaydigan muqobil "kvadrat qavs yozuvlari" mavjud:
+=======
+JavaScript doesn't understand that. It thinks that we address `user.likes`, and then gives a syntax error when comes across unexpected `birds`.
 
+The dot requires the key to be a valid variable identifier. That implies: contains no spaces, doesn't start with a digit and doesn't include special characters (`$` and `_` are allowed).
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+
+There's an alternative "square bracket notation" that works with any string:
 
 ```js run
 let user = {};
@@ -130,7 +145,11 @@ let key = "qushlarni yoqtiradi";
 user[key] = true;
 ```
 
+<<<<<<< HEAD
 Bu yerda `key` o'zgaruvchani ish vaqtida hisoblanishi yoki foydalanuvchi ma'lumotlariga bog'liq bo'lishi mumkin. Va keyin biz uni xususitatga kirish uchun ishlatamiz. Bu bizga katta moslashuvchanlikni beradi. Nuqta yozuvidan shunga o'xshash tarzda foydalanish mumkin emas.
+=======
+Here, the variable `key` may be calculated at run-time or depend on the user input. And then we use it to access the property. That gives us a great deal of flexibility.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
@@ -146,10 +165,25 @@ let key = prompt("Foydalanuvchi haqida nimani bilmoqchisiz?", "name");
 alert( user[key] ); // John (agar "name" kiritilsa)
 ```
 
+The dot notation cannot be used in a similar way:
+
+```js run
+let user = {
+  name: "John",
+  age: 30
+};
+
+let key = "name";
+alert( user.key ) // undefined
+```
 
 ### Xususiyat nomlari bo'yicha cheklovlar
 
+<<<<<<< HEAD
 Ob'ekt iiterallida kvadrat qavslardan foydalanishimiz mumkin. Bu *hisoblash xususiyatlari* deb nomlanadi.
+=======
+We can use square brackets in an object literal, when creating an object. That's called *computed properties*.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
@@ -193,6 +227,7 @@ Kvadrat qavslar nuqta yozuvidan ancha kuchliroq. Ular har qanday xususiyat nomla
 
 Shunday qilib, ko'pincha xususiyat nomlari ma'lum va sodda bo'lsa, nuqta yozuvi ishlatiladi. Va agar biz murakkabroq narsaga muhtoj bo'lsak, biz kvadrat qavslarga o'tamiz.
 
+<<<<<<< HEAD
 
 
 ````smart header="O'zgaruvchan xususiyati"
@@ -230,6 +265,9 @@ Shuningdek, o'zboshimchalik bilan kalitlarni qo'llab-quvvatlaydigan <info:map-se
 
 
 ## O'zgaruvchan xususiyati
+=======
+## Property value shorthand
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Haqiqiy kodda biz ko'pincha mavjud o'zgaruvchanlarni qiymat sifatida xususiyat nomlari uchun ishlatamiz.
 
@@ -239,8 +277,13 @@ Masalan:
 function makeUser(name, age) {
   return {
     name: name,
+<<<<<<< HEAD
     age: age
     // ...boshqa xususiyatlar
+=======
+    age: age,
+    // ...other properties
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   };
 }
 
@@ -256,8 +299,13 @@ Yuqoridagi misolda, "name" va "age" xususiyatlarining nomi o'zgaruvchanlar nomla
 function makeUser(name, age) {
 *!*
   return {
+<<<<<<< HEAD
     name, // name: name bilan bir xil
     age   // age: age bilan bir xil
+=======
+    name, // same as name: name
+    age,  // same as age: age
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     // ...
   };
 */!*
@@ -273,9 +321,63 @@ let user = {
 };
 ```
 
+<<<<<<< HEAD
 ## Xususiyat mavjudligini tekshirish, operator "in"
 
 Boshqa ko'plab tillardan farqli o'laroq, JavaScript ob'ektlarining o'ziga xos qulayligi shundaki u har qanday xususiyatga kirish imkonini beradi. Xususiyatlar mavjud bo'lmasa ham, hech qanday xato bo'lmaydi! Yo'q bo'lgan xususiyatga murojaat qilganda, `undefined` qaytariladi. Bu faqat xususiyatning mavjudligini tekshirish imkonini beradi:
+=======
+
+## Property names limitations
+
+As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction:
+
+```js run
+// these properties are all right
+let obj = {
+  for: 1,
+  let: 2,
+  return: 3
+};
+
+alert( obj.for + obj.let + obj.return );  // 6
+```
+
+In short, there are no limitations on property names. They can be any strings or symbols (a special type for identifiers, to be covered later).
+
+Other types are automatically converted to strings.
+
+For instance, a number `0` becomes a string `"0"` when used as a property key:
+
+```js run
+let obj = {
+  0: "test" // same as "0": "test"
+};
+
+// both alerts access the same property (the number 0 is converted to string "0")
+alert( obj["0"] ); // test
+alert( obj[0] ); // test (same property)
+```
+
+There's a minor gotcha with a special property named `__proto__`. We can't set it to a non-object value:
+
+```js run
+let obj = {};
+obj.__proto__ = 5; // assign a number
+alert(obj.__proto__); // [object Object] - the value is an object, didn't work as intended
+```
+
+As we see from the code, the assignment to a primitive `5` is ignored.
+
+We'll cover the special nature of `__proto__` in [subsequent chapters](info:prototype-inheritance), and suggest the [ways to fix](info:prototype-methods) such behavior.
+
+## Property existence test, "in" operator
+
+A notable feature of objects in JavaScript, compared to many other languages, is that it's possible to access any property. There will be no error if the property doesn't exist!
+
+Reading a non-existing property just returns `undefined`. So we can easily test whether the property exists:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {};
@@ -283,7 +385,11 @@ let user = {};
 alert( user.noSuchProperty === undefined ); // true "bunday xususiyat yo'q" degan ma'noni anglatadi
 ```
 
+<<<<<<< HEAD
 Shuningdek, mulk mavjudligini tekshirish uchun `"in"` maxsus operatori mavjud.
+=======
+There's also a special operator `"in"` for that.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Sintaksis:
 ```js
@@ -301,17 +407,30 @@ alert( "blabla" in user ); // false, user.blabla mavjud emas
 
 Iltimos, `in` ning chap tomonida *xususiyat nomi* bo'lishi kerakligini unutmang. Odatda bu tirnoq ostidagi matn.
 
+<<<<<<< HEAD
 Agar biz tirnoqni olib tashlab qo'ysak, bu haqiqiy nomni o'z ichiga olgan o'zgaruvchanning tekshirilishini anglatadi. Masalan:
+=======
+If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = { age: 30 };
 
 let key = "age";
+<<<<<<< HEAD
 alert( *!*key*/!* in user ); // true, nomni key-dan oladi va bunday xususiyatni tekshiradi
 ```
 
 ````smart header=" \"in\" ni `undefined` saqlaydigan xususiyatlar uchun ishlatish"
 Odatda, `"=== undefined"` tekshiruvi yaxshi ishlaydi. Muvaffaqiyatsiz bo'lgan maxsus holatlarda, `in` to'g'ri ishlaydi.
+=======
+alert( *!*key*/!* in user ); // true, property "age" exists
+```
+
+Why does the `in` operator exist? Isn't it enough to compare against `undefined`?
+
+Well, most of the time the comparison with `undefined` works fine. But there's a special case when it fails, but `"in"` works correctly.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ob'ekt xususiyati mavjud bo'lganda, lekin `undefined` ni saqlaganda:
 
@@ -325,11 +444,17 @@ alert( obj.test ); // u aniqlanmagan, demak - bunday xususiyat yo'qmi?
 alert( "test" in obj ); // true, xususiyat mavjud!
 ```
 
+<<<<<<< HEAD
 
 Yuqoridagi kodda `obj.test` xususiyati texnik jihatdan mavjud. Shunday qilib, `in` operatori to'g'ri ishlaydi.
 
 Bu kabi holatlar juda kamdan-kam hollarda bo'ladi, chunki `undefined` odatda tayinlanmaydi. Biz "noma'lum" yoki "bo'sh" qiymatlar uchun asosan `null` dan foydalanamiz. Shunday qilib, `in` operatori koddagi ekzotik mehmondir.
 ````
+=======
+In the code above, the property `obj.test` technically exists. So the `in` operator works right.
+
+Situations like this happen very rarely, because `undefined` should not be explicitly assigned. We mostly use `null` for "unknown" or "empty" values. So the `in` operator is an exotic guest in the code.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 
 ## "for..in" tsikli
@@ -365,8 +490,12 @@ E'tibor bering, barcha "for" konstruktsiyalari tsikl ichidagi tsikl o'zgaruvchan
 
 Bundan tashqari, biz bu yerda `key` o'rniga boshqa o'zgaruvchan nomdan foydalanishimiz mumkin. Masalan, `"for (let prop in obj)"` ham keng qo'llaniladi.
 
+<<<<<<< HEAD
 
 ### Ob'ektning xususiyatlarini tartibga solish
+=======
+### Ordered like an object
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ob'ektning xususiyatlari tartibga solinganmi? Boshqacha qilib aytadigan bo'lsak, biz ob'ektning barcha xususiyatlarini tsiklda ko'rib chiqsak, ularni biz qo'shgan tartibda olamizmi? Bunga ishonishimiz mumkinmi?
 
@@ -449,6 +578,7 @@ for (let code in codes) {
 
 Endi u maqsadga muvofiq ishlaydi.
 
+<<<<<<< HEAD
 ## Havola orqali nusxalash
 
 Ob'ektlarning ibtidoiylarga nisbatan tub farqlaridan biri shundaki, ular "havolani" saqlanadi va nusxalanadi.
@@ -707,6 +837,9 @@ Yuqorida keltirilgan va murakkabroq holatlarni ko'rib chiqadigan chuqur klonlash
 
 
 ## Xulosa
+=======
+## Summary
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ob'ektlar bir nechta maxsus xususiyatlarga ega bo'lgan assotsiativ massivlardir.
 
@@ -723,11 +856,15 @@ Qo'shimcha operatorlar:
 - Berilgan kalitga ega xususiyat mavjudligini tekshirish uchun: `"key" in obj`.
 - Ob'ekt ustida takrorlash uchun: `for (let key in obj)` tsikl.
 
+<<<<<<< HEAD
 Ob'ektlar tayinlanadi va havola orqali nusxalanadi. Boshqacha qilib aytganda, o'zgaruvchanda "ob'ekt qiymati" emas, balki qiymat uchun "havola" (xotiradagi manzil) saqlanadi. Shunday qilib, bunday o'zgaruvchanni nusxalash yoki uni funktsiya argumenti sifatida topshirish ob'ektni emas, balki havola nusxasini yaratadi. Nusxalangan havolalar orqali barcha operatsiyalar (masalan, xususiyatlarni qo'shish/o'chirish kabi) bitta ob'ektda amalga oshiriladi.
 
 "Haqiqiy nusxa" (klon) yaratish uchun biz `Object.assign` yoki [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) dan foydalanishimiz mumkin.
 
 Ushbu bobda biz o'rgangan narsalar "oddiy ob'ekt" yoki shunchaki `Ob'ekt` deb nomlanadi.
+=======
+What we've studied in this chapter is called a "plain object", or just `Object`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 JavaScript-da boshqa ko'plab turdagi ob'ektlar mavjud:
 

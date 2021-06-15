@@ -36,4 +36,8 @@ Shunday qilib, agar `arr.length` 10000 bo'lsa, bizda `10000 * 10000` = 100 milli
 
 Shunday qilib, yechim faqat kichik massivlar uchun foydalidir.
 
+<<<<<<< HEAD
 Keyinchalik <info:map-set-weakmap-weakset> bobida biz uni qanday qilib optimallashtirishni ko'rib chiqamiz.
+=======
+Further in the chapter <info:map-set> we'll see how to optimize it.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

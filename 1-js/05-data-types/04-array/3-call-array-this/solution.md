@@ -9,7 +9,7 @@ arr.push(function() {
   alert( this );
 })
 
-arr[2](); // "a","b",function
+arr[2](); // a,b,function(){...}
 ```
 
 Massivda 3 ta qiymat mavjud: dastlab unda ikkita qiymat mavjud edi, funktsiya qiymati qo'shildi.

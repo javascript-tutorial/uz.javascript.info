@@ -10,15 +10,19 @@ Vazifa quyidagicha: elementlarning maksimal yig'indisi bilan `arr` ning tutashga
 
 Ushbu summani qaytaradigan `getMaxSubSum(arr)` funktsiyasini yozing.
 
+<<<<<<< HEAD
 Masalan: 
+=======
+For instance:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
-getMaxSubSum([-1, *!*2, 3*/!*, -9]) = 5 (the sum of highlighted items)
-getMaxSubSum([*!*2, -1, 2, 3*/!*, -9]) = 6
-getMaxSubSum([-1, 2, 3, -9, *!*11*/!*]) = 11
-getMaxSubSum([-2, -1, *!*1, 2*/!*]) = 3
-getMaxSubSum([*!*100*/!*, -9, 2, -3, 5]) = 100
-getMaxSubSum([*!*1, 2, 3*/!*]) = 6 (take all)
+getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (the sum of highlighted items)
+getMaxSubSum([*!*2, -1, 2, 3*/!*, -9]) == 6
+getMaxSubSum([-1, 2, 3, -9, *!*11*/!*]) == 11
+getMaxSubSum([-2, -1, *!*1, 2*/!*]) == 3
+getMaxSubSum([*!*100*/!*, -9, 2, -3, 5]) == 100
+getMaxSubSum([*!*1, 2, 3*/!*]) == 6 (take all)
 ```
 
 Agar barcha narsalar salbiy bo'lsa, demak biz hech narsani olmaymiz (submasssiv bo'sh), shuning uchun yig'indisi nolga teng:

@@ -1,6 +1,10 @@
 # Mantiqiy operatorlar
 
+<<<<<<< HEAD
 JavaScript-da uchta mantiqiy operator mavjud: `||` (YOKI), `&&` (VA), `!` (YO'Q).
+=======
+There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing). Here we cover the first three, the `??` operator is in the next article.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Garchi ular "mantiqiy" deb nomlangan bo'lsa-da, ularni faqat mantiqiy emas, balki har qanday turdagi qiymatlarga qo'llash mumkin. Ularning natijasi ham har qanday turdagi bo'lishi mumkin.
 
@@ -64,7 +68,11 @@ if (hour < 10 || hour > 18 || isWeekend) {
 }
 ```
 
+<<<<<<< HEAD
 ## YOKI(||) birinchi aniq qiymatni topadi
+=======
+## OR "||" finds the first truthy value [#or-finds-the-first-truthy-value]
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Yuqorida tavsiflangan mantiq biroz klassikdir. Endi, JavaScript-ning "qo'shimcha" xususiyatlarini keltiramiz.
 
@@ -84,34 +92,55 @@ YOKI `||` operatori quyidagilarni bajaradi:
 
 Qiymat konvertatsiya qilinmasdan asl shaklida qaytariladi.
 
+<<<<<<< HEAD
 Boshqacha qilib aytganda, YOKI `"||"` zanjiri birinchi to'g'ri qiymatni yoki agar bunday qiymat topilmasa, oxirgisini qaytaradi.
+=======
+In other words, a chain of OR `||` returns the first truthy value or the last one if no truthy value is found.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
 ```js run
+<<<<<<< HEAD
 alert( 1 || 0 ); // 1 (1 bu to'g'ri)
 alert( true || "nima bo'lganda ham" ); // (true bu to'g'ri)
 
 alert( null || 1 ); // 1 (1 bu birinchi to'g'ri qiymat)
 alert( null || 0 || 1 ); // 1 (birinchi to'g'ri qiymat)
 alert( undefined || null || 0 ); // 0 (barchasi noto'g'ri, ohirgi qiymat qaytariladi)
+=======
+alert( 1 || 0 ); // 1 (1 is truthy)
+
+alert( null || 1 ); // 1 (1 is the first truthy value)
+alert( null || 0 || 1 ); // 1 (the first truthy value)
+
+alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 Bu "toza, mumtoz, faqat mantiqiy YOKI" bilan taqqoslaganda ba'zi qiziqarli foydalanishga olib keladi.
 
 1. **O'zgaruvchanlar yoki ifodalar ro'yxatidan birinchi aniq qiymatni olish.**
 
+<<<<<<< HEAD
     Tasavvur qiling, bizda ma'lumotlni o'z ichiga olgan yoki `null/undefined` bo'lishi mumkin bo'lgan bir nechta o'zgaruvchanlar mavjud. Biz qanday birinchi ma'lumotli o'zgaruvchani topishimiz mumkin?
 
     YOKI `||` dan foydalanishimiz mumkin:
+=======
+    For instance, we have `firstName`, `lastName` and `nickName` variables, all optional (i.e. can be undefined or have falsy values).
+
+    Let's use OR `||` to choose the one that has the data and show it (or `"Anonymous"` if nothing set):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js run
-    let currentUser = null;
-    let defaultUser = "John";
+    let firstName = "";
+    let lastName = "";
+    let nickName = "SuperCoder";
 
     *!*
-    let name = currentUser || defaultUser || "unnamed";
+    alert( firstName || lastName || nickName || "Anonymous"); // SuperCoder
     */!*
+<<<<<<< HEAD
 
     alert( name ); // "John" ni tanlaydi - bu birinchi to'g'ri qiymat
     ```
@@ -125,30 +154,45 @@ Bu "toza, mumtoz, faqat mantiqiy YOKI" bilan taqqoslaganda ba'zi qiziqarli foyda
     Bu ikkinchi argument sifatida berilgan ifoda tayinlash kabi yon ta'sirga ega bo'lganda aniq ko'rinadi.
 
     Quyidagi misolda `x` tayinlanmaydi:
+=======
+    ```
 
-    ```js run no-beautify
-    let x;
+    If all variables were falsy, `"Anonymous"` would show up.
 
-    *!*true*/!* || (x = 1);
+2. **Short-circuit evaluation.**
 
+    Another feature of OR `||` operator is the so-called "short-circuit" evaluation.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+
+    It means that `||` processes its arguments until the first truthy value is reached, and then the value is returned immediately, without even touching the other argument.
+
+    That importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+
+<<<<<<< HEAD
     alert(x); // undefined, chunki (x = 1) baholanmagan
     ```
 
     Agar buning o'rniga birinchi argument `false` bo'lsa, `||` ikkinchisini baholaydi va shu bilan tayinlashni bajaradi:
+=======
+    In the example below, only the second message is printed:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js run no-beautify
-    let x;
-
-    *!*false*/!* || (x = 1);
-
-    alert(x); // 1
+    *!*true*/!* || alert("not printed");
+    *!*false*/!* || alert("printed");
     ```
 
+<<<<<<< HEAD
     Tayinlash bu oddiy hol. Boshqa yon ta'sirlar ham jalb qilinishi mumkin.
 
     Ko'rib turganimizdek, bunday foydalanish holati "`if` ni qisqartirish usuli" hisoblanadi. Birinchi operand mantiqiy qiymatga aylantiriladi. Agar u not'og'ri bo'lsa, ikkinchisi baholanadi.
 
     Ko'pincha, kodni tushunishni osonlashtirish uchun "muntazam" `if` dan foydalanish yaxshiroq, lekin ba'zida bu qulay bo'lishi mumkin.
+=======
+    In the first line, the OR `||` operator stops the evaluation immediately upon seeing `true`, so the `alert` isn't run.
+
+    Sometimes, people use this feature to execute commands only if the condition on the left part is falsy.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## && (VA)
 
@@ -187,7 +231,11 @@ if (1 && 0) { // true && false deb baholandi
 ```
 
 
+<<<<<<< HEAD
 ## VA birinchi soxta qiymatni topadi
+=======
+## AND "&&" finds the first falsy value
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Bir nechta VA qiymatlari berilgan:
 
@@ -237,7 +285,12 @@ VA `&&` operatorining ustunligi YOKI `||` dan yuqori.
 Shunday qilib `a && b || kodi c && d` ifodasi qavs ichida `&&` joylashgani bilan bir xil: `(a && b) || (c && d)`.
 ````
 
+<<<<<<< HEAD
 Xuddi YOKI kabi VA va `&&` operatori ba'zida "if" o'rnini bosishi mumkin.
+=======
+````warn header="Don't replace `if` with `||` or `&&`"
+Sometimes, people use the AND `&&` operator as a "shorter way to write `if`".
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
@@ -254,6 +307,7 @@ Shunday qilib, biz asosan analogga egamiz:
 ```js run
 let x = 1;
 
+<<<<<<< HEAD
 if (x > 0) {
   alert( 'Noldan kattaroq!' );
 }
@@ -262,6 +316,14 @@ if (x > 0) {
 `&&` varianti qisqaroq ko'rinadi. Ammo `if` aniqroq va biroz o'qilishi oson.
 
 Shuning uchun har bir konstruktsiyani o'z maqsadi uchun ishlatishni tavsiya etamiz: agarning xohlasak `if` dan foydalaning agar VA xohlasak `&&` dan foydalaning.
+=======
+if (x > 0) alert( 'Greater than zero!' );
+```
+
+Although, the variant with `&&` appears shorter, `if` is more obvious and tends to be a little bit more readable. So we recommend using every construct for its purpose: use `if` if we want `if` and use `&&` if we want AND.
+````
+
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## ! (YO'Q)
 

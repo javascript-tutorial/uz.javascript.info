@@ -20,7 +20,11 @@ alert( rabbit.eats ); // true
 ```
 
 
+<<<<<<< HEAD
 1. Biz yana bitta matn qo'shdik (ta'kidlangan), hozir qanday `alert` ko'rsatilmoqda?
+=======
+1. We added one more string (emphasized). What will `alert` show now?
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js
     function Rabbit() {}
@@ -54,7 +58,11 @@ alert( rabbit.eats ); // true
     alert( rabbit.eats ); // ?
     ```
 
+<<<<<<< HEAD
 3. Bu kabi (bitta satr o'rni o'zgartirildi)?
+=======
+3. And like this (replaced one line)?
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js
     function Rabbit() {}

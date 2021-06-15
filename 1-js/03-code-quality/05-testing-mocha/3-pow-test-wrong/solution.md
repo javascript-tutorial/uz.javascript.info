@@ -4,7 +4,11 @@ Bu yerda mavjud bo'lgan narsa aslida uchta test, ammo uchta assert(tasdiq) bilan
 
 Ba'zan bu tarzda yozish osonroq bo'ladi, ammo agar xato yuzaga kelsa, unda nima sodir bo'lgani aniq bo'lmaydi.
 
+<<<<<<< HEAD
 Agar murakkab ijro oqimida xatolik yuz bersa, biz o'sha paytda ma'lumotlarni aniqlab olishimiz kerak bo'ladi. Aslida *testni koddagi nosozliklarini tuzatishimiz kerak*.
+=======
+If an error happens in the middle of a complex execution flow, then we'll have to figure out the data at that point. We'll actually have to *debug the test*.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Testni aniq yozilgan kirish va chiqish natijalari bilan bir nechta "it" bloklariga ajratish yaxshiroq bo'lar edi.
 

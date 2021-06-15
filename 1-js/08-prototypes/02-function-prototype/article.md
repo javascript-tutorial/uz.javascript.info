@@ -2,7 +2,11 @@
 
 Esingizda bo'lsin, yangi obyektlar `new F()` kabi konstruktor funktsiyasi bilan yaratilishi mumkin.
 
+<<<<<<< HEAD
 Agar `F.prototype` obyekt bo'lsa, u holda `new` operator undan yangi obyekt uchun `[[Prototype]]` ni o'rnatishda foydalanadi.
+=======
+If `F.prototype` is an object, then the `new` operator uses it to set `[[Prototype]]` for the new object.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```smart
 Javascript boshidan prototip merosga ega edi. Bu tilning asosiy xususiyatlaridan biri edi.
@@ -40,8 +44,13 @@ Natijada paydo bo'lgan rasm:
 
 Rasmda `"prototype"` - gorizontal o'q, odatiy xususiyatni anglatadi va `[[Prototype]]` vertikal bo'lib, `rabbit` ning `animal` dan merosxo'rligini anglatadi.
 
+<<<<<<< HEAD
 ```smart header="`F.prototype` faqat `new F` vaqtida ishlatiladi"
 `F.prototype` xususiyati faqat `new F` chaqirilganda ishlatiladi, u yangi obyektning `[[Prototype]]` ni tayinlaydi. Shundan so'ng, `F.prototype` va yangi obyekt o'rtasida hech qanday bog'liqlik yo'q. Buni "bir martalik sovg'a" deb o'ylang.
+=======
+```smart header="`F.prototype` only used at `new F` time"
+`F.prototype` property is only used when `new F` is called, it assigns `[[Prototype]]` of the new object.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Agar yaratilgandan so'ng, `F.prototype` xususiyati o'zgarsa (`F.prototype = <another object>`) bo'lsa, unda `new F` tomonidan yaratilgan yangi obyektlar `[[Prototype]]` nomli boshqa obyektga ega bo'ladi, lekin allaqachon mavjud narsalar eskisini saqlab qoladi.
 ```
@@ -158,11 +167,19 @@ Rabbit.prototype = {
 
 Ushbu bobda biz konstruktor funktsiyasi orqali yaratilgan obyektlar uchun `[[Prototype]]` ni o'rnatish usulini qisqacha bayon qildik. Keyinchalik biz unga tayanadigan yanada rivojlangan dasturlash shablonlarni ko'rib chiqamiz.
 
+<<<<<<< HEAD
 Hammasi juda sodda, tushunarli bo'lishi uchun bir nechta eslatma:
 
 - `F.prototype` xususiyati `[[Prototype]]` bilan bir xil emas. `F.prototype` qiladigan yagona narsa: `new F()` chaqirilganda yangi obyektlarning `[[Prototype]]` ni o'rnatadi.
 - `F.prototype` qiymati obyekt yoki null bo'lishi kerak: boshqa qiymatlar ishlamaydi.
 -  `"prototype"` xususiyati faqat konstruktor funktsiyasiga o'rnatilganda va `new` bilan chaqirilganda bunday maxsus ta'sirga ega bo'ladi.
+=======
+Everything is quite simple, just a few notes to make things clear:
+
+- The `F.prototype` property (don't mistake it for `[[Prototype]]`) sets `[[Prototype]]` of new objects when `new F()` is called.
+- The value of `F.prototype` should be either an object or `null`: other values won't work.
+-  The `"prototype"` property only has such a special effect when set on a constructor function, and invoked with `new`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Oddiy obyektlarda `prototype` alohida ahamiyatga ega emas:
 ```js

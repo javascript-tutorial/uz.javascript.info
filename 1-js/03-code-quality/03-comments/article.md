@@ -4,7 +4,11 @@
 
 Odatda ularni kod qanday va nima uchun ishlashini tavsiflash uchun ishlatamiz.
 
+<<<<<<< HEAD
 Birinchi qarashdanoq, izohlar oson va aniq tuyulishi mumkin, ammo boshlang'ich dasturchilar odatda uni noto'g'ri qabul qilishadi.
+=======
+At first sight, commenting might be obvious, but novices in programming often use them wrongly.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Yomon izohlar
 
@@ -18,7 +22,11 @@ murakkab;
 kod;
 ```
 
+<<<<<<< HEAD
 Ammo yaxshi kodda bunday "tushuntirish" izohlarni miqdori minimal bo'lishi kerak. Jiddiy ravishda, ularsiz kodni tushunish oson bo'lishi kerak.
+=======
+But in good code, the amount of such "explanatory" comments should be minimal. Seriously, the code should be easy to understand without them.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Bu borada ajoyib qoida mavjud: "agar kod shunchalik noaniq bo'lib, u izohni talab qiladigan bo'lsa, ehtimol uning o'rniga uni qayta yozish kerak".
 
@@ -119,6 +127,7 @@ Aslida biz "tushuntirish" izohlaridan butunlay qochib qutula olmaymiz. Murakkab 
 
 Shunday qilib, tushuntirish izohlari odatda yomon. Qaysi izohlar yaxshi?
 
+<<<<<<< HEAD
 Arxitekturasini tavsiflang
 : Komponentlarning yuqori darajadagi sharhini, ular qanday ta'sir o'tkazayotganini, turli vaziyatlarda nazorat oqimining nima ekanligini... agar qisqacha bo'lsa, qushning ko'zidan kodni ko'rib chiqing. Kod arxitekturasini tushuntiruvchi diagrammalarni yaratish uchun maxsus [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) tili mavjud. Bu, albatta, o'rganishga arziydi.
 
@@ -144,6 +153,33 @@ Funktsiyadan foydalanishni hujjatlashtiring
     Aytgancha, [WebStorm](https://www.jetbrains.com/webstorm/) kabi ko'plab tahrirlovchilar ularni ham tushunishlari mumkin va ularni avtomatik to'ldirish va ba'zi bir avtomatik kodlarni tekshirish uchun ishlatishlari mumkin.
 
     Shuningdek, [JSDoc 3] (https://github.com/jsdoc3/jsdoc) kabi vositalar mavjud, ular izohlardan HTML-hujjatlarni yaratishlari mumkin. JSDoc haqida ko'proq ma'lumotni <http://usejsdoc.org/> sahifasida o'qishingiz mumkin.
+=======
+Describe the architecture
+: Provide a high-level overview of components, how they interact, what's the control flow in various situations... In short -- the bird's eye view of the code. There's a special language [UML](http://wikipedia.org/wiki/Unified_Modeling_Language) to build high-level architecture diagrams explaining the code. Definitely worth studying.
+
+Document function parameters and usage
+: There's a special syntax [JSDoc](http://en.wikipedia.org/wiki/JSDoc) to document a function: usage, parameters, returned value.
+
+For instance:
+```js
+/**
+ * Returns x raised to the n-th power.
+ *
+ * @param {number} x The number to raise.
+ * @param {number} n The power, must be a natural number.
+ * @return {number} x raised to the n-th power.
+ */
+function pow(x, n) {
+  ...
+}
+```
+
+Such comments allow us to understand the purpose of the function and use it the right way without looking in its code.
+
+By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
+
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Nima uchun vazifa shu tarzda hal qilinadi?
 : Yozilgan kod muhim. Ammo nima yozilganini tushunish uchun *yozilmagan* narsalar yanada muhimroq bo'lishi mumkin. Nima uchun vazifa aynan shu tarzda hal qilinadi? Kod hech qanday javob bermaydi.
@@ -174,7 +210,12 @@ Yaxshi sharhlar bizga kodni yaxshi saqlashga imkon beradi, vaqt o'tgach keyin un
 
 **Izohlashdan saqlaning:**
 
+<<<<<<< HEAD
 - Bu "kod qanday ishlaydi" va "u nima qiladi".
 - Ularni faqat oddiy va o'zini o'zi tavsiflovchi kodni bajarish mumkin bo'lmagan hollarda foydalaning, bu izohni talab qilmaydi.
+=======
+- That tell "how code works" and "what it does".
+- Put them in only if it's impossible to make the code so simple and self-descriptive that it doesn't require them.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Izohlar JSDoc3 kabi avtomatik hujjatlashtirish vositalari uchun ham qo'llaniladi: ularni o'qiydilar va HTML-hujjatlarni (yoki boshqa formatdagi hujjatlarni) yaratadilar.

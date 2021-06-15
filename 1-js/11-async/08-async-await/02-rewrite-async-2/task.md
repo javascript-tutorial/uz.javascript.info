@@ -1,7 +1,13 @@
 
+<<<<<<< HEAD
 # Qayta yozing "rethrow" async/await
 
 Quyida <info:promise-chaining> bobidagi "rethrow" misolini topishingiz mumkin. Uni `.then/catch` o'rniga `async/await` yordamida qayta yozing.
+=======
+# Rewrite "rethrow" with async/await
+
+Below you can find the "rethrow" example. Rewrite it using `async/await` instead of `.then/catch`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Va `demoGithubUser` dagi tsikl foydasiga rekursiyadan xalos bo'ling: `async/await` yordamida bajarish oson bo'ladi.
 
@@ -22,7 +28,7 @@ function loadJson(url) {
       } else {
         throw new HttpError(response);
       }
-    })
+    });
 }
 
 // Github haqiqiy foydalanuvchini ismini qaytarguncha foydalanuvchi ismini so'rang

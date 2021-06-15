@@ -1,11 +1,17 @@
 
 # Va'dalar bilan ishlashda xato
 
+<<<<<<< HEAD
 Asinxron harakatlar ba'zan muvaffaqiyatsiz bo'lishi mumkin: xato bo'lsa, tegishli va'da rad etiladi. Masalan, masofaviy server mavjud bo'lmasa, `fetch` bajarilmaydi. Xatolarni (rad etishlarni) boshqarish uchun `.catch` dan foydalanishimiz mumkin.
 
 Va'da zanjiri bu jihatdan juda yaxshi. Va'da rad etilganda, boshqaruv zanjir bo'ylab eng yaqin rad etuvchiga sakraydi. Bu amalda juda qulay.
 
 Masalan, URL ostidagi kodda xato (bunday server yo'q) va `.catch` xatoni boshqaradi:
+=======
+Promise chains are great at error handling. When a promise rejects, the control jumps to the closest rejection handler. That's very convenient in practice.
+
+For instance, in the code below the URL to `fetch` is wrong (no such site) and `.catch` handles the error:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 *!*
@@ -15,6 +21,7 @@ fetch('https://no-such-server.blabla') // rad etadi
   .catch(err => alert(err)) // TypeError: failed to fetch (the text may vary)
 ```
 
+<<<<<<< HEAD
 Yoki, ehtimol, hamma narsa serverda yaxshi, lekin javob to'g'ri emas JSON:
 
 ```js run
@@ -26,6 +33,11 @@ fetch('/') // fetch hozirda yaxshi ishlaydi, server muvaffaqiyatli javob beradi
 ```
 
 Barcha xatolarni ushlashning eng oson usuli - zanjirning oxiriga `.catch` qo'shilish:
+=======
+As you can see, the `.catch` doesn't have to be immediate. It may appear after one or maybe several `.then`.
+
+Or, maybe, everything is all right with the site, but the response is not valid JSON. The easiest way to catch all errors is to append `.catch` to the end of chain:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 fetch('/article/promise-chaining/user.json')
@@ -48,11 +60,19 @@ fetch('/article/promise-chaining/user.json')
 */!*
 ```
 
+<<<<<<< HEAD
 Odatda `.catch` umuman bajarilmaydi, chunki xatolar yo'q. Ammo agar yuqoridagi va'dalardan birortasi rad etsa (tarmoq muammosi yoki yaroqsiz json yoki boshqa narsalar), u buni bajaradi.
+=======
+Normally, such `.catch` doesn't trigger at all. But if any of the promises above rejects (a network problem or invalid json or whatever), then it would catch it.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Yashirin try..catch
 
+<<<<<<< HEAD
 Va'da ijrochisi va va'da ishlovchilarining kodi atrofida "ko'rinmas `try..catch`" bor. Agar xato yuz bersa, u ushlanib qoladi va rad etish sifatida qabul qilinadi.
+=======
+The code of a promise executor and promise handlers has an "invisible `try..catch`" around it. If an exception happens, it gets caught and treated as a rejection.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan, ushbu kod:
 
@@ -70,13 +90,19 @@ new Promise((resolve, reject) => {
 new Promise((resolve, reject) => {
 *!*
   reject(new Error("Whoops!"));
-*/!*  
+*/!*
 }).catch(alert); // Error: Whoops!
 ```
 
+<<<<<<< HEAD
 Ijrochining atrofidagi "ko'rinmas `try..catch`" avtomatik ravishda xatoni ushlaydi va uni rad etish sifatida qabul qiladi.
 
 Bu nafaqat ijrochida, balki uning ishlovchilarida ham bo'ladi. Agar biz `.then` ishlov beruvchisiga `throw` qo'ysak, bu rad etilgan va'dani anglatadi, shuning uchun boshqaruv eng yaqin xato ishlov beruvchiga sakraydi.
+=======
+The "invisible `try..catch`" around the executor automatically catches the error and turns it into rejected promise.
+
+This happens not only in the executor function, but in its handlers as well. If we `throw` inside a `.then` handler, that means a rejected promise, so the control jumps to the nearest error handler.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Mana bir misol:
 
@@ -102,15 +128,27 @@ new Promise((resolve, reject) => {
 }).catch(alert); // ReferenceError: blabla is not defined
 ```
 
+<<<<<<< HEAD
 Yakuniy `.catch` nafaqat aniq rad etishlarni, balki yuqoridagi ishlovchilarda vaqti-vaqti bilan xatolarni ham ushlaydi.
+=======
+The final `.catch` not only catches explicit rejections, but also accidental errors in the handlers above.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Xatolar tarqalishi
 
+<<<<<<< HEAD
 Biz allaqachon payqaganimizdek, `.catch` o'zini `try..catch` kabi tutadi. Biz istagancha `.then` ishlovchilarga ega bo'lishimiz mumkin, so'ngra ularning barchasida xatolarni boshqarish uchun oxirida bitta `.catch` dan foydalanishimiz mumkin.
 
 Muntazam ravishda `try..catch` da biz xatoni tahlil qilamiz va agar uni uddalay olmasak, uni qayta tiklaymiz. Xuddi shu narsa va'dalar uchun ham mumkin.
 
 Agar biz `.catch` ichiga `throw` qo'ysak, boshqaruv keyingi eng yaqin xato ishlovchilariga o'tadi. Agar biz xatoga yo'l qo'ysak va odatdagidek tugatsak, u eng yaqin muvaffaqiyatli `.then` da davom etadi.
+=======
+As we already noticed, `.catch` at the end of the chain is similar to `try..catch`. We may have as many `.then` handlers as we want, and then use a single `.catch` at the end to handle errors in all of them.
+
+In a regular `try..catch` we can analyze the error and maybe rethrow it if it can't be handled. The same thing is possible for promises.
+
+If we `throw` inside `.catch`, then the control goes to the next closest error handler. And if we handle the error and finish normally, then it continues to the next closest successful `.then` handler.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Quyidagi misolda `.catch` xatoni muvaffaqiyatli hal qiladi:
 
@@ -120,7 +158,7 @@ new Promise((resolve, reject) => {
 
   throw new Error("Whoops!");
 
-}).catch(function(error) { 
+}).catch(function(error) {
 
   alert("Xato ko'rib chiqildi, odatdagidek davom eting ");
 
@@ -132,7 +170,7 @@ Bu yerda `.catch` bloki an'anaviy tarzda tugaydi. Shunday qilib, keyingi muvaffa
 Quyidagi misolda biz `.catch` bilan boshqa vaziyatni ko'ramiz. `(*)` ishlovchisi xatoni ushlaydi va uni hal qila olmaydi (masalan, faqat `URIErro`" bilan ishlashni biladi), shuning uchun uni qayta bajaradi:
 
 ```js run
-// the execution: catch -> catch -> then
+// the execution: catch -> catch
 new Promise((resolve, reject) => {
 
   throw new Error("Whoops!");
@@ -150,7 +188,11 @@ new Promise((resolve, reject) => {
   }
 
 }).then(function() {
+<<<<<<< HEAD
   /* hech qachon bu yerda ishlamaydi */
+=======
+  /* doesn't run here */
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 }).catch(error => { // (**)
 
   alert(`The unknown error has occurred: ${error}`);
@@ -159,6 +201,7 @@ new Promise((resolve, reject) => {
 });
 ```
 
+<<<<<<< HEAD
 Keyin ijro birinchi `.catch` `(*)` dan keyingisi `(**)` zanjirga sakraydi.
 
 Quyidagi bo'limda biz qayta ko'rib chiqishning amaliy namunasini ko'rib chiqamiz.
@@ -248,18 +291,26 @@ demoGithubUser();
 Iltimos, diqqat qiling: `.catch` bu yerda barcha xatolarga yo'l qo'yadi, ammo u faqat `HttpError 404` bilan ishlashni biladi. Bunday holda, bu bunday foydalanuvchi yo'qligini anglatadi va `.catch` bu holda qayta urinib ko'radi.
 
 Boshqa xatolar uchun, nima sodir bo'lishi mumkinligini bilmaydi. Ehtimol, dasturiy xato yoki boshqa narsa. Shunday qilib, uni `(*)` satrida qaytaradi.
+=======
+The execution jumps from the first `.catch` `(*)` to the next one `(**)` down the chain.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Ishlov berilmagan xatolar
 
+<<<<<<< HEAD
 Xato ko'rib chiqilmaganda nima bo'ladi? Masalan, yuqoridagi misolda `(*)` qayta tiklangandan keyin.
 
 Yoki biz zanjirning oxiriga xato ishlov beruvchini qo'shishni unutishimiz mumkin, masalan:
+=======
+What happens when an error is not handled? For instance, we forgot to append `.catch` to the end of the chain, like here:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js untrusted run refresh
 new Promise(function() {
   noSuchFunction(); // Bu erda xato (bunday funktsiya yo'q)
 })
   .then(() => {
+<<<<<<< HEAD
     // nol yoki ko'plab va'da beruvchi ishlovchilar
   }); // oxirida .catch siz!
 ```
@@ -269,6 +320,19 @@ Xato bo'lsa, va'da holati "rad etilgan" bo'lib qoladi va ijro eng yaqin rad etuv
 Amalda, xuddi odatdagi ishlov berilmagan xatolar singari, bu ham biron bir narsa noto'g'ri ketganligini anglatadi, ehtimol skript o'lgan.
 
 Ko'pgina JavaScript interpretatorlari bunday vaziyatlarni kuzatib boradi va bu holda global xatolarni keltirib chiqaradi. Buni konsolda ko'rishimiz mumkin.
+=======
+    // successful promise handlers, one or more
+  }); // without .catch at the end!
+```
+
+In case of an error, the promise becomes rejected, and the execution should jump to the closest rejection handler. But there is none. So the error gets "stuck". There's no code to handle it.
+
+In practice, just like with regular unhandled errors in code, it means that something has gone terribly wrong.
+
+What happens when a regular error occurs and is not caught by `try..catch`? The script dies with a message in the console. A similar thing happens with unhandled promise rejections.
+
+The JavaScript engine tracks such rejections and generates a global error in that case. You can see it in the console if you run the example above.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Brauzerda biz `unhandledrejection` hodisasi yordamida bunday xatolarga yo'l qo'yamiz:
 
@@ -292,11 +356,16 @@ Agar xatolik yuz bersa va `.catch` mavjud bo'lmasa, `unhandledrejection` ishlov 
 
 Odatda bunday xatolar tiklanmaydi, shuning uchun bizning eng yaxshi yo'limiz foydalanuvchini muammo haqida xabardor qilish va ehtimol serverga hodisa haqida xabar berishdir.
 
+<<<<<<< HEAD
 Node.js kabi brauzerdan tashqari muhitda ishlov berilmagan xatolarni kuzatib borishning boshqa shunga o'xshash usullari mavjud.
 
+=======
+In non-browser environments like Node.js there are other ways to track unhandled errors.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Xulosa
 
+<<<<<<< HEAD
 - `.catch` tutqichlari har qanday rad etishni va'da qiladi: `reject()` chaqiruvi yoki ishlov beruvchiga xato tashlanadi.
 - Biz xatolarni ko'rib chiqishni va ularni qanday boshqarishni bilishni xohlagan joylarga `.catch` ni aniq joylashtirishimiz kerak. Ishlovchi xatolarni tahlil qilishi kerak (maxsus xato klasslari yordam beradi) va noma'lumlarini qayta tiklashi kerak.
 - Xatolarni qanday hal qilishni bilmasak, `.catch` dan foydalanmaslik odatiy holdir (barcha xatolar tiklanmaydi).
@@ -341,3 +410,9 @@ Bu yerda `(1)` satrida biz hujjatni xiralashtirish orqali yuklanishni ko'rsatami
 Va'da bajarilgandan so'ng, u muvaffaqiyatli fetch yoki xato bo'ladimi, `finally` `(2)` satrida boshlanadi va ko'rsatkichni to'xtatadi.
 
 `finally` dan nol-tanaffus va'dasini qaytarish bilan `(*)` brauzerning kichik hiyla-nayranglari mavjud. Buning sababi shundaki, ba'zi brauzerlar (masalan, Chrome) hujjatdagi o'zgarishlarni bo'yash uchun tashqarida va'da beruvchilarga "biroz vaqt" kerak. Shunday qilib, zanjirga o'tmasdan oldin ko'rsatkich vizual ravishda to'xtatilishini ta'minlaydi.
+=======
+- `.catch` handles errors in promises of all kinds: be it a `reject()` call, or an error thrown in a handler.
+- We should place `.catch` exactly in places where we want to handle errors and know how to handle them. The handler should analyze errors (custom error classes help) and rethrow unknown ones (maybe they are programming mistakes).
+- It's ok not to use `.catch` at all, if there's no way to recover from an error.
+- In any case we should have the `unhandledrejection` event handler (for browsers, and analogs for other environments) to track unhandled errors and inform the user (and probably our server) about them, so that our app never "just dies".
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

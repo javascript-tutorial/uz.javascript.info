@@ -5,7 +5,7 @@
 
 Endi kod:
 
-```js run
+```js demo run
 function sum(a) {
 
   let currentSum = a;
@@ -52,4 +52,8 @@ function f(b) {
 }
 ```
 
+<<<<<<< HEAD
 Ushbu `f` keyingi chaqiruvda ishlatiladi, yana o'zimi qaytaradi, kerak bo'lganda. Keyin raqam yoki matn sifatida ishlatilganda `toString` `currentSum` qiymatini qaytaradi. Konvertatsiya qilish uchun biz bu yerda `Symbol.toPrimitive` yoki `valueOf` dan ham foydalanishimiz mumkin.
+=======
+This `f` will be used in the next call, again return itself, as many times as needed. Then, when used as a number or a string -- the `toString` returns the `currentSum`. We could also use `Symbol.toPrimitive` or `valueOf` here for the conversion.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

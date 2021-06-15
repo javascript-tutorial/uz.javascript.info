@@ -2,7 +2,11 @@ importance: 5
 
 ---
 
+<<<<<<< HEAD
 # Qayerda yoziladi?
+=======
+# Where does it write?
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Bizda `animal` dan meros qolgan `rabbit` bor.
 

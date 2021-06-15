@@ -1,12 +1,24 @@
+<<<<<<< HEAD
 # Shartli operatorlar: if, '?'
+=======
+# Conditional branching: if, '?'
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ba'zan, biz har xil sharoitlarda har xil harakatlarni bajarishimiz kerak.
 
+<<<<<<< HEAD
 Buning uchun `if` ifodasidan va "savol belgisi" operatori deb yuritiladigan uchlik operatoridan soddalik uchun foydalanamiz `?`.
+=======
+To do that, we can use the `if` statement and the conditional operator `?`, that's also called a "question mark" operator.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## "If" ifodasi
 
+<<<<<<< HEAD
 `If` ifodasi shartni baholaydi va agar natijaning natijasi `true` bo'lsa, kod blokini bajaradi.
+=======
+The `if(...)` statement evaluates a condition in parentheses and, if the result is `true`, executes a block of code.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
@@ -68,7 +80,11 @@ if (cond) {
 
 ## "Else" ifodasi
 
+<<<<<<< HEAD
 `If` ifodasi ixtiyoriy `else` blokini o'z ichiga olishi mumkin. U shart noto'g'ri bo'lganida amalga oshiriladi.
+=======
+The `if` statement may contain an optional "else" block. It executes when the condition is falsy.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 ```js run
@@ -104,7 +120,11 @@ Yuqoridagi kodda JavaScript avval `year < 2015` ni tekshiradi. Agar bu noto'g'ri
 
 Ko'proq `else if` bloklari bo'lishi mumkin. Oxirgi `else` ixtiyoriy.
 
+<<<<<<< HEAD
 ## Uchlik operator '?'
+=======
+## Conditional operator '?'
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ba'zan, biz shartga qarab o'zgaruvchani tayinlashimiz kerak.
 
@@ -125,9 +145,15 @@ if (age > 18) {
 alert(accessAllowed);
 ```
 
+<<<<<<< HEAD
 "Uchlik" yoki "savol belgisi" deb nomlangan operator bizga buni qisqa va sodda qilib bajarishga imkon beradi.
 
 Operator `?` savol belgisi bilan ifodalanadi. "Uchlik" rasmiy atamasi operatorda uchta operand borligini anglatadi. Bu aslida JavaScript-da juda ko'p operandli bitta va yagona operator.
+=======
+The so-called "conditional" or "question mark" operator lets us do that in a shorter and simpler way.
+
+The operator is represented by a question mark `?`. Sometimes it's called "ternary", because the operator has three operands. It is actually the one and only operator in JavaScript which has that many.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Sintaksis:
 ```js
@@ -142,7 +168,11 @@ Masalan:
 let accessAllowed = (age > 18) ? true : false;
 ```
 
+<<<<<<< HEAD
 Texnik jihatdan `age > 18` atrofidagi qavslarni tashlab qo'yishimiz mumkin. Savol belgisi operatori past ustunlikka ega, shuning uchun u `>` taqqoslashidan so'ng amalga oshiriladi.
+=======
+Technically, we can omit the parentheses around `age > 18`. The question mark operator has a low precedence, so it executes after the comparison `>`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ushbu misol avvalgisiga o'xshash narsani bajaradi:
 
@@ -217,7 +247,11 @@ let company = prompt('JavaScript-ni qaysi kompaniya yaratgan?', '');
 
 Biz bu yerda o'zgaruvchanga natija bermaymiz. Buning o'rniga, biz shartga qarab turli xil kodlarni bajaramiz.
 
+<<<<<<< HEAD
 **Savol belgisi operatoridan shu tarzda foydalanishni tavsiya etmaymiz.**
+=======
+**It's not recommended to use the question mark operator in this way.**
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Yozuv ba'zi dasturchilarga yoqadigan `if` ekvivalentidan qisqa. Ammo uning o'qilishi qiyin.
 

@@ -2,9 +2,15 @@
 
 Keling, o'q funktsiyalarini qayta ko'rib chiqaylik.
 
+<<<<<<< HEAD
 O'q funktsiyalari faqat kamroq yozish uchun "qisqartirish" emas. Ular boshqa foydali xususiyatlarga ega.
 
 JavaScript biz boshqa joyda bajarilgan kichik funktsiyani yozishimiz kerak bo'lgan vaziyatlarga to'la.
+=======
+Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
+
+JavaScript is full of situations where we need to write a small function that's executed somewhere else.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
@@ -14,7 +20,11 @@ Masalan:
 
 Funktsiyani yaratish va uni biron bir joyga yetkazish JavaScript-ni ruhiga mos keladi.
 
+<<<<<<< HEAD
 Va bunday funktsiyalarda biz odatda hozirgi kontekstni tark etishni xohlamaymiz.
+=======
+And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## O'q funktsiyalarida "this" yo'q
 
@@ -52,7 +62,7 @@ let group = {
 *!*
     this.students.forEach(function(student) {
       // Error: Cannot read property 'title' of undefined
-      alert(this.title + ': ' + student)
+      alert(this.title + ': ' + student);
     });
 */!*
   }
@@ -87,7 +97,7 @@ Masalan, `defer(f, ms)` funktsiyani oladi va atrofida chaqiruvni `ms` millisoniy
 ```js run
 function defer(f, ms) {
   return function() {
-    setTimeout(() => f.apply(this, arguments), ms)
+    setTimeout(() => f.apply(this, arguments), ms);
   };
 }
 
@@ -118,9 +128,18 @@ function defer(f, ms) {
 
 O'q funktsiyalari:
 
+<<<<<<< HEAD
 - `this` ga ega emas.
 - `argumentlar` ga ega emas.
 - `new` bilan chaqirib bo'lmaydi.
 - (Ularda `super` yo'q, lekin biz buni hali o'rganmadik. <info:class-inheritance> bo'limida bo'ladi).
 
 Buning sababi shundaki, ular o'zlarining "kontekstlari" bo'lmagan, aksincha hozirgi holatida ishlaydigan qisqa kodlar uchun mo'ljallangan. Va ular, albatta, ushbu foydalanish holatida porlaydilar.
+=======
+- Do not have `this`
+- Do not have `arguments`
+- Can't be called with `new`
+- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
+
+That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

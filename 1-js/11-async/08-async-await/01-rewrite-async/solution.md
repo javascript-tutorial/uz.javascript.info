@@ -19,9 +19,15 @@ loadJson('no-such-user.json')
 
 Izohlar:
 
+<<<<<<< HEAD
 1. `loadUrl` funktsiyasi `async` bo'ladi.
 2. Hammasi `.then` ichi `await` bilan almashtiriladi.
 3. Buni kutish o'rniga `response.json()` ni qaytarishimiz mumkin, masalan:
+=======
+1. The function `loadJson` becomes `async`.
+2. All `.then` inside are replaced with `await`.
+3. We can `return response.json()` instead of awaiting for it, like this:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     ```js
     if (response.status == 200) {

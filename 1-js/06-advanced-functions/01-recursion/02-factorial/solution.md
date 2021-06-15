@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Ta'rifga ko'ra, faktorial `n!` deb yozilishi mumkin `n * (n-1)!`.
+=======
+By definition, a factorial `n!` can be written as `n * (n-1)!`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Boshqacha qilib aytganda, `faktorial(n)` natijasini `faktorial(n-1)` natijasiga ko'paytirib, `n` deb hisoblash mumkin. Va `n-1` chaqiruvi rekursiv ravishda `1` gacha pastroq va pastroq tushishi mumkin.
 

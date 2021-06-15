@@ -6,8 +6,14 @@ alert( alert(1) || 2 || alert(3) );
 
 `alert` qiymatni qaytarmaydi. Yoki, boshqacha qilib aytganda, u `undefined` ni qaytaradi.
 
+<<<<<<< HEAD
 1. Birinchi YOKI `||` chap operandni baholaydi `alert(1)`. Bu birinchi xabarni `1` ko'rsatadi.
 2. `alert` `undefined` ni qaytaradi, shuning uchun YOKI ikkinchi operandga o'tib, haqiqiy qiymatni qidiradi.
 3. Ikkinchi operand `2` haqiqatdir, shuning uchun ijro to'xtatiladi, `2` qaytariladi va keyin tashqi ogohlantirish(alert) bilan ko'rsatiladi.
+=======
+1. The first OR `||` evaluates its left operand `alert(1)`. That shows the first message with `1`.
+2. The `alert` returns `undefined`, so OR goes on to the second operand searching for a truthy value.
+3. The second operand `2` is truthy, so the execution is halted, `2` is returned and then shown by the outer alert.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 `3` bo'lmaydi, chunki baholash `alert(3)` ga yetib bormaydi.

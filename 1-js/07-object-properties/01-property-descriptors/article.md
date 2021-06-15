@@ -3,7 +3,11 @@
 
 Ma'lumki, obyektlar xususiyatlarni saqlashi mumkin.
 
+<<<<<<< HEAD
 Hozirgacha mulk biz uchun oddiy "kalit-qiymat" juftligi edi. Ammo obyekt xususiyati aslida yanada moslashuvchan va kuchli narsadir.
+=======
+Until now, a property was a simple "key-value" pair to us. But an object property is actually a more flexible and powerful thing.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ushbu bobda biz qo'shimcha konfiguratsiya variantlarini o'rganamiz va keyingi bosqichda ularni qanday qilib ko'rinmas holda getter/setter funktsiyalariga aylantirishni ko'rib chiqamiz.
 
@@ -11,9 +15,15 @@ Ushbu bobda biz qo'shimcha konfiguratsiya variantlarini o'rganamiz va keyingi bo
 
 Obyekt xususiyatlari, **`value`** dan tashqari, uchta maxsus xususiyatga ega ("bayroqlar" deb nomlanadi):
 
+<<<<<<< HEAD
 - **`writable`** -- agar `true` bo'lsa, uni o'zgartirish mumkin, aks holda faqat o'qish mumkin.
 - **`enumerable`** -- agar `true` bo'lsa, u holda tsikldan ro'yxatga olinadi, aks holda ro'yxatga olinmaydi.
 - **`configurable`** -- agar `true` bo'lsa, xususiyat o'chirilishi va ushbu atributlar o'zgartirilishi mumkin, aks holda yo'q.
+=======
+- **`writable`** -- if `true`, the value can be changed, otherwise it's read-only.
+- **`enumerable`** -- if `true`, then listed in loops, otherwise not listed.
+- **`configurable`** -- if `true`, the property can be deleted and these attributes can be modified, otherwise not.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Biz ularni hali ko'rmadik, chunki umuman ular ko'rinmaydi. "Odatiy usul" xususiyatini yaratganimizda, ularning barchasi `true`. Ammo biz ularni har qanday vaqtda o'zgartirishimiz mumkin.
 
@@ -63,10 +73,17 @@ Object.defineProperty(obj, propertyName, descriptor)
 ```
 
 `obj`, `propertyName`
+<<<<<<< HEAD
 : Ishlash uchun obyekt va xususiyat.
 
 `descriptor`
 : Qo'llash uchun xususiyatni tavsiflovchi.
+=======
+: The object and its property to apply the descriptor.
+
+`descriptor`
+: Property descriptor object to apply.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Agar xususiyat mavjud bo'lsa, `defineProperty` bayroqlarini yangilaydi. Aks holda, u berilgan qiymat va bayroqlar bilan xususiyatni yaratadi; u holda, agar bayroq berilmagan bo'lsa, u `false` deb qabul qilinadi.
 
@@ -100,9 +117,15 @@ Uni yuqoridagi "normal ravishda yaratilgan" `user.name` bilan taqqoslang: endi b
 
 Keling, bayroqlarning ta'sirini misol orqali ko'rib chiqaylik.
 
+<<<<<<< HEAD
 ## Faqat o'qish
 
 `user.name` ni `yoziladigan` bayroqni o'zgartirib, faqat o'qish imkoniyatiga ega qilaylik:
+=======
+## Non-writable
+
+Let's make `user.name` non-writable (can't be reassigned) by changing `writable` flag:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {
@@ -116,36 +139,57 @@ Object.defineProperty(user, "name", {
 });
 
 *!*
-user.name = "Pete"; // Error: Cannot assign to read only property 'name'...
+user.name = "Pete"; // Error: Cannot assign to read only property 'name'
 */!*
 ```
 
 Endi hech kim bizning foydalanuvchimiz nomini o'zgartira olmaydi, agar ular o'zlarining `defineProperty ini biznikidan ustun qo'yish uchun qo'llamasalar.
 
+<<<<<<< HEAD
 Xudda shu operatsiya, lekin xususiyat mavjud bo'lmagan holat uchun:
+=======
+```smart header="Errors appear only in strict mode"
+In the non-strict mode, no errors occur when writing to non-writable properties and such. But the operation still won't succeed. Flag-violating actions are just silently ignored in non-strict.
+```
+
+Here's the same example, but the property is created from scratch:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = { };
 
 Object.defineProperty(user, "name", {
 *!*
+<<<<<<< HEAD
   value: "Pete",
   // yangi xususiyatlar uchun haqiqatni aniq ro'yxatlash kerak
+=======
+  value: "John",
+  // for new properties we need to explicitly list what's true
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   enumerable: true,
   configurable: true
 */!*
 });
 
-alert(user.name); // Pete
-user.name = "Alice"; // Error
+alert(user.name); // John
+user.name = "Pete"; // Error
 ```
 
+<<<<<<< HEAD
 
 ## Hisoblab bo'lmaydigan
+=======
+## Non-enumerable
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Endi `userSt` ga `toString` odatiy qo'shaylik.
 
+<<<<<<< HEAD
 Odatda, obyektlar uchun o'rnatilgan `toString` ni sanab bo'lmaydi, u `for..in` ko'rinishida ko'rinmaydi. Agar biz o'zimiz `toString` ni qo'shsak, u holda sukut bo'yicha `for..in` ko'rinishida bo'ladi:
+=======
+Normally, a built-in `toString` for objects is non-enumerable, it does not show up in `for..in`. But if we add a `toString` of our own, then by default it shows up in `for..in`, like this:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {
@@ -159,7 +203,11 @@ let user = {
 for (let key in user) alert(key); // name, toString
 ```
 
+<<<<<<< HEAD
 Agar biz buni yoqtirmasak, biz `enumerable:false` ni o'rnatamiz. Keyin u `for..in` tsiklida ko'rinmaydi, xuddi ichki o'rnatilgani kabi:
+=======
+If we don't like it, then we can set `enumerable:false`. Then it won't appear in a `for..in` loop, just like the built-in one:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let user = {
@@ -191,9 +239,15 @@ alert(Object.keys(user)); // name
 
 Konfiguratsiya qilinmaydigan bayroq (`configurable: false`) ba'zan o'rnatilgan obyektlar va xususiyatlar uchun oldindan o'rnatiladi.
 
+<<<<<<< HEAD
 Konfiguratsiya qilinmaydigan xususiyatni o'chirib bo'lmaydi yoki `defineProperty` bilan o'zgartirib bo'lmaydi.
 
 Masalan, `Math.PI` ni faqat o'qish mumkin, hisoblab bo'lmaydi va konfiguratsiya qilinmaydi:
+=======
+A non-configurable property can not be deleted.
+
+For instance, `Math.PI` is non-writable, non-enumerable and non-configurable:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let descriptor = Object.getOwnPropertyDescriptor(Math, 'PI');
@@ -216,19 +270,50 @@ Math.PI = 3; // Error
 // delete Math.PI ham ishlamaydi
 ```
 
+<<<<<<< HEAD
 Mulkni konfiguratsiya qilinmaydigan qilish - bu bir tomonlama yo'l. Biz uni o'zgartira olmaymiz, chunki `defineProperty` konfiguratsiya qilinmaydigan xususiyatlarda ishlamaydi.
 
 Bu erda biz `user.name` manzilini "abadiy muhrlangan" konstantaga keltiramiz:
+=======
+Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+
+To be precise, non-configurability imposes several restrictions on `defineProperty`:
+1. Can't change `configurable` flag.
+2. Can't change `enumerable` flag.
+3. Can't change `writable: false` to `true` (the other way round works).
+4. Can't change `get/set` for an accessor property (but can assign them if absent).
+
+**The idea of "configurable: false" is to prevent changes of property flags and its deletion, while allowing to change its value.**
+
+Here `user.name` is non-configurable, but we can still change it (as it's writable):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
-let user = { };
+let user = {
+  name: "John"
+};
 
 Object.defineProperty(user, "name", {
-  value: "John",
+  configurable: false
+});
+
+user.name = "Pete"; // works fine
+delete user.name; // Error
+```
+
+And here we make `user.name` a "forever sealed" constant:
+
+```js run
+let user = {
+  name: "John"
+};
+
+Object.defineProperty(user, "name", {
   writable: false,
   configurable: false
 });
 
+<<<<<<< HEAD
 *!*
 // user.name ni  yoki uning bayroqlarini o'zgartira olmaydi
 // bularning barchasi ishlamaydi:
@@ -242,6 +327,15 @@ Object.defineProperty(user, "name", {writable: true}); // Error
 ```smart header="Xatolar faqat qat'iy rejim foydalanishda paydo bo'ladi"
 Qat'iy bo'lmagan rejimda faqat o'qish uchun xususiyatlarga yozishda hech qanday xato bo'lmaydi. Ammo operatsiya baribir muvaffaqiyatli bo'lmaydi. Bayroqni buzadigan harakatlar qat'iyan jimgina e'tiborga olinmaydi.
 ```
+=======
+// won't be able to change user.name or its flags
+// all this won't work:
+user.name = "Pete";
+delete user.name;
+Object.defineProperty(user, "name", { value: "Pete" });
+```
+
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Object.defineProperties
 
@@ -304,8 +398,14 @@ Xususiyat tavsiflovchilari individual xususiyatlar darajasida ishlaydi.
 : Xususiyatlarni qo'shish/o'chirishni taqiqlaydi. Mavjud barcha xususiyatlar uchun `configurable: false` o'rnatadi.
 
 [Object.freeze(obj)](mdn:js/Object/freeze)
+<<<<<<< HEAD
 : Xususiyatlarni qo'shish/olib tashlash/o'zgartirishni taqiqlaydi. Mavjud barcha xususiyatlar uchun `configurable: false, writable: false` ni o'rnatadi.
 Va ular uchun testlar mavjud:
+=======
+: Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
+
+And also there are tests for them:
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 [Object.isExtensible(obj)](mdn:js/Object/isExtensible)
 : Agar xususiyatlarni qo'shish taqiqlangan bo'lsa, `false` ni qaytaradi, aks holda `true`.

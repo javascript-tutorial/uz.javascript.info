@@ -46,7 +46,11 @@ alert(3 +
 + 2);
 ```
 
+<<<<<<< HEAD
 Kod `6` ni chiqaradi, chunki JavaScript bu erga nuqta-vergul qo'shmaydi. Agar satr ortiqcha `"+"` bilan tugagan bo'lsa, u "to'liq bo'lmagan ifoda" ekanligi intuitiv ravishda aniq, shuning uchun nuqta-vergul shart emas. Va bu holda, hamma narsa maqsadga muvofiq ishlaydi.
+=======
+The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 **Ammo shunday holatlar mavjudki, JavaScript haqiqatan ham zarur bo'lgan joyda nuqta-vergulni "unutadi".**
 
@@ -56,29 +60,44 @@ Bunday hollarda sodir bo'lgan xatolarni topish va tuzatish juda qiyin.
 Agar bunday aniq xato misolni ko'rishning hohlasangiz, bu kodni tekshiring:
 
 ```js run
-[1, 2].forEach(alert)
+alert("Hello");
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 Hali qavs `[]` va 'forEach (har biri uchun)' ma'nosi haqida o'ylashning hojati yo'q. Ularni keyinroq o'rganamiz. Hozircha, faqat kod natija eslab qoling: u `1` keyin `2` ko'rsatadi.
 
 Endi koddan oldin `alert(ogohlantirish)` ni qo'shaylik va uni nuqta-vergul bilan *tugatmaylik*:
 
 ```js run no-beautify
 alert("Xato bo'ladi")
+=======
+No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
 
-[1, 2].forEach(alert)
+Now let's remove the semicolon after the `alert`:
+
+```js run no-beautify
+alert("Hello")
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+
+[1, 2].forEach(alert);
 ```
 
+<<<<<<< HEAD
 Endi kodni ishlatsak, faqat birinchi `alert(ogohlantirish)` ko'rsatiladi va keyin bizda xato bor!
 
 Lekin `alert` dan keyin nuqta-vergul qo'shsak, yana hamma narsa yaxshi:
 
 ```js run
 alert("Hozir barchasi yaxshi");
+=======
+The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
-[1, 2].forEach(alert)  
-```
+If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
 
+<<<<<<< HEAD
 Endi biz `1` va `2` dan so'ng "Hozir barchasi yaxshi" xabar bor.
 
 
@@ -92,11 +111,28 @@ alert("Xato bo'ladi")[1, 2].forEach(alert)
 
 Ammo bu bitta emas, ikkita alohida ifoda bo'lishi kerak. Bunday holda birlashish noto'g'ri, shuning uchun xato. Bu turdagi hato boshqa holatlarda ham bo'lishi mumkin.
 
+=======
+That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
+
+Here's how the engine sees it:
+
+```js run no-beautify
+alert("Hello")[1, 2].forEach(alert);
+```
+
+Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
+
+This can happen in other situations also.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ````
 
 Yangi satrlar bilan ajratilgan bo'lsa ham, ifodalar orasida nuqta-vergul qo'yishni tavsiya etamiz. Ushbu qoida jamiyat tomonidan keng qabul qilingan. Yana bir bor ta'kidlab o'tamiz -- *ko'pincha nuqta-vergul qoldirish mumkin*. Ammo ulardan foydalanish xavfsizroq -- ayniqsa, yangi boshlanuvchilar uchun.
 
+<<<<<<< HEAD
 ## Izohlar
+=======
+## Comments [#code-comments]
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Vaqt o'tgan sayin dasturlar murakkablashib boradi. Shuning uchun *izohlar* qo'shish kerak bo'ladi, kod nima bajarilishini tasvirlab berish uchun.
 
@@ -138,8 +174,13 @@ alert('Hello');
 alert('World');
 ```
 
+<<<<<<< HEAD
 ```smart header="Maxsus klavsishalar kombinatsiyalaridan foydalaning"
 Ko'p matn muharrirlarida, kod satrini bitta satrli izoh uchun: `key:Ctrl+/` tugmachasini bosish orqali izohlash mumkin va shunga o'xshash narsa: "Ctrl+Shift+/" - ko'p satrli izohlar uchun (kod qismini tanlang va maxsus klavsishalar kombinatsiyani bosing). Mac uchun `key:Ctrl` o'rniga `key:Cmd` ni sinab ko'ring.
+=======
+```smart header="Use hotkeys!"
+In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 ````warn header="Izohning ichida izoh qoldirish mumkin emas!"

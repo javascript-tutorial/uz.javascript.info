@@ -57,7 +57,11 @@ alert( getMaxSubSum([1, 2, 3]) ); // 6
 alert( getMaxSubSum([100, -9, 2, -3, 5]) ); // 100
 ```
 
+<<<<<<< HEAD
 Yechim vaqt murakkabligiga ega [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). Boshqacha qilib aytadigan bo'lsak, massiv hajmini 2 baravar oshirsak, algoritm 4 barobar sekinroq ishlaydi.
+=======
+The solution has a time complexity of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Katta massivlar uchun (1000, 10000 va undan ortiq elementlar) bunday algoritmlar jiddiy sustkashlikka olib kelishi mumkin.
 

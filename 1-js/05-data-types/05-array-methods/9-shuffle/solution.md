@@ -45,7 +45,11 @@ for (let key in count) {
 }
 ```
 
+<<<<<<< HEAD
 Misol natijasi (for V8, July 2017):
+=======
+An example result (depends on JS engine):
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 123: 250706
@@ -67,8 +71,19 @@ Vazifani bajarishning boshqa yaxshi usullari mavjud. Masalan, [Fisher-Yates shuf
 ```js
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
+<<<<<<< HEAD
     let j = Math.floor(Math.random() * (i + 1)); // 0 dan i gacha bo'lgan tasodifiy indeks
     [array[i], array[j]] = [array[j], array[i]]; // elementlarni almashtirish 
+=======
+    let j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+
+    // swap elements array[i] and array[j]
+    // we use "destructuring assignment" syntax to achieve that
+    // you'll find more details about that syntax in later chapters
+    // same can be written as:
+    // let t = array[i]; array[i] = array[j]; array[j] = t
+    [array[i], array[j]] = [array[j], array[i]];
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   }
 }
 ```

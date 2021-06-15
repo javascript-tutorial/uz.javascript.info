@@ -2,9 +2,15 @@ importance: 3
 
 ---
 
+<<<<<<< HEAD
 # Barcha sonli xususiyatlarni 2 ga ko'paytiradi
 
 `obj` ning barcha raqamli xususiyatlarini `2` ga ko'paytiradigan `multiplyNumeric(obj)` funktsiyasini yarating.
+=======
+# Multiply numeric property values by 2
+
+Create a function `multiplyNumeric(obj)` that multiplies all numeric property values of `obj` by `2`.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 

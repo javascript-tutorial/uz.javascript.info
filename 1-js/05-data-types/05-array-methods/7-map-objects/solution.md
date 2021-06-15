@@ -25,7 +25,11 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // John Smith
 ```
 
+<<<<<<< HEAD
 Iltimos, o'q funktsiyalari uchun biz qo'shimcha qavslardan foydalanishimiz kerakligini unutmang.
+=======
+Please note that in the arrow functions we need to use additional brackets. 
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Biz bunday yozolmaymiz:
 ```js

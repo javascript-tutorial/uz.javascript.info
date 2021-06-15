@@ -31,6 +31,12 @@ Vazifa ikki qismdan iborat.
     alert( result ); // 8
     ```
 
+<<<<<<< HEAD
 - Ushbu topshiriqda qavs yoki murakkab ifodalar yo'q.
 - Raqamlar va operator to'liq bitta bo'sh joy bilan chegaralangan.
 - Agar uni qo'shmoqchi bo'lsangiz, ishlov berishda xato bo'lishi mumkin.
+=======
+- No parentheses or complex expressions in this task.
+- The numbers and the operator are delimited with exactly one space.
+- There may be error handling if you'd like to add it.
+>>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

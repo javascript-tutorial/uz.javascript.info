@@ -1,6 +1,5 @@
 # O'zbek tilida zamonaviy JavaScript darsligi
 
-<<<<<<< HEAD
 Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan.
 Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu repozitoriyning Issues[https://#] bo'limida bizga murojaat qilishingizni so'raymiz. 
 =======

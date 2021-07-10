@@ -72,7 +72,7 @@ Natija `json` satri *JSON tomonidan kodlangan* yoki *ketma-ketlashtirilgan* yoki
 Iltimos, unutmangki, JSON-kodlangan obyekt obyekt adabiyotidan bir necha muhim farqlarga ega:
 
 - Matnlar ikki tirnoqdan foydalanishadi. JSON-da bitta tirnoq yoki teskari tirnoq yo'q. Shunday qilib, `'John'` `"John"` bo'ladi.
-- Obyektning mulk nomlari ham ikki tirnoqdan foydalanishadi. Bu majburiy. Shunday qilib `'age': 30` `"age":30` aylanadi.
+- Obyektning xususiyat nomlari ham ikki tirnoqdan foydalanishadi. Bu majburiy. Shunday qilib `'age': 30` `"age":30` aylanadi.
 
 `JSON.stringify` ibtidoiylarga ham qo'llanilishi mumkin.
 
@@ -214,7 +214,7 @@ alert( JSON.stringify(meetup, *!*['title', 'participants']*/!*) );
 // {"title":"Konferensiya","participants":[{},{}]}
 ```
 
-Bu yerda biz juda qattiqqo'lmiz. Mulklar ro'yxati butun obyekt tuzilishiga qo'llaniladi. Shuning uchun ishtirokchilar bo'sh, chunki `name` ro'yxatda yo'q.
+Bu yerda biz juda qattiqqo'lmiz. Xususiyatlar ro'yxati butun obyekt tuzilishiga qo'llaniladi. Shuning uchun ishtirokchilar bo'sh, chunki `name` ro'yxatda yo'q.
 
 Tsiklik ma'lumotnomani keltirib chiqaradigan `room.occupiedBy` dan tashqari har qanday xususiyatni o'z ichiga olaylik:
 
@@ -241,7 +241,7 @@ alert( JSON.stringify(meetup, *!*['title', 'participants', 'place', 'name', 'num
 */
 ```
 
-Endi `occupiedBy` dan tashqari hamma narsa seriyalashtirilgan. Ammo mulk ro'yxati juda uzun.
+Endi `occupiedBy` dan tashqari hamma narsa seriyalashtirilgan. Ammo xususiyat ro'yxati juda uzun.
 
 Yaxshiyamki, biz `o'rnini bosuvchi` sifatida massiv o'rniga funktsiyadan foydalanishimiz mumkin.
 
@@ -282,7 +282,7 @@ number:       23
 
 Iltimos, shuni yodda tutingki, `replacer` funktsiyasi har bir kalit/qiymat juftligini, shu jumladan ichki obyektlar va massiv elementlarini oladi. U rekursiv tarzda qo'llaniladi. `this` ichidagi  `replacer` qiymat - joriy xususiyatni o'z ichiga olgan obyekt.
 
-Birinchi chaqiruv maxsus. U maxsus "o'rash ob'ekti" yordamida tayyorlanadi: `{"": meetup}`. Boshqacha qilib aytganda, birinchi `(kalit, qiymat)` jufti bo'sh kalitga ega va qiymat umuman maqsadli obyektdir. Shuning uchun birinchi satr yuqoridagi misolda `":[object Object]"` dir.
+Birinchi chaqiruv maxsus. U maxsus "o'rash obyekti" yordamida tayyorlanadi: `{"": meetup}`. Boshqacha qilib aytganda, birinchi `(kalit, qiymat)` jufti bo'sh kalitga ega va qiymat umuman maqsadli obyektdir. Shuning uchun birinchi satr yuqoridagi misolda `":[object Object]"` dir.
 
 Ushbu g'oya `replacer` ga imkon qadar ko'proq kuch berishdir: agar kerak bo'lsa, butun obyektni tahlil qilish va almashtirish/o'tkazib yuborish imkoniyati mavjud.
 

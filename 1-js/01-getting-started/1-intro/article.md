@@ -34,10 +34,9 @@ Yuqoridagi atamalarni eslab qolish yaxshi, chunki ular netdagi ishlab chiquvchil
 
 Intetptretatorlar murakkab. Ammo asoslari oson.
 
-1. The engine (embedded if it's a browser) reads ("parses") the script.
-2. Then it converts ("compiles") the script to the machine language.
-3. And then the machine code runs, pretty fast.
-1. intetptretator (agar u brauzer bo'lsa, avtomatik o'rnatilgan) skriptni o'qiydi ("tahlil qiladi").
+1. Intetptretator (agar u brauzer bo'lsa, avtomatik o'rnatilgan) skriptni o'qiydi ("tahlil qiladi").
+2. Keyin u skriptni mashina tiliga o'zgartiradi ("kompilyatsiya qiladi").
+3. Va keyin mashina kodi juda tez ishlaydi.
 
 Interpretatatsiya jarayonning har bir bosqichida optimallashtirishlarni qo'llaydi. U hattoki kompilyatsiya qilingan skriptni ishlayotganda kuzatib boradi, u orqali oqib o'tadigan ma'lumotlarni tahlil qiladi va shu bilimga asoslangan holda mashina kodiga optimallashtirishlarni qo'llaydi. Tugatgandan so'ng, skriptlar juda tez ishlaydi.
 ```

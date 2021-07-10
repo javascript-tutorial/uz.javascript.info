@@ -50,7 +50,7 @@ Agar kerak bo'lsa, iltimos, muntazam takrorlanuvchilar haqida batafsil ma'lumot 
 
 Obyektni asinxron qilib takrorlash uchun:
 1. Biz `Symbol.iterator` o'rniga  `Symbol.asyncIterator` dan foydalanishimiz kerak.
-2. `next()` va'dani qaytarishi kerak.
+2. `next()` promisni qaytarishi kerak.
 3. Bunday obyekt ustida takrorlash uchun biz `for await (let item of iterable)` tsikldan foydalanishimiz kerak.
 
 Oldingi kabi takrorlanadigan `range` obyektini yarataylik, ammo endi u qiymatlarni asinxron ravishda bir soniyada bir marta qaytaradi:
@@ -74,7 +74,7 @@ let range = {
 *!*
       async next() { // (2)
         // u qiymatni obyekt sifatida qaytarishi kerak {done:.., value :...}
-        // (avtomatik ravishda async tomonidan va'daga o'ralgan)
+        // (avtomatik ravishda async tomonidan promisga o'ralgan)
 */!*
 
         // ichida await ishlatishi mumkin, async narsalarni bajaring:
@@ -105,7 +105,7 @@ Ko'rib turganimizdek, komponentlar odatiy ketma-ket saraluvchanlarga o'xshaydi:
 
 1. Obyektni sinxron ravishda takrorlash uchun uning `Symbol.asyncIterator` `(1)` usuli bo'lishi kerak.
 2. Obyektni `next()` usuli bilan qaytarib berish kerak `(2)`.
-3. `Next()` usuli `async` bo'lishi shart emas, u va'dani qaytaradigan odatiy usul bo'lishi mumkin, ammo `async` ichidagi `await` dan foydalanishga imkon beradi. Bu yerda biz bir soniyani kechiktiramiz `(3)`.
+3. `Next()` usuli `async` bo'lishi shart emas, u promisni qaytaradigan odatiy usul bo'lishi mumkin, ammo `async` ichidagi `await` dan foydalanishga imkon beradi. Bu yerda biz bir soniyani kechiktiramiz `(3)`.
 4. Takrorlash uchun biz "kutish uchun (diapazonning qiymatiga yo'l qo'ying)" (4) dan foydalanamiz, ya'ni "for" dan keyin "await" ni qo'shamiz. U bir marta `range[Symbol.asyncIterator]()` oralig'ini, so'ngra qiymatlar uchun `next()` ni chaqiradi.
 
 Mana kichik eslatma:
@@ -180,9 +180,9 @@ Muammo yo'q, uni `async` bilan oldindan yozing, shunga o'xshash:
 
 Endi biz `for await...of` bilan takrorlanadigan asinxronizatsiya generatoriga egamiz.
 
-Bu haqiqatan ham juda oddiy. Biz `async` kalit so'zini qo'shamiz va generator endi uning ichida `await` dan foydalanishi mumkin, va'da va boshqa asinxron funktsiyalarga tayanishi mumkin.
+Bu haqiqatan ham juda oddiy. Biz `async` kalit so'zini qo'shamiz va generator endi uning ichida `await` dan foydalanishi mumkin, promis va boshqa asinxron funktsiyalarga tayanishi mumkin.
 
-Texnik jihatdan, asinxron generatorning yana bir farqi shundaki, uning `generator.next()` usuli endi asinxron bo'lib, u va'dalarni qaytaradi.
+Texnik jihatdan, asinxron generatorning yana bir farqi shundaki, uning `generator.next()` usuli endi asinxron bo'lib, u promislarni qaytaradi.
 
 Muntazam, asinxron generator uchun `result = generator.next()` o'rniga quyidagi qiymatlarni olish mumkin:
 
@@ -225,7 +225,7 @@ for(let value of range) {
 }
 ```
 
-Bu yerda moslashtirilgan `range` ob'ekti takrorlanadi va `*[Symbol.iterator]` generatori ro'yxat qiymatlari mantig'ini amalga oshiradi.
+Bu yerda moslashtirilgan `range` obyekti takrorlanadi va `*[Symbol.iterator]` generatori ro'yxat qiymatlari mantig'ini amalga oshiradi.
 
 Agar biz generatorga asinxron amallarni qo'shishni xohlasak, biz `Symbol.iterator` o'rnini `Symbol.asyncIterator` bilan moslashtiramiz:
 

@@ -2,7 +2,7 @@
 
 Obyektlar qadriyatlar to'plamini saqlashga imkon beradi. Juda soz.
 
-Ammo ko'pincha biz *ro'yhatlangan to'plamga* ehtiyoj sezamiz, bu yerda bizda 1 chi, 2 chi, 3 chi element va h.k. Masalan, biz biror narsaning ro'yxatini saqlashimiz kerak: foydalanuvchilar, tovarlar, HTML elementlari va boshqalar.
+Ammo ko'pincha biz *ro'yhatlangan to'plamga* ehtiyoj sezamiz, bu yerda bizda 1 chi, 2 chi, 3 chi element va hk. Masalan, biz biror narsaning ro'yxatini saqlashimiz kerak: foydalanuvchilar, tovarlar, HTML elementlari va boshqalar.
 
 Bu erda obyektni ishlatish qulay emas, chunki u elementlarning tartibini boshqarish usullarini taqdim etmaydi. Mavjud bo'lganlar orasida "o'rtasiga" yangi xususiyat kiritolmaymiz. Obyektlar bunday foydalanish uchun mo'ljallanmagan.
 
@@ -300,7 +300,7 @@ for (let fruit of fruits) {
 
 `for..of` joriy element raqamiga kirish huquqini bermaydi, faqat uning qiymatiga, lekin aksariyat hollarda bu yetarli. Va bu qisqaroq.
 
-Texnik jihatdan, massivlar ob'ekt bo'lgani uchun `for..in` dan foydalanish ham mumkin:
+Texnik jihatdan, massivlar obyekt bo'lgani uchun `for..in` dan foydalanish ham mumkin:
 
 ```js run
 let arr = ["Olma", "Apelsin", "Nok"];
@@ -315,7 +315,7 @@ for (let key in arr) {
 Ammo bu aslida yomon fikr. U bilan bog'liq muammolar mavjud:
 
 1. `For..in` tsikli nafaqat raqamli xususiyatlarni, balki *barcha xususiyatlarni* takrorlaydi.
-    Brauzerda va boshqa muhitda "massivga o'xshash" deb nomlangan ob'ektlar mavjud, ular *massivlarga o'xshaydi*. Ya'ni, ular `length` va indekslar xususiyatlariga ega, ammo ular boshqa raqamli bo'lmagan xususiyatlar va usullarga ham ega bo'lishi mumkin, ular odatda bizga kerak emas. `for..in` tsikl ularni ro'yxatlaydi. Agar biz massivga o'xshash narsalar bilan ishlashimiz kerak bo'lsa, unda bu "qo'shimcha" xususiyatlar muammoga aylanishi mumkin.
+    Brauzerda va boshqa muhitda "massivga o'xshash" deb nomlangan obyektlar mavjud, ular *massivlarga o'xshaydi*. Ya'ni, ular `length` va indekslar xususiyatlariga ega, ammo ular boshqa raqamli bo'lmagan xususiyatlar va usullarga ham ega bo'lishi mumkin, ular odatda bizga kerak emas. `for..in` tsikl ularni ro'yxatlaydi. Agar biz massivga o'xshash narsalar bilan ishlashimiz kerak bo'lsa, unda bu "qo'shimcha" xususiyatlar muammoga aylanishi mumkin.
 
 2. `for..in` tsikli massivlar uchun emas, balki umumiy obyektlar uchun optimallashtirilgan va shuning uchun 10-100 marta sekinroq. Albatta, bu hali ham juda tez. Tezlashish faqat to'siqlarda muhim bo'lishi mumkin yoki ahamiyatsiz bo'lib tuyulishi mumkin. Ammo shunga qaramay, farqni bilishimiz kerak.
 
@@ -428,7 +428,7 @@ alert( "1,2" + 1 ); // "1,21"
 
 ## Xulosa
 
-Array - ro'yhatlangan ma'lumotlar elementlarini saqlash va boshqarish uchun mos bo'lgan maxsus ob'ekt turi.
+Array - ro'yhatlangan ma'lumotlar elementlarini saqlash va boshqarish uchun mos bo'lgan maxsus obyekt turi.
 
 - Deklaratsiya:
 

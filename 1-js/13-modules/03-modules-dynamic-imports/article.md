@@ -31,7 +31,7 @@ Ammo modulni talabga binoan qanday qilib dinamik ravishda import qilamiz?
 
 ## import() funktsiya
 
-`import(module)` funksiyasini istalgan joydan chaqirish mumkin. Bu modul obyektida hal qilinadigan va'dani qaytaradi.
+`import(module)` funksiyasini istalgan joydan chaqirish mumkin. Bu modul obyektida hal qilinadigan promisni qaytaradi.
 
 Foydalanish tartibi quyidagicha:
 

@@ -3,21 +3,21 @@
 
 `.then`/`.catch`/`.finally` ishlovchilari doimo asinxrondir.
 
-Va'da zudlik bilan hal qilingan taqdirda ham, sizning `.then`/`.catch`/`.finally` satrlaringizdagidan *quyidagi* kod birinchi bo'lib bajariladi.
+Promis zudlik bilan hal qilingan taqdirda ham, sizning `.then`/`.catch`/`.finally` satrlaringizdagidan *quyidagi* kod birinchi bo'lib bajariladi.
 
 Buni ko'rsatadigan kod:
 
 ```js run
 let promise = Promise.resolve();
 
-promise.then(() => alert("va'da bajarildi"));
+promise.then(() => alert("promis bajarildi"));
 
 alert("kod tugadi"); // birinchi navbatda ushbu ogohlantirish ko'rsatiladi
 ```
 
-Agar siz uni ishlatsangiz, avval `kod tugadi`, so'ngra `va'da tugadi` ni ko'rasiz.
+Agar siz uni ishlatsangiz, avval `kod tugadi`, so'ngra `promis tugadi` ni ko'rasiz.
 
-Bu g'alati, chunki va'da boshidanoq albatta amalga oshiriladi.
+Bu g'alati, chunki promis boshidanoq albatta amalga oshiriladi.
 
 Nima uchun `.then` keyin bajariladi? Nima bo'lyapti?
 
@@ -30,23 +30,23 @@ Asinxron vazifalar to'g'ri boshqaruvga muhtoj. Buning uchun standart `PromiseJob
 - Navbat birinchi bo'lib amalga oshiriladi: birinchi navbatda vazifalar bo'lib bajariladi.
 - Vazifani bajarish faqat boshqa hech narsa ishlamay qolganda boshlanadi.
 
-Yoki sodda qilib aytganda, va'da tayyor bo'lganda, uning `.then/catch/finally` ishlovchilari navbatga qo'yiladi. Ular hali bajarilmagan. JavaScript interpretatori navbatdan vazifani oladi va joriy koddan qutilganda uni bajaradi.
+Yoki sodda qilib aytganda, promis tayyor bo'lganda, uning `.then/catch/finally` ishlovchilari navbatga qo'yiladi. Ular hali bajarilmagan. JavaScript interpretatori navbatdan vazifani oladi va joriy koddan qutilganda uni bajaradi.
 
 Shuning uchun yuqoridagi misolda "kod tugadi" birinchi bo'lib ko'rsatilgan.
 
 ![](promiseQueue.svg)
 
-Va'da beruvchilar doimo ushbu ichki navbatdan o'tadilar.
+Promis beruvchilar doimo ushbu ichki navbatdan o'tadilar.
 
 Agar bir nechta `.then/catch/finally` zanjiri mavjud bo'lsa, unda ularning har biri asinxron tarzda bajariladi. Ya'ni, u avval navbatga qo'yiladi va joriy kod tugagandan va avval navbatda turgan ishlovchilar tugagandan so'ng bajariladi.
 
-**Agar navbat biz uchun muhim bo'lsachi? Qanday qilib `kod tugadi` ni `va'da bajarilgandan` keyin ishlashimiz mumkin?**
+**Agar navbat biz uchun muhim bo'lsachi? Qanday qilib `kod tugadi` ni `promis bajarilgandan` keyin ishlashimiz mumkin?**
 
 Oson, uni `.then` bilan navbatga qo'ying.
 
 ```js run
 Promise.resolve()
-  .then(() => alert("va'da bajarilgandan!"))
+  .then(() => alert("promis bajarilgandan!"))
   .then(() => alert("kod tugadi"));
 ```
 
@@ -63,7 +63,7 @@ Hodisalar misollari:
 - `setTimeout` ishlov beruvchi chaqirildi.
 - tashqi `<script src ="...">` yuklangan, bajarishga tayyor.
 - tarmoq operatsiyasi, masalan. `fetch` tugallandi.
-- ...va h.k.
+- ...va hk.
 
 Hodisalar sodir bo'ladi - interpretator ularni boshqaradi - va yana ko'p narsalar bo'lishini kutadi (uxlash paytida va nolga yaqin CPU iste'mol qilganda).
 
@@ -83,7 +83,7 @@ Endi muhim narsalar.
 
 **Mikrovazifa navbatida makrovazifa navbatiga qaraganda ustunlik yuqori.**
 
-Boshqacha qilib aytganda, interpretator avval barcha mikrovazifalarni bajaradi, so'ngra makrovazifalarni oladi. Va'da bilan ishlash har doim birinchi o'ringa ega.
+Boshqacha qilib aytganda, interpretator avval barcha mikrovazifalarni bajaradi, so'ngra makrovazifalarni oladi. Promis bilan ishlash har doim birinchi o'ringa ega.
 
 Masalan, qarang:
 
@@ -102,7 +102,7 @@ Navbat qanday?
 2. `promise` ikkinchi bo'lib ko'rsatiladi, chunki `.then` mikrovazifa navbatidan o'tadi va joriy koddan keyin ishlaydi.
 3. `timeout` oxirgi o'rinda ko'rsatiladi, chunki bu makrovazifa.
 
-Ehtimol, makrovazifada ishlash paytida yangi va'dalar paydo bo'lishi mumkin.
+Ehtimol, makrovazifada ishlash paytida yangi promislar paydo bo'lishi mumkin.
 
 Yoki, aksincha, mikrovazifa makrovazifani rejalashtiradi (masalan, `setTimeout`).
 
@@ -120,7 +120,7 @@ Promise.resolve()
 
 Tabiiyki, avval `promise` paydo bo'ladi, chunki `setTimeout` makrovazifani unchalik ahamiyatga ega bo'lmagan makrovazifa navbatida kutmoqda.
 
-Mantiqiy natija sifatida makrovazifalar faqat interpretatorga "bo'sh vaqt" berganda amalga oshiriladi. Shunday qilib, agar bizda hech narsa kutmaydigan va'da zanjiri bo'lsa, unda `setTimeout` yoki hodisa ishlovchilari kabi narsalar hech qachon o'rtaga kira olmaydi.
+Mantiqiy natija sifatida makrovazifalar faqat interpretatorga "bo'sh vaqt" berganda amalga oshiriladi. Shunday qilib, agar bizda hech narsa kutmaydigan promis zanjiri bo'lsa, unda `setTimeout` yoki hodisa ishlovchilari kabi narsalar hech qachon o'rtaga kira olmaydi.
 
 
 ## Ishlov berilmagan rad etish
@@ -129,7 +129,7 @@ Mantiqiy natija sifatida makrovazifalar faqat interpretatorga "bo'sh vaqt" berga
 
 Endi mikrovazifalarni tushunish bilan biz uni rasmiylashtira olamiz.
 
-**"Ishlov berilmagan rad etish" - bu mikrovazifa navbatining oxirida va'da xatosi ko'rib chiqilmaganda sodir bo'ladi.**
+**"Ishlov berilmagan rad etish" - bu mikrovazifa navbatining oxirida promis xatosi ko'rib chiqilmaganda sodir bo'ladi.**
 
 Masalan, ushbu kodni ko'rib chiqing:
 
@@ -167,13 +167,13 @@ setTimeout(() => promise.catch(err => alert('caught')));
 window.addEventListener('unhandledrejection', event => alert(event.reason));
 ```
 
-Endi ishlov berilmagan rad etish yana paydo bo'ladi. Nima uchun? Mikrovazifada navbat tugagandan so'ng, "ishlov berilmagan rad etish" paydo bo'ladi. Interpretator va'dalarni tekshiradi va agar ulardan biri "rad etilgan" holatda bo'lsa, unda hodisa sodir bo'ladi.
+Endi ishlov berilmagan rad etish yana paydo bo'ladi. Nima uchun? Mikrovazifada navbat tugagandan so'ng, "ishlov berilmagan rad etish" paydo bo'ladi. Interpretator promislarni tekshiradi va agar ulardan biri "rad etilgan" holatda bo'lsa, unda hodisa sodir bo'ladi.
 
 Masalan, `setTimeout` tomonidan qo'shilgan `.catch` ham ishga tushadi, albatta, lekin `unhandledrejection` allaqachon sodir bo'lgandan so'ng.
 
 ## Xulosa
 
-- Va'dalarni boshqarish har doim ham mos kelmaydi, chunki barcha va'da qilingan harakatlar "mikrovazifa navbati" (v8 atama) deb nomlangan ichki "va'da ishi" navbatidan o'tadi.
+- Promislarni boshqarish har doim ham mos kelmaydi, chunki barcha promis qilingan harakatlar "mikrovazifa navbati" (v8 atama) deb nomlangan ichki "promis ishi" navbatidan o'tadi.
 
     **Shunday qilib, `.then/catch/finally` joriy kod tugagandan so'ng chaqiriladi.**
 
@@ -187,4 +187,4 @@ Masalan, `setTimeout` tomonidan qo'shilgan `.catch` ham ishga tushadi, albatta, 
 
     Boshqacha qilib aytganda, ularning ustunligi pastroq.
 
-Shunday qilib, navbat quyidagicha: odatdagi kod, keyin va'da bilan ishlash, so'ngra hamma narsa, masalan hodisalar va boshqalar.
+Shunday qilib, navbat quyidagicha: odatdagi kod, keyin promis bilan ishlash, so'ngra hamma narsa, masalan hodisalar va boshqalar.

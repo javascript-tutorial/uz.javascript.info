@@ -21,7 +21,7 @@ Javascript `(user.go)()` qavsidan oldin vergulni qabul qilmaydi, shuning uchun u
 let user = { go:... }(user.go)()
 ```
 
-Bundan tashqari, biz bunday qo'shma ifoda sintaktik ravishda `{go: ...}` ob'ektini `(user.go)` argumenti bilan funktsiya sifatida chaqirishini ko'rishimiz mumkin. Va bu xuddi shu satrda `let user` bilan sodir bo'ladi, shuning uchun `user` ob'ekti hali aniqlanmagan, shuning uchun xato.
+Bundan tashqari, biz bunday qo'shma ifoda sintaktik ravishda `{go: ...}` obyektini `(user.go)` argumenti bilan funktsiya sifatida chaqirishini ko'rishimiz mumkin. Va bu xuddi shu satrda `let user` bilan sodir bo'ladi, shuning uchun `user` obyekti hali aniqlanmagan, shuning uchun xato.
 
 Agar biz nuqta-vergul qo'shsak, barchasi yaxshi:
 

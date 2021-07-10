@@ -455,7 +455,7 @@ list.next.next = { value: 3 };
 list.next.next.next = { value: 4 };
 ```
 
-Bu erda biz bir nechta ob'ektlar borligini yanada aniqroq ko'rishimiz mumkin, ularning har biri `qiymati` va `keyingi` qo'shniga ishora qiladi. `list` o'zgaruvchisi zanjirning birinchi obyekti, shuning uchun undan `keyingi` ko'rsatgichlardan so'ng istalgan elementga erishishimiz mumkin.
+Bu erda biz bir nechta obyektlar borligini yanada aniqroq ko'rishimiz mumkin, ularning har biri `qiymati` va `keyingi` qo'shniga ishora qiladi. `list` o'zgaruvchisi zanjirning birinchi obyekti, shuning uchun undan `keyingi` ko'rsatgichlardan so'ng istalgan elementga erishishimiz mumkin.
 
 Ro'yxat osongina bir nechta qismlarga bo'linishi va keyinchalik birlashtirilishi mumkin:
 

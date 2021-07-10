@@ -1,8 +1,8 @@
-# Va'da
+# Promis
 
 O'zingizni eng yaxshi qo'shiqchi deb tasavvur qiling va muxlislar kechayu kunduz yaqinlashib kelayotgan qo'shig'ingizni so'rashadi.
 
-Biroz yengil tortish uchun, u nashr qilinganda, ularga yuborishga va'da berasiz. Siz muxlislaringizga yangilanishlar uchun obuna bo'lishlari mumkin bo'lgan ro'yxatni berasiz. Ular elektron pochta manzillarini to'ldirishlari mumkin, shunda qo'shiq paydo bo'lganda, obuna bo'lgan barcha partiyalar uni darhol qabul qilishadi. Hatto biron bir narsa noto'g'ri bo'lsa ham, aytaylik, agar qo'shiqni nashr etish rejalari bekor qilinsa, ular bundan xabardor bo'lishadi.
+Biroz yengil tortish uchun, u nashr qilinganda, ularga yuborishga promis berasiz. Siz muxlislaringizga yangilanishlar uchun obuna bo'lishlari mumkin bo'lgan ro'yxatni berasiz. Ular elektron pochta manzillarini to'ldirishlari mumkin, shunda qo'shiq paydo bo'lganda, obuna bo'lgan barcha partiyalar uni darhol qabul qilishadi. Hatto biron bir narsa noto'g'ri bo'lsa ham, aytaylik, agar qo'shiqni nashr etish rejalari bekor qilinsa, ular bundan xabardor bo'lishadi.
 
 Har bir inson baxtlidir! Siz baxtlisiz, chunki siz endi muxlislar tomonidan ta'qib qilinmaysiz va muxlislar endi yangi qo'shiqni sog'inishdan tashvishlanmasligi mumkin.
 
@@ -10,11 +10,11 @@ Bu biz dasturlashda tez-tez uchraydigan narsalar uchun haqiqiy hayotdagi o'xshas
 
 1. Biror narsani qiladigan va vaqt talab qiladigan "ishlab chiqaruvchi kod". Masalan, kod masofaviy skriptni yuklaydi. Bu "qo'shiqchi".
 2. Tayyor bo'lgandan keyin "ishlab chiqarish kodi" natijasini istaydigan "iste'mol kod". Ko'pgina funktsiyalar ushbu natijaga muhtoj bo'lishi mumkin. Bular "muxlislar".
-3. *Va'da* - bu "ishlab chiqaruvchi kod" va "iste'molchi kodi" ni bir-biriga bog'laydigan maxsus JavaScript obyekti. Analogiya nuqtai nazaridan: bu "obuna ro'yxati". "Ishlab chiqarish kodi" va'da qilingan natijani olish uchun zarur bo'lgan har qanday vaqtni oladi va "va'da" ushbu natijani obuna bo'lgan barcha kodlarga tayyor bo'lgandan keyin taqdim etadi.
+3. *Promis* - bu "ishlab chiqaruvchi kod" va "iste'molchi kodi" ni bir-biriga bog'laydigan maxsus JavaScript obyekti. Analogiya nuqtai nazaridan: bu "obuna ro'yxati". "Ishlab chiqarish kodi" promis qilingan natijani olish uchun zarur bo'lgan har qanday vaqtni oladi va "promis" ushbu natijani obuna bo'lgan barcha kodlarga tayyor bo'lgandan keyin taqdim etadi.
 
-Analogiya juda aniq emas, chunki JavaScript-ning va'dalari oddiy obuna ro'yxatiga qaraganda ancha murakkab: ular qo'shimcha funktsiyalar va cheklovlarga ega. Ammo bu boshlashga yaxshidir.
+Analogiya juda aniq emas, chunki JavaScript-ning promislarni oddiy obuna ro'yxatiga qaraganda ancha murakkab: ular qo'shimcha funktsiyalar va cheklovlarga ega. Ammo bu boshlashga yaxshidir.
 
-Va'da obyekti uchun konstruktor sintaksisi:
+Promis obyekti uchun konstruktor sintaksisi:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
@@ -22,7 +22,7 @@ let promise = new Promise(function(resolve, reject) {
 });
 ```
 
-`new Promise` ga berilgan funktsiya *bajaruvchi* deb nomlanadi. Va'da yaratilganda, ushbu ijrochi funktsiya avtomatik ravishda ishlaydi. U natija berishi kerak bo'lgan ishlab chiqarish kodini o'z ichiga oladi. Yuqoridagi analogiya nuqtai nazaridan: ijrochi "qo'shiqchi".
+`new Promise` ga berilgan funktsiya *bajaruvchi* deb nomlanadi. Promis yaratilganda, ushbu ijrochi funktsiya avtomatik ravishda ishlaydi. U natija berishi kerak bo'lgan ishlab chiqarish kodini o'z ichiga oladi. Yuqoridagi analogiya nuqtai nazaridan: ijrochi "qo'shiqchi".
 
 Natijada `promise` obyekti ichki xususiyatlarga ega:
 
@@ -42,11 +42,11 @@ Ijrochi ishni tugatgandan so'ng, u argument sifatida qabul qilingan funktsiyalar
 
 Keyinchalik ushbu o'zgarishlar qanday qilib "muxlislar" ga ma'lum bo'lishini ko'ramiz.
 
-Va'da konstruktori va "ishlab chiqaruvchi kod" (`setTimeout`) bilan sodda ijrochi funktsiyasiga misol:
+Promis konstruktori va "ishlab chiqaruvchi kod" (`setTimeout`) bilan sodda ijrochi funktsiyasiga misol:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
-  // va'da tuzilganda funktsiya avtomatik ravishda bajariladi
+  // Promis tuzilganda funktsiya avtomatik ravishda bajariladi
 
   // 1 soniya ichida "bajarilgan" natija bilan ish bajarilganligi to'g'risida signal
   setTimeout(() => *!*resolve("done")*/!*, 1000);
@@ -62,9 +62,9 @@ Yuqoridagi kodni ishga tushirish orqali biz ikkita narsani ko'rishimiz mumkin:
 
 ![](promise-resolve-1.svg)
 
-Bu ishni muvaffaqiyatli yakunlashning misoli, "bajarilgan va'da" edi.
+Bu ishni muvaffaqiyatli yakunlashning misoli, "bajarilgan promis" edi.
 
-Va endi ijrochining va'dani xato bilan rad etishiga misol:
+Va endi ijrochining promisni xato bilan rad etishiga misol:
 
 ```js
 let promise = new Promise(function(resolve, reject) {
@@ -77,10 +77,10 @@ let promise = new Promise(function(resolve, reject) {
 
 Xulosa qilib aytganda, ijrochi ishni bajarishi kerak (odatda vaqt talab qiladigan narsa), so'ngra tegishli "Promise" obyektining holatini o'zgartirish uchun `resolve` yoki `reject` ni chaqirish kerak.
 
-Yo'q qilingan yoki rad qilingan va'da, "pending" va'dadan farqli o'laroq, "settled" deb nomlanadi.
+Yo'q qilingan yoki rad qilingan promis, "pending" promisdan farqli o'laroq, "settled" deb nomlanadi.
 
 ````smart header="Faqat bitta natija yoki xato bo'lishi mumkin"
-Ijrochi faqat bitta `resolve` yoki bitta `reject` ni chaqirishi kerak. Va'daning o'zgarishi yakuniy hisoblanadi.
+Ijrochi faqat bitta `resolve` yoki bitta `reject` ni chaqirishi kerak. Promisning o'zgarishi yakuniy hisoblanadi.
 
 Boshqa barcha `resolve` va `reject` chaqiruvlari inobatga olinmaydi:
 
@@ -114,7 +114,7 @@ let promise = new Promise(function(resolve, reject) {
 
 Masalan, bu ishni boshlashni boshlaganimizda, lekin keyin hamma narsa tugallanganligini ko'rganimizda yuz berishi mumkin.
 
-Juda soz. Bizda darhol va'da hal qilingan, bunda hech qanday yomon narsa yo'q.
+Juda soz. Bizda darhol promis hal qilingan, bunda hech qanday yomon narsa yo'q.
 ````
 
 ```smart header="`state` va `result` ichki"
@@ -140,15 +140,15 @@ promise.then(
 
 `.then` ning birinchi argumenti quyidagicha funktsiya:
 
-1. va'da bajarilganda ishlaydi va
+1. promis bajarilganda ishlaydi va
 2. natijani oladi.
 
 `.then` ning ikkinchi argumenti:
 
-1. va'da rad etilganda ishlaydi va
+1. promis rad etilganda ishlaydi va
 2. natijani oladi.
 
-Masalan, muvaffaqiyatli hal qilingan va'daga munosabat:
+Masalan, muvaffaqiyatli hal qilingan promisga munosabat:
 
 ```js run
 let promise = new Promise(function(resolve, reject) {
@@ -214,9 +214,9 @@ promise.catch(alert); // "Error: Whoops!" ko'rsatiladi 1 soniyadan keyin
 
 ### finally
 
-Oddiy `try {...} catch {...}` da `finally` bandi bo'lgani kabi, va'da da ham `finally` bor.
+Oddiy `try {...} catch {...}` da `finally` bandi bo'lgani kabi, promis da ham `finally` bor.
 
-`.finally(f)` chaqiruvi `.then(f, f)` ga o'xshaydi, chunki u har doim va'da bajarilganda ishlaydi: xoh qaror qabul qilinsin yoki rad etilsin.
+`.finally(f)` chaqiruvi `.then(f, f)` ga o'xshaydi, chunki u har doim promis bajarilganda ishlaydi: xoh qaror qabul qilinsin yoki rad etilsin.
 
 `finally` tozalashni amalga oshirish uchun yaxshi ishlov beradi, masalan, bizning yuklash ko'rsatkichlarimizni to'xtatish, chunki natija qanday bo'lishidan qat'i nazar, endi ular kerak emas.
 
@@ -227,7 +227,7 @@ new Promise((resolve, reject) => {
   /* vaqt talab qiladigan narsani qilish va keyin resolve/reject ni chaqirish */
 })
 *!*
-  // va'da qilinganidan keyin ishlaydi, muvaffaqiyatli yoki yo'q muhim emas
+  // promis qilinganidan keyin ishlaydi, muvaffaqiyatli yoki yo'q muhim emas
   .finally(() => stop loading indicator)
 */!*
   .then(result => show result, err => show error)
@@ -235,7 +235,7 @@ new Promise((resolve, reject) => {
 
 Bu aniq taxallus emas. Bir nechta muhim farqlar mavjud:
 
-1. `finally` ishlov beruvchida argumentlar yo'q. `finally` da biz va'da muvaffaqiyatli yoki yo'qligini bilmaymiz. Hammasi yaxshi, chunki bizning vazifamiz odatda "umumiy" yakunlovchi protseduralarni bajarishdir.
+1. `finally` ishlov beruvchida argumentlar yo'q. `finally` da biz promis muvaffaqiyatli yoki yo'qligini bilmaymiz. Hammasi yaxshi, chunki bizning vazifamiz odatda "umumiy" yakunlovchi protseduralarni bajarishdir.
 2. Nihoyat, natijalar va xatolar orqali keyingi ishlov beruvchiga o'tadi.
 
     Masalan, bu yerda natija `finally` dan `then` ga uzatiladi:
@@ -247,7 +247,7 @@ Bu aniq taxallus emas. Bir nechta muhim farqlar mavjud:
       .then(result => alert(result)); // <-- .then natijani boshqaradi
     ```
 
-    Va bu yerda `finally` dan `catch` ga o'tgan va'dada xato bor:
+    Va bu yerda `finally` dan `catch` ga o'tgan promisda xato bor:
 
     ```js run
     new Promise((resolve, reject) => {
@@ -257,26 +257,26 @@ Bu aniq taxallus emas. Bir nechta muhim farqlar mavjud:
       .catch(err => alert(err));  // <-- .catch xato obyektini boshqaradi
     ```  
 
-    Bu juda qulay, chunki "finally" va'da qilingan natijalarni qayta ishlashga mo'ljallanmagan. Shunday qilib, bu ulardan o'tib ketadi.
+    Bu juda qulay, chunki "finally" promis qilingan natijalarni qayta ishlashga mo'ljallanmagan. Shunday qilib, bu ulardan o'tib ketadi.
 
-    Va'da zanjiri va ishlovchilar o'rtasida natijalarni uzatish haqida keyingi bobda gaplashamiz.
+    Promis zanjiri va ishlovchilar o'rtasida natijalarni uzatish haqida keyingi bobda gaplashamiz.
 
 3. So'nggi, lekin eng muhimi, `.finally(f)` - `.then(f, f)` dan ko'ra qulayroq sintaksis: funktsiyani takrorlashning hojati yo'q.
 
-````smart header="Qabul qilingan va'dalar bo'yicha ishlovchilar darhol ishlaydi"
-Agar va'da kutilayotgan bo'lsa, `.then/catch/finally` ishlovchilar natijani kutishadi. Aks holda, agar va'da allaqachon o'rnatilgan bo'lsa, darhol bajaradilar:
+````smart header="Qabul qilingan promislar bo'yicha ishlovchilar darhol ishlaydi"
+Agar promis kutilayotgan bo'lsa, `.then/catch/finally` ishlovchilar natijani kutishadi. Aks holda, agar promis allaqachon o'rnatilgan bo'lsa, darhol bajaradilar:
 
 ```js run
-// darhol hal qilingan va'da
+// darhol hal qilingan promis
 let promise = new Promise(resolve => resolve("done!"));
 
 promise.then(alert); // done! (hozir paydo bo'ladi)
 ```
 
-Yaxshi tomoni shundaki, `.then` ishlov beruvchisi va'da vaqtni oladimi yoki darhol hal qiladimi, ishlashiga kafolat beradi.
+Yaxshi tomoni shundaki, `.then` ishlov beruvchisi promis vaqtni oladimi yoki darhol hal qiladimi, ishlashiga kafolat beradi.
 ````
 
-Keling, va'dalar asinxron kod yozishda qanday yordam berishi haqida ko'proq amaliy misollarni ko'rib chiqamiz.
+Keling, promislar asinxron kod yozishda qanday yordam berishi haqida ko'proq amaliy misollarni ko'rib chiqamiz.
 
 ## Misol: loadScript
 
@@ -296,7 +296,7 @@ function loadScript(src, callback) {
 }
 ```
 
-Keling, uni va'dalar yordamida qayta yozaylik.
+Keling, uni promislar yordamida qayta yozaylik.
 
 `loadScript` yangi funktsiyasi qayta chaqiruvni talab qilmaydi. Buning o'rniga, u yuklash tugagandan so'ng hal qilinadigan "Promise" obyektini yaratadi va qaytaradi. Tashqi kod unga `.then` yordamida ishlov beruvchilarni (obuna funktsiyalarni) qo'shishi mumkin:
 
@@ -332,7 +332,7 @@ Qayta chaqiruvga asoslangan shablondan darhol bir nechta afzalliklarni ko'rishim
 
 | Promises | Callbacks |
 |----------|-----------|
-| Va'dalar bizni narsalarni tabiiy tartibda bajarishga imkon beradi. Birinchidan, biz `loadScript(script)` ni ishga tushiramiz va keyin `result` bilan nima qilishni yozamiz. | `LoadScript(script, callback)` ni chaqirishda bizda `callback` funktsiyasi bo'lishi kerak. Boshqacha qilib aytganda,  `loadScript` chaqirilishidan *oldin* natija bilan nima qilishni bilamiz. |
+| Promislar bizni narsalarni tabiiy tartibda bajarishga imkon beradi. Birinchidan, biz `loadScript(script)` ni ishga tushiramiz va keyin `result` bilan nima qilishni yozamiz. | `LoadScript(script, callback)` ni chaqirishda bizda `callback` funktsiyasi bo'lishi kerak. Boshqacha qilib aytganda,  `loadScript` chaqirilishidan *oldin* natija bilan nima qilishni bilamiz. |
 | Biz `.then` ni xohlagancha chaqirishimiz mumkin. Har safar biz "obuna ro'yxatiga" yangi "fanat", yangi obuna funktsiyasini qo'shmoqdamiz. Bu haqda keyingi bobda batafsil ma'lumot beramiz: [](info:promise-chaining). | Faqat bitta qayta chaqiruv bo'lishi mumkin. |
 
-Shunday qilib, va'dalar bizga kod oqimini va moslashuvchanlikni beradi. Ammo yana ko'p narsalar mavjud. Buni keyingi boblarda ko'ramiz.
+Shunday qilib, promislar bizga kod oqimini va moslashuvchanlikni beradi. Ammo yana ko'p narsalar mavjud. Buni keyingi boblarda ko'ramiz.

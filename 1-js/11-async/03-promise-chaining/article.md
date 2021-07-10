@@ -1,11 +1,11 @@
 
-# Va'dalar zanjiri
+# Promislar zanjiri
 
 <info:callbacks> bobida aytib o'tilgan muammoga qaytaylik: bizda birin-ketin bajariladigan asinxron vazifalar ketma-ketligi mavjud. Masalan, skriptlarni yuklash. Qanday qilib biz uni yaxshi kodlashimiz mumkin?
 
-Buning uchun va'dalar bir nechta retseptlarni taqdim etadi.
+Buning uchun promislar bir nechta retseptlarni taqdim etadi.
 
-Ushbu bobda biz va'da zanjirini yoritamiz.
+Ushbu bobda biz promis zanjirini yoritamiz.
 
 Bu shunday ko'rinadi:
 
@@ -35,7 +35,7 @@ new Promise(function(resolve, reject) {
 G'oya shundan iboratki, natija `.then` ishlovchilar zanjiri orqali o'tadi.
 
 Mana oqim:
-1. Dastlabki va'da 1 soniyada hal qilinadi `(*)`,
+1. Dastlabki promis 1 soniyada hal qilinadi `(*)`,
 2. Keyin `.then` ishlov beruvchisi `(**)` chaqiriladi.
 3. Qaytgan qiymat keyingi `.then` ishlov beruvchiga `(***)` uzatiladi
 4. ...va hokazo.
@@ -44,9 +44,9 @@ Natijada ishlovchilar zanjiri bo'ylab uzatilganda biz `alert` chaqiruvlari ketma
 
 ![](promise-then-chain.svg)
 
-Hammasi ishlaydi, chunki `promise.then` degan chaqiriq va'dani qaytaradi, shunda biz keyingi `.then` ni chaqira olamiz.
+Hammasi ishlaydi, chunki `promise.then` degan chaqiriq promisni qaytaradi, shunda biz keyingi `.then` ni chaqira olamiz.
 
-Qayta ishlovchi qiymatni qaytarganda, bu va'daning natijasi bo'ladi, shuning uchun keyingi `.then` u bilan chaqiriladi.
+Qayta ishlovchi qiymatni qaytarganda, bu promisning natijasi bo'ladi, shuning uchun keyingi `.then` u bilan chaqiriladi.
 
 Ushbu so'zlarni aniqroq qilish uchun, mana zanjirning boshlanishi:
 
@@ -64,9 +64,9 @@ new Promise(function(resolve, reject) {
 // .then…
 ```
 
-`.then` tomonidan qaytarilgan qiymat va'da, shuning uchun biz `(2)` da yana bir `.then` qo'sha olamiz. Qiymat `(1)` ga qaytarilganda, bu va'da hal qilinadi, shuning uchun keyingi ishlov beruvchi qiymat bilan ishlaydi.
+`.then` tomonidan qaytarilgan qiymat promis, shuning uchun biz `(2)` da yana bir `.then` qo'sha olamiz. Qiymat `(1)` ga qaytarilganda, bu promis hal qilinadi, shuning uchun keyingi ishlov beruvchi qiymat bilan ishlaydi.
 
-**Klassik yangilar xatosi: texnik jihatdan biz bitta va'daga ko'p `.then` qo'sha olamiz. Bu zanjir emas.**
+**Klassik yangilar xatosi: texnik jihatdan biz bitta promisga ko'p `.then` qo'sha olamiz. Bu zanjir emas.**
 
 Masalan:
 ```js run
@@ -90,21 +90,21 @@ promise.then(function(result) {
 });
 ```
 
-Bu yerda qilgan narsamiz bu bitta va'daga bir nechta ishlovchilar qo'yganimiz. Ular natijani bir-biriga yetkazishmaydi, aksincha uni mustaqil ravishda qayta ishlashadi.
+Bu yerda qilgan narsamiz bu bitta promisga bir nechta ishlovchilar qo'yganimiz. Ular natijani bir-biriga yetkazishmaydi, aksincha uni mustaqil ravishda qayta ishlashadi.
 
 Mana rasm (yuqoridagi zanjir bilan taqqoslang):
 
 ![](promise-then-many.svg)
 
-Barchasi `.then`, bitta va'da bo'yicha bir xil natijaga erishiladi - bu va'da natijasi. Shunday qilib, yuqoridagi kodda `alert` bir xil bo'ladi: `1`.
+Barchasi `.then`, bitta promis bo'yicha bir xil natijaga erishiladi - bu promis natijasi. Shunday qilib, yuqoridagi kodda `alert` bir xil bo'ladi: `1`.
 
-Amalda biz kamdan-kam hollarda bitta va'da uchun bir nechta ishlov beruvchiga muhtojmiz. Zanjirlash juda tez-tez ishlatiladi.
+Amalda biz kamdan-kam hollarda bitta promis uchun bir nechta ishlov beruvchiga muhtojmiz. Zanjirlash juda tez-tez ishlatiladi.
 
-## Va'dalarni qaytarish
+## Promislarni qaytarish
 
 Odatda, `.then` ishlov beruvchisi tomonidan qaytarilgan qiymat darhol keyingi ishlov beruvchiga uzatiladi. Ammo istisno mavjud.
 
-Agar qaytarib berilgan qiymat va'da bo'lsa, unda keyingi ijro to'xtaguncha to'xtatiladi. Shundan so'ng, ushbu va'daning natijasi keyingi `.then` ishlov beruvchiga beriladi.
+Agar qaytarib berilgan qiymat promis bo'lsa, unda keyingi ijro to'xtaguncha to'xtatiladi. Shundan so'ng, ushbu promisning natijasi keyingi `.then` ishlov beruvchiga beriladi.
 
 Masalan:
 
@@ -142,7 +142,7 @@ Bu yerda birinchi `.then` `1` `(*)` satrida `new Promise(…)` ni qaytaradi. Bir
 
 Shunday qilib, chiqish yana 1 -> 2 -> 4 ni tashkil qiladi, ammo endi `alert` chaqiruvlari o'rtasida 1 soniya kechikish mavjud.
 
-Va'dalarni qaytarish bizga asinxron harakatlar zanjirlarini yaratishga imkon beradi.
+Promislarni qaytarish bizga asinxron harakatlar zanjirlarini yaratishga imkon beradi.
 
 ## Misol: loadScript
 
@@ -180,7 +180,7 @@ loadScript("/article/promise-chaining/one.js")
 ```
 
 
-Bu yerda har bir `loadScript` chaqiruvi va'da qaytaradi va keyingi `.then` hal bo'lganda ishlaydi. So'ng u keyingi skriptni yuklashni boshlaydi. Shunday qilib, skriptlar birin-ketin yuklanadi.
+Bu yerda har bir `loadScript` chaqiruvi promis qaytaradi va keyingi `.then` hal bo'lganda ishlaydi. So'ng u keyingi skriptni yuklashni boshlaydi. Shunday qilib, skriptlar birin-ketin yuklanadi.
 
 Biz zanjirga ko'proq asinxron harakatlarni qo'shishimiz mumkin. Iltimos, unutmangki, kod hali ham "tekis" bo'lib, u o'ngga emas, pastga qarab o'sadi. "Halokat piramidasi" ning alomatlari yo'q.
 
@@ -201,17 +201,17 @@ loadScript("/article/promise-chaining/one.js").then(script1 => {
 
 Ushbu kod ham xuddi shunday: 3 ta skriptni ketma-ket yuklaydi. Ammo u "o'ng tomonga o'sadi". Shunday qilib, biz chaqiruvlarni qaytarish bilan bir xil muammolarga duch kelamiz.
 
-Va'dalardan foydalanishni boshlagan odamlar ba'zida zanjirlash haqida bilishmaydi, shuning uchun ular shunday yozadilar. Odatda, zanjirlash afzaldir.
+Promislardan foydalanishni boshlagan odamlar ba'zida zanjirlash haqida bilishmaydi, shuning uchun ular shunday yozadilar. Odatda, zanjirlash afzaldir.
 
 Ba'zan to'g'ridan-to'g'ri `.then` yozish yaxshi bo'ladi, chunki ichki funktsiya tashqi doiraga kirish huquqiga ega. Yuqoridagi misolda eng uyali qayta chaqirish `skript1`, `skript2`, `skript3` barcha o'zgaruvchanlariga kirish huquqiga ega. Ammo bu qoidadan ko'ra istisno.
 
 
 ````smart header="Thenables"
-Aniqroq qilib aytganda, `.then` tasodifiy "thenable" obyektni qaytarishi mumkin va unga va'da kabi munosabatda bo'lishadi.
+Aniqroq qilib aytganda, `.then` tasodifiy "thenable" obyektni qaytarishi mumkin va unga promis kabi munosabatda bo'lishadi.
 
 "Thenable" obyekt `.then` usuli bo'lgan har qanday obyekt.
 
-Ushbu g'oya shundan iboratki, uchinchi tomon kutubxonalari o'zlariga tegishli "va'dalarga mos" obyektlarni amalga oshirishi mumkin. Ular kengaytirilgan usullar to'plamiga ega bo'lishi mumkin, shuningdek, mahalliy va'dalarga mos kelishi mumkin, chunki ular `.then` ni amalga oshiradilar.
+Ushbu g'oya shundan iboratki, uchinchi tomon kutubxonalari o'zlariga tegishli "promislarga mos" obyektlarni amalga oshirishi mumkin. Ular kengaytirilgan usullar to'plamiga ega bo'lishi mumkin, shuningdek, mahalliy promislarga mos kelishi mumkin, chunki ular `.then` ni amalga oshiradilar.
 
 Thenable obyektga misol:
 
@@ -236,13 +236,13 @@ new Promise(resolve => resolve(1))
 
 JavaScript `.then` `(*)` satridagi `.then` ishlov beruvchisi tomonidan qaytarilgan obyektni tekshiradi: agar u `then` deb nomlanadigan usulga ega bo'lsa, u holda bu tabiiy funktsiyalarni taqdim etadigan ushbu usulni `resolve`, `reject` argument sifatida chaqiradi (ijrochiga o'xshash) va ulardan biri chaqirilguncha kutadi. Yuqoridagi misolda `resolve(2)` 1 soniyadan so'ng chaqiriladi `(**)`. Keyin natija zanjirning pastki qismiga uzatiladi.
 
-Ushbu xususiyat `Promise` dan meros olmasdan, moslashtirilgan moslamalarni va'da zanjirlari bilan birlashtirishga imkon beradi.
+Ushbu xususiyat `Promise` dan meros olmasdan, moslashtirilgan moslamalarni promis zanjirlari bilan birlashtirishga imkon beradi.
 ````
 
 
 ## Kattaroq misol: fetch
 
-Frontend dasturlash va'dalari ko'pincha tarmoq so'rovlari uchun ishlatiladi. Keling, buning kengaytirilgan namunasini ko'rib chiqaylik.
+Frontend dasturlash promislari ko'pincha tarmoq so'rovlari uchun ishlatiladi. Keling, buning kengaytirilgan namunasini ko'rib chiqaylik.
 
 Uzoq serverdan foydalanuvchi haqidagi ma'lumotlarni yuklash uchun [fetch](mdn:api/WindowOrWorkerGlobalScope/fetch) usulidan foydalanamiz. Usul juda murakkab, ko'plab ixtiyoriy parametrlarga ega, ammo asosiy foydalanish juda oddiy:
 
@@ -250,9 +250,9 @@ Uzoq serverdan foydalanuvchi haqidagi ma'lumotlarni yuklash uchun [fetch](mdn:ap
 let promise = fetch(url);
 ```
 
-Bu `url` ga tarmoq so'rovini yuboradi va va'da qaytaradi. Masofaviy server sarlavhalar bilan javob berganida, va *to'liq javob yuklab olinmasdan oldin* va'da `response` obyekti bilan hal qilinadi.
+Bu `url` ga tarmoq so'rovini yuboradi va promis qaytaradi. Masofaviy server sarlavhalar bilan javob berganida, va *to'liq javob yuklab olinmasdan oldin* promis `response` obyekti bilan hal qilinadi.
 
-To'liq javobni o'qish uchun biz `response.text()` usulini chaqirishimiz kerak: bu to'liq matnni uzoq serverdan yuklab olganda va natijada ushbu matn bilan hal qilinadigan va'dani qaytaradi.
+To'liq javobni o'qish uchun biz `response.text()` usulini chaqirishimiz kerak: bu to'liq matnni uzoq serverdan yuklab olganda va natijada ushbu matn bilan hal qilinadigan promisni qaytaradi.
 
 Quyidagi kod `user.json` ga so'rov yuboradi va uning matnini serverdan yuklaydi:
 
@@ -260,7 +260,7 @@ Quyidagi kod `user.json` ga so'rov yuboradi va uning matnini serverdan yuklaydi:
 fetch('/article/promise-chaining/user.json')
   // .then masofaviy server javob berganida quyida ishlaydi
   .then(function(response) {
-    // response.text() javobning to'liq matni bilan hal qilinadigan yangi va'dani qaytaradi
+    // response.text() javobning to'liq matni bilan hal qilinadigan yangi promisni qaytaradi
     // uni yuklab olishni tugatgandan so'ng
     return response.text();
   })
@@ -305,11 +305,11 @@ fetch('/article/promise-chaining/user.json')
   });
 ```
 
-Kod ishlaydi, tafsilotlar haqidagi sharhlarni ko'ring, lekin u o'zi tavsiflovchi bo'lishi kerak. Garchi unda potentsial muammo mavjud bo'lsa ham, va'da ishlatishni boshlaganlar uchun odatiy xato.
+Kod ishlaydi, tafsilotlar haqidagi sharhlarni ko'ring, lekin u o'zi tavsiflovchi bo'lishi kerak. Garchi unda potentsial muammo mavjud bo'lsa ham, promis ishlatishni boshlaganlar uchun odatiy xato.
 
 `(*)` satriga qarang: avatar ko'rsatilgandan so'ng va olib tashlanganidan *keyin* qanday qilib biron bir narsa qilishimiz mumkin? Masalan, biz ushbu foydalanuvchini yoki boshqa biron bir narsani tahrirlash uchun shaklni ko'rsatmoqchimiz. Hozircha iloj yo'q.
 
-Zanjirni uzaytiradigan qilish uchun, biz avatarni ko'rsatishni tugatgandan so'ng hal qiladigan va'dani qaytarishimiz kerak.
+Zanjirni uzaytiradigan qilish uchun, biz avatarni ko'rsatishni tugatgandan so'ng hal qiladigan promisni qaytarishimiz kerak.
 
 Shunga o'xshash:
 
@@ -339,7 +339,7 @@ fetch('/article/promise-chaining/user.json')
 
 Endi `setTimeout` `img.remove()` ni ishga tushirgandan so'ng, `resolve(githubUser)` ni chaqiradi, shu bilan boshqaruvni zanjirdagi keyingi `.then` ga uzatadi va foydalanuvchi ma'lumotlarini uzatadi.
 
-Qoida tariqasida, asinxron harakat har doim va'dani qaytarishi kerak.
+Qoida tariqasida, asinxron harakat har doim promisni qaytarishi kerak.
 
 Bu undan keyin harakatlarni rejalashtirishga imkon beradi. Agar biz hozirda zanjirni kengaytirishni rejalashtirmagan bo'lsak ham, keyinroq kerak bo'lishi mumkin.
 
@@ -380,7 +380,7 @@ loadJson('/article/promise-chaining/user.json')
 
 ## Xulosa
 
-Agar `.then` (yoki `catch/finally` ahamiyati yo'q) ishlov beruvchisi va'da bersa, qolgan zanjir o'rnashguncha kutadi. Qachonki u bajarilsa, uning natijasi (yoki xatosi) yana uzatiladi.
+Agar `.then` (yoki `catch/finally` ahamiyati yo'q) ishlov beruvchisi promis bersa, qolgan zanjir o'rnashguncha kutadi. Qachonki u bajarilsa, uning natijasi (yoki xatosi) yana uzatiladi.
 
 Mana to'liq rasm:
 

@@ -391,7 +391,7 @@ alert(item2);  // Donut
 
 Va nihoyat, biz standart qiymatdan `width`, `height`, `item1`, `item2` va `title` ga egamiz.
 
-Bu ko'pincha destrukturalashtirish bilan sodir bo'ladi. Bizda juda ko'p xususiyatlarga ega bo'lgan murakkab ob'ekt mavjud va faqat kerakli narsalarni ajratib olishni xohlaymiz.
+Bu ko'pincha destrukturalashtirish bilan sodir bo'ladi. Bizda juda ko'p xususiyatlarga ega bo'lgan murakkab obyekt mavjud va faqat kerakli narsalarni ajratib olishni xohlaymiz.
 
 Hatto bu erda ham shunday bo'ladi:
 ```js

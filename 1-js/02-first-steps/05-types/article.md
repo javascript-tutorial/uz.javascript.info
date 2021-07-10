@@ -173,13 +173,13 @@ alert(x); // "undefined"
 
 ...Ammo buni qilishni tavsiya etmaymiz. Odatda, biz o'zgaruvchiga "bo'sh" yoki "noma'lum" qiymatlarni berish uchun `null` dan foydalanamiz va o'zgaruvchanlar tayinlanganligini tekshirish uchun `undefined` dan foydalanamiz.
 
-## Ob'yektlar va Belgilar
+## Obyektlar va Belgilar
 
 `object` turi maxsusdir.
 
-Boshqa barcha turlar "ibtidoiy" deb nomlanadi, chunki ularning qiymatlari faqat bitta narsani o'z ichiga olishi mumkin (matn, raqam yoki boshqa narsalar). Aksincha, ob'yektlar ma'lumotlar to'plamlarini va murakkabroq subyektlarni saqlash uchun ishlatiladi. Biz ob'yekt haqida ko'proq kengi bobda <info:object> bilib olamiz.
+Boshqa barcha turlar "ibtidoiy" deb nomlanadi, chunki ularning qiymatlari faqat bitta narsani o'z ichiga olishi mumkin (matn, raqam yoki boshqa narsalar). Aksincha, obyektlar ma'lumotlar to'plamlarini va murakkabroq subyektlarni saqlash uchun ishlatiladi. Biz obyekt haqida ko'proq kengi bobda <info:object> bilib olamiz.
 
-`Symbol` turi ob'yektlar uchun noyob identifikatorlarni yaratish uchun ishlatiladi. To'liqlik uchun bu yerda eslatib o'tishimiz kerak, ammo ob'yektlardan keyin ushbu turni o'rganish yaxshiroqdir.
+`Symbol` turi obyektlar uchun noyob identifikatorlarni yaratish uchun ishlatiladi. To'liqlik uchun bu yerda eslatib o'tishimiz kerak, ammo obyektlardan keyin ushbu turni o'rganish yaxshiroqdir.
 
 ## Typeof operatori
 
@@ -192,7 +192,7 @@ Ikkita shakili sintaksisning  qo'llab-quvvatlaydi:
 
 Boshqacha qilib aytganda, bu qavs bilan yoki ularsiz ishlaydi. Natija bir xil.
 
-`Typeof x`ning qo'ngiroq qilganda u matni argument turi bilan qaytaradi 
+`Typeof x`ning qo'ngiroq qilganda u matnni argument turi bilan qaytaradi 
 
 ```js
 typeof undefined // "undefined"
@@ -220,9 +220,9 @@ typeof alert // "function"  (3)
 
 Oxirgi uchta satr qo'shimcha tushuntirishga muhtoj bo'lishi mumkin:
 
-1. `Math` - bu matematik operatsiyalarni ta'minlaydigan Javascriptning ichida o'rnatilgan ob'yekt. Biz buni <info:number> bobida bilib olamiz. Bu yerda u xuddi ob'yekt rolida bo'lib xizmat qiladi.
-2. `Typeof null`ning natijasi `"object"`. Bu noto'g'ri. Bu moslik uchun saqlanadigan `typeof` da rasmiy tan olingan xato. Albatta, `null` ob'yekt emas. Bu o'ziga xos alohida turga ega bo'lgan maxsus qiymatdir. Demak, bu tilning ichidagi xato.
-3. `typeof alert`ning natijasi `"function"`dir, chunki `alert` tilning funktsiyasidir. Keyingi boblarda biz funktsiyalarni o'rganamiz, bu yerda JavaScript da maxsus "funktsiya" turi yo'qligini ko'rasiz. Funktsiyalar ob'yekt turiga tegishli. Ammo `typeof` ularga boshqacha munosabatda. Rasmiy ravishda bu noto'g'ri, ammo amalda juda qulay.
+1. `Math` - bu matematik operatsiyalarni ta'minlaydigan Javascriptning ichida o'rnatilgan obyekt. Biz buni <info:number> bobida bilib olamiz. Bu yerda u xuddi obyekt rolida bo'lib xizmat qiladi.
+2. `Typeof null`ning natijasi `"object"`. Bu noto'g'ri. Bu moslik uchun saqlanadigan `typeof` da rasmiy tan olingan xato. Albatta, `null` obyekt emas. Bu o'ziga xos alohida turga ega bo'lgan maxsus qiymatdir. Demak, bu tilning ichidagi xato.
+3. `typeof alert`ning natijasi `"function"`dir, chunki `alert` tilning funktsiyasidir. Keyingi boblarda biz funktsiyalarni o'rganamiz, bu yerda JavaScript da maxsus "funktsiya" turi yo'qligini ko'rasiz. Funktsiyalar obyekt turiga tegishli. Ammo `typeof` ularga boshqacha munosabatda. Rasmiy ravishda bu noto'g'ri, ammo amalda juda qulay.
 
 
 ## Xulosa
@@ -240,7 +240,7 @@ JavaScript-da 7 ta asosiy ma'lumotlar turi mavjud.
 `Typeof` operatori bizga qaysi tur o'zgaruvchida saqlanganligini ko'rish imkonini beradi.
 
 - Ikki shakl: `typeof x` yoki `typeof(x)`.
-- `"String"` kabi turdagi nomi bilan matni qaytaradi.
-- `Null` uchun `"object"` qaytaradi -- bu tilda xato, aslida bu ob'yekt emas.
+- `"String"` kabi turdagi nomi bilan matnni qaytaradi.
+- `Null` uchun `"object"` qaytaradi -- bu tilda xato, aslida bu obyekt emas.
 
-Keyingi boblarda biz ibtidoiy qadriyatlarga e'tibor qaratamiz va ular bilan tanishib bo'lgach, ob'yektlarga o'tamiz.
+Keyingi boblarda biz ibtidoiy qadriyatlarga e'tibor qaratamiz va ular bilan tanishib bo'lgach, obyektlarga o'tamiz.

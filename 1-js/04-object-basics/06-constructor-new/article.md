@@ -29,7 +29,7 @@ alert(user.isAdmin); // false
 
 Agar funktsiya `new User(...)` sifatida bajarilsa, u quyidagi amallarni bajaradi:
 
-1. Yangi bo'sh ob'ekt yaratilib, `this` ga tayinlangan.
+1. Yangi bo'sh obyekt yaratilib, `this` ga tayinlangan.
 2. Funktsiya tanasi bajariladi. Odatda u `this` ni o'zgartiradi, unga yangi xususiyatlar qo'shadi.
 3. `this` ning qiymati qaytariladi.
 
@@ -220,7 +220,7 @@ john = {
 
 Biz bir nechta o'xshash obyektlarni yaratish uchun konstruktor funktsiyalaridan foydalanishimiz mumkin.
 
-JavaScript ko'plab o'rnatilgan til ob'ektlari uchun konstruktor funktsiyalarini taqdim etadi: sanalar uchun `Data`, to'plamlar uchun `Set` va biz o'rganishni rejalashtirgan boshqa narsalar.
+JavaScript ko'plab o'rnatilgan til obyektlari uchun konstruktor funktsiyalarini taqdim etadi: sanalar uchun `Data`, to'plamlar uchun `Set` va biz o'rganishni rejalashtirgan boshqa narsalar.
 
 ```smart header="Obyektlar, biz qaytib kelamiz!"
 Ushbu bobda biz faqat obyektlar va konstruktorlar haqida asoslarni ko'rib chiqdik. Ular keyingi boblarda ma'lumotlar turlari va funktsiyalari haqida ko'proq bilish uchun juda muhimdir.

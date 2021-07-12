@@ -308,7 +308,7 @@ weakMap.set("test", "Whoops"); // Xato, chunki "test" obyekt emas
 */!*
 ```
 
-Endi, agar biz ob'ektni kalit sifatida ishlatsak va u obyektga boshqa havolalar bo'lmasa - u xotiradan (va map obyektidan) avtomatik ravishda o'chiriladi.
+Endi, agar biz obyektni kalit sifatida ishlatsak va u obyektga boshqa havolalar bo'lmasa - u xotiradan (va map obyektidan) avtomatik ravishda o'chiriladi.
 
 ```js
 let john = { name: "John" };
@@ -338,7 +338,7 @@ JavaScript interpretatori buni hal qiladi. Zudlik bilan xotirani tozalashni amal
 
 Endi bunday narsa bizga qayerda kerak?
 
-"WeakMap" g'oyasi shundan iboratki, biz obyekt uchun faqat ob'ekt mavjud bo'lganda bo'lishi kerak bo'lgan narsalarni saqlashimiz mumkin. Ammo biz obyektni shunchaki u uchun biror narsa saqlashimiz bilan yashashga majburlamaymiz.
+"WeakMap" g'oyasi shundan iboratki, biz obyekt uchun faqat obyekt mavjud bo'lganda bo'lishi kerak bo'lgan narsalarni saqlashimiz mumkin. Ammo biz obyektni shunchaki u uchun biror narsa saqlashimiz bilan yashashga majburlamaymiz.
 
 ```js
 weakMap.set(john, "maxfiy hujjatlar");

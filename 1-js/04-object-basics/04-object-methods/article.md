@@ -9,7 +9,7 @@ let user = {
 };
 ```
 
-Va, haqiqiy dunyoda, foydalanuvchi *harakat qilishi mumkin*: xarid qilish vositasidan biror narsani tanlash, kirish, chiqish va h.k.
+Va, haqiqiy dunyoda, foydalanuvchi *harakat qilishi mumkin*: xarid qilish vositasidan biror narsani tanlash, kirish, chiqish va hk.
 
 Amallar JavaScript-da funktsiyadagi xususiyatlar bilan ifodalanadi.
 
@@ -270,7 +270,7 @@ sayHi(); // undefined
 
 Bunday holda `this` qat'iy rejimda `undefined`. Agar `this.name` ga kirishga harakat qilsak, xato bo'ladi.
 
-Qat'iy bo'lmagan rejimda `this` qiymati *global obyekt* bo'ladi (brauzerda `window`, biz keyinroq [](info:global-objekt) bobida unga erishamiz. Bunday tarixiy xatti-harakatlarni tuzatish uchun, `"use strict"` dan foydalaning.
+Qat'iy bo'lmagan rejimda `this` qiymati *global obyekt* bo'ladi (brauzerda `window`, biz keyinroq [](info:global-object) bobida unga erishamiz. Bunday tarixiy xatti-harakatlarni tuzatish uchun, `"use strict"` dan foydalaning.
 
 <<<<<<< HEAD
 Iltimos, shuni yodda tutingki, odatda `this` ni obyektsiz ishlatiladigan funktsiya chaqiruvi odatiy emas, aksincha dasturiy xato. Agar funktsiya `this` ga ega bo'lsa, unda odatda obyekt kontekstida chaqirilishi kerak.
@@ -285,7 +285,7 @@ Agar ilgari boshqa dasturlash tillarini o'rgangan bo'lsangiz, unda siz "bog'liq 
 <<<<<<< HEAD
 JavaScript-da `this` "ozod", uning qiymati chaqiruv vaqtida baholanadi va usul qayerda e'lon qilinganiga bog'liq emas, balki "nuqta oldida" nima bo'lganiga bog'liq.
 
-Ish vaqti tushunchasi `this` ijobiy va salbiy tomonlarga ega. Bir tomondan, funktsiyani turli xil ob'yktlar uchun qayta ishlatish mumkin. Boshqa tomondan, ko'proq moslashuvchanlik xatolar uchun joy ochadi.
+Ish vaqti tushunchasi `this` ijobiy va salbiy tomonlarga ega. Bir tomondan, funktsiyani turli xil obyektlar uchun qayta ishlatish mumkin. Boshqa tomondan, ko'proq moslashuvchanlik xatolar uchun joy ochadi.
 
 Bu yerda bizning pozitsiyamiz ushbu tilni loyihalashtirish bo'yicha qarorning yaxshi yoki yomonligini baholash emas. U bilan qanday ishlashni, qanday foyda olish va muammolardan qanday qochish kerakligini organamiz.
 ```

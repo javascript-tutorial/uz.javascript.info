@@ -2,7 +2,7 @@
 ## Salom!
 
 Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan.
-Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu repozitoriyning Issues[https://#] bo'limida bizga murojaat qilishingizni so'raymiz. 
+Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu repozitoriyning Issues[https://github.com/javascript-tutorial/uz.javascript.info/issues] bo'limida bizga murojaat qilishingizni so'raymiz. 
 
 ## Tarjimalar
 

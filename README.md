@@ -33,7 +33,6 @@ Materialning turi papka ichidagi fayl bilan belgilanadi:
 
 Bu fayllarning har biri `# Asosiy sarlavhadan` boshlanadi.
 
-...
-
 E'tiboringiz uchun rahmat!
-Elbek va Oybek.
+Elbek @hakimbekovelbek
+Oybek

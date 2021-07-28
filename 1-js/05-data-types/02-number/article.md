@@ -56,8 +56,8 @@ In other words, `e` multiplies the number by `1` with the given zeroes count.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
-1e3 = 1 * 1000 // e3 means *1000
-1.23e6 = 1.23 * 1000000 // e6 means *1000000
+1e3 === 1 * 1000; // e3 means *1000
+1.23e6 === 1.23 * 1000000; // e6 means *1000000
 ```
 
 <<<<<<< HEAD
@@ -86,11 +86,19 @@ Agar `0.000001` dagi nollarni hisoblasak, ularning soni 6 taga teng. Tabiiyki, b
 Boshqacha qilib aytganda, `"e"` dan keyin salbiy son, berilgan nol soni bilan 1 ga bo'linishni anglatadi:
 
 ```js
+<<<<<<< HEAD
 // -3  3 ta nol bilan 1 ga bo'linadi
 1e-3 = 1 / 1000 (=0.001)
 
 // -6 6 ta nol bilan 1 ga bo'linadi
 1.23e-6 = 1.23 / 1000000 (=0.00000123)
+=======
+// -3 divides by 1 with 3 zeroes
+1e-3 === 1 / 1000; // 0.001
+
+// -6 divides by 1 with 6 zeroes
+1.23e-6 === 1.23 / 1000000; // 0.00000123
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 ```
 
 ### O'n olti, ikkilik va sakkizli sonlar
@@ -145,7 +153,12 @@ Iltimos e'tibor bering, `123456..toString(36)` dagi ikkita nuqta matn terish xat
 
 Agar bitta nuqta qo'ygan bo'lsak: `123456.toString(36)`, unda xato bo'lishi mumkin, chunki JavaScript sintaksisida birinchi nuqtadan keyingi o'nlik qismi nazarda tutilgan. Agar biz yana bitta nuqta qo'yadigan bo'lsak, JavaScript kasr qismi bo'sh ekanligini biladi va endi usulga o'tadi.
 
+<<<<<<< HEAD
 Shuningdek yozishi mumkin edi `(123456).toString(36)`.
+=======
+Also could write `(123456).toString(36)`.
+
+>>>>>>> ef8d576821ff28c69bfb7410dc79fd216b0a315b
 ```
 
 ## Yaxlitlash

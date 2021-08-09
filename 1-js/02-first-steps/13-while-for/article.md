@@ -438,7 +438,7 @@ label: {
 }
 ```
 
-...Although, 99.9% of the time `break` used is inside loops, as we've seen in the examples above.
+...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
 
 A `continue` is only possible from inside a loop.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md

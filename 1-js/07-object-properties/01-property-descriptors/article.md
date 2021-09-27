@@ -29,7 +29,11 @@ Biz ularni hali ko'rmadik, chunki umuman ular ko'rinmaydi. "Odatiy usul" xususiy
 
 Birinchidan, ushbu bayroqlarni qanday olish kerakligini ko'rib chiqamiz.
 
+<<<<<<< HEAD
 [Object.getOwnPropertyDescriptor](mdn:js/Object/getOwnPropertyDescriptor) usuli xususiyat haqida *to'liq* ma'lumotni so'rashga imkon beradi.
+=======
+The method [Object.getOwnPropertyDescriptor](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor) allows to query the *full* information about a property.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 Sintaksis:
 ```js
@@ -64,7 +68,11 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 */
 ```
 
+<<<<<<< HEAD
 Bayroqlarni o'zgartirish uchun biz [Object.defineProperty](mdn:js/Object/defineProperty) dan foydalanishimiz mumkin.
+=======
+To change the flags, we can use [Object.defineProperty](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty).
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 Sintaksis:
 
@@ -242,9 +250,13 @@ Konfiguratsiya qilinmaydigan bayroq (`configurable: false`) ba'zan o'rnatilgan o
 <<<<<<< HEAD
 Konfiguratsiya qilinmaydigan xususiyatni o'chirib bo'lmaydi yoki `defineProperty` bilan o'zgartirib bo'lmaydi.
 
+<<<<<<< HEAD
 Masalan, `Math.PI` ni faqat o'qish mumkin, hisoblab bo'lmaydi va konfiguratsiya qilinmaydi:
 =======
 A non-configurable property can not be deleted.
+=======
+A non-configurable property can't be deleted, its attributes can't be modified.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 For instance, `Math.PI` is non-writable, non-enumerable and non-configurable:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -265,25 +277,32 @@ alert( JSON.stringify(descriptor, null, 2 ) );
 Shunday qilib, dasturchi `Math.PI` qiymatini o'zgartira olmaydi yoki uning ustiga yozib bo'lmaydi.
 
 ```js run
-Math.PI = 3; // Error
+Math.PI = 3; // Error, because it has writable: false
 
 // delete Math.PI ham ishlamaydi
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Mulkni konfiguratsiya qilinmaydigan qilish - bu bir tomonlama yo'l. Biz uni o'zgartira olmaymiz, chunki `defineProperty` konfiguratsiya qilinmaydigan xususiyatlarda ishlamaydi.
 
 Bu erda biz `user.name` manzilini "abadiy muhrlangan" konstantaga keltiramiz:
 =======
 Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+=======
+We also can't change `Math.PI` to be `writable` again:
 
-To be precise, non-configurability imposes several restrictions on `defineProperty`:
-1. Can't change `configurable` flag.
-2. Can't change `enumerable` flag.
-3. Can't change `writable: false` to `true` (the other way round works).
-4. Can't change `get/set` for an accessor property (but can assign them if absent).
+```js run
+// Error, because of configurable: false
+Object.defineProperty(Math, "PI", { writable: true });
+```
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
-**The idea of "configurable: false" is to prevent changes of property flags and its deletion, while allowing to change its value.**
+There's absolutely nothing we can do with `Math.PI`.
+
+Making a property non-configurable is a one-way road. We cannot change it back with `defineProperty`.
+
+**Please note: `configurable: false` prevents changes of property flags and its deletion, while allowing to change its value.**
 
 Here `user.name` is non-configurable, but we can still change it (as it's writable):
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -301,7 +320,7 @@ user.name = "Pete"; // works fine
 delete user.name; // Error
 ```
 
-And here we make `user.name` a "forever sealed" constant:
+And here we make `user.name` a "forever sealed" constant, just like the built-in `Math.PI`:
 
 ```js run
 let user = {
@@ -335,11 +354,23 @@ delete user.name;
 Object.defineProperty(user, "name", { value: "Pete" });
 ```
 
+<<<<<<< HEAD
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Object.defineProperties
 
 Bir vaqtning o'zida ko'plab xususiyatlarni aniqlashga imkon beradigan  [Object.defineProperties(obj, descriptors)](mdn:js/Object/defineProperties) usuli mavjud.
+=======
+```smart header="The only attribute change possible: writable true -> false"
+There's a minor exception about changing flags.
+
+We can change `writable: true` to `false` for a non-configurable property, thus preventing its value modification (to add another layer of protection). Not the other way around though.
+```
+
+## Object.defineProperties
+
+There's a method [Object.defineProperties(obj, descriptors)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) that allows to define many properties at once.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 Sintaksis:
 
@@ -365,7 +396,11 @@ Shunday qilib, biz bir vaqtning o'zida ko'plab xususiyatlarni o'rnatishimiz mumk
 
 ## Object.getOwnPropertyDescriptors
 
+<<<<<<< HEAD
 Bir vaqtning o'zida barcha xususiyatlar tavsiflovchilarini olish uchun biz [Object.getOwnPropertyDescriptors(obj)](mdn:js/Object/getOwnPropertyDescriptors) usulidan foydalanishimiz mumkin.
+=======
+To get all property descriptors at once, we can use the method [Object.getOwnPropertyDescriptors(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptors).
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 `Object.defineProperties` bilan birgalikda u obyektni klonlashning "bayroqlardan xabardor" usuli sifatida ishlatilishi mumkin:
 
@@ -391,6 +426,7 @@ Xususiyat tavsiflovchilari individual xususiyatlar darajasida ishlaydi.
 
 *Butun* obyektga kirishni cheklaydigan usullar ham mavjud:
 
+<<<<<<< HEAD
 [Object.preventExtensions(obj)](mdn:js/Object/preventExtensions)
 : Obyektga yangi xususiyatlarni qo'shishni taqiqlaydi.
 
@@ -402,11 +438,21 @@ Xususiyat tavsiflovchilari individual xususiyatlar darajasida ishlaydi.
 : Xususiyatlarni qo'shish/olib tashlash/o'zgartirishni taqiqlaydi. Mavjud barcha xususiyatlar uchun `configurable: false, writable: false` ni o'rnatadi.
 Va ular uchun testlar mavjud:
 =======
+=======
+[Object.preventExtensions(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/preventExtensions)
+: Forbids the addition of new properties to the object.
+
+[Object.seal(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/seal)
+: Forbids adding/removing of properties. Sets `configurable: false` for all existing properties.
+
+[Object.freeze(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 : Forbids adding/removing/changing of properties. Sets `configurable: false, writable: false` for all existing properties.
 
 And also there are tests for them:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 [Object.isExtensible(obj)](mdn:js/Object/isExtensible)
 : Agar xususiyatlarni qo'shish taqiqlangan bo'lsa, `false` ni qaytaradi, aks holda `true`.
 
@@ -415,5 +461,15 @@ And also there are tests for them:
 
 [Object.isFrozen(obj)](mdn:js/Object/isFrozen)
 : Xususiyatlarni qo'shish/olib tashlash/o'zgartirish taqiqlangan bo'lsa va barcha mavjud xususiyatlar `configurable: false, writable: false` bo'lsa, `true` ni qaytaradi.
+=======
+[Object.isExtensible(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isExtensible)
+: Returns `false` if adding properties is forbidden, otherwise `true`.
+
+[Object.isSealed(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isSealed)
+: Returns `true` if adding/removing properties is forbidden, and all existing properties have `configurable: false`.
+
+[Object.isFrozen(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/isFrozen)
+: Returns `true` if adding/removing/changing properties is forbidden, and all current properties are `configurable: false, writable: false`.
+>>>>>>> b09e38c5573346c401a9f9f7410b4ff9be5f4115
 
 Ushbu usullar amalda kamdan kam qo'llaniladi.

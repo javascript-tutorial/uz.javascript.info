@@ -4,7 +4,11 @@ importance: 2
 
 # Ikki funktsiya - bitta obyekt
 
+<<<<<<< HEAD
 `A` va `B` funktsiyalarini `new A()==new B()` kabi yaratish mumkinmi?
+=======
+Is it possible to create functions `A` and `B` so that `new A() == new B()`?
+>>>>>>> 193319c963b9ba86ac7d9590f7261a36ecdcc4d2
 
 ```js no-beautify
 function A() { ... }

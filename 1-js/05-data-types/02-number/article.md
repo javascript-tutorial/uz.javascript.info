@@ -9,7 +9,7 @@ In modern JavaScript, there are two types of numbers:
 
 1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754-2008_revision), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
 
-2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
+2. BigInt numbers, to represent integers of arbitrary length. They are sometimes needed, because a regular number can't safely exceed <code>2<sup>53</sup></code> or be less than <code>-2<sup>53</sup></code>. As bigints are used in few special areas, we devote them a special chapter <info:bigint>.
 
 So here we'll talk about regular numbers. Let's expand our knowledge of them.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -56,8 +56,8 @@ In other words, `e` multiplies the number by `1` with the given zeroes count.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
-1e3 = 1 * 1000 // e3 means *1000
-1.23e6 = 1.23 * 1000000 // e6 means *1000000
+1e3 === 1 * 1000; // e3 means *1000
+1.23e6 === 1.23 * 1000000; // e6 means *1000000
 ```
 
 <<<<<<< HEAD
@@ -81,16 +81,28 @@ Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes
 let ms = 1e-6; // 1 dan chapga oltita nol
 ```
 
+<<<<<<< HEAD
 Agar `0.000001` dagi nollarni hisoblasak, ularning soni 6 taga teng. Tabiiyki, bu `1e-6`.  
+=======
+If we count the zeroes in `0.000001`, there are 6 of them. So naturally it's `1e-6`.
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 
 Boshqacha qilib aytganda, `"e"` dan keyin salbiy son, berilgan nol soni bilan 1 ga bo'linishni anglatadi:
 
 ```js
+<<<<<<< HEAD
 // -3  3 ta nol bilan 1 ga bo'linadi
 1e-3 = 1 / 1000 (=0.001)
 
 // -6 6 ta nol bilan 1 ga bo'linadi
 1.23e-6 = 1.23 / 1000000 (=0.00000123)
+=======
+// -3 divides by 1 with 3 zeroes
+1e-3 === 1 / 1000; // 0.001
+
+// -6 divides by 1 with 6 zeroes
+1.23e-6 === 1.23 / 1000000; // 0.00000123
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 ```
 
 ### O'n olti, ikkilik va sakkizli sonlar
@@ -145,7 +157,12 @@ Iltimos e'tibor bering, `123456..toString(36)` dagi ikkita nuqta matn terish xat
 
 Agar bitta nuqta qo'ygan bo'lsak: `123456.toString(36)`, unda xato bo'lishi mumkin, chunki JavaScript sintaksisida birinchi nuqtadan keyingi o'nlik qismi nazarda tutilgan. Agar biz yana bitta nuqta qo'yadigan bo'lsak, JavaScript kasr qismi bo'sh ekanligini biladi va endi usulga o'tadi.
 
+<<<<<<< HEAD
 Shuningdek yozishi mumkin edi `(123456).toString(36)`.
+=======
+Also could write `(123456).toString(36)`.
+
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 ```
 
 ## Yaxlitlash
@@ -389,7 +406,11 @@ let num = +prompt("Raqam kiriting", '');
 alert( isFinite(num) );
 ```
 
+<<<<<<< HEAD
 Iltimos, barcha raqam;o funktsiyalarda bo'sh yoki faqat bo'shliq matni `0` sifatida ko'rib chiqilishini unutmang. 
+=======
+Please note that an empty or a space-only string is treated as `0` in all numeric functions including `isFinite`.
+>>>>>>> eda333d423db8ade41f75d2e2d30ea06c7d997ef
 
 ```smart header="`Object.is` bilan solishtiring"
 

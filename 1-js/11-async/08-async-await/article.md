@@ -148,20 +148,38 @@ showAvatar();
 
 Juda toza va o'qish oson, to'g'rimi? Oldingiga qaraganda ancha yaxshi.
 
+<<<<<<< HEAD
 ````smart header="`await` yuqori darajadagi kodda ishlamaydi"
 `await` dan foydalanishni yangi boshlagan odamlar, biz `await` dan yuqori darajadagi kodda foydalana olmasligimizni unutishadi. Masalan, bu ishlamaydi:
 
 ```js run
 // yuqori darajadagi kodda sintaksis xatosi
+=======
+````smart header="Modern browsers allow top-level `await` in modules"
+In modern browsers, `await` on top level works just fine, when we're inside a module. We'll cover modules in article <info:modules-intro>.
+
+For instance:
+
+```js run module
+// we assume this code runs at top level, inside a module
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 let response = await fetch('/article/promise-chaining/user.json');
 let user = await response.json();
+
+console.log(user);
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Biz buni noma'lum async funktsiyasiga o'rashimiz mumkin, masalan:
 =======
 But we can wrap it into an anonymous async function, like this:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+If we're not using modules, or [older browsers](https://caniuse.com/mdn-javascript_operators_await_top_level) must be supported, there's a universal recipe: wrapping into an anonymous async function.
+
+Lke this:
+>>>>>>> 3699f73b4ccb2a57ac5ef990d2687bf31ccf564c
 
 ```js
 (async () => {
@@ -171,7 +189,6 @@ But we can wrap it into an anonymous async function, like this:
 })();
 ```
 
-P.S. New feature: starting from V8 engine version 8.9+, top-level await works in [modules](info:modules).
 ````
 <<<<<<< HEAD
 ````smart header="`await` \"thenables\" ni qabul qiladi"

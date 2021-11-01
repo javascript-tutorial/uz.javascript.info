@@ -38,12 +38,18 @@ Bizning `readUser(json)` funktsiyasi nafaqat JSONni o'qiydi, balki ma'lumotlarni
 Bizning `ValidationError` klassi o'rnatilgan `Error` klassidan olinishi kerak.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Ushbu klass ichki o'rnatilgan, ammo biz nima kengaytirayotganimizni tushunish uchun uning taxminiy kodi bizning ko'z oldida bo'lishi kerak.
 
 Mana:
 =======
 That class is built-in, but here's its approximate code so we can understand what we're extending:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Our `ValidationError` class should inherit from the `Error` class.
+
+The `Error` class is built-in, but here's its approximate code so we can understand what we're extending:
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ```js
 // O'rnatilgan Xatolar sinfi uchun "pseudocode" JavaScript-ning o'zi tomonidan belgilanadi
@@ -153,19 +159,27 @@ Quyidagi kabi `err.name` ga qarashimiz mumkin:
 // (err instanceof SyntaxError) ning o'rniga
 } else if (err.name == "SyntaxError") { // (*)
 // ...
-```  
+```
 
 `instanceof` versiyasi ancha yaxshi, chunki kelajakda biz `ValidationError` ni kengaytiramiz, uning `TypeRequiredError` kabi pastki turlarini yaratamiz. Va `instanceof` tekshiruvi yangi meros klasslari uchun ishlashni davom ettiradi. Demak, bu kelajakka ishonchli.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Bundan tashqari, agar `catch` noma'lum xatoga duch kelsa, uni `(**)` satrida qayta tiklashi muhimdir. `catch` faqat tasdiqlash va sintaksis xatolarini qanday boshqarishni biladi, boshqa turlarni (koddagi xato yoki shunga o'xshash sabablarga ko'ra) boshqara ololmaydi.
 =======
 Also it's important that if `catch` meets an unknown error, then it rethrows it in the line `(**)`. The `catch` block only knows how to handle validation and syntax errors, other kinds (due to a typo in the code or other unknown ones) should fall through.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Also it's important that if `catch` meets an unknown error, then it rethrows it in the line `(**)`. The `catch` block only knows how to handle validation and syntax errors, other kinds (caused by a typo in the code or other unknown reasons) should fall through.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ## Keyinchalik meros
 
+<<<<<<< HEAD
 `ValidationError` klassi juda umumiy. Ko'p narsalar noto'g'ri ketishi mumkin. Xususiyat yo'q bo'lishi yoki noto'g'ri formatda bo'lishi mumkin (masalan, `age` uchun matn qiymati). Keling, aniq xususiyatlar uchun aniqroq `PropertyRequiredError` klassini yarataylik. Unda yetishmayotgan mulk to'g'risida qo'shimcha ma'lumotlar mavjud.
+=======
+The `ValidationError` class is very generic. Many things may go wrong. The property may be absent or it may be in a wrong format (like a string value for `age` instead of a number). Let's make a more concrete class `PropertyRequiredError`, exactly for absent properties. It will carry additional information about the property that's missing.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ```js run
 class ValidationError extends Error {

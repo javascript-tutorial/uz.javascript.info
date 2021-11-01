@@ -378,10 +378,14 @@ Compare it to non-module scripts, where `this` is a global object:
 Brauzerga xos bo'lgan `type="module"` skriptlarining bir nechta farqlari mavjud.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Agar siz birinchi marta o'qiyotgan bo'lsangiz yoki JavaScript-ni brauzerda ishlatmasangiz, ularni hozircha o'tkazib yuborishingiz mumkin.
 =======
 You may want skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+You may want to skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
 
 ### Modul skriptlari keyinga qoldiriladi
 

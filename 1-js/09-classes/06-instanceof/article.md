@@ -129,10 +129,14 @@ Normally, `instanceof` examines the prototype chain for the check. We can also s
     alert(rabbit instanceof Animal); // true
     */!*
 
+<<<<<<< HEAD
     // rabbit.__proto__ === Rabbit.prototype
 <<<<<<< HEAD
     // rabbit.__proto__.__proto__ === Animal.prototype (mutanosiblik!)
 =======
+=======
+    // rabbit.__proto__ === Animal.prototype (no match)
+>>>>>>> 6989312841d843f2350803ab552d9082437be569
     *!*
     // rabbit.__proto__.__proto__ === Animal.prototype (match!)
     */!*

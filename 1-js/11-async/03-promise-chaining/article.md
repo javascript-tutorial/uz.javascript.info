@@ -38,17 +38,29 @@ new Promise(function(resolve, reject) {
 
 G'oya shundan iboratki, natija `.then` ishlovchilar zanjiri orqali o'tadi.
 
+<<<<<<< HEAD
 Mana oqim:
 1. Dastlabki va'da 1 soniyada hal qilinadi `(*)`,
 2. Keyin `.then` ishlov beruvchisi `(**)` chaqiriladi.
 3. Qaytgan qiymat keyingi `.then` ishlov beruvchiga `(***)` uzatiladi
 4. ...va hokazo.
+=======
+Here the flow is:
+1. The initial promise resolves in 1 second `(*)`,
+2. Then the `.then` handler is called `(**)`, which in turn creates a new promise (resolved with `2` value).
+3. The next `then` `(***)` gets the result of the previous one, processes it (doubles) and passes it to the next handler.
+4. ...and so on.
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 
 Natijada ishlovchilar zanjiri bo'ylab uzatilganda biz `alert` chaqiruvlari ketma-ketligini ko'rishimiz mumkin: `1` -> `2` -> `4`.
 
 ![](promise-then-chain.svg)
 
+<<<<<<< HEAD
 Hammasi ishlaydi, chunki `promise.then` degan chaqiriq va'dani qaytaradi, shunda biz keyingi `.then` ni chaqira olamiz.
+=======
+The whole thing works, because every call to a `.then` returns a new promise, so that we can call the next `.then` on it.
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 
 Qayta ishlovchi qiymatni qaytarganda, bu va'daning natijasi bo'ladi, shuning uchun keyingi `.then` u bilan chaqiriladi.
 
@@ -440,8 +452,7 @@ function loadJson(url) {
 }
 
 function loadGithubUser(name) {
-  return fetch(`https://api.github.com/users/${name}`)
-    .then(response => response.json());
+  return loadJson(`https://api.github.com/users/${name}`);
 }
 
 function showAvatar(githubUser) {

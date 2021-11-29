@@ -119,6 +119,7 @@ Keling, `for` ifodani qisma ko'rib chiqamiz:
 
 | qism  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
 | boshlanishi | `i = 0`    | Tsikldan e'lon qilingandan keyin bir marta bajariladi.                                    |
 | shart | `i < 3`| Har bir tsikl takrorlashdan oldin tekshiriladi. Agar yolg'on bo'lsa, tsikl to'xtaydi.  |
@@ -129,6 +130,9 @@ Keling, `for` ifodani qisma ko'rib chiqamiz:
 Umumiy tsikl algoritmi quyidagicha ishlaydi:
 =======
 | begin | `i = 0`    | Executes once upon entering the loop.                                      |
+=======
+| begin | `let i = 0`    | Executes once upon entering the loop.                                      |
+>>>>>>> a82915575863d33db6b892087975f84dea6cb425
 | condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
 | body | `alert(i)`| Runs again and again while the condition is truthy.                         |
 | step| `i++`      | Executes after the body on each iteration. |
@@ -438,7 +442,7 @@ label: {
 }
 ```
 
-...Although, 99.9% of the time `break` used is inside loops, as we've seen in the examples above.
+...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
 
 A `continue` is only possible from inside a loop.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md

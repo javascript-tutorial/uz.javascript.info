@@ -28,7 +28,11 @@ Endi `=` tayinlash operatori yordamida unga ba'zi ma'lumotlarni kiritishimiz mum
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hello'; // matni saqlash
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> c5358c59494b53efb832c81a5338e0a23b22c269
 */!*
 ```
 

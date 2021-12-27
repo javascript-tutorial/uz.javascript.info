@@ -213,7 +213,7 @@ In other words, to put these terms straight:
 
 We declare functions listing their parameters, then call them passing arguments.
 
-In the example above, one might say: "the function `sayMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
 
 
 ## Default values
@@ -304,6 +304,7 @@ function showMessage(text) {
 showMessage(); // empty message
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/14-function-basics/article.md
 ...Yoki `||` operatori:
 
@@ -313,6 +314,9 @@ function showMessage(from, text) {
   text = text || 'matn berilmagan';
 =======
 ...Or we could use the `??` operator:
+=======
+...Or we could use the `||` operator:
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 ```js
 function showMessage(text) {

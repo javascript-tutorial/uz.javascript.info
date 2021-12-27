@@ -136,8 +136,13 @@ class CoffeeMachine {
 // kofe mashinasini yarating
 let coffeeMachine = new CoffeeMachine(100);
 
+<<<<<<< HEAD
 // suv qo'shing
 coffeeMachine.waterAmount = -10; // Error: Salbiy suv
+=======
+// add water
+coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 ```
 
 <<<<<<< HEAD

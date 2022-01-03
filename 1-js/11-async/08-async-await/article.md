@@ -148,20 +148,38 @@ showAvatar();
 
 Juda toza va o'qish oson, to'g'rimi? Oldingiga qaraganda ancha yaxshi.
 
+<<<<<<< HEAD
 ````smart header="`await` yuqori darajadagi kodda ishlamaydi"
 `await` dan foydalanishni yangi boshlagan odamlar, biz `await` dan yuqori darajadagi kodda foydalana olmasligimizni unutishadi. Masalan, bu ishlamaydi:
 
 ```js run
 // yuqori darajadagi kodda sintaksis xatosi
+=======
+````smart header="Modern browsers allow top-level `await` in modules"
+In modern browsers, `await` on top level works just fine, when we're inside a module. We'll cover modules in article <info:modules-intro>.
+
+For instance:
+
+```js run module
+// we assume this code runs at top level, inside a module
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 let response = await fetch('/article/promise-chaining/user.json');
 let user = await response.json();
+
+console.log(user);
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Biz buni noma'lum async funktsiyasiga o'rashimiz mumkin, masalan:
 =======
 But we can wrap it into an anonymous async function, like this:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+If we're not using modules, or [older browsers](https://caniuse.com/mdn-javascript_operators_await_top_level) must be supported, there's a universal recipe: wrapping into an anonymous async function.
+
+Lke this:
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 
 ```js
 (async () => {
@@ -171,7 +189,6 @@ But we can wrap it into an anonymous async function, like this:
 })();
 ```
 
-P.S. New feature: starting from V8 engine version 8.9+, top-level await works in [modules](info:modules).
 ````
 <<<<<<< HEAD
 ````smart header="`await` \"thenables\" ni qabul qiladi"
@@ -420,9 +437,13 @@ Va'da oldidan `await` kalit so'zi JavaScript-ni ushbu va'da bajarilishini kutib 
 
 Ular birgalikda asinxron kod yozish uchun ajoyib asos yaratadilar, bu ham o'qilishi, ham yozilishi oson.
 
+<<<<<<< HEAD
 `Async/await` bilan biz kamdan-kam hollarda `promise.then/catch` deb yozishimiz kerak, ammo biz hali ham ularning va'dalarga asoslanganligini unutmasligimiz kerak, chunki ba'zida (masalan, tashqi tomondan) biz ushbu usullardan foydalanishimiz kerak. Shuningdek, `Promise.all` bir vaqtning o'zida ko'plab vazifalarni kutish uchun foydali narsa.
 =======
 1. If it's an error, the exception is generated — same as if `throw error` were called at that very place.
+=======
+1. If it's an error, an exception is generated — same as if `throw error` were called at that very place.
+>>>>>>> 3c934b5a46a76861255e3a4f29da6fd54ab05c8c
 2. Otherwise, it returns the result.
 
 Together they provide a great framework to write asynchronous code that is easy to both read and write.

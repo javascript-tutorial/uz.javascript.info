@@ -92,8 +92,12 @@ Barcha berilgan va'dalar bajarilganda va ularning natijalari massivida yangi va'
 =======
 `Promise.all` takes an array of promises (it technically can be any iterable, but is usually an array) and returns a new promise.
 
+<<<<<<< HEAD
 The new promise resolves when all listed promises are settled, and the array of their results becomes its result.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+The new promise resolves when all listed promises are resolved, and the array of their results becomes its result.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 Masalan, quyidagi `Promise.all` 3 soniyadan keyin o'rnatiladi va natijada `[1, 2, 3]` massivi hosil bo'ladi:
 

@@ -35,6 +35,7 @@ function loadScript(src) {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Funktsiyaning maqsadi yangi skriptni yuklashdir. Hujjatga `<script src ="… ">` qo'shilganda, brauzer uni yuklaydi va bajaradi.
 
 Biz buni quyidagicha ishlatishimiz mumkin:
@@ -57,6 +58,9 @@ loadScript('/my/script.js');
 Endi yangi skript yuklanganda undan foydalanishni xohlaymiz deylik. Ehtimol, u yangi funktsiyalarni e'lon qiladi, shuning uchun ularni boshqarishni xohlaymiz.
 =======
 It appends to the document the new, dynamically created, tag `<script src="…">` with given `src`. The browser automatically starts loading it and executes when complete.
+=======
+It inserts into the document a new, dynamically created, tag `<script src="…">` with the given `src`. The browser automatically starts loading it and executes when complete.
+>>>>>>> 246c600f11b4e6c52b4ae14f83e65319671f998f
 
 We can use this function like this:
 

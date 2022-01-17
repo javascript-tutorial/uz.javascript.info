@@ -163,8 +163,12 @@ Ba'zan odamlar `class` JavaScript-dagi "sintaksis shakar" deb aytishadi, chunki 
 =======
 ## Not just a syntactic sugar
 
+<<<<<<< HEAD
 Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same without `class` keyword at all:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same thing without using the `class` keyword at all:
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 ```js run
 // sof funktsiyalarda class User qayta yozish

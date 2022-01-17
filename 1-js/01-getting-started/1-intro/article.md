@@ -40,16 +40,24 @@ Brauzerlar o'z JavaScript interpretatorlariga ega, ular gohida "JavaScript virtu
 Har bir intetptretatorni o'z nomi mavjud. Masalan:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- Chrome va Opera brauzerlarida qo'llanadi.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- Firefox brauzerida.
 - ...net Explorer brauerning turli xil versiyalari uchun "Trident" va "Chakra", Microsoft Edge uchun "ChakraCore", Safari uchun "Nitro" va "SquirrelFish" va boshqalar kabi boshqa kod nomlari mavjud.
 =======
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
 - ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Yuqoridagi atamalarni eslab qolish yaxshi, chunki ular netdagi ishlab chiquvchilar maqolalarida qo'llaniladi. Biz ulardan ham foydalanamiz. Masalan, agar "X funktsiyasini V8 qo'llab-quvvatlasa", ehtimol u Chrome va Opera-da ishlaydi.
+=======
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 ```smart header="Intetptretatorlar ishni qanday bajarishadi?"
 
@@ -84,7 +92,11 @@ Masalan:
 
 ## JavaScript-da brauzerda nima qila olmaysiz?
 
+<<<<<<< HEAD
 JavaScript-ning brauzerdagi imkoniyatlari foydalanuvchi xavfsizligi uchun cheklangan. Maqsad yomon veb-sahifaning shaxsiy ma'lumotlarga kirishini yoki foydalanuvchi ma'lumotlariga zarar etkazishini oldini olishdir.
+=======
+JavaScript's abilities in the browser are limited for the sake of a user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 
 Bunday cheklovlarga quyidagilar kiradi:
 
@@ -117,10 +129,17 @@ Agar JavaScript brauzerdan tashqarida, masalan serverda ishlatilsa, bunday chekl
 
 JavaScript hech bo'lmaganda *uchta* ajoyib xususiyatga ega:
 
+<<<<<<< HEAD
 ```solishtiring
 + HTML va CSS bilan to'liq integratsiyasi.
 + Oson ishlar osongina amalga oshiriladi.
 + Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va ularda standart sifatida yoqilgan.
+=======
+```compare
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+>>>>>>> a6fdfda09570a8ce47bb0b83cd7a32a33869cfad
 ```
 JavaScript - bu uchta narsani birlashtirgan yagona brauzer texnologiyasidir.
 
@@ -169,6 +188,6 @@ There are more. Of course, even if we use one of transpiled languages, we should
 ## Summary
 
 - JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
 - There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

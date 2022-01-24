@@ -584,7 +584,7 @@ Foydalanish namunasi (konsolda mualliflarning kommitlarini ko'rsatadi):
 
   for await (const commit of fetchCommits('javascript-tutorial/en.javascript.info')) {
 
-    console.log(commit.author.login);
+    console.log(commit.author.name);
 
     if (++count == 100) { // keling, 100 ta kommitlar bilan to'xtaylik
       break;

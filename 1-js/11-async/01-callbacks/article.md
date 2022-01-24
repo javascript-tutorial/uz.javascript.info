@@ -35,6 +35,7 @@ function loadScript(src) {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Funktsiyaning maqsadi yangi skriptni yuklashdir. Hujjatga `<script src ="… ">` qo'shilganda, brauzer uni yuklaydi va bajaradi.
 
 Biz buni quyidagicha ishlatishimiz mumkin:
@@ -57,6 +58,9 @@ loadScript('/my/script.js');
 Endi yangi skript yuklanganda undan foydalanishni xohlaymiz deylik. Ehtimol, u yangi funktsiyalarni e'lon qiladi, shuning uchun ularni boshqarishni xohlaymiz.
 =======
 It appends to the document the new, dynamically created, tag `<script src="…">` with given `src`. The browser automatically starts loading it and executes when complete.
+=======
+It inserts into the document a new, dynamically created, tag `<script src="…">` with the given `src`. The browser automatically starts loading it and executes when complete.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 We can use this function like this:
 
@@ -238,9 +242,15 @@ Shunday qilib, bitta `callback` funktsiyasi xatolarni xabar qilish va natijalarn
 
 ## Halokat piramidasi
 
+<<<<<<< HEAD
 Bir qarashda, bu asinxron kodni yozishning ishchi usuli. Va haqiqatan ham shunday. Bir yoki ehtimol ikkita ichki chaqiruvlar uchun yaxshi bo'ladi.
 
 Ammo ketma-ket keladigan bir nechta asinxron harakatlar uchun bizda shunday kod bo'ladi:
+=======
+At first glance, it looks like a viable approach to asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+
+But for multiple asynchronous actions that follow one after another, we'll have code like this:
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 ```js
 loadScript('1.js', function(error, script) {
@@ -270,10 +280,17 @@ loadScript('1.js', function(error, script) {
 });
 ```
 
+<<<<<<< HEAD
 Yuqoridagi kodda:
 1. Biz `1.js` ni yuklaymiz, keyin xato bo'lmasa.
 2. Biz `2.js` ni yuklaymiz, keyin xato bo'lmasa.
 3. Biz `3.js` ni yuklaymiz, keyin xato bo'lmasa. -- boshqa narsa bajarish `(*)`.
+=======
+In the code above:
+1. We load `1.js`, then if there's no error...
+2. We load `2.js`, then if there's no error...
+3. We load `3.js`, then if there's no error -- do something else `(*)`.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 <<<<<<< HEAD
 Chaqiruvlar uyasi ko'payib borishi bilan, kod yanada chuqurlashadi va boshqarish tobora qiyinlashib boradi, ayniqsa, agar bizda `...` o'rniga haqiqiy kod bo'lsa, bu ko'proq tsiklarni, shartli bayonotlarni va boshqalarni o'z ichiga olishi mumkin.
@@ -348,7 +365,11 @@ function step3(error, script) {
 }
 ```
 
+<<<<<<< HEAD
 Ko'ryapsizmi? Xuddi shu narsani qiladi va endi chuqur uyalar yo'q, chunki biz har bir harakatni alohida yuqori darajadagi funktsiyaga aylantirdik.
+=======
+See? It does the same thing, and there's no deep nesting now because we made every action a separate top-level function.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b
 
 U ishlaydi, lekin kod yirtilib ketgan elektron jadvalga o'xshaydi. O'qish qiyin, va ehtimol siz uni o'qiyotganingizda buyumlar orasidan ko'z bilan sakrash kerakligini payqadingiz. Bu noqulay, ayniqsa o'quvchi kodni yaxshi bilmasa va qayerga ko'z bilan sakrashni bilmasa.
 

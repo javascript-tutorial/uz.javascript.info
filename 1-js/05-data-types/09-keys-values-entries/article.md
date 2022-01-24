@@ -104,7 +104,7 @@ Objects lack many methods that exist for arrays, e.g. `map`, `filter` and others
 If we'd like to apply them, then we can use `Object.entries` followed by `Object.fromEntries`:
 
 1. Use `Object.entries(obj)` to get an array of key/value pairs from `obj`.
-2. Use array methods on that array, e.g. `map`.
+2. Use array methods on that array, e.g. `map`, to transform these key/value pairs.
 3. Use `Object.fromEntries(array)` on the resulting array to turn it back into an object.
 
 For example, we have an object with prices, and would like to double them:
@@ -118,13 +118,18 @@ let prices = {
 
 *!*
 let doublePrices = Object.fromEntries(
-  // convert to array, map, and then fromEntries gives back the object
-  Object.entries(prices).map(([key, value]) => [key, value * 2])
+  // convert prices to array, map each key/value pair into another pair
+  // and then fromEntries gives back the object
+  Object.entries(prices).map(entry => [entry[0], entry[1] * 2])
 );
 */!*
 
 alert(doublePrices.meat); // 8
-```   
+```
 
+<<<<<<< HEAD
 It may look difficult at first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way. 
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/09-keys-values-entries/article.md
+=======
+It may look difficult at first sight, but becomes easy to understand after you use it once or twice. We can make powerful chains of transforms this way.
+>>>>>>> bae0ef44d0208506f6e9b7f3421ee640ab41af2b

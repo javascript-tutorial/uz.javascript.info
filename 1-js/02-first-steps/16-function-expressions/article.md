@@ -16,7 +16,13 @@ function sayHi() {
 
 Funktsiyani yaratish uchun yana bir sintaksis mavjud, u *funktsiya ifodasi* deb nomlanadi.
 
+<<<<<<< HEAD
 Bu shunday ko'rinishga ega:
+=======
+It allows us to create a new function in the middle of any expression.
+
+For example:
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 ```js
 let sayHi = function() {
@@ -24,6 +30,7 @@ let sayHi = function() {
 };
 ```
 
+<<<<<<< HEAD
 Bu yerda funktsiya boshqa qiymatlar singari aniq ravishda yaratiladi va o'zgaruvchanga tayinlanadi. Funktsiya qanday aniqlangan bo'lishidan qat'iy nazar, bu faqat `sayHi` o'zgaruvchanida saqlanadigan qiymat.
 
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
@@ -32,6 +39,21 @@ Ushbu kod namunalarining ma'nosi bir xil: "funktsiyani yarating va uni `sayHi`" 
 Hatto `alert` yordamida ushbu qiymatni chiqarishimiz mumkin:
 =======
 The meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+=======
+Here we can see a variable `sayHi` getting a value, the new function, created as `function() { alert("Hello"); }`.
+
+As the function creation happens in the context of the assignment expression (to the right side of `=`), this is a *Function Expression*.
+
+Please note, there's no name after the `function` keyword. Omitting a name is allowed for Function Expressions.
+
+Here we immediately assign it to the variable, so the meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+
+In more advanced situations, that we'll come across later, a function may be created and immediately called or scheduled for a later execution, not stored anywhere, thus remaining anonymous.
+
+## Function is a value
+
+Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function in the `sayHi` variable.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 We can even print out that value using `alert`:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
@@ -85,10 +107,14 @@ Yuqorida nima batafsil sodir bo'lganligi:
 3. Now the function can be called as both `sayHi()` and `func()`.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
 
+<<<<<<< HEAD
 E'tibor bering, biz birinchi satrda `sayHi` ni e'lon qilish uchun funktsiya ifodasidan foydalinishimiz mumkin edi:
+=======
+We could also have used a Function Expression to declare `sayHi`, in the first line:
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 ```js
-let sayHi = function() {
+let sayHi = function() { // (1) create
   alert( "Hello" );
 };
 
@@ -116,6 +142,7 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
 Javob oddiy:
 - Kod bloklari va ularni ishlatadigan `if {...}`, `for {}`, `function f {}` va hokazo kabi sintaksis tuzilmalarining oxirida nuqta-vergul `;` qo'yish kerak emas.
@@ -125,6 +152,11 @@ The answer is simple:
 - There's no need for `;` at the end of code blocks and syntax structures that use them like `if { ... }`, `for {  }`, `function f { }` etc.
 - A Function Expression is used inside the statement: `let sayHi = ...;`, as a value. It's not a code block, but rather an assignment. The semicolon `;` is recommended at the end of statements, no matter what the value is. So the semicolon here is not related to the Function Expression itself, it just terminates the statement.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
+=======
+The answer is simple: a Function Expression is created here as `function(…) {…}` inside the assignment statement: `let sayHi = …;`. The semicolon `;` is recommended at the end of the statement, it's not a part of the function syntax.
+
+The semicolon would be there for a simpler assignment, such as `let sayHi = 5;`, and it's also there for a function assignment.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 ````
 
 ## Qayta chaqirish funktsiyalari

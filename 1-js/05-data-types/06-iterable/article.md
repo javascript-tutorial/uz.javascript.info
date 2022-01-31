@@ -53,7 +53,7 @@ To make the `range` object iterable (and thus let `for..of` work) we need to add
 1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
 2. Onward, `for..of` works *only with that returned object*.
 3. When `for..of` wants the next value, it calls `next()` on that object.
-4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true`  means that the iteration is finished, otherwise `value` is the next value.
+4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true` means that the loop is finished, otherwise `value` is the next value.
 
 Here's the full implementation for `range` with remarks:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -67,11 +67,16 @@ let range = {
 // 1. for..of chaqiruvi this ni chaqiradi
 range[Symbol.iterator] = function() {
 
+<<<<<<< HEAD
   // ...ketma-ket sarraluvchan obyektini qaytaradi:
   // 2. for..of faqat ushbu ketma-ket sarraluvchan bilan ishlaydi, undan keyingi qiymatlarni so'raydi
+=======
+  // ...it returns the iterator object:
+  // 2. Onward, for..of works only with the iterator object below, asking it for next values
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
     // 3. next() for..of tsikldan har bir takrorlanishda chaqiriladi
     next() {
@@ -341,10 +346,14 @@ alert(chars);
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ...Ammo qisqaroq.
 =======
 ...But it is shorter.    
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+...But it is shorter.
+>>>>>>> 0f748275e20a81700c8514f22a7cc80c4422d09c
 
 Hatto surrogat juftlarini qo'llab-quvvatlaydigan `slice` yaratishimiz mumkin:
 

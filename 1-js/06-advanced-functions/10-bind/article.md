@@ -218,8 +218,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Salom"); // Salom, John ("Salom" say ga bog'landi)
 say("Hayir"); // Hayir, John ("Hayir" say ga bog'landi)
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 ```
 
 ````smart header="Qulaylik usuli: `bindAll`"

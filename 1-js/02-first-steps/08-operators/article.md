@@ -244,6 +244,7 @@ Here's an extract from the [precedence table](https://developer.mozilla.org/en-U
 | Ustunlik | Ism | Belgi |
 |------------|------|------|
 | ... | ... | ... |
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/07-operators/article.md
 | 16 | unar qo'shilish | `+` |
 | 16 | unar ayirish | `-` |
@@ -270,10 +271,28 @@ Ko'rib turganimizdek, "unar qo'shilish" ning ustuvorligi `16`, bu (binar qo'shil
 =======
 As we can see, the "unary plus" has a priority of `17` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/08-operators/article.md
+=======
+| 15 | unary plus | `+` |
+| 15 | unary negation | `-` |
+| 14 | exponentiation | `**` |
+| 13 | multiplication | `*` |
+| 13 | division | `/` |
+| 12 | addition | `+` |
+| 12 | subtraction | `-` |
+| ... | ... | ... |
+| 2 | assignment | `=` |
+| ... | ... | ... |
+
+As we can see, the "unary plus" has a priority of `15` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 ## Tayinlash operatori
 
+<<<<<<< HEAD
 Tenglik belgisi `=` ham operator ekanligini ta'kidlaymiz. U ustunlik jadvalida juda past ustuvorlik bilan ko'rsatilgan `3`.
+=======
+Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `2`.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Shuning uchun, biz o'zgaruvchini tayinlaganimizda, masalan, `x = 2 * 2 + 1`, avval hisob-kitoblar amalga oshiriladi va keyin natijani `x` da saqlagan holda `=` baholanadi.
 

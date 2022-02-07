@@ -38,17 +38,29 @@ new Promise(function(resolve, reject) {
 
 G'oya shundan iboratki, natija `.then` ishlovchilar zanjiri orqali o'tadi.
 
+<<<<<<< HEAD
 Mana oqim:
 1. Dastlabki va'da 1 soniyada hal qilinadi `(*)`,
 2. Keyin `.then` ishlov beruvchisi `(**)` chaqiriladi.
 3. Qaytgan qiymat keyingi `.then` ishlov beruvchiga `(***)` uzatiladi
 4. ...va hokazo.
+=======
+Here the flow is:
+1. The initial promise resolves in 1 second `(*)`,
+2. Then the `.then` handler is called `(**)`, which in turn creates a new promise (resolved with `2` value).
+3. The next `then` `(***)` gets the result of the previous one, processes it (doubles) and passes it to the next handler.
+4. ...and so on.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Natijada ishlovchilar zanjiri bo'ylab uzatilganda biz `alert` chaqiruvlari ketma-ketligini ko'rishimiz mumkin: `1` -> `2` -> `4`.
 
 ![](promise-then-chain.svg)
 
+<<<<<<< HEAD
 Hammasi ishlaydi, chunki `promise.then` degan chaqiriq va'dani qaytaradi, shunda biz keyingi `.then` ni chaqira olamiz.
+=======
+The whole thing works, because every call to a `.then` returns a new promise, so that we can call the next `.then` on it.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 Qayta ishlovchi qiymatni qaytarganda, bu va'daning natijasi bo'ladi, shuning uchun keyingi `.then` u bilan chaqiriladi.
 
@@ -157,11 +169,15 @@ new Promise(function(resolve, reject) {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Bu yerda birinchi `.then` `1` `(*)` satrida `new Promise(…)` ni qaytaradi. Bir soniyadan so'ng u hal bo'ladi va natija (`resolve` argumenti, bu yerda `result*2`) `(**)` satridagi ikkinchi `.then` ishlov beruvchiga uzatiladi. Bu `2` ni ko'rsatadi va xuddi shu narsani qiladi.
 
 Shunday qilib, chiqish yana 1 -> 2 -> 4 ni tashkil qiladi, ammo endi `alert` chaqiruvlari o'rtasida 1 soniya kechikish mavjud.
 =======
 Here the first `.then` shows `1` and returns `new Promise(…)` in the line `(*)`. After one second it resolves, and the result (the argument of `resolve`, here it's `result * 2`) is passed on to handler of the second `.then`. That handler is in the line `(**)`, it shows `2` and does the same thing.
+=======
+Here the first `.then` shows `1` and returns `new Promise(…)` in the line `(*)`. After one second it resolves, and the result (the argument of `resolve`, here it's `result * 2`) is passed on to the handler of the second `.then`. That handler is in the line `(**)`, it shows `2` and does the same thing.
+>>>>>>> 71da17e5960f1c76aad0d04d21f10bc65318d3f6
 
 So the output is the same as in the previous example: 1 -> 2 -> 4, but now with 1 second delay between `alert` calls.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -440,8 +456,7 @@ function loadJson(url) {
 }
 
 function loadGithubUser(name) {
-  return fetch(`https://api.github.com/users/${name}`)
-    .then(response => response.json());
+  return loadJson(`https://api.github.com/users/${name}`);
 }
 
 function showAvatar(githubUser) {

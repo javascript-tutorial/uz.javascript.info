@@ -1,6 +1,10 @@
 # Konstruktor, operator "new"
 
+<<<<<<< HEAD
 Oddiy `{...}` sintaksisi bitta obyektni yaratishga imkon beradi. Ammo ko'pincha biz shunga o'xshash ko'plab obyektlarni yaratishimiz kerak, masalan, bir nechta foydalanuvchi yoki menyu elementlari va boshqalar.
+=======
+The regular `{...}` syntax allows us to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 Buni konstruktor funktsiyalari va `"new"` operator yordamida amalga oshirish mumkin.
 

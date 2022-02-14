@@ -55,7 +55,6 @@ Bizning katta dunyoda boshqa buyuk muharrirlar ham bor. Iltimos, o'zingizga eng 
 Muharriri tanlash, boshqa har qanday vositasi kabi, individual va loyihalar bog'liq, odatlar, va shaxsiy imtiyozlar.
 =======
 - [Atom](https://atom.io/) (cross-platform, free).
-- [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
 - [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.

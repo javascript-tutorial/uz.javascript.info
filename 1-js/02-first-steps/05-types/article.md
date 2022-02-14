@@ -59,13 +59,23 @@ Oddiy raqamlardan tashqari, ushbu ma'lumot turiga mansub "maxsus raqamli qiymatl
     alert( "not a number" / 2 ); // NaN, bunday bo'linish noto'g'ri
     ```
 
+<<<<<<< HEAD
     `NaN` yopishqoq bo'ladi. `NaN` bo'yicha har qanday keyingi operatsiya `NaN` qaytaradi:
+=======
+    `NaN` is sticky. Any further mathematical operation on `NaN` returns `NaN`:
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
     ```js run
-    alert( "not a number" / 2 + 5 ); // NaN
+    alert( NaN + 1 ); // NaN
+    alert( 3 * NaN ); // NaN
+    alert( "not a number" / 2 - 1 ); // NaN
     ```
 
+<<<<<<< HEAD
     Shunday qilib, agar biror joyda matematik ifodada "NaN" bo'lsa, u butun natijaga tarqaladi.
+=======
+    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result (there's only one exception to that: `NaN ** 0` is `1`).
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 ```smart header="Matematik operatsiyalar xavfsizdir"
 Matematikadan foydalanish JavaScript da "xavfsiz". Biz hamma narsani qila olamiz: nolga bo'lish, raqamsiz matnlarni raqamlar kabi ko'rib chiqish va hk.
@@ -270,6 +280,7 @@ The `symbol` type is used to create unique identifiers for objects. We have to m
 
 `Typeof` operatori argument turini qaytaradi. Bu biz har xil turdagi qiymatlarni boshqacha ishlov berishni xohlaganimizda yoki tezkor tekshirishni xohlaganimizda foydalidir.
 
+<<<<<<< HEAD
 Ikkita shakili sintaksisning  qo'llab-quvvatlaydi:
 
 1. Operator sifatida: `typeof x`.
@@ -278,6 +289,9 @@ Ikkita shakili sintaksisning  qo'llab-quvvatlaydi:
 Boshqacha qilib aytganda, bu qavs bilan yoki ularsiz ishlaydi. Natija bir xil.
 
 `Typeof x`ning qo'ngiroq qilganda u matni argument turi bilan qaytaradi 
+=======
+A call to `typeof x` returns a string with the type name:
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 ```js
 typeof undefined // "undefined"
@@ -314,14 +328,28 @@ Oxirgi uchta satr qo'shimcha tushuntirishga muhtoj bo'lishi mumkin:
 
 =======
 1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
-2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof` behavior, coming from the early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own.
+2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
 3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Xulosa
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 JavaScript-da 7 ta asosiy ma'lumotlar turi mavjud.
+=======
+```smart header="The `typeof(x)` syntax"
+You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+
+To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+
+Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+
+Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+```
+
+## Summary
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 - `number` har qanday turdagi raqamlar uchun: butun son yoki suzuvchi nuqta.
 - `string` matnlar uchun. Matnda bir yoki bir nechta belgi bo'lishi mumkin, alohida bitta belgi turi yo'q.
@@ -345,8 +373,14 @@ There are 8 basic data types in JavaScript.
 
 `Typeof` operatori bizga qaysi tur o'zgaruvchida saqlanganligini ko'rish imkonini beradi.
 
+<<<<<<< HEAD
 - Ikki shakl: `typeof x` yoki `typeof(x)`.
 - `"String"` kabi turdagi nomi bilan matni qaytaradi.
 - `Null` uchun `"object"` qaytaradi -- bu tilda xato, aslida bu ob'yekt emas.
+=======
+- Usually used as `typeof x`, but `typeof(x)` is also possible.
+- Returns a string with the name of the type, like `"string"`.
+- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 Keyingi boblarda biz ibtidoiy qadriyatlarga e'tibor qaratamiz va ular bilan tanishib bo'lgach, ob'yektlarga o'tamiz.

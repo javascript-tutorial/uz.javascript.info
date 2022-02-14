@@ -31,7 +31,11 @@ Yaxshiyamki, bularning barchasini hal qilish uchun kod yozishning hojati yo'q. V
 
 ## JSON.stringify
 
+<<<<<<< HEAD
 [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) qiymatlar va moslamalarni aks ettirish uchun umumiy formatdir. U [RFC 4627](http://tools.ietf.org/html/rfc4627) standartidagi kabi tavsiflanadi. Dastlab u JavaScript uchun yaratilgan, ammo boshqa ko'plab tillarda ham uni boshqarish uchun kutubxonalar mavjud. Mijoz JavaScript-ni ishlatganda va server Ruby/PHP/Java/nima bo'lganda ham ma'lumotlar almashinuvi uchun JSON-dan foydalanish oson.
+=======
+The [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 JavaScript quyidagi usullarni taqdim etadi:
 

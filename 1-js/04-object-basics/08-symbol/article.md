@@ -229,11 +229,15 @@ for (let key in user) alert(key); // name, age (belgilar yo'q)
 alert( "Direct: " + user[id] );
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/04-object-basics/03-symbol/article.md
 Bu umumiy "yashirish" tushunchasining bir qismi. Agar boshqa skript yoki kutubxona bizning obyektimizga o'girilsa, u kutilmaganda belgi xususiyatga kira olmaydi.
 =======
 `Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+[Object.keys(user)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+>>>>>>> 29216730a877be28d0a75a459676db6e7f5c4834
 
 Aksincha, [Object.assign](mdn:js/Object/assigned) ham matn, ham belgi xususiyatlarini ko'chiradi:
 

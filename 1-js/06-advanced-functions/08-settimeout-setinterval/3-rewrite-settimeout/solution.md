@@ -1,4 +1,4 @@
-using `setInterval`
+foydalanildi `setInterval`
 
 ```js run
 let i = 0;

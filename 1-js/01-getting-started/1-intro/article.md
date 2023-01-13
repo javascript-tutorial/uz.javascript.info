@@ -80,39 +80,43 @@ Bunday cheklovlarga quyidagilar kiradi:
 
 Agar JavaScript brauzerdan tashqarida, masalan serverda ishlatilsa, bunday cheklovlar mavjud emas. Zamonaviy brauzerlar kengaytirilgan ruxsat so'rashi mumkin bo'lgan plagin / kengaytmalarga ham imkon beradi.
 
-## JavaScript-ni qaysi xususiyatlari uni noyob qiladi?
+## JavaScript-ning boshqa dasturlash tillaridan ustun tomoni nimada?
 
-JavaScript hech bo'lmaganda *uchta* ajoyib xususiyatga ega:
+JavaScript eng kamida *uchta* ajoyib xususiyatga ega:
 
-```solishtiring
-+ HTML va CSS bilan to'liq integratsiyasi.
-+ Oson ishlar osongina amalga oshiriladi.
-+ Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va ularda standart sifatida yoqilgan.
+```compare
++ HTML va CSS bilan to'liq integratsiya qiladi.
++ Oddiy ishlar osongina amalga oshiriladi.
++ Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va standart ravishda yoqilgan.
 ```
 JavaScript - bu uchta narsani birlashtirgan yagona brauzer texnologiyasidir.
 
-Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer feyslarini yaratishda eng keng tarqalgan vositadir.
+Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer interfeyslarini yaratishda eng keng tarqalgan vositadir.
 
-Yangi texnologiyani o'rganishni rejalashtirayotib, uning istiqbollarini tekshirish ham muhimdir. Keling, zamonaviy tendentsiyalarga o'taylik.
+Bundan tashqari, JavaScript yordamida serverlar, mobil ilovalar yaratish va boshqa amallarni bajarish mumkin
 
-JavaScript-ning sintaksisi hammaning ehtiyojlariga mos kelmaydi. Turli odamlar turli xususiyatlarni xohlashadi.
+## Boshqa dasturlash tillari va JavaScript
 
-Bu kutilgan hodisa bo'lishi kerak edi, chunki loyihalar va talablar har bir kishi uchun farq qiladi.
+JavaScript-ning sintaksisi hammaning ham ehtiyojlariga mos kelavermaydi. Turli xil odamlar turli xil xususiyatlarni xohlashadi.
 
-Shunday qilib, yaqinda juda ko'p yangi tillar paydo bo'ldi va brauzer ularni ishlatishdan oldin JavaScript-ga aylantirib bajaradi.
+Bu kutilgan hodisa, chunki har kimning loyihalari va talablari bir-biridan farq qiladi.
 
-Zamonaviy asboblar transpilatsiyani juda tez va shaffof bajaradi, aslida dasturchilar kodni bitta tilda yozganda, ular uni avtomatik tarzda boshqa tilga aylantirish imkonini beradi.
+Shunday qilib, yaqinda juda ko'p yangi tillar paydo bo'ldi va brauzer ularni ishlatishdan oldin JavaScript-ga aylantirib beradi.
+
+Zamonaviy asboblar transpilyatsiyani juda tez va shaffof bajaradi, aslida dasturchilar kodni bitta tilda yozganda, ular uni avtomatik tarzda boshqa tilga aylantirish imkonini beradi.
 
 Bunday tillarning namunalari:
 
-- [CoffeeScript] (http://coffeescript.org/) JavaScript uchun "sintaktik shakar" dir. Ushbu til bizga qisqa sintaksisni va aniqroq kodni taqdim etadi. Odatda, Ruby dasurchilari shu tilni afzal ko'rishadi.
-- [TypeScript] (http://www.typescriptlang.org/) murakkab tizimlarni ishlab chiqish, soddalashtirish va qo'llab-quvvatlash uchun "strict data typing"ni qo'shishga qaratilgan. Microsoft tomonidan ishlab chiqilgan.
-- [Dart] (https://www.dartlang.org/) brauzer bo'lmagan muhitda (mobil ilovalar kabi) ishlaydigan o'z dvigateliga ega bo'lgan mustaqil til. Bu dastlab JavaScript uchun zaxira sifatida Google tomonidan taklif etildi, lekin hozirgi paytda, brauzerlar shu tilni ham JS-ga transpilatsiya bo'lishini talab qilishadi.
+- [CoffeeScript](http://coffeescript.org/) JavaScript uchun "sintaktik shakar" dir. Ushbu til bizga qisqa sintaksisni va aniqroq kodni taqdim etadi. Odatda, Ruby dasurchilari shu tilni afzal ko'rishadi.
+- [TypeScript](http://www.typescriptlang.org/) murakkab tizimlarni ishlab chiqish, soddalashtirish va qo'llab-quvvatlash uchun "strict data typing"ni qo'shishga qaratilgan. Microsoft tomonidan ishlab chiqilgan.
+- [Dart](https://www.dartlang.org/) brauzer bo'lmagan muhitda (mobil ilovalar kabi) ishlaydigan o'z dvigateliga ega bo'lgan mustaqil til. Bu dastlab JavaScript uchun zaxira sifatida Google tomonidan taklif etildi, lekin hozirgi paytda, brauzerlar shu tilni ham JS-ga transpilatsiya bo'lishini talab qilishadi.
+- [Brython](https://brython.info/) ilovalarni JavaScript yordamisiz to'liq Python-da yaratishga imkon beradigan Python transpayleri.
+- [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) brauzer yoki Node uchun mo'ljallangan zamonaviy, aniq, va xavfsiz dasturlash tili.
 
 Bundan ham ko'proq tillar mavjud. Albatta, biz bu tillardan birini ishlatsak ham, biz nima qilayotganimizni tushunish uchun JavaScript-ni bilishimiz kerak.
 
 ## Xulosa
 
-- JavaScript dastlab brauzer tili sifatida yaratilgan, ammo hozirgi paytda ko'pgina boshqa muhitlarda ham qo'llanilmoqda.
+- JavaScript dastlab brauzer tili sifatida yaratilgan, ammo hozirgi paytda ko'pgina boshqa dasturlash muhitlarida ham qo'llanilmoqda.
 - Bugun JavaScript HTML/CSS bilan to'la integratsiyalashgan va eng keng tarqalgan brauzer tili hisoblanadi.
 - JavaScript-ga "aylanadigan" va muayyan xususiyatlarni taqdim etadigan ko'plab tillar mavjud. Javascriptni o'zlashtirgandan so'ng kamida qisqacha ularga bir nazar tashlash tavsiya etiladi.

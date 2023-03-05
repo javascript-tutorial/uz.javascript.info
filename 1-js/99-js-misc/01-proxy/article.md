@@ -1,18 +1,19 @@
 # Proxy and Reflect
 
-A `Proxy` object wraps another object and intercepts operations, like reading/writing properties and others, optionally handling them on its own, or transparently allowing the object to handle them.
+`Proxy` obyekti boshqa obyektni o'rab turadi va xususiyatlarni o'qish/yozish va boshqa operatsiyalarni tutib qolib, ularni boshqarish imkonini beradi. Standart holatda (default) obyekta operatsiyalarni shaffof boshqarishga imkon beradi.
 
-Proxies are used in many libraries and some browser frameworks. We'll see many practical applications in this article.
+Proxylar ko'p kutubxonalar va ayrim brauzer frameworklarida ishlatilgan. Ushbu bobda biz ko'plab amaliy dasturlarni ko'rib chiqamiz.
+
 
 ## Proxy
 
-The syntax:
+Sintaksis:
 
 ```js
 let proxy = new Proxy(target, handler)
 ```
 
-- `target` -- is an object to wrap, can be anything, including functions.
+- `target` -- o'rab olish uchun obyekt, har narsa bo'lishi mumkin, funksiya ham.
 - `handler` -- proxy configuration: an object with "traps", methods that intercept operations. - e.g. `get` trap for reading a property of `target`, `set` trap for writing a property into `target`, and so on.
 
 For operations on `proxy`, if there's a corresponding trap in `handler`, then it runs, and the proxy has a chance to handle it, otherwise the operation is performed on `target`.

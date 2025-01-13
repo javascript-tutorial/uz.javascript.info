@@ -28,4 +28,8 @@ alert(dictionary); // "apple,__proto__"
 
 Agar xususiyatni deskriptor yordamida yaratadigan bo'lsak, uning bayroqlari sukut bo'yicha `false` bo'ladi. Shunday qilib, yuqoridagi kodda `dictionary.toString` ni sanab bo'lmaydi.
 
+<<<<<<< HEAD
 Ko'rib chiqish uchun [](info:property-descriptors) bo'limiga qarang.
+=======
+See the chapter [](info:property-descriptors) for review.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3

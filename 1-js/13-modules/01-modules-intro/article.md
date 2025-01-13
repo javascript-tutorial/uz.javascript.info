@@ -20,6 +20,7 @@ But eventually scripts became more and more complex, so the community invented a
 To name some (for historical reasons):
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 - [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- dastlab kutubxona tomonidan amalga oshirilgan eng qadimgi modul tizimlaridan biri [request.js](http://requirejs.org/).
 - [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- Node.js server uchun yaratilgan modul tizimi.
 - [UMD](https://github.com/umdjs/umd) -- yana bitta modul tizimi, universal sifatida tavsiya etilgan, AMD va CommonJS bilan mos keladi.
@@ -28,6 +29,13 @@ To name some (for historical reasons):
 Endi bularning barchasi asta-sekin tarixning bir qismiga aylanadi, ammo biz ularni eski skriptlarda topishimiz mumkin. Til darajasidagi modul tizimi standartda 2015 yilda paydo bo'lgan va o'sha paytdan boshlab asta-sekin rivojlanib borgan va hozirda barcha yirik brauzerlar va Node.js tomonidan qo'llab quvatlanadi.
 =======
 Now all these slowly become a part of history, but we still can find them in old scripts.
+=======
+- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](https://requirejs.org/).
+- [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.
+- [UMD](https://github.com/umdjs/umd) -- one more module system, suggested as a universal one, compatible with AMD and CommonJS.
+
+Now these all slowly became a part of history, but we still can find them in old scripts.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 The language-level module system appeared in the standard in 2015, gradually evolved since then, and is now supported by all major browsers and in Node.js. So we'll study the modern JavaScript modules from now on.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -273,7 +281,7 @@ Masalan, `admin.js` moduli ma'lum funktsiyalarni taqdim etishi mumkin, ammo hiso
 
 As you can see, when `1.js` changes the `name` property in the imported `admin`, then `2.js` can see the new `admin.name`.
 
-That's exactly because the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other modules will see that.
+That's exactly because the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other importers will see that.
 
 **Such behavior is actually very convenient, because it allows us to *configure* modules.**
 
@@ -378,10 +386,14 @@ Compare it to non-module scripts, where `this` is a global object:
 Brauzerga xos bo'lgan `type="module"` skriptlarining bir nechta farqlari mavjud.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Agar siz birinchi marta o'qiyotgan bo'lsangiz yoki JavaScript-ni brauzerda ishlatmasangiz, ularni hozircha o'tkazib yuborishingiz mumkin.
 =======
 You may want skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+You may want to skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ### Modul skriptlari keyinga qoldiriladi
 
@@ -400,8 +412,12 @@ In other words:
 - module scripts wait until the HTML document is fully ready (even if they are tiny and load faster than HTML), and then run.
 - relative order of scripts is maintained: scripts that go first in the document, execute first.
 
+<<<<<<< HEAD
 As a side-effect, module scripts always "see" the fully loaded HTML-page, including HTML elements below them.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+As a side effect, module scripts always "see" the fully loaded HTML-page, including HTML elements below them.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Masalan:
 

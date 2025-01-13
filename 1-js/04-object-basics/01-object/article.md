@@ -48,7 +48,11 @@ Natijada `user` ob'ekti "name" va "age" ikkita imzolangan fayllari bo'lgan quti 
 
 ![user object](object-user.svg)
 
+<<<<<<< HEAD
 Undan istalgan vaqtda fayllarni qo'shishimiz, olib tashlashimiz va o'qishimiz mumkin.
+=======
+We can add, remove and read files from it at any time.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Xususiyat qiymatlariga nuqta belgisi yordamida murojat qilish mumkin:
 
@@ -70,7 +74,11 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
+<<<<<<< HEAD
 Xususiyatni olib tashlash uchun biz `delete` operatoridan foydalanishimiz mumkin:
+=======
+To remove a property, we can use the `delete` operator:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js
 delete user.age;
@@ -223,7 +231,11 @@ let bag = {
 };
 ```
 
+<<<<<<< HEAD
 Kvadrat qavslar nuqta yozuvidan ancha kuchliroq. Ular har qanday xususiyat nomlari va o'zgaruvchanlarga ruxsat beradi. Ammo ular yozish uchun noqulay.
+=======
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Shunday qilib, ko'pincha xususiyat nomlari ma'lum va sodda bo'lsa, nuqta yozuvi ishlatiladi. Va agar biz murakkabroq narsaga muhtoj bo'lsak, biz kvadrat qavslarga o'tamiz.
 
@@ -269,7 +281,11 @@ Shuningdek, o'zboshimchalik bilan kalitlarni qo'llab-quvvatlaydigan <info:map-se
 ## Property value shorthand
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Haqiqiy kodda biz ko'pincha mavjud o'zgaruvchanlarni qiymat sifatida xususiyat nomlari uchun ishlatamiz.
+=======
+In real code, we often use existing variables as values for property names.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Masalan:
 
@@ -329,7 +345,7 @@ Boshqa ko'plab tillardan farqli o'laroq, JavaScript ob'ektlarining o'ziga xos qu
 
 ## Property names limitations
 
-As we already know, a variable cannot have a name equal to one of language-reserved words like "for", "let", "return" etc.
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
 
 But for an object property, there's no such restriction:
 
@@ -408,10 +424,14 @@ alert( "blabla" in user ); // false, user.blabla mavjud emas
 Iltimos, `in` ning chap tomonida *xususiyat nomi* bo'lishi kerakligini unutmang. Odatda bu tirnoq ostidagi matn.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Agar biz tirnoqni olib tashlab qo'ysak, bu haqiqiy nomni o'z ichiga olgan o'zgaruvchanning tekshirilishini anglatadi. Masalan:
 =======
 If we omit quotes, that means a variable, it should contain the actual name to be tested. For instance:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ```js run
 let user = { age: 30 };
@@ -457,7 +477,11 @@ Situations like this happen very rarely, because `undefined` should not be expli
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 
+<<<<<<< HEAD
 ## "for..in" tsikli
+=======
+## The "for..in" loop [#forin]
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Ob'ektning barcha kalitlari bo'ylab yurish uchun tsiklning maxsus shakli mavjud: `for..in`. Bu biz oldin o'rgangan `for(;;)` konstruktsiyadan butunlay boshqacha narsa.
 
@@ -519,7 +543,11 @@ for (let code in codes) {
 */!*
 ```
 
+<<<<<<< HEAD
 Ob'ekt foydalanuvchiga variantlar ro'yxatini taklif qilish uchun ishlatilishi mumkin. Agar biz asosan nemis auditoriyasi uchun sayt yaratayotgan bo'lsak, ehtimol `49` birinchi bo'lishini xohlaymiz.
+=======
+The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Ammo kodni ishlatsak, biz butunlay boshqacha natijani ko'ramiz:
 
@@ -531,6 +559,7 @@ Telefon kodlari o'sish tartibida boradi, chunki ular butun sonlardir. Shunday qi
 ````smart header="Butun sonli xususiyatlar? Nima u?"
 Bu yerda "butun sonli xususiyat" atamasi o'zgaruvchisiz butun songa va matnga aylantirilishi mumkin bo'lgan matni anglatadi.
 
+<<<<<<< HEAD
 Shunday qilib, "49" - bu butun sonli xususiyat nomi, chunki u butun songa va orqaga o'zgartirilganda, u hanuzgacha bir xil bo'ladi. Ammo "+49" va "1.2" unday emas:
 
 ```js run
@@ -538,6 +567,16 @@ Shunday qilib, "49" - bu butun sonli xususiyat nomi, chunki u butun songa va orq
 alert( String(Math.trunc(Number("49"))) ); // "49", bir xil, butun sonli xususiyat
 alert( String(Math.trunc(Number("+49"))) ); // "49", bir xil emas "+49" ⇒ butun sonli xususiyat emas
 alert( String(Math.trunc(Number("1.2"))) ); // "1", bir xil emas "1.2" ⇒ butun sonli xususiyat emas
+=======
+So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+
+```js run
+// Number(...) explicitly converts to a number
+// Math.trunc is a built-in function that removes the decimal part
+alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
+alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
+alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ```
 ````
 
@@ -847,9 +886,15 @@ Ular xususiyatlarni saqlaydi (kalit-qiymat juftliklari), bu erda:
 - Xususiyat kalitlari matn yoki belgi (odatda matn) bo'lishi kerak.
 - Qiymatlar har qanday turda bo'lishi mumkin.
 
+<<<<<<< HEAD
 Xususiyatga murojaat qilish uchun biz quyidagilardan foydalanishingiz mumkin:
 - Nuqta belisi yozuvi: `obj.property`.
 - Kvadrat qavslar yozuvi `obj["property"]`. Kvadrat qavs kalitni o'zgaruvchandan olishga imkon beradi, masalan `obj[varWithKey]`.
+=======
+To access a property, we can use:
+- The dot notation: `obj.property`.
+- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Qo'shimcha operatorlar:
 - Xususiyatni o'chirish uchun: `delete obj.prop`.

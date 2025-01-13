@@ -31,7 +31,11 @@ function sum(a, b) {
 alert( sum(1, 2, 3, 4, 5) );
 ```
 
+<<<<<<< HEAD
 "Haddan tashqari" argumentlar tufayli xato bo'lmaydi. Ammo, albatta, natijada faqat dastlabki ikkitasi hisobga olinadi.
+=======
+There will be no error because of "excessive" arguments. But of course in the result only the first two will be counted, so the result in the code above is `3`.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 <<<<<<< HEAD:1-js/06-advanced-functions/02-rest-parameters-spread-operator/article.md
 Qoldiq parametrlarni funktsiya ta'rifida uchta nuqta bilan yozish mumkin `...`. Ular so'zma-so'z "qolgan parametrlarni qatorga yig'ish" degan ma'noni anglatadi.

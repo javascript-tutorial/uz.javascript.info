@@ -85,7 +85,7 @@ Biz qaysi funktsiyalarni tasvirlaymiz. Bizning holatda biz `pow` funktsiyasini t
 : `it` blokining birinchi argumentida biz *inson tilida* funktsiyadan foydalanishning aniq usulini tasvirlaymiz, ikkinchisida esa bu ishni sinab ko'radigan funktsiyani yozamiz.
 =======
 `describe("title", function() { ... })`
-: What functionality we're describing. In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
+: What functionality we're describing? In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
 
 `it("use case description", function() { ... })`
 : In the title of `it` we *in a human-readable way* describe the particular use case, and the second argument is a function that tests it.
@@ -119,7 +119,7 @@ Rivojlanish oqimi odatda quyidagicha ko'rinadi:
 =======
 1. An initial spec is written, with tests for the most basic functionality.
 2. An initial implementation is created.
-3. To check whether it works, we run the testing framework [Mocha](http://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
+3. To check whether it works, we run the testing framework [Mocha](https://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
 4. Now we have a working initial implementation with tests.
 5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
 6. Go to 3, update the implementation till tests give no errors.
@@ -133,16 +133,26 @@ Bizning holatlarimizda birinchi qadam tugallandi: bizda `pow` uchun boshlang'ich
 =======
 Let's see this development flow in our practical case.
 
+<<<<<<< HEAD
 The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use a few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 ## Amaldagi spetsifikatsiya
 
 Bu qo'llanmada biz testlar uchun quyidagi JavaScript kutubxonalaridan foydalanamiz:
 
+<<<<<<< HEAD
 - [Mocha](http://mochajs.org/) -- asosiy framework: u `describe` va `it` va testlarni boshqaradigan asosiy funktsiyalarni o'z ichiga olgan umumiy sinov funktsiyalarini taqdim etadi.
 - [Chai](http://chaijs.com) -- ko'plab tasdiqlar bilan kutubxona. Bu juda ko'p tasdiqlardan foydalanishga imkon beradi, hozirda bizga faqat `assert.equal` kerak.
 - [Sinon](http://sinonjs.org/) -- funksiyalarni kuzatish, ichki xususiyatlarni taqlid qilish va boshqa ko'p narsalarni ko'rish imkonini beruvchi kutubxona. Keyinchalik biz uchun foydali bo'ladi.
+=======
+- [Mocha](https://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
+- [Chai](https://www.chaijs.com/) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
+- [Sinon](https://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 
 Ushbu kutubxonalar brauzerda ham, serverda ham sinov uchun javob beradi. Bu erda biz brauzer variantini ko'rib chiqamiz.
 
@@ -421,6 +431,7 @@ Chai-da boshqa tasdiqlar ham mavjud, masalan:
 ```smart header="Other assertions"
 Please note the assertion `assert.isNaN`: it checks for `NaN`.
 
+<<<<<<< HEAD
 There are other assertions in [Chai](http://chaijs.com) as well, for instance:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
@@ -430,6 +441,16 @@ There are other assertions in [Chai](http://chaijs.com) as well, for instance:
 - `assert.isTrue(qiymat)` -- `qiymat === true` tekshiradi
 - `assert.isFalse(qiymat)` -- `qiymat === false` tekshiradi
 - ...to'liq ro'yxat [hujjatlar](http://chaijs.com/api/assert/)
+=======
+There are other assertions in [Chai](https://www.chaijs.com/) as well, for instance:
+
+- `assert.equal(value1, value2)` -- checks the equality  `value1 == value2`.
+- `assert.strictEqual(value1, value2)` -- checks the strict equality `value1 === value2`.
+- `assert.notEqual`, `assert.notStrictEqual` -- inverse checks to the ones above.
+- `assert.isTrue(value)` -- checks that `value === true`
+- `assert.isFalse(value)` -- checks that `value === false`
+- ...the full list is in the [docs](https://www.chaijs.com/api/assert/)
+>>>>>>> 34a80e70f8cce5794be259d25f815d7a7db7cbe3
 ```
 
 Shunday qilib, biz `pow` ga bir nechta satr qo'shishimiz kerak:

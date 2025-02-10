@@ -116,8 +116,12 @@ Agar biz `type="module"` atributini `<script>` yorlig'iga o'rnatgan bo'lsak, und
 alert(window.gVar); // 5 (became a property of the global object)
 ```
 
+<<<<<<< HEAD
 The same effect have function declarations (statements with `function` keyword in the main code flow, not function expressions).
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Function declarations have the same effect (statements with `function` keyword in the main code flow, not function expressions).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such a thing doesn't happen.
 

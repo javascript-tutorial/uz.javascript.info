@@ -12,12 +12,16 @@ Ammo kichik bir muammo bor. Agar `str` bo'sh bo'lsa, unda `str[0]` aniqlanmagan(
 There's a small problem though. If `str` is empty, then `str[0]` is `undefined`, and as `undefined` doesn't have the `toUpperCase()` method, we'll get an error.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Bu yerda ikkita variant mavjud:
 
 1. `str.charAt(0)` dan foydalanish, chunki u har doim matni qaytaradi (ehtimol bo'sh).
 2. Bo'sh satr uchun test qo'shish.
 
 Mana, ikkinchi variant:
+=======
+The easiest way out is to add a test for an empty string, like this:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run demo
 function ucFirst(str) {
@@ -28,4 +32,3 @@ function ucFirst(str) {
 
 alert( ucFirst("john") ); // John
 ```
-

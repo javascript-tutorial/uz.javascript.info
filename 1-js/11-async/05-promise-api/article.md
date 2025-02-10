@@ -82,9 +82,10 @@ For instance, download several URLs in parallel and process the content once the
 Sintaksis:
 
 ```js
-let promise = Promise.all([...promises...]);
+let promise = Promise.all(iterable);
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Bu bir massiv va'dalarni talab qiladi (texnik jihatdan har qanday ketma-ket saraluvchanlar mumkin, lekin odatda massiv) va yangi va'dani qaytaradi.
 
@@ -94,6 +95,11 @@ Barcha berilgan va'dalar bajarilganda va ularning natijalari massivida yangi va'
 
 The new promise resolves when all listed promises are settled, and the array of their results becomes its result.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+`Promise.all` takes an iterable (usually, an array of promises) and returns a new promise.
+
+The new promise resolves when all listed promises are resolved, and the array of their results becomes its result.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Masalan, quyidagi `Promise.all` 3 soniyadan keyin o'rnatiladi va natijada `[1, 2, 3]` massivi hosil bo'ladi:
 
@@ -375,7 +381,7 @@ Promise.any([
 ]).catch(error => {
   console.log(error.constructor.name); // AggregateError
   console.log(error.errors[0]); // Error: Ouch!
-  console.log(error.errors[1]); // Error: Error
+  console.log(error.errors[1]); // Error: Error!
 });
 ```
 

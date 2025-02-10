@@ -32,7 +32,11 @@ Odatda, bu funktsiya. Tarixiy sabablarga ko'ra kod matnni o'tkazish mumkin, ammo
 : Ishlashdan oldin kechikish, millisekundlarda (1000 ms = 1 soniya), sukut bo'yicha 0.
 
 `arg1`, `arg2`...
+<<<<<<< HEAD
 : Funktsiya uchun argumentlar (IE9- da qo'llab-quvvatlanmaydi)
+=======
+: Arguments for the function
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Masalan, ushbu kod bir soniyadan so'ng `sayHi()` ni chaqiradi:
 
@@ -115,7 +119,11 @@ alert(timerId); // bir xil identifikator (bekor qilinganidan keyin null bo'lmayd
 
 Shunga qaramay, ushbu usullar uchun universal spetsifikatsiya mavjud emas, shuning uchun hammasi yaxshi.
 
+<<<<<<< HEAD
 Brauzerlar uchun taymerlar HTML5 standartidagi [taymerlar bo'limida](https://www.w3.org/TR/html5/webappapis.html#timers) tasvirlangan.
+=======
+For browsers, timers are described in the [timers section](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) of HTML Living Standard.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## setInterval
 
@@ -290,7 +298,11 @@ setTimeout(function() {...}, 100);
 
 `setInterval` uchun funktsiya `clearInterval` chaqirilguncha xotirada qoladi.
 
+<<<<<<< HEAD
 Yon ta'siri bor. Funktsiya tashqi leksik muhitga murojaat qiladi, shuning uchun u yashab turib, tashqi o'zgaruvchanlar ham yashaydi. Ular funktsiyadan ko'ra ko'proq xotirani olishlari mumkin. Shunday qilib, biz endi rejalashtirilgan funktsiyaga muhtoj bo'lmaganda, juda kichik bo'lsa ham, uni bekor qilish yaxshiroqdir.
+=======
+There's a side effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ````
 
 ## Zero delay setTimeout
@@ -432,7 +444,7 @@ The first line "puts the call into calendar after 0ms". But the scheduler will o
 There are also advanced browser-related use cases of zero-delay timeout, that we'll discuss in the chapter <info:event-loop>.
 
 ````smart header="Zero delay is in fact not zero (in a browser)"
-In the browser, there's a limitation of how often nested timers can run. The [HTML5 standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+In the browser, there's a limitation of how often nested timers can run. The [HTML Living Standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
 
 Let's demonstrate what it means with the example below. The `setTimeout` call in it re-schedules itself with zero delay. Each call remembers the real time from the previous one in the `times` array. What do the real delays look like? Let's see:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -549,10 +561,17 @@ For server-side JavaScript, that limitation does not exist, and there exist othe
 Please note that all scheduling methods do not *guarantee* the exact delay.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Masalan, brauzer ichidagi taymer juda ko'p sabablarga ko'ra sekinlashishi mumkin:
 - CPU haddan tashqari yuklangan.
 - Brauzer yorlig'i fon rejimida.
 - Noutbuk batareyada.
+=======
+For example, the in-browser timer may slow down for a lot of reasons:
+- The CPU is overloaded.
+- The browser tab is in the background mode.
+- The laptop is on battery saving mode.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 <<<<<<< HEAD
 Brauzer va sozlamalarga qarab, taymerning minimal taymer o'lchamlarini (minimal kechikish) 300 yoki hatto 1000 soniyaga oshirishi mumkin.

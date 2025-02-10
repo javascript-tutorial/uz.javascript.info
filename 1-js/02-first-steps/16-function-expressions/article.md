@@ -16,7 +16,13 @@ function sayHi() {
 
 Funktsiyani yaratish uchun yana bir sintaksis mavjud, u *funktsiya ifodasi* deb nomlanadi.
 
+<<<<<<< HEAD
 Bu shunday ko'rinishga ega:
+=======
+It allows us to create a new function in the middle of any expression.
+
+For example:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 let sayHi = function() {
@@ -24,6 +30,7 @@ let sayHi = function() {
 };
 ```
 
+<<<<<<< HEAD
 Bu yerda funktsiya boshqa qiymatlar singari aniq ravishda yaratiladi va o'zgaruvchanga tayinlanadi. Funktsiya qanday aniqlangan bo'lishidan qat'iy nazar, bu faqat `sayHi` o'zgaruvchanida saqlanadigan qiymat.
 
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
@@ -32,6 +39,21 @@ Ushbu kod namunalarining ma'nosi bir xil: "funktsiyani yarating va uni `sayHi`" 
 Hatto `alert` yordamida ushbu qiymatni chiqarishimiz mumkin:
 =======
 The meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+=======
+Here we can see a variable `sayHi` getting a value, the new function, created as `function() { alert("Hello"); }`.
+
+As the function creation happens in the context of the assignment expression (to the right side of `=`), this is a *Function Expression*.
+
+Please note, there's no name after the `function` keyword. Omitting a name is allowed for Function Expressions.
+
+Here we immediately assign it to the variable, so the meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+
+In more advanced situations, that we'll come across later, a function may be created and immediately called or scheduled for a later execution, not stored anywhere, thus remaining anonymous.
+
+## Function is a value
+
+Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function in the `sayHi` variable.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 We can even print out that value using `alert`:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
@@ -85,14 +107,18 @@ Yuqorida nima batafsil sodir bo'lganligi:
 3. Now the function can be called as both `sayHi()` and `func()`.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
 
+<<<<<<< HEAD
 E'tibor bering, biz birinchi satrda `sayHi` ni e'lon qilish uchun funktsiya ifodasidan foydalinishimiz mumkin edi:
+=======
+We could also have used a Function Expression to declare `sayHi`, in the first line:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
-let sayHi = function() {
+let sayHi = function() { // (1) create
   alert( "Hello" );
 };
 
-let func = sayHi;
+let func = sayHi;  //(2)
 // ...
 ```
 
@@ -103,8 +129,13 @@ Everything would work the same.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
 
 
+<<<<<<< HEAD
 ````smart header="Nima uchun oxirida nuqta-vergul bor?"
 Siz hayron bo'lishingiz mumkin, nima uchun funktsiya ifodasi oxirida nuqta-vergulga ega `;`, lekin funktsiya deklaratsiyasi ega emas:
+=======
+````smart header="Why is there a semicolon at the end?"
+You might wonder, why do Function Expressions have a semicolon `;` at the end, but Function Declarations do not:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 function sayHi() {
@@ -116,6 +147,7 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
 Javob oddiy:
 - Kod bloklari va ularni ishlatadigan `if {...}`, `for {}`, `function f {}` va hokazo kabi sintaksis tuzilmalarining oxirida nuqta-vergul `;` qo'yish kerak emas.
@@ -125,6 +157,11 @@ The answer is simple:
 - There's no need for `;` at the end of code blocks and syntax structures that use them like `if { ... }`, `for {  }`, `function f { }` etc.
 - A Function Expression is used inside the statement: `let sayHi = ...;`, as a value. It's not a code block, but rather an assignment. The semicolon `;` is recommended at the end of statements, no matter what the value is. So the semicolon here is not related to the Function Expression itself, it just terminates the statement.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
+=======
+The answer is simple: a Function Expression is created here as `function(…) {…}` inside the assignment statement: `let sayHi = …;`. The semicolon `;` is recommended at the end of the statement, it's not a part of the function syntax.
+
+The semicolon would be there for a simpler assignment, such as `let sayHi = 5;`, and it's also there for a function assignment.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ````
 
 ## Qayta chaqirish funktsiyalari
@@ -164,6 +201,7 @@ function showCancel() {
 ask("Rozimisiz?", showOk, showCancel);
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
 Qanday qilib uni qisqartirish kerakligini o'rgatishdan oldin, brauzerda (va ba'zi hollarda server tomonida) bunday funktsiyalar juda mashhurligini ta'kidlaymiz. Haqiqiy hayotdan tatbiq etish va yuqoridagi misol o'rtasidagi asosiy farq shundaki, real funktsiyalar foydalanuvchi bilan o'zaro aloqada oddiy `confirm` dan ko'ra murakkab usullardan foydalanadi. Brauzerda bunday funktsiya odatda chiroyli ko'rinadigan savollar oynasini chiqaradi. Ammo bu boshqa voqea.
 
@@ -172,13 +210,20 @@ Qanday qilib uni qisqartirish kerakligini o'rgatishdan oldin, brauzerda (va ba'z
 G'oya shundan iboratki, biz funktsiyani bajaramiz va agar kerak bo'lsa, uni keyinroq "qayta chaqirilgan" deb oylaymiz. Bizning holatimizda `showOk` "ha" javobi uchun, "yo'q" javobi uchun `showCancel` qayta chaqirish bo'ladi.
 =======
 In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such function usually draws a nice-looking question window. But that's another story.
+=======
+In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such functions usually draw a nice-looking question window. But that's another story.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 **The arguments `showOk` and `showCancel` of `ask` are called *callback functions* or just *callbacks*.**
 
 The idea is that we pass a function and expect it to be "called back" later if necessary. In our case, `showOk` becomes the callback for "yes" answer, and `showCancel` for "no" answer.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
 
+<<<<<<< HEAD
 Xuddi shu funktsiyani ancha qisqa yozish uchun biz funktsiya ifodalaridan foydalanishimiz mumkin:
+=======
+We can use Function Expressions to write an equivalent, shorter function:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run no-beautify
 function ask(savol, ha, yoq) {
@@ -229,7 +274,11 @@ Birinchidan, sintaksis: kod qanday ko'rinishag ega.
 First, the syntax: how to differentiate between them in the code.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
 
+<<<<<<< HEAD
 - *Funktsiya deklaratsiyasi:* asosiy kod oqimida alohida ifoda sifatida e'lon qilingan funktsiya.
+=======
+- *Function Declaration:* a function, declared as a separate statement, in the main code flow:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
     ```js
     // Funktsiya deklaratsiyasi
@@ -237,11 +286,15 @@ First, the syntax: how to differentiate between them in the code.
       return a + b;
     }
     ```
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
 - *Funktsiya ifodasi:* ifoda ichida yoki boshqa sintaksis tarkibida yaratilgan funktsiya. Bu erda funktsiya "tayinlash ifodasi" ning `=` 'o'ng tomonida yaratilgan:
     
 =======
 - *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created at the right side of the "assignment expression" `=`:
+=======
+- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the "assignment expression" `=`:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
     ```js
@@ -367,9 +420,15 @@ if (age < 18) {
   welcome();               // \   (ishlaydi)
 */!*
                            //  |
+<<<<<<< HEAD
   function welcome() {     //  |  
     alert("Salom!");       //  |  Funktsiya deklaratsiyasi e'lon qilingan blokning 
   }                        //  |  hamma joyida mavjud
+=======
+  function welcome() {     //  |
+    alert("Hello!");       //  |  Function Declaration is available
+  }                        //  |  everywhere in the block where it's declared
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
                            //  |
 *!*
   welcome();               // /   (ishlaydi)
@@ -377,11 +436,15 @@ if (age < 18) {
 
 } else {
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/15-function-expressions-arrows/article.md
   function welcome() {     //  age = 16 uchun bu "welcome" hech qachon yaratilmaydi
     alert("Assalomu aleykum!");
 =======
   function welcome() {    
+=======
+  function welcome() {
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
     alert("Greetings!");
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
   }
@@ -546,8 +609,12 @@ let sum = (a, b) => {  // jingalak qavs ko'p satrli funktsiyani ochadi
 };
 =======
 ```smart header="When to choose Function Declaration versus Function Expression?"
+<<<<<<< HEAD
 As a rule of thumb, when we need to declare a function, the first to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/16-function-expressions/article.md
+=======
+As a rule of thumb, when we need to declare a function, the first thing to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 That's also better for readability, as it's easier to look up `function f(…) {…}` in the code than `let f = function(…) {…};`. Function Declarations are more "eye-catching".
 

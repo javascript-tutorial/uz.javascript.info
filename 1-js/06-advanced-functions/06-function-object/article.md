@@ -373,12 +373,16 @@ welcome(); // Salom, Mehmon (ichki chaqiruv ishlamoqda)
 Endi u ishlaydi, chunki `"func"` nomi funktsional-lokal hisoblanadi. U tashqaridan olinmaydi (va u yerda ko'rinmaydi). Spetsifikatsiya har doim mavjud funktsiyaga murojaat qilishiga kafolat beradi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Tashqi kod hali ham `sayHi` yoki `welcome` o'zgaruvchanga ega. Va `func` - bu "ichki funktsiya nomi", funktsiya o'zini o'zi ichkaridan chaqira oladi.
 
 ```smart header="Funktsiya deklaratsiyasi uchun bunday narsa yo'q"
 Bu yerda tasvirlangan "ichki ism" xususiyati faqat funktsiya ifodalari uchun mavjud, funktsiya deklaratsiyalari uchun emas. Funktsiya deklaratsiyalari uchun yana bitta "ichki" ism qo'shish uchun sintaksis imkoniyati mavjud emas.
 =======
 The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", how the function can call itself internally.
+=======
+The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", the way for the function to can call itself reliably.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```smart header="There's no such thing for Function Declaration"
 The "internal name" feature described here is only available for Function Expressions, not for Function Declarations. For Function Declarations, there is no syntax for adding an "internal" name.

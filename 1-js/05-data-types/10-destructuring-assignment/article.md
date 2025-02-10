@@ -2,20 +2,28 @@
 
 JavaScript-dagi ikkita eng ko'p ishlatiladigan ma'lumotlar tuzilmasi `Object` va `Array`.
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Obyektlar ko'plab ma'lumotlarni bitta obyektga to'plashimizga imkon beradi va massivlar ro'yxatlangan to'plamlarni saqlashga imkon beradi. Shunday qilib, biz obyekt yoki massiv yaratib, uni bitta shaxs sifatida boshqarishimiz yoki uni funktsiya chaqiruviga o'tkazishimiz mumkin.
 
 *Destrukturalashtirish* - bu maxsus sintaksis, bu massivlarni yoki moslamalarni bir dasta o'zgaruvchanga "ochish" imkonini beradi, chunki ba'zida ular qulayroq bo'ladi. Destruktirizatsiya, shuningdek, juda ko'p parametrlarga, standart qiymatlarga ega bo'lgan murakkab funktsiyalar bilan juda yaxshi ishlaydi va tez orada biz ularni qanday ishlashini ko'rib chiqamiz.
 =======
 - Objects allow us to create a single entity that stores data items by key. 
+=======
+- Objects allow us to create a single entity that stores data items by key.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 - Arrays allow us to gather data items into an ordered list.
 
-Although, when we pass those to a function, it may need not an object/array as a whole. It may need individual pieces.
+However, when we pass these to a function, we may not need all of it. The function might only require certain elements or properties.
 
-*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient. 
+*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient.
 
+<<<<<<< HEAD
 Destructuring also works great with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+Destructuring also works well with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ## Massivni destrukturalashtirish
 
@@ -32,7 +40,7 @@ let arr = ["Ilya", "Kantor"]
 Here's an example of how an array is destructured into variables:
 
 ```js
-// we have an array with the name and surname
+// we have an array with a name and surname
 let arr = ["John", "Smith"]
 
 *!*
@@ -57,6 +65,7 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 ````smart header="\"destrukturalashtirish\" degani \ "halokat \" degani emas."
 U "destrukturalashtirish" deb nomlanadi, chunki u elementlarni o'zgaruvchanga nusxalash orqali "buzadi". Ammo massivning o'zi o'zgartirilmaydi.
@@ -66,6 +75,12 @@ As you can see, the syntax is simple. There are several peculiar details though.
 ````smart header="\"Destructuring\" does not mean \"destructive\"."
 It's called "destructuring assignment," because it "destructurizes" by copying items into variables. But the array itself is not modified.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples to understand it better.
+
+````smart header="\"Destructuring\" does not mean \"destructive\"."
+It's called "destructuring assignment," because it "destructurizes" by copying items into variables. However, the array itself is not modified.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Bu shunchaki yozishning qisqa usuli:
 ```js
@@ -87,11 +102,15 @@ let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic
 alert( title ); // Consul
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Yuqoridagi kodda massivning ikkinchi elementi o'tkazib yuboriladi, uchinchisiga `title` beriladi va massivning qolgan qismi ham o'tkazib yuboriladi.
 =======
 In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items is also skipped (as there are no variables for them).
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items are also skipped (as there are no variables for them).
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 ````
 
 ````smart header="O'ng tomondagi har qanday ketma-ket saraluvchanlar bilan ishlaydi"
@@ -102,7 +121,7 @@ In the code above, the second element of the array is skipped, the third one is 
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-That works, because internally a destructuring assignment works by iterating over the right value. It's kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
+That works, because internally a destructuring assignment works by iterating over the right value. It's a kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
 ````
 
 
@@ -112,8 +131,12 @@ That works, because internally a destructuring assignment works by iterating ove
 Biz chap tomonda har qanday "tayinlanadigan" narsalardan foydalanishimiz mumkin.
 =======
 ````smart header="Assign to anything at the left-side"
+<<<<<<< HEAD
 We can use any "assignables" at the left side.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+We can use any "assignables" on the left side.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Masalan, obyekt xususiyati:
 ```js run
@@ -132,10 +155,16 @@ alert(user.surname); // Smith
 Oldingi bobda biz [Object.entries(obj)](mdn:js/Object/entries) usulini ko'rdik.
 =======
 ````smart header="Looping with .entries()"
+<<<<<<< HEAD
 In the previous chapter we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
 
 Obyektning kalitlari va qiymatlari ustida tsiklash uchun biz uni destrukturalashtiramiz:
+=======
+In the previous chapter, we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+
+We can use it with destructuring to loop over the keys-and-values of an object:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let user = {
@@ -143,7 +172,11 @@ let user = {
   age: 30
 };
 
+<<<<<<< HEAD
 // kalitlari va qiymatlari ustida tsiklash
+=======
+// loop over the keys-and-values
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
@@ -217,21 +250,29 @@ If we'd like also to gather all that follows -- we can add one more parameter th
 let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
 
 *!*
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 // "qolganlar" turi massiv ekanligini unutmang.
 =======
 // rest is array of items, starting from the 3rd one
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+// rest is an array of items, starting from the 3rd one
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 alert(rest[0]); // Consul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 */!*
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 `Rest` qiymati - bu qolgan qator elementlari massivi. Biz "rest" o'rniga boshqa har qanday o'zgaruvchan nomdan foydalanishimiz mumkin, shunchaki uning oldida uchta nuqta borligiga va destrukturalashtirishning oxirgi o'rinda turganiga ishonch hosil qiling.
 =======
 The value of `rest` is the array of the remaining array elements. 
+=======
+The value of `rest` is the array of the remaining array elements.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 We can use any other variable name in place of `rest`, just make sure it has three dots before it and goes last in the destructuring assignment.
 
@@ -243,11 +284,15 @@ let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Ro
 
 ### Sukut bo'yicha tayinlangan qiymatlar
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Agar massiv qiymatlar kamroq bo'lsa, tayinlashga nisbatan, xato bo'lmaydi. Yo'q qiymatlar `undefined` hisoblanadi:
 =======
 If the array is shorter than the list of variables at the left, there'll be no errors. Absent values are considered undefined:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+If the array is shorter than the list of variables on the left, there will be no errors. Absent values are considered undefined:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 *!*
@@ -298,11 +343,15 @@ Asosiy sintaksis:
 let {var1, var2} = {var1:…, var2:…}
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 O'ng tomonda mavjud bo'lgan obyektimiz bor, biz uni o'zgaruvchanlarga bo'lishni xohlaymiz. Chap tomonda tegishli xususiyatlar uchun "shablon" mavjud. Oddiy holatda, bu o'zgaruvchanlar nomlari ro'yxati `{...}`.
 =======
 We should have an existing object at the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+We should have an existing object on the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Masalan:
 
@@ -322,6 +371,7 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Tegishli o'zgaruvchilarga `options.title`,` options.width` va `options.height` xususiyatlari tayinlaniladi. Tartib muhim emas. Bu ham ishlaydi:
 
@@ -329,6 +379,9 @@ Tegishli o'zgaruvchilarga `options.title`,` options.width` va `options.height` x
 // let{...} da xususiyatlar tartibini o'zgartirdi
 =======
 Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables. 
+=======
+Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 The order does not matter. This works too:
 
@@ -524,6 +577,7 @@ alert( title ); // Menu
 
 ## Ichki destrukturalashtirish
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Agar obyektda yoki massivda boshqa obyektlar va massivlar bo'lsa, biz chuqurroq qismlarni ajratib olish uchun murakkabroq chap tomon shablonlardan foydalanishimiz mumkin.
 
@@ -533,6 +587,11 @@ If an object or an array contain other nested objects and arrays, we can use mor
 
 In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern at the left side of the assignment has the same structure to extract values from them:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+If an object or an array contains other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+
+In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern on the left side of the assignment has the same structure to extract values from them:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js run
 let options = {
@@ -541,6 +600,7 @@ let options = {
     height: 200
   },
   items: ["Cake", "Donut"],
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
   extra: true    // biz yo'q qilmaydigan qo'shimcha narsa
 };
@@ -548,6 +608,9 @@ let options = {
 // aniqlik uchun bir nechta chiziqlar bo'yicha destrukturalashtirish
 =======
   extra: true   
+=======
+  extra: true
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 };
 
 // destructuring assignment split in multiple lines for clarity
@@ -568,6 +631,7 @@ alert(item1);  // Cake
 alert(item2);  // Donut
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 `extra` dan tashqari barcha `options` obyekti tegishli o'zgaruvchanlarga tayinlangan.
 
@@ -575,6 +639,9 @@ alert(item2);  // Donut
 =======
 All properties of `options` object except `extra` that is absent in the left part, are assigned to corresponding variables:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
+=======
+All properties of `options` object except `extra` which is absent in the left part, are assigned to corresponding variables:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ![](destructuring-complex.svg)
 
@@ -594,6 +661,7 @@ Note that there are no variables for `size` and `items`, as we take their conten
 
 ## Smart funktsiya parametrlari
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Funktsiya ko'p parametrlarga ega bo'lishi mumkin bo'lgan vaqtlar mavjud, ularning aksariyati ixtiyoriydir. Bu, ayniqsa, foydalanuvchi interfeyslariga taalluqlidir. Menyu yaratadigan funktsiyani tasavvur qiling. Uning kengligi, balandligi, sarlavhasi, buyumlar ro'yxati va boshqalar bo'lishi mumkin.
 =======
@@ -601,6 +669,11 @@ There are times when a function has many parameters, most of which are optional.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
 
 Bunday funktsiyani yozishning yomon usuli:
+=======
+There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, an item list and so on.
+
+Here's a bad way to write such a function:
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 ```js
 function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -608,7 +681,7 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 }
 ```
 
-In real-life, the problem is how to remember the order of arguments. Usually IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+In real-life, the problem is how to remember the order of arguments. Usually, IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
 
 Like this?
 
@@ -677,10 +750,14 @@ function({
 })
 ```
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 Iltimos, shuni unutmangki, bunday destrukturalashtirish `showMenu()` ning argumentiga ega. Agar biz barcha qiymatlarni sukut bo'yicha tayinlangan bo'lishini xohlasak, unda bo'sh obyektni ko'rsatishimiz kerak:
 =======
 Then, for an object of parameters, there will be a variable `varName` for property `incomingProperty`, with `defaultValue` by default.
+=======
+Then, for an object of parameters, there will be a variable `varName` for the property `incomingProperty`, with `defaultValue` by default.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 Please note that such destructuring assumes that `showMenu()` does have an argument. If we want all values by default, then we should specify an empty object:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
@@ -722,7 +799,7 @@ Yuqoridagi kodda barcha argumentlar obyekti sukut bo'yicha `{}` dir, shuning uch
 - The full object syntax:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
     ```js
-    let {prop : varName = default, ...rest} = object
+    let {prop : varName = defaultValue, ...rest} = object
     ```
 
     Bu shuni anglatadiki, `prop` xususiyati `varName` o'zgaruvchaniga o'tishi kerak va agar bunday xususiyat bo'lmasa, u holda `default` qiymati ishlatilishi kerak.
@@ -736,10 +813,14 @@ Yuqoridagi kodda barcha argumentlar obyekti sukut bo'yicha `{}` dir, shuning uch
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/10-destructuring-assignment/article.md
 
     ```js
-    let [item1 = default, item2, ...rest] = array
+    let [item1 = defaultValue, item2, ...rest] = array
     ```
 
+<<<<<<< HEAD
     Birinchi element `item1` ga o'tadi; ikkinchisi `item2` ga o'tadi, qolganlari esa `rest` massivini yaratadi.
+=======
+    The first item goes to `item1`; the second goes into `item2`, and all the rest makes the array `rest`.
+>>>>>>> 6236eb8c3cdde729dab761a1d0967a88a1a6197e
 
 <<<<<<< HEAD:1-js/05-data-types/09-destructuring-assignment/article.md
 - Keyinchalik murakkab holatlar uchun chap tomon o'ng tomoni bilan bir xil tuzilishga ega bo'lishi kerak.

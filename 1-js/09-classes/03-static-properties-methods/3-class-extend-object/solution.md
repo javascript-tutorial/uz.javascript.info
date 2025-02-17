@@ -21,7 +21,11 @@ alert( rabbit.hasOwnProperty('name') ); // true
 
 Ammo bu hali hammasi emas.
 
+<<<<<<< HEAD
 Tuzatishdan keyin ham, `"class Rabbit extends Object"` va `class Rabbit` o'rtasida hali ham muhim farq bor.
+=======
+Even after the fix, there's still an important difference between `"class Rabbit extends Object"` and `class Rabbit`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Ma'lumki, "kengaytirish" sintaksisida ikkita prototip mavjud:
 
@@ -33,7 +37,11 @@ Ma'lumki, "kengaytirish" sintaksisida ikkita prototip mavjud:
 2. Between the constructor functions themselves (for static methods).
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/09-classes/03-static-properties-methods/3-class-extend-object/solution.md
 
+<<<<<<< HEAD
 Bizning holatimizda, `class Rabbit extends Object` uchun bu quyidagilarni anglatadi:
+=======
+In the case of `class Rabbit extends Object` it means:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
 class Rabbit extends Object {}
@@ -42,7 +50,11 @@ alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
 alert( Rabbit.__proto__ === Object ); // (2) true
 ```
 
+<<<<<<< HEAD
 Shunday qilib, `Rabbit` endi `Rabbit` orqali `Object` ning statik usullariga kirishni ta'minlaydi:
+=======
+So `Rabbit` now provides access to the static methods of `Object` via `Rabbit`, like this:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js run
 class Rabbit extends Object {}
@@ -72,7 +84,11 @@ alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Error
 
 Shunday qilib, `Rabbit` bu holda `Object` ning statik usullariga kirishni ta'minlamaydi.
 
+<<<<<<< HEAD
 Aytgancha, `Function.prototype` "umumiy" funktsiya usullariga ega, masalan `call`, `bind` va boshqalar. Ikkala holatda ham ular mavjud, chunki `Object` konstruktori `Object.__ proto__ = == Funktsiya.prototype`.
+=======
+By the way, `Function.prototype` also has "generic" function methods, like `call`, `bind` etc. They are ultimately available in both cases, because for the built-in `Object` constructor, `Object.__proto__ === Function.prototype`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Here's the picture:
 

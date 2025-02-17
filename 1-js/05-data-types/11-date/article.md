@@ -81,10 +81,17 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
 : Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
+<<<<<<< HEAD
     - `yil` 4 ta raqamdan iborat bo'lishi kerak: `2013` yaxshi, `98` yo'q.
     - Oylarni hisoblash `0` (yanvar) bilan boshlanadi, `11` gacha (dekabr).
     - `Sana` parametri aslida oyning kunidir, agar yo'q bo'lsa, `1` qabul qilinadi.
     - Agar `soat/daqiqa/soniya/millisoniya` bo'lmasa, ular `0` ga teng  deb qabul qilinadi.
+=======
+    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is the same as `1998` here, but always using 4 digits is strongly encouraged.
+    - The `month` count starts with `0` (Jan), up to `11` (Dec).
+    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
+    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
     Masalan:
 
@@ -449,7 +456,11 @@ Zamonaviy JavaScript interpretatorlari ko'plab optimallashtirishlarni amalga osh
 Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
+<<<<<<< HEAD
 V8 haqidagi maqolalar to'plamini <http://mrale.ph> sahifasida topishingiz mumkin.
+=======
+The great pack of articles about V8 can be found at <https://mrale.ph>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 ## Date.parse matndan
@@ -487,7 +498,7 @@ Vaqt belgisidan darhol yangi `Date` obyektini yaratishimiz mumkin:
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 
-alert(date);  
+alert(date);
 ```
 
 ## Xulosa

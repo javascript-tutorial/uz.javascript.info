@@ -53,7 +53,7 @@ To make the `range` object iterable (and thus let `for..of` work) we need to add
 1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
 2. Onward, `for..of` works *only with that returned object*.
 3. When `for..of` wants the next value, it calls `next()` on that object.
-4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true`  means that the iteration is finished, otherwise `value` is the next value.
+4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true` means that the loop is finished, otherwise `value` is the next value.
 
 Here's the full implementation for `range` with remarks:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -67,11 +67,16 @@ let range = {
 // 1. for..of chaqiruvi this ni chaqiradi
 range[Symbol.iterator] = function() {
 
+<<<<<<< HEAD
   // ...ketma-ket sarraluvchan obyektini qaytaradi:
   // 2. for..of faqat ushbu ketma-ket sarraluvchan bilan ishlaydi, undan keyingi qiymatlarni so'raydi
+=======
+  // ...it returns the iterator object:
+  // 2. Onward, for..of works only with the iterator object below, asking it for next values
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
   return {
     current: this.from,
-    last: this.to,      
+    last: this.to,
 
     // 3. next() for..of tsikldan har bir takrorlanishda chaqiriladi
     next() {
@@ -224,7 +229,11 @@ When we use JavaScript for practical tasks in a browser or any other environment
 For instance, strings are both iterable (`for..of` works on them) and array-like (they have numeric indexes and `length`).
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Ammo ketma-ket sarraluvchan massivga-o'xshash bo'lmasligi mumkin. Va aksincha, massivga-o'xshash ketma-ket sarraluvchan bo'lmasligi mumkin.
+=======
+But an iterable may not be array-like. And vice versa an array-like may not be iterable.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Masalan, yuqoridagi misolda `range` ketma-ket sarraluvchan, lekin massivga-o'xshash emas, chunki u indekslangan xususiyatlarga va `uzunlikka` ega emas.
 
@@ -280,8 +289,13 @@ alert(arr.pop()); // World (usul ishlaydi)
 
 Xuddi shu narsa ketma-ket sarraluvchan uchun sodir bo'ladi:
 
+<<<<<<< HEAD
 ```js
 // ushbu range yuqoridagi misoldan olingan deb taxmin qilsak
+=======
+```js run
+// assuming that range is taken from the example above
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (toString massivning konversiyasi ishlaydi)
 ```
@@ -303,8 +317,13 @@ The optional second argument `mapFn` can be a function that will be applied to e
 
 Masalan:
 
+<<<<<<< HEAD
 ```js
 // ushbu range yuqoridagi misoldan olingan deb taxmin qilsak
+=======
+```js run
+// assuming that range is taken from the example above
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 // har bir sonning kvadrati
 let arr = Array.from(range, num => num * num);
@@ -341,10 +360,14 @@ alert(chars);
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ...Ammo qisqaroq.
 =======
 ...But it is shorter.    
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+...But it is shorter.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Hatto surrogat juftlarini qo'llab-quvvatlaydigan `slice` yaratishimiz mumkin:
 

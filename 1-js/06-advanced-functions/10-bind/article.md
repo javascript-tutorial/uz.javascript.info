@@ -218,8 +218,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Salom"); // Salom, John ("Salom" say ga bog'landi)
 say("Hayir"); // Hayir, John ("Hayir" say ga bog'landi)
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 ````smart header="Qulaylik usuli: `bindAll`"
@@ -234,12 +239,16 @@ for (let key in user) {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 JavaScript kutubxonalari, shuningdek, qulay ommaviy biriktirish uchun funktsiyalarni taqdim etadi, masalan, [_.bindAll(obj)](http://lodash.com/docs#bindAll) lodash-da.
 ````
 
 ## Xulosa
 =======
 JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](http://lodash.com/docs#bindAll) in lodash.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](https://lodash.com/docs#bindAll) in lodash.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ````
 
 ## Partial functions

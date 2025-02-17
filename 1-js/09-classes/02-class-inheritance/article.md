@@ -189,11 +189,15 @@ class Rabbit extends Animal {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 ...Ammo, odatda, biz ota-ona usulini butunlay almashtirishni xohlamaymiz, aksincha uning ustiga qurish, uning funktsiyalarini o'zgartirish yoki kengaytirishni xohlaymiz. Biz o'z usulimiz bilan biron bir narsani qilamiz, lekin oldin yoki keyin yoki jarayonda ota-ona usulini chaqiramiz.
 =======
 Usually we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Usually, however, we don't want to totally replace a parent method, but rather to build on top of it to tweak or extend its functionality. We do something in our method, but call the parent method before/after it or in the process.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Klasslar buning uchun `"super"` kalit so'zni taqdim etadi.
 
@@ -260,7 +264,12 @@ Endi `Rabbit` bu jarayonda ota-onani `super.stop()` deb ataydigan `to'xtatish` u
 ````smart header="O'q funktsiyalarida "super" yo'q"
 <info:arrow-functions> bobida aytib o'tilganidek, o'q funktsiyalari `super` ga ega emas.
 
+<<<<<<< HEAD
 Agar unga kirish imkoni bo'lsa, u tashqi funktsiyadan olingan. Misol uchun:
+=======
+If accessed, it's taken from the outer function. For instance:
+
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```js
 class Rabbit extends Animal {
   stop() {
@@ -277,8 +286,12 @@ setTimeout(function() { super.stop() }, 1000);
 ```
 ````
 
+<<<<<<< HEAD
 
 ## Konstruktorni bekor qilish
+=======
+## Overriding constructor
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Konstruktorlar bilan bu biroz hiyla-nayrangga aylanadi.
 
@@ -406,6 +419,7 @@ alert(rabbit.earLength); // 10
 */!*
 ```
 
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 ## Super: ichki qismlar, [[HomeObject]]
@@ -423,6 +437,8 @@ Keling, buni qilishga harakat qilaylik. Klasslarsiz, oddiylik uchun oddiy obyekt
 Bu yerda `rabbit.eat()` ota-ona obyektining `animal.eat()` usulini chaqirishi kerak:
 =======
 
+=======
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ### Overriding class fields: a tricky note
 
 ```warn header="Advanced note"
@@ -458,13 +474,13 @@ new Rabbit(); // animal
 */!*
 ```
 
-Here, class `Rabbit` extends `Animal` and overrides `name` field with its own value.
+Here, class `Rabbit` extends `Animal` and overrides the `name` field with its own value.
 
 There's no own constructor in `Rabbit`, so `Animal` constructor is called.
 
 What's interesting is that in both cases: `new Animal()` and `new Rabbit()`, the `alert` in the line `(*)` shows `animal`.
 
-**In other words, parent constructor always uses its own field value, not the overridden one.**
+**In other words, the parent constructor always uses its own field value, not the overridden one.**
 
 What's odd about it?
 
@@ -501,9 +517,9 @@ And that's what we naturally expect. When the parent constructor is called in th
 
 ...But for class fields it's not so. As said, the parent constructor always uses the parent field.
 
-Why is there the difference?
+Why is there a difference?
 
-Well, the reason is in the field initialization order. The class field is initialized:
+Well, the reason is the field initialization order. The class field is initialized:
 - Before constructor for the base class (that doesn't extend anything),
 - Immediately after `super()` for the derived class.
 
@@ -511,12 +527,11 @@ In our case, `Rabbit` is the derived class. There's no `constructor()` in it. As
 
 So, `new Rabbit()` calls `super()`, thus executing the parent constructor, and (per the rule for derived classes) only after that its class fields are initialized. At the time of the parent constructor execution, there are no `Rabbit` class fields yet, that's why `Animal` fields are used.
 
-This subtle difference between fields and methods is specific to JavaScript
+This subtle difference between fields and methods is specific to JavaScript.
 
 Luckily, this behavior only reveals itself if an overridden field is used in the parent constructor. Then it may be difficult to understand what's going on, so we're explaining it here.
 
 If it becomes a problem, one can fix it by using methods or getters/setters instead of fields.
-
 
 ## Super: internals, [[HomeObject]]
 

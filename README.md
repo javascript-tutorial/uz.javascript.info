@@ -1,8 +1,12 @@
 # O'zbek tilida zamonaviy JavaScript darsligi
 ## Salom!
 
+<<<<<<< HEAD
 Ushbu darslik ingliz tilidan tarjima qilinmoqda. Darslinki ingliz tili vesriyasi <https://javascript.info>-da joylashgan.
 Tarjimamizda xatolar mavjud bo'lishi mumkin, shunda ularni aniqlasangiz ushbu repozitoriyning Issues[https://github.com/javascript-tutorial/uz.javascript.info/issues] bo'limida bizga murojaat qilishingizni so'raymiz. 
+=======
+This repository hosts the English content of the Modern JavaScript Tutorial, published at [https://javascript.info](https://javascript.info).
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ## Tarjimalar
 
@@ -15,17 +19,29 @@ Bizning jamoamiz boshqa odamlar bilan hamkorlikda ishlashni xohlaydi. Shuning uc
 
 Darslikda biror narsa noto'g'rimi? Yoki kerakli mavzu yo'qmi? Buni bizga tushuntirib, Pull Request (PR) orqali o'z murojaatingizni qoldiring.
 
+<<<<<<< HEAD
 **Tarjimani siz har bir matn mutaxarririda osonligicha yozishingiz mumkin** Darslikni matni oson va qulay Markdown tilida yozilgan. Agar siz darslikni loyihasini veb-sahifa tarzida ko'rmoqchi bo'lsangiz, unda siz mahalliy server tashkil etishingiz kerak. Shu mavzu haqida batafsil ma'lumot olish uchun quyidagi maqolaga o'ting <https://github.com/javascript-tutorial/server>.  
 
 Tarjima ishtirokchilari ro'yxati <https://javascript.info/about#contributors>-da mavjud.
+=======
+Something's wrong? A topic is missing? Explain it to people, add it as PR 👏
+
+**You can edit the text in any editor.** The tutorial uses an enhanced "markdown" format, easy to grasp. And if you want to see how it looks on-site, there's a server to run the tutorial locally at <https://github.com/javascript-tutorial/server>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ## Loyihaning tuzilishi
 
 Har bir bob, maqola yoki mashq o'z papkasiga ega.
 
+<<<<<<< HEAD
 Papka `N-url` kabi nomlanadi, bu yerda `N` - saralash maqsadlari uchun raqamlar, `url` esa materiallarni URL qismlari.
 
 Materialning turi papka ichidagi fayl bilan belgilanadi:
+=======
+Every chapter, article, or task has its folder.
+
+The folder is named like `N-url`, where `N` is a number for the sorting purposes and `URL` is the URL part with the title of the material.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
   - `index.md` bobni belgilash uchun
   - `article.md` maqolani belgilash uchun

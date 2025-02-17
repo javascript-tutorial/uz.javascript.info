@@ -178,8 +178,12 @@ Such comments allow us to understand the purpose of the function and use it the 
 
 By the way, many editors like [WebStorm](https://www.jetbrains.com/webstorm/) can understand them as well and use them to provide autocomplete and some automatic code-checking.
 
+<<<<<<< HEAD
 Also, there are tools like [JSDoc 3](https://github.com/jsdoc3/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <http://usejsdoc.org/>.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Nima uchun vazifa shu tarzda hal qilinadi?
 : Yozilgan kod muhim. Ammo nima yozilganini tushunish uchun *yozilmagan* narsalar yanada muhimroq bo'lishi mumkin. Nima uchun vazifa aynan shu tarzda hal qilinadi? Kod hech qanday javob bermaydi.

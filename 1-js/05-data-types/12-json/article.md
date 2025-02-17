@@ -31,7 +31,11 @@ Yaxshiyamki, bularning barchasini hal qilish uchun kod yozishning hojati yo'q. V
 
 ## JSON.stringify
 
+<<<<<<< HEAD
 [JSON](http://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) qiymatlar va moslamalarni aks ettirish uchun umumiy formatdir. U [RFC 4627](http://tools.ietf.org/html/rfc4627) standartidagi kabi tavsiflanadi. Dastlab u JavaScript uchun yaratilgan, ammo boshqa ko'plab tillarda ham uni boshqarish uchun kutubxonalar mavjud. Mijoz JavaScript-ni ishlatganda va server Ruby/PHP/Java/nima bo'lganda ham ma'lumotlar almashinuvi uchun JSON-dan foydalanish oson.
+=======
+The [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation) is a general format to represent values and objects. It is described as in [RFC 4627](https://tools.ietf.org/html/rfc4627) standard. Initially it was made for JavaScript, but many other languages have libraries to handle it as well.  So it's easy to use JSON for data exchange when the client uses JavaScript and the server is written on Ruby/PHP/Java/Whatever.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 JavaScript quyidagi usullarni taqdim etadi:
 
@@ -45,7 +49,7 @@ let student = {
   age: 30,
   isAdmin: false,
   courses: ['html', 'css', 'js'],
-  wife: null
+  spouse: null
 };
 
 *!*
@@ -62,7 +66,7 @@ alert(json);
   "age": 30,
   "isAdmin": false,
   "courses": ["html", "css", "js"],
-  "wife": null
+  "spouse": null
 }
 */
 */!*
@@ -463,7 +467,7 @@ JSON-matnni dekodlash uchun bizga [JSON.parse](mdn:js/JSON/parse) nomli boshqa u
 
 Sintaksis:
 ```js
-let value = JSON.parse(str, [reviver]);
+let value = JSON.parse(str[, reviver]);
 ```
 
 str
@@ -513,7 +517,11 @@ let json = `{
 
 Bundan tashqari, JSON izohlarni qo'llab-quvvatlamaydi. JSON-ga izoh qo'shish uni bekor qiladi.
 
+<<<<<<< HEAD
 [JSON5](http://json5.org/) nomli yana bir format mavjud , bu qoshtirnoqsiz kalitlarga, izohlarga va hokazolarga imkon beradi, ammo bu tilning o'ziga xos xususiyatlarida emas, balki mustaqil kutubxona.
+=======
+There's another format named [JSON5](https://json5.org/), which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Oddiy JSON - bu ishlab chiquvchilar dangasa bo'lgani uchun emas, balki tahlil algoritmini oson, ishonchli va juda tez amalga oshirishga imkon berish uchun qat'iydir.
 

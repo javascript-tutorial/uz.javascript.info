@@ -872,7 +872,11 @@ Masalan:
 
 `window.onerror` global ishlovchisining roli odatda skriptni bajarilishini tiklashdan iborat bo'ladi - bu dasturlashda xatolik yuz berganda emas, balki xato xabarini ishlab chiquvchilarga yuborishdir.
 
+<<<<<<< HEAD
 Bunday holatlarda xatolarni qayd qilishni ta'minlaydigan veb-xizmatlar ham mavjud, masalan, <https://errorception.com> yoki <http://www.muscula.com>.
+=======
+There are also web-services that provide error-logging for such cases, like <https://errorception.com> or <https://www.muscula.com>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Ular shunday ishlaydi:
 

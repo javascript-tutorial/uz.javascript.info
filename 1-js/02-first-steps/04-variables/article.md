@@ -28,7 +28,11 @@ Endi `=` tayinlash operatori yordamida unga ba'zi ma'lumotlarni kiritishimiz mum
 let message;
 
 *!*
+<<<<<<< HEAD
 message = 'Hello'; // matni saqlash
+=======
+message = 'Hello'; // store the string 'Hello' in the variable named message
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 */!*
 ```
 
@@ -67,8 +71,12 @@ let age = 25;
 let message = 'Hello';
 ```
 
+<<<<<<< HEAD
 Ba'zi odamlar ushbu ko'p satrli uslubda bir nechta o'zgaruvchani e'lon qiladilar:
 
+=======
+Some people also define multiple variables in this multiline style:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js no-beautify
 let user = 'John',
@@ -93,9 +101,15 @@ Eski skriptlarda siz yana bitta kalit so'zni uchratishingiz mumkin: `let` o'rnig
 *!*var*/!* message = 'Hello';
 ```
 
+<<<<<<< HEAD
 `Var` kalit so'zi *deyarli* `let` bilan bir xil. Shuningdek, u o'zgaruvchani e'lon qiladi, ammo biroz boshqacha, "eski uslub" da.
 
 `let` va `var` o'rtasida ozgina farqlar mavjud, ammo ular biz uchun hali muhim emas. Biz ularni <info:var> bobda batafsil ko'rib chiqamiz
+=======
+The `var` keyword is *almost* the same as `let`. It also declares a variable but in a slightly different, "old-school" way.
+
+There are subtle differences between `let` and `var`, but they do not matter to us yet. We'll cover them in detail in the chapter <info:var>.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ````
 
 ## Haqiqiy hayotdagi o'xshashlik
@@ -104,12 +118,21 @@ Agar biz uni ma'lumotlar uchun "quti" deb tasavvur qilsak, "o'zgaruvchan" tushun
 
 Misol uchun, o'zgaruvchan `message` `"message"` etiketli `"Salom!"` qiymati bilan quti sifatida tasavvur qilinishi mumkin:
 
+<<<<<<< HEAD
+=======
+For instance, the variable `message` can be imagined as a box labelled `"message"` with the value `"Hello!"` in it:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ![](variable.svg)
 
 Biz qutiga har qanday qiymatini qo'yish mumkin.
 
+<<<<<<< HEAD
 Uni istagancha o'zgartirishimiz ham mumkin:
+=======
+We can also change it as many times as we want:
+
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```js run
 let message;
 
@@ -160,12 +183,20 @@ So, we should declare a variable once and then refer to it without `let`.
 ````
 
 ```smart header="Functional languages"
+<<<<<<< HEAD
 It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+It's interesting to note that there exist so-called [pure functional](https://en.wikipedia.org/wiki/Purely_functional_programming) programming languages, such as [Haskell](https://en.wikipedia.org/wiki/Haskell), that forbid changing variable values.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Bunday tillarda qiymat "qutiga" saqlangandan so'ng, u abadiy mavjud. Agar biz boshqa narsalarni saqlashimiz kerak bo'lsa, til bizni yangi quti yaratishga majbur qiladi (yangi o'zgaruvchini e'lon qiling). Biz eskisini qayta ishlata ololmaymiz.
 
+<<<<<<< HEAD
 Bir qarashda biroz g'alati tuyulishi mumkin bo'lsa ham, bu tillar jiddiy rivojlanishga qodir. Bundan tashqari, bu cheklash ma'lum foyda keltiradigan parallel hisoblash kabi sohalar mavjud. Bunday tilni o'rganish (yaqinda siz undan foydalanishni rejalashtirmagan bo'lsangiz ham) aqlni kengaytirish uchun tavsiya etiladi.
+=======
+Though it may seem a little odd at first sight, these languages are quite capable of serious development. More than that, there are areas like parallel computations where this limitation confers certain benefits.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 ## O'zgaruvchani nomlash
@@ -204,8 +235,13 @@ let 1a; // raqam bilan boshlanish mumkin emas
 let my-name; // defisni '-' nomlashda ishlatish mumkin emas
 ```
 
+<<<<<<< HEAD
 ```smart header="Registr muhim"
 `apple` va` AppLE` nomli o'zgaruvchanlar ikki xil o'zgaruvchandir.
+=======
+```smart header="Case matters"
+Variables named `apple` and `APPLE` are two different variables.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```
 
 <<<<<<< HEAD
@@ -213,8 +249,12 @@ let my-name; // defisni '-' nomlashda ishlatish mumkin emas
 Bu kabi har qanday tilni, shu jumladan kirill harflarini yoki hatto ierogliflarni ishlatish mumkin:
 =======
 ````smart header="Non-Latin letters are allowed, but not recommended"
+<<<<<<< HEAD
 It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+It is possible to use any language, including Cyrillic letters, Chinese logograms and so on, like this:
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ```js
 let имя = '...';
@@ -222,10 +262,14 @@ let 我 = '...';
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Texnik jihatdan, bu erda hech qanday xato yo'q, bunday nomlarga ruxsat berilgan, ammo o'zgaruvchan nomlarda ingliz tilidan foydalanish bo'yicha xalqaro an'ana mavjud. Kichik skript yozayotgan bo'lsak ham, uni uzoq umr kutishi mumkin. Boshqa mamlakatlardan kelgan odamlar uni o'qishlari kerak bo'lishi mumkin.
 =======
 Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it sometime.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ````
 
 ````warn header="Himoyalangan ismlar"
@@ -284,12 +328,20 @@ const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // xato, konstantani qayta tayinlab bo'lmaydi!
 ```
 
+<<<<<<< HEAD
 Agar dasturchi o'zgaruvchining hech qachon o'zgarmasligiga ishonch hosil qilsa, bu haqiqatni har kimga kafolatlash va aniq etkazish uchun uni `const` bilan e'lon qilishlari mumkin.
 
+=======
+When a programmer is sure that a variable will never change, they can declare it with `const` to guarantee and communicate that fact to everyone.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ### Tepa registr konstantalar
 
+<<<<<<< HEAD
 Amalga oshirilishidan oldin eslab qolishi qiyin bo'lgan qiymatlar uchun konstantani taxallus sifatida ishlatish amaliyoti keng tarqalgan.
+=======
+There is a widespread practice to use constants as aliases for difficult-to-remember values that are known before execution.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Bunday doimiylar tepa registr va pastki chiziqlar yordamida nomlanadi.
 
@@ -318,16 +370,29 @@ Foydalar:
 
 Qachon biz konstantalarga tepa registrdan foydalanishimiz kerak va uni qachon normal nomlashimiz kerak? Keling, buni aniq bilib olamiz.
 
+<<<<<<< HEAD
 "Konstanta" shunchaki o'zgaruvchanning qiymati hech qachon o'zgarmasligini anglatadi. Ammo bajarilishidan oldin ma'lum bo'lgan konstantalar mavjud (masalan, qizil uchun o'n oltinchi qiymat) va bajarilish vaqtida *hisoblab chiqilgan*, lekin dastlabki tayinlangandan keyin o'zgarmaydigan konstantalar mavjud.
 
 Misol uchun:
+=======
+Being a "constant" just means that a variable's value never changes. But some constants are known before execution (like a hexadecimal value for red) and some constants are *calculated* in run-time, during the execution, but do not change after their initial assignment.
+
+For instance:
+
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 ```js
 const pageLoadTime = /* yuklash uchun veb-sahifa tomonidan olingan vaqt */;
 ```
 
+<<<<<<< HEAD
 `pageLoadTime` o'zgaruvchanning qiymati sahifa yuklanishidan oldin ma'lum emas, shuning uchun u odatdagidek nomlanadi. Ammo bu hali ham konstanta, chunki tayinlanganidan keyin u o'zgarmaydi.
 
 Boshqacha qilib aytganda, tepa registr bilan nomlangan konstantalar faqat "qattiq kodlangan" qiymatlar uchun taxallus sifatida ishlatiladi.
+=======
+The value of `pageLoadTime` is not known before the page load, so it's named normally. But it's still a constant because it doesn't change after the assignment.
+
+In other words, capital-named constants are only used as aliases for "hard-coded" values.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 ## O'zgaruvchanlarni to'g'ri nomlang
 
@@ -339,18 +404,31 @@ O'zgaruvchanning ismi toza, aniq ma'noga ega, saqlanadigan ma'lumotlarni tasvirl
 A variable name should have a clean, obvious meaning, describing the data that it stores.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 O'zgaruvchanning nomlash dasturlashning eng muhim va murakkab ko'nikmalaridan biridir. O'zgaruvchan nomlarga qarab, tajribali dasturchi yoki boshlang'ich tomonidan kod yozilganligini aniqlashi mumkin.
 
 Haqiqiy loyihada ko'p vaqt noldan butunlay alohida narsa yozishdan ko'ra, mavjud kod bazasini o'zgartirish va kengaytirishga sarflanadi. Biroz vaqtdan so'ng, ba'zi bir kodlarga qaytsak, yaxshi belgilangan ma'lumotlarni topish ancha osonroq. Yoki, boshqacha qilib aytganda, o'zgaruvchanlar yaxshi nomlarga ega bo'lganda.
+=======
+Variable naming is one of the most important and complex skills in programming. A glance at variable names can reveal which code was written by a beginner versus an experienced developer.
+
+In a real project, most of the time is spent modifying and extending an existing code base rather than writing something completely separate from scratch. When we return to some code after doing something else for a while, it's much easier to find information that is well-labelled. Or, in other words, when the variables have good names.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Iltimos, o'zgaruvchani e'lon qilishdan oldin uning to'g'ri nomi haqida o'ylab ko'ring. Shunday qiling va sizga mukofot beriladi.
 
 Ba'zi amal qilish kerak bolgan qoidalar:
 
+<<<<<<< HEAD
 - `userName` yoki `shoppingCart` kabi odamlar tomonidan o'qiladigan nomlardan foydalaning.
 - `a`, `b`, `c` kabi qisqartmalar yoki qisqa nomlardan uzoq turing, agar chindan ham nima qilayotganingizni bilmasangiz.
 - Nomlarni maksimal darajada tavsiflovchi va ixcham qiling. Yomon nomlarga misollar `ma'lumotlar` va `qiymat`. Bunday nomlar hech narsa bildirmaydi. Agar kodning konteksti o'zgaruvchanning qaysi ma'lumotlarga yoki qiymatga murojaat qilayotganini juda aniq ko'rsatadigan bo'lsa, ulardan foydalanish yaxshi bo'ladi.
 - Jamoangiz ichidagi va o'zingizning fikringizdagi shartlar to'g'risida kelishib oling. Agar saytga tashrif buyuruvchi "user" deb nomlangan bo'lsa, biz `currentVisitor` yoki `newManInTown` o'rniga `currentUser` yoki `newUser` deb nomlashimiz kerak.
+=======
+- Use human-readable names like `userName` or `shoppingCart`.
+- Stay away from abbreviations or short names like `a`, `b`, and `c`, unless you know what you're doing.
+- Make names maximally descriptive and concise. Examples of bad names are `data` and `value`. Such names say nothing. It's only okay to use them if the context of the code makes it exceptionally obvious which data or value the variable is referencing.
+- Agree on terms within your team and in your mind. If a site visitor is called a "user" then we should name related variables `currentUser` or `newUser` instead of `currentVisitor` or `newManInTown`.
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 Oson eshitiladimi? Haqiqatan ham shunday, ammo amalda tavsiflovchi va ixcham o'zgaruvchan nomlarni yaratish unday oson emas. Olg'a.
 

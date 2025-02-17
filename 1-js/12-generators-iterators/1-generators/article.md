@@ -629,7 +629,33 @@ try {
 
 Agar biz u yerda xatoga yo'l qo'ymasak, u odatdagidek, tashqi chaqiruv kodiga tushadi (agar mavjud bo'lsa) va agar tutilmasa, skriptni o'ldiradi.
 
+<<<<<<< HEAD
 ## Xulosa
+=======
+## generator.return
+
+`generator.return(value)` finishes the generator execution and return the given `value`.
+
+```js
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const g = gen();
+
+g.next();        // { value: 1, done: false }
+g.return('foo'); // { value: "foo", done: true }
+g.next();        // { value: undefined, done: true }
+```
+
+If we again use `generator.return()` in a completed generator, it will return that value again ([MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator/return)).
+
+Often we don't use it, as most of time we want to get all returning values, but it can be useful when we want to stop generator in a specific condition.
+
+## Summary
+>>>>>>> 1dce5b72b16288dad31b7b3febed4f38b7a5cd8a
 
 <<<<<<< HEAD
 - Generatorlar generator funktsiyalari tomonidan yaratiladi `function*(…) {…}`.

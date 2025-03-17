@@ -28,6 +28,10 @@ E'tibor bering, `63.5` hech qanday aniq yo'qotishlarga ega emas. Buning sababi, 
 
 
 ```js run
+<<<<<<< HEAD
 alert( Math.round(6.35 * 10) / 10); // 6.35 -> 63.5 -> 64(yaxlitlangan) -> 6.4
+=======
+alert( Math.round(6.35 * 10) / 10 ); // 6.35 -> 63.5 -> 64(rounded) -> 6.4
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 ```
 

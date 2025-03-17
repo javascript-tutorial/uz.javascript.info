@@ -23,7 +23,7 @@ Ko'pgina IDElar pullik, ammo bepul sinov muddati bor. Ularning narxi malakali da
 ## Engil muharrirlar
 =======
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
-- [WebStorm](http://www.jetbrains.com/webstorm/) (cross-platform, paid).
+- [WebStorm](https://www.jetbrains.com/webstorm/) (cross-platform, paid).
 
 For Windows, there's also "Visual Studio", not to be confused with "Visual Studio Code". "Visual Studio" is a paid and mighty Windows-only editor, well-suited for the .NET platform. It's also good at JavaScript. There's also a free version [Visual Studio Community](https://www.visualstudio.com/vs/community/).
 
@@ -40,6 +40,7 @@ Amalda yengil muharrirlarda juda ko'p plaginlar bo'lishi mumkin, shu jumladan di
 
 Quyidagi variantlar sizning e'tiboringizga loyiqdir:
 
+<<<<<<< HEAD
 - [Atom](https://atom.io/) (o'zaro faoliyatli platforma, bepul).
 - [Sublime Text](http://www.sublimetext.com) (o'zaro faoliyatli platforma, shartli ravishda bepul).
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, bepul).
@@ -57,8 +58,13 @@ Muharriri tanlash, boshqa har qanday vositasi kabi, individual va loyihalar bog'
 - [Atom](https://atom.io/) (cross-platform, free).
 - [Visual Studio Code](https://code.visualstudio.com/) (cross-platform, free).
 - [Sublime Text](http://www.sublimetext.com) (cross-platform, shareware).
+=======
+There are many options, for instance:
+
+- [Sublime Text](https://www.sublimetext.com/) (cross-platform, shareware).
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 - [Notepad++](https://notepad-plus-plus.org/) (Windows, free).
-- [Vim](http://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
+- [Vim](https://www.vim.org/) and [Emacs](https://www.gnu.org/software/emacs/) are also cool if you know how to use them.
 
 ## Let's not argue
 
@@ -67,4 +73,12 @@ The editors in the lists above are those that either I or my friends whom I cons
 There are other great editors in our big world. Please choose the one you like the most.
 
 The choice of an editor, like any other tool, is individual and depends on your projects, habits, and personal preferences.
+<<<<<<< HEAD
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/01-getting-started/3-code-editors/article.md
+=======
+
+The author's personal opinion:
+
+- I'd use [Visual Studio Code](https://code.visualstudio.com/) if I develop mostly frontend.
+- Otherwise, if it's mostly another language/platform and partially frontend, then consider other editors, such as XCode (Mac), Visual Studio (Windows) or Jetbrains family (Webstorm, PHPStorm, RubyMine etc, depending on the language).
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6

@@ -140,8 +140,12 @@ Here's the diagram (see the right part):
 
 That's because methods `sayHi` and `sayBye` were initially created in `sayHiMixin`. So even though they got copied, their `[[HomeObject]]` internal property references `sayHiMixin`, as shown in the picture above.
 
+<<<<<<< HEAD
 As `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`, that means it searches `sayHiMixin.[[Prototype]]`, not `User.[[Prototype]]`.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+As `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`, that means it searches `sayHiMixin.[[Prototype]]`.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 ## EventMixin
 

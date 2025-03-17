@@ -15,7 +15,7 @@ Bundan tashqari, qiymatni kutilgan turga aniq aylantirish kerak bo'lgan holatlar
 Ushbu bobda biz ob'ektlarni qamrab olmaymiz. Buning o'rniga, avvalo ibtidoiylarni o'rganamiz. Keyinchalik, ob'ektlar haqida bilib olganimizdan so'ng, ob'ekt konvertatsiyasi <info:object-toprimitive> bobida qanday ishlashini ko'ramiz.
 =======
 ```smart header="Not talking about objects yet"
-In this chapter, we won't cover objects. For now we'll just be talking about primitives.
+In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
 
 Later, after we learn about objects, in the chapter <info:object-toprimitive> we'll see how objects fit in.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/07-type-conversions/article.md
@@ -44,7 +44,11 @@ Matn konvertatsiyasi asosan aniq. `false` `"false"` ga, `null` `"null"` ga va ho
 
 ## Numeric Conversion
 
+<<<<<<< HEAD
 Raqamli konvertatsiya matematik funktsiyalar va ifodalarda avtomatik ravishda sodir bo'ladi.
+=======
+Numeric conversion in mathematical functions and expressions happens automatically.
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Masalan, `/` bo'linmasi raqam bo'lmagan turlarga nisbatan qo'llanilganda:
 
@@ -79,8 +83,13 @@ Raqamli konvertatsiya qilish qoidalari:
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
+<<<<<<< HEAD
 |<code>true&nbsp;va&nbsp;false</code> | `1` va `0` |
 | `string` | Boshidan va oxiridan bo'sh joylar olib tashlanadi. Agar qolgan matn bo'sh bo'lsa, natijada `0` bo'ladi. Aks holda, raqam satrdan "o'qiladi". Xato `NaN` ni beradi. |
+=======
+|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
+| `string` | Whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 Examples:
 
@@ -166,7 +175,11 @@ Konvertatsiya quyidagi qoidalarga amal qiladi:
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
+<<<<<<< HEAD
 | `string` | Matn "boricha" o'qiladi, ikki tomondan bo'sh joylar e'tiborga olinmaydi. Bo'sh satr `0` ga aylanadi. Xato `NaN` ni chiqazadi. |
+=======
+| `string` | The string is read "as is", whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+>>>>>>> 3d7abb9cc8fa553963025547717f06f126c449b6
 
 <<<<<<< HEAD:1-js/02-first-steps/06-type-conversions/article.md
 **`ToBoolean`** -- Mantiqiy ma'lumot turi operatsiyalarda uchraydi. "Boolean (value)" bilan bajarilishi mumkin.

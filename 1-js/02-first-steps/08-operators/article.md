@@ -65,8 +65,9 @@ The result of `a % b` is the [remainder](https://en.wikipedia.org/wiki/Remainder
 For instance:
 
 ```js run
-alert( 5 % 2 ); // 1, a remainder of 5 divided by 2
-alert( 8 % 3 ); // 2, a remainder of 8 divided by 3
+alert( 5 % 2 ); // 1, the remainder of 5 divided by 2
+alert( 8 % 3 ); // 2, the remainder of 8 divided by 3
+alert( 8 % 4 ); // 0, the remainder of 8 divided by 4
 ```
 
 ### Exponentiation **
@@ -83,7 +84,7 @@ alert( 2 ** 3 ); // 2³ = 8
 alert( 2 ** 4 ); // 2⁴ = 16
 ```
 
-Just like in maths, the exponentiation operator is defined for non-integer numbers as well. 
+Just like in maths, the exponentiation operator is defined for non-integer numbers as well.
 
 For example, a square root is an exponentiation by ½:
 
@@ -95,8 +96,12 @@ alert( 8 ** (1/3) ); // 2 (power of 1/3 is the same as a cubic root)
 
 ## String concatenation with binary +
 
+<<<<<<< HEAD
 Let's meet features of JavaScript operators that are beyond school arithmetics.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/08-operators/article.md
+=======
+Let's meet the features of JavaScript operators that are beyond school arithmetics.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Odatda `+` qo'shuv operatori raqamlarni yig'adi.
 
@@ -244,6 +249,7 @@ Here's an extract from the [precedence table](https://developer.mozilla.org/en-U
 | Ustunlik | Ism | Belgi |
 |------------|------|------|
 | ... | ... | ... |
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/07-operators/article.md
 | 16 | unar qo'shilish | `+` |
 | 16 | unar ayirish | `-` |
@@ -270,10 +276,28 @@ Ko'rib turganimizdek, "unar qo'shilish" ning ustuvorligi `16`, bu (binar qo'shil
 =======
 As we can see, the "unary plus" has a priority of `17` which is higher than the `13` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/08-operators/article.md
+=======
+| 14 | unary plus | `+` |
+| 14 | unary negation | `-` |
+| 13 | exponentiation | `**` |
+| 12 | multiplication | `*` |
+| 12 | division | `/` |
+| 11 | addition | `+` |
+| 11 | subtraction | `-` |
+| ... | ... | ... |
+| 2 | assignment | `=` |
+| ... | ... | ... |
+
+As we can see, the "unary plus" has a priority of `14` which is higher than the `11` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ## Tayinlash operatori
 
+<<<<<<< HEAD
 Tenglik belgisi `=` ham operator ekanligini ta'kidlaymiz. U ustunlik jadvalida juda past ustuvorlik bilan ko'rsatilgan `3`.
+=======
+Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `2`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Shuning uchun, biz o'zgaruvchini tayinlaganimizda, masalan, `x = 2 * 2 + 1`, avval hisob-kitoblar amalga oshiriladi va keyin natijani `x` da saqlagan holda `=` baholanadi.
 
@@ -426,10 +450,14 @@ Such operators have the same precedence as a normal assignment, so they run afte
 ```js run
 let n = 2;
 
-n *= 3 + 5;
+n *= 3 + 5; // right part evaluated first, same as n *= 8
 
+<<<<<<< HEAD
 alert( n ); // 16  (right part evaluated first, same as n *= 8)
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/08-operators/article.md
+=======
+alert( n ); // 16
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 ```
 
 ## Kattalashtirish/Kamaytirish
@@ -570,6 +598,7 @@ Operatorlar ro'yxati:
 - RIGHT SHIFT - O'NGGA SILJITISH ( `>>` )
 - ZERO-FILL RIGHT SHIFT - NOLGA TO'LDIRISH O'NGGA SILJITISH ( `>>>` )
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/07-operators/article.md
 Ushbu operatorlarni juda kam ishlatishadi. Ularni tushunish uchun biz past darajadagi raqamlarni ko'rib chiqishimiz kerak va buni hozircha bajarish maqbul bo'lmaydi, ayniqsa, ular bizga yaqin orada kerak bo'lmaydi. Agar sizga qiziq bo'lsa, MDN-da [Bit Operatorlar] (https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators) maqolasini o'qishingiz mumkin. Haqiqiy ehtiyoj paydo bo'lganda buni qilish yanada amaliyroq bo'ladi.
 
@@ -609,6 +638,9 @@ alert( n ); // 16  (n * = 8 bilan bir xil, avval o'ng qismi baholandi)
 =======
 These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Bitwise) chapter on MDN when a need arises.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/08-operators/article.md
+=======
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) chapter on MDN when a need arises.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ## Vergul
 

@@ -74,7 +74,11 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ```
 
+<<<<<<< HEAD
 Bu yerda `(*)` satri `animal` `rabbit` ning prototipi sifatida o'rnatadi.
+=======
+Here the line `(*)` sets `animal` to be the prototype of `rabbit`.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Keyin, `alert` `rabbit.eats` `(**)` xususiyatini o'qishga harakat qiladi, u `rabbit` da mavjud emas, shuning uchun JavaScript `[[Prototype]]` ma'lumotnomasiga amal qiladi va uni `animal` da topadi (pastdan yuqoriga qarang):
 
@@ -160,9 +164,12 @@ There are only two limitations:
 Bundan tashqari, bu aniq bo'lishi mumkin, ammo baribir: bitta `[[Prototype]]` bo'lishi mumkin. Obyekt boshqa ikkitadan meros ololmaydi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## Yozishda prototipdan foydalanilmaydi
 =======
 
+=======
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 ```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
 It's a common mistake of novice developers not to know the difference between these two.
 
@@ -344,7 +351,7 @@ for(let prop in rabbit) alert(prop); // jumps, then eats
 */!*
 ```
 
-If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](mdn:js/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
 
 So we can filter out inherited properties (or do something else with them):
 

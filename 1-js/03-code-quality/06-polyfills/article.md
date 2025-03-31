@@ -5,13 +5,23 @@
 # Polyfills and transpilers
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 JavaScript tili doimiy ravishda rivojlanib boradi. Tilga oid yangi takliflar muntazam ravishda paydo bo'lib, ular tahlil qilinadi va agar munosib deb topilsa, <https://tc39.github.io/ecma262/> ro'yxatiga qo'shiladi va keyin [spetsifikatsiya](http://www.ecma-international.org/publications/standards/Ecma-262.htm) ga o'tiladi .
+=======
+The JavaScript language steadily evolves. New proposals to the language appear regularly, they are analyzed and, if considered worthy, are appended to the list at <https://tc39.github.io/ecma262/> and then progress to the [specification](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/).
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 JavaScript interpretatorini ortida turgan jamoalar avval nimani amalga oshirish kerakligi to'g'risida qaror qilishadi. Ular loyihadagi takliflarni amalga oshirishga qaror qilishlari va oldindan aytib o'tilgan narsalarni keyinga qoldirishlari mumkin, chunki ular unchalik qiziq emas yoki ularni bajarish qiyinroq bo'lsa.
 
+<<<<<<< HEAD
 Shunday qilib, interpretator uchun standartning faqat bir qismini amalga oshirish odatiy holdir.
 
 Til xususiyatlarini qo'llab-quvvatlashning hozirgi holatini ko'rish uchun yaxshi sahifa <https://kangax.github.io/compat-table/es6/> (bu juda katta, biz hali o'rganadigan ko'p narsalarimiz bor).
+=======
+So it's quite common for an engine to implement only part of the standard.
+
+A good page to see the current state of support for language features is <https://compat-table.github.io/compat-table/es6/> (it's big, we have a lot to study yet).
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 As programmers, we'd like to use most recent features. The more good stuff - the better!
 
@@ -53,7 +63,7 @@ Here, in this chapter, our purpose is to get the gist of how they work, and thei
 
 ## Transpilers
 
-A [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) is a special piece of software that can parse ("read and understand") modern code, and rewrite it using older syntax constructs, so that the result would be the same.
+A [transpiler](https://en.wikipedia.org/wiki/Source-to-source_compiler) is a special piece of software that translates source code to another source code. It can parse ("read and understand") modern code and rewrite it using older syntax constructs, so that it'll also work in outdated engines.
 
 E.g. JavaScript before year 2020 didn't have the "nullish coalescing operator" `??`. So, if a visitor uses an outdated browser, it may fail to understand the code like `height = height ?? 100`.
 
@@ -72,8 +82,9 @@ Now the rewritten code is suitable for older JavaScript engines.
 Usually, a developer runs the transpiler on their own computer, and then deploys the transpiled code to the server.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
-Speaking of names, [Babel](https://babeljs.io) is one of the most prominent transpilers out there. 
+Speaking of names, [Babel](https://babeljs.io) is one of the most prominent transpilers out there.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 ````online
 Ko'pgina misollar joyida ishlaydi, masalan:
@@ -94,6 +105,9 @@ Oflayn versiyasini o'qiyotgan bo'sangiz, misollarni ishlatish mumkin emas. Ammo 
 E'tibor bering, ishlab chiqarishda biz Babel-da kodni eskirgan brauzerlarga mos ravishda tarjima qilishimiz mumkin, shuning uchun bunday cheklov bo'lmaydi, kod hamma joyda ishlaydi.
 =======
 Modern project build systems, such as [webpack](http://webpack.github.io/), provide means to run transpiler automatically on every code change, so it's very easy to integrate into development process.
+=======
+Modern project build systems, such as [webpack](https://webpack.js.org/), provide a means to run a transpiler automatically on every code change, so it's very easy to integrate into the development process.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ## Polyfills
 
@@ -120,23 +134,20 @@ if (!Math.trunc) { // if no such function
 }
 ```
 
-JavaScript is a highly dynamic language, scripts may add/modify any functions, even including built-in ones. 
+JavaScript is a highly dynamic language. Scripts may add/modify any function, even built-in ones.
 
-Two interesting libraries of polyfills are:
-- [core js](https://github.com/zloirock/core-js) that supports a lot, allows to include only needed features.
-- [polyfill.io](http://polyfill.io) service that provides a script with polyfills, depending on the features and user's browser.
-
+One interesting polyfill library is [core-js](https://github.com/zloirock/core-js), which supports a wide range of features and allows you to include only the ones you need.
 
 ## Summary
 
 In this chapter we'd like to motivate you to study modern and even "bleeding-edge" language features, even if they aren't yet well-supported by JavaScript engines.
 
-Just don't forget to use transpiler (if using modern syntax or operators) and polyfills (to add functions that may be missing). And they'll ensure that the code works.
+Just don't forget to use a transpiler (if using modern syntax or operators) and polyfills (to add functions that may be missing). They'll ensure that the code works.
 
-For example, later when you're familiar with JavaScript, you can setup a code build system based on [webpack](http://webpack.github.io/) with [babel-loader](https://github.com/babel/babel-loader) plugin.
+For example, later when you're familiar with JavaScript, you can setup a code build system based on [webpack](https://webpack.js.org/) with the [babel-loader](https://github.com/babel/babel-loader) plugin.
 
 Good resources that show the current state of support for various features:
-- <https://kangax.github.io/compat-table/es6/> - for pure JavaScript.
+- <https://compat-table.github.io/compat-table/es6/> - for pure JavaScript.
 - <https://caniuse.com/> - for browser-related functions.
 
 P.S. Google Chrome is usually the most up-to-date with language features, try it if a tutorial demo fails. Most tutorial demos work with any modern browser though.

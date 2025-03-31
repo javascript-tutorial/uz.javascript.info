@@ -1,5 +1,11 @@
+importance: 5
 
+<<<<<<< HEAD
 # If ning ichidagi funktsiya
+=======
+---
+# Function in if
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 <<<<<<< HEAD:1-js/06-advanced-functions/03-closure/3-function-in-if/task.md
 Kodga qarang. So'nggi satrdagi chaqiruv natijasi qanday bo'ladi?

@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 Xato yuz berdi, chunki `ask` obyektsiz `loginOk/loginFail` funktsiyalarini oladi.
+=======
+The error occurs because `askPassword` gets functions `loginOk/loginFail` without the object.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Ularni chaqirganda, ular tabiiy ravishda `this=undefined` deb taxmin qilishadi.
 

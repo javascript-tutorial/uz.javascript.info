@@ -40,24 +40,38 @@ Brauzerlar o'z JavaScript interpretatorlariga ega, ular gohida "JavaScript virtu
 Har bir intetptretatorni o'z nomi mavjud. Masalan:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- Chrome va Opera brauzerlarida qo'llanadi.
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- Firefox brauzerida.
 - ...net Explorer brauerning turli xil versiyalari uchun "Trident" va "Chakra", Microsoft Edge uchun "ChakraCore", Safari uchun "Nitro" va "SquirrelFish" va boshqalar kabi boshqa kod nomlari mavjud.
 =======
 - [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome and Opera.
+=======
+- [V8](https://en.wikipedia.org/wiki/V8_(JavaScript_engine)) -- in Chrome, Opera and Edge.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 - [SpiderMonkey](https://en.wikipedia.org/wiki/SpiderMonkey) -- in Firefox.
 - ...There are other codenames like "Chakra" for IE, "JavaScriptCore", "Nitro" and "SquirrelFish" for Safari, etc.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Yuqoridagi atamalarni eslab qolish yaxshi, chunki ular netdagi ishlab chiquvchilar maqolalarida qo'llaniladi. Biz ulardan ham foydalanamiz. Masalan, agar "X funktsiyasini V8 qo'llab-quvvatlasa", ehtimol u Chrome va Opera-da ishlaydi.
+=======
+The terms above are good to remember because they are used in developer articles on the internet. We'll use them too. For instance, if "a feature X is supported by V8", then it probably works in Chrome, Opera and Edge.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```smart header="Intetptretatorlar ishni qanday bajarishadi?"
 
 Intetptretatorlar murakkab. Ammo asoslari oson.
 
+<<<<<<< HEAD
 1. Intetptretator (agar u brauzer bo'lsa, avtomatik o'rnatilgan) skriptni o'qiydi ("tahlil qiladi").
 2. Keyin u skriptni mashina tiliga o'zgartiradi ("kompilyatsiya qiladi").
 3. Va keyin mashina kodi juda tez ishlaydi.
+=======
+1. The engine (embedded if it's a browser) reads ("parses") the script.
+2. Then it converts ("compiles") the script to machine code.
+3. And then the machine code runs, pretty fast.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 <<<<<<< HEAD
 Interpretatatsiya jarayonning har bir bosqichida optimallashtirishlarni qo'llaydi. U hattoki kompilyatsiya qilingan skriptni ishlayotganda kuzatib boradi, u orqali oqib o'tadigan ma'lumotlarni tahlil qiladi va shu bilimga asoslangan holda mashina kodiga optimallashtirishlarni qo'llaydi. Tugatgandan so'ng, skriptlar juda tez ishlaydi.
@@ -68,7 +82,11 @@ The engine applies optimizations at each step of the process. It even watches th
 
 ## Brauzerdagi JavaScript nimani bajara oladi?
 
+<<<<<<< HEAD
 Zamonaviy JavaScript - bu "xavfsiz" dasturlash tili. Bu xotira yoki protsessorga(CPU) past darajadagi kirishni ta'minlamaydi, chunki dastlab uni talab qilmaydigan brauzerlar uchun yaratilgan.
+=======
+Modern JavaScript is a "safe" programming language. It does not provide low-level access to memory or the CPU, because it was initially created for browsers which do not require it.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 JavaScript-ning imkoniyatlari u ishlayotgan muhitga juda bog'liq. Masalan, [Node.js](https://wikipedia.org/wiki/Node.js) JavaScript-ga o'zboshimchalik bilan fayllarni o'qish / yozish, tarmoq so'rovlarini bajarish va hk.
 
@@ -84,7 +102,11 @@ Masalan:
 
 ## JavaScript-da brauzerda nima qila olmaysiz?
 
+<<<<<<< HEAD
 JavaScript-ning brauzerdagi imkoniyatlari foydalanuvchi xavfsizligi uchun cheklangan. Maqsad yomon veb-sahifaning shaxsiy ma'lumotlarga kirishini yoki foydalanuvchi ma'lumotlariga zarar etkazishini oldini olishdir.
+=======
+JavaScript's abilities in the browser are limited to protect the user's safety. The aim is to prevent an evil webpage from accessing private information or harming the user's data.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Bunday cheklovlarga quyidagilar kiradi:
 
@@ -96,6 +118,7 @@ Bunday cheklovlarga quyidagilar kiradi:
 
     Zamonaviy brauzerlar unga fayllar bilan ishlashga imkon beradi, lekin kirish cheklangan va faqat foydalanuvchi brauzer oynasiga faylni "tushirish" yoki uni `<input>` yorlig'i orqali tanlash kabi ba'zi bir amallarni bajargan taqdirdagina taqdim etiladi.
 
+<<<<<<< HEAD
     Kamera / mikrofon va boshqa qurilmalar bilan o'zaro aloqa qilish usullari mavjud, ammo ular foydalanuvchidan aniq ruxsat talab qiladi. Shunday qilib, JavaScript-ni qo'llab-quvvatlaydigan sahifa veb-kamerani yashirincha yoqmasligi, atrofni kuzatishi va ma'lumotni[NSA](https://en.wikipedia.org/wiki/National_Security_Agency) ga yuborishi mumkin emas.
 - Turli xil yorliqlar / oynalar odatda bir-birlarini bilishmaydi. Ba'zan ular bilishadi, masalan, bitta oyna ikkinchisini ochish uchun JavaScript-ni ishlatganda. Ammo bu holatda ham bitta sahifadagi JavaScript-ni boshqa saytlarga kirish mumkin emas, agar ular turli saytlardan (boshqa domendan, protokoldan yoki portdan) bo'lsa.
 
@@ -112,20 +135,41 @@ Bunday cheklovlarga quyidagilar kiradi:
 ![](limitations.svg)
 
 Agar JavaScript brauzerdan tashqarida, masalan serverda ishlatilsa, bunday cheklovlar mavjud emas. Zamonaviy brauzerlar kengaytirilgan ruxsat so'rashi mumkin bo'lgan plagin / kengaytmalarga ham imkon beradi.
+=======
+    There are ways to interact with the camera/microphone and other devices, but they require a user's explicit permission. So a JavaScript-enabled page may not sneakily enable a web-camera, observe the surroundings and send the information to the [NSA](https://en.wikipedia.org/wiki/National_Security_Agency).
+- Different tabs/windows generally do not know about each other. Sometimes they do, for example when one window uses JavaScript to open the other one. But even in this case, JavaScript from one page may not access the other page if they come from different sites (from a different domain, protocol or port).
+
+    This is called the "Same Origin Policy". To work around that, *both pages* must agree for data exchange and must contain special JavaScript code that handles it. We'll cover that in the tutorial.
+
+    This limitation is, again, for the user's safety. A page from `http://anysite.com` which a user has opened must not be able to access another browser tab with the URL `http://gmail.com`, for example, and steal information from there.
+- JavaScript can easily communicate over the net to the server where the current page came from. But its ability to receive data from other sites/domains is crippled. Though possible, it requires explicit agreement (expressed in HTTP headers) from the remote side. Once again, that's a safety limitation.
+
+![](limitations.svg)
+
+Such limitations do not exist if JavaScript is used outside of the browser, for example on a server. Modern browsers also allow plugins/extensions which may ask for extended permissions.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ## JavaScript-ni qaysi xususiyatlari uni noyob qiladi?
 
 JavaScript hech bo'lmaganda *uchta* ajoyib xususiyatga ega:
 
+<<<<<<< HEAD
 ```solishtiring
 + HTML va CSS bilan to'liq integratsiyasi.
 + Oson ishlar osongina amalga oshiriladi.
 + Barcha asosiy brauzerlar tomonidan qo'llab-quvvatlanadi va ularda standart sifatida yoqilgan.
+=======
+```compare
++ Full integration with HTML/CSS.
++ Simple things are done simply.
++ Supported by all major browsers and enabled by default.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 ```
 JavaScript - bu uchta narsani birlashtirgan yagona brauzer texnologiyasidir.
 
 Bu JavaScript-ni noyob qiladi. Shuning uchun u brauzer feyslarini yaratishda eng keng tarqalgan vositadir.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Yangi texnologiyani o'rganishni rejalashtirayotib, uning istiqbollarini tekshirish ham muhimdir. Keling, zamonaviy tendentsiyalarga o'taylik.
 
@@ -133,6 +177,9 @@ Yangi texnologiyani o'rganishni rejalashtirayotib, uning istiqbollarini tekshiri
 =======
 That said, JavaScript also allows to create servers, mobile applications, etc.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+That said, JavaScript can be used to create servers, mobile applications, etc.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 JavaScript-ning sintaksisi hammaning ehtiyojlariga mos kelmaydi. Turli odamlar turli xususiyatlarni xohlashadi.
 
@@ -140,7 +187,11 @@ Bu kutilgan hodisa bo'lishi kerak edi, chunki loyihalar va talablar har bir kish
 
 Shunday qilib, yaqinda juda ko'p yangi tillar paydo bo'ldi va brauzer ularni ishlatishdan oldin JavaScript-ga aylantirib bajaradi.
 
+<<<<<<< HEAD
 Zamonaviy asboblar transpilatsiyani juda tez va shaffof bajaradi, aslida dasturchilar kodni bitta tilda yozganda, ular uni avtomatik tarzda boshqa tilga aylantirish imkonini beradi.
+=======
+So, recently a plethora of new languages appeared, which are *transpiled* (converted) to JavaScript before they run in the browser.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Bunday tillarning namunalari:
 
@@ -148,6 +199,7 @@ Bunday tillarning namunalari:
 - [TypeScript] (http://www.typescriptlang.org/) murakkab tizimlarni ishlab chiqish, soddalashtirish va qo'llab-quvvatlash uchun "strict data typing"ni qo'shishga qaratilgan. Microsoft tomonidan ishlab chiqilgan.
 - [Dart] (https://www.dartlang.org/) brauzer bo'lmagan muhitda (mobil ilovalar kabi) ishlaydigan o'z dvigateliga ega bo'lgan mustaqil til. Bu dastlab JavaScript uchun zaxira sifatida Google tomonidan taklif etildi, lekin hozirgi paytda, brauzerlar shu tilni ham JS-ga transpilatsiya bo'lishini talab qilishadi.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 Bundan ham ko'proq tillar mavjud. Albatta, biz bu tillardan birini ishlatsak ham, biz nima qilayotganimizni tushunish uchun JavaScript-ni bilishimiz kerak.
 
@@ -160,15 +212,20 @@ Bundan ham ko'proq tillar mavjud. Albatta, biz bu tillardan birini ishlatsak ham
 - [CoffeeScript](http://coffeescript.org/) is a "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
 - [TypeScript](http://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
 - [Flow](http://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+=======
+- [CoffeeScript](https://coffeescript.org/) is "syntactic sugar" for JavaScript. It introduces shorter syntax, allowing us to write clearer and more precise code. Usually, Ruby devs like it.
+- [TypeScript](https://www.typescriptlang.org/) is concentrated on adding "strict data typing" to simplify the development and support of complex systems. It is developed by Microsoft.
+- [Flow](https://flow.org/) also adds data typing, but in a different way. Developed by Facebook.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 - [Dart](https://www.dartlang.org/) is a standalone language that has its own engine that runs in non-browser environments (like mobile apps), but also can be transpiled to JavaScript. Developed by Google.
 - [Brython](https://brython.info/) is a Python transpiler to JavaScript that enables the writing of applications in pure Python without JavaScript.
 - [Kotlin](https://kotlinlang.org/docs/reference/js-overview.html) is a modern, concise and safe programming language that can target the browser or Node.
 
-There are more. Of course, even if we use one of transpiled languages, we should also know JavaScript to really understand what we're doing.
+There are more. Of course, even if we use one of these transpiled languages, we should also know JavaScript to really understand what we're doing.
 
 ## Summary
 
 - JavaScript was initially created as a browser-only language, but it is now used in many other environments as well.
-- Today, JavaScript has a unique position as the most widely-adopted browser language with full integration in HTML/CSS.
+- Today, JavaScript has a unique position as the most widely-adopted browser language, fully integrated with HTML/CSS.
 - There are many languages that get "transpiled" to JavaScript and provide certain features. It is recommended to take a look at them, at least briefly, after mastering JavaScript.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

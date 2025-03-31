@@ -63,7 +63,11 @@ Yechim vaqt murakkabligiga ega [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/
 The solution has a time complexity of [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). In other words, if we increase the array size 2 times, the algorithm will work 4 times longer.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Katta massivlar uchun (1000, 10000 va undan ortiq elementlar) bunday algoritmlar jiddiy sustkashlikka olib kelishi mumkin.
+=======
+For big arrays (1000, 10000 or more items) such algorithms can lead to serious sluggishness.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 # Tez yechim
 
@@ -95,4 +99,8 @@ alert( getMaxSubSum([-1, -2, -3]) ); // 0
 
 Algoritm uchun to'liq 1 massiv o'tishi kerak, shuning uchun vaqtning murakkabligi O (n) ga teng.
 
+<<<<<<< HEAD
 Algoritm haqida batafsil ma'lumotni bu erda topishingiz mumkin: [Maksimal submassiv muammosi](http://en.wikipedia.org/wiki/Maximum_subarray_problem). Agar bu hali ham aniq bo'lmasa, iltimos, yuqoridagi misollar bo'yicha algoritmni kuzating, qanday ishlashini ko'ring, bu har qanday so'zdan yaxshiroqdir.
+=======
+You can find more detailed information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9

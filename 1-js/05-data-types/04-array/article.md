@@ -114,6 +114,38 @@ let fruits = [
 "Osilgan vergul" uslubi elementlarni kiritishni/olib tashlashni osonlashtiradi, chunki barcha satrlar bir xil bo'ladi.
 ````
 
+## Get last elements with "at"
+
+[recent browser="new"]
+
+Let's say we want the last element of the array.
+
+Some programming languages allow the use of negative indexes for the same purpose, like `fruits[-1]`.
+
+Although, in JavaScript it won't work. The result will be `undefined`, because the index in square brackets is treated literally.
+
+We can explicitly calculate the last element index and then access it: `fruits[fruits.length - 1]`.
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+alert( fruits[fruits.length-1] ); // Plum
+```
+
+A bit cumbersome, isn't it? We need to write the variable name twice.
+
+Luckily, there's a shorter syntax: `fruits.at(-1)`:
+
+```js run
+let fruits = ["Apple", "Orange", "Plum"];
+
+// same as fruits[fruits.length-1]
+alert( fruits.at(-1) ); // Plum
+```
+
+In other words, `arr.at(i)`:
+- is exactly the same as `arr[i]`, if `i >= 0`.
+- for negative values of `i`, it steps back from the end of the array.
 
 ## Usullar pop/push, shift/unshift
 
@@ -152,13 +184,17 @@ Stek odatda kartalar to'plami sifatida tasvirlanadi: yuqoriga yangi kartalar qo'
 JavaScript-dagi massivlar navbat sifatida ham, stek sifatida ham ishlashi mumkin. Ular sizga elementlarni boshiga yoki oxiriga qo'shish/olib tashlash imkonini beradi.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Kompyuter fanida bunga imkon beradigan ma'lumotlar tuzilishi [deque](https://en.wikipedia.org/wiki/Double-ended_queue) deb nomlanadi.
 
 **Massiv oxiri bilan ishlaydigan usullar:**
 =======
 Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements both to/from the beginning or the end.
+=======
+Arrays in JavaScript can work both as a queue and as a stack. They allow you to add/remove elements, both to/from the beginning or the end.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
-In computer science the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
+In computer science, the data structure that allows this, is called [deque](https://en.wikipedia.org/wiki/Double-ended_queue).
 
 **Methods that work with the end of the array:**
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
@@ -173,6 +209,8 @@ In computer science the data structure that allows this, is called [deque](https
 
     alert( fruits ); // Olma, Apelsin
     ```
+
+    Both `fruits.pop()` and `fruits.at(-1)` return the last element of the array, but `fruits.pop()` also modifies the array by removing it.
 
 `push`
 : Elementni massivning oxiriga qo'shadi:
@@ -316,7 +354,11 @@ Nega massivning boshidan ko'ra uning oxiri bilan ishlash tezroq? Keling, ijro pa
 fruits.shift(); // boshidan 1 ta elementni oling
 ```
 
+<<<<<<< HEAD
 Elementni `0` raqami bilan olib tashlash yetarli emas. Boshqa elementlarning ham raqamlarini o'zgartirish kerak.
+=======
+It's not enough to take and remove the element with the index `0`. Other elements need to be renumbered as well.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 `shift` operatsiyasi uchta narsani bajarishi kerak:
 
@@ -441,11 +483,19 @@ Massiv yaratish uchun yana bitta sintaksis mavjud:
 let arr = *!*new Array*/!*("Olma", "Nok", "va hokazo");
 ```
 
+<<<<<<< HEAD
 U kamdan-kam qo'llaniladi, chunki to'rtburchaklar `[]` qisqaroq. Bundan tashqari, bu bilan juda ayyor xususiyati mavjud.
+=======
+It's rarely used, because square brackets `[]` are shorter. Also, there's a tricky feature with it.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 Agar `new Array` raqamli bitta argument bilan chaqirilsa, u *elementlarsiz, lekin berilgan uzunlikdagi* massivni yaratadi.
 
+<<<<<<< HEAD
 Keling, qanday qilib ayanchli xizmatni taqdim etishni ko'rib chiqaylik:
+=======
+Let's see how one can shoot themselves in the foot:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 ```js run
 let arr = new Array(2); // u [2] massiv yaratadimi?
@@ -479,10 +529,14 @@ let matrix = [
 ];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 alert( matrix[1][1] ); // markaziy element
 =======
 alert( matrix[1][1] ); // 5, the central element
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+alert( matrix[0][1] ); // 2, the second value of the first inner array
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 ```
 
 ## toString
@@ -532,7 +586,7 @@ Let's recall the rules:
 - If one of the arguments of `==` is an object, and the other one is a primitive, then the object gets converted to primitive, as explained in the chapter <info:object-toprimitive>.
 - ...With an exception of `null` and `undefined` that equal `==` each other and nothing else.
 
-The strict comparison `===` is even simpler, as it doesn't convert types. 
+The strict comparison `===` is even simpler, as it doesn't convert types.
 
 So, if we compare arrays with `==`, they are never the same, unless we compare two variables that reference exactly the same array.
 
@@ -552,7 +606,7 @@ alert( 0 == [] ); // true
 alert('0' == [] ); // false
 ```
 
-Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`. 
+Here, in both cases, we compare a primitive with an array object. So the array `[]` gets converted to primitive for the purpose of comparison and becomes an empty string `''`.
 
 Then the comparison process goes on with the primitives, as described in the chapter <info:type-conversions>:
 
@@ -572,6 +626,7 @@ That's simple: don't use the `==` operator. Instead, compare them item-by-item i
 
 Array - ro'yhatlangan ma'lumotlar elementlarini saqlash va boshqarish uchun mos bo'lgan maxsus ob'ekt turi.
 
+<<<<<<< HEAD
 - Deklaratsiya:
 
     ```js
@@ -583,6 +638,19 @@ Array - ro'yhatlangan ma'lumotlar elementlarini saqlash va boshqarish uchun mos 
     ```
 
     `new Arryay(raqam)` berilgan uzunlikdagi, ammo elementlarsiz massivni yaratadi.
+=======
+The declaration:
+
+```js
+// square brackets (usual)
+let arr = [item1, item2...];
+
+// new Array (exceptionally rare)
+let arr = new Array(item1, item2...);
+```
+
+The call to `new Array(number)` creates an array with the given length, but without elements.
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 <<<<<<< HEAD
 - `length` xususiyati - bu massiv uzunligi yoki aniqrog'i, uning oxirgi son ko'rsatkichi plyus bir. U massiv usullari bilan avtomatik ravishda o'rnatiladi.
@@ -592,7 +660,16 @@ Array - ro'yhatlangan ma'lumotlar elementlarini saqlash va boshqarish uchun mos 
 - If we shorten `length` manually, the array is truncated.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
+<<<<<<< HEAD
 Biz quyidagi amallar bilan massivni ishlatishimiz mumkin:
+=======
+Getting the elements:
+
+- we can get element by its index, like `arr[0]`
+- also we can use `at(i)` method that allows negative indexes. For negative values of `i`, it steps back from the end of the array. If `i >= 0`, it works same as `arr[i]`.
+
+We can use an array as a deque with the following operations:
+>>>>>>> 035c5267ba80fa7b55878f7213cbde449b4092d9
 
 <<<<<<< HEAD
 - `push(...ma'lumot)` oxiriga `ma'lumot` qo'shiladi.

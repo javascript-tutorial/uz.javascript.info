@@ -15,7 +15,7 @@ Bizning jamoamiz boshqa odamlar bilan hamkorlikda ishlashni xohlaydi. Shuning uc
 
 Darslikda biror narsa noto'g'rimi? Yoki kerakli mavzu yo'qmi? Buni bizga tushuntirib, Pull Request (PR) orqali o'z murojaatingizni qoldiring.
 
-**Tarjimani siz har bir matn mutaxarririda osonligicha yozishingiz mumkin** Darslikni matni oson va qulay Markdown tilida yozilgan. Agar siz darslikni loyihasini veb-sahifa tarzida ko'rmoqchi bo'lsangiz, unda siz mahalliy server tashkil etishingiz kerak. Shu mavzu haqida batafsil ma'lumot olish uchun quyidagi maqolaga o'ting <https://github.com/javascript-tutorial/server>.  
+**Tarjimani siz har bir matn muharririda osonligicha yozishingiz mumkin** Darslikni matni oson va qulay Markdown tilida yozilgan. Agar siz darslikni loyihasini veb-sahifa tarzida ko'rmoqchi bo'lsangiz, unda siz mahalliy server tashkil etishingiz kerak. Shu mavzu haqida batafsil ma'lumot olish uchun quyidagi maqolaga o'ting <https://github.com/javascript-tutorial/server>.  
 
 Tarjima ishtirokchilari ro'yxati <https://javascript.info/about#contributors>-da mavjud.
 

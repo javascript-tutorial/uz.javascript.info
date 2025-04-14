@@ -1,6 +1,7 @@
 
 # Belgilar turi
 
+<<<<<<< HEAD
 Spetsifikatsiya bo'yicha obyekt xususiyatining kalitlari matn turi yoki belgi turi bo'lishi mumkin. Raqamlar emas, mantiqiy emas, faqat matn yoki belgilar, bu ikki tur bo'lishi mumkin.
 
 <<<<<<< HEAD:1-js/04-object-basics/03-symbol/article.md
@@ -8,6 +9,18 @@ Hozirgacha biz faqat matnlarni ko'rib chiqamiz. Keling, belgilar bizga beradigan
 =======
 Till now we've been using only strings. Now let's see the benefits that symbols can give us.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+By specification, only two primitive types may serve as object property keys:
+
+- string type, or
+- symbol type.
+
+Otherwise, if one uses another type, such as number, it's autoconverted to string. So that `obj[1]` is the same as `obj["1"]`, and `obj[true]` is the same as `obj["true"]`.
+
+Until now we've been using only strings.
+
+Now let's explore symbols, see what they can do for us.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ## Belgilar
 
@@ -20,6 +33,7 @@ A "symbol" represents a unique identifier.
 Ushbu turdagi qiymatni `Symbol()` yordamida yaratish mumkin:
 
 ```js
+<<<<<<< HEAD
 // id bu yangi belgi
 let id = Symbol();
 ```
@@ -31,6 +45,12 @@ Shuningdek, biz belgiga tavsif bera olamiz (belgi nomi ham deyiladi), bu asosan 
 // id bu "id" tavsifiga ega bo'lgan belgidir
 =======
 Upon creation, we can give symbol a description (also called a symbol name), mostly useful for debugging purposes:
+=======
+let id = Symbol();
+```
+
+Upon creation, we can give symbols a description (also called a symbol name), mostly useful for debugging purposes:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 // id is a symbol with the description "id"
@@ -38,7 +58,11 @@ Upon creation, we can give symbol a description (also called a symbol name), mos
 let id = Symbol("id");
 ```
 
+<<<<<<< HEAD
 Belgilar noyob bo'lishi kafolatlanadi. Agar biz bir xil tavsifga ega bo'lgan ko'plab belgilarni yaratadigan bo'lsak ham, ular har xil qiymatlardir. Tavsif shunchaki hech narsaga ta'sir qilmaydigan yorliq.
+=======
+Symbols are guaranteed to be unique. Even if we create many symbols with exactly the same description, they are different values. The description is just a label that doesn't affect anything.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Masalan, mana bir xil tavsifga ega ikkita belgi -- ular teng emas:
 
@@ -53,8 +77,15 @@ alert(id1 == id2); // false
 
 Agar siz Ruby yoki boshqa biron bir "symbol" ga ega bo'lgan boshqa tilni bilsangiz, iltimos, adashmang. JavaScript-da belgilar boshqacha.
 
+<<<<<<< HEAD
 ````warn header="Belgilar avtomatik ravishda matnga aylantirilmaydi"
 JavaScript-dagi aksariyat qiymatlar matnga aylantirishni qo'llab-quvvatlaydi. Masalan, biz deyarli har qanday qiymatni `alert` ya'ni ekranga chiqazishimiz mumkin va u ishlaydi. Belgilar alohida ahamiyatga ega. Ular avtomatik konvertatsiya qilmaydi.
+=======
+So, to summarize, a symbol is a "primitive unique value" with an optional description. Let's see where we can use them.
+
+````warn header="Symbols don't auto-convert to a string"
+Most values in JavaScript support implicit conversion to a string. For instance, we can `alert` almost any value, and it will work. Symbols are special. They don't auto-convert.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Masalan, ushbu `alert` xatolikni ko'rsatadi:
 
@@ -74,7 +105,11 @@ Agar biz chindan ham belgini ko'rsatishni istasak, unda `.toString()` ni chaqiri
 That's a "language guard" against messing up, because strings and symbols are fundamentally different and should not accidentally convert one into another.
 
 If we really want to show a symbol, we need to explicitly call `.toString()` on it, like here:
+<<<<<<< HEAD
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js run
 let id = Symbol("id");
 *!*
@@ -86,7 +121,11 @@ alert(id.toString()); // Symbol(id), endi u ishlaydi
 Yoki faqat tavsifni olish uchun `symbol.description` xususiyatini ishlatamiz:
 =======
 Or get `symbol.description` property to show the description only:
+<<<<<<< HEAD
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js run
 let id = Symbol("id");
 *!*
@@ -98,11 +137,15 @@ alert(id.description); // id
 
 ## "Yashirin" xususiyatlar
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/04-object-basics/03-symbol/article.md
 Belgilar bizga obyektning "yashirin" xususiyatlarini yaratishga imkon beradi, chunki kodning boshqa hech bir qismi tasodifan kira olmaydi va qayta yozib bo'lmaydi.
 
 Masalan, ёuser` obyekti uchun "identifikator" ni saqlamoqchi bo'lsak, buning uchun kalit sifatida belgidan foydalanishimiz mumkin:
 =======
+=======
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 Symbols allow us to create "hidden" properties of an object, that no other part of code can accidentally access or overwrite.
 
 For instance, if we're working with `user` objects, that belong to a third-party code. We'd like to add identifiers to them.
@@ -129,6 +172,7 @@ alert( user[id] ); // we can access the data using the symbol as the key
 
 `"id"` ning o'rniga `Symbol("id")` dan ishlatishning foydasi nimada?
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/04-object-basics/03-symbol/article.md
 Buni ko'rish uchun misolni biroz chuqurroq qilaylik.
 
@@ -138,6 +182,11 @@ As `user` objects belongs to another code, and that code also works with them, w
 
 Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes. That may be another JavaScript library, so that the scripts are completely unaware of each other.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+As `user` objects belong to another codebase, it's unsafe to add fields to them, since we might affect pre-defined behavior in that other codebase. However, symbols cannot be accessed accidentally. The third-party code won't be aware of newly defined symbols, so it's safe to add symbols to the `user` objects.
+
+Also, imagine that another script wants to have its own identifier inside `user`, for its own purposes.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Keyin ushbu skript o'z `Symbol("id")` ni yaratishi mumkin, masalan:
 
@@ -225,6 +274,7 @@ let user = {
 for (let key in user) alert(key); // name, age (belgilar yo'q)
 */!*
 
+<<<<<<< HEAD
 // to'g'ridan-to'g'ri murojaat belgisi ishlaydi
 alert( "Direct: " + user[id] );
 ```
@@ -234,6 +284,13 @@ Bu umumiy "yashirish" tushunchasining bir qismi. Agar boshqa skript yoki kutubxo
 =======
 `Object.keys(user)` also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+// the direct access by the symbol works
+alert( "Direct: " + user[id] ); // Direct: 123
+```
+
+[Object.keys(user)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys) also ignores them. That's a part of the general "hiding symbolic properties" principle. If another script or a library loops over our object, it won't unexpectedly access a symbolic property.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Aksincha, [Object.assign](mdn:js/Object/assigned) ham matn, ham belgi xususiyatlarini ko'chiradi:
 
@@ -310,12 +367,20 @@ Registr ichidagi belgilar *global belgilar* deb nomlanadi. Agar biz keng ko'laml
 ```smart header="Bu Ruby-ga o'xshaydi"
 Ruby singari ba'zi dasturlash tillarida bitta nom uchun bitta belgi mavjud.
 
+<<<<<<< HEAD
 JavaScript-da, biz ko'rib turganimizdek, bu bayonot faqat global belgilar uchun to'g'ri.
+=======
+In JavaScript, as we can see, that's true for global symbols.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 ### Symbol.keyFor
 
+<<<<<<< HEAD
 Global belgilar uchun nafaqat `Symbol.for(key)` belgini nomini qaytaradi, balki teskari chaqirish mavjud: `Symbol.keyFor(sym)`, bu teskari: nomni global belgi bilan qaytaradi.
+=======
+We have seen that for global symbols, `Symbol.for(key)` returns a symbol by name. To do the opposite -- return a name by global symbol -- we can use: `Symbol.keyFor(sym)`:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Masalan:
 
@@ -338,8 +403,12 @@ alert( Symbol.keyFor(sym2) ); // id
 =======
 The `Symbol.keyFor` internally uses the global symbol registry to look up the key for the symbol. So it doesn't work for non-global symbols. If the symbol is not global, it won't be able to find it and returns `undefined`.
 
+<<<<<<< HEAD
 That said, any symbols have `description` property.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+That said, all symbols have the `description` property.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Masalan:
 
@@ -396,6 +465,7 @@ Belgilar ikkita asosiy foydalanish holatiga ega:
     Agar biz boshqa skriptga yoki kutubxonaga "tegishli" bo'lgan obyektga xususiyat qo'shmoqchi bo'lsak, biz belgi yaratib, uni xususiyat kaliti sifatida ishlatishimiz mumkin. Belgi xususiyati `for..in` da ko'rinmaydi, shuning uchun u kutilmaganda ro'yxatga olinmaydi. Bundan tashqari, unga to'g'ridan-to'g'ri kirish imkoni bo'lmaydi, chunki boshqa skriptda bizning belgimiz yo'q, shuning uchun u kutilmaganda uning harakatlariga aralashmaydi.
 =======
 1. "Hidden" object properties.
+
     If we want to add a property into an object that "belongs" to another script or a library, we can create a symbol and use it as a property key. A symbolic property does not appear in `for..in`, so it won't be accidentally processed together with other properties. Also it won't be accessed directly, because another script does not have our symbol. So the property will be protected from accidental use or overwrite.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
 
@@ -403,8 +473,12 @@ Belgilar ikkita asosiy foydalanish holatiga ega:
 
 2. JavaScript tomonidan ishlatiladigan `Symbol.*` kabi tizimining ko'pgina belgilari mavjud. Biz ulardan ichki o'rnatilgan xatti-harakatlarni o'zgartirish uchun foydalanishimiz mumkin. Masalan, keyinchalik o'quv qo'llanmada biz `Symbol.toPrimitive` [obyektdan ibtidoiy konvertatsiya](info:object-toprimitive) va boshqalarni o'rnatish uchun `Symbol.iterator` dan foydalanamiz [iterables](info:iterable).
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/04-object-basics/03-symbol/article.md
 Texnik jihatdan belgilar 100% yashirin emas. Barcha belgilarni olishimizga imkon beradigan o'rnatilgan [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) usuli mavjud. Shuningdek, [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) deb nomlangan usul mavjud, bu obyektning *barcha* kalitlarni, shu jumladan belgi kalitlarni qaytaradi. Shunday qilib, ular haqiqatan ham yashirin emas. Ammo aksariyat kutubxonalar, o'rnatilgan usullar va sintaksis tuzilmalari umumiy kelishuvga amal qilishadi. Yuqorida aytib o'tilgan usullarni aniq chaqirgan kishi, ehtimol, nima qilayotganini yaxshi tushunadi.
 =======
 Technically, symbols are not 100% hidden. There is a built-in method [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) that allows us to get all symbols. Also there is a method named [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys of an object including symbolic ones. So they are not really hidden. But most libraries, built-in functions and syntax constructs don't use these methods.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/08-symbol/article.md
+=======
+Technically, symbols are not 100% hidden. There is a built-in method [Object.getOwnPropertySymbols(obj)](mdn:js/Object/getOwnPropertySymbols) that allows us to get all symbols. Also there is a method named [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) that returns *all* keys of an object including symbolic ones. But most libraries, built-in functions and syntax constructs don't use these methods.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b

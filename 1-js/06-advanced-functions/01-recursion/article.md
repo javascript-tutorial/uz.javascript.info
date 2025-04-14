@@ -61,7 +61,7 @@ Iltimos, rekursiv variant qanday fundamental farq qilishiga e'tibor bering.
               if n==1  = x
              /
 pow(x, n) =
-             \       
+             \
               else     = x * pow(x, n - 1)
 ```
 
@@ -309,7 +309,11 @@ Qayta takrorlanadigan `pow` takrorlash jarayonida `i` va `natija` ni o'zgartiril
 
 **Har qanday rekursiyani tsikl sifatida qayta yozish mumkin. Tsikl variantini odatda samaraliroq qilish mumkin.**
 
+<<<<<<< HEAD
 ...Ammo ba'zida qayta yozish ahamiyatsiz bo'ladi, ayniqsa funktsiya sharoitga qarab turli xil rekursiv subchaqiruvlardan foydalanganda va ularning natijalarini birlashtirganda yoki tarmoqlanish murakkabroq bo'lganda. Va optimallashtirish kerak bo'lmasligi va bu umuman harakatlarga loyiq emas bo'lishi mumkin.
+=======
+...But sometimes the rewrite is non-trivial, especially when a function uses different recursive subcalls depending on conditions and merges their results or when the branching is more intricate. And the optimization may be unneeded and totally not worth the efforts.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Rekursiya kodni qisqartirishi mumkin, uni tushunish va qo'llab-quvvatlash osonroq. Har bir joyda optimallashtirish talab qilinmaydi, asosan bizga yaxshi kod kerak, shuning uchun u ishlatiladi.
 
@@ -602,7 +606,11 @@ Terms:
     list = { value, next -> list }
     ```
 
+<<<<<<< HEAD
     Ushbu bobdagi HTML elementlari daraxti yoki bo'lim daraxti kabi daraxtlar ham tabiiy ravishda rekursivdir: ular shoxlanadi va har bir shox boshqa shoxlarga ega bo'lishi mumkin.
+=======
+    Trees like HTML elements tree or the department tree from this chapter are also naturally recursive: they have branches and every branch can have other branches.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
     Rekursiv funktsiyalar yordamida ularning ustida yurish uchun foydalanish mumkin, buni biz `sumSalary` misolida ko'rdik.
 

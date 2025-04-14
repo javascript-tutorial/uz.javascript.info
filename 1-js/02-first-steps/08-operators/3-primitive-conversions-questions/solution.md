@@ -30,5 +30,9 @@ undefined + 1 = NaN // (6)
 4. The subtraction always converts to numbers, so it makes `"  -9  "` a number `-9` (ignoring spaces around it).
 5. `null` becomes `0` after the numeric conversion.
 6. `undefined` becomes `NaN` after the numeric conversion.
+<<<<<<< HEAD
 7. Space characters, are trimmed off string start and end when a string is converted to a number. Here the whole string consists of space characters, such as `\t`, `\n` and a "regular" space between them. So, similarly to an empty string, it becomes `0`.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/08-operators/3-primitive-conversions-questions/solution.md
+=======
+7. Space characters are trimmed off string start and end when a string is converted to a number. Here the whole string consists of space characters, such as `\t`, `\n` and a "regular" space between them. So, similarly to an empty string, it becomes `0`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b

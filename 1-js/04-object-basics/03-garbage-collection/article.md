@@ -85,7 +85,11 @@ Endi biz ham xuddi shunday qilsak:
 user = null;
 ```
 
+<<<<<<< HEAD
 ...Hozir ob'ektga `admin` global o'zgaruvchani orqali kirish mumkin, shuning uchun u xotirada. Agar biz `admin` ning qayta yozsak, u o'chirilishi mumkin.
+=======
+...Then the object is still reachable via `admin` global variable, so it must stay in memory. If we overwrite `admin` too, then it can be removed.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ## O'zaro bog'langan ob'ektlar
 
@@ -189,11 +193,19 @@ Birinchi qadam ildizlarni belgilaydi:
 
 ![](garbage-collection-2.svg)
 
+<<<<<<< HEAD
 Keyin ularning havolalari belgilanadi:
 
 ![](garbage-collection-3.svg)
 
 ...Va ularning havolalari, iloji bo'lsa:
+=======
+Then we follow their references and mark referenced objects:
+
+![](garbage-collection-3.svg)
+
+...And continue to follow further references, while possible:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ![](garbage-collection-4.svg)
 
@@ -208,14 +220,24 @@ JavaScript interpretatori uni tezroq ishlashi va bajarilishiga ta'sir qilmasligi
 =======
 We can also imagine the process as spilling a huge bucket of paint from the roots, that flows through all references and marks all reachable objects. The unmarked ones are then removed.
 
+<<<<<<< HEAD
 That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not affect the execution.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/03-garbage-collection/article.md
+=======
+That's the concept of how garbage collection works. JavaScript engines apply many optimizations to make it run faster and not introduce any delays into the code execution.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Ba'zi optimallashtirishlar:
 
+<<<<<<< HEAD
 - **Avlodlar to'plami (Generational collection)** - ob'ektlar ikkita to'plamga bo'linadi: "yangilari" va "eskilari". Ko'p ob'ektlar paydo bo'ladi, o'z ishlarini bajarishadi va tezda o'lishadi, ularni tajovuzkor tarzda tozalash mumkin. Yetarlicha uzoq vaqt omon qolganlar, "eski" bo'lib, kamroq tekshiriladi.
 - **Qo'shimcha yig'ish (Incremental collection)** - agar ob'ektlar ko'p bo'lsa va biz birma-bir yurib, butun ob'ektni belgilashga harakat qilsak, bu biroz vaqt talab qilishi va bajarilishdagi kechikishlarni keltirib chiqarishi mumkin. Shunday qilib, interpretator axlat yig'ilishini qismlarga ajratishga harakat qiladi. Keyin qismlar birma-bir, alohida bajariladi. Buning uchun o'zgarishlarni kuzatib borish uchun ular o'rtasida qo'shimcha hisob olib borilishi kerak, ammo bizda aksariyat kechikishlar mavjud, ammo katta emas.
 - **Bo'sh vaqtni yig'ish (Idle-time collection)** - ishlashga ta'sirini kamaytirish uchun axlat yig'uvchi faqat protsessor uzilishlari vaqtida ishlashga harakat qiladi.
+=======
+- **Generational collection** -- objects are split into two sets: "new ones" and "old ones". In typical code, many objects have a short life span: they appear, do their job and die fast, so it makes sense to track new objects and clear the memory from them if that's the case. Those that survive for long enough, become "old" and are examined less often.
+- **Incremental collection** -- if there are many objects, and we try to walk and mark the whole object set at once, it may take some time and introduce visible delays in the execution. So the engine splits the whole set of existing objects into multiple parts. And then clear these parts one after another. There are many small garbage collections instead of a total one. That requires some extra bookkeeping between them to track changes, but we get many tiny delays instead of a big one.
+- **Idle-time collection** -- the garbage collector tries to run only while the CPU is idle, to reduce the possible effect on the execution.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 <<<<<<< HEAD:1-js/04-object-basics/02-garbage-collection/article.md
 Axlat yig'ish algoritmlarini optimallashtirish va turli xil usullar mavjud. Lekin bu yerda ularni qanday ta'riflashni istasam ham, men bundan kechishim kerak, chunki turli JavaScript interpretatorlari turli usullar va sozlamalardan foydalanadilar. Va bundan ham muhimi, interpretatorlarning rivojlanishi bilan hamma narsa o'zgaradi, shuning uchun bu mavzuni oldindan ko'rib chiqish, haqiqiy ehtiyojsiz, ehtimol bunga loyiq emas. Agar, albatta, bu sof qiziqish masalasi bo'lmasa, unda quyidagi ba'zi havolalar siz uchun foydali bo'ladi.
@@ -227,14 +249,21 @@ There exist other optimizations and flavours of garbage collection algorithms. A
 
 Bilish kerak bo'lgan asosiy narsalar:
 
+<<<<<<< HEAD
 - Axlat yig'ish avtomatik ravishda amalga oshiriladi. Biz uni majbuan oldini ololmaymiz.
 - Ob'ektlar erishuvchan bo'lganda xotirada saqlanadi.
 - Yo'naltiriladigan havola (ildizdan) erishish bilan bir xil emas: o'zaro bog'langan ob'ektlar to'plami umuman olganda yetib bo'lmaydigan bo'lib qolishi mumkin.
+=======
+- Garbage collection is performed automatically. We cannot force or prevent it.
+- Objects are retained in memory while they are reachable.
+- Being referenced is not the same as being reachable (from a root): a pack of interlinked objects can become unreachable as a whole, as we've seen in the example above.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Zamonaviy interpretatorlar axlat yig'ishning zamonaviy algoritmlarini amalga oshirmoqdalar.
 
 Umumiy kitob "The Garbage Collection Handbook: The Art of Automatic Memory Management" (R. Jons va boshqalar) ularning ayrimlarini qamrab oladi.
 
+<<<<<<< HEAD
 Agar siz past darajadagi dasturlarni yaxshi bilsangiz, V8 axlatni yig'uvchi haqida batafsil ma'lumot [V8 tur: Axlat yig'ish](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection) maqolasida keltirilgan.
 
 <<<<<<< HEAD:1-js/04-object-basics/02-garbage-collection/article.md
@@ -244,3 +273,10 @@ Bundan tashqari, [V8 interpretatorning blogida](http://v8project.blogspot.com/) 
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/04-object-basics/03-garbage-collection/article.md
 
 Interpretatorni chuqur bilish, past darajadagi optimallashtirish kerak bo'lganda yaxshi bo'ladi. Buni til bilan tanishganingizdan keyin keyingi qadam sifatida rejalashtirish oqilona bo'ladi.
+=======
+If you are familiar with low-level programming, more detailed information about V8's garbage collector is in the article [A tour of V8: Garbage Collection](https://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection).
+
+The [V8 blog](https://v8.dev/) also publishes articles about changes in memory management from time to time. Naturally, to learn more about garbage collection, you'd better prepare by learning about V8 internals in general and read the blog of [Vyacheslav Egorov](https://mrale.ph) who worked as one of the V8 engineers. I'm saying: "V8", because it is best covered by articles on the internet. For other engines, many approaches are similar, but garbage collection differs in many aspects.
+
+In-depth knowledge of engines is good when you need low-level optimizations. It would be wise to plan that as the next step after you're familiar with the language.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b

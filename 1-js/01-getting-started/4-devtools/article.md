@@ -24,7 +24,7 @@ Dasturchilar uchun ko'makchi vositalari standart sifatida consol yorlig'ida ochi
 
 Bu shunday ko'rinadi:
 
-![chrome](chrome.png)
+![chrome](chrome.webp)
 
 Ishlab chiquvchi vositalarning aniq ko'rinishi sizning Chrome versiyangizga bog'liq. U vaqti-vaqti bilan o'zgarib turadi, ammo shunga o'xshash bo'lishi kerak.
 
@@ -56,7 +56,11 @@ Ularning tashqi ko'rinishi va his qilishi o'xshash. Ushbu vositalardan birini qa
 
 Safari (Windows / Linux tomonidan qo'llab-quvvatlanmaydigan Mac brauzeri) bu erda biroz o'ziga xosdir. Avval "Dasturchi menyusi" ni yoqishimiz kerak.
 
+<<<<<<< HEAD
 Preferences-ni oching va "Advanced" oynasiga o'ting. Pastki qismida belgilash katakchasi mavjud:
+=======
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ![safari](safari.png)
 

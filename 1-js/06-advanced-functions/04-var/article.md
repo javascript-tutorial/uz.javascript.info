@@ -7,7 +7,7 @@
 ```smart header="This article is for understanding old scripts"
 The information in this article is useful for understanding old scripts.
 
-That's not how we write a new code.
+That's not how we write new code.
 ```
 
 In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
@@ -90,7 +90,7 @@ alert(test); // ReferenceError: test is not defined
 
 Xuddi shu narsa tsiklar uchun: `var` blok-yoki tsikl-lokal bo'lishi mumkin emas:
 
-```js
+```js run
 for (var i = 0; i < 10; i++) {
   var one = 1;
   // ...
@@ -216,7 +216,7 @@ That's best demonstrated with an example:
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
   var phrase = "Salom";
@@ -305,11 +305,11 @@ There exist other ways besides parentheses to tell JavaScript that we mean a Fun
 ```js run
 // Ways to create IIFE
 
-(function() {
+*!*(*/!*function() {
   alert("Parentheses around the function");
 }*!*)*/!*();
 
-(function() {
+*!*(*/!*function() {
   alert("Parentheses around the whole thing");
 }()*!*)*/!*;
 

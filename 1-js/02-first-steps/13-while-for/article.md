@@ -6,7 +6,24 @@ Masalan, ro'yxatdan qiymatlarni birin-ketin chiqarish yoki shunchaki 1 dan 10 ga
 
 *Tsikl* - bu bitta kodni bir necha marta takrorlash usuli.
 
+<<<<<<< HEAD
 ## "while" tsikli
+=======
+```smart header="The for..of and for..in loops"
+A small announcement for advanced readers.
+
+This article covers only basic loops: `while`, `do..while` and `for(..;..;..)`.
+
+If you came to this article searching for other types of loops, here are the pointers:
+
+- See [for..in](info:object#forin) to loop over object properties.
+- See [for..of](info:array#loops) and [iterables](info:iterable) for looping over arrays and iterable objects.
+
+Otherwise, please read on.
+```
+
+## The "while" loop
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 `while` tsikli quyidagi sintaksisga ega:
 
@@ -119,6 +136,7 @@ Keling, `for` ifodani qisma ko'rib chiqamiz:
 
 | qism  |          |                                                                            |
 |-------|----------|----------------------------------------------------------------------------|
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
 | boshlanishi | `i = 0`    | Tsikldan e'lon qilingandan keyin bir marta bajariladi.                                    |
 | shart | `i < 3`| Har bir tsikl takrorlashdan oldin tekshiriladi. Agar yolg'on bo'lsa, tsikl to'xtaydi.  |
@@ -129,6 +147,9 @@ Keling, `for` ifodani qisma ko'rib chiqamiz:
 Umumiy tsikl algoritmi quyidagicha ishlaydi:
 =======
 | begin | `i = 0`    | Executes once upon entering the loop.                                      |
+=======
+| begin | `let i = 0`    | Executes once upon entering the loop.                                      |
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 | condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
 | body | `alert(i)`| Runs again and again while the condition is truthy.                         |
 | step| `i++`      | Executes after the body on each iteration. |
@@ -189,11 +210,14 @@ for (i = 0; i < 3; i++) { // mavjud bo'lgan o'zgaruvchandan
 
 alert(i); // 3, chiqariladi, chunki tsiklning tashqarisida e'lon qilingan
 ```
-
 ````
 
+<<<<<<< HEAD
 
 ### Parchalarni tashlab ketish
+=======
+### Skipping parts
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 `For` ning istalgan qismi o'tkazib yuborilishi mumkin.
 
@@ -295,11 +319,15 @@ for (let i = 0; i < 10; i++) {
 
 Texnik nuqtai nazardan, bu yuqoridagi misol bilan bir xil. Albatta, biz `continue` dan foydalanish o'rniga `if` blokiga kodni o'rashimiz mumkin.
 
+<<<<<<< HEAD
 <<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
 Ammo yon ta'sir sifatida bu yana bitta uyalash darajasini yaratdi (jingalak qavs ichidagi `alert` chaqiruvi). Agar `if` ichidagi kod bir necha satrdan uzun bo'lsa, bu umumiy kod o'qilishini pasaytirishi mumkin.
 =======
 But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+=======
+But as a side effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ````
 
 ````warn header="'?' Operatorning o'ng tomonida `break/continue` dan foydalana olmaymizmi"
@@ -316,7 +344,6 @@ if (i > 5) {
 ```
 
 ...va savol belgisi yordamida uni qayta yozamiz:
-
 
 ```js no-beautify
 (i > 5) ? alert(i) : *!*continue*/!*; // bu erda davom etishga ruxsat berilmaydi
@@ -369,7 +396,12 @@ Agar foydalanuvchi kirishni bekor qilsa, biz jarayonni to'xtatish usuliga muhtoj
 The ordinary `break` after `input` would only break the inner loop. That's not sufficient -- labels, come to the rescue!
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
 
+<<<<<<< HEAD
 *Yorliq* - bu tsikl oldida ikkita nuqta qo'yilgan identifikator:
+=======
+A *label* is an identifier with a colon before a loop:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js
 yorliqIsmi: for (...) {
   ...
@@ -391,7 +423,12 @@ Quyidagi tsikldagi `break <yorliqIsmi>` ifodasi yorliqqa chiqadi:
     // qiymat bilan operatsiyalarni bajaring...
   }
 }
+<<<<<<< HEAD
 alert('Bajarildi!');
+=======
+
+alert('Done!');
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```
 
 Yuqoridagi kodda `break tashqari` yorlig'i yuqoriga qarab, `tashqari` deb nomlangan va shu tsikldan tashqariga chiqadi.
@@ -415,7 +452,12 @@ Yorliqlar koddagi o'zboshimchalik bilan har qanday joyga o'tishga imkon bermaydi
 Labels do not allow us to jump into an arbitrary place in the code.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
 
+<<<<<<< HEAD
 Masalan, buni amalga oshirish mumkin emas:
+=======
+For example, it is impossible to do this:
+
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 ```js
 <<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
 break label;  // yorliqqa sakraydimi? Yo'q
@@ -430,6 +472,7 @@ label: for (...)
 `break/continue` ga qo'ng'iroq faqat tsiklning ichkaridan amalga oshiriladi va yorliq yo'riqnomaning yuqorisida bo'lishi kerak.
 =======
 A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+
 ```js
 label: {
   // ...
@@ -438,7 +481,7 @@ label: {
 }
 ```
 
-...Although, 99.9% of the time `break` used is inside loops, as we've seen in the examples above.
+...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
 
 A `continue` is only possible from inside a loop.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md

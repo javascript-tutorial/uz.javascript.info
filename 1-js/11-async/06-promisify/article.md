@@ -37,7 +37,7 @@ Keling, buni va'da qilaylik. Yangi `loadScriptPromise(src)` funktsiyasi ham xudd
 The function loads a script with the given `src`, and then calls `callback(err)` in case of an error, or `callback(null, script)` in case of successful loading. That's a widespread agreement for using callbacks, we saw it before.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
-Let's promisify it. 
+Let's promisify it.
 
 We'll make a new function `loadScriptPromise(src)`, that does the same (loads the script), but returns a promise instead of using callbacks.
 
@@ -170,7 +170,11 @@ For more exotic callback formats, like those without `err` at all: `callback(res
 Promisifikatsiya funktsiyalaridan biroz moslashuvchan bo'lgan modullar ham mavjud, masalan, [es6-promisify](https://github.com/digitaldesignlabs/es6-promisify). Node.js-da buning uchun o'rnatilgan `util.promisify` funktsiyasi mavjud.
 
 ```smart
+<<<<<<< HEAD
 Promisifikatsiya - bu ajoyib yondashuv, ayniqsa `async/await` dan foydalanganda (keyingi bobga qarang), ammo qayta chaqiruvlarni to'liq almashtirish emas.
+=======
+Promisification is a great approach, especially when you use `async/await` (covered later in the chapter <info:async-await>), but not a total replacement for callbacks.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Yodda tuting, va'da faqat bitta natijaga ega bo'lishi mumkin, ammo texnik qayta chaqiruv ko'p marta chaqirilishi mumkin.
 

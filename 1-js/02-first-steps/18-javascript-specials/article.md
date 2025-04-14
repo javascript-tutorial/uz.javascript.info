@@ -59,7 +59,11 @@ Direktiv skriptning yuqori qismida yoki funktsiya boshida bo'lishi kerak.
 The directive must be at the top of a script or at the beginning of a function body.
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
 
+<<<<<<< HEAD
 `"use strict"` siz, hamma narsa baribir ishlaydi, ammo ba'zi xususiyatlar o'zlarini eskicha moda tutishadi. Biz odatda zamonaviy xatti-harakatni afzal ko'ramiz.
+=======
+Without `"use strict"`, everything still works, but some features behave in the old-fashioned, "compatible" way. We'd generally prefer the modern behavior.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Tilning ba'zi zamonaviy xususiyatlari (kelajakda biz o'rganadigan sinflar singari) qat'iy rejimni bilvosita ta'minlaydi.
 
@@ -118,18 +122,30 @@ Batafsil: <info:variables> va <info:types>.
 
 Biz brauzerni ish muhiti sifatida ishlatmoqdamiz, shuning uchun asosiy interfeys funktsiyalari quyidagilar:
 
+<<<<<<< HEAD
 [`prompt(question, [default])`](mdn:api/Window/prompt)
 <<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
 : `Savol` bering va mehmon kiritgan qiymatni qaytaring, agar mehmon "bekor" tugmasini bosgan bo'lsa `null` ni qaytaring.
 =======
+=======
+[`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 : Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
 
+<<<<<<< HEAD
 [`confirm(question)`](mdn:api/Window/confirm)
 : `Savol` bering va Ok yoki Bekor qilish o'rtasida tanlov qilishni taklif qiling. Tanlov `true/false` sifatida qaytariladi.
 
 [`alert(message)`](mdn:api/Window/alert)
 : `Message` ni qaytaradi.
+=======
+[`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
+: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
+
+[`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
+: Output a `message`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 Bu funktsiyalarning barchasi *modal* bo'lib, ular kod bajarilishini to'xtatib turadi va mehmon javob berguncha sahifa bilan o'zaro aloqada bo'lishiga yo'l qo'ymaydi.
 
@@ -173,7 +189,7 @@ Mantiqiy operatorlar
 : Mantiqiy VA `&&` va YOKI `||` qisqa tutashuvni baholashni amalga oshiradi va keyin to'xtagan joyga qiymatni qaytaradi. Mantiqiy YO'Q `!` operandni mantiqiy turga o'zgartiradi va teskari qiymatni qaytaradi.
 =======
 Bitwise
-: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) when they are needed.
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) when they are needed.
 
 Conditional
 : The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
@@ -304,7 +320,11 @@ Biz JavaScript da funktsiyani yaratishning uchta usulini ko'rib chiqdik:
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
 
     ```js
+<<<<<<< HEAD
     // o'ng tomonidagi ifoda
+=======
+    // expression on the right side
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
     let sum = (a, b) => a + b;
 
     // yoki {...} bilan ko'p satrli sintaksis, bu erga return kaliti kerak:

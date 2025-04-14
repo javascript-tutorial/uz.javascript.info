@@ -35,6 +35,7 @@ function loadScript(src) {
 ```
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Funktsiyaning maqsadi yangi skriptni yuklashdir. Hujjatga `<script src ="… ">` qo'shilganda, brauzer uni yuklaydi va bajaradi.
 
 Biz buni quyidagicha ishlatishimiz mumkin:
@@ -57,6 +58,9 @@ loadScript('/my/script.js');
 Endi yangi skript yuklanganda undan foydalanishni xohlaymiz deylik. Ehtimol, u yangi funktsiyalarni e'lon qiladi, shuning uchun ularni boshqarishni xohlaymiz.
 =======
 It appends to the document the new, dynamically created, tag `<script src="…">` with given `src`. The browser automatically starts loading it and executes when complete.
+=======
+It inserts into the document a new, dynamically created, tag `<script src="…">` with the given `src`. The browser automatically starts loading it and executes when complete.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 We can use this function like this:
 
@@ -110,7 +114,13 @@ function loadScript(src, *!*callback*/!*) {
 }
 ```
 
+<<<<<<< HEAD
 Endi biz skriptdan yangi funktsiyalarni chaqirmoqchi bo'lsak, uni qayta chaqiruvda yozishimiz kerak:
+=======
+The `onload` event is described in the article <info:onload-onerror#loading-a-script>, it basically executes a function after the script is loaded and executed.
+
+Now if we want to call new functions from the script, we should write that in the callback:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 loadScript('/my/script.js', function() {
@@ -139,8 +149,12 @@ loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', s
   alert( _ ); // yuklangan skriptda e'lon qilingan funktsiya
 =======
   alert(`Cool, the script ${script.src} is loaded`);
+<<<<<<< HEAD
   alert( _ ); // function declared in the loaded script
 >>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+=======
+  alert( _ ); // _ is a function declared in the loaded script
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 });
 */!*
 ```
@@ -238,9 +252,15 @@ Shunday qilib, bitta `callback` funktsiyasi xatolarni xabar qilish va natijalarn
 
 ## Halokat piramidasi
 
+<<<<<<< HEAD
 Bir qarashda, bu asinxron kodni yozishning ishchi usuli. Va haqiqatan ham shunday. Bir yoki ehtimol ikkita ichki chaqiruvlar uchun yaxshi bo'ladi.
 
 Ammo ketma-ket keladigan bir nechta asinxron harakatlar uchun bizda shunday kod bo'ladi:
+=======
+At first glance, it looks like a viable approach to asynchronous coding. And indeed it is. For one or maybe two nested calls it looks fine.
+
+But for multiple asynchronous actions that follow one after another, we'll have code like this:
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 ```js
 loadScript('1.js', function(error, script) {
@@ -270,10 +290,17 @@ loadScript('1.js', function(error, script) {
 });
 ```
 
+<<<<<<< HEAD
 Yuqoridagi kodda:
 1. Biz `1.js` ni yuklaymiz, keyin xato bo'lmasa.
 2. Biz `2.js` ni yuklaymiz, keyin xato bo'lmasa.
 3. Biz `3.js` ni yuklaymiz, keyin xato bo'lmasa. -- boshqa narsa bajarish `(*)`.
+=======
+In the code above:
+1. We load `1.js`, then if there's no error...
+2. We load `2.js`, then if there's no error...
+3. We load `3.js`, then if there's no error -- do something else `(*)`.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 <<<<<<< HEAD
 Chaqiruvlar uyasi ko'payib borishi bilan, kod yanada chuqurlashadi va boshqarish tobora qiyinlashib boradi, ayniqsa, agar bizda `...` o'rniga haqiqiy kod bo'lsa, bu ko'proq tsiklarni, shartli bayonotlarni va boshqalarni o'z ichiga olishi mumkin.
@@ -348,7 +375,11 @@ function step3(error, script) {
 }
 ```
 
+<<<<<<< HEAD
 Ko'ryapsizmi? Xuddi shu narsani qiladi va endi chuqur uyalar yo'q, chunki biz har bir harakatni alohida yuqori darajadagi funktsiyaga aylantirdik.
+=======
+See? It does the same thing, and there's no deep nesting now because we made every action a separate top-level function.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b
 
 U ishlaydi, lekin kod yirtilib ketgan elektron jadvalga o'xshaydi. O'qish qiyin, va ehtimol siz uni o'qiyotganingizda buyumlar orasidan ko'z bilan sakrash kerakligini payqadingiz. Bu noqulay, ayniqsa o'quvchi kodni yaxshi bilmasa va qayerga ko'z bilan sakrashni bilmasa.
 
@@ -360,4 +391,8 @@ Also, the functions named `step*` are all of single use, they are created only t
 
 Yaxshiroq yo'lni topish kerak.
 
+<<<<<<< HEAD
 Baxtimizga, bunday piramidalardan saqlanishning boshqa usullari mavjud. Keyingi bobda tasvirlangan "va'dalar" dan foydalanish eng yaxshi usullardan biridir.
+=======
+Luckily, there are other ways to avoid such pyramids. One of the best ways is to use "promises", described in the next chapter.
+>>>>>>> 540d753e90789205fc6e75c502f68382c87dea9b

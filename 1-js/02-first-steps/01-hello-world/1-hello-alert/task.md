@@ -6,7 +6,6 @@ muhimlik: 5
 
 "Men JavaScriptman!" xabarni ko'rsatadigan sahifa yarating.
 
-Buni sanbox("o'quv muhiti") yoki o'zingizning kod muharririda, muhim emas, faqat uning ishlashini ta'minlang.
+Buni sanbox("o'quv muhiti") yoki o'zingizning kod muharriringizda (muhit muhim emas) faqat uning ishlashini ta'minlang.
 
-[demo src="solution"]
-
+[demo src="yechim"]

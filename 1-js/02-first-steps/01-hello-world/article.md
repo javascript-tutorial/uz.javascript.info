@@ -1,72 +1,52 @@
-# Hello, world!("Salom Dunyo!")
+# Hello, world! ("Salom, Dunyo!")
 
-<<<<<<< HEAD
-O'quv qo'llanmaning ushbu qismi asosiy JavaScript haqida, tilning o'zi haqida. Keyinchalik, siz Node.js va undan foydalanadigan boshqa platformalar haqida ma'lumotga ega bo'lasiz.
-=======
-This part of the tutorial is about core JavaScript, the language itself.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+O'quv qo'llanmaning ushbu qismi asosiy JavaScript haqida, ya'ni tilning o'zi haqida. Keyinchalik, siz Node.js va undan foydalanadigan boshqa platformalar haqida ma'lumot olasiz.
 
-Bizning skriptlarimizning ishga tushirish uchun bizga ish muhiti kerak, bu kitob onlayn bo'lganligi uchun brauzer yaxshi tanlovdir. Brauzerga xos buyruqlar miqdorini (masalan, alert("ogohlantirish")) minimal darajada taqdim qilamiz, shunda siz boshqa muhitda (masalan, Node.js) diqqat qilishni rejalashtirmoqchi bo'lsangiz, ularga vaqt sarflamaysiz. Biz o'quv qo'llanmasining [keyingi qismida](/ui) brauzerda JavaScript-ga e'tibor qaratamiz.
+Skriptlarimizni ishga tushirish uchun bizga ish muhiti kerak. Bu kitob onlayn bo'lganligi sababli, brauzer yaxshi tanlov hisoblanadi. Brauzerga xos buyruqlar miqdorini (masalan, `alert("ogohlantirish")`) minimal darajada keltiramiz, shunda agar siz boshqa muhitda (masalan, Node.js) ishlashni rejalashtirmoqchi bo'lsangiz, ularga vaqt sarflamaysiz. Biz o'quv qo'llanmasining [keyingi qismida](/ui) brauzerda JavaScript-ga e'tibor qaratamiz.
 
-Shunday qilib, avval veb-sahifaga skriptni qanday biriktirishimizni ko'rib chiqamiz. Server-tomon (masalan, Node.js) uchun siz `"node my.js"` buyrug'i bilan bajarishingiz mumkin.
+Shunday qilib, avval veb-sahifaga skriptni qanday biriktirish mumkinligini ko'rib chiqamiz. Server tomoni (masalan, Node.js) uchun siz `"node my.js"` buyrug'i bilan uni bajarishingiz mumkin.
 
+## "script" HTML tegi
 
-## HTML "script" tegi
-
-<<<<<<< HEAD
-JavaScript dasturlari HTML hujjatning istalgan qismiga `<script>` tegi yordamida kiritilishi mumkin.
-=======
-JavaScript programs can be inserted almost anywhere into an HTML document using the `<script>` tag.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+JavaScript dasturlarini HTML hujjatning istalgan qismiga `<script>` tegi yordamida kiritish mumkin.
 
 Masalan:
 
 ```html run height=100
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <body>
+    <p>Skriptdan oldin...</p>
 
-<body>
+    *!*
+    <script>
+      alert("Hello, world!");
+    </script>
+    */!*
 
-  <p>Skriptdan oldin...</p>
-
-*!*
-  <script>
-    alert( 'Hello, world!' );
-  </script>
-*/!*
-
-  <p>...Skriptdan keyin.</p>
-
-</body>
-
+    <p>...Skriptdan keyin.</p>
+  </body>
 </html>
 ```
 
 ```online
-Yuqoridagi katakchaning o'ng yuqori burchagidagi "Play" tugmasini bosish orqali siz misolni ishga tushirishingiz mumkin.
+Yuqoridagi misolning o'ng yuqori burchagidagi "Play" tugmasini bosish orqali siz uni ishga tushirishingiz mumkin.
 ```
 
-`<script>` tegi JavaScript kodini o'z ichiga oladi va brauzer avtomatik ravishda tegni jarayonlaydi.
-
+`<script>` tegi JavaScript kodini o'z ichiga oladi va brauzer tegni uchraganida uni avtomatik ravishda qayta ishlaydi.
 
 ## Zamonaviy belgilar
 
-`<script>` tegi bugungi kunda kamdan-kam ishlatiladigan, ammo eski kodda mavjud bo'lgan bir nechta atributlarga ega:
+`<script>` tegi bugungi kunda kamdan-kam ishlatiladigan, ammo eski kodlarda mavjud bo'lgan bir nechta atributlarga ega:
 
-<<<<<<< HEAD
-Atribut `type`: <code>&lt;script <u>type</u>=...&gt;</code>
-: Eski HTML standarti, HTML4, skriptlar "type"("tur") ga ega bo'lishni talab qilar edi. Odatda bu `type="text/javascript"` edi. Bu endi talab qilinmaydi. Shuningdek, zamonaviy HTML standarti, HTML5, ushbu atributning ma'nosini butunlay o'zgartirdi. Endi u JavaScript modullari uchun ishlatilishi mumkin. Ammo bu ilg'or mavzu; modullar haqida darslikning boshqa qismida gaplashamiz.
-=======
-The `type` attribute: <code>&lt;script <u>type</u>=...&gt;</code>
-: The old HTML standard, HTML4, required a script to have a `type`. Usually it was `type="text/javascript"`. It's not required anymore. Also, the modern HTML standard totally changed the meaning of this attribute. Now, it can be used for JavaScript modules. But that's an advanced topic, we'll talk about modules in another part of the tutorial.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+**type atributi**: <code>&lt;script <u>type</u>=...&gt;</code>
+: Eski HTML standarti (HTML4) skriptlarning "type" (tur)ga ega bo'lishini talab qilgan edi. Odatda bu `type="text/javascript"` bo'lgan. Endi bu talab qilinmaydi. Shuningdek, zamonaviy HTML standarti (HTML5) ushbu atributning ma'nosini butunlay o'zgartirdi. Endi u JavaScript modullari uchun ishlatilishi mumkin. Ammo bu ilg'or mavzu; modullar haqida o'quv qo'llanmasining boshqa qismida gaplashamiz.
 
-Atribut `language`: <code>&lt;script <u>language</u>=...&gt;</code>
-: Ushbu atribut scriptning tilini ko'rsatish uchun mo'ljallangan edi. Ushbu atribut endi mantiqiy emas, chunki JavaScript standart til hisoblanadi. Uni ishlatishga hojat yo'q.
+**language atributi**: <code>&lt;script <u>language</u>=...&gt;</code>
+: Ushbu atribut skriptning tilini ko'rsatish uchun mo'ljallangan edi. Ushbu atribut endi ma'noga ega emas, chunki JavaScript standart til hisoblanadi. Uni ishlatishga hojat yo'q.
 
-Skriptlardan oldin va keyingi izohlar.
-: In really ancient books and guides, you may find comments inside `<script>` tags, like this:
-Juda qadimiy kitoblar va qo'llanmalarda siz quyidagi kabi `<script>` teglarining ichida izohlarni topishingiz mumkin:
+**Skriptlardan oldin va keyingi izohlar**:
+: Juda qadimiy kitoblar va qo'llanmalarda siz quyidagi kabi `<script>` teglarining ichida izohlarni topishingiz mumkin:
 
     ```html no-beautify
     <script type="text/javascript"><!--
@@ -74,38 +54,29 @@ Juda qadimiy kitoblar va qo'llanmalarda siz quyidagi kabi `<script>` teglarining
     //--></script>
     ```
 
-<<<<<<< HEAD
-    Ushbu hiyla zamonaviy JavaScript-da ishlatilmaydi. Ushbu sharhlar JavaScript kodini `<script>` tegini qanday ishlashini bilmagan eski brauzerlardan yashirgan. So'nggi 15 yil ichida chiqarilgan brauzerlarda bunday muammo bo'lmaganligi sababli, bunday sharh sizga eski kodni aniqlashda yordam beradi.
-=======
-    This trick isn't used in modern JavaScript. These comments hide JavaScript code from old browsers that didn't know how to process the `<script>` tag. Since browsers released in the last 15 years don't have this issue, this kind of comment can help you identify really old code.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
-
+    Ushbu hiyla zamonaviy JavaScript-da ishlatilmaydi. Ushbu izohlar JavaScript kodini `<script>` tegini qanday ishlashini bilmagan eski brauzerlardan yashirgan. So'nggi 15 yil ichida chiqarilgan brauzerlarda bunday muammo yo'qligi sababli, bunday izoh sizga faqat eski kodni aniqlashda yordam beradi.
 
 ## Tashqi skriptlar
 
-Agar bizda JavaScript kodlari ko'p bo'lsa, uni alohida faylga qo'yishimiz mumkin.
+Agar bizda JavaScript kodi ko'p bo'lsa, uni alohida faylga joylashtirish mumkin.
 
-Skript fayllari HTML-ga `src` atributi bilan biriktirilgan:
+Skript fayllari HTML-ga `src` atributi bilan biriktiriladi:
 
 ```html
 <script src="/path/to/script.js"></script>
 ```
 
-<<<<<<< HEAD
-Bu erda, `/path/to/script.js` - bu skript fayliga (sayt ildizidan) mutlaq yo'l.
+Bu yerda `/path/to/script.js` - skript fayliga (sayt ildizidan) mutlaq yo'l.
 
-Joriy sahifadan nisbiy yo'lni ham taqdim etishingiz mumkin. Masalan, `src="script.js"` joriy papkada `"script.js"` faylini bildiradi.
-=======
-Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"` would mean a file `"script.js"` in the current folder.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Joriy sahifadan nisbiy yo'lni ham ko'rsatish mumkin. Masalan, `src="script.js"` joriy papkada joylashgan `"script.js"` faylini bildiradi.
 
-Biz to'liq URL manzilini ham berishimiz mumkin. Masalan:
+To'liq URL manzilini ham berish mumkin. Masalan:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
 ```
 
-Bir qancha skriptlarni biriktirish uchun bir nechta teglardan foydalaning:
+Bir nechta skriptlarni biriktirish uchun bir nechta tegdan foydalaning:
 
 ```html
 <script src="/js/script1.js"></script>
@@ -114,30 +85,31 @@ Bir qancha skriptlarni biriktirish uchun bir nechta teglardan foydalaning:
 ```
 
 ```smart
-Qoida tariqasida HTML-ga faqat eng sodda skriptlar qo'yiladi. Nurakkabllari alohida fayllarda joylashiladi.
+Qoida tariqasida, HTML-ga faqat eng sodda skriptlar joylashtiriladi. Murakkablari alohida fayllarda saqlanadi.
 
-Alohida faylning foydasi shundaki, brauzer uni yuklab olib, o'z [keshida](https://en.wikipedia.org/wiki/Web_cache) saqlaydi .
+Alohida faylning foydasi shundaki, brauzer uni yuklab olib, o'zining [keshida](https://en.wikipedia.org/wiki/Web_cache) saqlaydi.
 
-Xuddi shu skriptga murojaat qilgan boshqa sahifalar uni yuklab olish o'rniga keshdan oladi, shuning uchun fayl aslida faqat bir marta yuklab olinadi.
+Xuddi shu skriptga murojaat qilgan boshqa sahifalar uni qayta yuklab olish o'rniga keshdan oladi, shuning uchun fayl aslida faqat bir marta yuklab olinadi.
 
-Bu trafikni kamaytiradi va sahifalarni tezlashtiradi. 
+Bu trafikni kamaytiradi va sahifalarni tezlashtiradi.
 ```
 
-````warn header="Agar `src` o'rnatilgan bo'lsa, skript tarkibiga e'tibor berilmaydi."
-A single `<script>` tag can't have both the `src` attribute and code inside.
-Bitta `<script>` tegning ichida `src` atributi va kod bo'lishi mumkin emas.
+````warn header="Agar `src`o'rnatilgan bo'lsa, skript mazmuniga e'tibor berilmaydi."
+Bitta`<script>`tegida ham`src` atributi, ham ichki kod bo'lishi mumkin emas.
 
 Bu ishlamaydi:
 
 ```html
+
 <script *!*src*/!*="file.js">
-  alert(1); // tarkibga e'tibor berilmaydi, chunki src o'rnatilgan
+  alert(1); // mazmuniga e'tibor berilmaydi, chunki src o'rnatilgan
 </script>
+
 ```
 
-Biz tashqi `<script src="…">` ni yoki odatdagi kod bilan `<script>` ni tanlashimiz kerak.
+Biz tashqi `<script src="…">` yoki ichki kod bilan `<script>` dan birini tanlashimiz kerak.
 
-Yuqoridagi misolni ishlash uchun ikkita skriptga bo'lish mumkin:
+Yuqoridagi misolni ishlashi uchun ikkita skriptga bo'lish mumkin:
 
 ```html
 <script src="file.js"></script>
@@ -145,13 +117,13 @@ Yuqoridagi misolni ishlash uchun ikkita skriptga bo'lish mumkin:
   alert(1);
 </script>
 ```
-````
+
+```
 
 ## Xulosa
 
-- JavaScript kodini sahifaga qo'shish uchun `<script>` tegidan foydalanishimiz mumkin.
-- `type` va `language` atributlar talab qilinmaydi.
-- Tashqi faylga skript `<script src="path/to/script.js"></script>` "src" atribut yordamida qo'shilishi mumkin .
+- Sahifaga JavaScript kodi qo'shish uchun `<script>` tegidan foydalanishimiz mumkin.
+- `type` va `language` atributlari talab qilinmaydi.
+- Tashqi fayldan skript `<script src="path/to/script.js"></script>` ko'rinishida `src` atributi yordamida qo'shilishi mumkin.
 
-
-Brauzer skriptlari va ularning veb-sahifa bilan o'zaro aloqalari haqida ko'proq bilib olish mumkin. Shuni yodda tutingki, o'quv qo'llanmaning ushbu qismi JavaScript tiliga bag'ishlangan, shuning uchun uni brauzerga xos dasturlar bilan chalg'itmasligimiz kerak. Biz brauzerni JavaScript-ni ishga tushirish usuli sifatida ishlatamiz, bu onlayn o'qish uchun juda qulay, ammo ko'pchiligidan bittasi.
+Brauzer skriptlari va ularning veb-sahifa bilan o'zaro aloqalari haqida ko'proq ma'lumot olish mumkin. Shuni yodda tutingki, o'quv qo'llanmasining ushbu qismi JavaScript tiliga bag'ishlangan, shuning uchun uni brauzerga xos dasturlar bilan aralashtirib yubormasligimiz kerak. Biz brauzerni JavaScript-ni ishga tushirish usuli 

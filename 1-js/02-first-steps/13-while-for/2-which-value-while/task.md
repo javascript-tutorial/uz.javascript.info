@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -10,13 +10,14 @@ Har ikki tsikl bir xil qiymatlarni `alert` orqali chiqariladimi, yoki yo'qmi?
 
 1. `++i` prefiks shakli:
 
-    ```js
-    let i = 0;
-    while (++i < 5) alert( i );
-    ```
+   ```js
+   let i = 0;
+   while (++i < 5) alert(i);
+   ```
+
 2. Postfiks shakli `i++`
 
-    ```js
-    let i = 0;
-    while (i++ < 5) alert( i );
-    ```
+   ```js
+   let i = 0;
+   while (i++ < 5) alert(i);
+   ```

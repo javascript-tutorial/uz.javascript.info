@@ -1,13 +1,12 @@
 Javob: `null`.
 
-
 ```js run
 function f() {
-  alert( this ); // null
+  alert(this); // null
 }
 
 let user = {
-  g: f.bind(null)
+  g: f.bind(null),
 };
 
 user.g();

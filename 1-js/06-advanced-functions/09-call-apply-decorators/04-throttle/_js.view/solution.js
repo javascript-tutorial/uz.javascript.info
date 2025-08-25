@@ -1,11 +1,9 @@
 function throttle(func, ms) {
-
   let isThrottled = false,
     savedArgs,
     savedThis;
 
   function wrapper() {
-
     if (isThrottled) {
       // memo last arguments to call after the cooldown
       savedArgs = arguments;
@@ -19,7 +17,7 @@ function throttle(func, ms) {
     isThrottled = true;
 
     // plan to reset isThrottled after the delay
-    setTimeout(function() {
+    setTimeout(function () {
       isThrottled = false;
       if (savedArgs) {
         // if there were calls, savedThis/savedArgs have the last one

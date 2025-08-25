@@ -1,14 +1,13 @@
+# Promiz bilan kechiktirish
 
-# Va'da bilan kechiktirish
+O'rnatilgan `setTimeout` funktsiyasi qayta chaqiruvlardan foydalanadi. Promizga asoslangan alternativani yarating.
 
-O'rnatilgan `setTimeout` funktsiyasi qayta chaqiruvlardan foydalanadi. Va'daga asoslangan alternativani yarating.
-
-`delay(ms)` funktsiyasi va'da berishi kerak. Ushbu va'da `ms` milisoniyadan keyin hal qilinishi kerak, shunda biz unga `.then` qo'sha olamiz, shunga o'xshash:
+`delay(ms)` funktsiyasi Promiz berishi kerak. Ushbu Promiz `ms` milisoniyadan keyin hal qilinishi kerak, shunda biz unga `.then` qo'sha olamiz, shunga o'xshash:
 
 ```js
 function delay(ms) {
   // sizning kodingiz
 }
 
-delay(3000).then(() => alert('3 soniyadan keyin ishlaydi'));
+delay(3000).then(() => alert("3 soniyadan keyin ishlaydi"));
 ```

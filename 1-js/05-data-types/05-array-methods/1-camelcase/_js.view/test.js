@@ -1,19 +1,17 @@
-describe("camelize", function() {
-
-  it("leaves an empty line as is", function() {
+describe("camelize", function () {
+  it("bo'sh satrni o'zgartirisiz qoldiradi", function () {
     assert.equal(camelize(""), "");
   });
 
-  it("turns background-color into backgroundColor", function() {
+  it("background-color ni backgroundColor ga aylantiradi", function () {
     assert.equal(camelize("background-color"), "backgroundColor");
   });
 
-  it("turns list-style-image into listStyleImage", function() {
+  it("list-style-image ni listStyleImage ga aylantiradi", function () {
     assert.equal(camelize("list-style-image"), "listStyleImage");
   });
 
-  it("turns -webkit-transition into WebkitTransition", function() {
+  it("-webkit-transition ni WebkitTransition ga aylantiradi", function () {
     assert.equal(camelize("-webkit-transition"), "WebkitTransition");
   });
-
 });

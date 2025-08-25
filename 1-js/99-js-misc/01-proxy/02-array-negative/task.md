@@ -1,33 +1,32 @@
+# array[-1] ga murojaat
 
-# Accessing array[-1]
+Ba'zi dasturlash tillarida biz massiv elementlariga oxiridan boshlab manfiy indekslar yordamida kirishimiz mumkin.
 
-In some programming languages, we can access array elements using negative indexes, counted from the end.
-
-Like this:
+Bu kabi:
 
 ```js
 let array = [1, 2, 3];
 
-array[-1]; // 3, the last element
-array[-2]; // 2, one step from the end
-array[-3]; // 1, two steps from the end
+array[-1]; // 3, oxirgi element
+array[-2]; // 2, oxiridan bir qadam oldingi
+array[-3]; // 1, oxiridan ikki qadam oldingi
 ```
 
-In other words, `array[-N]` is the same as `array[array.length - N]`.
+Boshqacha qilib aytganda, `array[-N]` `array[array.uzunligi - N]` bilan bir xil.
 
-Create a proxy to implement that behavior.
+Ushbu xatti-harakatni amalga oshirish uchun proksi-server yarating.
 
-That's how it should work:
+Bu shunday ishlashi kerak:
 
 ```js
 let array = [1, 2, 3];
 
 array = new Proxy(array, {
-  /* your code */
+  /* sizning kodingiz */
 });
 
-alert( array[-1] ); // 3
-alert( array[-2] ); // 2
+alert(array[-1]); // 3
+alert(array[-2]); // 2
 
-// Other array functionality should be kept "as is"
+// Massivning boshqa funksiyalari "xuddi shunday" saqlanishi kerak
 ```

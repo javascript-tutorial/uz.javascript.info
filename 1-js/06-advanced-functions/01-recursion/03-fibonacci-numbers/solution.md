@@ -29,11 +29,7 @@ Bu yerda `fib(3)` qiymati `fib(5)` va `fib(4)` uchun ham zarurligini ko'rishimiz
 
 Mana, to'liq rekursiya daraxti:
 
-<<<<<<< HEAD
 ![fibonachchi rekursion daraxti](fibonacci-recursion-tree.svg)
-=======
-![fibonacci recursion tree](fibonacci-recursion-tree.svg)
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Biz aniq bilib olamizki, `fib(3)` ikki marta va `fib(2)` uch marta baholanadi. Hisoblashlarning umumiy miqdori `n` ga qaraganda tezroq o'sib boradi va bu hatto `n = 77` uchun ham juda katta bo'ladi.
 

@@ -5,10 +5,10 @@ Urunib ko'ring:
 ```js run
 let user = {
   name: "John",
-  go: function() { alert(this.name) }
-}
-
-(user.go)() // xato!
+  go: function () {
+    alert(this.name);
+  },
+}(user.go)(); // xato!
 ```
 
 Ko'pgina brauzerlardagi xato xabari nima bo'lganligini tushunishga imkon bermaydi.
@@ -35,9 +35,3 @@ let user = {
 ```
 
 Iltimos e'tibor bering, `(user.go)` atrofidagi qavslar bu erda hech narsa qilmaydi. Odatda ular operatsiyalar tartibini o'rnatadilar, ammo bu erda nuqta `.` baribir avval ishlaydi, shuning uchun hech qanday ta'sir bo'lmaydi. Faqat nuqta-vergul muhim.
-
-
-
-
-
-

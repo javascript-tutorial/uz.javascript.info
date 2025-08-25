@@ -1,11 +1,10 @@
-importance: 5
+muhimlik: 5
 
 ---
 
 # Kengaytirilgan soat
 
 Bizda `soat` klassi bor. Hozirda u har soniyada vaqtni bosib chiqaradi.
-
 
 [js src="source.view/clock.js"]
 

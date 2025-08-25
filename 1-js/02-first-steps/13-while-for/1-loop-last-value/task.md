@@ -1,4 +1,4 @@
-importance: 3
+muhimlik: 3
 
 ---
 
@@ -10,6 +10,6 @@ Ushbu kod chiqaradigan oxirgi qiymat nima? Nima uchun?
 let i = 3;
 
 while (i) {
-  alert( i-- );
+  alert(i--);
 }
 ```

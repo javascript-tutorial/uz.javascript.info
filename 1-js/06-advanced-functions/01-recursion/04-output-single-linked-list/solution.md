@@ -11,10 +11,10 @@ let list = {
       value: 3,
       next: {
         value: 4,
-        next: null
-      }
-    }
-  }
+        next: null,
+      },
+    },
+  },
 };
 
 function printList(list) {
@@ -24,7 +24,6 @@ function printList(list) {
     alert(tmp.value);
     tmp = tmp.next;
   }
-
 }
 
 printList(list);
@@ -43,11 +42,7 @@ function printList(list) {
 }
 ```
 
-<<<<<<< HEAD
 ...Ammo bu aqlsiz bo'ladi. Kelajakda biz funktsiyani kengaytirishimiz, ro'yxat bilan yana bir narsa qilishimiz kerak bo'lishi mumkin. Agar biz `list` ni o'zgartirsak, unda biz bunday qobiliyatni yo'qotamiz.
-=======
-...But that would be unwise. In the future we may need to extend a function, do something else with the list. If we change `list`, then we lose such ability.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Yaxshi o'zgaruvchanlar nomlari haqida gapiradigan bo'lsak, `list` bu yerda ro'yxatning o'zi. Buning birinchi elementi. Va u shunday qolishi kerak. Bu aniq va ishonchli.
 
@@ -66,20 +61,18 @@ let list = {
       value: 3,
       next: {
         value: 4,
-        next: null
-      }
-    }
-  }
+        next: null,
+      },
+    },
+  },
 };
 
 function printList(list) {
-
   alert(list.value); // joriy elementni chiqarish
 
   if (list.next) {
     printList(list.next); // ro'yxatning qolgan qismida ham xuddi shunday qiling
   }
-
 }
 
 printList(list);

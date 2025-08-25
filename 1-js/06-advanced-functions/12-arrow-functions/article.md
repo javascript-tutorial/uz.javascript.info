@@ -2,15 +2,9 @@
 
 Keling, o'q funktsiyalarini qayta ko'rib chiqaylik.
 
-<<<<<<< HEAD
 O'q funktsiyalari faqat kamroq yozish uchun "qisqartirish" emas. Ular boshqa foydali xususiyatlarga ega.
 
 JavaScript biz boshqa joyda bajarilgan kichik funktsiyani yozishimiz kerak bo'lgan vaziyatlarga to'la.
-=======
-Arrow functions are not just a "shorthand" for writing small stuff. They have some very specific and useful features.
-
-JavaScript is full of situations where we need to write a small function that's executed somewhere else.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Masalan:
 
@@ -20,11 +14,7 @@ Masalan:
 
 Funktsiyani yaratish va uni biron bir joyga yetkazish JavaScript-ni ruhiga mos keladi.
 
-<<<<<<< HEAD
 Va bunday funktsiyalarda biz odatda hozirgi kontekstni tark etishni xohlamaymiz.
-=======
-And in such functions we usually don't want to leave the current context. That's where arrow functions come in handy.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## O'q funktsiyalarida "this" yo'q
 
@@ -75,16 +65,16 @@ Xatolik yuzaga keldi, chunki `forEach` sukut bo'yicha `this=undefined` bilan ish
 
 Bu o'q funktsiyalariga ta'sir qilmaydi, chunki ularda `this` yo'q.
 
-```warn header="O'q funktsiyalari `new` bilan ishlamaydi"
-`this` ga ega bo'lmaslik tabiiy ravishda yana bir cheklovni anglatadi: o'q funktsiyalarini konstruktor sifatida ishlatish mumkin emas. Ularni `new` bilan chaqirish mumkin emas.
-```
+```warn header="O'q funktsiyalari `new`bilan ishlamaydi"`this`ga ega bo'lmaslik tabiiy ravishda yana bir cheklovni anglatadi: o'q funktsiyalarini konstruktor sifatida ishlatish mumkin emas. Ularni`new` bilan chaqirish mumkin emas.
+
+````
 
 ```smart header="O'q funktsiyalar VS bind"
 `=>` O'q funktsiyasi va `.bind(this)` bilan chaqirilgan muntazam funktsiya o'rtasida nozik farq bor:
 
 - `.bind(this)` funktsiyaning "bog'langan versiyasi" ni yaratadi.
 - `=>` o'qi hech qanday bog'lanish yaratmaydi. Funktsiyada oddiygina `this` mavjud emas. `this` ni qidirish doimiy o'zgaruvchan qidirish bilan bir xil tarzda amalga oshiriladi: tashqi leksik muhitda.
-```
+````
 
 ## O'qlarda "argumentlar" yo'q
 
@@ -96,13 +86,13 @@ Masalan, `defer(f, ms)` funktsiyani oladi va atrofida chaqiruvni `ms` millisoniy
 
 ```js run
 function defer(f, ms) {
-  return function() {
+  return function () {
     setTimeout(() => f.apply(this, arguments), ms);
   };
 }
 
 function sayHi(who) {
-  alert('Salom, ' + who);
+  alert("Salom, " + who);
 }
 
 let sayHiDeferred = defer(sayHi, 2000);
@@ -113,9 +103,9 @@ Xuddi shu o'q funktsiyasiz quyidagicha ko'rinadi:
 
 ```js
 function defer(f, ms) {
-  return function(...args) {
+  return function (...args) {
     let ctx = this;
-    setTimeout(function() {
+    setTimeout(function () {
       return f.apply(ctx, args);
     }, ms);
   };
@@ -128,18 +118,9 @@ function defer(f, ms) {
 
 O'q funktsiyalari:
 
-<<<<<<< HEAD
 - `this` ga ega emas.
 - `argumentlar` ga ega emas.
 - `new` bilan chaqirib bo'lmaydi.
 - (Ularda `super` yo'q, lekin biz buni hali o'rganmadik. <info:class-inheritance> bo'limida bo'ladi).
 
 Buning sababi shundaki, ular o'zlarining "kontekstlari" bo'lmagan, aksincha hozirgi holatida ishlaydigan qisqa kodlar uchun mo'ljallangan. Va ular, albatta, ushbu foydalanish holatida porlaydilar.
-=======
-- Do not have `this`
-- Do not have `arguments`
-- Can't be called with `new`
-- They also don't have `super`, but we didn't study it yet. We will on the chapter <info:class-inheritance>
-
-That's because they are meant for short pieces of code that do not have their own "context", but rather work in the current one. And they really shine in that use case.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

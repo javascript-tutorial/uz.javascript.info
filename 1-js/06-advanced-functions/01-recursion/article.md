@@ -85,11 +85,7 @@ Shunday qilib, rekursiya funktsiya chaqiruvini sodda chaqiruvchiga, so'ngra yana
 ````smart header="Rekursiya odatda qisqaroq"
 Rekursiv yechim odatda takrorlanuvchiga qaraganda qisqaroq bo'ladi.
 
-<<<<<<< HEAD
 Bu yerda biz `pow(x, n)` funktsiya kodini yanada qisqartirish, ammo oson o'qilishi uchun `if` o'rniga uchlik `?` operatoridan foydalangan holda qayta yozishimiz mumkin:
-=======
-Here we can rewrite the same using the conditional operator `?` instead of `if` to make `pow(x, n)` more terse and still very readable:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 function pow(x, n) {
@@ -100,27 +96,11 @@ function pow(x, n) {
 
 Ichki chaqiruvlarning maksimal soni (birinchisini ham qo'shganda) *rekursiya chuqurligi* deb nomlanadi. Bizning holatda, bu aniq `n` bo'ladi.
 
-<<<<<<< HEAD
 Maksimal rekursiya chuqurligi JavaScript interpretatori bilan cheklangan. 10000 ga yaqin ekanligiga ishonch hosil qilishimiz mumkin, ba'zi interpretatorlar ko'proq narsalarga imkon beradi, ammo 100000 ularning aksariyati uchun cheklangan bo'lishi mumkin. Buni engillashtirishga yordam beradigan avtomatik optimallashtirishlar mavjud ("quyruq chaqiruvlar optimallashtirish"), ammo ular hali hamma joyda qo'llab-quvvatlanmaydi va faqat oddiy holatlarda ishlaydi.
-=======
-The maximal recursion depth is limited by JavaScript engine. We can rely on it being 10000, some engines allow more, but 100000 is probably out of limit for the majority of them. There are automatic optimizations that help alleviate this ("tail calls optimizations"), but they are not yet supported everywhere and work only in simple cases.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
-
-Bu rekursiyani qo'llashni cheklaydi, ammo u hali ham juda keng bo'lib qolmoqda. Rekursiv fikrlash uslubi sodda kod beradi, uni saqlash osonroq.
-
-<<<<<<< HEAD
-## Ijro to'plami
-=======
-## The execution context and stack
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Endi rekursiv chaqiruvlar qanday ishlashini ko'rib chiqamiz. Buning uchun biz funktsiyalarning "qopqog' ostini" ko'rib chiqamiz.
 
-<<<<<<< HEAD
 Funksiyaning ishlashi haqida ma'lumot uning *bajarilish kontekstida* saqlanadi.
-=======
-The information about the process of execution of a running function is stored in its *execution context*.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 [Ijro etish konteksti](https://tc39.github.io/ecma262/#sec-execution-contexts) - bu funktsiyalarning bajarilishi to'g'risidagi ma'lumotlarni o'z ichiga olgan ichki ma'lumotlar tuzilishi: boshqaruv oqimi hozir bo'lgan joyda, hozirgi o'zgaruvchanlar , `this` qiymati (biz bu yerda ishlatmaymiz) va boshqa bir nechta ichki tafsilotlar.
 
@@ -148,11 +128,7 @@ Biz uni quyidagicha chizishimiz mumkin:
   </li>
 </ul>
 
-<<<<<<< HEAD
 Ana shunda funktsiya bajarila boshlaydi. `n == 1` sharti noto'g'ri, shuning uchun oqim `if` ning ikkinchi shoxiga o'tadi:
-=======
-That's when the function starts to execute. The condition `n == 1` is falsy, so the flow continues into the second branch of `if`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 function pow(x, n) {
@@ -205,17 +181,7 @@ Bu yerda biz xuddi shu funktsiyani `pow` deb ataymiz, ammo bu mutlaqo muhim emas
 
 Yangi joriy ijro konteksti tepada (va qalin) va avval eslab olingan kontekstlar quyida keltirilgan.
 
-<<<<<<< HEAD
 Subchaqiruv tugatgandan so'ng - avvalgi kontekstni davom ettirish oson, chunki u ikkala o'zgaruvchanni va kodning to'xtagan joyini saqlaydi. Bu yerda rasmda biz "satr" so'zini ishlatmoqdamiz, ammo bu aniqroq.
-=======
-When we finish the subcall -- it is easy to resume the previous context, because it keeps both variables and the exact place of the code where it stopped.
-
-```smart
-Here in the picture we use the word "line", as in our example there's only one subcall in line, but generally a single line of code may contain multiple subcalls, like `pow(…) + pow(…) + somethingElse(…)`.
-
-So it would be more precise to say that the execution resumes "immediately after the subcall".
-```
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ### pow(2, 1)
 
@@ -348,57 +314,33 @@ let company = {
 
 Boshqacha qilib aytganda, kompaniyada bo'limlar mavjud.
 
-<<<<<<< HEAD
 - Bo'limda bir massiv xodimlar bo'lishi mumkin. Masalan, `savdo` bo'limida ikkita xodim ishlaydi: Aziza va Elbek.
 - Yoki kompaniya bo'linmalarga bo'linishi mumkin, masalan, `rivojlanish` ning ikkita shoxi mavjud: `saytlar` va `ichki dasturals`. Ularning har birida o'z shaxsiy xodimlari mavjud.
 - Bundan tashqari, agar bo'linma o'sib chiqsa, u pastki bo'limlarga (yoki jamoalarga) bo'linishi mumkin.
-=======
-- A department may have an array of staff. For instance, `sales` department has 2 employees: John and Alice.
-- Or a department may split into subdepartments, like `development` has two branches: `sites` and `internals`. Each of them has their own staff.
-- It is also possible that when a subdepartment grows, it divides into subsubdepartments (or teams).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     Masalan, kelajakda saytlar bo'limi `siteA` va` siteB` uchun jamoalarga bo'linishi mumkin. Va ular, ehtimol, ko'proq bo'linishi mumkin. Faqat bu rasmda emas, balki bu narsani yodda tutish kerak.
 
 Keling, barcha ish haqlarining yig'indisini olish funktsiyasini xohlaymiz deylik. Buni qanday qilishimiz mumkin?
 
-<<<<<<< HEAD
 Takroriy yondashish oson emas, chunki tuzilish oddiy emas. Birinchi g'oya, birinchi darajali bo'limlar ustidan ichki subtsikl bilan `for` tsikl qilishdir. Ammo keyin biz `saytlar` kabi 2-darajali bo'limlarda ishlaydigan xodimlarni takrorlash uchun ko'proq ichki subtsiklarga muhtojmiz. ...Va keyin kelajakda paydo bo'lishi mumkin bo'lgan uchinchi darajali bo'limlar uchun yana bitta subtsiklmi? 3 darajasida to'xtashimiz kerakmi yoki 4 darajali tsikl qilishimiz kerakmi? Agar bitta obyektni ustidan takrorlash uchun kodga 3-4 ta ichki ichki tsiklni qo'ysak, u juda xunuk bo'ladi.
-=======
-An iterative approach is not easy, because the structure is not simple. The first idea may be to make a `for` loop over `company` with nested subloop over 1st level departments. But then we need more nested subloops to iterate over the staff in 2nd level departments like `sites`... And then another subloop inside those for 3rd level departments that might appear in the future? If we put 3-4 nested subloops in the code to traverse a single object, it becomes rather ugly.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Rekursiyani sinab ko'raylik.
 
 Ko'rib turganimizdek, bizning funktsiyamiz bo'limni yig'ib olganda, ikkita holat mavjud:
 
-<<<<<<< HEAD
 1. Yoki bu "oddiy" *odamlar massiviga ega* bo'lim -- biz ish haqini oddiy tsiklda yig'ishimiz mumkin.
 2. Yoki bu *`N` bo'linmalariga ega bo'lgan obyekt* - biz subdepslarning har biri uchun yig'indini olish va natijalarni birlashtirish uchun `N` rekursiv chaqiruvlarini amalga oshirishimiz mumkin.
 
 (1) - bu rekursiyaning asosi, muhim holat.
 
 (2) - bu rekursiv qadam. Murakkab vazifa kichik bo'limlar uchun subvazifalrga bo'linadi. Ular o'z navbatida yana bo'linishi mumkin, ammo ertami-kechmi bo'linish (1) da tugaydi.
-=======
-1. Either it's a "simple" department with an *array* of people -- then we can sum the salaries in a simple loop.
-2. Or it's *an object* with `N` subdepartments -- then we can make `N` recursive calls to get the sum for each of the subdeps and combine the results.
-
-The 1st case is the base of recursion, the trivial case, when we get an array.
-
-The 2nd case when we get an object is the recursive step. A complex task is split into subtasks for smaller departments. They may in turn split again, but sooner or later the split will finish at (1).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Algoritmni koddan o'qish yanada osonroq bo'lishi mumkin:
 
 
 ```js run
-<<<<<<< HEAD
 let company = { // qisqartirish uchun siqilgan bir xil obyekt
   sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 600 }],
-=======
-let company = { // the same object, compressed for brevity
-  sales: [{name: 'John', salary: 1000}, {name: 'Alice', salary: 1600 }],
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   development: {
     sites: [{name: 'Peter', salary: 2000}, {name: 'Alex', salary: 1800 }],
     internals: [{name: 'Jack', salary: 1300}]
@@ -470,11 +412,7 @@ let arr = [obj1, obj2, obj3];
 
 ...Ammo massivlarda muammo bor. "Elementni o'chirish" va "elementni kiritish" operatsiyalari qimmatga tushadi. Masalan, `arr.unshift(obj)` operatsiyasi yangi `obj` ga joy ajratish uchun barcha elementlarning raqamlarini o'zgartirishi kerak va agar massiv katta bo'lsa, vaqt talab etiladi. `arr.shift()` bilan bir xil.
 
-<<<<<<< HEAD
 Ommaviy raqamlarni o'zgartirishni talab qilmaydigan yagona tizimli o'zgartirishlar massiv oxirida ishlaydiganlardir: `arr.push/pop`. Shunday qilib, massiv katta navbatlarda juda sekin bo'lishi mumkin.
-=======
-The only structural modifications that do not require mass-renumbering are those that operate with the end of array: `arr.push/pop`. So an array can be quite slow for big queues, when we have to work with the beginning.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Shu bilan bir qatorda, agar biz haqiqatan ham tezkor kiritish/o'chirishga muhtoj bo'lsak, biz [bog'langan ro'yxat](https://en.wikipedia.org/wiki/Linked_list) deb nomlangan boshqa ma'lumotlar tuzilishini tanlashimiz mumkin.
 
@@ -514,11 +452,7 @@ list.next.next.next = { value: 4 };
 list.next.next.next.next = null;
 ```
 
-<<<<<<< HEAD
 Bu erda biz bir nechta ob'ektlar borligini yanada aniqroq ko'rishimiz mumkin, ularning har biri `qiymati` va `keyingi` qo'shniga ishora qiladi. `list` o'zgaruvchisi zanjirning birinchi obyekti, shuning uchun undan `keyingi` ko'rsatgichlardan so'ng istalgan elementga erishishimiz mumkin.
-=======
-Here we can even more clearly see that there are multiple objects, each one has the `value` and `next` pointing to the neighbour. The `list` variable is the first object in the chain, so following `next` pointers from it we can reach any element.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Ro'yxat osongina bir nechta qismlarga bo'linishi va keyinchalik birlashtirilishi mumkin:
 
@@ -569,28 +503,14 @@ Tabiiyki, ro'yxatlar har doim ham massivlardan yaxshiroq emas. Aks holda hamma f
 
 Asosiy kamchilik shundaki, biz elementga uning soniga ko'ra osonlikcha kira olmaymiz. Bu massivda oson erishiladi: `arr[n]` - bu to'g'ridan-to'g'ri ma'lumotdir. Ammo ro'yxatda biz birinchi elementdan boshlashimiz va `N` elementni olish uchun `keyingi` `N` marta o'tishimiz kerak.
 
-<<<<<<< HEAD
 ...Lekin biz har doim bunday operatsiyalarga muhtoj emasmiz. Misol uchun, biz navbatga yoki hatto [ikki tomonlama](https://en.wikipedia.org/wiki/Double-ended_queue) muhtojmiz –- bu har ikki uchidan ham elementlarni juda tez qo'shish/o'chirish imkonini beruvchi tartibli tuzilishdir, lekin o'rtada kirishga iloji yo'q.
 
 Ba'zan ro'yxatning oxirgi elementini kuzatib borish uchun `quyruq` nomli boshqa o'zgaruvchanni qo'shishga to'g'ri keladi (elementlarni oxiriga qo'shish/olib tashlash va yangilash uchun). Katta elementlar to'plami uchun tezlik farqi massivga nisbatan katta.
-=======
-...But we don't always need such operations. For instance, when we need a queue or even a [deque](https://en.wikipedia.org/wiki/Double-ended_queue) -- the ordered structure that must allow very fast adding/removing elements from both ends, but access to its middle is not needed.
-
-Lists can be enhanced:
-- We can add property `prev` in addition to `next` to reference the previous element, to move back easily.
-- We can also add a variable named `tail` referencing the last element of the list (and update it when adding/removing elements from the end).
-- ...The data structure may vary according to our needs.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Xulosa
 
-<<<<<<< HEAD
 Shartlar:
 - *Rekursiya* - bu "o'zini o'zi chaqirish" funktsiyasini anglatadigan dasturlash atamasi. Bunday funktsiyalar yordamida ba'zi vazifalarni nafis usullar bilan hal qilish mumkin.
-=======
-Terms:
-- *Recursion*  is a programming term that means calling a function from itself. Recursive functions can be used to solve tasks in elegant ways.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     Agar funktsiya o'zini o'zi chaqirsa, bu *rekursiya qadami* deb nomlanadi. Rekursiyaning *asosi* vazifani shu qadar soddalashtiradigan funktsiya argumentlari bo'lib, funktsiya qo'shimcha chaqiruvlarni amalga oshirmaydi.
 

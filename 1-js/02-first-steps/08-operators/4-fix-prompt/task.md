@@ -1,18 +1,18 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Fix the addition
+# Qo'shishni tuzating
 
-Here's a code that asks the user for two numbers and shows their sum.
+Mana foydalanuvchidan ikkita raqamni so'raydigan va ularning yig'indisini ko'rsatadigan kod.
 
-It works incorrectly. The output in the example below is `12` (for default prompt values).
+Bu noto'g'ri ishlaydi. Quyidagi misoldagi chiqish `12` (standart taklif qiymatlari uchun).
 
-Why? Fix it. The result should be `3`.
+Nega? Tuzating. Natija "3" bo'lishi kerak.
 
 ```js run
-let a = prompt("First number?", 1);
-let b = prompt("Second number?", 2);
+let a = prompt("Birinchi raqam?", 1);
+let b = prompt("Ikkinchi raqam?", 2);
 
 alert(a + b); // 12
 ```

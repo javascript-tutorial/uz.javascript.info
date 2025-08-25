@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -9,7 +9,7 @@ Ertagacha qolgan soniya sonini qaytaradigan `getSecondsToTomorrow()` funktsiyasi
 Masalan, agar hozir `23:00` bo'lsa, unda:
 
 ```js
-getSecondsToTomorrow() == 3600
+getSecondsToTomorrow() == 3600;
 ```
 
 P.S. Funktsiya har qanday vaqtda ishlashi kerak, faqat "bugun" uchun kodlangan emas.

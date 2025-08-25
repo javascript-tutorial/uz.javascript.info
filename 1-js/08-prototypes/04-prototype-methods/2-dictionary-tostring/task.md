@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -19,12 +19,12 @@ let dictionary = Object.create(null);
 
 // ba'zi ma'lumotlarni qo'shing
 dictionary.apple = "Apple";
-dictionary.__proto__ = "test"; // __proto__ bu erda odatiy xususiyat kalitidir
+dictionary.__proto__ = "test"; // __proto__ bu yerda odatiy xususiyat kalitidir
 
 // faqat apple va __proto__ tsiklda
 for(let key in dictionary) {
   alert(key); // "apple", so'ng "__proto__"
-}  
+}
 
 // sizning toString amalda
 alert(dictionary); // "apple,__proto__"

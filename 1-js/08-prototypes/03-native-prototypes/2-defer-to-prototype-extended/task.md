@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -10,7 +10,7 @@ Qanday ishlashi kerakligi haqida bir misol:
 
 ```js
 function f(a, b) {
-  alert( a + b );
+  alert(a + b);
 }
 
 f.defer(1000)(1, 2); // 1 soniyadan keyin 3 ni ko'rsatadi

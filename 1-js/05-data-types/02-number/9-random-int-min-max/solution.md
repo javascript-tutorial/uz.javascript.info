@@ -4,11 +4,11 @@ Eng sodda, ammo noto'g'ri yechim, `min` dan max" gacha qiymat hosil qilish va un
 
 ```js run
 function randomInteger(min, max) {
-  let rand = min + Math.random() * (max - min); 
+  let rand = min + Math.random() * (max - min);
   return Math.round(rand);
 }
 
-alert( randomInteger(1, 3) );
+alert(randomInteger(1, 3));
 ```
 
 Funktsiya ishlaydi, ammo bu noto'g'ri. `min` va `max` chekka qiymatlarini olish ehtimoli boshqalarga nisbatan ikki baravar kam.

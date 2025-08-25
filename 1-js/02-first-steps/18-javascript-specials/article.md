@@ -1,51 +1,50 @@
-# JavaScript xususiyatlari
+# JavaScript maxsus xususiyatlari
 
-Ushbu bobda JavaScript-ning nozik lahzalarga alohida e'tibor berib, biz hozirgacha o'rgangan xususiyatlari haqida qisqacha ma'lumot berilgan.
+Bu bob hozir o'rgangan JavaScript xususiyatlarini qisqacha takrorlaydi va nozik momentlarga alohida e'tibor beradi.
 
-## Kod tarkibi
+## Kod tuzilishi
 
-Ifodalar nuqta-vergul bilan ajratilgan:
-
-```js run no-beautify
-alert('Salom'); alert('Dunyo');
-```
-
-Odatda, keyingi satrga o’tish ajratuvchi sifatida qaraladi, shuning uchun bu ham ishlaydi:
+Iboralar nuqta-vergul bilan ajratiladi:
 
 ```js run no-beautify
-alert('Salom')
-alert('Dunyo')
+alert("Salom");
+alert("Dunyo");
 ```
 
-Bu "avtomatik nuqta-vergul qo'shish" deb ataladi. Ba'zan ishlamaydi, masalan:
+Odatda, qator uzilishi ham ajratuvchi sifatida qaraladi, shuning uchun bu ham ishlaydi:
+
+```js run no-beautify
+alert("Salom");
+alert("Dunyo");
+```
+
+Bu "avtomatik nuqta-vergul qo'yish" deb ataladi. Ba'zan u ishlamaydi, masalan:
 
 ```js run
-alert("Ushbu xabardan keyin xato bo'ladi")
-
-[1, 2].forEach(alert)
+alert("Bu xabardan keyin xato bo'ladi")[(1, 2)].forEach(alert);
 ```
 
-Ko'pgina kod uslublari bo'yicha qo'llanmalar har bir ifodadan keyin nuqta-vergul qo'yishimiz kerak degan fikrga qo'shilishadi.
+Ko'pchilik kod uslubi qo'llanmalari har bir iboradan keyin nuqta-vergul qo'yishga rozi.
 
-`{...}` kod bloklari va ular bilan sintaksis tuzilgandan tsiklardan so'ng, nuqta-vergullar shart emas:
+Kod bloklari `{...}` va ular bilan tsikllar kabi sintaksis konstruksiyalaridan keyin nuqta-vergul shart emas:
 
 ```js
 function f() {
-  // funktsiya e'lon qilinganidan keyin nuqta-vergul kerak emas
+  // funksiya e'lonidan keyin nuqta-vergul kerak emas
 }
 
-for(;;) {
+for (;;) {
   // tsikldan keyin nuqta-vergul kerak emas
 }
 ```
 
-...Ammo biz biron bir joyga "qo'shimcha" nuqta-vergul qo'yishimiz mumkin, bu xato emas. Bunga e'tibor berilmaydi.
+...Lekin agar biror joyga "qo'shimcha" nuqta-vergul qo'ysak ham, bu xato emas. U e'tiborga olinmaydi.
 
 Batafsil: <info:structure>.
 
 ## Qat'iy rejim
 
-Zamonaviy JavaScript-ning barcha xususiyatlarini to'liq ishga tushirish uchun biz `"use strict"` bilan skriptlarni boshlashimiz kerak.
+Zamonaviy JavaScript-ning barcha xususiyatlarini to'liq yoqish uchun skriptlarni `"use strict"` bilan boshlashimiz kerak.
 
 ```js
 'use strict';
@@ -53,94 +52,77 @@ Zamonaviy JavaScript-ning barcha xususiyatlarini to'liq ishga tushirish uchun bi
 ...
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-Direktiv skriptning yuqori qismida yoki funktsiya boshida bo'lishi kerak.
-=======
-The directive must be at the top of a script or at the beginning of a function body.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+Direktiva skriptning yuqorisida yoki funksiya tanasining boshida bo'lishi kerak.
 
-`"use strict"` siz, hamma narsa baribir ishlaydi, ammo ba'zi xususiyatlar o'zlarini eskicha moda tutishadi. Biz odatda zamonaviy xatti-harakatni afzal ko'ramiz.
+`"use strict"` bo'lmasa ham, hamma narsa ishlaydi, lekin ba'zi xususiyatlar eski uslubda, "mos" tarzda ishlaydi. Biz odatda zamonaviy xatti-harakatni afzal ko'ramiz.
 
-Tilning ba'zi zamonaviy xususiyatlari (kelajakda biz o'rganadigan sinflar singari) qat'iy rejimni bilvosita ta'minlaydi.
+Tilning ba'zi zamonaviy xususiyatlari (kelajakda o'rganadigan sinflar kabi) qat'iy rejimni bilvosita yoqadi.
 
 Batafsil: <info:strict-mode>.
 
-## O'zgaruvchanlar
+## O'zgaruvchilar
 
-E'lon qilinishi mumkin:
+Quyidagilar yordamida e'lon qilish mumkin:
 
 - `let`
-- `const` (konstanta, o'zgartirish mumkin emas)
-- `var` (eski uslub, keyinroq ko'riladi)
+- `const` (doimiy, o'zgartirib bo'lmaydi)
+- `var` (eski uslub, keyinroq ko'ramiz)
 
-O'zgaruvchan nomi quyidagilarni o'z ichiga olishi mumkin:
-- Harflar va raqamlar, lekin birinchi belgi raqam bo'lmasligi kerak.
-- `$` Va `_` belgilar normal, harflar bilan teng.
-- Lotin bo'lmagan alifbolar va ierogliflarga ham ruxsat berilgan, ammo odatda qo'llanilmaydi.
+O'zgaruvchi nomi quyidagilarni o'z ichiga olishi mumkin:
 
-O'zgaruvchanlar dinamik tarzda yoziladi. Ular har qanday qiymatni saqlashlari mumkin:
+- Harflar va raqamlar, lekin birinchi belgi raqam bo'lmasligi mumkin.
+- `$` va `_` belgilar oddiy, harflar bilan teng.
+- Lotin bo'lmagan alifbolar va ierogliflar ham ruxsat etilgan, lekin odatda ishlatilmaydi.
+
+O'zgaruvchilar dinamik tipga ega. Ular istalgan qiymatni saqlashi mumkin:
 
 ```js
 let x = 5;
 x = "John";
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-Ma'lumotlarning 7 turi mavjud:
+8 ta ma'lumot turi mavjud:
 
 - `number` suzuvchi nuqta va butun sonlar uchun,
-- `string` matnlar uchun,
-- `boolean` mantiqiy qiymatlar: `true/false`,
-- `null` -- "bo'sh" yoki "mavjud emas" degan ma'noni anglatuvchi bitta `null` qiymatiga ega tur,
-- `undefined` -- "tayinlanmagan" degan ma'noni anglatuvchi `undefined` yagona qiymatga ega tur,
-- `object` va `symbol` -- murakkab ma'lumotlar tuzilmalari va noyob identifikatorlar uchun, biz ularni hali o'rganmaganmiz.
-=======
-There are 8 data types:
+- `bigint` ixtiyoriy uzunlikdagi butun sonlar uchun,
+- `string` satrlar uchun,
+- `boolean` mantiqiy qiymatlar uchun: `true/false`,
+- `null` -- bitta `null` qiymatli tip, "bo'sh" yoki "mavjud emas" ma'nosini bildiradi,
+- `undefined` -- bitta `undefined` qiymatli tip, "tayinlanmagan" ma'nosini bildiradi,
+- `object` va `symbol` -- murakkab ma'lumotlar tuzilmalari va noyob identifikatorlar uchun, biz ularni hali o'rganmadik.
 
-- `number` for both floating-point and integer numbers,
-- `bigint` for integer numbers of arbitrary length,
-- `string` for strings,
-- `boolean` for logical values: `true/false`,
-- `null` -- a type with a single value `null`, meaning "empty" or "does not exist",
-- `undefined` -- a type with a single value `undefined`, meaning "not assigned",
-- `object` and `symbol` -- for complex data structures and unique identifiers, we haven't learnt them yet.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+`typeof` operatori qiymat uchun tipni qaytaradi, ikkita istisno bilan:
 
-`typeof` operatori qiymatning turini qaytaradi, ikkita istisno bundan mustasno:
 ```js
-typeof null == "object" // tilda xato
-typeof function(){} == "function" // funktsiyalarga maxsus ishlov beriladi
+typeof null == "object"; // tildagi xato
+typeof function () {} == "function"; // funksiyalar alohida ko'rib chiqiladi
 ```
 
 Batafsil: <info:variables> va <info:types>.
 
-## Mehmon bilan o'zaro munosabatlar
+## O'zaro ta'sir
 
-Biz brauzerni ish muhiti sifatida ishlatmoqdamiz, shuning uchun asosiy interfeys funktsiyalari quyidagilar:
+Biz brauzerni ish muhiti sifatida ishlatamoqdamiz, shuning uchun asosiy UI funksiyalar quyidagicha bo'ladi:
 
-[`prompt(question, [default])`](mdn:api/Window/prompt)
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-: `Savol` bering va mehmon kiritgan qiymatni qaytaring, agar mehmon "bekor" tugmasini bosgan bo'lsa `null` ni qaytaring.
-=======
-: Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+[`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
+: `question` so'rash va tashrif buyuruvchi kiritgan narsani yoki "bekor qilish"ni bossalar `null` ni qaytarish.
 
-[`confirm(question)`](mdn:api/Window/confirm)
-: `Savol` bering va Ok yoki Bekor qilish o'rtasida tanlov qilishni taklif qiling. Tanlov `true/false` sifatida qaytariladi.
+[`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
+: `question` so'rash va Ok va Bekor qilish o'rtasida tanlashni taklif qilish. Tanlov `true/false` sifatida qaytariladi.
 
-[`alert(message)`](mdn:api/Window/alert)
-: `Message` ni qaytaradi.
+[`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
+: `message` ni chiqarish.
 
-Bu funktsiyalarning barchasi *modal* bo'lib, ular kod bajarilishini to'xtatib turadi va mehmon javob berguncha sahifa bilan o'zaro aloqada bo'lishiga yo'l qo'ymaydi.
+Bu funksiyalarning barchasi _modal_, ular kod bajarilishini to'xtatadi va tashrif buyuruvchi javob berguncha sahifa bilan o'zaro ta'sirni oldini oladi.
 
 Masalan:
 
 ```js run
-let userName = prompt("Ismingiz?", "Aziza");
-let isTeaWanted = confirm("Choy istaysizmi??");
+let userName = prompt("Ismingiz?", "Alice");
+let isTeaWanted = confirm("Choy istaysizmi?");
 
-alert( "Mehmon: " + userName ); // Aziza
-alert( "Choy istaydi: " + isTeaWanted ); // true
+alert("Tashrif buyuruvchi: " + userName); // Alice
+alert("Choy kerak: " + isTeaWanted); // true
 ```
 
 Batafsil: <info:alert-prompt-confirm>.
@@ -150,197 +132,153 @@ Batafsil: <info:alert-prompt-confirm>.
 JavaScript quyidagi operatorlarni qo'llab-quvvatlaydi:
 
 Arifmetik
-: Muntazam: `* + - /`, qolgan qismi uchun `%` va raqamning darajasi uchun `**`.
+: Oddiy: `* + - /`, shuningdek qoldiq uchun `%` va sonning darajasi uchun `**`.
 
-    Binar qo'shish `+` matnlarni birlashtiradi. Agar operandlarning birortasi matn bo'lsa, ikkinchisi ham matnga aylantiriladi:
+    Ikkilik plus `+` satrlarni birlashtiradi. Va agar operandlardan biri satr bo'lsa, ikkinchisi ham satrga aylantiriladi:
 
     ```js run
-    alert( '1' + 2 ); // '12', matn
-    alert( 1 + '2' ); // '12', matn
+    alert( '1' + 2 ); // '12', satr
+    alert( 1 + '2' ); // '12', satr
     ```
 
-Tayinlash belgisi
-: Oddiy tayinlashlar mavjud: `a = b` va `a *= 2` kabi kombinatsiyalanganlar.
+Tayinlashlar
+: Oddiy tayinlash: `a = b` va birlashtirilganlar `a *= 2` kabi.
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-Bit operatorlari
-: Bitwise operatorlari butun sonlar bilan bit darajasida ishlaydi: kerak bo'lganda [docs](mdn:/JavaScript/Reference/Operators/Bitwise_Operators) ga qarang.
+Bitli
+: Bitli operatorlar eng past, bit darajasida 32-bitli butun sonlar bilan ishlaydi: kerak bo'lganda [hujjatlarga](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) qarang.
 
-Uchinchi
-: Uch parametrga ega bo'lgan yagona operator: `cond ? natijaA : natijaB`. Agar `cond` to'g'ri bo'lsa, `natijaA` ni, aks holda `natijaB` ni qaytaradi.
+Shartli
+: Uchta parametrli yagona operator: `cond ? resultA : resultB`. Agar `cond` haqiqiy bo'lsa, `resultA` ni qaytaradi, aks holda `resultB` ni.
 
 Mantiqiy operatorlar
-: Mantiqiy VA `&&` va YOKI `||` qisqa tutashuvni baholashni amalga oshiradi va keyin to'xtagan joyga qiymatni qaytaradi. Mantiqiy YO'Q `!` operandni mantiqiy turga o'zgartiradi va teskari qiymatni qaytaradi.
-=======
-Bitwise
-: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](mdn:/JavaScript/Guide/Expressions_and_Operators#Bitwise) when they are needed.
+: Mantiqiy VA `&&` va YOKI `||` qisqa tutashuv baholashini amalga oshiradi va keyin to'xtagan joyda qiymatni qaytaradi (majburiy ravishda `true`/`false` emas). Mantiqiy EMAS `!` operandni boolean tipiga aylantiradi va teskari qiymatni qaytaradi.
 
-Conditional
-: The only operator with three parameters: `cond ? resultA : resultB`. If `cond` is truthy, returns `resultA`, otherwise `resultB`.
-
-Logical operators
-: Logical AND `&&` and OR `||` perform short-circuit evaluation and then return the value where it stopped (not necessary `true`/`false`). Logical NOT `!` converts the operand to boolean type and returns the inverse value.
-
-Nullish coalescing operator
-: The `??` operator provides a way to choose a defined value from a list of variables. The result of `a ?? b` is `a` unless it's `null/undefined`, then `b`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+Nullish coalescing operatori
+: `??` operatori o'zgaruvchilar ro'yxatidan aniqlangan qiymatni tanlash usulini taqdim etadi. `a ?? b` ning natijasi `null/undefined` bo'lmaguncha `a`, keyin `b`.
 
 Taqqoslashlar
-: Turli xil qiymatlar uchun tenglikni tekshirish `==` ularni raqamga o'zgartiradi (bir-biriga teng keladigan `null` va `undefined` dan tashqari), shuning uchun ular tengdir:
+: Turli tiplar qiymatlari uchun tenglik tekshiruvi `==` ularni raqamga aylantiradi (`null` va `undefined` dan tashqari, ular bir-biriga teng va boshqa hech narsaga teng emas), shuning uchun bular teng:
 
     ```js run
     alert( 0 == false ); // true
     alert( 0 == '' ); // true
     ```
 
-    Boshqa taqqoslashlar ham raqamga aylanadi.
+    Boshqa taqqoslashlar ham raqamga aylantiradi.
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-    `===` qat'iy tenglik operatori konvertatsiyani amalga oshirmaydi: har xil turlar har doim har xil qiymatlarni anglatadi, shuning uchun:
-=======
-    The strict equality operator `===` doesn't do the conversion: different types always mean different values for it.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+    Qat'iy tenglik operatori `===` aylantirishni qilmaydi: turli tiplar uning uchun har doim turli qiymatlarni anglatadi.
 
-    `null` va `undefined` qiymatlari alohida ahamiyatga ega: ular `==` bir-biriga teng va boshqa hech narsaga teng kelmaydi.
+    `null` va `undefined` qiymatlari maxsus: ular bir-biriga `==` teng va boshqa hech narsaga teng emas.
 
-    Kattaroq/kamroq taqqoslashlar satrlarni belgi bo'yicha taqqoslaydi, boshqa turlari raqamga aylantiriladi.
+    Katta/kichik taqqoslashlar satrlarni belgi-belgiga solishtiradi, boshqa tiplar raqamga aylantiriladi.
 
 Boshqa operatorlar
-: Vergul operatori kabi bir necha boshqalar bor.
+: Vergul operatori kabi bir nechtasi bor.
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-Batafsil: <info:operators>, <info:comparison>, <info:logical-operators>.
-=======
-More in: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-coalescing-operator>.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+Batafsil: <info:operators>, <info:comparison>, <info:logical-operators>, <info:nullish-coalescing-operator>.
 
-## Tsiklar
+## Tsikllar
 
-- Biz uchta turni qopladik:
+- Biz 3 turdagi tsiklni ko'rib chiqdik:
 
-    ```js
-    // 1
-    while (shart) {
-      ...
-    }
+  ```js
+  // 1
+  while (condition) {
+    ...
+  }
 
-    // 2
-    do {
-      ...
-    } while (shart);
+  // 2
+  do {
+    ...
+  } while (condition);
 
-    // 3
-    for(let i = 0; i < 10; i++) {
-      ...
-    }
-    ```
+  // 3
+  for(let i = 0; i < 10; i++) {
+    ...
+  }
+  ```
 
-- `For(let ...)` tsiklida e'lon qilingan o'zgaruvchan faqat tsikl ichida ko'rinadi. Ammo biz `let` ni qoldirib, mavjud bo'lgan o'zgaruvchani qayta ishlatishimiz mumkin.
-- Direktivalar `break/continue` butun tsikldan/joriy iteratsiyadan chiqishga imkon beradi. Ichki halqalarni sindirish uchun yorliqlardan foydalaning.
+- `for(let...)` tsiklida e'lon qilingan o'zgaruvchi faqat tsikl ichida ko'rinadi. Lekin biz `let` ni tashlab qo'yib, mavjud o'zgaruvchini qayta ishlatishimiz ham mumkin.
+- `break/continue` direktivlari butun tsikl/joriy iteratsiyadan chiqishga imkon beradi. Ichma-ich tsikllarni buzish uchun yorliqlardan foydalaning.
 
 Batafsil: <info:while-for>.
 
-Keyinchalik biz ob'ektlar bilan ishlash uchun ko'proq tsikl turlarini o'rganamiz.
+Keyinroq obyektlar bilan ishlash uchun ko'proq tsikl turlarini o'rganamiz.
 
-## "Switch" konstruktsiyasi
+## "switch" konstruksiyasi
 
-"Switch" konstruktsiyasi bir nechta `if` tekshiruvlarini almashtirishi mumkin. Taqqoslash uchun `===` (qat'iy tenglik) ishlatiladi.
+"switch" konstruksiyasi bir nechta `if` tekshiruvini almashtirishi mumkin. U taqqoslash uchun `===` (qat'iy tenglik) dan foydalanadi.
 
 Masalan:
 
 ```js run
-let age = prompt('Yoshingiz?', 18);
+let age = prompt("Yoshingiz?", 18);
 
 switch (age) {
   case 18:
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-    alert("Ishlamaydi"); // so'rov natijasi raqam emas, balki matndir
-=======
-    alert("Won't work"); // the result of prompt is a string, not a number
+    alert("Ishlamaydi"); // prompt natijasi satr, raqam emas
     break;
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
 
   case "18":
     alert("Bu ishlaydi!");
     break;
 
   default:
-    alert("Yuqoridagi qiymatga teng bo'lmagan har qanday qiymat");
+    alert("Yuqoridagilardan biriga teng bo'lmagan istalgan qiymat");
 }
 ```
 
 Batafsil: <info:switch>.
 
-## Funktsiyalar
+## Funksiyalar
 
-Biz JavaScript da funktsiyani yaratishning uchta usulini ko'rib chiqdik:
+JavaScript-da funksiya yaratishning uchta usulini ko'rib chiqdik:
 
-1. Funktsiya deklaratsiyasi: asosiy kod oqimidagi funktsiya
+1. Funksiya e'loni: asosiy kod oqimidagi funksiya
 
-    ```js
-    function sum(a, b) {
-      let result = a + b;
+   ```js
+   function sum(a, b) {
+     let result = a + b;
 
-      return result;
-    }
-    ```
+     return result;
+   }
+   ```
 
-2. Funktsiya ifodasi: ifoda kontekstidagi funktsiya
+2. Funksiya ifodasi: ifoda kontekstidagi funksiya
 
-    ```js
-    let sum = function(a, b) {
-      let result = a + b;
+   ```js
+   let sum = function (a, b) {
+     let result = a + b;
 
-      return result;
-    };
-    ```
+     return result;
+   };
+   ```
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-    Funktsiya ifodalari `sum = function nom(a,b)` kabi nomga ega bo'lishi mumkin, ammo bu `nom` faqat shu funktsiya ichida ko'rinadi.
+3. Arrow funksiyalar:
 
-3. O'q funktsiya:
-=======
-3. Arrow functions:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
+   ```js
+   // o'ng tomonda ifoda
+   let sum = (a, b) => a + b;
 
-    ```js
-    // o'ng tomonidagi ifoda
-    let sum = (a, b) => a + b;
+   // yoki { ... } bilan ko'p qatorli sintaksis, bu yerda return kerak:
+   let sum = (a, b) => {
+     // ...
+     return a + b;
+   };
 
-    // yoki {...} bilan ko'p satrli sintaksis, bu erga return kaliti kerak:
-    let sum = (a, b) => {
-      // ...
-      return a + b;
-    }
+   // argumentlarsiz
+   let sayHi = () => alert("Salom");
 
-    // argumentlarsiz
-    let sayHi = () => alert("Hello");
+   // bitta argument bilan
+   let double = (n) => n * 2;
+   ```
 
-    // bitta argument bilan
-    let double = n => n * 2;
-    ```
+- Funksiyalar mahalliy o'zgaruvchilarga ega bo'lishi mumkin: uning tanasida yoki parametr ro'yxatida e'lon qilinganlar. Bunday o'zgaruvchilar faqat funksiya ichida ko'rinadi.
+- Parametrlar standart qiymatlarga ega bo'lishi mumkin: `function sum(a = 1, b = 2) {...}`.
+- Funksiyalar har doim biror narsa qaytaradi. Agar `return` iborasi bo'lmasa, natija `undefined` bo'ladi.
 
+Batafsil: <info:function-basics>, <info:arrow-functions-basics> ga qarang.
 
-<<<<<<< HEAD:1-js/02-first-steps/16-javascript-specials/article.md
-- Funksiyalar ichki o'zgaruvchanga ega bo'lishi mumkin: funktsiyani tanasida e'lon qilingan. Bunday o'zgaruvchanlar faqat funktsiya ichida ko'rinadi.
-- Parametrlar oldindan tayinlangan qiymatlarga ega bo'lishi mumkin:`function sum(a = 1, b = 2) {...}`.
-- Funktsiyalar har doim bir narsani qaytaradi. Agar `return` ifodasi bo'lmasa, natija `undefined` bo'ladi.
+## Davomi bor
 
-
-| Funktsiya Deklaratsiyasi | Funktsiya Ifodasi |
-|----------------------|---------------------|
-| butun kod blokida ko'rinadi | ijro etish unga etib kelganida yaratiladi |
-|   - | faqat funktsiya ichida ko'rinadigan nomga ega bo'lishi mumkin |
-
-Batafsil: <info:function-basics>, <info:function-expressions-arrows>.
-=======
-- Functions may have local variables: those declared inside its body or its parameter list. Such variables are only visible inside the function.
-- Parameters can have default values: `function sum(a = 1, b = 2) {...}`.
-- Functions always return something. If there's no `return` statement, then the result is `undefined`.
-
-Details: see <info:function-basics>, <info:arrow-functions-basics>.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/18-javascript-specials/article.md
-
-## Yanada ko'proq
-
-Bu JavaScript xususiyatlarining qisqacha ro'yxati edi. Hozirgacha biz faqat asoslarni o'rganib chiqdik. Keyinchalik o'quv qo'llanmada siz JavaScript-ning qo'shimcha va maxsus xususiyatlarini topasiz.
+Bu JavaScript xususiyatlarining qisqacha ro'yxati edi. Hozircha biz faqat asoslarni o'rgandik. Qo'llanmaning davomida siz JavaScript-ning ko'proq maxsus va ilg'or xususiyatlarini topasiz.

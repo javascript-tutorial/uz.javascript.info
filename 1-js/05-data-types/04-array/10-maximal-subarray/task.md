@@ -1,4 +1,4 @@
-importance: 2
+muhimlik: 2
 
 ---
 
@@ -10,11 +10,7 @@ Vazifa quyidagicha: elementlarning maksimal yig'indisi bilan `arr` ning tutashga
 
 Ushbu summani qaytaradigan `getMaxSubSum(arr)` funktsiyasini yozing.
 
-<<<<<<< HEAD
-Masalan: 
-=======
-For instance:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Masalan:
 
 ```js
 getMaxSubSum([-1, *!*2, 3*/!*, -9]) == 5 (the sum of highlighted items)

@@ -5,7 +5,7 @@ function makeCounter() {
     return count++;
   }
 
-  counter.set = value => count = value;
+  counter.set = (value) => (count = value);
 
   counter.decrease = () => count--;
 

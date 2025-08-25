@@ -1,41 +1,39 @@
-
-
 ```js run
-Function.prototype.defer = function(ms) {
+Function.prototype.defer = function (ms) {
   let f = this;
-  return function(...args) {
+  return function (...args) {
     setTimeout(() => f.apply(this, args), ms);
-  }
+  };
 };
 
-// check it
+// uni tekshirish
 function f(a, b) {
-  alert( a + b );
+  alert(a + b);
 }
 
-f.defer(1000)(1, 2); // shows 3 after 1 sec
+f.defer(1000)(1, 2); // 1 soniyadan keyin 3 ni ko'rsatadi
 ```
 
-Please note: we use `this` in `f.apply` to make our decoration work for object methods.
+E'tibor bering: bizning dekoratsiya objekt metodlari uchun ishlashi uchun `f.apply` da `this` dan foydalanamiz.
 
-So if the wrapper function is called as an object method, then `this` is passed to the original method `f`.
+Shunday qilib, agar wrapper funktsiya objekt metodi sifatida chaqirilsa, u holda `this` asl `f` metodiga uzatiladi.
 
 ```js run
-Function.prototype.defer = function(ms) {
+Function.prototype.defer = function (ms) {
   let f = this;
-  return function(...args) {
+  return function (...args) {
     setTimeout(() => f.apply(this, args), ms);
-  }
+  };
 };
 
 let user = {
   name: "John",
   sayHi() {
     alert(this.name);
-  }
-}
+  },
+};
 
 user.sayHi = user.sayHi.defer(1000);
 
-user.sayHi();
+user.sayHi(); // 1 soniyadan keyin "John" ni ko'rsatadi
 ```

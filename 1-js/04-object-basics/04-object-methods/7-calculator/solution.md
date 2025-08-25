@@ -1,4 +1,3 @@
-
 ```js run demo solution
 let calculator = {
   sum() {
@@ -10,12 +9,12 @@ let calculator = {
   },
 
   read() {
-    this.a = +prompt('a?', 0);
-    this.b = +prompt('b?', 0);
-  }
+    this.a = +prompt("a?", 0);
+    this.b = +prompt("b?", 0);
+  },
 };
 
 calculator.read();
-alert( calculator.sum() );
-alert( calculator.mul() );
+alert(calculator.sum());
+alert(calculator.mul());
 ```

@@ -1,63 +1,59 @@
-# O'zgaruvchanlar
+# O'zgaruvchilar
 
-Ko'pincha, JavaScript dasturi ma'lumot bilan ishlashi kerak. Mana ikkita misol:
-1. Onlayn do'kon -- ma'lumot tovarlar sotilgan va xarid qilingan savatni o'z ichiga olishi mumkin.
-2. Chat dasturi -- ma'lumot foydalanuvchilar, xabarlar va boshqa ko'p narsalarni o'z ichiga olishi mumkin.
+Ko'pincha JavaScript ilovasi ma'lumotlar bilan ishlashi kerak. Mana ikkita misol:
+1. Onlayn do'kon -- ma'lumotlar sotiladigan tovarlar va xarid savatchasini o'z ichiga olishi mumkin.
+2. Chat ilovasi -- ma'lumotlar foydalanuvchilar, xabarlar va boshqa ko'p narsalarni o'z ichiga olishi mumkin.
 
-O'zgaruvchanlar bu ma'lumotlarni saqlash uchun ishlatiladi.
+O'zgaruvchilar bu ma'lumotlarni saqlash uchun ishlatiladi.
 
-## O'zgaruvchanlar
+## O'zgaruvchi
 
-[O'zgaruvchan](https://en.wikipedia.org/wiki/Variable_(computer_science)) bu ma'lumotlar uchun "nomlangan saqlash qutusi". Tovarlar, tashrif buyuruvchilar va boshqa ma'lumotlarni saqlash uchun biz o'zgaruvchanlardan foydalanishimiz mumkin.
+[O'zgaruvchi](https://en.wikipedia.org/wiki/Variable_(computer_science)) - bu ma'lumotlar uchun "nomli xotira". Biz o'zgaruvchilardan tovarlar, tashrif buyuruvchilar va boshqa ma'lumotlarni saqlash uchun foydalanishimiz mumkin.
 
-JavaScript da o'zgaruvchani yaratish uchun `let` kalit so'zidan foydalaning.
+JavaScript da o'zgaruvchi yaratish uchun `let` kalit so'zidan foydalaning.
 
-<<<<<<< HEAD
-Quyidagi ifoda "xabar" nomli o'zgaruvchini yaratadi (boshqacha aytganda: *e'lon qiladi* yoki *belgilaydi*):
-=======
-The statement below creates (in other words: *declares*) a variable with the name "message":
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Quyidagi bayonot "message" nomli o'zgaruvchini yaratadi (boshqacha qilib aytganda: *e'lon qiladi*):
 
 ```js
 let message;
 ```
 
-Endi `=` tayinlash operatori yordamida unga ba'zi ma'lumotlarni kiritishimiz mumkin:
+Endi biz unga tayinlash operatori `=` yordamida ma'lumot kiritishimiz mumkin:
 
 ```js
 let message;
 
 *!*
-message = 'Hello'; // matni saqlash
+message = 'Hello'; // 'Hello' stringini message nomli o'zgaruvchiga saqlash
 */!*
 ```
 
-Matn endi o'zgaruvchanga bog'landi va xotira maydoniga saqlandi. Uning qiymatini o’qish uchun o’zgaruvchan nomini ishlatshimiz lozim:
+String endi o'zgaruvchi bilan bog'langan xotira maydoniga saqlandi. Biz unga o'zgaruvchi nomi orqali murojaat qilishimiz mumkin:
 
 ```js run
 let message;
-message = 'Hello!'; // message ingliz tilidan xabarni bildiradi
+message = 'Hello!';
 
 *!*
-alert(message); // o'zgaruvchan tarkibini ko'rsatadi
+alert(message); // o'zgaruvchi mazmunini ko'rsatadi
 */!*
 ```
 
-Qisqa bo'lishi uchun, biz o'zgaruvchani e'lon qilish va tayinlashni bitta satrga birlashtira olamiz:
+Qisqalik uchun biz o'zgaruvchini e'lon qilish va tayinlashni bitta satrga birlashtirishimiz mumkin:
 
 ```js run
-let message = 'Hello!'; // o'zgaruvchani aniqlang va qiymatni belgilang
+let message = 'Hello!'; // o'zgaruvchini aniqlash va qiymat berish
 
 alert(message); // Hello!
 ```
 
-Bir astrda bir nechta o'zgaruvchanlarni e'lon qilishimiz mumkin:
+Shuningdek, bir satrda bir nechta o'zgaruvchini e'lon qilishimiz mumkin:
 
 ```js no-beautify
 let user = 'John', age = 25, message = 'Hello';
 ```
 
-Bu qisqaroq ko'rinishi mumkin, ammo biz buni tavsiya qilmaymiz. Kodingiz yaxshi o'qilishi uchun har bir o'zgaruvchanga bitta satrdan foydalaning.
+Bu qisqaroq ko'rinishi mumkin, ammo biz buni tavsiya qilmaymiz. Yaxshiroq o'qish uchun har bir o'zgaruvchi uchun alohida satr ishlatishni so'raymiz.
 
 Ko'p satrli variant biroz uzunroq, ammo o'qish osonroq:
 
@@ -67,8 +63,7 @@ let age = 25;
 let message = 'Hello';
 ```
 
-Ba'zi odamlar ushbu ko'p satrli uslubda bir nechta o'zgaruvchani e'lon qiladilar:
-
+Ba'zi odamlar ko'p satrli uslubda bir nechta o'zgaruvchilarni aniqlaydi:
 
 ```js no-beautify
 let user = 'John',
@@ -76,7 +71,7 @@ let user = 'John',
   message = 'Hello';
 ```
 
-...Yoki "vergul-birinchi" tarzida:
+Yoki hatto "vergul-birinchi" uslubida:
 
 ```js no-beautify
 let user = 'John'
@@ -84,47 +79,47 @@ let user = 'John'
   , message = 'Hello';
 ```
 
-Texnik jihatdan, barcha bu varyantlar bir xil narsani bildiradi. Demak, bu shaxsiy did va estetika masalasidir.
+Texnik jihatdan, bu variantlarning barchasi bir xil ishni bajaradi. Demak, bu shaxsiy did va estetika masalasi.
 
-````smart header="`var` instead of `let`"
-Eski skriptlarda siz yana bitta kalit so'zni uchratishingiz mumkin: `let` o'rniga `var`:
+````smart header="`let` o'rniga `var`"
+Eski skriptlarda siz boshqa kalit so'zni ham topishingiz mumkin: `let` o'rniga `var`:
 
 ```js
 *!*var*/!* message = 'Hello';
 ```
 
-`Var` kalit so'zi *deyarli* `let` bilan bir xil. Shuningdek, u o'zgaruvchani e'lon qiladi, ammo biroz boshqacha, "eski uslub" da.
+`var` kalit so'zi `let` bilan *deyarli* bir xil. U ham o'zgaruvchini e'lon qiladi, ammo biroz boshqacha, "eski maktab" usulida.
 
-`let` va `var` o'rtasida ozgina farqlar mavjud, ammo ular biz uchun hali muhim emas. Biz ularni <info:var> bobda batafsil ko'rib chiqamiz
+`let` va `var` orasida nozik farqlar bor, ammo ular bizga hali muhim emas. Biz ularni <info:var> bobida batafsil ko'rib chiqamiz.
 ````
 
-## Haqiqiy hayotdagi o'xshashlik
+## Hayotiy o'xshashlik
 
-Agar biz uni ma'lumotlar uchun "quti" deb tasavvur qilsak, "o'zgaruvchan" tushunchasini osongina tushunishimiz mumkin.
+Agar uni ma'lumotlar uchun "quti" sifatida tasavvur qilsak, unda noyob nomlangan stiker yopishtirilgan bo'lsa, "o'zgaruvchi" tushunchasini osongina tushunishimiz mumkin.
 
-Misol uchun, o'zgaruvchan `message` `"message"` etiketli `"Salom!"` qiymati bilan quti sifatida tasavvur qilinishi mumkin:
-
+Masalan, `message` o'zgaruvchisini ichida `"Hello!"` qiymati bo'lgan `"message"` yorlig'i bilan qutiga o'xshatish mumkin:
 
 ![](variable.svg)
 
-Biz qutiga har qanday qiymatini qo'yish mumkin.
+Biz qutiga istalgan qiymatni qo'yishimiz mumkin.
 
-Uni istagancha o'zgartirishimiz ham mumkin:
+Shuningdek, uni xohlagancha marta o'zgartirishimiz mumkin:
+
 ```js run
 let message;
 
 message = 'Hello!';
 
-message = 'World!'; // qiymati o'zgardi
+message = 'World!'; // qiymat o'zgartirildi
 
 alert(message);
 ```
 
-Qiymat o'zgartirilganda, eski ma'lumotlar o'zgaruvchandan o'chiriladi:
+Qiymat o'zgartirilganda, eski ma'lumotlar o'zgaruvchidan olib tashlanadi:
 
 ![](variable-change.svg)
 
-Shuningdek, biz ikkita o'zgaruvchani e'lon qilishimiz va ma'lumotlarni ikkinchisiga nusxalashimiz mumkin.
+Shuningdek, biz ikkita o'zgaruvchini e'lon qilishimiz va biridan ikkinchisiga ma'lumotlarni nusxalashimiz mumkin.
 
 ```js run
 let hello = 'Hello world!';
@@ -132,151 +127,132 @@ let hello = 'Hello world!';
 let message;
 
 *!*
-// 'Hello world!' ni hello o'zgaruvchandan message o'zgaruvchanga nusxalash
+// 'Hello world' ni hello dan message ga nusxalash
 message = hello;
 */!*
 
-// endi ikkita o'zgaruvchan bir xil ma'lumotga ega
+// endi ikkita o'zgaruvchi bir xil ma'lumotni saqlaydi
 alert(hello); // Hello world!
 alert(message); // Hello world!
 ```
 
-<<<<<<< HEAD
-```smart header="Funktsional tillar"
-[Scala](http://www.scala-lang.org/) yoki [Erlang](http://www.erlang.org/) kabi [funktsional](https://en.wikipedia.org/wiki/Functional_programming) dasturlash tillari mavjudligini ta'kidlash qiziq. Ular o'zgaruvchan qiymatlarini o'zgartirishni taqiqlaydi.
-=======
-````warn header="Declaring twice triggers an error"
-A variable should be declared only once.
+````warn header="Ikki marta e'lon qilish xatolikka olib keladi"
+O'zgaruvchi faqat bir marta e'lon qilinishi kerak.
 
-A repeated declaration of the same variable is an error:
+Bir xil o'zgaruvchining takroriy e'lon qilinishi xato hisoblanadi:
 
 ```js run
 let message = "This";
 
-// repeated 'let' leads to an error
+// takroriy 'let' xatolikka olib keladi
 let message = "That"; // SyntaxError: 'message' has already been declared
 ```
-So, we should declare a variable once and then refer to it without `let`.
+Demak, biz o'zgaruvchini bir marta e'lon qilishimizdan keyin unga `let` ishlatmasdan murojaat qilishimiz kerak.
 ````
 
-```smart header="Functional languages"
-It's interesting to note that there exist [functional](https://en.wikipedia.org/wiki/Functional_programming) programming languages, like [Scala](http://www.scala-lang.org/) or [Erlang](http://www.erlang.org/) that forbid changing variable values.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+```smart header="Funksional tillar"
+Qiziq tomoni shundaki, [sof funksional](https://en.wikipedia.org/wiki/Purely_functional_programming) dasturlash tillari mavjud, masalan [Haskell](https://en.wikipedia.org/wiki/Haskell), ular o'zgaruvchi qiymatlarini o'zgartirishni taqiqlaydi.
 
-Bunday tillarda qiymat "qutiga" saqlangandan so'ng, u abadiy mavjud. Agar biz boshqa narsalarni saqlashimiz kerak bo'lsa, til bizni yangi quti yaratishga majbur qiladi (yangi o'zgaruvchini e'lon qiling). Biz eskisini qayta ishlata ololmaymiz.
+Bunday tillarda qiymat "qutiga" saqlangandan so'ng, u abadiy u yerda qoladi. Agar biz boshqa narsani saqlashimiz kerak bo'lsa, til bizni yangi quti yaratishga (yangi o'zgaruvchi e'lon qilishga) majbur qiladi. Eskisini qayta ishlatib bo'lmaydi.
 
-Bir qarashda biroz g'alati tuyulishi mumkin bo'lsa ham, bu tillar jiddiy rivojlanishga qodir. Bundan tashqari, bu cheklash ma'lum foyda keltiradigan parallel hisoblash kabi sohalar mavjud. Bunday tilni o'rganish (yaqinda siz undan foydalanishni rejalashtirmagan bo'lsangiz ham) aqlni kengaytirish uchun tavsiya etiladi.
+Dastlabki qarashda biroz g'alati tuyulishi mumkin bo'lsa-da, bu tillar jiddiy ishlanmaga juda qodir. Bundan tashqari, parallel hisoblashlar kabi sohalar mavjud bo'lib, bu cheklov ma'lum afzalliklarni beradi.
 ```
 
-## O'zgaruvchani nomlash
+## O'zgaruvchilarni nomlash [#variable-naming]
 
-JavaScript da o'zgaruvchanning nomlash uchun ikkita cheklov mavjud:
+JavaScript da o'zgaruvchi nomlari uchun ikkita cheklov mavjud:
 
-1. Nomda faqat harflar, raqamlar yoki ramzlar bo'lishi kerak `$`va `_`.
+1. Nom faqat harflar, raqamlar yoki `$` va `_` belgilarini o'z ichiga olishi kerak.
 2. Birinchi belgi raqam bo'lmasligi kerak.
 
-Amal nomlar misollari:
+To'g'ri nomlar misollari:
 
 ```js
 let userName;
 let test123;
 ```
 
-Nom bir nechta so'zlardan iborat bo'lsa, odatda [tuya registri](https://en.wikipedia.org/wiki/CamelCase) ishlatiladi. Ya'ni: so'zlar birin-ketin ketadi, har bir so'z birinchi bosh harf bilan boshlanadi, birinch so'zdan itashqari: "meningJudaUzunNomim".
+Nom bir nechta so'zdan iborat bo'lganda, odatda [camelCase](https://en.wikipedia.org/wiki/CamelCase) dan foydalaniladi. Ya'ni: so'zlar ketma-ket keladi, birinchisidan tashqari har bir so'z bosh harf bilan boshlanadi: `myVeryLongName`.
 
-Qizig'i shundaki, `'$'` dollar belgisi va `'_'` pastki chiziq ham nomlarda ishlatilishi mumkin. Ular odatiy belgilar, xuddi harflar singari, hech qanday maxsus ma'noga ega emaslar.
+Qiziq tomoni -- dollar belgisi `'$'` va pastki chiziq `'_'` ham nomlarda ishlatilishi mumkin. Ular oddiy belgilar, xuddi harflar kabi, hech qanday maxsus ma'nosiz.
 
-Ushbu nomlar mumkin:
+Bu nomlar to'g'ri:
 
 ```js run untrusted
-let $ = 1; // "$" nomi bilan o'zgaruvchan e'lon qildindi
-let _ = 2; // Va endi "_" nomi bilan o'zgaruvchan e'lon qildindi
+let $ = 1; // "$" nomli o'zgaruvchi e'lon qilindi
+let _ = 2; // va endi "_" nomli o'zgaruvchi
 
 alert($ + _); // 3
 ```
 
-Examples of incorrect variable names:
-Noto'g'ri nomlangan o'zgaruvchanlarga misollar:
+Noto'g'ri o'zgaruvchi nomlari misollari:
 
 ```js no-beautify
-let 1a; // raqam bilan boshlanish mumkin emas
+let 1a; // raqam bilan boshlanishi mumkin emas
 
-let my-name; // defisni '-' nomlashda ishlatish mumkin emas
+let my-name; // defislar '-' nomda ruxsat etilmagan
 ```
 
-```smart header="Registr muhim"
-`apple` va` AppLE` nomli o'zgaruvchanlar ikki xil o'zgaruvchandir.
+```smart header="Katta-kichik harflar muhim"
+`apple` va `APPLE` nomli o'zgaruvchilar ikki xil o'zgaruvchidir.
 ```
 
-<<<<<<< HEAD
-````smart header="Lotin bo'lmagan harflarga ruxsat beriladi, ammo tavsiya etilmaydi"
-Bu kabi har qanday tilni, shu jumladan kirill harflarini yoki hatto ierogliflarni ishlatish mumkin:
-=======
-````smart header="Non-Latin letters are allowed, but not recommended"
-It is possible to use any language, including cyrillic letters or even hieroglyphs, like this:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+````smart header="Lotin bo'lmagan harflarga ruxsat berilgan, ammo tavsiya etilmaydi"
+Kirill harflari, xitoy logogrammalar va hokazo har qanday tildan foydalanish mumkin:
 
 ```js
 let имя = '...';
 let 我 = '...';
 ```
 
-<<<<<<< HEAD
-Texnik jihatdan, bu erda hech qanday xato yo'q, bunday nomlarga ruxsat berilgan, ammo o'zgaruvchan nomlarda ingliz tilidan foydalanish bo'yicha xalqaro an'ana mavjud. Kichik skript yozayotgan bo'lsak ham, uni uzoq umr kutishi mumkin. Boshqa mamlakatlardan kelgan odamlar uni o'qishlari kerak bo'lishi mumkin.
-=======
-Technically, there is no error here. Such names are allowed, but there is an international convention to use English in variable names. Even if we're writing a small script, it may have a long life ahead. People from other countries may need to read it some time.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Texnik jihatdan bu yerda xato yo'q. Bunday nomlar ruxsat etilgan, ammo o'zgaruvchi nomlarida ingliz tilidan foydalanish xalqaro konventsiya hisoblanadi. Kichik skript yozsak ham, uning oldida uzoq hayot bo'lishi mumkin. Boshqa mamlakatlardan odamlar uni o'qishlari kerak bo'lishi mumkin.
 ````
 
-````warn header="Himoyalangan ismlar"
-[Himoyalangan so'zlar ro'yxati](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords) mavjud, ular Javascriptning o'zi tomonidan ishlatiladi, shuning uchun ularning o'zgaruvchan nomlari sifatida foydalanish mumkin emas.
+````warn header="Zaxiralangan nomlar"
+Tilning o'zi tomonidan ishlatiladigan [zaxiralangan so'zlar ro'yxati](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords) mavjud, ularni o'zgaruvchi nomi sifatida ishlatib bo'lmaydi.
 
-Masalan: `let`, `class`, `return` va `function` himoyalangan
+Masalan: `let`, `class`, `return` va `function` zaxiralangan.
 
-Quyidagi kod sintaksis xato chiqaradi:
+Quyidagi kod sintaksis xatosini beradi:
 
 ```js run no-beautify
-let let = 5; // "let" deb o'zgaruvchani nomlash mumkin emas, hato!
-let return = 5; // shuningdek "return" deb o'zgaruvchani nomlash mumkin emas, hato!
+let let = 5; // o'zgaruvchini "let" deb nomlab bo'lmaydi, xato!
+let return = 5; // uni "return" deb ham nomlab bo'lmaydi, xato!
 ```
 ````
 
-````warn header="`qat'iy rejim` siz ifoda"
+````warn header="`use strict` ishlatishdan tayinlash"
 
-Odatda, biz uni ishlatishdan oldin o'zgaruvchani aniqlashimiz kerak. Ammo qadimgi davrlarda texnik qiymatni "let" dan foydalanmasdan faqat qiymatni belgilash orqali yaratish mumkin edi. Agar biz eski skriptlar bilan moslikni saqlab qolish uchun skriptlarimizga `use strict` qo'ymasak, bu hali ham ishlaydi.
+Odatda, o'zgaruvchini ishlatishdan oldin uni aniqlashimiz kerak. Ammo eski davrlarda `let` ishlatmasdan shunchaki qiymat tayinlash orqali o'zgaruvchi yaratish texnik jihatdan mumkin edi. Bu eski skriptlar bilan muvofiqlikni ta'minlash uchun skriptlarimizga `use strict` qo'ymasak, hali ham ishlaydi.
 
 ```js run no-strict
-// eslatma: ushbu misolda "qat'iy rejim" yo'q
+// e'tibor bering: bu misolda "use strict" yo'q
 
-num = 5; // agar mavjud bo'lmasa "num" o'zgaruvchan yaratiladi
+num = 5; // agar "num" o'zgaruvchisi mavjud bo'lmasa, u yaratiladi
 
 alert(num); // 5
 ```
 
-Bu yomon amaliyot va qat'iy rejimda xatolikka olib kelishi mumkin:
+Bu yomon amaliyot va qattiq rejimda xatolikka olib keladi:
 
 ```js
 "use strict";
 
 *!*
-num = 5; // xato: num belgilangan emas
+num = 5; // xato: num aniqlanmagan
 */!*
 ```
 ````
 
 ## Konstantalar
 
-Doimiy(o'zgarmas) o'zgaruvchani e'lon qilish uchun `let` o'rniga `const` dan foydalaning:
+O'zgarmas (o'zgarmaydigan) o'zgaruvchini e'lon qilish uchun `let` o'rniga `const` dan foydalaning:
 
 ```js
 const myBirthday = '18.04.1982';
 ```
 
-<<<<<<< HEAD
-`Const` yordamida e'lon qilingan o'zgaruvchanlar "konstantalar" deyiladi. Ularni o'zgartirib bo'lmaydi. Bunga urinish xatolikka olib keladi:
-=======
-Variables declared using `const` are called "constants". They cannot be reassigned. An attempt to do so would cause an error:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+`const` yordamida e'lon qilingan o'zgaruvchilar "konstanta" deb ataladi. Ularni qayta tayinlab bo'lmaydi. Bunga urinish xatolikka olib keladi:
 
 ```js run
 const myBirthday = '18.04.1982';
@@ -284,20 +260,15 @@ const myBirthday = '18.04.1982';
 myBirthday = '01.01.2001'; // xato, konstantani qayta tayinlab bo'lmaydi!
 ```
 
-Agar dasturchi o'zgaruvchining hech qachon o'zgarmasligiga ishonch hosil qilsa, bu haqiqatni har kimga kafolatlash va aniq etkazish uchun uni `const` bilan e'lon qilishlari mumkin.
+Dasturchi o'zgaruvchi hech qachon o'zgarmasligiga ishonchi komil bo'lsa, bu faktni kafolatlash va hammaga etkazish uchun uni `const` bilan e'lon qilishi mumkin.
 
+### Bosh harfli konstantalar
 
-### Tepa registr konstantalar
+Bajarilishdan oldin ma'lum bo'lgan, eslab qolish qiyin bo'lgan qiymatlar uchun takma nom sifatida konstantalardan foydalanish keng tarqalgan amaliyot.
 
-Amalga oshirilishidan oldin eslab qolishi qiyin bo'lgan qiymatlar uchun konstantani taxallus sifatida ishlatish amaliyoti keng tarqalgan.
+Bunday konstantalar bosh harflar va pastki chiziqlar yordamida nomlanadi.
 
-Bunday doimiylar tepa registr va pastki chiziqlar yordamida nomlanadi.
-
-<<<<<<< HEAD
-Masalan, "veb"(o'n oltinchi) formatidagi ranglar uchun konstantalarni yarataylik:
-=======
-For instance, let's make constants for colors in so-called "web" (hexadecimal) format:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Masalan, "veb" (o'n oltilik) formatda ranglar uchun konstantalar yarataylik:
 
 ```js run
 const COLOR_RED = "#F00";
@@ -312,72 +283,63 @@ alert(color); // #FF7F00
 
 Foydalar:
 
-- `COLOR_ORANGE` ni eslash `"#FF7F00"` dan ko'ra osonroq.
-- `COLOR_ORANGE` dan ko'ra `"#FF7F00"` ni noto'g'ri yozish osonroq.
-- Kodni o'qiyotganda, `COLOR_ORANGE` `"#FF7F00"` ga qaraganda ancha mazmunli bo'ladi.
+- `COLOR_ORANGE` ni `"#FF7F00"` dan ko'ra yodlash osonroq.
+- `"#FF7F00"` da `COLOR_ORANGE` ga qaraganda xato qilish osonroq.
+- Kodni o'qiyotganda `COLOR_ORANGE` `#FF7F00` dan ko'ra ancha mazmunli.
 
-Qachon biz konstantalarga tepa registrdan foydalanishimiz kerak va uni qachon normal nomlashimiz kerak? Keling, buni aniq bilib olamiz.
+Konstanta uchun qachon bosh harflardan foydalanishimiz va qachon oddiy nomlashimiz kerak? Keling, buni aniqlashtiriruylik.
 
-"Konstanta" shunchaki o'zgaruvchanning qiymati hech qachon o'zgarmasligini anglatadi. Ammo bajarilishidan oldin ma'lum bo'lgan konstantalar mavjud (masalan, qizil uchun o'n oltinchi qiymat) va bajarilish vaqtida *hisoblab chiqilgan*, lekin dastlabki tayinlangandan keyin o'zgarmaydigan konstantalar mavjud.
+"Konstanta" bo'lish shunchaki o'zgaruvchining qiymati hech qachon o'zgarmasligini anglatadi. Ammo ba'zi konstantalar bajarilishdan oldin ma'lum (qizil uchun o'n oltilik qiymat kabi) va ba'zi konstantalar ish vaqtida, bajarilish davomida *hisoblanadi*, lekin boshlang'ich tayinlashdan keyin o'zgarmaydi.
 
-Misol uchun:
+Masalan:
+
 ```js
-const pageLoadTime = /* yuklash uchun veb-sahifa tomonidan olingan vaqt */;
+const pageLoadTime = /* veb-sahifa yuklanish vaqti */;
 ```
 
-`pageLoadTime` o'zgaruvchanning qiymati sahifa yuklanishidan oldin ma'lum emas, shuning uchun u odatdagidek nomlanadi. Ammo bu hali ham konstanta, chunki tayinlanganidan keyin u o'zgarmaydi.
+`pageLoadTime` ning qiymati sahifa yuklanishidan oldin ma'lum emas, shuning uchun u oddiy nomlanadi. Ammo bu hali ham konstanta, chunki tayinlashdan keyin o'zgarmaydi.
 
-Boshqacha qilib aytganda, tepa registr bilan nomlangan konstantalar faqat "qattiq kodlangan" qiymatlar uchun taxallus sifatida ishlatiladi.
+Boshqacha qilib aytganda, bosh harfli konstantalar faqat "qattiq kodlangan" qiymatlar uchun takma nom sifatida ishlatiladi.
 
-## O'zgaruvchanlarni to'g'ri nomlang
+## Narsalarni to'g'ri nomlash
 
-O'zgaruvchanlar haqida gapirganda, yana bir muhim narsa bor.
+O'zgaruvchilar haqida gapirganda, yana bir juda muhim narsa bor.
 
-<<<<<<< HEAD
-O'zgaruvchanning ismi toza, aniq ma'noga ega, saqlanadigan ma'lumotlarni tasvirlaydigon bo'lishi kerak.
-=======
-A variable name should have a clean, obvious meaning, describing the data that it stores.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+O'zgaruvchi nomi toza, aniq ma'noga ega bo'lishi va u saqlaydigan ma'lumotlarni tasvirlashi kerak.
 
-O'zgaruvchanning nomlash dasturlashning eng muhim va murakkab ko'nikmalaridan biridir. O'zgaruvchan nomlarga qarab, tajribali dasturchi yoki boshlang'ich tomonidan kod yozilganligini aniqlashi mumkin.
+O'zgaruvchilarni nomlash dasturlashtirining eng muhim va murakkab ko'nikmalaridan biridir. O'zgaruvchi nomlariga bir qarash yangi boshlovchi yoki tajribali dasturchi tomonidan yozilgan kodni aniqlash mumkin.
 
-Haqiqiy loyihada ko'p vaqt noldan butunlay alohida narsa yozishdan ko'ra, mavjud kod bazasini o'zgartirish va kengaytirishga sarflanadi. Biroz vaqtdan so'ng, ba'zi bir kodlarga qaytsak, yaxshi belgilangan ma'lumotlarni topish ancha osonroq. Yoki, boshqacha qilib aytganda, o'zgaruvchanlar yaxshi nomlarga ega bo'lganda.
+Haqiqiy loyihada vaqtning ko'p qismi noldan butunlay alohida narsa yozishdan ko'ra mavjud kod bazasini o'zgartirish va kengaytirishga sarflanadi. Bir muddat boshqa ish bilan shug'ullanganimizdan keyin qandaydir kodga qaytsak, yaxshi belgilangan ma'lumotni topish ancha oson. Boshqacha qilib aytganda, o'zgaruvchilarning yaxshi nomlari bo'lganda.
 
-Iltimos, o'zgaruvchani e'lon qilishdan oldin uning to'g'ri nomi haqida o'ylab ko'ring. Shunday qiling va sizga mukofot beriladi.
+O'zgaruvchini e'lon qilishdan oldin uning to'g'ri nomi haqida o'ylashga vaqt ajrating. Buni qilish sizga katta foyda keltiradi.
 
-Ba'zi amal qilish kerak bolgan qoidalar:
+Bajarilishi kerak bo'lgan qoidalar:
 
-- `userName` yoki `shoppingCart` kabi odamlar tomonidan o'qiladigan nomlardan foydalaning.
-- `a`, `b`, `c` kabi qisqartmalar yoki qisqa nomlardan uzoq turing, agar chindan ham nima qilayotganingizni bilmasangiz.
-- Nomlarni maksimal darajada tavsiflovchi va ixcham qiling. Yomon nomlarga misollar `ma'lumotlar` va `qiymat`. Bunday nomlar hech narsa bildirmaydi. Agar kodning konteksti o'zgaruvchanning qaysi ma'lumotlarga yoki qiymatga murojaat qilayotganini juda aniq ko'rsatadigan bo'lsa, ulardan foydalanish yaxshi bo'ladi.
-- Jamoangiz ichidagi va o'zingizning fikringizdagi shartlar to'g'risida kelishib oling. Agar saytga tashrif buyuruvchi "user" deb nomlangan bo'lsa, biz `currentVisitor` yoki `newManInTown` o'rniga `currentUser` yoki `newUser` deb nomlashimiz kerak.
+- `userName` yoki `shoppingCart` kabi inson o'qiy oladigan nomlardan foydalaning.
+- Nima qilayotganingizni bilmasangiz, `a`, `b` va `c` kabi qisqartmalar yoki qisqa nomlardan qoching.
+- Nomlarni maksimal darajada tavsiflovchi va qisqa qiling. Yomon nomlar misollari `data` va `value`. Bunday nomlar hech narsa demaydi. Ularni faqat kod konteksti o'zgaruvchi qaysi ma'lumot yoki qiymatga ishora qilayotganini juda aniq qilsa ishlatish mumkin.
+- Jamoangizdagi va fikringizdagi atamalar bo'yicha kelishing. Agar sayt tashrif buyuruvchisi "user" deb atalsa, biz tegishli o'zgaruvchilarni `currentVisitor` yoki `newManInTown` o'rniga `currentUser` yoki `newUser` deb nomlashimiz kerak.
 
-Oson eshitiladimi? Haqiqatan ham shunday, ammo amalda tavsiflovchi va ixcham o'zgaruvchan nomlarni yaratish unday oson emas. Olg'a.
+Oddiy eshitiladimi? Haqiqatan ham shunday, ammo amalda tavsiflovchi va qisqa o'zgaruvchi nomlari yaratish unchalik oson emas. Harakat qiling.
 
-```smart header="Qayta ishlash yoki yaratish?"
-Va oxirgi eslatma. Ba'zi dangasa dasturchilar bor, ular yangi o'zgaruvchanlarni e'lon qilish o'rniga, mavjudlarini qayta ishlatishga moyildirlar.
+```smart header="Qayta ishlatish yoki yaratish?"
+Va oxirgi eslatma. Ba'zi dangasa dasturchilar yangi o'zgaruvchilar e'lon qilish o'rniga mavjudlarini qayta ishlatishga moyil.
 
-Natijada, ularning o'zgaruvchanlari qutilarga o'xshaydi, odamlar stikerlarini o'zgartirmasdan har xil narsalarni tashlaydilar. Endi qutining ichida nima bor? Kim biladi? Bilish uchun yaqinroq kelib tekshirishimiz kerak.
+Natijada, ularning o'zgaruvchilari odamlar stikerlarini o'zgartirmasdan turli narsalarni tashlaydigan qutilarga o'xshaydi. Qutida hozir nima bor? Kim biladi? Yaqinroq kelib tekshirishimiz kerak.
 
-Bunday dasturchilar o'zgaruvchan deklaratsiyadan ozgina vaqt tejashadi, ammo debagginga(dastur kodidagi xatolarni tuzatish) o'n baravar ko'proq vaqt yo'qotadilar.
+Bunday dasturchilar o'zgaruvchi e'lon qilishda ozgina tejashadi, ammo disk raskadrovkada o'n barobar ko'proq yo'qotishadi.
 
-Qo'shimcha o'zgaruvchan yaxshi, yomon emas.
+Qo'shimcha o'zgaruvchi yaxshi, yomon emas.
 
-Zamonaviy JavaScript minifikatorlari va brauzerlari kodni yetarlicha optimallashtiradi, shuning uchun ishlash muammolarini keltirib chiqarmaydi. Turli xil qiymatlar uchun turli xil o'zgaruvchanlardan foydalanish, hatto iterpretatorga kodingizni optimallashtirishga yordam beradi.
+Zamonaviy JavaScript minifikatorlari va brauzerlar kodni yetarlicha yaxshi optimallashtiradi, shuning uchun bu ishlash muammolarini yaratmaydi. Turli qiymatlar uchun turli o'zgaruvchilardan foydalanish hatto dvigatelga kodingizni optimallashtirashda yordam berishi mumkin.
 ```
 
 ## Xulosa
 
-Ma'lumotlarni saqlash uchun o'zgaruvchanlarni `var`, `let` yoki `const` kalit sozlar yordamida e'lon qilishimiz mumkin.
+Biz `var`, `let` yoki `const` kalit so'zlari yordamida ma'lumotlarni saqlash uchun o'zgaruvchilar e'lon qilishimiz mumkin.
 
-<<<<<<< HEAD
-- 'let` -- zamonaviy o'zgaruvchan deklaratsiya hisoblanadi. Kod Chrome(V8) da `let` ni ishlatish uchun qat'iy rejimda bo'lishi kerak.
-- `var` -- eskirgan o'zgaruvchan deklaratsiya hisoblanadi. Odatda, biz uni ishlatmaymiz, lekin biz `let` dan nozik farqlarni <info:var> bobda qamrab olamiz, agar sizga kerak bo'lsa.
-- `const` -- `let` ga o'xshaydi, lekin o'zgaruvchanning qiymatini o'zgartirib bo'lmaydi.
-=======
-- `let` -- is a modern variable declaration.
-- `var` -- is an old-school variable declaration. Normally we don't use it at all, but we'll cover subtle differences from `let` in the chapter <info:var>, just in case you need them.
-- `const` -- is like `let`, but the value of the variable can't be changed.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+- `let` -- zamonaviy o'zgaruvchi e'loni.
+- `var` -- eski maktab o'zgaruvchi e'loni. Odatda biz uni umuman ishlatmaymiz, ammo agar kerak bo'lsa, <info:var> bobida `let` dan nozik farqlarni ko'rib chiqamiz.
+- `const` -- `let` ga o'xshaydi, ammo o'zgaruvchining qiymatini o'zgartirib bo'lmaydi.
 
-O'zgaruvchanlar ularni ichida nima borligini osongina tushunishga imkon beradigan tarzda nomlanishi kerak.
+O'zgaruvchilar ichida nima borligini osongina tushunishga imkon beradigan tarzda nomlanishi kerak.

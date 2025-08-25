@@ -1,65 +1,65 @@
-# Object references and copying
+# Obyekt havolalari va nusxalash
 
-One of the fundamental differences of objects versus primitives is that objects are stored and copied "by reference", whereas primitive values: strings, numbers, booleans, etc -- are always copied "as a whole value".
+Obyektlar va primitivlar o'rtasidagi asosiy farqlardan biri shundaki, obyektlar "havola bo'yicha" saqlanadi va nusxalanadi, primitivlar esa: satrlar, raqamlar, boolean va hokazo -- har doim "to'liq qiymat" sifatida nusxalanadi.
 
-That's easy to understand if we look a bit under the hood of what happens when we copy a value.
+Qiymat nusxalanganda nima sodir bo'lishini biroz chuqurroq ko'rsak, buni tushunish oson.
 
-Let's start with a primitive, such as a string.
+Satr kabi primitiv bilan boshlaylik.
 
-Here we put a copy of `message` into `phrase`:
+Bu yerda biz `message` ning nusxasini `phrase` ga qo'yamiz:
 
 ```js
-let message = "Hello!";
+let message = "Salom!";
 let phrase = message;
 ```
 
-As a result we have two independent variables, each one storing the string `"Hello!"`.
+Natijada bizda ikkita mustaqil o'zgaruvchi bor, har biri `"Salom!"` satrini saqlaydi.
 
 ![](variable-copy-value.svg)
 
-Quite an obvious result, right?
+Aniq natija, to'g'rimi?
 
-Objects are not like that.
+Obyektlar bunday emas.
 
-**A variable assigned to an object stores not the object itself, but its "address in memory" -- in other words "a reference" to it.**
+**Obyektga tayinlangan o'zgaruvchi obyektning o'zini emas, balki uning "xotiradagi manzilini" -- boshqacha qilib aytganda, unga "havolani" saqlaydi.**
 
-Let's look at an example of such a variable:
+Bunday o'zgaruvchining misolini ko'ramiz:
 
 ```js
 let user = {
-  name: "John"
+  name: "John",
 };
 ```
 
-And here's how it's actually stored in memory:
+Va u xotirada qanday saqlanishi:
 
 ![](variable-contains-reference.svg)
 
-The object is stored somewhere in memory (at the right of the picture), while the `user` variable (at the left) has a "reference" to it.
+Obyekt xotirada biror joyda saqlanadi (rasmning o'ng tomonida), `user` o'zgaruvchisi (chap tomonda) esa unga "havola" qiladi.
 
-We may think of an object variable, such as `user`, as like a sheet of paper with the address of the object on it.
+`user` kabi obyekt o'zgaruvchisini obyektning manzili yozilgan qog'oz varaq deb tasavvur qilishimiz mumkin.
 
-When we perform actions with the object, e.g. take a property `user.name`, the JavaScript engine looks at what's at that address and performs the operation on the actual object.
+Obyekt bilan amallarni bajarganimizda, masalan `user.name` xossasini olganimizda, JavaScript dvigateli o'sha manzilda nima borligini ko'radi va haqiqiy obyektda operatsiyani bajaradi.
 
-Now here's why it's important.
+Endi bu nima uchun muhimligi.
 
-**When an object variable is copied, the reference is copied, but the object itself is not duplicated.**
+**Obyekt o'zgaruvchisi nusxalanganda, havola nusxalanadi, lekin obyektning o'zi takrorlanmaydi.**
 
-For instance:
+Masalan:
 
 ```js no-beautify
 let user = { name: "John" };
 
-let admin = user; // copy the reference
+let admin = user; // havolani nusxalash
 ```
 
-Now we have two variables, each storing a reference to the same object:
+Endi bizda ikkita o'zgaruvchi bor, har biri bir xil obyektga havola qiladi:
 
 ![](variable-copy-reference.svg)
 
-As you can see, there's still one object, but now with two variables that reference it.
+Ko'rib turganingizdek, hali ham bitta obyekt bor, lekin endi unga havola qiluvchi ikkita o'zgaruvchi bor.
 
-We can use either variable to access the object and modify its contents:
+Obyektga kirish va uning tarkibini o'zgartirish uchun har qanday o'zgaruvchidan foydalanishimiz mumkin:
 
 ```js run
 let user = { name: 'John' };
@@ -67,174 +67,43 @@ let user = { name: 'John' };
 let admin = user;
 
 *!*
-admin.name = 'Pete'; // changed by the "admin" reference
+admin.name = 'Pete'; // "admin" havolasi orqali o'zgartirildi
 */!*
 
-alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
+alert(*!*user.name*/!*); // 'Pete', o'zgarishlar "user" havolasidan ko'rinadi
 ```
 
-It's as if we had a cabinet with two keys and used one of them (`admin`) to get into it and make changes. Then, if we later use another key (`user`), we are still opening the same cabinet and can access the changed contents.
+Bu xuddi bizda ikkita kaliti bo'lgan shkaf bo'lgandek va ulardan birini (`admin`) ishlatib unga kirib o'zgarishlar qildik. Keyin, agar boshqa kalitni (`user`) ishlatsak, biz hali ham bir xil shkafdamiz va o'zgartirilgan tarkibga kira olamiz.
 
-## Comparison by reference
+## Havola bo'yicha solishtirish
 
-Two objects are equal only if they are the same object.
+Ikki obyekt faqat bir xil obyekt bo'lsagina teng hisoblanadi.
 
-For instance, here `a` and `b` reference the same object, thus they are equal:
+Masalan, bu yerda `a` va `b` bir xil obyektga havola qiladi, shuning uchun ular teng:
 
 ```js run
 let a = {};
-let b = a; // copy the reference
+let b = a; // havolani nusxalash
 
-alert( a == b ); // true, both variables reference the same object
-alert( a === b ); // true
+alert(a == b); // true, ikkala o'zgaruvchi bir xil obyektga havola qiladi
+alert(a === b); // true
 ```
 
-And here two independent objects are not equal, even though they look alike (both are empty):
+Va bu yerda ikkita mustaqil obyekt teng emas, garchi ular o'xshash ko'rinsa ham (ikkalasi ham bo'sh):
 
 ```js run
 let a = {};
-let b = {}; // two independent objects
+let b = {}; // ikkita mustaqil obyekt
 
-alert( a == b ); // false
+alert(a == b); // false
 ```
 
-For comparisons like `obj1 > obj2` or for a comparison against a primitive `obj == 5`, objects are converted to primitives. We'll study how object conversions work very soon, but to tell the truth, such comparisons are needed very rarely -- usually they appear as a result of a programming mistake.
+`obj1 > obj2` kabi solishtirishlar uchun yoki primitiv bilan solishtirish `obj == 5` uchun, obyektlar primitivlarga aylantiriladi. Obyekt aylantirishlari qanday ishlashini tez orada o'rganamiz, lekin rostini aytganda, bunday solishtirishlar juda kam kerak bo'ladi -- odatda ular dasturlash xatosi natijasida paydo bo'ladi.
 
-## Cloning and merging, Object.assign [#cloning-and-merging-object-assign]
+````smart header="Const obyektlarni o'zgartirish mumkin"
+Obyektlarni havola sifatida saqlashning muhim yon ta'siri shundaki, `const` sifatida e'lon qilingan obyektni o'zgartirish *mumkin*.
 
-So, copying an object variable creates one more reference to the same object.
-
-But what if we need to duplicate an object? Create an independent copy, a clone?
-
-That's also doable, but a little bit more difficult, because there's no built-in method for that in JavaScript. But there is rarely a need -- copying by reference is good most of the time.
-
-But if we really want that, then we need to create a new object and replicate the structure of the existing one by iterating over its properties and copying them on the primitive level.
-
-Like this:
-
-```js run
-let user = {
-  name: "John",
-  age: 30
-};
-
-*!*
-let clone = {}; // the new empty object
-
-// let's copy all user properties into it
-for (let key in user) {
-  clone[key] = user[key];
-}
-*/!*
-
-// now clone is a fully independent object with the same content
-clone.name = "Pete"; // changed the data in it
-
-alert( user.name ); // still John in the original object
-```
-
-Also we can use the method [Object.assign](mdn:js/Object/assign) for that.
-
-The syntax is:
-
-```js
-Object.assign(dest, [src1, src2, src3...])
-```
-
-- The first argument `dest` is a target object.
-- Further arguments `src1, ..., srcN` (can be as many as needed) are source objects.
-- It copies the properties of all source objects `src1, ..., srcN` into the target `dest`. In other words, properties of all arguments starting from the second are copied into the first object.
-- The call returns `dest`.
-
-For instance, we can use it to merge several objects into one:
-```js
-let user = { name: "John" };
-
-let permissions1 = { canView: true };
-let permissions2 = { canEdit: true };
-
-*!*
-// copies all properties from permissions1 and permissions2 into user
-Object.assign(user, permissions1, permissions2);
-*/!*
-
-// now user = { name: "John", canView: true, canEdit: true }
-```
-
-If the copied property name already exists, it gets overwritten:
-
-```js run
-let user = { name: "John" };
-
-Object.assign(user, { name: "Pete" });
-
-alert(user.name); // now user = { name: "Pete" }
-```
-
-We also can use `Object.assign` to replace `for..in` loop for simple cloning:
-
-```js
-let user = {
-  name: "John",
-  age: 30
-};
-
-*!*
-let clone = Object.assign({}, user);
-*/!*
-```
-
-It copies all properties of `user` into the empty object and returns it.
-
-There are also other methods of cloning an object, e.g. using the [spread syntax](info:rest-parameters-spread) `clone = {...user}`, covered later in the tutorial.
-
-## Nested cloning
-
-Until now we assumed that all properties of `user` are primitive. But properties can be references to other objects. What to do with them?
-
-Like this:
-```js run
-let user = {
-  name: "John",
-  sizes: {
-    height: 182,
-    width: 50
-  }
-};
-
-alert( user.sizes.height ); // 182
-```
-
-Now it's not enough to copy `clone.sizes = user.sizes`, because the `user.sizes` is an object, it will be copied by reference. So `clone` and `user` will share the same sizes:
-
-Like this:
-
-```js run
-let user = {
-  name: "John",
-  sizes: {
-    height: 182,
-    width: 50
-  }
-};
-
-let clone = Object.assign({}, user);
-
-alert( user.sizes === clone.sizes ); // true, same object
-
-// user and clone share sizes
-user.sizes.width++;       // change a property from one place
-alert(clone.sizes.width); // 51, see the result from the other one
-```
-
-To fix that, we should use a cloning loop that examines each value of `user[key]` and, if it's an object, then replicate its structure as well. That is called a "deep cloning".
-
-We can use recursion to implement it. Or, to not reinvent the wheel, take an existing implementation, for instance [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) from the JavaScript library [lodash](https://lodash.com).
-
-````smart header="Const objects can be modified"
-An important side effect of storing objects as references is that an object declared as `const` *can* be modified.
-
-For instance:
+Masalan:
 
 ```js run
 const user = {
@@ -248,17 +117,209 @@ user.name = "Pete"; // (*)
 alert(user.name); // Pete
 ```
 
-It might seem that the line `(*)` would cause an error, but it does not. The value of `user` is constant, it must always reference the same object, but properties of that object are free to change.
+`(*)` qatori xato keltirib chiqarishi kerak bo'lgandek tuyuladi, lekin bunday emas. `user` qiymati doimiy, u har doim bir xil obyektga havola qilishi kerak, lekin o'sha obyektning xossalari erkin o'zgarishi mumkin.
 
-In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+Boshqacha qilib aytganda, `const user` faqat biz `user=...` ni butunlay o'rnatishga harakat qilganimizda xato beradi.
 
-That said, if we really need to make constant object properties, it's also possible, but using totally different methods. We'll mention that in the chapter <info:property-descriptors>.
+Shuni aytish kerakki, agar biz haqiqatan ham doimiy obyekt xossalarini yaratishimiz kerak bo'lsa, bu ham mumkin, lekin butunlay boshqa usullardan foydalanib. Buni <info:property-descriptors> bobida eslatamiz.
 ````
 
-## Summary
+## Klonlash va birlashtirish, Object.assign [#cloning-and-merging-object-assign]
 
-Objects are assigned and copied by reference. In other words, a variable stores not the "object value", but a "reference" (address in memory) for the value. So copying such a variable or passing it as a function argument copies that reference, not the object itself.
+Shunday qilib, obyekt o'zgaruvchisini nusxalash bir xil obyektga yana bir havola yaratadi.
 
-All operations via copied references (like adding/removing properties) are performed on the same single object.
+Lekin agar bizga obyektni takrorlash kerak bo'lsa-chi?
 
-To make a "real copy" (a clone) we can use `Object.assign` for the so-called "shallow copy" (nested objects are copied by reference) or a "deep cloning" function, such as [_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+Biz yangi obyekt yaratishimiz va mavjud obyektning tuzilmasini takrorlashimiz mumkin, uning xossalari bo'ylab iteratsiya qilib va ularni primitiv darajada nusxalash orqali.
+
+Quyidagicha:
+
+```js run
+let user = {
+  name: "John",
+  age: 30
+};
+
+*!*
+let clone = {}; // yangi bo'sh obyekt
+
+// keling, user ning barcha xossalarini unga nusxalaylik
+for (let key in user) {
+  clone[key] = user[key];
+}
+*/!*
+
+// endi clone bir xil tarkibga ega to'liq mustaqil obyekt
+clone.name = "Pete"; // undagi ma'lumotni o'zgartirdik
+
+alert( user.name ); // asl obyektda hali ham John
+```
+
+Shuningdek, biz [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) usulidan ham foydalanishimiz mumkin.
+
+Sintaksis:
+
+```js
+Object.assign(dest, ...sources);
+```
+
+- Birinchi argument `dest` - maqsadli obyekt.
+- Keyingi argumentlar - manba obyektlar ro'yxati.
+
+U barcha manba obyektlarning xossalarini maqsadli `dest` ga nusxalaydi va keyin natija sifatida uni qaytaradi.
+
+Masalan, bizda `user` obyekt bor, unga bir nechta ruxsatlar qo'shamiz:
+
+```js run
+let user = { name: "John" };
+
+let permissions1 = { canView: true };
+let permissions2 = { canEdit: true };
+
+*!*
+// permissions1 va permissions2 ning barcha xossalarini user ga nusxalaydi
+Object.assign(user, permissions1, permissions2);
+*/!*
+
+// endi user = { name: "John", canView: true, canEdit: true }
+alert(user.name); // John
+alert(user.canView); // true
+alert(user.canEdit); // true
+```
+
+Agar nusxalangan xossa nomi allaqachon mavjud bo'lsa, u qayta yoziladi:
+
+```js run
+let user = { name: "John" };
+
+Object.assign(user, { name: "Pete" });
+
+alert(user.name); // endi user = { name: "Pete" }
+```
+
+Shuningdek, biz `Object.assign` dan oddiy obyekt klonlash uchun ham foydalanishimiz mumkin:
+
+```js run
+let user = {
+  name: "John",
+  age: 30
+};
+
+*!*
+let clone = Object.assign({}, user);
+*/!*
+
+alert(clone.name); // John
+alert(clone.age); // 30
+```
+
+Bu yerda u `user` ning barcha xossalarini bo'sh obyektga nusxalaydi va uni qaytaradi.
+
+Obyektni klonlashning boshqa usullari ham bor, masalan [spread sintaksisi](info:rest-parameters-spread) `clone = {...user}` dan foydalanish, o'quv qo'llanmasida keyinroq yoritilgan.
+
+## Ichma-ich klonlash
+
+Hozirgacha biz `user` ning barcha xossalari primitiv deb faraz qildik. Lekin xossalar boshqa obyektlarga havolalar bo'lishi mumkin.
+
+Quyidagicha:
+
+```js run
+let user = {
+  name: "John",
+  sizes: {
+    height: 182,
+    width: 50,
+  },
+};
+
+alert(user.sizes.height); // 182
+```
+
+Endi `clone.sizes = user.sizes` ni nusxalash yetarli emas, chunki `user.sizes` obyekt va havola bo'yicha nusxalanadi, shuning uchun `clone` va `user` bir xil sizes ni bo'lishadi:
+
+```js run
+let user = {
+  name: "John",
+  sizes: {
+    height: 182,
+    width: 50,
+  },
+};
+
+let clone = Object.assign({}, user);
+
+alert(user.sizes === clone.sizes); // true, bir xil obyekt
+
+// user va clone sizes ni bo'lishadi
+user.sizes.width = 60; // bir joydan xossani o'zgartirish
+alert(clone.sizes.width); // 60, natijani boshqa joydan olish
+```
+
+Buni tuzatish va `user` bilan `clone` ni haqiqatan ham alohida obyektlar qilish uchun biz `user[key]` ning har bir qiymatini tekshiradigan va agar u obyekt bo'lsa, uning tuzilmasini ham takrorlaydigan klonlash tsiklidan foydalanishimiz kerak. Bu "chuqur klonlash" yoki "tuzilmaviy klonlash" deb ataladi. Chuqur klonlashni amalga oshiradigan [structuredClone](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone) usuli mavjud.
+
+### structuredClone
+
+`structuredClone(object)` chaqiruvi `object` ni barcha ichma-ich xossalar bilan klonlaydi.
+
+Misolimizda qanday foydalanishni ko'ramiz:
+
+```js run
+let user = {
+  name: "John",
+  sizes: {
+    height: 182,
+    width: 50
+  }
+};
+
+*!*
+let clone = structuredClone(user);
+*/!*
+
+alert( user.sizes === clone.sizes ); // false, turli obyektlar
+
+// user va clone endi butunlay bog'liq emas
+user.sizes.width = 60;    // bir joydan xossani o'zgartirish
+alert(clone.sizes.width); // 50, bog'liq emas
+```
+
+`structuredClone` usuli obyektlar, massivlar, primitiv qiymatlar kabi ko'pchilik ma'lumot turlarini klonlay oladi.
+
+U shuningdek obyekt xossasi obyektning o'ziga havola qilgan (bevosita yoki havolalar zanjiri orqali) aylanma havolalarni ham qo'llab-quvvatlaydi.
+
+Masalan:
+
+```js run
+let user = {};
+// keling, aylanma havola yarataylik:
+// user.me user ning o'ziga havola qiladi
+user.me = user;
+
+let clone = structuredClone(user);
+alert(clone.me === clone); // true
+```
+
+Ko'rib turganingizdek, `clone.me` `user` ga emas, `clone` ga havola qiladi! Shunday qilib, aylanma havola ham to'g'ri klonlandi.
+
+Garchi, `structuredClone` muvaffaqiyatsiz bo'lgan holatlar ham bor.
+
+Masalan, obyektda funksiya xossasi bo'lganda:
+
+```js run
+// xato
+structuredClone({
+  f: function () {},
+});
+```
+
+Funksiya xossalari qo'llab-quvvatlanmaydi.
+
+Bunday murakkab holatlarni hal qilish uchun bizga klonlash usullarining kombinatsiyasidan foydalanish, maxsus kod yozish yoki g'ildirakni qayta ixtiro qilmaslik uchun mavjud implementatsiyani olish kerak bo'lishi mumkin, masalan [lodash](https://lodash.com) JavaScript kutubxonasidagi [\_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep).
+
+## Xulosa
+
+Obyektlar havola bo'yicha tayinlanadi va nusxalanadi. Boshqacha qilib aytganda, o'zgaruvchi "obyekt qiymati" ni emas, balki qiymat uchun "havola" (xotiradagi manzil) ni saqlaydi. Shunday qilib, bunday o'zgaruvchini nusxalash yoki uni funksiya argumenti sifatida uzatish obyektning o'zini emas, o'sha havolani nusxalaydi.
+
+Nusxalangan havolalar orqali barcha amallar (xossalar qo'shish/olib tashlash kabi) bir xil obyektda amalga oshiriladi.
+
+"Haqiqiy nusxa" (klon) yaratish uchun biz "sayoz nusxa" (ichma-ich obyektlar havola bo'yicha nusxalanadi) uchun `Object.assign` dan yoki "chuqur klonlash" funksiyasi `structuredClone` dan yoki [\_.cloneDeep(obj)](https://lodash.com/docs#cloneDeep) kabi maxsus klonlash implementatsiyasidan foydalanishimiz mumkin.

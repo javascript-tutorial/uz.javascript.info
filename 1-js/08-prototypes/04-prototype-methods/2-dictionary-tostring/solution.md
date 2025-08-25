@@ -1,4 +1,3 @@
-
 Usul `Object.keys` yordamida barcha ro'yxatga olinadigan kalitlarni olishi va ularning ro'yxatini chiqarishi mumkin.
 
 `toString` ni sanoqsiz qilish uchun, uni xususiyat tavsiflovchisi yordamida aniqlaymiz. `Object.create` sintaksisi bizni obyektni ikkinchi argument sifatida xususiyat tavsiflovchilari bilan ta'minlashga imkon beradi.
@@ -20,7 +19,7 @@ dictionary.__proto__ = "test";
 // apple va __proto__ tsiklda
 for(let key in dictionary) {
   alert(key); // "apple", so'ng "__proto__"
-}  
+}
 
 // toString tomonidan vergul bilan ajratilgan xususiyatlar ro'yxati
 alert(dictionary); // "apple,__proto__"

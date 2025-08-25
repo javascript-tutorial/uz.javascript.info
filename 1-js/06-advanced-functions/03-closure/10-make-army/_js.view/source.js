@@ -3,8 +3,9 @@ function makeArmy() {
 
   let i = 0;
   while (i < 10) {
-    let shooter = function() { // shooter function
-      alert( i ); // should show its number
+    let shooter = function () {
+      // shooter function
+      alert(i); // should show its number
     };
     shooters.push(shooter);
     i++;

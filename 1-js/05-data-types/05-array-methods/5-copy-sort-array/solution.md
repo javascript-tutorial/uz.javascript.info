@@ -14,4 +14,3 @@ let sorted = copySorted(arr);
 alert( sorted );
 alert( arr );
 ```
-

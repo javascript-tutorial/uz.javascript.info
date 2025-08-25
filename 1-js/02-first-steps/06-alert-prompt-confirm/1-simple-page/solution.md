@@ -10,15 +10,13 @@ To'liq sahifa:
 ```html
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <script>
+      "use strict";
 
-  <script>
-    'use strict';
-
-    let name = prompt("Sening isming nima?", "");
-    alert(name);
-  </script>
-
-</body>
+      let name = prompt("Sening isming nima?", "");
+      alert(name);
+    </script>
+  </body>
 </html>
 ```

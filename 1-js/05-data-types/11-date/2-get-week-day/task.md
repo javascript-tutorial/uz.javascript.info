@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -9,6 +9,6 @@ Hafta kunini qisqa formatda ko'rsatish uchun `getWeekDay(date)` funktsiyasini yo
 For instance:
 
 ```js no-beautify
-let date = new Date(2012, 0, 3);  // 3 Jan 2012
-alert( getWeekDay(date) );        // "SE" qaytarish kerak 
+let date = new Date(2012, 0, 3); // 3 Jan 2012
+alert(getWeekDay(date)); // "SE" qaytarish kerak
 ```

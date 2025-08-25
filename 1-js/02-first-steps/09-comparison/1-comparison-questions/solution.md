@@ -10,12 +10,12 @@ null == "\n0\n" → false
 null === +"\n0\n" → false
 ```
 
-Some of the reasons:
+Ba'zi sabablar:
 
-1. Obviously, true.
-2. Dictionary comparison, hence false. `"a"` is smaller than `"p"`.
-3. Again, dictionary comparison, first char `"2"` is greater than the first char `"1"`.
-4. Values `null` and `undefined` equal each other only.
-5. Strict equality is strict. Different types from both sides lead to false.
-6. Similar to `(4)`, `null` only equals `undefined`.
-7. Strict equality of different types.
+1. Shubhasiz, rost.
+2. Lug'atni taqqoslash, shuning uchun noto'g'ri. `"a"` `"p"` dan kichikroq.
+3. Yana lug'atni solishtirish, birinchi belgi `"2"` birinchi belgidan katta `"1"`.
+4. “Nul” va “aniqlanmagan” qiymatlar faqat bir-biriga teng.
+5. Qat’iy tenglik – qat’iy. Ikkala tomonning turli xil turlari yolg'onga olib keladi.
+6. `(4)`ga o`xshab, `null` faqat `aniqlanmagan`ga teng.
+7. Har xil turdagi qat'iy tenglik.

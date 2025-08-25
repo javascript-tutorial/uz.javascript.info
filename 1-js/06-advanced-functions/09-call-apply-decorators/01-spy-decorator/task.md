@@ -1,8 +1,8 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Dekorativ ayg'oqchi 
+# Dekorativ ayg'oqchi
 
 Barcha chaqiruvlarni `calls` xususiyatida ishlashga saqlaydigan o'ramni qaytaradigan dekorativ `spy(func)` yarating.
 

@@ -1,4 +1,3 @@
-
 Xato yuz berdi, chunki `ask` obyektsiz `loginOk/loginFail` funktsiyalarini oladi.
 
 Ularni chaqirganda, ular tabiiy ravishda `this=undefined` deb taxmin qilishadi.
@@ -33,16 +32,15 @@ askPassword(user.loginOk.bind(user), user.loginFail.bind(user));
 Endi u ishlaydi.
 
 Muqobil yechim bo'lishi mumkin:
+
 ```js
 //...
-askPassword(() => user.loginOk(), () => user.loginFail());
+askPassword(
+  () => user.loginOk(),
+  () => user.loginFail()
+);
 ```
 
-<<<<<<< HEAD
 Odatda bu ham ishlaydi, lekin `user` so'rash va ishga tushirish vaqtlari orasida yozilishi mumkin bo'lgan murakkab vaziyatlarda ishlamay qolishi mumkin `() => user.loginOk ()`.
 
-=======
-Usually that also works and looks good.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
-
-It's a bit less reliable though in more complex situations where `user` variable might change *after* `askPassword` is called, but *before* the visitor answers and calls `() => user.loginOk()`. 
+It's a bit less reliable though in more complex situations where `user` variable might change _after_ `askPassword` is called, but _before_ the visitor answers and calls `() => user.loginOk()`.

@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -14,4 +14,3 @@ Masalan:
 sum(1)(2) = 3
 sum(5)(-1) = 4
 ```
-

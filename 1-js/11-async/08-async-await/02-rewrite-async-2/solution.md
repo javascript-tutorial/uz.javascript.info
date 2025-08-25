@@ -1,15 +1,10 @@
-
-<<<<<<< HEAD
 Bu yerda hech qanday fokuslar yo'q. `demoGithubUser` ichida `.catch` ni `try...catch` bilan almashtiring va kerak bo'lganda `async/await` ni qo'shing:
-=======
-There are no tricks here. Just replace `.catch` with `try..catch` inside `demoGithubUser` and add `async/await` where needed:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 class HttpError extends Error {
   constructor(response) {
     super(`${response.status} for ${response.url}`);
-    this.name = 'HttpError';
+    this.name = "HttpError";
     this.response = response;
   }
 }
@@ -25,15 +20,14 @@ async function loadJson(url) {
 
 // Github haqiqiy foydalanuvchini qaytarguncha foydalanuvchi nomini so'rang
 async function demoGithubUser() {
-
   let user;
-  while(true) {
+  while (true) {
     let name = prompt("Ism kiriting", "iliakan");
 
     try {
       user = await loadJson(`https://api.github.com/users/${name}`);
       break; // xato yo'q, tsiklni tark etish
-    } catch(err) {
+    } catch (err) {
       if (err instanceof HttpError && err.response.status == 404) {
         // alert-dan keyin tsikl davom etadi
         alert("Bunday foydalanuvchi yo'q, iltimos qayta kiring.");
@@ -41,9 +35,8 @@ async function demoGithubUser() {
         // noma'lum xato, qaytarmoq
         throw err;
       }
-    }      
+    }
   }
-
 
   alert(`To'liq ism: ${user.name}.`);
   return user;

@@ -1,9 +1,8 @@
-importance: 5
+muhimlik: 5
 
 ---
 
 # String xususiyatini qo'shsam bo'ladimi?
-
 
 Quyidagi kodni ko'rib chiqing:
 

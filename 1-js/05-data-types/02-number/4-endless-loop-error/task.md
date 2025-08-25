@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -12,4 +12,3 @@ while (i != 10) {
   i += 0.2;
 }
 ```
-

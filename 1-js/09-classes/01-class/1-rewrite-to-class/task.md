@@ -1,9 +1,9 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Rewrite to class
+# Sinfga qayta yozish
 
-The `Clock` class (see the sandbox) is written in functional style. Rewrite it in the "class" syntax.
+`Clock` klassi (qum qutisiga qarang) funktsional uslubda yozilgan. Uni `klass` sintaksisida qayta yozing.
 
-P.S. The clock ticks in the console, open it to see.
+P.S. Konsolda soat chayqaladi, ko'rish uchun uni oching.

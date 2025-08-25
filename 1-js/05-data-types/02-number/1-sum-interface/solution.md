@@ -1,10 +1,8 @@
-
-
 ```js run demo
 let a = +prompt("Birinchi raqam?", "");
 let b = +prompt("Ikkinchi raqam?", "");
 
-alert( a + b );
+alert(a + b);
 ```
 
 `prompt` oldidan unar plyusga `+` e'tibor bering. U darhol qiymatni raqamga o'zgartiradi.

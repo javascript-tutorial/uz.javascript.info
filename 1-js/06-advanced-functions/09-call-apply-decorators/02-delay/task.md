@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 

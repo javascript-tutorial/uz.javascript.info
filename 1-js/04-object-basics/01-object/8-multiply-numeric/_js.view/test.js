@@ -1,9 +1,9 @@
-describe("multiplyNumeric", function() {
-  it("barcha sonli xususiyatlarni 2 ga ko'paytiradi", function() {
+describe("multiplyNumeric", function () {
+  it("barcha sonli xususiyatlarni 2 ga ko'paytiradi", function () {
     let menu = {
       width: 200,
       height: 300,
-      title: "Mening menyuim"
+      title: "Mening menyuim",
     };
     let result = multiplyNumeric(menu);
     assert.equal(menu.width, 400);
@@ -11,8 +11,7 @@ describe("multiplyNumeric", function() {
     assert.equal(menu.title, "Mening menyuim");
   });
 
-  it("returns nothing", function() {
-    assert.isUndefined( multiplyNumeric({}) );
+  it("returns nothing", function () {
+    assert.isUndefined(multiplyNumeric({}));
   });
-
 });

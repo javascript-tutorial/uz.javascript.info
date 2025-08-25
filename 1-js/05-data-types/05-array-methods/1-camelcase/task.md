@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -11,9 +11,9 @@ Ya'ni: barcha chiziqlarni olib tashlaydi, chiziqdan keyingi har bir so'z tepa re
 Masalan:
 
 ```js
-camelize("background-color") == 'backgroundColor';
-camelize("list-style-image") == 'listStyleImage';
-camelize("-webkit-transition") == 'WebkitTransition';
+camelize("background-color") == "backgroundColor";
+camelize("list-style-image") == "listStyleImage";
+camelize("-webkit-transition") == "WebkitTransition";
 ```
 
-P.S. Maslahat: matnni massivga bo'lish, uni o'zgartirish  uchun `split` dan foydalaning va qo'shilish uchun `join`.
+P.S. Maslahat: matnni massivga bo'lish, uni o'zgartirish uchun `split` dan foydalaning va qo'shilish uchun `join`.

@@ -1,26 +1,26 @@
-importance: 4
+muhimlik: 4
 
 ---
 
-# Create keyed object from array
+# Massivdan kalitli obyekt yaratish
 
-Let's say we received an array of users in the form `{id:..., name:..., age... }`.
+Aytaylik, bizga `{id:..., name:..., age... }` shaklida foydalanuvchilar massivi keldi.
 
-Create a function `groupById(arr)` that creates an object from it, with `id` as the key, and array items as values.
+Undan obyekt yaratiladigan `groupById(arr)` funksiyasini yarating, bu yerda `id` kalit bo'lib, massiv elementlari qiymat bo'ladi.
 
-For example:
+Masalan:
 
 ```js
 let users = [
-  {id: 'john', name: "John Smith", age: 20},
-  {id: 'ann', name: "Ann Smith", age: 24},
-  {id: 'pete', name: "Pete Peterson", age: 31},
+  { id: "john", name: "John Smith", age: 20 },
+  { id: "ann", name: "Ann Smith", age: 24 },
+  { id: "pete", name: "Pete Peterson", age: 31 },
 ];
 
 let usersById = groupById(users);
 
 /*
-// after the call we should have:
+// chaqiruvdan keyin bizda bo'lishi kerak:
 
 usersById = {
   john: {id: 'john', name: "John Smith", age: 20},
@@ -30,8 +30,8 @@ usersById = {
 */
 ```
 
-Such function is really handy when working with server data.
+Bunday funksiya server ma'lumotlari bilan ishlashda juda qulay.
 
-In this task we assume that `id` is unique. There may be no two array items with the same `id`.
+Bu vazifada biz `id` ning noyob ekanligini faraz qilamiz. Bir xil `id` ga ega ikkita massiv elementi bo'lmasligi mumkin.
 
-Please use array `.reduce` method in the solution.
+Iltimos, yechimda massivning `.reduce` usulidan foydalaning.

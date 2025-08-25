@@ -1,16 +1,12 @@
-describe("truncate", function() {
-  it("truncate the long string to the given length (including the ellipsis)", function() {
+describe("kesish", function () {
+  it("uzun matnni berilgan uzunlikka (shu jumladan ellips) kesib tashlang", function () {
     assert.equal(
-      truncate("What I'd like to tell on this topic is:", 20),
-      "What I'd like to te…"
+      truncate("Ushbu mavzu bo'yicha men aytmoqchi bo'lgan narsa:", 20),
+      "Ushbu mavzu bo'yicha..."
     );
   });
 
-  it("doesn't change short strings", function() {
-    assert.equal(
-      truncate("Hi everyone!", 20),
-      "Hi everyone!"
-    );
+  it("qisqa matnlarni o'zgartirmang", function () {
+    assert.equal(truncate("Hammaga salom!", 20), "Hammaga salom!");
   });
-
 });

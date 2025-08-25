@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -11,6 +11,5 @@ Bunday satrdan sonli qiymatni chiqaradigan va qaytaradigan `extractCurrencyValue
 Masalan:
 
 ```js
-alert( extractCurrencyValue('$120') === 120 ); // true
+alert(extractCurrencyValue("$120") === 120); // true
 ```
-

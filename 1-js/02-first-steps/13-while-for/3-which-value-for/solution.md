@@ -1,9 +1,9 @@
 **Javob: ikkala holatda ham `0` dan `4` gacha.**
 
 ```js run
-for (let i = 0; i < 5; ++i) alert( i );
+for (let i = 0; i < 5; ++i) alert(i);
 
-for (let i = 0; i < 5; i++) alert( i );
+for (let i = 0; i < 5; i++) alert(i);
 ```
 
 Buni `for` algoritmidan osongina ajratish mumkin:

@@ -1,30 +1,31 @@
-The solution consists of two parts:
+Yechim ikki qismdan iborat:
 
-1. Whenever `.observe(handler)` is called, we need to remember the handler somewhere, to be able to call it later. We can store handlers right in the object, using our symbol as the property key.
-2. We need a proxy with `set` trap to call handlers in case of any change.
+1. Qachonki `.observe(handler)` chaqirilsa, keyinroq qo'ng'iroq qilishimiz uchun ishlov beruvchini biror joyda eslab qolishimiz kerak. Biz ishlovchilarni to'g'ridan-to'g'ri ob'ektda saqlashimiz mumkin, bunda o'z belgimizdan mulk kaliti sifatida foydalanamiz.
+2. Har qanday o'zgarish bo'lsa, ishlov beruvchilarga qo'ng'iroq qilish uchun bizga `set` trapli proksi-server kerak.
 
 ```js run
-let handlers = Symbol('handlers');
+let handlers = Symbol("handlers");
 
 function makeObservable(target) {
-  // 1. Initialize handlers store
+  // 1. Qiymatlarni yaratish
   target[handlers] = [];
 
-  // Store the handler function in array for future calls
-  target.observe = function(handler) {
+  // Kelgusi qo'ng'iroqlar uchun ishlov beruvchi funksiyasini massivda saqlang
+  target.observe = function (handler) {
     this[handlers].push(handler);
   };
 
-  // 2. Create a proxy to handle changes
+  // 2. O'zgarishlarni boshqarish uchun proksi-server yarating
   return new Proxy(target, {
     set(target, property, value, receiver) {
-      let success = Reflect.set(...arguments); // forward the operation to object
-      if (success) { // if there were no error while setting the property
-        // call all handlers
-        target[handlers].forEach(handler => handler(property, value));
+      let success = Reflect.set(...arguments); // operatsiyani ob'ektga yo'naltirish
+      if (success) {
+        // mulkni o'rnatishda xatolik bo'lmasa
+        // barcha ishlovchilarni chaqiring
+        target[handlers].forEach((handler) => handler(property, value));
       }
       return success;
-    }
+    },
   });
 }
 

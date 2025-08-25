@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -11,10 +11,9 @@ Bunday ishlashi kerak:
 ```js
 let schedule = {};
 
-alert( isEmpty(schedule) ); // true
+alert(isEmpty(schedule)); // true
 
 schedule["8:30"] = "turmoq";
 
-alert( isEmpty(schedule) ); // false
+alert(isEmpty(schedule)); // false
 ```
-

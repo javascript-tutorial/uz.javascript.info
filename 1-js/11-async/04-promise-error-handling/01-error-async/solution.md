@@ -1,7 +1,7 @@
 Javob: **yo'q, bo'lmaydi**:
 
 ```js run
-new Promise(function(resolve, reject) {
+new Promise(function (resolve, reject) {
   setTimeout(() => {
     throw new Error("Whoops!");
   }, 1000);

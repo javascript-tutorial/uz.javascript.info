@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!-- natija ko'rsatish uchun Mocha CSS-ni qo'shamiz -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
-  <!-- mocha framework-ini qo'shamiz -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
-  <script>
-    // bdd uslubidagi sinovni yoqamiz
-    mocha.setup('bdd');
-  </script>
-  <!-- chai ni qo'shamiz -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
-  <script>
-    // chai juda ko'p funktsiyalarga ega, keling, global deb ta'kidlaymiz
-    let assert = chai.assert;
-  </script>
-</head>
+  <head>
+    <!-- natija ko'rsatish uchun Mocha CSS-ni qo'shamiz -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css"
+    />
+    <!-- mocha framework-ini qo'shamiz -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+    <script>
+      // bdd uslubidagi sinovni yoqamiz
+      mocha.setup("bdd");
+    </script>
+    <!-- chai ni qo'shamiz -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+    <script>
+      // chai juda ko'p funktsiyalarga ega, keling, global deb ta'kidlaymiz
+      let assert = chai.assert;
+    </script>
+  </head>
 
-<body>
+  <body>
+    <script>
+      function pow(x, n) {
+        let result = 1;
 
-  <script>
-    function pow(x, n) {
-      let result = 1;
+        for (let i = 0; i < n; i++) {
+          result *= x;
+        }
 
-      for (let i = 0; i < n; i++) {
-        result *= x;
+        return result;
       }
+    </script>
 
-      return result;
-    }
-  </script>
+    <!-- testlar bilan skript (describe, it ...) -->
+    <script src="test.js"></script>
 
-  <!-- testlar bilan skript (describe, it ...) -->
-  <script src="test.js"></script>
+    <!-- id="mocha" elementi test natijalarini o'z ichiga oladi -->
+    <div id="mocha"></div>
 
-  <!-- id="mocha" elementi test natijalarini o'z ichiga oladi -->
-  <div id="mocha"></div>
-
-  <!-- testlarni o'tkazing! -->
-  <script>
-    mocha.run();
-  </script>
-</body>
-
+    <!-- testlarni o'tkazing! -->
+    <script>
+      mocha.run();
+    </script>
+  </body>
 </html>
-

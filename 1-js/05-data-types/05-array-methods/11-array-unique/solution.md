@@ -1,4 +1,5 @@
 Keling, massiv elementlari bo'ylab yuraylik:
+
 - Har bir element uchun, natijada olingan massivda ushbu element mavjudligini tekshiramiz.
 - Agar shunday bo'lsa, unda e'tibor bermang, aks holda natijalarga qo'shing.
 
@@ -15,11 +16,19 @@ function unique(arr) {
   return result;
 }
 
-let strings = ["Hare", "Krishna", "Hare", "Krishna",
-  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+let strings = [
+  "Hare",
+  "Krishna",
+  "Hare",
+  "Krishna",
+  "Krishna",
+  "Krishna",
+  "Hare",
+  "Hare",
+  ":-O",
 ];
 
-alert( unique(strings) ); // Hare, Krishna, :-O
+alert(unique(strings)); // Hare, Krishna, :-O
 ```
 
 Kod ishlaydi, lekin unda potentsial ishlash muammosi mavjud.
@@ -36,8 +45,4 @@ Shunday qilib, agar `arr.length` 10000 bo'lsa, bizda `10000 * 10000` = 100 milli
 
 Shunday qilib, yechim faqat kichik massivlar uchun foydalidir.
 
-<<<<<<< HEAD
 Keyinchalik <info:map-set-weakmap-weakset> bobida biz uni qanday qilib optimallashtirishni ko'rib chiqamiz.
-=======
-Further in the chapter <info:map-set> we'll see how to optimize it.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

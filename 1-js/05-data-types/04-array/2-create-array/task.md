@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -15,10 +15,9 @@ Keling, 5 ta massiv operatsiyasini sinab ko'raylik.
 Jarayondagi massiv:
 
 ```js no-beautify
-Jazz, Blues
-Jazz, Blues, Rock-n-Roll
-Jazz, Classics, Rock-n-Roll
-Classics, Rock-n-Roll
-Rap, Reggae, Classics, Rock-n-Roll
+Jazz, Blues;
+Jazz, Blues, Rock - n - Roll;
+Jazz, Classics, Rock - n - Roll;
+Classics, Rock - n - Roll;
+Rap, Reggae, Classics, Rock - n - Roll;
 ```
-

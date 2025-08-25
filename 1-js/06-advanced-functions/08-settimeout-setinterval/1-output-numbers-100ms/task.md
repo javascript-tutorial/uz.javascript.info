@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -8,11 +8,5 @@ Har soniyada sonni `from` dan boshlab va `to` bilan tugaydigan sonlarni chiqarad
 
 Natijaning ikkita variantini tuzing.
 
-<<<<<<< HEAD
 1. `setInterval` dan foydalanish.
 2. Rekursiv `setTimeout` dan foydalanish.
-
-=======
-1. Using `setInterval`.
-2. Using nested `setTimeout`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

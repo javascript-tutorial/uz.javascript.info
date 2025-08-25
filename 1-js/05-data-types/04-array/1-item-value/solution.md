@@ -1,6 +1,5 @@
 Natija `4`:
 
-
 ```js run
 let fruits = ["Olmalar", "Nok", "Apelsin"];
 

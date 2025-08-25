@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -11,7 +11,7 @@ Funktsiyaning natijasi kesilgan (kerak bo'lsa) matn bo'lishi kerak.
 Masalan:
 
 ```js
-truncate("What I'd like to tell on this topic is:", 20) = "What I'd like to te…"
+truncate("Ushbu mavzu bo'yicha men aytmoqchi bo'lgan narsa:", 20) = "Ushbu mavzu bo'yicha..."
 
-truncate("Hi everyone!", 20) = "Hi everyone!"
+truncate("Hammaga salom!", 20) = "Hammaga salom!"
 ```

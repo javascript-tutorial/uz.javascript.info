@@ -1,22 +1,46 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Inherit from SyntaxError
+# SyntaxError dan meros olish
 
-Create a class `FormatError` that inherits from the built-in `SyntaxError` class.
+O'rnatilgan `SyntaxError` klassidan meros oladigan `FormatError` klassini yarating.
 
-It should support `message`, `name` and `stack` properties.
+U `message`, `name` va `stack` xususiyatlarini qo'llab-quvvatlashi kerak.
 
-Usage example:
+Foydalanish misoli:
 
 ```js
-let err = new FormatError("formatting error");
+let err = new FormatError("formatlash xatosi");
 
-alert( err.message ); // formatting error
-alert( err.name ); // FormatError
-alert( err.stack ); // stack
+alert(err.message); // formatlash xatosi
+alert(err.name); // FormatError
+alert(err.stack); // stack
 
-alert( err instanceof FormatError ); // true
-alert( err instanceof SyntaxError ); // true (because inherits from SyntaxError)
+alert(err instanceof FormatError); // true
+alert(err instanceof SyntaxError); // true (SyntaxError dan meros olganligi uchun)
+```
+
+---
+
+## Yechim
+
+```js
+class FormatError extends SyntaxError {
+  constructor(message) {
+    super(message);
+    this.name = "FormatError";
+  }
+}
+
+// Test
+let err = new FormatError("formatlash xatosi");
+
+alert(err.message); // formatlash xatosi
+alert(err.name); // FormatError
+alert(err.stack); // stack (brauzerga bog'liq)
+
+alert(err instanceof FormatError); // true
+alert(err instanceof SyntaxError); // true
+alert(err instanceof Error); // true
 ```

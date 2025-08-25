@@ -94,17 +94,15 @@ Xuddi shu skriptga murojaat qilgan boshqa sahifalar uni qayta yuklab olish o'rni
 Bu trafikni kamaytiradi va sahifalarni tezlashtiradi.
 ```
 
-````warn header="Agar `src`o'rnatilgan bo'lsa, skript mazmuniga e'tibor berilmaydi."
-Bitta`<script>`tegida ham`src` atributi, ham ichki kod bo'lishi mumkin emas.
+````warn header="Agar `src` o'rnatilgan bo'lsa, skript mazmuniga e'tibor berilmaydi."
+Bitta `<script>` tegida ham `src` atributi, ham ichki kod bo'lishi mumkin emas.
 
 Bu ishlamaydi:
 
 ```html
-
 <script *!*src*/!*="file.js">
   alert(1); // mazmuniga e'tibor berilmaydi, chunki src o'rnatilgan
 </script>
-
 ```
 
 Biz tashqi `<script src="…">` yoki ichki kod bilan `<script>` dan birini tanlashimiz kerak.
@@ -117,13 +115,12 @@ Yuqoridagi misolni ishlashi uchun ikkita skriptga bo'lish mumkin:
   alert(1);
 </script>
 ```
-
-```
+````
 
 ## Xulosa
 
 - Sahifaga JavaScript kodi qo'shish uchun `<script>` tegidan foydalanishimiz mumkin.
 - `type` va `language` atributlari talab qilinmaydi.
-- Tashqi fayldan skript `<script src="path/to/script.js"></script>` ko'rinishida `src` atributi yordamida qo'shilishi mumkin.
+- Tashqi fayldan skript `<script src="path/to/script.js"></script>` ko'rinishida qo'shilishi mumkin.
 
-Brauzer skriptlari va ularning veb-sahifa bilan o'zaro aloqalari haqida ko'proq ma'lumot olish mumkin. Shuni yodda tutingki, o'quv qo'llanmasining ushbu qismi JavaScript tiliga bag'ishlangan, shuning uchun uni brauzerga xos dasturlar bilan aralashtirib yubormasligimiz kerak. Biz brauzerni JavaScript-ni ishga tushirish usuli 
+Brauzer skriptlari va ularning veb-sahifa bilan o'zaro aloqalari haqida ko'proq ma'lumot olish mumkin. Shuni yodda tutingki, o'quv qo'llanmasining ushbu qismi JavaScript tiliga bag'ishlangan, shuning uchun uni brauzerga xos dasturlar bilan aralashtirib yubormasligimiz kerak. Biz brauzerni JavaScript-ni ishga tushirish usuli sifatida ishlatamiz, bu onlayn o'qish uchun juda qulay, lekin ko'plab usullardan faqat bittasi.

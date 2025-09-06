@@ -1,80 +1,80 @@
-# Server Sent Events
+# Server Sent Events (Server tomonidan yuborilgan event'lar)
 
-The [Server-Sent Events](https://html.spec.whatwg.org/multipage/comms.html#the-eventsource-interface) specification describes a built-in class `EventSource`, that keeps connection with the server and allows to receive events from it.
+[Server-Sent Events](https://html.spec.whatwg.org/multipage/comms.html#the-eventsource-interface) spetsifikatsiyasi server bilan ulanishni saqlaydigan va undan event'larni qabul qilishga imkon beruvchi o'rnatilgan `EventSource` klassini tasvirlaydi.
 
-Similar to `WebSocket`, the connection is persistent.
+`WebSocket` ga o'xshab, ulanish doimiydir.
 
-But there are several important differences:
+Lekin bir nechta muhim farqlar bor:
 
 | `WebSocket` | `EventSource` |
 |-------------|---------------|
-| Bi-directional: both client and server can exchange messages | One-directional: only server sends data |
-| Binary and text data | Only text |
-| WebSocket protocol | Regular HTTP |
+| Ikki tomonlama: ham mijoz, ham server xabar almashinuvi mumkin | Bir tomonlama: faqat server ma'lumot yuboradi |
+| Ikkilik va matn ma'lumotlari | Faqat matn |
+| WebSocket protokoli | Oddiy HTTP |
 
-`EventSource` is a less-powerful way of communicating with the server than `WebSocket`.
+`EventSource` - bu server bilan muloqot qilishning `WebSocket` ga nisbatan kamroq kuchli usuli.
 
-Why should one ever use it?
+Nega uni ishlatish kerak?
 
-The main reason: it's simpler. In many applications, the power of `WebSocket` is a little bit too much.
+Asosiy sabab: u oddiyroq. Ko'pgina ilovalarda `WebSocket` ning kuchi biroz ortiqcha.
 
-We need to receive a stream of data from server: maybe chat messages or market prices, or whatever. That's what `EventSource` is good at. Also it supports auto-reconnect, something  we need to implement manually with `WebSocket`. Besides, it's a plain old HTTP, not a new protocol.
+Bizga serverdan ma'lumot oqimini qabul qilish kerak: ehtimol chat xabarlari yoki bozor narxlari, yoki boshqa narsalar. `EventSource` aynan shu uchun yaxshi. Bundan tashqari, u avtomatik qayta ulanishni qo'llab-quvvatlaydi, buni `WebSocket` bilan qo'lda amalga oshirishimiz kerak. Bundan tashqari, bu yangi protokol emas, balki oddiy eski HTTP.
 
-## Getting messages
+## Xabarlarni olish
 
-To start receiving messages, we just need to create `new EventSource(url)`.
+Xabarlarni qabul qilishni boshlash uchun faqat `new EventSource(url)` yaratishimiz kerak.
 
-The browser will connect to `url` and keep the connection open, waiting for events.
+Brauzer `url` ga ulanadi va event'larni kutib ulanishni ochiq saqlaydi.
 
-The server should respond with status 200 and the header `Content-Type: text/event-stream`, then keep the connection and write messages into it in the special format, like this:
+Server 200 status va `Content-Type: text/event-stream` header bilan javob berishi, keyin ulanishni saqlab, xabarlarni maxsus formatda yozishi kerak, masalan:
 
 ```
-data: Message 1
+data: Xabar 1
 
-data: Message 2
+data: Xabar 2
 
-data: Message 3
-data: of two lines
+data: Xabar 3
+data: ikki qatorli
 ```
 
-- A message text goes after `data:`, the space after the colon is optional.
-- Messages are delimited with double line breaks `\n\n`.
-- To send a line break `\n`, we can immediately send one more `data:` (3rd message above).
+- Xabar matni `data:` dan keyin keladi, ikki nuqtadan keyingi bo'shliq ixtiyoriy.
+- Xabarlar ikki qatorli uzilish `\n\n` bilan ajratiladi.
+- Qator uzilishi `\n` yuborish uchun darhol yana bir `data:` yuborishimiz mumkin (yuqoridagi 3-xabar).
 
-In practice, complex messages are usually sent JSON-encoded. Line-breaks are encoded as `\n` within them, so multiline `data:` messages are not necessary.
+Amalda murakkab xabarlar odatda JSON-kodlangan holda yuboriladi. Qator uzilishlari ularda `\n` sifatida kodlanadi, shuning uchun ko'p qatorli `data:` xabarlari kerak emas.
 
-For instance:
+Masalan:
 
 ```js
-data: {"user":"John","message":"First line*!*\n*/!* Second line"}
+data: {"user":"John","message":"Birinchi qator*!*\n*/!* Ikkinchi qator"}
 ```
 
-...So we can assume that one `data:` holds exactly one message.
+...Shunday qilib, biz bitta `data:` aynan bitta xabarni saqlaydi deb taxmin qilishimiz mumkin.
 
-For each such message, the `message` event is generated:
+Har bir bunday xabar uchun `message` eventi yaratiladi:
 
 ```js
 let eventSource = new EventSource("/events/subscribe");
 
 eventSource.onmessage = function(event) {
-  console.log("New message", event.data);
-  // will log 3 times for the data stream above
+  console.log("Yangi xabar", event.data);
+  // yuqoridagi ma'lumot oqimi uchun 3 marta log qiladi
 };
 
-// or eventSource.addEventListener('message', ...)
+// yoki eventSource.addEventListener('message', ...)
 ```
 
-### Cross-origin requests
+### Cross-origin so'rovlari
 
-`EventSource` supports cross-origin requests, like `fetch` and any other networking methods. We can use any URL:
+`EventSource` `fetch` va boshqa tarmoq metodlari kabi cross-origin so'rovlarni qo'llab-quvvatlaydi. Biz har qanday URL dan foydalanishimiz mumkin:
 
 ```js
 let source = new EventSource("https://another-site.com/events");
 ```
 
-The remote server will get the `Origin` header and must respond with `Access-Control-Allow-Origin` to proceed.
+Masofaviy server `Origin` header'ini oladi va davom etish uchun `Access-Control-Allow-Origin` bilan javob berishi kerak.
 
-To pass credentials, we should set the additional option `withCredentials`, like this:
+Hisob ma'lumotlarini uzatish uchun qo'shimcha `withCredentials` opsiyasini o'rnatishimiz kerak, masalan:
 
 ```js
 let source = new EventSource("https://another-site.com/events", {
@@ -82,30 +82,29 @@ let source = new EventSource("https://another-site.com/events", {
 });
 ```
 
-Please see the chapter <info:fetch-crossorigin> for more details about cross-origin headers.
+Cross-origin header'lar haqida batafsil ma'lumot uchun <info:fetch-crossorigin> bobiga qarang.
 
+## Qayta ulanish
 
-## Reconnection
+Yaratilganda `new EventSource` serverga ulanadi va agar ulanish uzilsa -- qayta ulanadi.
 
-Upon creation, `new EventSource` connects to the server, and if the connection is broken -- reconnects.
+Bu juda qulay, chunki bu haqda g'amxo'rlik qilishimiz shart emas.
 
-That's very convenient, as we don't have to care about it.
+Qayta ulanishlar orasida kichik kechikish bor, sukut bo'yicha bir necha soniya.
 
-There's a small delay between reconnections, a few seconds by default.
-
-The server can set the recommended delay using `retry:` in response (in milliseconds):
+Server javobda `retry:` yordamida tavsiya etilgan kechikishni o'rnatishi mumkin (millisekundlarda):
 
 ```js
 retry: 15000
-data: Hello, I set the reconnection delay to 15 seconds
+data: Salom, men qayta ulanish kechikishini 15 soniyaga o'rnatdim
 ```
 
-The `retry:` may come both together with some data, or as a standalone message.
+`retry:` ba'zi ma'lumotlar bilan birga yoki mustaqil xabar sifatida kelishi mumkin.
 
-The browser should wait that many milliseconds before reconnecting. Or longer, e.g. if the browser knows (from OS) that there's no network connection at the moment, it may wait until the connection appears, and then retry.
+Brauzer qayta ulanishdan oldin shuncha millisekund kutishi kerak. Yoki uzoqroq, masalan agar brauzer (OS dan) hozir tarmoq ulanishi yo'qligini bilsa, u ulanish paydo bo'lguncha kutib, keyin qayta urinishi mumkin.
 
-- If the server wants the browser to stop reconnecting, it should respond with HTTP status 204.
-- If the browser wants to close the connection, it should call `eventSource.close()`:
+- Agar server brauzerning qayta ulanishni to'xtatishini xohlasa, u HTTP status 204 bilan javob berishi kerak.
+- Agar brauzer ulanishni yopmoqchi bo'lsa, `eventSource.close()` ni chaqirishi kerak:
 
 ```js
 let eventSource = new EventSource(...);
@@ -113,159 +112,159 @@ let eventSource = new EventSource(...);
 eventSource.close();
 ```
 
-Also, there will be no reconnection if the response has an incorrect `Content-Type` or its HTTP status differs from 301, 307, 200 and 204. In such cases the `"error"` event will be emitted, and the browser won't reconnect.
+Bundan tashqari, agar javob noto'g'ri `Content-Type` ga ega bo'lsa yoki uning HTTP statusi 301, 307, 200 va 204 dan farq qilsa, qayta ulanish bo'lmaydi. Bunday hollarda `"error"` eventi chiqariladi va brauzer qayta ulanmaydi.
 
 ```smart
-When a connection is finally closed, there's no way to "reopen" it. If we'd like to connect again, just create a new `EventSource`.
+Ulanish nihoyat yopilganda, uni "qayta ochish" imkoni yo'q. Agar qayta ulanmoqchi bo'lsak, faqat yangi `EventSource` yarating.
 ```
 
-## Message id
+## Xabar id'si
 
-When a connection breaks due to network problems, either side can't be sure which messages were received, and which weren't.
+Tarmoq muammolari tufayli ulanish uzilganda, hech bir tomon qaysi xabarlar qabul qilingan va qaysilari qabul qilinmaganiga ishonch hosil qila olmaydi.
 
-To correctly resume the connection, each message should have an `id` field, like this:
+Ulanishni to'g'ri davom ettirish uchun har bir xabar `id` maydoniga ega bo'lishi kerak, masalan:
 
 ```
-data: Message 1
+data: Xabar 1
 id: 1
 
-data: Message 2
+data: Xabar 2
 id: 2
 
-data: Message 3
-data: of two lines
+data: Xabar 3
+data: ikki qatorli
 id: 3
 ```
 
-When a message with `id:` is received, the browser:
+`id:` bilan xabar qabul qilinganda, brauzer:
 
-- Sets the property `eventSource.lastEventId` to its value.
-- Upon reconnection sends the header `Last-Event-ID` with that `id`, so that the server may re-send following messages.
+- `eventSource.lastEventId` xususiyatini uning qiymatiga o'rnatadi.
+- Qayta ulanishda server keyingi xabarlarni qayta yuborishi uchun o'sha `id` bilan `Last-Event-ID` header'ini yuboradi.
 
-```smart header="Put `id:` after `data:`"
-Please note: the `id` is appended below message `data` by the server, to ensure that `lastEventId` is updated after the message is received.
+```smart header="`id:` ni `data:` dan keyin qo'ying"
+Diqqat qiling: xabar qabul qilingandan keyin `lastEventId` yangilanishini ta'minlash uchun server tomonidan `id` xabar `data` dan pastga qo'shiladi.
 ```
 
-## Connection status: readyState
+## Ulanish holati: readyState
 
-The `EventSource` object has `readyState` property, that has one of three values:
+`EventSource` obyektining uchta qiymatdan biriga ega `readyState` xususiyati bor:
 
 ```js no-beautify
-EventSource.CONNECTING = 0; // connecting or reconnecting
-EventSource.OPEN = 1;       // connected
-EventSource.CLOSED = 2;     // connection closed
+EventSource.CONNECTING = 0; // ulanmoqda yoki qayta ulanmoqda
+EventSource.OPEN = 1;       // ulangan
+EventSource.CLOSED = 2;     // ulanish yopilgan
 ```
 
-When an object is created, or the connection is down, it's always `EventSource.CONNECTING` (equals `0`).
+Obyekt yaratilganda yoki ulanish uzilganda, u har doim `EventSource.CONNECTING` (0 ga teng).
 
-We can query this property to know the state of `EventSource`.
+`EventSource` holatini bilish uchun ushbu xususiyatni so'rashimiz mumkin.
 
-## Event types
+## Event turlari
 
-By default `EventSource` object generates three events:
+Sukut bo'yicha `EventSource` obyekti uchta event yaratadi:
 
-- `message` -- a message received, available as `event.data`.
-- `open` -- the connection is open.
-- `error` -- the connection could not be established, e.g. the server returned HTTP 500 status.
+- `message` -- xabar qabul qilindi, `event.data` sifatida mavjud.
+- `open` -- ulanish ochiq.
+- `error` -- ulanish o'rnatilmadi, masalan server HTTP 500 statusini qaytardi.
 
-The server may specify another type of event with `event: ...` at the event start.
+Server event boshida `event: ...` bilan boshqa event turi belgilashi mumkin.
 
-For example:
+Masalan:
 
 ```
 event: join
 data: Bob
 
-data: Hello
+data: Salom
 
 event: leave
 data: Bob
 ```
 
-To handle custom events, we must use `addEventListener`, not `onmessage`:
+Maxsus event'larni boshqarish uchun `onmessage` emas, `addEventListener` dan foydalanishimiz kerak:
 
 ```js
 eventSource.addEventListener('join', event => {
-  alert(`Joined ${event.data}`);
+  alert(`Qo'shildi ${event.data}`);
 });
 
 eventSource.addEventListener('message', event => {
-  alert(`Said: ${event.data}`);
+  alert(`Aytdi: ${event.data}`);
 });
 
 eventSource.addEventListener('leave', event => {
-  alert(`Left ${event.data}`);
+  alert(`Ketdi ${event.data}`);
 });
 ```
 
-## Full example
+## To'liq misol
 
-Here's the server that sends messages with `1`, `2`, `3`, then `bye` and breaks the connection.
+Mana `1`, `2`, `3`, keyin `bye` bilan xabarlar yuborib ulanishni uzadigan server.
 
-Then the browser automatically reconnects.
+Keyin brauzer avtomatik qayta ulanadi.
 
 [codetabs src="eventsource"]
 
-## Summary
+## Xulosa
 
-`EventSource` object automatically establishes a persistent connection and allows the server to send messages over it.
+`EventSource` obyekti avtomatik ravishda doimiy ulanish o'rnatadi va server uning ustida xabarlar yuborish imkonini beradi.
 
-It offers:
-- Automatic reconnect, with tunable `retry` timeout.
-- Message ids to resume events, the last received identifier is sent in `Last-Event-ID` header upon reconnection.
-- The current state is in the `readyState` property.
+U quyidagilarni taklif etadi:
+- Sozlanadigan `retry` timeout bilan avtomatik qayta ulanish.
+- Event'larni davom ettirish uchun xabar id'lari, qayta ulanishda oxirgi qabul qilingan identifikator `Last-Event-ID` header'ida yuboriladi.
+- Joriy holat `readyState` xususiyatida.
 
-That makes `EventSource` a viable alternative to `WebSocket`, as the latter is more low-level and lacks such built-in features (though they can be implemented).
+Bu `EventSource` ni `WebSocket` ga muqobil variant qiladi, chunki ikkinchisi past darajadagi va bunday o'rnatilgan xususiyatlarga ega emas (garchi ularni amalga oshirish mumkin bo'lsa ham).
 
-In many real-life applications, the power of `EventSource` is just enough.
+Ko'pgina real hayot ilovalarida `EventSource` ning kuchi yetarli.
 
-Supported in all modern browsers (not IE).
+Barcha zamonaviy brauzerlarda qo'llab-quvvatlanadi (IE bundan mustasno).
 
-The syntax is:
+Sintaksis:
 
 ```js
 let source = new EventSource(url, [credentials]);
 ```
 
-The second argument has only one possible option: `{ withCredentials: true }`, it allows sending cross-origin credentials.
+Ikkinchi argument faqat bitta mumkin bo'lgan opsiyaga ega: `{ withCredentials: true }`, u cross-origin hisob ma'lumotlarini yuborishga imkon beradi.
 
-Overall cross-origin security is same as for `fetch` and other network methods.
+Umuman cross-origin xavfsizligi `fetch` va boshqa tarmoq metodlari bilan bir xil.
 
-### Properties of an `EventSource` object
+### `EventSource` obyektining xususiyatlari
 
 `readyState`
-: The current connection state: either `EventSource.CONNECTING (=0)`, `EventSource.OPEN (=1)` or `EventSource.CLOSED (=2)`.
+: Joriy ulanish holati: `EventSource.CONNECTING (=0)`, `EventSource.OPEN (=1)` yoki `EventSource.CLOSED (=2)`.
 
 `lastEventId`
-: The last received `id`. Upon reconnection the browser sends it in the header `Last-Event-ID`.
+: Oxirgi qabul qilingan `id`. Qayta ulanishda brauzer uni `Last-Event-ID` header'ida yuboradi.
 
-### Methods
+### Metodlar
 
 `close()`
-: Closes the connection.
+: Ulanishni yopadi.
 
-### Events
+### Event'lar
 
 `message`
-: Message received, the data is in `event.data`.
+: Xabar qabul qilindi, ma'lumot `event.data` da.
 
 `open`
-: The connection is established.
+: Ulanish o'rnatildi.
 
 `error`
-: In case of an error, including both lost connection (will auto-reconnect) and fatal errors. We can check `readyState` to see if the reconnection is being attempted.
+: Xatolik holatida, jumladan yo'qolgan ulanish (avtomatik qayta ulanadi) va halokatli xatolar. Qayta ulanish urinilayotganini ko'rish uchun `readyState` ni tekshirishimiz mumkin.
 
-The server may set a custom event name in `event:`. Such events should be handled using `addEventListener`, not `on<event>`.
+Server `event:` da maxsus event nomini o'rnatishi mumkin. Bunday event'lar `on<event>` emas, `addEventListener` yordamida boshqarilishi kerak.
 
-### Server response format
+### Server javob formati
 
-The server sends messages, delimited by `\n\n`.
+Server `\n\n` bilan ajratilgan xabarlarni yuboradi.
 
-A message may have following fields:
+Xabarda quyidagi maydonlar bo'lishi mumkin:
 
-- `data:` -- message body, a sequence of multiple `data` is interpreted as a single message, with `\n` between the parts.
-- `id:` -- renews `lastEventId`, sent in `Last-Event-ID` on reconnect.
-- `retry:` -- recommends a retry delay for reconnections in ms. There's no way to set it from JavaScript.
-- `event:` -- event name, must precede `data:`.
+- `data:` -- xabar tanasi, bir nechta `data` ketma-ketligi qismlar orasida `\n` bilan bitta xabar sifatida talqin qilinadi.
+- `id:` -- `lastEventId` ni yangilaydi, qayta ulanishda `Last-Event-ID` da yuboriladi.
+- `retry:` -- qayta ulanishlar uchun ms da retry kechikishini tavsiya etadi. JavaScript'dan uni o'rnatishning yo'li yo'q.
+- `event:` -- event nomi, `data:` dan oldin bo'lishi kerak.
 
-A message may include one or more fields in any order, but `id:` usually goes the last.
+Xabar har qanday tartibda bir yoki bir nechta maydonlarni o'z ichiga olishi mumkin, lekin `id:` odatda oxirgi bo'ladi.

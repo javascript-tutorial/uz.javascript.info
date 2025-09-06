@@ -1,16 +1,20 @@
-First, let's make HTML/CSS.
+# Soat dasturini yaratish
 
-Each component of the time would look great in its own `<span>`:
+Avval HTML/CSS yarataylik.
+
+Vaqtning har bir komponenti o'zining `<span>` da ajoyib ko'rinadi:
 
 ```html
 <div id="clock">
-  <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec">ss</span>
+  <span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec"
+    >ss</span
+  >
 </div>
 ```
 
-Also we'll need CSS to color them.
+Shuningdek, ularni rangga solish uchun CSS kerak bo'ladi.
 
-The `update` function will refresh the clock, to be called by `setInterval` every second:
+`update` funksiyasi soatni yangilaydi, har soniyada `setInterval` tomonidan chaqiriladi:
 
 ```js
 function update() {
@@ -32,15 +36,17 @@ function update() {
 }
 ```
 
-In the line `(*)` we every time check the current date. The calls to `setInterval` are not reliable: they may happen with delays.
+`(*)` qatorida biz har safar joriy sanani tekshiramiz. `setInterval` chaqiruvlari ishonchli emas: ular kechikishlar bilan sodir bo'lishi mumkin.
 
-The clock-managing functions:
+Soatni boshqaradigan funksiyalar:
 
 ```js
 let timerId;
 
-function clockStart() { // run the clock  
-  if (!timerId) { // only set a new interval if the clock is not running
+function clockStart() {
+  // soatni ishga tushirish
+  if (!timerId) {
+    // faqat soat ishlamayotgan bo'lsa yangi interval o'rnatish
     timerId = setInterval(update, 1000);
   }
   update(); // (*)
@@ -52,6 +58,6 @@ function clockStop() {
 }
 ```
 
-Please note that the call to `update()` is not only scheduled in `clockStart()`, but immediately run in the line `(*)`. Otherwise the visitor would have to wait till the first execution of `setInterval`. And the clock would be empty till then.
+E'tibor bering, `update()` ga chaqiruv nafaqat `clockStart()` da rejalashtiriladi, balki `(*)` qatorida darhol ishga tushiriladi. Aks holda tashrif buyuruvchi `setInterval` ning birinchi bajarilishini kutishi kerak bo'ladi. Va o'sha vaqtgacha soat bo'sh bo'ladi.
 
-Also it is important to set a new interval in `clockStart()` only when the clock is not running. Otherways clicking the start button several times would set multiple concurrent intervals. Even worse - we would only keep the `timerID` of the last interval, losing references to all others. Then we wouldn't be able to stop the clock ever again! Note that we need to clear the `timerID` when the clock is stopped in the line `(**)`, so that it can be started again by running `clockStart()`.
+Shuningdek, `clockStart()` da yangi intervalni faqat soat ishlamayotgan vaqtda o'rnatish muhim. Aks holda start tugmasini bir necha marta bosish bir nechta parallel intervallarni o'rnatadi. Bundan ham yomoni - biz faqat oxirgi intervalning `timerID` sini saqlashimiz va boshqalariga havolalarni yo'qotishimiz mumkin. Keyin biz soatni boshqa hech qachon to'xtata olmaymiz! E'tibor bering, soat to'xtatilganda `(**)` qatorida `timerID` ni tozalashimiz kerak, shunda uni `clockStart()` ni ishga tushirish orqali yana ishga tushirish mumkin bo'ladi.

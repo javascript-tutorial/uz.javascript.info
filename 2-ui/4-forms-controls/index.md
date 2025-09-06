@@ -1,3 +1,3 @@
-# Forms, controls
+# Formalar, boshqaruv elementlari
 
-Special properties and events for forms `<form>` and controls: `<input>`, `<select>` and other.
+`<form>` shakllari va boshqaruv elementlari uchun maxsus xususiyatlar va hodisalar: `<input>`, `<select>` va boshqalar.

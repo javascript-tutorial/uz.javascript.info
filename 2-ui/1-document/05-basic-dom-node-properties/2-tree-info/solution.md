@@ -1,4 +1,6 @@
-Let's make a loop over `<li>`:
+# `<li>` Ustida Tsikl Yasash
+
+`<li>` elementlari ustida tsikl yasaymiz:
 
 ```js
 for (let li of document.querySelectorAll('li')) {
@@ -6,16 +8,16 @@ for (let li of document.querySelectorAll('li')) {
 }
 ```
 
-In the loop we need to get the text inside every `li`.
+Tsikl ichida har bir `li` ning ichidagi matnni olishimiz kerak.
 
-We can read the text from the first child node of `li`, that is the text node:
+Matnni `li` ning birinchi bolasi tugunidan, ya'ni matn tugunidan o'qishimiz mumkin:
 
 ```js
-for (let li of document.querySelectorAll('li')) {
+for (let li of document.querySelectorAll("li")) {
   let title = li.firstChild.data;
 
-  // title is the text in <li> before any other nodes
+  // title - bu <li> ichidagi boshqa tugunlardan oldingi matn
 }
 ```
 
-Then we can get the number of descendants as `li.getElementsByTagName('li').length`.
+Keyin avlodlar sonini `li.getElementsByTagName('li').length` orqali olishimiz mumkin.

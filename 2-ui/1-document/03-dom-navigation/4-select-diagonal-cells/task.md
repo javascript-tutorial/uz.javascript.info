@@ -1,18 +1,18 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Select all diagonal cells
+# Barcha diagonal katakchalarni tanlang
 
-Write the code to paint all diagonal table cells in red.
+Jadvalning barcha diagonali katakchalarini qizil rangga bo'yash uchun kodni yozing.
 
-You'll need to get all diagonal `<td>` from the `<table>` and paint them using the code:
+Barcha diagonal `<td>`ni `<jadval>`dan olishingiz va ularni kod yordamida bo`yashingiz kerak bo`ladi:
 
 ```js
-// td should be the reference to the table cell
-td.style.backgroundColor = 'red';
+// td jadval katakchasiga havola bo'lishi kerak
+td.style.backgroundColor = "red";
 ```
 
-The result should be:
+Natija shunday bo'lishi kerak:
 
 [iframe src="solution" height=180]

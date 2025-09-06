@@ -1,16 +1,16 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Catch links in the element
+# Elementdagi havolalarni ushlang
 
-Make all links inside the element with `id="contents"` ask the user if they really want to leave. And if they don't then don't follow.
+Element ichidagi barcha havolalarni `id="contents"` bilan o'rnating, foydalanuvchidan ular haqiqatdan ham ketishni xohlayaptimi yoki yo'qligini so'rang. Va agar ular buni qilmasalar, ergashmanglar.
 
-Like this:
+Shunga o'xshash:
 
 [iframe height=100 border=1 src="solution"]
 
-Details:
+Tafsilotlar:
 
-- HTML inside the element may be loaded or regenerated dynamically at any time, so we can't find all links and put handlers on them. Use event delegation.
-- The content may have nested tags. Inside links too, like `<a href=".."><i>...</i></a>`.
+- Element ichidagi HTML istalgan vaqtda dinamik ravishda yuklanishi yoki qayta tiklanishi mumkin, shuning uchun biz barcha havolalarni topa olmaymiz va ularga ishlov beruvchilarni joylashtirmaymiz. Tadbir delegatsiyasidan foydalaning.
+- Tarkibda ichki teglar bo'lishi mumkin. `<a href=".."><i>...</i></a>` kabi ichki havolalar ham.

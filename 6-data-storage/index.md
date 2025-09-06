@@ -1,2 +1,1 @@
-
-# Storing data in the browser
+# Ma'lumotlarni brauzerda saqlash

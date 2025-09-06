@@ -1,4 +1,4 @@
-A modal window can be implemented using a half-transparent `<div id="cover-div">` that covers the whole window, like this:
+Modal oyna butun oynani qoplaydigan yarim shaffof `<div id="cover-div">` yordamida amalga oshirilishi mumkin, masalan:
 
 ```css
 #cover-div {
@@ -13,8 +13,8 @@ A modal window can be implemented using a half-transparent `<div id="cover-div">
 }
 ```
 
-Because the `<div>` covers everything, it gets all clicks, not the page below it.
+`<div>` hamma narsani qamrab olganligi sababli, uning ostidagi sahifani emas, balki barcha kliklarni oladi.
 
-Also we can prevent page scroll by setting `body.style.overflowY='hidden'`.
+Shuningdek, biz `body.style.overflowY='hidden'` o'rnatish orqali sahifani aylantirishni oldini olishimiz mumkin.
 
-The form should be not in the `<div>`, but next to it, because we don't want it to have `opacity`.
+Shakl `<div>` ichida emas, balki uning yonida bo'lishi kerak, chunki biz unda `opacity` bo'lishini istamaymiz.

@@ -1,24 +1,23 @@
+# Template elementi
 
-# Template element
+O'rnatilgan `<template>` elementi HTML markup shablonlari uchun saqlash joyi vazifasini bajaradi. Brauzer uning mazmunini e'tiborsiz qoldiradi, faqat sintaksis to'g'riligini tekshiradi, lekin biz JavaScript-da unga kirishimiz va boshqa elementlar yaratish uchun ishlatishimiz mumkin.
 
-A built-in `<template>` element serves as a storage for HTML markup templates. The browser ignores it contents, only checks for syntax validity, but we can access and use it in JavaScript, to create other elements.
+Nazariy jihatdan, biz HTML markup saqlash maqsadlari uchun HTML da istalgan ko'rinmas elementni yaratishimiz mumkin edi. `<template>`ning nima maxsus tomoni bor?
 
-In theory, we could create any invisible element somewhere in HTML for HTML markup storage purposes. What's special about `<template>`?
+Birinchidan, uning mazmuni har qanday to'g'ri HTML bo'lishi mumkin, hatto u odatda to'g'ri o'ralgan tegni talab qilsa ham.
 
-First, its content can be any valid HTML, even if it normally requires a proper enclosing tag.
-
-For example, we can put there a table row `<tr>`:
+Masalan, biz u yerga jadval qatori `<tr>`ni qo'yishimiz mumkin:
 ```html
 <template>
   <tr>
-    <td>Contents</td>
+    <td>Mazmun</td>
   </tr>
 </template>
 ```
 
-Usually, if we try to put `<tr>` inside, say, a `<div>`, the browser detects the invalid DOM structure and "fixes" it, adds `<table>` around. That's not what we want. On the other hand, `<template>` keeps exactly what we place there.
+Odatda, agar biz `<tr>`ni, aytaylik, `<div>` ichiga qo'yishga harakat qilsak, brauzer noto'g'ri DOM tuzilmasini aniqlaydi va uni "tuzatadi", atrofiga `<table>` qo'shadi. Bu biz xohlagan narsa emas. Boshqa tomondan, `<template>` biz u yerga qo'ygan narsani aynan saqlaydi.
 
-We can put styles and scripts into `<template>` as well:
+Biz `<template>` ichiga uslublar va skriptlarni ham qo'yishimiz mumkin:
 
 ```html
 <template>
@@ -26,45 +25,45 @@ We can put styles and scripts into `<template>` as well:
     p { font-weight: bold; }
   </style>
   <script>
-    alert("Hello");
+    alert("Salom");
   </script>
 </template>
 ```
 
-The browser considers `<template>` content "out of the document": styles are not applied, scripts are not executed, `<video autoplay>` is not run, etc.
+Brauzer `<template>` mazmunini "hujjatdan tashqarida" deb hisoblaydi: uslublar qo'llanilmaydi, skriptlar ishga tushmaydi, `<video autoplay>` ishlamaydi va hokazo.
 
-The content becomes live (styles apply, scripts run etc) when we insert it into the document.
+Mazmun uni hujjatga kiritganimizda jonli bo'ladi (uslublar qo'llaniladi, skriptlar ishlaydi va hokazo).
 
-## Inserting template
+## Template kiritish
 
-The template content is available in its `content` property as a [DocumentFragment](info:modifying-document#document-fragment) -- a special type of DOM node.
+Shablonning mazmuni uning `content` xususiyatida [DocumentFragment](info:modifying-document#document-fragment) sifatida mavjud -- DOM tugunining maxsus turi.
 
-We can treat it as any other DOM node, except one special property: when we insert it somewhere, its children are inserted instead.
+Biz uni har qanday boshqa DOM tuguni kabi ko'rib chiqishimiz mumkin, bitta maxsus xususiyatdan tashqari: uni biror joyga kiritganimizda, uning bolalari o'rniga kiritiladi.
 
-For example:
+Masalan:
 
 ```html run
 <template id="tmpl">
   <script>
-    alert("Hello");
+    alert("Salom");
   </script>
-  <div class="message">Hello, world!</div>
+  <div class="message">Salom, dunyo!</div>
 </template>
 
 <script>
   let elem = document.createElement('div');
 
 *!*
-  // Clone the template content to reuse it multiple times
+  // Shablonning mazmunini bir necha marta qayta ishlatish uchun klonlash
   elem.append(tmpl.content.cloneNode(true));
 */!*
 
   document.body.append(elem);
-  // Now the script from <template> runs
+  // Endi <template>dan skript ishlaydi
 </script>
 ```
 
-Let's rewrite a Shadow DOM example from the previous chapter using `<template>`:
+Oldingi bobdan Shadow DOM misolini `<template>` yordamida qayta yozaylik:
 
 ```html run untrusted autorun="no-epub" height=60
 <template id="tmpl">
@@ -72,7 +71,7 @@ Let's rewrite a Shadow DOM example from the previous chapter using `<template>`:
   <p id="message"></p>
 </template>
 
-<div id="elem">Click me</div>
+<div id="elem">Meni bosing</div>
 
 <script>
   elem.onclick = function() {
@@ -82,14 +81,14 @@ Let's rewrite a Shadow DOM example from the previous chapter using `<template>`:
     elem.shadowRoot.append(tmpl.content.cloneNode(true)); // (*)
 */!*
 
-    elem.shadowRoot.getElementById('message').innerHTML = "Hello from the shadows!";
+    elem.shadowRoot.getElementById('message').innerHTML = "Soyalardan salom!";
   };
 </script>
 ```
 
-In the line `(*)` when we clone and insert `tmpl.content`, as its `DocumentFragment`, its children (`<style>`, `<p>`) are inserted instead.
+`(*)` satrida biz `tmpl.content`ni klonlab va kiritganimizda, u `DocumentFragment` bo'lgani uchun, uning bolalari (`<style>`, `<p>`) o'rniga kiritiladi.
 
-They form the shadow DOM:
+Ular soya DOM ni hosil qiladi:
 
 ```html
 <div id="elem">
@@ -99,18 +98,18 @@ They form the shadow DOM:
 </div>
 ```
 
-## Summary
+## Xulosa
 
-To summarize:
+Xulosa qilib aytganda:
 
-- `<template>` content can be any syntactically correct HTML.
-- `<template>` content is considered "out of the document", so it doesn't affect anything.
-- We can access `template.content` from JavaScript, clone it to reuse in a new component.
+- `<template>` mazmuni har qanday sintaktik jihatdan to'g'ri HTML bo'lishi mumkin.
+- `<template>` mazmuni "hujjatdan tashqarida" hisoblanadi, shuning uchun u hech narsaga ta'sir qilmaydi.
+- Biz JavaScript-dan `template.content`ga kirishimiz mumkin, uni yangi komponentda qayta ishlatish uchun klonlashimiz mumkin.
 
-The `<template>` tag is quite unique, because:
+`<template>` tegi juda noyob, chunki:
 
-- The browser checks HTML syntax inside it (as opposed to using a template string inside a script).
-- ...But still allows use of any top-level HTML tags, even those that don't make sense without proper wrappers (e.g. `<tr>`).
-- The content becomes interactive: scripts run, `<video autoplay>` plays etc, when inserted into the document.
+- Brauzer uning ichidagi HTML sintaksisini tekshiradi (skript ichidagi shablon satridan foydalanishdan farqli o'laroq).
+- ...Lekin baribir har qanday yuqori darajadagi HTML teglaridan foydalanishga imkon beradi, hatto to'g'ri o'rashsiz ma'noga ega bo'lmagan teglar ham (masalan, `<tr>`).
+- Mazmun interaktiv bo'ladi: skriptlar ishlaydi, `<video autoplay>` ijro etiladi va hokazo, hujjatga kiritilganda.
 
-The `<template>` element does not feature any iteration mechanisms, data binding or variable substitutions, but we can implement those on top of it.
+`<template>` elementi hech qanday iteratsiya mexanizmlari, ma'lumotlarni bog'lash yoki o'zgaruvchilarni almashtirish xususiyatlariga ega emas, lekin biz ularni uning ustiga amalga oshirishimiz mumkin.

@@ -1,87 +1,86 @@
-
 # Fetch
 
-JavaScript can send network requests to the server and load new information whenever it's needed.
+JavaScript server bilan tarmoq so'rovlarini yuborishi va kerakli paytda yangi ma'lumotlarni yuklashi mumkin.
 
-For example, we can use a network request to:
+Masalan, biz tarmoq so'rovidan quyidagilar uchun foydalanishimiz mumkin:
 
-- Submit an order,
-- Load user information,
-- Receive latest updates from the server,
-- ...etc.
+- Buyurtma yuborish,
+- Foydalanuvchi ma'lumotlarini yuklash,
+- Serverdan eng so'nggi yangilanishlarni olish,
+- ...va hokazo.
 
-...And all of that without reloading the page!
+...Va bularning barchasini sahifani qayta yuklamasdan!
 
-There's an umbrella term "AJAX" (abbreviated <b>A</b>synchronous <b>J</b>avaScript <b>A</b>nd <b>X</b>ML) for network requests from JavaScript. We don't have to use XML though: the term comes from old times, that's why that word is there. You may have heard that term already.
+JavaScript'dan tarmoq so'rovlari uchun "AJAX" (<b>A</b>sinxron <b>J</b>avaScript <b>v</b>a <b>X</b>ML) atamasi mavjud. Garchi XML ishlatishimiz shart emas: bu atama eski davrlardan qolgan, shuning uchun bu so'z mavjud. Bu atamani eshitgan bo'lishingiz mumkin.
 
-There are multiple ways to send a network request and get information from the server.
+Tarmoq so'rovini yuborish va serverdan ma'lumot olishning bir nechta yo'li bor.
 
-The `fetch()` method is modern and versatile, so we'll start with it. It's not supported by old browsers (can be polyfilled), but very well supported among the modern ones.
+`fetch()` usuli zamonaviy va ko'p qirrali, shuning uchun undan boshlaymiz. Eski brauzerlar tomonidan qo'llab-quvvatlanmaydi (polyfill qilinishi mumkin), lekin zamonaviy brauzerlar orasida juda yaxshi qo'llab-quvvatlanadi.
 
-The basic syntax is:
+Asosiy sintaksis:
 
 ```js
 let promise = fetch(url, [options])
 ```
 
-- **`url`** -- the URL to access.
-- **`options`** -- optional parameters: method, headers etc.
+- **`url`** -- kirishga mo'ljallangan URL.
+- **`options`** -- ixtiyoriy parametrlar: method, headers va boshqalar.
 
-Without `options`, this is a simple GET request, downloading the contents of the `url`.
+`options` bo'lmasa, bu oddiy GET so'rovi bo'lib, `url` ning mazmunini yuklab oladi.
 
-The browser starts the request right away and returns a promise that the calling code should use to get the result.
+Brauzer so'rovni darhol boshlaydi va chaqiruvchi kod natijani olish uchun ishlatishi kerak bo'lgan promise'ni qaytaradi.
 
-Getting a response is usually a two-stage process.
+Javob olish odatda ikki bosqichli jarayon.
 
-**First, the `promise`, returned by `fetch`, resolves with an object of the built-in [Response](https://fetch.spec.whatwg.org/#response-class) class as soon as the server responds with headers.**
+**Birinchidan, server headers bilan javob berganda, `fetch` tomonidan qaytarilgan `promise` built-in [Response](https://fetch.spec.whatwg.org/#response-class) klassining obyekti bilan resolve qilinadi.**
 
-At this stage we can check HTTP status, to see whether it is successful or not, check headers, but don't have the body yet.
+Bu bosqichda biz HTTP statusni tekshirishimiz mumkin, u muvaffaqiyatli yoki yo'qligini ko'rish, headers'larni tekshirish mumkin, lekin hali body'miz yo'q.
 
-The promise rejects if the `fetch` was unable to make HTTP-request, e.g. network problems, or there's no such site. Abnormal HTTP-statuses, such as 404 or 500 do not cause an error.
+Agar `fetch` HTTP-so'rovni bajarish imkoniyatiga ega bo'lmasa, masalan, tarmoq muammolari yoki bunday sayt mavjud bo'lmasa, promise rad etiladi. 404 yoki 500 kabi g'ayritabiiy HTTP-statuslar xatolikka sabab bo'lmaydi.
 
-We can see HTTP-status in response properties:
+HTTP-statusni response xususiyatlarida ko'rishimiz mumkin:
 
-- **`status`** -- HTTP status code, e.g. 200.
-- **`ok`** -- boolean, `true` if the HTTP status code is 200-299.
+- **`status`** -- HTTP status kodi, masalan 200.
+- **`ok`** -- boolean, agar HTTP status kodi 200-299 bo'lsa `true`.
 
-For example:
+Masalan:
 
 ```js
 let response = await fetch(url);
 
-if (response.ok) { // if HTTP-status is 200-299
-  // get the response body (the method explained below)
+if (response.ok) { // agar HTTP-status 200-299 bo'lsa
+  // response body'ni oling (usul quyida tushuntirilgan)
   let json = await response.json();
 } else {
-  alert("HTTP-Error: " + response.status);
+  alert("HTTP-Xato: " + response.status);
 }
 ```
 
-**Second, to get the response body, we need to use an additional method call.**
+**Ikkinchidan, response body'ni olish uchun qo'shimcha method chaqiruvidan foydalanishimiz kerak.**
 
-`Response` provides multiple promise-based methods to access the body in various formats:
+`Response` body'ga turli formatlarda kirish uchun bir nechta promise-asoslangan methodlarni taqdim etadi:
 
-- **`response.text()`** -- read the response and return as text,
-- **`response.json()`** -- parse the response as JSON,
-- **`response.formData()`** -- return the response as `FormData` object (explained in the [next chapter](info:formdata)),
-- **`response.blob()`** -- return the response as [Blob](info:blob) (binary data with type),
-- **`response.arrayBuffer()`** -- return the response as [ArrayBuffer](info:arraybuffer-binary-arrays) (low-level representation of binary data),
-- additionally, `response.body` is a [ReadableStream](https://streams.spec.whatwg.org/#rs-class) object, it allows you to read the body chunk-by-chunk, we'll see an example later.
+- **`response.text()`** -- javobni o'qish va matn sifatida qaytarish,
+- **`response.json()`** -- javobni JSON sifatida parse qilish,
+- **`response.formData()`** -- javobni `FormData` obyekti sifatida qaytarish ([keyingi bob](info:formdata)da tushuntirilgan),
+- **`response.blob()`** -- javobni [Blob](info:blob) sifatida qaytarish (turi bilan ikkilik ma'lumot),
+- **`response.arrayBuffer()`** -- javobni [ArrayBuffer](info:arraybuffer-binary-arrays) sifatida qaytarish (ikkilik ma'lumotlarning past darajadagi ko'rinishi),
+- qo'shimcha ravishda, `response.body` - [ReadableStream](https://streams.spec.whatwg.org/#rs-class) obyekti, u body'ni chunk-by-chunk o'qish imkonini beradi, keyinroq misolni ko'ramiz.
 
-For instance, let's get a JSON-object with latest commits from GitHub:
+Masalan, GitHub'dan eng so'nggi commitlar bilan JSON-obyektni olaylik:
 
 ```js run async
 let url = 'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits';
 let response = await fetch(url);
 
 *!*
-let commits = await response.json(); // read response body and parse as JSON
+let commits = await response.json(); // response body'ni o'qish va JSON sifatida parse qilish
 */!*
 
 alert(commits[0].author.login);
 ```
 
-Or, the same without `await`, using pure promises syntax:
+Yoki, `await` bo'lmagan holda, toza promises sintaksisi yordamida:
 
 ```js run
 fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits')
@@ -89,63 +88,63 @@ fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commi
   .then(commits => alert(commits[0].author.login));
 ```
 
-To get the response text, `await response.text()` instead of `.json()`:
+Response matnini olish uchun `.json()` o'rniga `await response.text()`:
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
 
-let text = await response.text(); // read response body as text
+let text = await response.text(); // response body'ni matn sifatida o'qish
 
 alert(text.slice(0, 80) + '...');
 ```
 
-As a show-case for reading in binary format, let's fetch and show a logo image of ["fetch" specification](https://fetch.spec.whatwg.org) (see chapter [Blob](info:blob) for details about operations on `Blob`):
+Ikkilik formatda o'qishning namunasi sifatida, ["fetch" spetsifikatsiyasi](https://fetch.spec.whatwg.org)ning logotip rasmini yuklab olaylik va ko'rsataylik (`Blob` operatsiyalari haqida batafsil ma'lumot uchun [Blob](info:blob) bobiga qarang):
 
 ```js async run
 let response = await fetch('/article/fetch/logo-fetch.svg');
 
 *!*
-let blob = await response.blob(); // download as Blob object
+let blob = await response.blob(); // Blob obyekti sifatida yuklash
 */!*
 
-// create <img> for it
+// buning uchun <img> yaratish
 let img = document.createElement('img');
 img.style = 'position:fixed;top:10px;left:10px;width:100px';
 document.body.append(img);
 
-// show it
+// ko'rsatish
 img.src = URL.createObjectURL(blob);
 
-setTimeout(() => { // hide after three seconds
+setTimeout(() => { // uch soniyadan keyin yashirish
   img.remove();
   URL.revokeObjectURL(img.src);
 }, 3000);
 ```
 
 ````warn
-We can choose only one body-reading method.
+Biz faqat bitta body-o'qish usulini tanlashimiz mumkin.
 
-If we've already got the response with `response.text()`, then `response.json()` won't work, as the body content has already been processed.
+Agar biz allaqachon `response.text()` bilan javob olgan bo'lsak, `response.json()` ishlamaydi, chunki body mazmuni allaqachon qayta ishlangan.
 
 ```js
-let text = await response.text(); // response body consumed
-let parsed = await response.json(); // fails (already consumed)
+let text = await response.text(); // response body iste'mol qilindi
+let parsed = await response.json(); // ishlamaydi (allaqachon iste'mol qilingan)
 ```
 ````
 
 ## Response headers
 
-The response headers are available in a Map-like headers object in `response.headers`.
+Response headers `response.headers` da Map-ga o'xshash headers obyektida mavjud.
 
-It's not exactly a Map, but it has similar methods to get individual headers by name or iterate over them:
+Bu aynan Map emas, lekin nom bo'yicha alohida header'larni olish yoki ularni takrorlash uchun shunga o'xshash methodlarga ega:
 
 ```js run async
 let response = await fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits');
 
-// get one header
+// bitta header olish
 alert(response.headers.get('Content-Type')); // application/json; charset=utf-8
 
-// iterate over all headers
+// barcha header'lar bo'ylab takrorlash
 for (let [key, value] of response.headers) {
   alert(`${key} = ${value}`);
 }
@@ -153,7 +152,7 @@ for (let [key, value] of response.headers) {
 
 ## Request headers
 
-To set a request header in `fetch`, we can use the `headers` option. It has an object with outgoing headers, like this:
+`fetch` da request header'ini o'rnatish uchun `headers` opsiyasidan foydalanishimiz mumkin. Unda chiquvchi header'lar bilan obyekt bor, masalan:
 
 ```js
 let response = fetch(protectedUrl, {
@@ -163,7 +162,7 @@ let response = fetch(protectedUrl, {
 });
 ```
 
-...But there's a list of [forbidden HTTP headers](https://fetch.spec.whatwg.org/#forbidden-header-name) that we can't set:
+...Lekin o'rnata olmaydigan [taqiqlangan HTTP header'lar](https://fetch.spec.whatwg.org/#forbidden-header-name) ro'yxati mavjud:
 
 - `Accept-Charset`, `Accept-Encoding`
 - `Access-Control-Request-Headers`
@@ -186,22 +185,22 @@ let response = fetch(protectedUrl, {
 - `Proxy-*`
 - `Sec-*`
 
-These headers ensure proper and safe HTTP, so they are controlled exclusively by the browser.
+Bu header'lar to'g'ri va xavfsiz HTTP'ni ta'minlaydi, shuning uchun ular faqat brauzer tomonidan nazorat qilinadi.
 
-## POST requests
+## POST so'rovlar
 
-To make a `POST` request, or a request with another method, we need to use `fetch` options:
+`POST` so'rovini yoki boshqa method bilan so'rov yaratish uchun `fetch` opsiyalaridan foydalanishimiz kerak:
 
-- **`method`** -- HTTP-method, e.g. `POST`,
-- **`body`** -- the request body, one of:
-  - a string (e.g. JSON-encoded),
-  - `FormData` object, to submit the data as `form/multipart`,
-  - `Blob`/`BufferSource` to send binary data,
-  - [URLSearchParams](info:url), to submit the data in `x-www-form-urlencoded` encoding, rarely used.
+- **`method`** -- HTTP-method, masalan `POST`,
+- **`body`** -- so'rov tanasi, quyidagilardan biri:
+  - string (masalan JSON-kodlangan),
+  - `FormData` obyekti, ma'lumotlarni `form/multipart` sifatida yuborish uchun,
+  - ikkilik ma'lumotlarni yuborish uchun `Blob`/`BufferSource`,
+  - ma'lumotlarni `x-www-form-urlencoded` kodlashda yuborish uchun [URLSearchParams](info:url), kamdan-kam ishlatiladi.
 
-The JSON format is used most of the time.
+JSON format ko'pincha ishlatiladi.
 
-For example, this code submits `user` object as JSON:
+Masalan, bu kod `user` obyektini JSON sifatida yuboradi:
 
 ```js run async
 let user = {
@@ -223,21 +222,21 @@ let result = await response.json();
 alert(result.message);
 ```
 
-Please note, if the request `body` is a string, then `Content-Type` header is set to `text/plain;charset=UTF-8` by default.
+Diqqat qiling, agar so'rov `body` string bo'lsa, `Content-Type` header sukut bo'yicha `text/plain;charset=UTF-8` ga o'rnatiladi.
 
-But, as we're going to send JSON, we use `headers` option to send `application/json` instead, the correct `Content-Type` for JSON-encoded data.
+Lekin, biz JSON yuborayotganimiz uchun, JSON-kodlangan ma'lumotlar uchun to'g'ri `Content-Type` bo'lgan `application/json` ni yuborish uchun `headers` opsiyasidan foydalanamiz.
 
-## Sending an image
+## Rasm yuborish
 
-We can also submit binary data with `fetch` using `Blob` or `BufferSource` objects.
+Shuningdek, `Blob` yoki `BufferSource` obyektlari yordamida `fetch` bilan ikkilik ma'lumotlarni yuborishimiz mumkin.
 
-In this example, there's a `<canvas>` where we can draw by moving a mouse over it. A click on the "submit" button sends the image to the server:
+Ushbu misolda, ustida sichqonchani harakatlantirib chizish mumkin bo'lgan `<canvas>` mavjud. "Submit" tugmasini bosish rasmni serverga yuboradi:
 
 ```html run autorun height="90"
 <body style="margin:0">
   <canvas id="canvasElem" width="100" height="80" style="border:1px solid"></canvas>
 
-  <input type="button" value="Submit" onclick="submit()">
+  <input type="button" value="Yuborish" onclick="submit()">
 
   <script>
     canvasElem.onmousemove = function(e) {
@@ -253,7 +252,7 @@ In this example, there's a `<canvas>` where we can draw by moving a mouse over i
         body: blob
       });
 
-      // the server responds with confirmation and the image size
+      // server tasdiqlash va rasm o'lchami bilan javob beradi
       let result = await response.json();
       alert(result.message);
     }
@@ -262,9 +261,9 @@ In this example, there's a `<canvas>` where we can draw by moving a mouse over i
 </body>
 ```
 
-Please note, here we don't set `Content-Type` header manually, because a `Blob` object has a built-in type (here `image/png`, as generated by `toBlob`). For `Blob` objects that type becomes the value of `Content-Type`.
+Diqqat qiling, bu yerda `Content-Type` header'ini qo'lda o'rnatmaymiz, chunki `Blob` obyekti o'rnatilgan turga ega (bu yerda `image/png`, `toBlob` tomonidan yaratilgan). `Blob` obyektlari uchun bu tur `Content-Type` ning qiymatiga aylanadi.
 
-The `submit()` function can be rewritten without `async/await` like this:
+`submit()` funksiyasini `async/await` bo'lmagan holda quyidagicha qayta yozish mumkin:
 
 ```js
 function submit() {
@@ -279,38 +278,38 @@ function submit() {
 }
 ```
 
-## Summary
+## Xulosa
 
-A typical fetch request consists of two `await` calls:
+Odatiy fetch so'rovi ikkita `await` chaqiruvidan iborat:
 
 ```js
-let response = await fetch(url, options); // resolves with response headers
-let result = await response.json(); // read body as json
+let response = await fetch(url, options); // response headers bilan resolve qilinadi
+let result = await response.json(); // body'ni json sifatida o'qish
 ```
 
-Or, without `await`:
+Yoki, `await` bo'lmagan holda:
 
 ```js
 fetch(url, options)
   .then(response => response.json())
-  .then(result => /* process result */)
+  .then(result => /* natijani qayta ishlash */)
 ```
 
-Response properties:
-- `response.status` -- HTTP code of the response,
-- `response.ok` -- `true` is the status is 200-299.
-- `response.headers` -- Map-like object with HTTP headers.
+Response xususiyatlari:
+- `response.status` -- javobning HTTP kodi,
+- `response.ok` -- agar status 200-299 bo'lsa `true`.
+- `response.headers` -- HTTP headers bilan Map-ga o'xshash obyekt.
 
-Methods to get response body:
-- **`response.text()`** -- return the response as text,
-- **`response.json()`** -- parse the response as JSON object,
-- **`response.formData()`** -- return the response as `FormData` object (form/multipart encoding, see the next chapter),
-- **`response.blob()`** -- return the response as [Blob](info:blob) (binary data with type),
-- **`response.arrayBuffer()`** -- return the response as [ArrayBuffer](info:arraybuffer-binary-arrays) (low-level binary data),
+Response body'ni olish usullari:
+- **`response.text()`** -- javobni matn sifatida qaytarish,
+- **`response.json()`** -- javobni JSON obyekti sifatida parse qilish,
+- **`response.formData()`** -- javobni `FormData` obyekti sifatida qaytarish (form/multipart kodlash, keyingi bobga qarang),
+- **`response.blob()`** -- javobni [Blob](info:blob) sifatida qaytarish (turi bilan ikkilik ma'lumot),
+- **`response.arrayBuffer()`** -- javobni [ArrayBuffer](info:arraybuffer-binary-arrays) sifatida qaytarish (past darajadagi ikkilik ma'lumot),
 
-Fetch options so far:
+Hozircha Fetch opsiyalari:
 - `method` -- HTTP-method,
-- `headers` -- an object with request headers (not any header is allowed),
-- `body` -- the data to send (request body) as `string`, `FormData`, `BufferSource`, `Blob` or `UrlSearchParams` object.
+- `headers` -- so'rov headers bilan obyekt (har qanday header ruxsat etilmagan),
+- `body` -- `string`, `FormData`, `BufferSource`, `Blob` yoki `UrlSearchParams` obyekti sifatida yuborish uchun ma'lumot (so'rov tanasi).
 
-In the next chapters we'll see more options and use cases of `fetch`.
+Keyingi boblarda biz `fetch` ning ko'proq opsiyalari va foydalanish holatlarini ko'ramiz.

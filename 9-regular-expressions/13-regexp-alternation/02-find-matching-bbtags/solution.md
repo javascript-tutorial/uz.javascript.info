@@ -1,23 +1,22 @@
+Ochuvchi teg `pattern:\[(b|url|quote)\]`.
 
-Opening tag is `pattern:\[(b|url|quote)\]`.
+Keyin yopuvchi teggacha hamma narsani topish uchun -- yangi qatorni ham o'z ichiga olgan har qanday belgiga mos kelish uchun `pattern:s` bayrog'i bilan `pattern:.*?` naqshidan foydalanamiz va keyin yopuvchi tegga orqaga havola qo'shamiz.
 
-Then to find everything till the closing tag -- let's use the pattern `pattern:.*?` with flag `pattern:s` to match any character including the newline and then add a backreference to the closing tag.
+To'liq naqsh: `pattern:\[(b|url|quote)\].*?\[/\1\]`.
 
-The full pattern: `pattern:\[(b|url|quote)\].*?\[/\1\]`.
-
-In action:
+Amalda:
 
 ```js run
 let regexp = /\[(b|url|quote)\].*?\[\/\1\]/gs;
 
 let str = `
-  [b]hello![/b]
+  [b]salom![/b]
   [quote]
     [url]http://google.com[/url]
   [/quote]
 `;
 
-alert( str.match(regexp) ); // [b]hello![/b],[quote][url]http://google.com[/url][/quote]
+alert(str.match(regexp)); // [b]salom![/b],[quote][url]http://google.com[/url][/quote]
 ```
 
-Please note that besides escaping `pattern:[` and `pattern:]`, we had to escape a slash for the closing tag `pattern:[\/\1]`, because normally the slash closes the pattern.
+E'tibor bering, `pattern:[` va `pattern:]` ni escape qilishdan tashqari, yopuvchi teg `pattern:[\/\1]` uchun slashni ham escape qilishimiz kerak edi, chunki odatda slash naqshni yopadi.

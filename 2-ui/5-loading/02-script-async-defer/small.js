@@ -1,3 +1,3 @@
 // ...small js...
 
-alert("Small script loaded");
+alert("Kichik skript yuklandi");

@@ -1,13 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Editable div
+# Tahrirlanadigan div
 
-Create a `<div>` that turns into `<textarea>` when clicked.
+Bosilganda `<textarea>` ga aylanadigan `<div>` yarating.
 
-The textarea allows to edit the HTML in the `<div>`.
+Matn maydoni HTMLni `<div>` da tahrirlash imkonini beradi.
 
-When the user presses `key:Enter` or it loses focus, the `<textarea>` turns back into `<div>`, and its content becomes HTML in `<div>`.
+Foydalanuvchi `key:Enter` tugmasini bosganda yoki u fokusni yo'qotsa, `<textarea>` yana `<div>` ga aylanadi va uning mazmuni `<div>`da HTMLga aylanadi.
 
 [demo src="solution"]

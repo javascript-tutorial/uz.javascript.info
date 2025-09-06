@@ -1,105 +1,109 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <h2>Quyidagi tugmani bosing</h2>
 
-<body style="height:3000px">
+    <input
+      type="button"
+      value="Formani ko'rsatish uchun bosing"
+      id="show-button"
+    />
 
-  <h2>Click the button below</h2>
+    <div id="prompt-form-container">
+      <form id="prompt-form">
+        <div id="prompt-message"></div>
+        <input name="text" type="text" placeholder="Bu yerga yozing..." />
+        <div class="button-container">
+          <input type="button" name="cancel" value="Bekor qilish" />
+          <input type="submit" value="OK" />
+        </div>
+      </form>
+    </div>
 
-  <input type="button" value="Click to show the form" id="show-button">
+    <script>
+      // Sahifani "soya" qilish uchun yarim shaffof DIV ko'rsatish
+      // (forma ichida emas, balki yonida, chunki u yarim shaffof bo'lmasligi kerak)
+      function showCover() {
+        let coverDiv = document.createElement("div");
+        coverDiv.id = "cover-div";
 
+        // modal forma ochiq bo'lganida sahifani scroll qilib bo'lmaydigan qilish
+        document.body.style.overflowY = "hidden";
 
-  <div id="prompt-form-container">
-    <form id="prompt-form">
-      <div id="prompt-message"></div>
-      <input name="text" type="text">
-      <input type="submit" value="Ok">
-      <input type="button" name="cancel" value="Cancel">
-    </form>
-  </div>
-
-  <script>
-    // Show a half-transparent DIV to "shadow" the page
-    // (the form is not inside, but near it, because it shouldn't be half-transparent)
-    function showCover() {
-      let coverDiv = document.createElement('div');
-      coverDiv.id = 'cover-div';
-
-      // make the page unscrollable while the modal form is open
-      document.body.style.overflowY = 'hidden';
-
-      document.body.append(coverDiv);
-    }
-
-    function hideCover() {
-      document.getElementById('cover-div').remove();
-      document.body.style.overflowY = '';
-    }
-
-    function showPrompt(text, callback) {
-      showCover();
-      let form = document.getElementById('prompt-form');
-      let container = document.getElementById('prompt-form-container');
-      document.getElementById('prompt-message').innerHTML = text;
-      form.text.value = '';
-
-      function complete(value) {
-        hideCover();
-        container.style.display = 'none';
-        document.onkeydown = null;
-        callback(value);
+        document.body.append(coverDiv);
       }
 
-      form.onsubmit = function() {
-        let value = form.text.value;
-        if (value == '') return false; // ignore empty submit
+      function hideCover() {
+        document.getElementById("cover-div").remove();
+        document.body.style.overflowY = "";
+      }
 
-        complete(value);
-        return false;
-      };
+      function showPrompt(text, callback) {
+        showCover();
+        let form = document.getElementById("prompt-form");
+        let container = document.getElementById("prompt-form-container");
+        document.getElementById("prompt-message").innerHTML = text;
+        form.text.value = "";
 
-      form.cancel.onclick = function() {
-        complete(null);
-      };
+        function complete(value) {
+          hideCover();
+          container.style.display = "none";
+          document.onkeydown = null;
+          callback(value);
+        }
 
-      document.onkeydown = function(e) {
-        if (e.key == 'Escape') {
+        form.onsubmit = function () {
+          let value = form.text.value;
+          if (value == "") return false; // bo'sh yuborishni e'tiborsiz qoldirish
+
+          complete(value);
+          return false;
+        };
+
+        form.cancel.onclick = function () {
           complete(null);
-        }
+        };
+
+        document.onkeydown = function (e) {
+          if (e.key == "Escape") {
+            complete(null);
+          }
+        };
+
+        let lastElem = form.elements[form.elements.length - 1];
+        let firstElem = form.elements[0];
+
+        lastElem.onkeydown = function (e) {
+          if (e.key == "Tab" && !e.shiftKey) {
+            firstElem.focus();
+            return false;
+          }
+        };
+
+        firstElem.onkeydown = function (e) {
+          if (e.key == "Tab" && e.shiftKey) {
+            lastElem.focus();
+            return false;
+          }
+        };
+
+        container.style.display = "block";
+        form.elements.text.focus();
+      }
+
+      document.getElementById("show-button").onclick = function () {
+        showPrompt("Biror narsa kiriting<br>...aqlli :)", function (value) {
+          if (value) {
+            alert("Siz kiritdingiz: " + value);
+          } else {
+            alert("Bekor qilindi");
+          }
+        });
       };
-
-      let lastElem = form.elements[form.elements.length - 1];
-      let firstElem = form.elements[0];
-
-      lastElem.onkeydown = function(e) {
-        if (e.key == 'Tab' && !e.shiftKey) {
-          firstElem.focus();
-          return false;
-        }
-      };
-
-      firstElem.onkeydown = function(e) {
-        if (e.key == 'Tab' && e.shiftKey) {
-          lastElem.focus();
-          return false;
-        }
-      };
-
-      container.style.display = 'block';
-      form.elements.text.focus();
-    }
-
-    document.getElementById('show-button').onclick = function() {
-      showPrompt("Enter something<br>...smart :)", function(value) {
-        alert("You entered: " + value);
-      });
-    };
-  </script>
-
-
-</body>
+    </script>
+  </body>
 </html>

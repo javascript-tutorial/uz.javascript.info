@@ -1,4 +1,4 @@
-The answer: **`BODY`**.
+Javob: **`BODY`**.
 
 ```html run
 <script>
@@ -6,12 +6,12 @@ The answer: **`BODY`**.
 
   body.innerHTML = "<!--" + body.tagName + "-->";
 
-  alert( body.firstChild.data ); // BODY
+  alert(body.firstChild.data); // BODY
 </script>
 ```
 
-What's going on step by step:
+Bosqichma-bosqich nima sodir bo'ladi:
 
-1. The content of `<body>` is replaced with the comment. The comment is `<!--BODY-->`, because `body.tagName == "BODY"`. As we remember, `tagName` is always uppercase in HTML.
-2. The comment is now the only child node, so we get it in `body.firstChild`.
-3. The `data` property of the comment is its contents (inside `<!--...-->`): `"BODY"`.
+1. `<body>` mazmuni izoh bilan almashtiriladi. Sharh `<!--BODY-->`, chunki `body.tagName == "BODY"`. Esda tutganimizdek, HTML-da `tagName` har doim katta harf bo'ladi.
+2. Sharh endi yagona tugun, shuning uchun biz uni `body.firstChild` da olamiz.
+3. Sharhning `ma`lumotlar` xususiyati uning mazmunidir (`<!--...-->`ichida):`BODY`.

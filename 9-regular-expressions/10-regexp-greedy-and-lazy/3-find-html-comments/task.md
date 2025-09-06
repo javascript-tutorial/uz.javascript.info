@@ -1,13 +1,13 @@
-# Find HTML comments
+# HTML izohlarni topish
 
-Find all HTML comments in the text:
+Matndagi barcha HTML izohlarini toping:
 
 ```js
-let regexp = /your regexp/g;
+let regexp = /sizning regexpiyingiz/g;
 
-let str = `... <!-- My -- comment
+let str = `... <!-- Mening -- izohim
  test --> ..  <!----> .. 
 `;
 
-alert( str.match(regexp) ); // '<!-- My -- comment \n test -->', '<!---->'
+alert(str.match(regexp)); // '<!-- Mening -- izohim \n test -->', '<!---->'
 ```

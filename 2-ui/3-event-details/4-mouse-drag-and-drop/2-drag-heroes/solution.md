@@ -1,5 +1,5 @@
-To drag the element we can use `position:fixed`, it makes coordinates easier to manage. At the end we should switch it back to `position:absolute` to lay the element into the document.
+Elementni sudrab olib borish uchun biz `position:fixed` dan foydalanishimiz mumkin, bu koordinatalarni boshqarishni osonlashtiradi. Oxirida elementni hujjatga joylashtirish uchun uni yana `position:absolute` ga o'tkazishimiz kerak.
 
-When coordinates are at window top/bottom, we use `window.scrollTo` to scroll it.
+Koordinatalar oynaning yuqori/pastki qismida bo'lsa, biz uni aylantirish uchun `window.scrollTo` dan foydalanamiz.
 
-More details in the code, in comments.
+Batafsil ma'lumot kodda, izohlarda.

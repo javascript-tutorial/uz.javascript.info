@@ -1,10 +1,10 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Clear the element
+# Elementni tozalang
 
-Create a function `clear(elem)` that removes everything from the element.
+Elementdan hamma narsani olib tashlaydigan “clear(elem)” funksiyasini yarating.
 
 ```html run height=60
 <ol id="elem">
@@ -13,8 +13,10 @@ Create a function `clear(elem)` that removes everything from the element.
 </ol>
 
 <script>
-  function clear(elem) { /* your code */ }
+  function clear(elem) {
+    /* sizning kodingiz */
+  }
 
-  clear(elem); // clears the list
+  clear(elem); // ro'yxatni tozalash
 </script>
 ```

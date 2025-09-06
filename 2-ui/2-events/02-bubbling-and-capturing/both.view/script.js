@@ -1,4 +1,4 @@
-let elems = document.querySelectorAll('form,div,p');
+let elems = document.querySelectorAll("form,div,p");
 
 for (let i = 0; i < elems.length; i++) {
   elems[i].addEventListener("click", highlightThis, true);
@@ -6,7 +6,7 @@ for (let i = 0; i < elems.length; i++) {
 }
 
 function highlightThis() {
-  this.style.backgroundColor = 'yellow';
+  this.style.backgroundColor = "yellow";
   alert(this.tagName);
-  this.style.backgroundColor = '';
+  this.style.backgroundColor = "";
 }

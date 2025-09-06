@@ -1,85 +1,78 @@
-# Moving the mouse: mouseover/out, mouseenter/leave
+# Sichqoncha harakati: mouseover/out, mouseenter/leave
 
-Let's dive into more details about events that happen when the mouse moves between elements.
+Sichqoncha elementlar orasida harakatlanayotganda sodir bo'ladigan hodisalar haqida batafsil to'xtalib o'taylik.
 
-## Events mouseover/mouseout, relatedTarget
+## Hodisalar mouseover/mouseout, relatedTarget
 
-The `mouseover` event occurs when a mouse pointer comes over an element, and `mouseout` -- when it leaves.
+`mouseover` hodisasi sichqoncha ko'rsatkichi element ustiga kelganda sodir bo'ladi, `mouseout` esa uni tark etganda.
 
 ![](mouseover-mouseout.svg)
 
-These events are special, because they have property `relatedTarget`. This property complements `target`. When a mouse leaves one element for another, one of them becomes `target`, and the other one - `relatedTarget`.
+Bu hodisalar maxsus, chunki ularda `relatedTarget` xossasi mavjud. Bu xossa `target` ni to'ldiradi. Sichqoncha bitta elementdan ikkinchisiga o'tganda, ulardan biri `target` bo'ladi, ikkinchisi esa - `relatedTarget`.
 
-For `mouseover`:
+`mouseover` uchun:
 
-- `event.target` -- is the element where the mouse came over.
-- `event.relatedTarget` -- is the element from which the mouse came (`relatedTarget` -> `target`).
+- `event.target` -- sichqoncha ustiga kelgan element.
+- `event.relatedTarget` -- sichqoncha kelgan element (`relatedTarget` -> `target`).
 
-For `mouseout` the reverse:
+`mouseout` uchun aksincha:
 
-- `event.target` -- is the element that the mouse left.
-- `event.relatedTarget` -- is the new under-the-pointer element, that mouse left for (`target` -> `relatedTarget`).
+- `event.target` -- sichqoncha tark etgan element.
+- `event.relatedTarget` -- ko'rsatkich ostidagi yangi element, sichqoncha o'tgan joy (`target` -> `relatedTarget`).
 
 ```online
-In the example below each face and its features are separate elements. When you move the mouse, you can see mouse events in the text area.
+Quyidagi misolda har bir yuz va uning xususiyatlari alohida elementlardir. Sichqonchani harakatlantirsangiz, matn maydonida sichqoncha hodisalarini ko'rishingiz mumkin.
 
-Each event has the information about both `target` and `relatedTarget`:
+Har bir hodisa `target` va `relatedTarget` haqida ma'lumotga ega:
 
 [codetabs src="mouseoverout" height=280]
 ```
 
-```warn header="`relatedTarget` can be `null`"
-The `relatedTarget` property can be `null`.
+```warn header="`relatedTarget` `null` bo'lishi mumkin"
+`relatedTarget` xossasi `null` bo'lishi mumkin.
 
-That's normal and just means that the mouse came not from another element, but from out of the window. Or that it left the window.
+Bu normal va shunchaki sichqoncha boshqa elementdan emas, balki oynadan tashqaridan kelganini anglatadi. Yoki u oynani tark etganini.
 
-We should keep that possibility in mind when using `event.relatedTarget` in our code. If we access `event.relatedTarget.tagName`, then there will be an error.
+Kodimizda `event.relatedTarget` dan foydalanganda bu imkoniyatni yodda tutishimiz kerak. Agar biz `event.relatedTarget.tagName` ga murojaat qilsak, xato yuz beradi.
 ```
 
-## Skipping elements
+## Elementlarni o'tkazib yuborish
 
-The `mousemove` event triggers when the mouse moves. But that doesn't mean that every pixel leads to an event.
+`mousemove` hodisasi sichqoncha harakatlanayotganda ishga tushadi. Lekin bu har bir piksel hodisaga olib kelishini anglatmaydi.
 
-The browser checks the mouse position from time to time. And if it notices changes then triggers the events.
+Brauzer vaqti-vaqti bilan sichqoncha pozitsiyasini tekshiradi. Va agar o'zgarishlarni sezsa, hodisalarni ishga tushiradi.
 
-That means that if the visitor is moving the mouse very fast then some DOM-elements may be skipped:
+Bu shuni anglatadiki, agar tashrif buyuruvchi sichqonchani juda tez harakatlantirsa, ba'zi DOM-elementlar o'tkazib yuborilishi mumkin:
 
 ![](mouseover-mouseout-over-elems.svg)
 
-If the mouse moves very fast from `#FROM` to `#TO` elements as painted above, then intermediate `<div>` elements (or some of them) may be skipped. The `mouseout` event may trigger on `#FROM` and then immediately `mouseover` on `#TO`.
+Agar sichqoncha yuqorida chizilgandek `#FROM` dan `#TO` elementlariga juda tez harakat qilsa, oraliq `<div>` elementlari (yoki ularning ba'zilari) o'tkazib yuborilishi mumkin. `mouseout` hodisasi `#FROM` da ishga tushishi va keyin darhol `#TO` da `mouseover` bo'lishi mumkin.
 
-That's good for performance, because there may be many intermediate elements. We don't really want to process in and out of each one.
+Bu unumdorlik uchun yaxshi, chunki ko'plab oraliq elementlar bo'lishi mumkin. Biz har biriga kirish va chiqishni qayta ishlamoqchi emasmiz.
 
-On the other hand, we should keep in mind that the mouse pointer doesn't "visit" all elements along the way. It can "jump".
+Boshqa tomondan, sichqoncha ko'rsatkichi yo'l bo'ylab barcha elementlarni "tashrif buyurmasligini" yodda tutishimiz kerak. U "sakrashi" mumkin.
 
-In particular, it's possible that the pointer jumps right inside the middle of the page from out of the window. In that case `relatedTarget` is `null`, because it came from "nowhere":
+Xususan, ko'rsatkich oynadan tashqaridan sahifaning o'rtasiga to'g'ri sakrashi mumkin. Bunday holda `relatedTarget` `null` bo'ladi, chunki u "hech qayerdan" kelgan:
 
 ![](mouseover-mouseout-from-outside.svg)
-<<<<<<< HEAD
-
-<div style="display:none">
-In case of a fast move, intermediate elements may trigger no events. But if the mouse enters the element (`mouseover`), when we're guaranteed to have `mouseout` when it leaves it.
-</div>
-=======
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```online
-You can check it out "live" on a teststand below.
+Buni quyidagi test stendida "jonli" tekshirishingiz mumkin.
 
-Its HTML has two nested elements: the `<div id="child">` is inside the `<div id="parent">`. If you move the mouse fast over them, then maybe only the child div triggers events, or maybe the parent one, or maybe there will be no events at all.
+Uning HTML ikkita ichki elementga ega: `<div id="child">` `<div id="parent">` ichida. Agar sichqonchani ular ustida tez harakatlantisangiz, ehtimol faqat bola div hodisalarni ishga tushiradi, yoki ehtimol ota-onasi, yoki ehtimol umuman hodisalar bo'lmaydi.
 
-Also move the pointer into the child `div`, and then move it out quickly down through the parent one. If the movement is fast enough, then the parent element is ignored. The mouse will cross the parent element without noticing it.
+Shuningdek, ko'rsatkichni bola `div` ga olib boring, so'ngra ota-onasi orqali tezda pastga chiqaring. Agar harakat etarlicha tez bo'lsa, ota-ona elementi e'tiborga olinmaydi. Sichqoncha ota-ona elementini sezmasdan kesib o'tadi.
 
 [codetabs height=360 src="mouseoverout-fast"]
 ```
 
-```smart header="If `mouseover` triggered, there must be `mouseout`"
-In case of fast mouse movements, intermediate elements may be ignored, but one thing we know for sure: if the pointer "officially" entered an element (`mouseover` event generated), then upon leaving it we always get `mouseout`.
+```smart header="Agar `mouseover` ishga tushsa, `mouseout` bo'lishi kerak"
+Tez sichqoncha harakatlarida oraliq elementlar e'tiborga olinmasligi mumkin, lekin bir narsani aniq bilamiz: agar ko'rsatkich elementga "rasmiy" ravishda kirsa (`mouseover` hodisasi hosil bo'lsa), uni tark etganda har doim `mouseout` ni olamiz.
 ```
 
-## Mouseout when leaving for a child
+## Bola uchun ketayotganda mouseout
 
-An important feature of `mouseout` -- it triggers, when the pointer moves from an element to its descendant, e.g. from `#parent` to `#child` in this HTML:
+`mouseout` ning muhim xususiyati -- u ko'rsatkich elementdan uning avlodiga o'tganda, masalan bu HTML da `#parent` dan `#child` ga o'tganda ishga tushadi:
 
 ```html
 <div id="parent">
@@ -87,33 +80,33 @@ An important feature of `mouseout` -- it triggers, when the pointer moves from a
 </div>
 ```
 
-If we're on `#parent` and then move the pointer deeper into `#child`, we get `mouseout` on `#parent`!
+Agar biz `#parent` da bo'lsak va keyin ko'rsatkichni `#child` ga chuqurroq olib borsak, `#parent` da `mouseout` ni olamiz!
 
 ![](mouseover-to-child.svg)
 
-That may seem strange, but can be easily explained.
+Bu g'alati tuyulishi mumkin, lekin osonlikcha tushuntiriladi.
 
-**According to the browser logic, the mouse cursor may be only over a *single* element at any time -- the most nested one and top by z-index.**
+**Brauzer mantiqiga ko'ra, sichqoncha kursori istalgan vaqtda faqat *bitta* element ustida bo'lishi mumkin -- eng ichki va z-index bo'yicha eng yuqori.**
 
-So if it goes to another element (even a descendant), then it leaves the previous one.
+Shuning uchun agar u boshqa elementga (hatto avlodga) o'tsa, oldingi birini tark etadi.
 
-Please note another important detail of event processing.
+Hodisalarni qayta ishlashning yana bir muhim tafsilotiga e'tibor bering.
 
-The `mouseover` event on a descendant bubbles up. So, if `#parent` has `mouseover` handler, it triggers:
+Avloddagi `mouseover` hodisasi yuqoriga bubble qiladi. Shuning uchun agar `#parent` da `mouseover` ishlov beruvchi bo'lsa, u ishga tushadi:
 
 ![](mouseover-bubble-nested.svg)
 
 ```online
-You can see that very well in the example below: `<div id="child">` is inside the `<div id="parent">`. There are `mouseover/out` handlers on `#parent` element that output event details.
+Buni quyidagi misolda juda yaxshi ko'rishingiz mumkin: `<div id="child">` `<div id="parent">` ichida. `#parent` elementida hodisa tafsilotlarini chiqaruvchi `mouseover/out` ishlov beruvchilari bor.
 
-If you move the mouse from `#parent` to `#child`, you see two events on `#parent`:
-1. `mouseout [target: parent]` (left the parent), then
-2. `mouseover [target: child]` (came to the child, bubbled).
+Agar sichqonchani `#parent` dan `#child` ga olib borsangiz, `#parent` da ikkita hodisani ko'rasiz:
+1. `mouseout [target: parent]` (ota-onani tark etdi), keyin
+2. `mouseover [target: child]` (bolaga keldi, bubble qildi).
 
 [codetabs height=360 src="mouseoverout-child"]
 ```
 
-As shown, when the pointer moves from `#parent` element to `#child`, two handlers trigger on the parent element: `mouseout` and `mouseover`:
+Ko'rsatilgandek, ko'rsatkich `#parent` elementidan `#child` ga o'tganda, ota-ona elementida ikkita ishlov beruvchi ishga tushadi: `mouseout` va `mouseover`:
 
 ```js
 parent.onmouseout = function(event) {
@@ -124,55 +117,55 @@ parent.onmouseover = function(event) {
 };
 ```
 
-**If we don't examine `event.target` inside the handlers, then it may seem that the mouse pointer left `#parent` element, and then immediately came back over it.**
+**Agar biz ishlov beruvchilar ichida `event.target` ni tekshirmasak, sichqoncha ko'rsatkichi `#parent` elementini tark etgandek va keyin darhol uning ustiga qaytgandek tuyulishi mumkin.**
 
-But that's not the case! The pointer is still over the parent, it just moved deeper into the child element.
+Lekin bunday emas! Ko'rsatkich hali ham ota-ona ustida, u shunchaki bola elementiga chuqurroq o'tgan.
 
-If there are some actions upon leaving the parent element, e.g. an animation runs in `parent.onmouseout`, we usually don't want it when the pointer just goes deeper into `#parent`.
+Agar ota-ona elementni tark etganda ba'zi harakatlar bo'lsa, masalan `parent.onmouseout` da animatsiya ishlasa, biz odatda ko'rsatkich shunchaki `#parent` ga chuqurroq kirganda buni xohlamaymiz.
 
-To avoid it, we can check `relatedTarget` in the handler and, if the mouse is still inside the element, then ignore such event.
+Buni oldini olish uchun ishlov beruvchida `relatedTarget` ni tekshirishimiz va agar sichqoncha hali ham element ichida bo'lsa, bunday hodisani e'tiborsiz qoldirishimiz mumkin.
 
-Alternatively we can use other events: `mouseenter` and `mouseleave`, that we'll be covering now, as they don't have such problems.
+Shu kabi muammolarga ega bo'lmagan boshqa hodisalardan foydalanishimiz mumkin: `mouseenter` va `mouseleave`, bularni endi ko'rib chiqamiz.
 
-## Events mouseenter and mouseleave
+## Hodisalar mouseenter va mouseleave
 
-Events `mouseenter/mouseleave` are like `mouseover/mouseout`. They trigger when the mouse pointer enters/leaves the element.
+`mouseenter/mouseleave` hodisalari `mouseover/mouseout` ga o'xshash. Ular sichqoncha ko'rsatkichi elementga kirganda/chiqayotganda ishga tushadi.
 
-But there are two important differences:
+Lekin ikkita muhim farq bor:
 
-1. Transitions inside the element, to/from descendants, are not counted.
-2. Events `mouseenter/mouseleave` do not bubble.
+1. Element ichidagi, avlodlarga/dan o'tishlar hisobga olinmaydi.
+2. `mouseenter/mouseleave` hodisalari bubble qilmaydi.
 
-These events are extremely simple.
+Bu hodisalar juda oddiy.
 
-When the pointer enters an element -- `mouseenter` triggers. The exact location of the pointer inside the element or its descendants doesn't matter.
+Ko'rsatkich elementga kirganda -- `mouseenter` ishga tushadi. Ko'rsatkichning element yoki uning avlodlari ichidagi aniq joylashuvi muhim emas.
 
-When the pointer leaves an element -- `mouseleave` triggers.
+Ko'rsatkich elementni tark etganda -- `mouseleave` ishga tushadi.
 
 ```online
-This example is similar to the one above, but now the top element has `mouseenter/mouseleave` instead of `mouseover/mouseout`.
+Bu misol yuqoridagiga o'xshash, lekin endi yuqori elementda `mouseover/mouseout` o'rniga `mouseenter/mouseleave` bor.
 
-As you can see, the only generated events are the ones related to moving the pointer in and out of the top element. Nothing happens when the pointer goes to the child and back. Transitions between descendants are ignored
+Ko'rib turganimizdek, hosil bo'lgan yagona hodisalar ko'rsatkichni yuqori elementga kirish va chiqish bilan bog'liq. Ko'rsatkich bolaga o'tganda va orqaga qaytganda hech narsa bo'lmaydi. Avlodlar orasidagi o'tishlar e'tiborga olinmaydi
 
 [codetabs height=340 src="mouseleave"]
 ```
 
-## Event delegation
+## Hodisa delegatsiyasi
 
-Events `mouseenter/leave` are very simple and easy to use. But they do not bubble. So we can't use event delegation with them.
+`mouseenter/leave` hodisalari juda oddiy va ishlatish oson. Lekin ular bubble qilmaydi. Shuning uchun biz ular bilan hodisa delegatsiyasidan foydalana olmaymiz.
 
-Imagine we want to handle mouse enter/leave for table cells. And there are hundreds of cells.
+Tasavvur qiling, biz jadval katakchalarida sichqoncha kirish/chiqishini qayta ishlamoqchimiz. Va yuzlab katak bor.
 
-The natural solution would be -- to set the handler on `<table>` and process events there. But `mouseenter/leave` don't bubble. So if such event happens on `<td>`, then only a handler on that `<td>` is able to catch it.
+Tabiiy yechim -- `<table>` ga ishlov beruvchi o'rnatish va hodisalarni u yerda qayta ishlash bo'ladi. Lekin `mouseenter/leave` bubble qilmaydi. Shuning uchun agar bunday hodisa `<td>` da sodir bo'lsa, faqat o'sha `<td>` dagi ishlov beruvchi uni ushlashi mumkin.
 
-Handlers for `mouseenter/leave` on `<table>` only trigger when the pointer enters/leaves the table as a whole. It's impossible to get any information about transitions inside it.
+`<table>` dagi `mouseenter/leave` uchun ishlov beruvchilar faqat ko'rsatkich butun jadvalga kirganda/chiqayotganda ishga tushadi. Uning ichidagi o'tishlar haqida hech qanday ma'lumot olish mumkin emas.
 
-So, let's use `mouseover/mouseout`.
+Shuning uchun `mouseover/mouseout` dan foydalanamiz.
 
-Let's start with simple handlers that highlight the element under mouse:
+Sichqoncha ostidagi elementni ajratib ko'rsatuvchi oddiy ishlov beruvchilar bilan boshlaylik:
 
 ```js
-// let's highlight an element under the pointer
+// sichqoncha ostidagi elementni ajratib ko'rsataylik
 table.onmouseover = function(event) {
   let target = event.target;
   target.style.background = 'pink';
@@ -185,44 +178,102 @@ table.onmouseout = function(event) {
 ```
 
 ```online
-Here they are in action. As the mouse travels across the elements of this table, the current one is highlighted:
+Mana ular amalda. Sichqoncha ushbu jadvalning elementlari bo'ylab harakatlanayotganda, joriy biri ajratiladi:
 
 [codetabs height=480 src="mouseenter-mouseleave-delegation"]
 ```
 
-In our case we'd like to handle transitions between table cells `<td>`: entering a cell and leaving it. Other transitions, such as inside the cell or outside of any cells, don't interest us. Let's filter them out.
+Bizning holatda biz jadval katakchalarida `<td>` o'tishlarni qayta ishlamoqchimiz: katakka kirish va uni tark etish. Boshqa o'tishlar, masalan katak ichida yoki hech qanday katakdan tashqarida, bizni qiziqtirmaydi. Keling, ularni filtrlaylik.
 
-Here's what we can do:
+Mana nima qilishimiz mumkin:
 
-- Remember the currently highlighted `<td>` in a variable, let's call it `currentElem`.
-- On `mouseover` -- ignore the event if we're still inside the current `<td>`.
-- On `mouseout` -- ignore if we didn't leave the current `<td>`.
+- Hozirgi ajratilgan `<td>` ni o'zgaruvchida eslab qolish, uni `currentElem` deb ataymiz.
+- `mouseover` da -- agar biz hali ham joriy `<td>` ichida bo'lsak, hodisani e'tiborsiz qoldirish.
+- `mouseout` da -- agar joriy `<td>` ni tark etmagan bo'lsak, e'tiborsiz qoldirish.
 
-Here's an example of code that accounts for all possible situations:
+Mana barcha mumkin bo'lgan holatlarni hisobga olgan kod misoli:
 
-[js src="mouseenter-mouseleave-delegation-2/script.js"]
+```js
+// Hozir ajratilgan element
+let currentElem = null;
 
-Once again, the important features are:
-1. It uses event delegation to handle entering/leaving of any `<td>` inside the table. So it relies on `mouseover/out` instead of `mouseenter/leave` that don't bubble and hence allow no delegation.
-2. Extra events, such as moving between descendants of `<td>` are filtered out, so that `onEnter/Leave` runs only if the pointer leaves or enters `<td>` as a whole.
+table.onmouseover = function(event) {
+  // mouseover ishga tushganda va biz allaqachon biror elementni ajratgan bo'lsak,
+  // unda avvalgi ajratishni bekor qilishdan oldin yangi hodisani e'tiborsiz qoldiramiz
+  if (currentElem) return;
+
+  let target = event.target.closest('td');
+  
+  // Biz td ga o'tmadik - e'tiborsiz qoldirish
+  if (!target) return;
+  
+  // Biz ichki jadvalga o'tdik (mumkin), uni e'tiborsiz qoldirish
+  if (!table.contains(target)) return;
+
+  // Hurray! Biz yangi td ga kirdik
+  currentElem = target;
+  onEnter(currentElem);
+};
+
+
+table.onmouseout = function(event) {
+  // Agar biz hozirda hech qanday elementda bo'lmasak, e'tiborsiz qoldirish
+  if (!currentElem) return;
+
+  // Biz elementni tark etayotgiz - qayerga? Ehtimol avlodga?
+  let relatedTarget = event.relatedTarget;
+
+  while (relatedTarget) {
+    // Yo'q! Biz currentElem ning ichiga o'tdik - bu ichki o'tish, e'tiborsiz qoldirish
+    if (relatedTarget == currentElem) return;
+
+    relatedTarget = relatedTarget.parentNode;
+  }
+
+  // Biz haqiqatdan ham elementni tark etdik
+  onLeave(currentElem);
+  currentElem = null;
+};
+
+// har qanday elementga kirish/chiqish funksiyalari
+function onEnter(elem) {
+  elem.style.background = 'pink';
+
+  // textarea da buni ko'rsatish
+  text.value += `over -> ${currentElem.tagName}.${currentElem.className}\n`;
+  text.scrollTop = text.scrollHeight;
+}
+
+function onLeave(elem) {
+  elem.style.background = '';
+
+  // textarea da buni ko'rsatish  
+  text.value += `leave <- ${elem.tagName}.${elem.className}\n`;
+  text.scrollTop = text.scrollHeight;
+}
+```
+
+Yana bir bor, muhim xususiyatlar:
+1. U jadval ichidagi har qanday `<td>` ga kirish/chiqishni qayta ishlash uchun hodisa delegatsiyasidan foydalanadi. Shuning uchun u bubble qilmaydigan va shuning uchun delegatsiyaga ruxsat bermaydigan `mouseenter/leave` o'rniga `mouseover/out` ga tayangan.
+2. `<td>` avlodlari orasida harakatlanish kabi qo'shimcha hodisalar filtrlangan, shuning uchun `onEnter/Leave` faqat ko'rsatkich `<td>` ni butunlay tark etganda yoki kirganda ishlaydi.
 
 ```online
-Here's the full example with all details:
+Mana barcha tafsilotlar bilan to'liq misol:
 
 [codetabs height=460 src="mouseenter-mouseleave-delegation-2"]
 
-Try to move the cursor in and out of table cells and inside them. Fast or slow -- doesn't matter. Only `<td>` as a whole is highlighted, unlike the example before.
+Kursorni jadval katakchalariga va ichiga kirish va chiqishda harakatlantiring. Tez yoki sekin -- farqi yo'q. Oldingi misoldan farqli o'laroq, faqat `<td>` butunlay ajratiladi.
 ```
 
-## Summary
+## Xulosa
 
-We covered events `mouseover`, `mouseout`, `mousemove`, `mouseenter` and `mouseleave`.
+Biz `mouseover`, `mouseout`, `mousemove`, `mouseenter` va `mouseleave` hodisalarini ko'rib chiqdik.
 
-These things are good to note:
+Quyidagi narsalarni qayd etish yaxshi:
 
-- A fast mouse move may skip intermediate elements.
-- Events `mouseover/out` and `mouseenter/leave` have an additional property: `relatedTarget`. That's the element that we are coming from/to, complementary to `target`.
+- Tez sichqoncha harakati oraliq elementlarni o'tkazib yuborishi mumkin.
+- `mouseover/out` va `mouseenter/leave` hodisalari qo'shimcha xossaga ega: `relatedTarget`. Bu biz kelayotgan/borayotgan element, `target` ga qo'shimcha.
 
-Events `mouseover/out` trigger even when we go from the parent element to a child element. The browser assumes that the mouse can be only over one element at one time -- the deepest one.
+`mouseover/out` hodisalari ota-ona elementdan bola elementga o'tganimizda ham ishga tushadi. Brauzer sichqoncha bir vaqtda faqat bitta element ustida bo'lishi mumkin deb hisoblaydi -- eng chuqur biri.
 
-Events `mouseenter/leave` are different in that aspect: they only trigger when the mouse comes in and out the element as a whole. Also they do not bubble.
+`mouseenter/leave` hodisalari bu jihatdan boshqacha: ular faqat sichqoncha elementga butunlay kirganda va chiqayotganda ishga tushadi. Shuningdek, ular bubble qilmaydi.

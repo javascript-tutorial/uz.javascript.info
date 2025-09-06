@@ -2,35 +2,35 @@ importance: 4
 
 ---
 
-# Load images with a callback
+# Callback bilan rasmlarni yuklash
 
-Normally, images are loaded when they are created. So when we add `<img>` to the page, the user does not see the picture immediately. The browser needs to load it first.
+Odatda rasmlar yaratilganda yuklanadi. Shuning uchun biz sahifaga `<img>` qo'shganimizda, foydalanuvchi rasmni darhol ko'rmaydi. Brauzer avval uni yuklashi kerak.
 
-To show an image immediately, we can create it "in advance", like this:
+Rasmni darhol ko'rsatish uchun biz uni "oldindan" yaratishimiz mumkin:
 
 ```js
-let img = document.createElement('img');
-img.src = 'my.jpg';
+let img = document.createElement("img");
+img.src = "my.jpg";
 ```
 
-The browser starts loading the image and remembers it in the cache. Later, when the same image appears in the document (no matter how), it shows up immediately.
+Brauzer rasmni yuklashni boshlaydi va uni keshda eslab qoladi. Keyinchalik, xuddi shu rasm hujjatda paydo bo'lganda (qanday bo'lishidan qat'iy nazar), u darhol ko'rsatiladi.
 
-**Create a function `preloadImages(sources, callback)` that loads all images from the array `sources` and, when ready, runs `callback`.**
+**`sources` massividan barcha rasmlarni yuklaydigan va tayyor bo'lganda `callback` ni ishga tushiradigan `preloadImages(sources, callback)` funksiyasini yarating.**
 
-For instance, this will show an `alert` after the images are loaded:
+Masalan, bu rasmlar yuklangandan keyin `alert` ni ko'rsatadi:
 
 ```js
 function loaded() {
-  alert("Images loaded")
+  alert("Rasmlar yuklandi");
 }
 
 preloadImages(["1.jpg", "2.jpg", "3.jpg"], loaded);
 ```
 
-In case of an error, the function should still assume the picture "loaded".
+Xatolik yuz berganda ham, funksiya rasmni "yuklangan" deb hisoblashi kerak.
 
-In other words, the `callback` is executed when all images are either loaded or errored out.
+Boshqacha qilib aytganda, `callback` barcha rasmlar yuklanganida yoki xatolik yuz berganida bajariladi.
 
-The function is useful, for instance, when we plan to show a gallery with many scrollable images, and want to be sure that all images are loaded.
+Funksiya, masalan, ko'plab aylantiriladigan rasmlar bilan galereyani ko'rsatishni rejalashtirganimizda va barcha rasmlarning yuklanganligiga ishonch hosil qilmoqchi bo'lganimizda foydalidir.
 
-In the source document you can find links to test images, and also the code to check whether they are loaded or not. It should output `300`.
+Manba hujjatida test rasmlarga havolalar va ular yuklanganligini tekshirish kodini topishingiz mumkin. U `300` ni chiqarishi kerak.

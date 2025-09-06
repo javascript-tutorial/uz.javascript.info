@@ -1,2 +1,1 @@
-
-# Document and resource loading
+# Hujjat va manbalarni yuklash

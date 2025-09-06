@@ -1,19 +1,17 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# What's in the nodeType?
+# NodeType ichida nima bor?
 
-What does the script show?
+Skript nimani ko'rsatadi?
 
 ```html
 <html>
-
-<body>
-  <script>
-    alert(document.body.lastChild.nodeType);
-  </script>
-</body>
-
+  <body>
+    <script>
+      alert(document.body.lastChild.nodeType);
+    </script>
+  </body>
 </html>
 ```

@@ -1,52 +1,52 @@
-# Word boundary: \b
+# So'z chegarasi: \b
 
-A word boundary `pattern:\b` is a test, just like `pattern:^` and `pattern:$`.
+So'z chegarasi `pattern:\b` - bu `pattern:^` va `pattern:$` kabi test.
 
-When the regexp engine (program module that implements searching for regexps) comes across `pattern:\b`, it checks that the position in the string is a word boundary.
+Regexp dvigateli (regexplarni qidirishni amalga oshiruvchi dastur moduli) `pattern:\b`ga duch kelganda, u satrdagi pozitsiya so'z chegarasi ekanligini tekshiradi.
 
-There are three different positions that qualify as word boundaries:
+So'z chegarasi sifatida uchta turli pozitsiya mavjud:
 
-- At string start, if the first string character is a word character `pattern:\w`.
-- Between two characters in the string, where one is a word character `pattern:\w` and the other is not.
-- At string end, if the last string character is a word character `pattern:\w`.
+- Satr boshida, agar birinchi satr belgisi so'z belgisi `pattern:\w` bo'lsa.
+- Satrdagi ikki belgi o'rtasida, biri so'z belgisi `pattern:\w`, ikkinchisi esa yo'q.
+- Satr oxirida, agar oxirgi satr belgisi so'z belgisi `pattern:\w` bo'lsa.
 
-For instance, regexp `pattern:\bJava\b` will be found in `subject:Hello, Java!`, where `subject:Java` is a standalone word, but not in `subject:Hello, JavaScript!`.
+Masalan, `pattern:\bJava\b` regexp `subject:Salom, Java!` da topiladi, bu yerda `subject:Java` mustaqil so'z, lekin `subject:Salom, JavaScript!` da emas.
 
 ```js run
-alert( "Hello, Java!".match(/\bJava\b/) ); // Java
-alert( "Hello, JavaScript!".match(/\bJava\b/) ); // null
+alert( "Salom, Java!".match(/\bJava\b/) ); // Java
+alert( "Salom, JavaScript!".match(/\bJava\b/) ); // null
 ```
 
-In the string `subject:Hello, Java!` following positions correspond to `pattern:\b`:
+`subject:Salom, Java!` satrida quyidagi pozitsiyalar `pattern:\b`ga mos keladi:
 
 ![](hello-java-boundaries.svg)
 
-So, it matches the pattern `pattern:\bHello\b`, because:
+Shunday qilib, u `pattern:\bSalom\b` naqshiga mos keladi, chunki:
 
-1. At the beginning of the string matches the first test `pattern:\b`.
-2. Then matches the word `pattern:Hello`.
-3. Then the test `pattern:\b` matches again, as we're between `subject:o` and a comma.
+1. Satr boshida birinchi test `pattern:\b`ga mos keladi.
+2. Keyin `pattern:Salom` so'ziga mos keladi.
+3. Keyin `pattern:\b` testi yana mos keladi, chunki biz `subject:o` va vergul o'rtasidamiz.
 
-So the pattern `pattern:\bHello\b` would match, but not `pattern:\bHell\b` (because there's no word boundary after `l`) and not `Java!\b` (because the exclamation sign is not a wordly character `pattern:\w`, so there's no word boundary after it).
+Shunday qilib, `pattern:\bSalom\b` naqshi mos keladi, lekin `pattern:\bSalo\b` emas (chunki `o` dan keyin so'z chegarasi yo'q) va `Java!\b` ham emas (chunki undov belgisi so'z belgisi `pattern:\w` emas, shuning uchun undan keyin so'z chegarasi yo'q).
 
 ```js run
-alert( "Hello, Java!".match(/\bHello\b/) ); // Hello
-alert( "Hello, Java!".match(/\bJava\b/) );  // Java
-alert( "Hello, Java!".match(/\bHell\b/) );  // null (no match)
-alert( "Hello, Java!".match(/\bJava!\b/) ); // null (no match)
+alert( "Salom, Java!".match(/\bSalom\b/) ); // Salom
+alert( "Salom, Java!".match(/\bJava\b/) );  // Java
+alert( "Salom, Java!".match(/\bHell\b/) );  // null (moslik yo'q)
+alert( "Salom, Java!".match(/\bJava!\b/) ); // null (moslik yo'q)
 ```
 
-We can use `pattern:\b` not only with words, but with digits as well.
+Biz `pattern:\b`ni nafaqat so'zlar bilan, balki raqamlar bilan ham ishlatishimiz mumkin.
 
-For example, the pattern `pattern:\b\d\d\b` looks for standalone 2-digit numbers. In other words, it looks for 2-digit numbers that are surrounded by characters different from `pattern:\w`, such as spaces or punctuation (or text start/end).
+Masalan, `pattern:\b\d\d\b` naqshi mustaqil 2 xonali raqamlarni qidiradi. Boshqacha qilib aytganda, u `pattern:\w`dan farqli belgilar bilan o'ralgan 2 xonali raqamlarni qidiradi, masalan bo'shliqlar yoki tinish belgilari (yoki matn boshi/oxiri).
 
 ```js run
 alert( "1 23 456 78".match(/\b\d\d\b/g) ); // 23,78
 alert( "12,34,56".match(/\b\d\d\b/g) ); // 12,34,56
 ```
 
-```warn header="Word boundary `pattern:\b` doesn't work for non-latin alphabets"
-The word boundary test `pattern:\b` checks that there should be `pattern:\w` on the one side from the position and "not `pattern:\w`" - on the other side.
+```warn header="So'z chegarasi `pattern:\b` lotin bo'lmagan alifbolar uchun ishlamaydi"
+So'z chegarasi testi `pattern:\b` pozitsiyaning bir tomonida `pattern:\w` bo'lishi va boshqa tomonida "not `pattern:\w`" bo'lishi kerakligini tekshiradi.
 
-But `pattern:\w` means a latin letter `a-z` (or a digit or an underscore), so the test doesn't work for other characters, e.g. cyrillic letters or hieroglyphs.
+Lekin `pattern:\w` lotin harfi `a-z` (yoki raqam yoki pastki chiziq) degani, shuning uchun test boshqa belgilar uchun ishlamaydi, masalan kirill harflari yoki ierogliflar.
 ```

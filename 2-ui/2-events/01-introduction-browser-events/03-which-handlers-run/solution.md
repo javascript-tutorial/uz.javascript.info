@@ -1,8 +1,8 @@
-The answer: `1` and `2`.
+Javob: `1` va `2`.
 
-The first handler triggers, because it's not removed by `removeEventListener`. To remove the handler we need to pass exactly the function that was assigned. And in the code a new function is passed, that looks the same, but is still another function.
+Birinchi ishlov beruvchi ishga tushadi, chunki u `removeEventListener` tomonidan o'chirilmagan. Ishlovchini olib tashlash uchun biz aniq tayinlangan funktsiyani o'tkazishimiz kerak. Va kodda yangi funktsiya o'tkazildi, u bir xil ko'rinadi, lekin hali ham boshqa funktsiya.
 
-To remove a function object, we need to store a reference to it, like this:
+Funktsiya ob'ektini olib tashlash uchun biz unga havolani saqlashimiz kerak, masalan:
 
 ```js
 function handler() {
@@ -13,4 +13,4 @@ button.addEventListener("click", handler);
 button.removeEventListener("click", handler);
 ```
 
-The handler `button.onclick` works independently and in addition to `addEventListener`.
+`button.onclick` ishlov beruvchisi mustaqil va `addEventListener`ga qo`shimcha ravishda ishlaydi.

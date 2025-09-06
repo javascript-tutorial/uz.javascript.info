@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-#  How to find an ellipsis "..." ?
+# "..." ellipsini qanday topish mumkin?
 
-Create a regexp to find ellipsis: 3 (or more?) dots in a row.
+Ellipsni topish uchun regexp yarating: ketma-ket 3 (yoki undan ko'p?) nuqta.
 
-Check it:
+Tekshiring:
 
 ```js
 let regexp = /your regexp/g;
-alert( "Hello!... How goes?.....".match(regexp) ); // ..., .....
+alert("Salom!... Qalay ketyapti?.....".match(regexp)); // ..., .....
 ```

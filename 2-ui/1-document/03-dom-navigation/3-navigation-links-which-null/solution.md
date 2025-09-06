@@ -1,6 +1,6 @@
-1. Yes, true. The element `elem.lastChild` is always the last one, it has no `nextSibling`.
-2. No, wrong, because `elem.children[0]` is the first child *among elements*. But there may exist non-element nodes before it. So `previousSibling` may be a text node.
+1. Ha, rost. `elem.lastChild` elementi har doim oxirgi element bo‘lib, unda `nextSibling` yo‘q.
+2.Yo'q, noto'g'ri, chunki `elem.children[0]` *elementlar orasidagi birinchi bola*. Ammo undan oldin element bo'lmagan tugunlar mavjud bo'lishi mumkin. Shunday qilib, `previousSibling` matnli tugun bo'lishi mumkin.
 
-Please note: for both cases if there are no children, then there will be an error.
+Iltimos, diqqat qiling: ikkala holatda ham, agar bolalar bo'lmasa, xato bo'ladi.
 
-If there are no children, `elem.lastChild` is `null`, so we can't access `elem.lastChild.nextSibling`. And the collection `elem.children` is empty (like an empty array `[]`).
+Agar bolalar boʻlmasa, `elem.lastChild”` `null` hisoblanadi, shuning uchun biz `elem.lastChild.nextSibling` ga kira olmaymiz. `elem.children` to'plami esa bo'sh (bo'sh `[]` massivi kabi).

@@ -1,15 +1,14 @@
 let isDragging = false;
 
-document.addEventListener('mousedown', function(event) {
-
-  let dragElement = event.target.closest('.draggable');
+document.addEventListener("mousedown", function (event) {
+  let dragElement = event.target.closest(".draggable");
 
   if (!dragElement) return;
 
   event.preventDefault();
 
-  dragElement.ondragstart = function() {
-      return false;
+  dragElement.ondragstart = function () {
+    return false;
   };
 
   let coords, shiftX, shiftY;
@@ -18,99 +17,101 @@ document.addEventListener('mousedown', function(event) {
 
   function onMouseUp(event) {
     finishDrag();
-  };
+  }
 
   function onMouseMove(event) {
     moveAt(event.clientX, event.clientY);
   }
 
-  // on drag start:
-  //   remember the initial shift
-  //   move the element position:fixed and a direct child of body
+  // sudrab boshlashda:
+  //   dastlabki siljishni eslang
+  //   element pozitsiyasini ko'chiring:sobit va tananing to'g'ridan-to'g'ri bolasi
   function startDrag(element, clientX, clientY) {
-    if(isDragging) {
+    if (isDragging) {
       return;
     }
 
     isDragging = true;
 
-    document.addEventListener('mousemove', onMouseMove);
-    element.addEventListener('mouseup', onMouseUp);
+    document.addEventListener("mousemove", onMouseMove);
+    element.addEventListener("mouseup", onMouseUp);
 
     shiftX = clientX - element.getBoundingClientRect().left;
     shiftY = clientY - element.getBoundingClientRect().top;
 
-    element.style.position = 'fixed';
+    element.style.position = "fixed";
 
     moveAt(clientX, clientY);
-  };
+  }
 
-  // switch to absolute coordinates at the end, to fix the element in the document
+  // hujjatdagi elementni tuzatish uchun oxirida mutlaq koordinatalarga o'ting
   function finishDrag() {
-    if(!isDragging) {
+    if (!isDragging) {
       return;
     }
 
     isDragging = false;
 
-    dragElement.style.top = parseInt(dragElement.style.top) + window.pageYOffset + 'px';
-    dragElement.style.position = 'absolute';
+    dragElement.style.top =
+      parseInt(dragElement.style.top) + window.pageYOffset + "px";
+    dragElement.style.position = "absolute";
 
-    document.removeEventListener('mousemove', onMouseMove);
-    dragElement.removeEventListener('mouseup', onMouseUp);
+    document.removeEventListener("mousemove", onMouseMove);
+    dragElement.removeEventListener("mouseup", onMouseUp);
   }
 
   function moveAt(clientX, clientY) {
-    // new window-relative coordinates
+    // yangi oynaning nisbiy koordinatalari
     let newX = clientX - shiftX;
     let newY = clientY - shiftY;
 
-    // check if the new coordinates are below the bottom window edge
-    let newBottom = newY + dragElement.offsetHeight; // new bottom
+    // yangi koordinatalar oynaning pastki chetidan pastda ekanligini tekshiring
+    let newBottom = newY + dragElement.offsetHeight; // yangi pastki
 
-    // below the window? let's scroll the page
+    // oyna ostidami? sahifani aylantiramiz
     if (newBottom > document.documentElement.clientHeight) {
-      // window-relative coordinate of document end
+      // hujjat oxirining oyna-nisbiy koordinatasi
       let docBottom = document.documentElement.getBoundingClientRect().bottom;
 
-      // scroll the document down by 10px has a problem
-      // it can scroll beyond the end of the document
-      // Math.min(how much left to the end, 10)
+      // hujjatni 10px pastga aylantiring, muammo bor
+      // u hujjat oxiridan tashqariga o'tishi mumkin
+      // Math.min(oxirigacha qancha qoldi, 10)
       let scrollY = Math.min(docBottom - newBottom, 10);
 
-      // calculations are imprecise, there may be rounding errors that lead to scrolling up
-      // that should be impossible, fix that here
+      // hisob-kitoblar aniq emas, yuqoriga o'tishga olib keladigan yaxlitlash xatolari bo'lishi mumkin
+      // bu imkonsiz bo'lishi kerak, buni shu erda tuzating
       if (scrollY < 0) scrollY = 0;
 
       window.scrollBy(0, scrollY);
 
-      // a swift mouse move make put the cursor beyond the document end
-      // if that happens -
-      // limit the new Y by the maximally possible (right at the bottom of the document)
-      newY = Math.min(newY, document.documentElement.clientHeight - dragElement.offsetHeight);
+      // sichqonchaning tez harakatlanishi kursorni hujjat oxiridan tashqariga qo'yish
+      // agar shunday bo'lsa -
+      // yangi Y ni maksimal darajada cheklash (hujjatning o'ng pastki qismida)
+      newY = Math.min(
+        newY,
+        document.documentElement.clientHeight - dragElement.offsetHeight
+      );
     }
 
-    // check if the new coordinates are above the top window edge (similar logic)
+    // yangi koordinatalar oynaning yuqori chetidan yuqori ekanligini tekshiring (shunga o'xshash mantiq)
     if (newY < 0) {
-      // scroll up
+      // yuqoriga aylantiring
       let scrollY = Math.min(-newY, 10);
-      if (scrollY < 0) scrollY = 0; // check precision errors
+      if (scrollY < 0) scrollY = 0; // aniqlikdagi xatolarni tekshiring
 
       window.scrollBy(0, -scrollY);
-      // a swift mouse move can put the cursor beyond the document start
-      newY = Math.max(newY, 0); // newY may not be below 0
+      // sichqonchaning tez harakatlanishi kursorni hujjat boshlanishidan tashqariga qo'yishi mumkin
+      newY = Math.max(newY, 0); // newY 0 dan past bo'lmasligi mumkin
     }
 
-
-    // limit the new X within the window boundaries
-    // there's no scroll here so it's simple
+    // yangi X ni oyna chegaralarida cheklash
+    // bu erda hech qanday aylantirish yo'q, shuning uchun hamma narsa oddiy
     if (newX < 0) newX = 0;
     if (newX > document.documentElement.clientWidth - dragElement.offsetWidth) {
       newX = document.documentElement.clientWidth - dragElement.offsetWidth;
     }
 
-    dragElement.style.left = newX + 'px';
-    dragElement.style.top = newY + 'px';
+    dragElement.style.left = newX + "px";
+    dragElement.style.top = newY + "px";
   }
-
 });

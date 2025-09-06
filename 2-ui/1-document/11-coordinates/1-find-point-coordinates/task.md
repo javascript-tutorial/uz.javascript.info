@@ -2,23 +2,23 @@ importance: 5
 
 ---
 
-# Find window coordinates of the field
+# Maydonning oyna koordinatalarini toping
 
-In the iframe below you can see a document with the green "field".
+Quyidagi iframe-da yashil "maydon" bilan hujjatni ko'rishingiz mumkin.
 
-Use JavaScript to find window coordinates of corners pointed by with arrows.
+O'qlar bilan ko'rsatilgan burchaklarning oyna koordinatalarini topish uchun JavaScript-dan foydalaning.
 
-There's a small feature implemented in the document for convenience. A click at any place shows coordinates there.
+Qulaylik uchun hujjatda kichik xususiyat mavjud. Istalgan joyga bosish u yerdagi koordinatalarni ko'rsatadi.
 
 [iframe border=1 height=360 src="source" link edit]
 
-Your code should use DOM to get window coordinates of:
+Sizning kodingiz oyna koordinatalarini olish uchun DOM dan foydalanishi kerak:
 
-1. Upper-left, outer corner (that's simple).
-2. Bottom-right, outer corner (simple too).
-3. Upper-left, inner corner (a bit harder).
-4. Bottom-right, inner corner (there are several ways, choose one).
+1. Yuqori chap, tashqi burchak (bu oddiy).
+2. Pastki o'ng, tashqi burchak (oddiy ham).
+3. Yuqori chap, ichki burchak (biroz qattiqroq).
+4. Pastki o'ng, ichki burchak (bir necha yo'l bor, birini tanlang).
 
-The coordinates that you calculate should be the same as those returned by the mouse click.
+Siz hisoblagan koordinatalar sichqonchani bosish orqali qaytariladigan koordinatalar bilan bir xil bo'lishi kerak.
 
-P.S. The code should also work if the element has another size or border, not bound to any fixed values.
+P.S. Agar element boshqa o'lcham yoki chegaraga ega bo'lsa, hech qanday sobit qiymatlarga bog'lanmagan bo'lsa, kod ham ishlashi kerak.

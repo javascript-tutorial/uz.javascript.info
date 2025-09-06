@@ -1,16 +1,16 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Edit TD on click
+# Bosish orqali TD ni tahrirlang
 
-Make table cells editable on click.
+Jadval xujayralarini bosish orqali tahrirlanadigan qilib qo'ying.
 
-- On click -- the cell should become "editable" (textarea appears inside), we can change HTML. There should be no resize, all geometry should remain the same.
-- Buttons OK and CANCEL appear below the cell to finish/cancel the editing.
-- Only one cell may be editable at a moment. While a `<td>` is in "edit mode", clicks on other cells are ignored.
-- The table may have many cells. Use event delegation.
+- Bosish orqali hujayra "tahrirlanadigan" bo'lishi kerak (ichkarida matn maydoni paydo bo'ladi), biz HTMLni o'zgartirishimiz mumkin. Hech qanday o'lcham bo'lmasligi kerak, barcha geometriya bir xil bo'lishi kerak.
+- Tahrirlashni tugatish/bekor qilish uchun katak ostida OK va CANCEL tugmalari paydo bo'ladi.
+- Bir vaqtning o'zida faqat bitta katakni tahrirlash mumkin. `<td>` «tahrirlash» rejimida bo`lsa-da, boshqa katakchalarni bosish e`tiborga olinmaydi.
+- Jadvalda ko'plab katakchalar bo'lishi mumkin. Tadbir delegatsiyasidan foydalaning.
 
-The demo:
+Demo:
 
 [iframe src="solution" height=400]

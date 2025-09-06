@@ -1,54 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <template id="tmpl">
   <style>
-  ul {
-    margin: 0;
-    list-style: none;
-    padding-left: 20px;
-  }
+    ul {
+      margin: 0;
+      list-style: none;
+      padding-left: 20px;
+    }
 
-  ::slotted([slot="title"]) {
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+    ::slotted([slot="title"]) {
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-  ::slotted([slot="title"])::before {
-    content: '📂';
-    font-size: 14px;
-  }
+    ::slotted([slot="title"])::before {
+      content: "📂";
+      font-size: 14px;
+    }
 
-  .closed ::slotted([slot="title"])::before {
-    content: '📁';
-  }
+    .closed ::slotted([slot="title"])::before {
+      content: "📁";
+    }
 
-  .closed ul {
-    display: none;
-  }
+    .closed ul {
+      display: none;
+    }
   </style>
 
   <div class="menu">
     <slot name="title"></slot>
-    <ul><slot name="item"></slot></ul>
+    <ul>
+      <slot name="item"></slot>
+    </ul>
   </div>
 </template>
 
 <script>
-customElements.define('custom-menu', class extends HTMLElement {
-  connectedCallback() {
-    this.attachShadow({mode: 'open'});
-    this.shadowRoot.append( tmpl.content.cloneNode(true) );
+  customElements.define(
+    "custom-menu",
+    class extends HTMLElement {
+      connectedCallback() {
+        this.attachShadow({ mode: "open" });
+        this.shadowRoot.append(tmpl.content.cloneNode(true));
 
-    this.shadowRoot.querySelector('slot[name="title"]').onclick = () => {
-      this.shadowRoot.querySelector('.menu').classList.toggle('closed');
-    };
-  }
-});
+        this.shadowRoot.querySelector('slot[name="title"]').onclick = () => {
+          this.shadowRoot.querySelector(".menu").classList.toggle("closed");
+        };
+      }
+    }
+  );
 </script>
 
 <custom-menu>
-  <span slot="title">Candy menu</span>
-  <li slot="item">Lollipop</li>
-  <li slot="item">Fruit Toast</li>
-  <li slot="item">Cup Cake</li>
+  <span slot="title">Shirinliklar menyusi</span>
+  <li slot="item">Lolipop</li>
+  <li slot="item">Mevali tost</li>
+  <li slot="item">Kubok keksi</li>
 </custom-menu>

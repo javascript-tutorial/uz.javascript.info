@@ -1,140 +1,136 @@
-# Keyboard: keydown and keyup
+# Klaviatura: keydown va keyup
 
-Before we get to keyboard, please note that on modern devices there are other ways to "input something". For instance, people use speech recognition (especially on mobile devices) or copy/paste with the mouse.
+Klaviaturaga o'tishdan oldin, zamonaviy qurilmalarda "biror narsani kiritish" uchun boshqa usullar ham mavjudligini yodda tuting. Masalan, odamlar ovozni tanish texnologiyasidan foydalanadilar (ayniqsa mobil qurilmalarda) yoki sichqoncha bilan nusxa olish/joylashtirish.
 
-So if we want to track any input into an `<input>` field, then keyboard events are not enough. There's another event named `input` to track changes of an `<input>` field, by any means. And it may be a better choice for such task. We'll cover it later in the chapter <info:events-change-input>.
+Shuning uchun agar biz `<input>` maydoniga har qanday kirishni kuzatmoqchi bo'lsak, klaviatura hodisalari yetarli emas. `<input>` maydonining o'zgarishlarini har qanday usul bilan kuzatish uchun `input` nomli boshqa hodisa mavjud. Va bu bunday vazifa uchun yaxshiroq tanlov bo'lishi mumkin. Buni keyinroq <info:events-change-input> bobida ko'rib chiqamiz.
 
-Keyboard events should be used when we want to handle keyboard actions (virtual keyboard also counts). For instance, to react on arrow keys `key:Up` and `key:Down` or hotkeys (including combinations of keys).
+Klaviatura hodisalari klaviatura harakatlarini (virtual klaviatura ham hisobga olinadi) qayta ishlashni xohlasak ishlatilishi kerak. Masalan, o'q tugmalari `key:Up` va `key:Down` yoki tezkor tugmalar (tugmalar kombinatsiyalari) ga javob berish uchun.
 
-
-## Teststand [#keyboard-test-stand]
+## Test stendi [#keyboard-test-stand]
 
 ```offline
-To better understand keyboard events, you can use the [teststand](sandbox:keyboard-dump).
+Klaviatura hodisalarini yaxshiroq tushunish uchun [test stendi](sandbox:keyboard-dump) dan foydalanishingiz mumkin.
 ```
 
 ```online
-To better understand keyboard events, you can use the teststand below.
+Klaviatura hodisalarini yaxshiroq tushunish uchun quyidagi test stendidan foydalanishingiz mumkin.
 
-Try different key combinations in the text field.
+Matn maydonida turli tugma kombinatsiyalarini sinab ko'ring.
 
 [codetabs src="keyboard-dump" height=480]
 ```
 
+## Keydown va keyup
 
-## Keydown and keyup
+Tugma bosilganda `keydown` hodisasi sodir bo'ladi, keyin uni qo'yib yuborilganda `keyup`.
 
-The `keydown` events happens when a key is pressed down, and then `keyup` -- when it's released.
+### event.code va event.key
 
-### event.code and event.key
+Hodisa obyektining `key` xossasi belgilarni olish imkonini beradi, `code` xossasi esa "jismoniy tugma kodi"ni olish imkonini beradi.
 
-The `key` property of the event object allows to get the character, while the `code` property of the event object allows to get the "physical key code".
+Masalan, bir xil `key:Z` tugmasi `key:Shift` bilan yoki usiz bosilishi mumkin. Bu bizga ikkita turli belgi beradi: kichik `z` va katta `Z`.
 
-For instance, the same key `key:Z` can be pressed with or without `key:Shift`. That gives us two different characters: lowercase `z` and uppercase `Z`.
+`event.key` aynan belgi bo'lib, u har xil bo'ladi. Lekin `event.code` bir xil:
 
-The `event.key` is exactly the character, and it will be different. But `event.code` is the same:
-
-| Key          | `event.key` | `event.code` |
+| Tugma        | `event.key` | `event.code` |
 |--------------|-------------|--------------|
-| `key:Z`      |`z` (lowercase)         |`KeyZ`        |
-| `key:Shift+Z`|`Z` (uppercase)          |`KeyZ`        |
+| `key:Z`      |`z` (kichik harf)         |`KeyZ`        |
+| `key:Shift+Z`|`Z` (katta harf)          |`KeyZ`        |
 
+Agar foydalanuvchi turli tillarda ishlasa, boshqa tilga o'tish `"Z"` o'rniga butunlay boshqa belgi hosil qiladi. Bu `event.key` ning qiymati bo'ladi, `event.code` esa doim bir xil: `"KeyZ"`.
 
-If a user works with different languages, then switching to another language would make a totally different character instead of `"Z"`. That will become the value of `event.key`, while `event.code` is always the same: `"KeyZ"`.
+```smart header="\"KeyZ\" va boshqa tugma kodlari"
+Har bir tugma klaviaturadagi joylashuviga qarab kodga ega. Tugma kodlari [UI Events code spetsifikatsiyasi](https://www.w3.org/TR/uievents-code/) da tasvirlangan.
 
-```smart header="\"KeyZ\" and other key codes"
-Every key has the code that depends on its location on the keyboard. Key codes described in the [UI Events code specification](https://www.w3.org/TR/uievents-code/).
+Masalan:
+- Harf tugmalari `"Key<harf>"` kodlariga ega: `"KeyA"`, `"KeyB"` va h.k.
+- Raqam tugmalari kodlarga ega: `"Digit<raqam>"`: `"Digit0"`, `"Digit1"` va h.k.
+- Maxsus tugmalar o'z nomlari bilan kodlanadi: `"Enter"`, `"Backspace"`, `"Tab"` va h.k.
 
-For instance:
-- Letter keys have codes `"Key<letter>"`: `"KeyA"`, `"KeyB"` etc.
-- Digit keys have codes: `"Digit<number>"`: `"Digit0"`, `"Digit1"` etc.
-- Special keys are coded by their names: `"Enter"`, `"Backspace"`, `"Tab"` etc.
+Bir nechta keng tarqalgan klaviatura joylashuvlari mavjud va spetsifikatsiya har biri uchun tugma kodlarini beradi.
 
-There are several widespread keyboard layouts, and the specification gives key codes for each of them.
-
-Read the [alphanumeric section of the spec](https://www.w3.org/TR/uievents-code/#key-alphanumeric-section) for more codes, or just press a key in the [teststand](#keyboard-test-stand) above.
+Ko'proq kodlar uchun [spetsifikatsiyaning alfanumerik bo'limi](https://www.w3.org/TR/uievents-code/#key-alphanumeric-section)ni o'qing yoki yuqoridagi [test stendi](#keyboard-test-stand)da tugmani bosing.
 ```
 
-```warn header="Case matters: `\"KeyZ\"`, not `\"keyZ\"`"
-Seems obvious, but people still make mistakes.
+```warn header="Katta-kichik harf muhim: `\"KeyZ\"`, `\"keyZ\"` emas"
+Aniq ko'rinadi, lekin odamlar hali ham xatolarga yo'l qo'yadilar.
 
-Please evade mistypes: it's `KeyZ`, not `keyZ`. The check like `event.code=="keyZ"` won't work: the first letter of `"Key"` must be uppercase.
+Iltimos, xatolardan saqlaning: `KeyZ`, `keyZ` emas. `event.code=="keyZ"` kabi tekshiruv ishlamaydi: `"Key"`ning birinchi harfi katta bo'lishi kerak.
 ```
 
-What if a key does not give any character? For instance, `key:Shift` or `key:F1` or others. For those keys, `event.key` is approximately the same as `event.code`:
+Agar tugma hech qanday belgi bermasa-chi? Masalan, `key:Shift` yoki `key:F1` yoki boshqalar. Bunday tugmalar uchun `event.key` taxminan `event.code` bilan bir xil:
 
-| Key          | `event.key` | `event.code` |
+| Tugma        | `event.key` | `event.code` |
 |--------------|-------------|--------------|
 | `key:F1`      |`F1`          |`F1`        |
 | `key:Backspace`      |`Backspace`          |`Backspace`        |
-| `key:Shift`|`Shift`          |`ShiftRight` or `ShiftLeft`        |
+| `key:Shift`|`Shift`          |`ShiftRight` yoki `ShiftLeft`        |
 
-Please note that `event.code` specifies exactly which key is pressed. For instance, most keyboards have two `key:Shift` keys: on the left and on the right side. The `event.code` tells us exactly which one was pressed, and `event.key` is responsible for the "meaning" of the key: what it is (a "Shift").
+Diqqat qiling, `event.code` aynan qaysi tugma bosilganini ko'rsatadi. Masalan, ko'pgina klaviaturalarda ikkita `key:Shift` tugmasi bor: chap va o'ng tomonda. `event.code` bizga aynan qaysi biri bosilganini aytadi, `event.key` esa tugmaning "ma'nosi" uchun javobgar: u nima ("Shift").
 
-Let's say, we want to handle a hotkey: `key:Ctrl+Z` (or `key:Cmd+Z` for Mac). Most text editors hook the "Undo" action on it. We can set a listener on `keydown` and check which key is pressed.
+Aytaylik, biz tezkor tugmani qayta ishlashni xohlaymiz: `key:Ctrl+Z` (yoki Mac uchun `key:Cmd+Z`). Ko'pgina matn muharrirlari unga "Bekor qilish" amalini bog'laydi. Biz `keydown` ga tinglovchi o'rnatishimiz va qaysi tugma bosilganini tekshirishimiz mumkin.
 
-There's a dilemma here: in such a listener, should we check the value of `event.key` or `event.code`?
+Bu yerda dilemma bor: bunday tinglovchida biz `event.key` yoki `event.code` qiymatini tekshirishimiz kerakmi?
 
-On one hand, the value of `event.key` is a character, it changes depending on the language. If the visitor has several languages in OS and switches between them, the same key gives different characters. So it makes sense to check `event.code`, it's always the same.
+Bir tomondan, `event.key` qiymati belgi bo'lib, u tilga qarab o'zgaradi. Agar tashrif buyuruvchi OS da bir nechta tilga ega bo'lib, ular o'rtasida almashsa, bir xil tugma turli belgilarni beradi. Shuning uchun `event.code` ni tekshirish mantiqiy, u doim bir xil.
 
-Like this:
+Bunday:
 
 ```js run
 document.addEventListener('keydown', function(event) {
   if (event.code == 'KeyZ' && (event.ctrlKey || event.metaKey)) {
-    alert('Undo!')
+    alert('Bekor qilish!')
   }
 });
 ```
 
-On the other hand, there's a problem with `event.code`. For different keyboard layouts, the same key may have different characters.
+Boshqa tomondan, `event.code` bilan muammo bor. Turli klaviatura joylashuvlari uchun bir xil tugmada turli belgilar bo'lishi mumkin.
 
-For example, here are US layout ("QWERTY") and German layout ("QWERTZ") under it (from Wikipedia):
+Masalan, bu yerda AQSh joylashuvi ("QWERTY") va uning ostida Nemis joylashuvi ("QWERTZ") (Vikipediyadan):
 
 ![](us-layout.svg)
 
 ![](german-layout.svg)
 
-For the same key, US layout has "Z", while German layout has "Y" (letters are swapped).
+Bir xil tugma uchun AQSh joylashuvida "Z" bor, Nemis joylashuvida esa "Y" (harflar almashtirilgan).
 
-Literally, `event.code` will equal `KeyZ` for people with German layout when they press `key:Y`.
+Tom ma'noda, Nemis joylashuviga ega odamlar `key:Y` ni bosganda `event.code` `KeyZ` ga teng bo'ladi.
 
-If we check `event.code == 'KeyZ'` in our code, then for people with German layout such test will pass when they press `key:Y`.
+Agar biz kodimizdagi `event.code == 'KeyZ'` ni tekshirsak, Nemis joylashuviga ega odamlar uchun bunday test `key:Y` ni bosganda o'tadi.
 
-That sounds really odd, but so it is. The [specification](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system) explicitly mentions such behavior.
+Bu haqiqatan ham g'alati eshitiladi, lekin shunday. [Spetsifikatsiya](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system) bunday xatti-harakatni aniq eslatadi.
 
-So, `event.code` may match a wrong character for unexpected layout. Same letters in different layouts may map to different physical keys, leading to different codes. Luckily, that happens only with several codes, e.g. `keyA`, `keyQ`, `keyZ` (as we've seen), and doesn't happen with special keys such as `Shift`. You can find the list in the [specification](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system).
+Shunday qilib, `event.code` kutilmagan joylashuv uchun noto'g'ri belgiga mos kelishi mumkin. Turli joylashuvlardagi bir xil harflar turli jismoniy tugmalarga mos kelishi mumkin, bu esa turli kodlarga olib keladi. Yaxshiyamki, bu faqat bir nechta kod bilan sodir bo'ladi, masalan `keyA`, `keyQ`, `keyZ` (ko'rganimizdek), va `Shift` kabi maxsus tugmalar bilan sodir bo'lmaydi. Ro'yxatni [spetsifikatsiya](https://www.w3.org/TR/uievents-code/#table-key-code-alphanumeric-writing-system)da topishingiz mumkin.
 
-To reliably track layout-dependent characters, `event.key` may be a better way.
+Joylashuvga bog'liq belgilarni ishonchli kuzatish uchun `event.key` yaxshiroq usul bo'lishi mumkin.
 
-On the other hand, `event.code` has the benefit of staying always the same, bound to the physical key location, even if the visitor changes languages. So hotkeys that rely on it work well even in case of a language switch.
+Boshqa tomondan, `event.code` har doim bir xil bo'lib, jismoniy tugma joylashuviga bog'langanligining afzalligi bor, hatto tashrif buyuruvchi tillarni o'zgartirsa ham. Shuning uchun unga tayanadigan tezkor tugmalar til almashtirilgan holatda ham yaxshi ishlaydi.
 
-Do we want to handle layout-dependant keys? Then `event.key` is the way to go.
+Biz joylashuvga bog'liq tugmalarni qayta ishlamoqchimizmi? U holda `event.key` yo'li.
 
-Or we want a hotkey to work even after a language switch? Then `event.code` may be better.
+Yoki tezkor tugma til almashtirilgandan keyin ham ishlashini xohlaymizmi? U holda `event.code` yaxshiroq bo'lishi mumkin.
 
-## Auto-repeat
+## Avtomatik takrorlash
 
-If a key is being pressed for a long enough time, it starts to "auto-repeat": the `keydown` triggers again and again, and then when it's released we finally get `keyup`. So it's kind of normal to have many `keydown` and a single `keyup`.
+Agar tugma etarlicha uzoq vaqt bosilsa, u "avtomatik takrorlash"ni boshlaydi: `keydown` qayta-qayta ishga tushadi, keyin qo'yib yuborilganda nihoyat `keyup` ni olamiz. Shuning uchun ko'plab `keydown` va bitta `keyup` bo'lishi odatiy holdir.
 
-For events triggered by auto-repeat, the event object has `event.repeat` property set to `true`.
+Avtomatik takrorlash tomonidan ishga tushirilgan hodisalar uchun hodisa obyekti `event.repeat` xossasini `true` ga o'rnatilgan.
 
+## Standart harakatlar
 
-## Default actions
+Standart harakatlar turli xil, chunki klaviatura tomonidan boshlanishi mumkin bo'lgan ko'plab mumkin bo'lgan narsalar mavjud.
 
-Default actions vary, as there are many possible things that may be initiated by the keyboard.
+Masalan:
 
-For instance:
+- Belgi ekranda paydo bo'ladi (eng aniq natija).
+- Belgi o'chiriladi (`key:Delete` tugmasi).
+- Sahifa aylantiriladi (`key:PageDown` tugmasi).
+- Brauzer "Sahifani saqlash" dialogini ochadi (`key:Ctrl+S`)
+-  ...va hokazo.
 
-- A character appears on the screen (the most obvious outcome).
-- A character is deleted (`key:Delete` key).
-- The page is scrolled (`key:PageDown` key).
-- The browser opens the "Save Page" dialog (`key:Ctrl+S`)
--  ...and so on.
+`keydown` da standart harakatning oldini olish ularning ko'pchiligini bekor qilishi mumkin, OS ga asoslangan maxsus tugmalar bundan mustasno. Masalan, Windows da `key:Alt+F4` joriy brauzer oynasini yopadi. Va JavaScript da standart harakatning oldini olish orqali buni to'xtatishning yo'li yo'q.
 
-Preventing the default action on `keydown` can cancel most of them, with the exception of OS-based special keys. For instance, on Windows `key:Alt+F4` closes the current browser window. And there's no way to stop it by preventing the default action in JavaScript.
-
-For instance, the `<input>` below expects a phone number, so it does not accept keys except digits, `+`, `()` or `-`:
+Masalan, quyidagi `<input>` telefon raqamini kutadi, shuning uchun raqamlar, `+`, `()` yoki `-` dan tashqari tugmalarni qabul qilmaydi:
 
 ```html autorun height=60 run
 <script>
@@ -142,13 +138,12 @@ function checkPhoneKey(key) {
   return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-';
 }
 </script>
-<input *!*onkeydown="return checkPhoneKey(event.key)"*/!* placeholder="Phone, please" type="tel">
+<input *!*onkeydown="return checkPhoneKey(event.key)"*/!* placeholder="Telefon, iltimos" type="tel">
 ```
 
-Please note that special keys, such as `key:Backspace`, `key:Left`, `key:Right`, `key:Ctrl+V`, do not work in the input. That's a side-effect of the strict filter `checkPhoneKey`.
+Diqqat qiling, `key:Backspace`, `key:Left`, `key:Right`, `key:Ctrl+V` kabi maxsus tugmalar kirishda ishlamaydi. Bu qat'iy filtr `checkPhoneKey` ning yon ta'siri.
 
-Let's relax it a little bit:
-
+Uni biroz yumshatamiz:
 
 ```html autorun height=60 run
 <script>
@@ -157,39 +152,39 @@ function checkPhoneKey(key) {
     key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
 }
 </script>
-<input onkeydown="return checkPhoneKey(event.key)" placeholder="Phone, please" type="tel">
+<input onkeydown="return checkPhoneKey(event.key)" placeholder="Telefon, iltimos" type="tel">
 ```
 
-Now arrows and deletion works well.
+Endi o'qlar va o'chirish yaxshi ishlaydi.
 
-...But we still can enter anything by using a mouse and right-click + Paste. So the filter is not 100% reliable. We can just let it be like that, because most of time it works. Or an alternative approach would be to track the `input` event -- it triggers after any modification. There we can check the new value and highlight/modify it when it's invalid.
+...Lekin biz hali ham sichqonchani ishlatib va o'ng bosish + Joylashtirish orqali har qanday narsani kiritishimiz mumkin. Shuning uchun filtr 100% ishonchli emas. Biz uni shunday qoldirishimiz mumkin, chunki ko'p hollarda ishlaydi. Yoki muqobil yondashuv `input` hodisasini kuzatish bo'ladi -- u har qanday o'zgarishdan keyin ishga tushadi. U yerda biz yangi qiymatni tekshirishimiz va noto'g'ri bo'lganda uni ajratib ko'rsatish/o'zgartirishimiz mumkin.
 
-## Legacy
+## Meros
 
-In the past, there was a `keypress` event, and also `keyCode`, `charCode`, `which` properties of the event object.
+O'tmishda `keypress` hodisasi va shuningdek hodisa obyektining `keyCode`, `charCode`, `which` xossalari mavjud edi.
 
-There were so many browser incompatibilities while working with them, that developers of the specification had no way, other than deprecating all of them and creating new, modern events (described above in this chapter). The old code still works, as browsers keep supporting them, but there's totally no need to use those any more.
+Ular bilan ishlashda juda ko'p brauzer nomosliklari bo'lgan, spetsifikatsiya ishlab chiquvchilari ularning barchasini eskirgan deb e'lon qilish va yangi, zamonaviy hodisalar (ushbu bobda yuqorida tasvirlangan) yaratishdan boshqa yo'li yo'q edi. Eski kod hali ham ishlaydi, chunki brauzerlar ularni qo'llab-quvvatlashda davom etadilar, lekin ularni ishlatishning hojati yo'q.
 
-## Mobile Keyboards
+## Mobil klaviaturalar
 
-When using virtual/mobile keyboards, formally known as IME (Input-Method Editor), the W3C standard states that a KeyboardEvent's [`e.keyCode` should be `229`](https://www.w3.org/TR/uievents/#determine-keydown-keyup-keyCode) and [`e.key` should be `"Unidentified"`](https://www.w3.org/TR/uievents-key/#key-attr-values).
+Virtual/mobil klaviaturalardan foydalanganda, rasmiy ravishda IME (Input-Method Editor) deb nomlanadi, W3C standarti KeyboardEvent ning [`e.keyCode` `229` bo'lishi](https://www.w3.org/TR/uievents/#determine-keydown-keyup-keyCode) va [`e.key` `"Unidentified"` bo'lishi](https://www.w3.org/TR/uievents-key/#key-attr-values) kerakligini bildiradi.
 
-While some of these keyboards might still use the right values for `e.key`, `e.code`, `e.keyCode`... when pressing certain keys such as arrows or backspace, there's no guarantee, so your keyboard logic might not always work on mobile devices.
+Bu klaviaturalarning ba'zilari hali ham o'qlar yoki backspace kabi ma'lum tugmalarni bosganda `e.key`, `e.code`, `e.keyCode` uchun to'g'ri qiymatlarni ishlatishi mumkin bo'lsa-da, kafolat yo'q, shuning uchun klaviatura mantiqingiz mobil qurilmalarda har doim ham ishlamasligi mumkin.
 
-## Summary
+## Xulosa
 
-Pressing a key always generates a keyboard event, be it symbol keys or special keys like `key:Shift` or `key:Ctrl` and so on. The only exception is `key:Fn` key that sometimes presents on a laptop keyboard. There's no keyboard event for it, because it's often implemented on lower level than OS.
+Tugmani bosish har doim klaviatura hodisasini hosil qiladi, xoh u belgi tugmalari bo'lsin yoki `key:Shift` yoki `key:Ctrl` kabi maxsus tugmalar. Yagona istisno ba'zan noutbuk klaviaturasida mavjud bo'lgan `key:Fn` tugmasi. Uning uchun klaviatura hodisasi yo'q, chunki u ko'pincha OS dan pastroq darajada amalga oshiriladi.
 
-Keyboard events:
+Klaviatura hodisalari:
 
-- `keydown` -- on pressing the key (auto-repeats if the key is pressed for long),
-- `keyup` -- on releasing the key.
+- `keydown` -- tugmani bosganda (tugma uzoq vaqt bosilsa avtomatik takrorlanadi),
+- `keyup` -- tugmani qo'yib yuborishda.
 
-Main keyboard event properties:
+Asosiy klaviatura hodisa xossalari:
 
-- `code` -- the "key code" (`"KeyA"`, `"ArrowLeft"` and so on), specific to the physical location of the key on keyboard.
-- `key` -- the character (`"A"`, `"a"` and so on), for non-character keys, such as `key:Esc`, usually has the same value  as `code`.
+- `code` -- "tugma kodi" (`"KeyA"`, `"ArrowLeft"` va h.k.), klaviaturadagi tugmaning jismoniy joylashuviga xos.
+- `key` -- belgi (`"A"`, `"a"` va h.k.), belgi bo'lmagan tugmalar uchun, masalan `key:Esc`, odatda `code` bilan bir xil qiymatga ega.
 
-In the past, keyboard events were sometimes used to track user input in form fields. That's not reliable, because the input can come from various sources. We have `input` and `change` events to handle any input (covered later in the chapter <info:events-change-input>). They trigger after any kind of input, including copy-pasting or speech recognition.
+O'tmishda klaviatura hodisalari ba'zan forma maydonlaridagi foydalanuvchi kirishini kuzatish uchun ishlatilgan. Bu ishonchli emas, chunki kirish turli manbalardan kelishi mumkin. Bizda har qanday kirishni qayta ishlash uchun `input` va `change` hodisalari mavjud (keyinroq <info:events-change-input> bobida ko'rib chiqiladi). Ular nusxa olish-joylashtirish yoki nutqni tanish kabi har qanday kirish turidan keyin ishga tushadi.
 
-We should use keyboard events when we really want keyboard. For example, to react on hotkeys or special keys.
+Haqiqatan ham klaviaturani xohlasak klaviatura hodisalarini ishlatishimiz kerak. Masalan, tezkor tugmalar yoki maxsus tugmalarga javob berish uchun.

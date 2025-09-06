@@ -1,15 +1,15 @@
-We need to find the beginning of the comment `match:<!--`, then everything till the end of `match:-->`.
+Sharhning boshini `match:<!--`, keyin esa `match:-->` oxirigacha hamma narsani topishimiz kerak.
 
-An acceptable variant is `pattern:<!--.*?-->` -- the lazy quantifier makes the dot stop right before `match:-->`. We also need to add flag `pattern:s` for the dot to include newlines.
+Qabul qilinadigan variant `pattern:<!--.*?-->` - dangasa kvantifikator nuqtani `match:-->` oldidan to'xtatadi. Shuningdek, nuqta yangi qatorlarni o'z ichiga olishi uchun `pattern:s` bayroqchasini qo'shishimiz kerak.
 
-Otherwise multiline comments won't be found:
+Aks holda ko'p qatorli sharhlar topilmaydi:
 
 ```js run
 let regexp = /<!--.*?-->/gs;
 
-let str = `... <!-- My -- comment
+let str = `... <!-- Mening - izohim
  test --> ..  <!----> ..
 `;
 
-alert( str.match(regexp) ); // '<!-- My -- comment \n test -->', '<!---->'
+alert(str.match(regexp)); // '<!-- Mening -- izohim \n test -->', '<!---->'
 ```

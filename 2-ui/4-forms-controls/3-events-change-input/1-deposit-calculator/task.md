@@ -1,21 +1,22 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Deposit calculator
+# Depozit kalkulyatori
 
-Create an interface that allows to enter a sum of bank deposit and percentage, then calculates how much it will be after given periods of time.
+Bank depoziti summasini va foizlarni kiritish imkonini beruvchi interfeys yarating, so'ngra berilgan vaqtdan keyin qancha bo'lishini hisoblab chiqadi.
 
-Here's the demo:
+Mana demo:
 
 [iframe src="solution" height="350" border="1"]
 
-Any input change should be processed immediately.
+Har qanday kirish o'zgarishi darhol qayta ishlanishi kerak.
 
-The formula is:
+Formula quyidagicha:
+
 ```js
-// initial: the initial money sum
-// interest: e.g. 0.05 means 5% per year
-// years: how many years to wait
+// boshlang'ich: boshlang'ich pul summasi
+// qiziqish: masalan. 0,05 yiliga 5% degani
+// yillar: necha yil kutish kerak
 let result = Math.round(initial * (1 + interest * years));
 ```

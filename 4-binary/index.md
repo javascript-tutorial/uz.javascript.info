@@ -1,3 +1,3 @@
-# Binary data, files
+# Binary ma'lumotlar, fayllar
 
-Working with binary data and files in JavaScript.
+JavaScript-da binar ma'lumotlar va fayllar bilan ishlash.

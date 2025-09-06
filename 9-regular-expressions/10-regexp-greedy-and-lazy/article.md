@@ -1,20 +1,20 @@
-# Greedy and lazy quantifiers
+# Ochko'z va dangasa miqdorchilar
 
-Quantifiers are very simple from the first sight, but in fact they can be tricky.
+Miqdorchilar birinchi qarashda juda oddiy ko'rinadi, lekin aslida ular murakkab bo'lishi mumkin.
 
-We should understand how the search works very well if we plan to look for something more complex than `pattern:/\d+/`.
+Agar biz `pattern:/\d+/` dan murakkabroq narsalarni qidirishni rejalashtirmoqchi bo'lsak, qidiruvning qanday ishlashini yaxshi tushunishimiz kerak.
 
-Let's take the following task as an example.
+Quyidagi vazifani misol sifatida olaylik.
 
-We have a text and need to replace all quotes `"..."` with guillemet marks: `«...»`. They are preferred for typography in many countries.
+Bizda matn bor va barcha qo'shtirnoqlar `"..."` ni guillemet belgilari bilan almashtirish kerak: `«...»`. Ular ko'plab mamlakatlarda tipografiya uchun afzalroq.
 
-For instance: `"Hello, world"` should become `«Hello, world»`. There exist other quotes, such as `„Witam, świat!”` (Polish) or `「你好，世界」` (Chinese), but for our task let's choose `«...»`.
+Masalan: `"Hello, world"` `«Hello, world»` ga aylanishi kerak. Boshqa qo'shtirnoqlar ham mavjud, masalan `„Witam, świat!"` (polyakcha) yoki `「你好，世界」` (xitoycha), lekin bizning vazifamiz uchun `«...»` ni tanlaymiz.
 
-The first thing to do is to locate quoted strings, and then we can replace them.
+Birinchi navbatda qo'shtirnoqlangan satrlarni topish, keyin ularni almashtirish kerak.
 
-A regular expression like `pattern:/".+"/g` (a quote, then something, then the other quote) may seem like a good fit, but it isn't!
+`pattern:/".+"/g` kabi doimiy ifoda (qo'shtirnoq, keyin biror narsa, keyin boshqa qo'shtirnoq) yaxshi ko'rinishi mumkin, lekin bunday emas!
 
-Let's try it:
+Sinab ko'raylik:
 
 ```js run
 let regexp = /".+"/g;
@@ -24,85 +24,85 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(regexp) ); // "witch" and her "broom"
 ```
 
-...We can see that it works not as intended!
+...Ko'ramizki, u mo'ljallanganidek ishlamaydi!
 
-Instead of finding two matches `match:"witch"` and `match:"broom"`, it finds one: `match:"witch" and her "broom"`.
+Ikkita moslik `match:"witch"` va `match:"broom"` ni topish o'rniga, bittasini topadi: `match:"witch" and her "broom"`.
 
-That can be described as "greediness is the cause of all evil".
+Buni "ochko'zlik barcha yovuzlikning sababi" deb ta'riflash mumkin.
 
-## Greedy search
+## Ochko'z qidiruv
 
-To find a match, the regular expression engine uses the following algorithm:
+Moslikni topish uchun doimiy ifoda dvigateli quyidagi algoritmdan foydalanadi:
 
-- For every position in the string
-    - Try to match the pattern at that position.
-    - If there's no match, go to the next position.
+- Satrdagi har bir pozitsiya uchun
+    - Shu pozitsiyada naqshni moslashtirishga harakat qiling.
+    - Agar moslik bo'lmasa, keyingi pozitsiyaga o'ting.
 
-These common words do not make it obvious why the regexp fails, so let's elaborate how the search works for the pattern `pattern:".+"`.
+Bu oddiy so'zlar regexp nima uchun muvaffaqiyatsiz ekanligini aniq qilmaydi, shuning uchun `pattern:".+"` naqshi uchun qidiruv qanday ishlashini batafsil ko'rib chiqaylik.
 
-1. The first pattern character is a quote `pattern:"`.
+1. Birinchi naqsh belgisi qo'shtirnoq `pattern:"`.
 
-    The regular expression engine tries to find it at the zero position of the source string `subject:a "witch" and her "broom" is one`, but there's `subject:a` there, so there's immediately no match.
+    Doimiy ifoda dvigateli uni manba satrining nol pozitsiyasida `subject:a "witch" and her "broom" is one` topishga harakat qiladi, lekin u yerda `subject:a` bor, shuning uchun darhol moslik yo'q.
 
-    Then it advances: goes to the next positions in the source string and tries to find the first character of the pattern there, fails again, and finally finds the quote at the 3rd position:
+    Keyin u oldinga siljiydi: manba satrining keyingi pozitsiyalariga o'tadi va u yerda naqshning birinchi belgisini topishga harakat qiladi, yana muvaffaqiyatsiz tugaydi va nihoyat 3-pozitsiyada qo'shtirnoqni topadi:
 
     ![](witch_greedy1.svg)
 
-2. The quote is detected, and then the engine tries to find a match for the rest of the pattern. It tries to see if the rest of the subject string conforms to `pattern:.+"`.
+2. Qo'shtirnoq aniqlanadi, keyin dvigatel naqshning qolgan qismiga mos kelishni topishga harakat qiladi. U manba satrining qolgan qismi `pattern:.+"` ga mos keladimi yoki yo'qligini tekshirishga harakat qiladi.
 
-    In our case the next pattern character is `pattern:.` (a dot). It denotes "any character except a newline", so the next string letter `match:'w'` fits:
+    Bizning holatimizda keyingi naqsh belgisi `pattern:.` (nuqta). U "yangi qatordan tashqari har qanday belgi"ni bildiradi, shuning uchun keyingi satr harfi `match:'w'` mos keladi:
 
     ![](witch_greedy2.svg)
 
-3. Then the dot repeats because of the quantifier `pattern:.+`. The regular expression engine adds to the match one character after another.
+3. Keyin nuqta `pattern:.+` miqdorchisi tufayli takrorlanadi. Doimiy ifoda dvigateli moslikka birin-ketin belgilarni qo'shadi.
 
-    ...Until when? All characters match the dot, so it only stops when it reaches the end of the string:
+    ...Qachongacha? Barcha belgilar nuqtaga mos keladi, shuning uchun u faqat satr oxiriga yetganda to'xtaydi:
 
     ![](witch_greedy3.svg)
 
-4. Now the engine finished repeating `pattern:.+` and tries to find the next character of the pattern. It's the quote `pattern:"`. But there's a problem: the string has finished, there are no more characters!
+4. Endi dvigatel `pattern:.+` ni takrorlashni tugatdi va naqshning keyingi belgisini topishga harakat qiladi. Bu qo'shtirnoq `pattern:"`. Lekin muammo bor: satr tugadi, boshqa belgilar yo'q!
 
-    The regular expression engine understands that it took too many `pattern:.+` and starts to *backtrack*.
+    Doimiy ifoda dvigateli haddan tashqari ko'p `pattern:.+` olganini tushunadi va *orqaga qaytishni* boshlaydi.
 
-    In other words, it shortens the match for the quantifier by one character:
+    Boshqacha qilib aytganda, u miqdorchi uchun moslikni bir belgi qisqartiradi:
 
     ![](witch_greedy4.svg)
 
-    Now it assumes that `pattern:.+` ends one character before the string end and tries to match the rest of the pattern from that position.
+    Endi u `pattern:.+` satr oxiridan bir belgi oldin tugaydi deb hisoblaydi va shu pozitsiyadan naqshning qolgan qismiga mos kelishga harakat qiladi.
 
-    If there were a quote there, then the search would end, but the last character is `subject:'e'`, so there's no match.
+    Agar u yerda qo'shtirnoq bo'lganida, qidiruv tugaydi, lekin oxirgi belgi `subject:'e'`, shuning uchun moslik yo'q.
 
-5. ...So the engine decreases the number of repetitions of `pattern:.+` by one more character:
+5. ...Shunday qilib, dvigatel `pattern:.+` ning takrorlanish sonini yana bir belgi kamaytiradi:
 
     ![](witch_greedy5.svg)
 
-    The quote `pattern:'"'` does not match `subject:'n'`.
+    Qo'shtirnoq `pattern:'"'` `subject:'n'` ga mos kelmaydi.
 
-6. The engine keep backtracking: it decreases the count of repetition for `pattern:'.'` until the rest of the pattern (in our case `pattern:'"'`) matches:
+6. Dvigatel orqaga qaytishni davom ettiradi: naqshning qolgan qismi (bizning holatimizda `pattern:'"'`) mos kelguncha `pattern:'.'` ning takrorlanish sonini kamaytiradi:
 
     ![](witch_greedy6.svg)
 
-7. The match is complete.
+7. Moslik tugallandi.
 
-8. So the first match is `match:"witch" and her "broom"`. If the regular expression has flag `pattern:g`, then the search will continue from where the first match ends. There are no more quotes in the rest of the string `subject:is one`, so no more results.
+8. Shunday qilib, birinchi moslik `match:"witch" and her "broom"`. Agar doimiy ifodada `pattern:g` bayrog'i bo'lsa, qidiruv birinchi moslik tugagan joydan davom etadi. Satrning qolgan qismida `subject:is one` boshqa qo'shtirnoqlar yo'q, shuning uchun boshqa natijalar yo'q.
 
-That's probably not what we expected, but that's how it works.
+Bu biz kutgan narsa emasligimiz mumkin, lekin u shunday ishlaydi.
 
-**In the greedy mode (by default) a quantified character is repeated as many times as possible.**
+**Ochko'z rejimda (sukut bo'yicha) miqdorli belgi imkon qadar ko'p marta takrorlanadi.**
 
-The regexp engine adds to the match as many characters as it can for `pattern:.+`, and then shortens that one by one, if the rest of the pattern doesn't match.
+Regexp dvigateli `pattern:.+` uchun imkon qadar ko'p belgilarni moslikka qo'shadi, keyin agar naqshning qolgan qismi mos kelmasa, uni birin-ketin qisqartiradi.
 
-For our task we want another thing. That's where a lazy mode can help.
+Bizning vazifamiz uchun biz boshqa narsani xohlaymiz. Bu yerda dangasa rejim yordam berishi mumkin.
 
-## Lazy mode
+## Dangasa rejim
 
-The lazy mode of quantifiers is an opposite to the greedy mode. It means: "repeat minimal number of times".
+Miqdorchilarning dangasa rejimi ochko'z rejimga qarama-qarshi. Bu degani: "minimal marta takrorlang".
 
-We can enable it by putting a question mark `pattern:'?'` after the quantifier, so that it becomes  `pattern:*?` or `pattern:+?` or even `pattern:??` for `pattern:'?'`.
+Biz uni miqdorchidan keyin savol belgisi `pattern:'?'` qo'yish orqali yoqishimiz mumkin, shunda u `pattern:*?` yoki `pattern:+?` yoki hatto `pattern:?` uchun `pattern:??` bo'ladi.
 
-To make things clear: usually a question mark `pattern:?` is a quantifier by itself (zero or one), but if added *after another quantifier (or even itself)* it gets another meaning -- it switches the matching mode from greedy to lazy.
+Aniq bo'lishi uchun: odatda savol belgisi `pattern:?` o'zi miqdorchi (nol yoki bir), lekin agar *boshqa miqdorchidan keyin (yoki hatto o'zidan) qo'shilsa* u boshqa ma'no oladi -- u moslashtirish rejimini ochko'zdan dangasaga o'zgartiradi.
 
-The regexp `pattern:/".+?"/g` works as intended: it finds `match:"witch"` and `match:"broom"`:
+`pattern:/".+?"/g` regexp mo'ljallanganidek ishlaydi: u `match:"witch"` va `match:"broom"` ni topadi:
 
 ```js run
 let regexp = /".+?"/g;
@@ -112,67 +112,69 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(regexp) ); // "witch", "broom"
 ```
 
-To clearly understand the change, let's trace the search step by step.
+O'zgarishni aniq tushunish uchun qidiruvni qadam-baqadam kuzatib boraylik.
 
-1. The first step is the same: it finds the pattern start `pattern:'"'` at the 3rd position:
+1. Birinchi qadam bir xil: u 3-pozitsiyada naqsh boshini `pattern:'"'` topadi:
 
     ![](witch_greedy1.svg)
 
-2. The next step is also similar: the engine finds a match for the dot `pattern:'.'`:
+2. Keyingi qadam ham o'xshash: dvigatel nuqta `pattern:'.'` uchun moslik topadi:
 
     ![](witch_greedy2.svg)
 
-3. And now the search goes differently. Because we have a lazy mode for `pattern:+?`, the engine doesn't try to match a dot one more time, but stops and tries to match the rest of the pattern  `pattern:'"'` right now:
+3. Va endi qidiruv boshqacha ketadi. Chunki bizda `pattern:+?` uchun dangasa rejim bor, dvigatel nuqtani yana bir marta moslashtirishga harakat qilmaydi, balki to'xtaydi va naqshning qolgan qismi `pattern:'"'` ni hoziroq moslashtirishga harakat qiladi:
 
     ![](witch_lazy3.svg)
 
-    If there were a quote there, then the search would end, but there's `'i'`, so there's no match.
-4. Then the regular expression engine increases the number of repetitions for the dot and tries one more time:
+    Agar u yerda qo'shtirnoq bo'lganida, qidiruv tugaydi, lekin `'i'` bor, shuning uchun moslik yo'q.
+
+4. Keyin doimiy ifoda dvigateli nuqtaning takrorlanish sonini oshiradi va yana bir marta harakat qiladi:
 
     ![](witch_lazy4.svg)
 
-    Failure again. Then the number of repetitions is increased again and again...
-5. ...Till the match for the rest of the pattern is found:
+    Yana muvaffaqiyatsizlik. Keyin takrorlanish soni yana va yana oshiriladi...
+
+5. ...Naqshning qolgan qismi uchun moslik topilguncha:
 
     ![](witch_lazy5.svg)
 
-6. The next search starts from the end of the current match and yield one more result:
+6. Keyingi qidiruv joriy moslikning oxiridan boshlanadi va yana bir natija beradi:
 
     ![](witch_lazy6.svg)
 
-In this example we saw how the lazy mode works for `pattern:+?`. Quantifiers `pattern:*?` and `pattern:??` work the similar way -- the regexp engine increases the number of repetitions only if the rest of the pattern can't match on the given position.
+Bu misolda biz `pattern:+?` uchun dangasa rejim qanday ishlashini ko'rdik. `pattern:*?` va `pattern:??` miqdorchilar ham xuddi shunday ishlaydi -- regexp dvigateli faqat naqshning qolgan qismi berilgan pozitsiyada mos kelmasa, takrorlanish sonini oshiradi.
 
-**Laziness is only enabled for the quantifier with `?`.**
+**Dangasalik faqat `?` bilan miqdorchi uchun yoqiladi.**
 
-Other quantifiers remain greedy.
+Boshqa miqdorchilar ochko'z bo'lib qoladi.
 
-For instance:
+Masalan:
 
 ```js run
 alert( "123 456".match(/\d+ \d+?/) ); // 123 4
 ```
 
-1. The pattern `pattern:\d+` tries to match as many digits as it can (greedy mode), so it finds  `match:123` and stops, because the next character is a space `pattern:' '`.
-2. Then there's a space in the pattern, it matches.
-3. Then there's `pattern:\d+?`. The quantifier is in lazy mode, so it finds one digit `match:4` and tries to check if the rest of the pattern matches from there.
+1. `pattern:\d+` naqshi imkon qadar ko'p raqamlarni moslashtirishga harakat qiladi (ochko'z rejim), shuning uchun u `match:123` ni topadi va to'xtaydi, chunki keyingi belgi bo'shliq `pattern:' '`.
+2. Keyin naqshda bo'shliq bor, u mos keladi.
+3. Keyin `pattern:\d+?` bor. Miqdorchi dangasa rejimda, shuning uchun u bitta raqam `match:4` ni topadi va naqshning qolgan qismi u yerdan mos keladimi deb tekshirishga harakat qiladi.
 
-    ...But there's nothing in the pattern after `pattern:\d+?`.
+    ...Lekin `pattern:\d+?` dan keyin naqshda hech narsa yo'q.
 
-    The lazy mode doesn't repeat anything without a need. The pattern finished, so we're done. We have a match `match:123 4`.
+    Dangasa rejim zaruratsiz hech narsani takrorlamaydi. Naqsh tugadi, shuning uchun biz tugatdik. Bizda `match:123 4` mosligi bor.
 
-```smart header="Optimizations"
-Modern regular expression engines can optimize internal algorithms to work faster. So they may work a bit differently from the described algorithm.
+```smart header="Optimallashtirish"
+Zamonaviy doimiy ifoda dvigatlari tezroq ishlash uchun ichki algoritmlarni optimallashtirishi mumkin. Shuning uchun ular tasvirlangan algoritmdan biroz farq qilishi mumkin.
 
-But to understand how regular expressions work and to build regular expressions, we don't need to know about that. They are only used internally to optimize things.
+Lekin doimiy ifodalar qanday ishlashini tushunish va doimiy ifodalar yaratish uchun biz buni bilishimiz shart emas. Ular faqat narsalarni optimallashtirish uchun ichki ravishda ishlatiladi.
 
-Complex regular expressions are hard to optimize, so the search may work exactly as described as well.
+Murakkab doimiy ifodalarni optimallashtirish qiyin, shuning uchun qidiruv aynan tasvirlanganidek ishlashi ham mumkin.
 ```
 
-## Alternative approach
+## Muqobil yondashuv
 
-With regexps, there's often more than one way to do the same thing.
+Regexplar bilan ko'pincha bir xil narsani qilishning bir nechta yo'li mavjud.
 
-In our case we can find quoted strings without lazy mode using the regexp `pattern:"[^"]+"`:
+Bizning holatimizda biz `pattern:"[^"]+"` regexpdan foydalanib dangasa rejimisiz qo'shtirnoqlangan satrlarni topishimiz mumkin:
 
 ```js run
 let regexp = /"[^"]+"/g;
@@ -182,120 +184,120 @@ let str = 'a "witch" and her "broom" is one';
 alert( str.match(regexp) ); // "witch", "broom"
 ```
 
-The regexp `pattern:"[^"]+"` gives correct results, because it looks for a quote `pattern:'"'` followed by one or more non-quotes `pattern:[^"]`, and then the closing quote.
+`pattern:"[^"]+"` regexp to'g'ri natijalar beradi, chunki u qo'shtirnoq `pattern:'"'` ni, keyin bir yoki ko'p qo'shtirnoq bo'lmagan `pattern:[^"]`, keyin yopuvchi qo'shtirnoqni qidiradi.
 
-When the regexp engine looks for `pattern:[^"]+` it stops the repetitions when it meets the closing quote, and we're done.
+Regexp dvigateli `pattern:[^"]+` ni qidirganda, yopuvchi qo'shtirnoqqa duch kelganda takrorlashni to'xtatadi va biz tugatamiz.
 
-Please note, that this logic does not replace lazy quantifiers!
+E'tibor bering, bu mantiq dangasa miqdorchilarni almashtirmaydi!
 
-It is just different. There are times when we need one or another.
+Bu shunchaki boshqacha. Ba'zida bizga u yoki bu kerak bo'ladigan vaqtlar bor.
 
-**Let's see an example where lazy quantifiers fail and this variant works right.**
+**Dangasa miqdorchilar muvaffaqiyatsiz bo'ladigan va bu variant to'g'ri ishlaydigan misolni ko'raylik.**
 
-For instance, we want to find links of the form `<a href="..." class="doc">`, with any `href`.
+Masalan, biz `<a href="..." class="doc">` shaklida havolalarni topmoqchimiz, har qanday `href` bilan.
 
-Which regular expression to use?
+Qaysi doimiy ifodadan foydalanish kerak?
 
-The first idea might be: `pattern:/<a href=".*" class="doc">/g`.
+Birinchi g'oya: `pattern:/<a href=".*" class="doc">/g`.
 
-Let's check it:
+Tekshirib ko'raylik:
 ```js run
 let str = '...<a href="link" class="doc">...';
 let regexp = /<a href=".*" class="doc">/g;
 
-// Works!
+// Ishlaydi!
 alert( str.match(regexp) ); // <a href="link" class="doc">
 ```
 
-It worked. But let's see what happens if there are many links in the text?
+Bu ishladi. Lekin matnda ko'plab havolalar bo'lsa nima bo'ladi?
 
 ```js run
 let str = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
 let regexp = /<a href=".*" class="doc">/g;
 
-// Whoops! Two links in one match!
+// Voy! Bitta moslikda ikkita havola!
 alert( str.match(regexp) ); // <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
-Now the result is wrong for the same reason as our "witches" example. The quantifier `pattern:.*` took too many characters.
+Endi natija bizning "jodugarlar" misolidagi kabi sabab tufayli noto'g'ri. `pattern:.*` miqdorchisi haddan tashqari ko'p belgilarni oldi.
 
-The match looks like this:
+Moslik quyidagicha ko'rinadi:
 
 ```html
 <a href="....................................." class="doc">
 <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
-Let's modify the pattern by making the quantifier `pattern:.*?` lazy:
+`pattern:.*?` miqdorchisini dangasa qilish orqali naqshni o'zgartiraylik:
 
 ```js run
 let str = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
 let regexp = /<a href=".*?" class="doc">/g;
 
-// Works!
+// Ishlaydi!
 alert( str.match(regexp) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
 ```
 
-Now it seems to work, there are two matches:
+Endi u ishlayotganga o'xshaydi, ikkita moslik bor:
 
 ```html
 <a href="....." class="doc">    <a href="....." class="doc">
 <a href="link1" class="doc">... <a href="link2" class="doc">
 ```
 
-...But let's test it on one more text input:
+...Lekin boshqa matn kiritishda sinab ko'raylik:
 
 ```js run
 let str = '...<a href="link1" class="wrong">... <p style="" class="doc">...';
 let regexp = /<a href=".*?" class="doc">/g;
 
-// Wrong match!
+// Noto'g'ri moslik!
 alert( str.match(regexp) ); // <a href="link1" class="wrong">... <p style="" class="doc">
 ```
 
-Now it fails. The match includes not just a link, but also a lot of text after it, including `<p...>`.
+Endi u muvaffaqiyatsiz. Moslik nafaqat havolani, balki undan keyingi ko'plab matnni ham, `<p...>` ni ham o'z ichiga oladi.
 
-Why?
+Nega?
 
-That's what's going on:
+Nima bo'layotgani:
 
-1. First the regexp finds a link start `match:<a href="`.
-2. Then it looks for `pattern:.*?`: takes one character (lazily!), check if there's a match for `pattern:" class="doc">` (none).
-3. Then takes another character into `pattern:.*?`, and so on... until it finally reaches `match:" class="doc">`.
+1. Birinchi regexp havola boshini topadi `match:<a href="`.
+2. Keyin u `pattern:.*?` ni qidiradi: bitta belgini oladi (dangasa!), `pattern:" class="doc">` uchun moslik bormi deb tekshiradi (yo'q).
+3. Keyin `pattern:.*?` ga yana bir belgini oladi va hokazo... nihoyat `match:" class="doc">` ga yetguncha.
 
-But the problem is: that's already beyond the link `<a...>`, in another tag `<p>`. Not what we want.
+Lekin muammo shundaki: bu allaqachon `<a...>` havolasidan tashqarida, boshqa `<p>` tegida. Biz xohlagan narsa emas.
 
-Here's the picture of the match aligned with the text:
+Mana matn bilan tekislangan moslikning tasviri:
 
 ```html
 <a href="..................................." class="doc">
 <a href="link1" class="wrong">... <p style="" class="doc">
 ```
 
-So, we need the pattern to look for `<a href="...something..." class="doc">`, but both greedy and lazy variants have problems.
+Shunday qilib, bizga `<a href="...biror narsa..." class="doc">` ni qidiradigan naqsh kerak, lekin ochko'z ham, dangasa ham variantlarda muammolar bor.
 
-The correct variant can be: `pattern:href="[^"]*"`. It will take all characters inside the `href` attribute till the nearest quote, just what we need.
+To'g'ri variant: `pattern:href="[^"]*"` bo'lishi mumkin. U `href` atributi ichidagi barcha belgilarni eng yaqin qo'shtirnoqgacha oladi, aynan bizga kerak bo'lgan narsa.
 
-A working example:
+Ishlaydigan misol:
 
 ```js run
 let str1 = '...<a href="link1" class="wrong">... <p style="" class="doc">...';
 let str2 = '...<a href="link1" class="doc">... <a href="link2" class="doc">...';
 let regexp = /<a href="[^"]*" class="doc">/g;
 
-// Works!
-alert( str1.match(regexp) ); // null, no matches, that's correct
+// Ishlaydi!
+alert( str1.match(regexp) ); // null, moslik yo'q, bu to'g'ri
 alert( str2.match(regexp) ); // <a href="link1" class="doc">, <a href="link2" class="doc">
 ```
 
-## Summary
+## Xulosa
 
-Quantifiers have two modes of work:
+Miqdorchilarning ikkita ish rejimi bor:
 
-Greedy
-: By default the regular expression engine tries to repeat the quantified character as many times as possible. For instance, `pattern:\d+` consumes all possible digits. When it becomes impossible to consume more (no more digits or string end), then it continues to match the rest of the pattern. If there's no match then it decreases the number of repetitions (backtracks) and tries again.
+Ochko'z
+: Sukut bo'yicha doimiy ifoda dvigateli miqdorli belgini imkon qadar ko'p marta takrorlashga harakat qiladi. Masalan, `pattern:\d+` barcha mumkin bo'lgan raqamlarni iste'mol qiladi. Ko'proq iste'mol qilish imkonsiz bo'lganda (boshqa raqamlar yo'q yoki satr oxiri), u naqshning qolgan qismiga mos kelishni davom ettiradi. Agar moslik bo'lmasa, u takrorlanish sonini kamaytiradi (orqaga qaytadi) va yana harakat qiladi.
 
-Lazy
-: Enabled by the question mark `pattern:?` after the quantifier. The regexp engine tries to match the rest of the pattern before each repetition of the quantified character.
+Dangasa
+: Miqdorchidan keyin savol belgisi `pattern:?` bilan yoqiladi. Regexp dvigateli miqdorli belgining har bir takrorlanishidan oldin naqshning qolgan qismiga mos kelishga harakat qiladi.
 
-As we've seen, the lazy mode is not a "panacea" from the greedy search. An alternative is a "fine-tuned" greedy search, with exclusions, as in the pattern `pattern:"[^"]+"`.
+Ko'rganimizdek, dangasa rejim ochko'z qidiruvdan "davo" emas. Muqobil - istisno bilan "nozik sozlangan" ochko'z qidiruv, `pattern:"[^"]+"` naqshidagidek.

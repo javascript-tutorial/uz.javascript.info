@@ -1,4 +1,4 @@
-The solution is actually pretty simple:
+Yechim aslida juda oddiy:
 
-- Use `position:absolute` in CSS instead of `position:fixed` for `.note`.
-- Use the function [getCoords()](info:coordinates#getCoords) from the chapter <info:coordinates> to get document-relative coordinates.
+- `.eslatma` uchun `position: fixed` o`rniga CSS-da `position:absolute` dan foydalaning.
+- Hujjatning nisbiy koordinatalarini olish uchun <info:coordinates> bobidagi [getCoords()](info:coordinates#getCoords) funksiyasidan foydalaning.

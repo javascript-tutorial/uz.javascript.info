@@ -1,4 +1,4 @@
-The solution, step by step:
+Bosqichma bosqich yechim:
 
 ```html run
 <select id="genres">
@@ -9,7 +9,7 @@ The solution, step by step:
 <script>
   // 1)
   let selectedOption = genres.options[genres.selectedIndex];
-  alert( selectedOption.value );
+  alert(selectedOption.value);
 
   // 2)
   let newOption = new Option("Classic", "classic");

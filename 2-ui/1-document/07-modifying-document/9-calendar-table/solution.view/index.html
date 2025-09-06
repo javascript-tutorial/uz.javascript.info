@@ -1,79 +1,77 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-<head>
-  <style>
-    table {
-      border-collapse: collapse;
-    }
-
-    td,
-    th {
-      border: 1px solid black;
-      padding: 3px;
-      text-align: center;
-    }
-
-    th {
-      font-weight: bold;
-      background-color: #E6E6E6;
-    }
-  </style>
-</head>
-
-<body>
-
-
-  <div id="calendar"></div>
-
-  <script>
-    function createCalendar(elem, year, month) {
-
-      let mon = month - 1; // months in JS are 0..11, not 1..12
-      let d = new Date(year, mon);
-
-      let table = '<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>';
-
-      // spaces for the first row
-      // from Monday till the first day of the month
-      // * * * 1  2  3  4
-      for (let i = 0; i < getDay(d); i++) {
-        table += '<td></td>';
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
       }
 
-      // <td> with actual dates
-      while (d.getMonth() == mon) {
-        table += '<td>' + d.getDate() + '</td>';
+      td,
+      th {
+        border: 1px solid black;
+        padding: 3px;
+        text-align: center;
+      }
 
-        if (getDay(d) % 7 == 6) { // sunday, last day of week - newline
-          table += '</tr><tr>';
+      th {
+        font-weight: bold;
+        background-color: #e6e6e6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="calendar"></div>
+
+    <script>
+      function createCalendar(elem, year, month) {
+        let mon = month - 1; // months in JS are 0..11, not 1..12
+        let d = new Date(year, mon);
+
+        let table =
+          "<table><tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>";
+
+        // birinchi qator uchun bo'sh joylar
+        // dushanbadan oyning birinchi kunigacha
+        // * * * 1  2  3  4
+        for (let i = 0; i < getDay(d); i++) {
+          table += "<td></td>";
         }
 
-        d.setDate(d.getDate() + 1);
-      }
+        // <td> haqiqiy sanalar bilan
+        while (d.getMonth() == mon) {
+          table += "<td>" + d.getDate() + "</td>";
 
-      // add spaces after last days of month for the last row
-      // 29 30 31 * * * *
-      if (getDay(d) != 0) {
-        for (let i = getDay(d); i < 7; i++) {
-          table += '<td></td>';
+          if (getDay(d) % 7 == 6) {
+            // yakshanba, haftaning oxirgi kuni - yangi qator
+            table += "</tr><tr>";
+          }
+
+          d.setDate(d.getDate() + 1);
         }
+
+        // oxirgi qator uchun oyning oxirgi kunlaridan keyin bo'sh joylar qo'shing
+        // 29 30 31 * * * *
+        if (getDay(d) != 0) {
+          for (let i = getDay(d); i < 7; i++) {
+            table += "<td></td>";
+          }
+        }
+
+        // stolni yoping
+        table += "</tr></table>";
+
+        elem.innerHTML = table;
       }
 
-      // close the table
-      table += '</tr></table>';
+      function getDay(date) {
+        // 0 dan (dushanba) 6 gacha (yakshanba) kun raqamini oling
+        let day = date.getDay();
+        if (day == 0) day = 7; // yakshanbani (0) oxirgi kun qiling
+        return day - 1;
+      }
 
-      elem.innerHTML = table;
-    }
-
-    function getDay(date) { // get day number from 0 (monday) to 6 (sunday)
-      let day = date.getDay();
-      if (day == 0) day = 7; // make Sunday (0) the last day
-      return day - 1;
-    }
-
-    createCalendar(calendar, 2012, 9);
-  </script>
-
-</body>
+      createCalendar(calendar, 2012, 9);
+    </script>
+  </body>
 </html>

@@ -1,6 +1,6 @@
-Differences:
+Farqlar:
 
-1. `clientWidth` is numeric, while `getComputedStyle(elem).width` returns a string with `px` at the end.
-2. `getComputedStyle` may return non-numeric width like `"auto"` for an inline element.
-3. `clientWidth` is the inner content area of the element plus paddings, while CSS width (with standard `box-sizing`) is the inner content area *without paddings*.
-4. If there's a scrollbar and the browser reserves the space for it, some browser substract that space from CSS width (cause it's not available for content any more), and some do not. The `clientWidth` property is always the same: scrollbar size is substracted if reserved.
+1. `clientWidth` sonli, `getComputedStyle(elem).width` esa oxirida `px` bo`lgan qatorni qaytaradi.
+2. `getComputedStyle` inline element uchun `auto` kabi raqamli bo`lmagan kenglikni qaytarishi mumkin.
+3. `clientWidth` elementning ichki kontent maydoni va qo'shimchalar, CSS kengligi (standart `box-sizing` bilan) esa _to'ldirgichsiz_ ichki kontent maydonidir.
+4. Agar aylantirish paneli mavjud bo'lsa va brauzer uning uchun bo'sh joy ajratsa, ba'zi brauzerlar ushbu bo'sh joyni CSS kengligidan ajratadi (chunki u endi kontent uchun mavjud emas), ba'zilari esa yo'q. `clientWidth` xususiyati har doim bir xil bo'ladi: agar zaxiralangan bo'lsa, aylantirish paneli o'lchami olib tashlanadi.

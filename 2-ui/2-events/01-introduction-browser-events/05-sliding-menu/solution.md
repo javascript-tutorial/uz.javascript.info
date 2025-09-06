@@ -1,47 +1,46 @@
-
 # HTML/CSS
-First let's create HTML/CSS.
+Avval HTML/CSS yarataylik.
 
-A menu is a standalone graphical component on the page, so it's better to put it into a single DOM element.
+Menyu sahifada mustaqil grafik komponent bo'lgani uchun uni bitta DOM elementiga joylashtirish yaxshiroq.
 
-A list of menu items can be laid out as a list `ul/li`.
+Menyu elementlari ro'yxati `ul/li` ro'yxat sifatida joylashtirilishi mumkin.
 
-Here's the example structure:
+Mana misol tuzilma:
 
 ```html
 <div class="menu">
-  <span class="title">Sweeties (click me)!</span>
+  <span class="title">Shirinliklar (menga bosing)!</span>
   <ul>
-    <li>Cake</li>
+    <li>Tort</li>
     <li>Donut</li>
-    <li>Honey</li>
+    <li>Asal</li>
   </ul>
 </div>
 ```
 
-We use `<span>` for the title, because `<div>` has an implicit `display:block` on it, and it will occupy 100% of the horizontal width.
+Biz sarlavha uchun `<span>` dan foydalanamiz, chunki `<div>` da yashirin `display:block` bor va u gorizontal kenglikning 100% ini egallaydi.
 
-Like this:
-
-```html autorun height=50
-<div style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</div>
-```
-
-So if we set `onclick` on it, then it will catch clicks to the right of the text.
-
-As `<span>` has an implicit `display: inline`, it occupies exactly enough place to fit all the text:
+Mana shunday:
 
 ```html autorun height=50
-<span style="border: solid red 1px" onclick="alert(1)">Sweeties (click me)!</span>
+<div style="border: solid red 1px" onclick="alert(1)">Shirinliklar (menga bosing)!</div>
 ```
 
-# Toggling the menu
+Shuning uchun agar biz unga `onclick` o'rnatsak, u matn o'ng tomonidagi bosilishlarni ushlaydi.
 
-Toggling the menu should change the arrow and show/hide the menu list.
+`<span>` yashirin `display: inline` ga ega bo'lgani uchun, u barcha matnni sig'dirish uchun aynan yetarli joy egallaydi:
 
-All these changes are perfectly handled by CSS. In JavaScript we should label the current state of the menu by adding/removing the class `.open`.
+```html autorun height=50
+<span style="border: solid red 1px" onclick="alert(1)">Shirinliklar (menga bosing)!</span>
+```
 
-Without it, the menu will be closed:
+# Menyuni almashtirish
+
+Menyuni almashtirish o'qni o'zgartirishi va menyu ro'yxatini ko'rsatishi/yashirishi kerak.
+
+Bu barcha o'zgarishlar CSS tomonidan mukammal tarzda boshqariladi. JavaScript da biz `.open` sinfini qo'shish/olib tashlash orqali menyuni joriy holatini belgilashimiz kerak.
+
+Busiz menyu yopiq bo'ladi:
 
 ```css
 .menu ul {
@@ -58,7 +57,7 @@ Without it, the menu will be closed:
 }
 ```
 
-...And with `.open` the arrow changes and the list shows up:
+...Va `.open` bilan o'q o'zgaradi va ro'yxat ko'rinadi:
 
 ```css
 .menu.open .title::before {
@@ -69,3 +68,69 @@ Without it, the menu will be closed:
   display: block;
 }
 ```
+
+## To'liq ishlayotgan misol
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .menu {
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+    
+    .menu ul {
+      margin: 0;
+      list-style: none;
+      padding-left: 20px;
+      display: none;
+    }
+    
+    .menu .title::before {
+      content: '▶ ';
+      font-size: 80%;
+      color: green;
+    }
+    
+    .menu.open .title::before {
+      content: '▼ ';
+    }
+    
+    .menu.open ul {
+      display: block;
+    }
+    
+    .menu li {
+      padding: 2px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu" id="menu">
+    <span class="title">Shirinliklar (menga bosing)!</span>
+    <ul>
+      <li>Tort</li>
+      <li>Donut</li>
+      <li>Asal</li>
+    </ul>
+  </div>
+
+  <script>
+    document.getElementById('menu').addEventListener('click', function() {
+      this.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>
+```
+
+## Asosiy tushunchalar:
+
+1. **HTML tuzilma**: `<div>` konteyner, `<span>` sarlavha, `<ul>/<li>` ro'yxat elementlari
+2. **CSS holatlar**: `.open` sinfi menyu holatini boshqaradi
+3. **JavaScript interaktivlik**: `classList.toggle()` orqali sinfni qo'shish/olib tashlash
+4. **Vizual ko'rsatkichlar**: O'qlar (▶ yopiq, ▼ ochiq) menyuni holati haqida ma'lumot beradi
+
+Bu yondashuv CSS animatsiyalari va turli xil stil effektlari bilan kengaytirilishi mumkin.

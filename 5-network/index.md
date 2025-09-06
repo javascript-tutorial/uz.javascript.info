@@ -1,2 +1,1 @@
-
-# Network requests
+# Tarmoq so'rovlari

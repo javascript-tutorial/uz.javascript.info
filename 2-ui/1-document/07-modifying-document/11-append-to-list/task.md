@@ -2,9 +2,9 @@ importance: 5
 
 ---
 
-# Insert the HTML in the list
+# Ro'yxatga HTMLni kiriting
 
-Write the code to insert `<li>2</li><li>3</li>` between two `<li>` here:
+Ikki `<li>` orasiga `<li>2</li><li>3</li>` kiritish uchun kodni bu yerga yozing:
 
 ```html
 <ul id="ul">

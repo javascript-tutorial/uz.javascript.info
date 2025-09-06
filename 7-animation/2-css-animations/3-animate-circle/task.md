@@ -1,16 +1,16 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Animated circle
+# Animatsion doira
 
-Create a function `showCircle(cx, cy, radius)` that shows an animated growing circle.
+Animatsiyalangan o'sib borayotgan doirani ko'rsatadigan "showCircle(cx, cy, radius)" funksiyasini yarating.
 
-- `cx,cy` are window-relative coordinates of the center of the circle,
-- `radius` is the radius of the circle.
+- `cx,cy` aylana markazining oynaga nisbiy koordinatalari
+- `radius` aylana radiusi.
 
-Click the button below to see how it should look like:
+Qanday ko'rinishini ko'rish uchun quyidagi tugmani bosing:
 
 [iframe src="solution" height=260]
 
-The source document has an example of a circle with right styles, so the task is precisely to do the animation right.
+Manba hujjatida to'g'ri uslublarga ega bo'lgan doira misoli bor, shuning uchun vazifa animatsiyani to'g'ri bajarishdir.

@@ -1,31 +1,27 @@
-importance: 5
+# "Aqlli" tooltip
 
----
+Faqat tashrif buyuruvchi sichqonchani elementga *olib kelganda* ko'rsatiladigan, lekin *orqali o'tkazganda* ko'rsatilmaydigan tooltip funksiyasini yozing.
 
-# "Smart" tooltip
+Boshqacha qilib aytganda, agar tashrif buyuruvchi sichqonchani elementga olib kelib, u yerda to'xtatsa -- tooltipni ko'rsating. Va agar ular shunchaki sichqonchani orqali o'tkazgan bo'lsa, kerak emas, kim qo'shimcha miltillashni xohlaydi?
 
-Write a function that shows a tooltip over an element only if the visitor moves the mouse *to it*, but not *through it*.
+Texnik jihatdan, biz element ustida sichqoncha tezligini o'lchashimiz mumkin va agar u sekin bo'lsa, u "element ustiga kelgan" deb hisoblaymiz va tooltipni ko'rsatamiz, agar tez bo'lsa -- uni e'tiborsiz qoldiramiz.
 
-In other words, if the visitor moves the mouse to the element and stops there -- show the tooltip. And if they just moved the mouse through, then no need, who wants extra blinking?
+Buning uchun universal obyekt `new HoverIntent(options)` yarating.
 
-Technically, we can measure the mouse speed over the element, and if it's slow then we assume that it comes "over the element" and show the tooltip, if it's fast -- then we ignore it.
+Uning `options` lari:
+- `elem` -- kuzatish uchun element.
+- `over` -- agar sichqoncha elementga kelgan bo'lsa chaqiriladigan funksiya: ya'ni u sekin harakat qiladi yoki uning ustida to'xtaydi.
+- `out` -- sichqoncha elementni tark etganda chaqiriladigan funksiya (`over` chaqirilgan bo'lsa).
 
-Make a universal object `new HoverIntent(options)` for it.
-
-Its `options`:
-- `elem` -- element to track.
-- `over` -- a function to call if the mouse came to the element: that is, it moves slowly or stopped over it.
-- `out` -- a function to call when the mouse leaves the element (if `over` was called).
-
-An example of using such object for the tooltip:
+Bunday obyektni tooltip uchun ishlatish misoli:
 
 ```js
-// a sample tooltip
+// tooltip namunasi
 let tooltip = document.createElement('div');
 tooltip.className = "tooltip";
 tooltip.innerHTML = "Tooltip";
 
-// the object will track mouse and call over/out
+// obyekt sichqonchani kuzatadi va over/out ni chaqiradi
 new HoverIntent({
   elem,
   over() {
@@ -39,10 +35,10 @@ new HoverIntent({
 });
 ```
 
-The demo:
+Demo:
 
 [iframe src="solution" height=140]
 
-If you move the mouse over the "clock" fast then nothing happens, and if you do it slow or stop on them, then there will be a tooltip.
+Agar siz sichqonchani "soat" ustiga tez harakat qildirsangiz, hech narsa bo'lmaydi, va agar uni sekin qilsangiz yoki ularda to'xtatsangiz, tooltip paydo bo'ladi.
 
-Please note: the tooltip doesn't "blink" when the cursor moves between the clock subelements.
+Diqqat qiling: kursor soat kichik elementlari orasida harakat qilganda tooltip "miltillamaydi".

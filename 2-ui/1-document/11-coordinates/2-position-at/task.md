@@ -1,18 +1,18 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Show a note near the element
+# Element yaqinidagi eslatmani ko'rsatish
 
-Create a function `positionAt(anchor, position, elem)` that positions `elem`, depending on `position` near `anchor` element.
+Anchor elementi yaqinidagi `pozitsiyaga` qarab `elem` joylashtiradigan `positionAt(anchor, position, element)` funksiyasini yarating.
 
-The `position` must be a string with any one of 3 values:
-- `"top"` - position `elem` right above `anchor`
-- `"right"` - position `elem` immediately at the right of `anchor`
-- `"bottom"` - position `elem` right below `anchor`
+`Pozitsiya` 3 ta qiymatdan biriga ega bo'lgan satr bo'lishi kerak:
+- `"top"` - pozitsiyada `elem` `anchor` tepasiga joylashadi
+- `"right"` - pozitsiyada `elem` `anchor`ning o'ng tomonida joylashadi 
+- `"bottom"` - pozitsiyada `elem` `anchor` ostida joylashadi
 
-It's used inside function `showNote(anchor, position, html)`, provided in the task source code, that creates a "note" element with given `html` and shows it at the given `position` near the `anchor`.
+U topshiriqning manba kodida taqdim etilgan `showNote(anchor, position, html)` funksiyasi ichida qoʻllaniladi, u berilgan `html` bilan `eslatma` elementini yaratadi va uni `anchor` yonidagi berilgan `pozitsiya`da koʻrsatadi.
 
-Here's the demo of notes:
+Eslatmalar demosi:
 
 [iframe src="solution" height="350" border="1" link]

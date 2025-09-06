@@ -6,7 +6,7 @@ body {
   position: relative;
   width: 398px;
   padding: 10px 40px;
-  border: 1px solid #CCC;
+  border: 1px solid #ccc;
   border-radius: 15px;
   background: #eee;
 }
@@ -14,7 +14,7 @@ body {
 .carousel img {
   width: 130px;
   height: 130px;
-  /* make it block to remove space around images */
+  /* tasvirlar atrofidagi bo'sh joyni olib tashlash uchun uni blokirovka qiling */
   display: block;
 }
 
@@ -60,7 +60,7 @@ body {
   padding: 0;
   list-style: none;
   transition: margin-left 250ms;
-  /* remove white-space between inline-block'ed li */
+  /* inline-block'ed li orasidagi bo'sh joyni olib tashlang */
   /* http://davidwalsh.name/remove-whitespace-inline-block */
   font-size: 0;
 }

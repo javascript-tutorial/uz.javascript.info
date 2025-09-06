@@ -1,16 +1,16 @@
-# CSS-animations
+# CSS animatsiyalari
 
-CSS animations make it possible to do simple animations without JavaScript at all.
+CSS animatsiyalari JavaScript'siz oddiy animatsiyalar yaratish imkonini beradi.
 
-JavaScript can be used to control CSS animations and make them even better, with little code.
+JavaScript CSS animatsiyalarini boshqarish va ularni ozgina kod bilan yanada yaxshilash uchun ishlatilishi mumkin.
 
-## CSS transitions [#css-transition]
+## CSS o'tishlar [#css-transition]
 
-The idea of CSS transitions is simple. We describe a property and how its changes should be animated. When the property changes, the browser paints the animation.
+CSS o'tishlari g'oyasi oddiy. Biz xususiyatni va uning o'zgarishlarini qanday animatsiya qilish kerakligini tavsiflaymiz. Xususiyat o'zgartirilganda, brauzer animatsiyani chizadi.
 
-That is, all we need is to change the property, and the fluid transition will be done by the browser.
+Ya'ni, bizga kerak bo'lgan narsa - xususiyatni o'zgartirish, suyuq o'tish esa brauzer tomonidan amalga oshiriladi.
 
-For instance, the CSS below animates changes of `background-color` for 3 seconds:
+Masalan, quyidagi CSS `background-color` o'zgarishlarini 3 soniya davomida animatsiya qiladi:
 
 ```css
 .animated {
@@ -19,12 +19,12 @@ For instance, the CSS below animates changes of `background-color` for 3 seconds
 }
 ```
 
-Now if an element has `.animated` class, any change of `background-color` is animated during 3 seconds.
+Endi agar element `.animated` klassiga ega bo'lsa, `background-color` ning har qanday o'zgarishi 3 soniya davomida animatsiya qilinadi.
 
-Click the button below to animate the background:
+Fonga animatsiya berish uchun quyidagi tugmani bosing:
 
 ```html run autorun height=60
-<button id="color">Click me</button>
+<button id="color">Meni bosing</button>
 
 <style>
   #color {
@@ -40,19 +40,19 @@ Click the button below to animate the background:
 </script>
 ```
 
-There are 4 properties to describe CSS transitions:
+CSS o'tishlarini tavsiflash uchun 4 ta xususiyat mavjud:
 
 - `transition-property`
 - `transition-duration`
 - `transition-timing-function`
 - `transition-delay`
 
-We'll cover them in a moment, for now let's note that the common `transition` property allows declaring them together in the order: `property duration timing-function delay`, as well as animating multiple properties at once.
+Ularni bir zumda ko'rib chiqamiz, hozircha umumiy `transition` xususiyati ularni birgalikda `property duration timing-function delay` tartibida e'lon qilish imkonini beradi va bir vaqtning o'zida bir nechta xususiyatni animatsiya qilish imkonini beradi.
 
-For instance, this button animates both `color` and `font-size`:
+Masalan, bu tugma ham `color`, ham `font-size`ni animatsiya qiladi:
 
 ```html run height=80 autorun no-beautify
-<button id="growing">Click me</button>
+<button id="growing">Meni bosing</button>
 
 <style>
 #growing {
@@ -70,29 +70,29 @@ growing.onclick = function() {
 </script>
 ```
 
-Now, let's cover animation properties one by one.
+Endi keling, animatsiya xususiyatlarini birma-bir ko'rib chiqamiz.
 
 ## transition-property
 
-In `transition-property`, we write a list of properties to animate, for instance: `left`, `margin-left`, `height`, `color`. Or we could write `all`, which means "animate all properties".
+`transition-property`da biz animatsiya qilinadigan xususiyatlar ro'yxatini yozamiz, masalan: `left`, `margin-left`, `height`, `color`. Yoki biz `all` yozishimiz mumkin, bu "barcha xususiyatlarni animatsiya qil" degani.
 
-Do note that, there are properties which can not be animated. However, [most of the generally used properties are animatable](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
+Shuni ta'kidlaymizki, animatsiya qilinmaydigan xususiyatlar mavjud. Ammo, [ko'pgina odatda ishlatiladigan xususiyatlar animatsiya qilish mumkin](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
 
 ## transition-duration
 
-In `transition-duration` we can specify how long the animation should take. The time should be in [CSS time format](http://www.w3.org/TR/css3-values/#time): in seconds `s` or milliseconds `ms`.
+`transition-duration`da biz animatsiya qancha davom etishini belgilashimiz mumkin. Vaqt [CSS vaqt formatida](http://www.w3.org/TR/css3-values/#time) bo'lishi kerak: soniyalarda `s` yoki millisioniyalarda `ms`.
 
 ## transition-delay
 
-In `transition-delay` we can specify the delay *before* the animation. For instance, if `transition-delay` is `1s` and `transition-duration` is `2s`, then the animation starts 1 second after the property change and the total duration will be 2 seconds.
+`transition-delay`da biz animatsiya *oldidan* kechikishni belgilashimiz mumkin. Masalan, agar `transition-delay` `1s` va `transition-duration` `2s` bo'lsa, animatsiya xususiyat o'zgarishidan 1 soniya keyin boshlanadi va umumiy davomiyligi 2 soniya bo'ladi.
 
-Negative values are also possible. Then the animation is shown immediately, but the starting point of the animation will be after given value (time). For example, if `transition-delay` is `-1s` and `transition-duration` is `2s`, then animation starts from the halfway point and total duration will be 1 second. 
+Manfiy qiymatlar ham mumkin. Keyin animatsiya darhol ko'rsatiladi, lekin animatsiyaning boshlang'ich nuqtasi berilgan qiymatdan (vaqt) keyin bo'ladi. Masalan, agar `transition-delay` `-1s` va `transition-duration` `2s` bo'lsa, animatsiya yarim yo'ldan boshlanadi va umumiy davomiyligi 1 soniya bo'ladi.
 
-Here the animation shifts numbers from `0` to `9` using CSS `translate` property:
+Bu yerda animatsiya CSS `translate` xususiyatidan foydalanib raqamlarni `0`dan `9`gacha siljitadi:
 
 [codetabs src="digits"]
 
-The `transform` property is animated like this:
+`transform` xususiyati quyidagicha animatsiya qilinadi:
 
 ```css
 #stripe.animate {
@@ -102,25 +102,25 @@ The `transform` property is animated like this:
 }
 ```
 
-In the example above JavaScript adds the class `.animate` to the element -- and the animation starts:
+Yuqoridagi misolda JavaScript elementga `.animate` klassini qo'shadi -- va animatsiya boshlanadi:
 
 ```js
 stripe.classList.add('animate');
 ```
 
-We could also start it from somewhere in the middle of the transition, from an exact number, e.g. corresponding to the current second, using a negative `transition-delay`.
+Shuningdek, biz uni o'tishning o'rtasidan, aniq raqamdan, masalan, joriy soniyaga mos keluvchi, manfiy `transition-delay` yordamida boshlashimiz mumkin.
 
-Here if you click the digit -- it starts the animation from the current second:
+Bu yerda raqamni bossangiz -- u joriy soniyadan animatsiyani boshlaydi:
 
 [codetabs src="digits-negative-delay"]
 
-JavaScript does it with an extra line:
+JavaScript buni qo'shimcha satr bilan qiladi:
 
 ```js
 stripe.onclick = function() {
   let sec = new Date().getSeconds() % 10;
 *!*
-  // for instance, -3s here starts the animation from the 3rd second
+  // masalan, bu yerda -3s animatsiyani 3-soniyadan boshlaydi
   stripe.style.transitionDelay = '-' + sec + 's';
 */!*
   stripe.classList.add('animate');
@@ -129,60 +129,60 @@ stripe.onclick = function() {
 
 ## transition-timing-function
 
-The timing function describes how the animation process is distributed along its timeline. Will it start slowly and then go fast, or vice versa.
+Timing funksiyasi animatsiya jarayoni uning vaqt chizig'i bo'yicha qanday taqsimlanishini tavsiflaydi. U sekin boshlanib, keyin tez boradimi yoki aksincha.
 
-It appears to be the most complicated property at first. But it becomes very simple if we devote a bit time to it.
+Dastlab eng murakkab xususiyat bo'lib ko'rinadi. Lekin agar biz unga ozgina vaqt ajratsak, u juda oddiy bo'ladi.
 
-That property accepts two kinds of values: a Bezier curve or steps. Let's start with the curve, as it's used more often.
+Bu xususiyat ikki xil qiymatni qabul qiladi: Bezier egri chizig'i yoki qadamlar. Keling, egri chiziqdan boshlaylik, chunki u tez-tez ishlatiladi.
 
-### Bezier curve
+### Bezier egri chizig'i
 
-The timing function can be set as a [Bezier curve](/bezier-curve) with 4 control points that satisfy the conditions:
+Timing funksiyasi quyidagi shartlarni qondiradigan 4 ta nazorat nuqtasi bilan [Bezier egri chizig'i](/bezier-curve) sifatida o'rnatilishi mumkin:
 
-1. First control point: `(0,0)`.
-2. Last control point: `(1,1)`.
-3. For intermediate points, the values of `x` must be in the interval `0..1`, `y` can be anything.
+1. Birinchi nazorat nuqtasi: `(0,0)`.
+2. Oxirgi nazorat nuqtasi: `(1,1)`.
+3. Oraliq nuqtalar uchun `x` qiymatlari `0..1` intervalida bo'lishi kerak, `y` har qanday bo'lishi mumkin.
 
-The syntax for a Bezier curve in CSS: `cubic-bezier(x2, y2, x3, y3)`. Here we need to specify only 2nd and 3rd control points, because the 1st one is fixed to `(0,0)` and the 4th one is `(1,1)`.
+CSS da Bezier egri chizig'i sintaksisi: `cubic-bezier(x2, y2, x3, y3)`. Bu yerda biz faqat 2-chi va 3-chi nazorat nuqtalarini belgilashimiz kerak, chunki 1-chi `(0,0)`ga, 4-chisi esa `(1,1)`ga mahkamlangan.
 
-The timing function describes how fast the animation process goes.
+Timing funksiyasi animatsiya jarayoni qanchalik tez borishini tavsiflaydi.
 
-- The `x` axis is the time: `0` -- the start, `1` -- the end of `transition-duration`.
-- The `y` axis specifies the completion of the process: `0` -- the starting value of the property, `1` -- the final value.
+- `x` o'qi vaqt: `0` -- boshlanish, `1` -- `transition-duration` oxiri.
+- `y` o'qi jarayonning tugallanishini bildiradi: `0` -- xususiyatning boshlang'ich qiymati, `1` -- yakuniy qiymat.
 
-The simplest variant is when the animation goes uniformly, with the same linear speed. That can be specified by the curve `cubic-bezier(0, 0, 1, 1)`.
+Eng oddiy variant animatsiya bir xil chiziqli tezlik bilan bir tekis borishidir. Bu `cubic-bezier(0, 0, 1, 1)` egri chizig'i bilan belgilanishi mumkin.
 
-Here's how that curve looks:
+Bu egri chiziq quyidagicha ko'rinadi:
 
 ![](bezier-linear.svg)
 
-...As we can see, it's just a straight line. As the time (`x`) passes, the completion (`y`) of the animation steadily goes from `0` to `1`.
+...Ko'rib turganingizdek, bu shunchaki to'g'ri chiziq. Vaqt (`x`) o'tishi bilan animatsiyaning tugallanishi (`y`) barqaror ravishda `0`dan `1`gacha boradi.
 
-The train in the example below goes from left to right with the permanent speed (click it):
+Quyidagi misoldagi poyezd chapdan o'ngga doimiy tezlik bilan boradi (uni bosing):
 
 [codetabs src="train-linear"]
 
-The CSS `transition` is based on that curve:
+CSS `transition` shu egri chiziqqa asoslangan:
 
 ```css
 .train {
   left: 0;
   transition: left 5s cubic-bezier(0, 0, 1, 1);
-  /* JavaScript sets left to 450px */
+  /* JavaScript left ni 450px ga o'rnatadi */
 }
 ```
 
-...And how can we show a train slowing down?
+...Va poyezdning sekinlashuvini qanday ko'rsatishimiz mumkin?
 
-We can use another Bezier curve: `cubic-bezier(0.0, 0.5, 0.5 ,1.0)`.
+Biz boshqa Bezier egri chizig'idan foydalanishimiz mumkin: `cubic-bezier(0.0, 0.5, 0.5 ,1.0)`.
 
-The graph:
+Grafik:
 
 ![](train-curve.svg)
 
-As we can see, the process starts fast: the curve soars up high, and then slower and slower.
+Ko'rib turganingizdek, jarayon tez boshlanadi: egri chiziq yuqoriga ko'tariladi, keyin sekinroq va sekinroq.
 
-Here's the timing function in action (click the train):
+Timing funksiyasi amalda (poyezdni bosing):
 
 [codetabs src="train"]
 
@@ -191,25 +191,24 @@ CSS:
 .train {
   left: 0;
   transition: left 5s cubic-bezier(0, .5, .5, 1);
-  /* JavaScript sets left to 450px */
+  /* JavaScript left ni 450px ga o'rnatadi */
 }
 ```
 
-There are several built-in curves: `linear`, `ease`, `ease-in`, `ease-out` and `ease-in-out`.
+Bir nechta o'rnatilgan egri chiziqlar mavjud: `linear`, `ease`, `ease-in`, `ease-out` va `ease-in-out`.
 
-The `linear` is a shorthand for `cubic-bezier(0, 0, 1, 1)` -- a straight line, which we described above.
+`linear` - `cubic-bezier(0, 0, 1, 1)` uchun qisqartma -- to'g'ri chiziq, yuqorida tasvirlagan.
 
-Other names are shorthands for the following `cubic-bezier`:
+Boshqa nomlar quyidagi `cubic-bezier` uchun qisqartmalar:
 
 | <code>ease</code><sup>*</sup> | <code>ease-in</code> | <code>ease-out</code> | <code>ease-in-out</code> |
 |-------------------------------|----------------------|-----------------------|--------------------------|
 | <code>(0.25, 0.1, 0.25, 1.0)</code> | <code>(0.42, 0, 1.0, 1.0)</code> | <code>(0, 0, 0.58, 1.0)</code> | <code>(0.42, 0, 0.58, 1.0)</code> |
-| ![ease, figure](ease.svg) | ![ease-in, figure](ease-in.svg) | ![ease-out, figure](ease-out.svg) | ![ease-in-out, figure](ease-in-out.svg) |
+| ![ease, rasm](ease.svg) | ![ease-in, rasm](ease-in.svg) | ![ease-out, rasm](ease-out.svg) | ![ease-in-out, rasm](ease-in-out.svg) |
 
-`*` -- by default, if there's no timing function, `ease` is used.
+`*` -- sukut bo'yicha, agar timing funksiyasi bo'lmasa, `ease` ishlatiladi.
 
-So we could use `ease-out` for our slowing down train:
-
+Shunday qilib, sekinlashayotgan poyezd uchun `ease-out` ishlatishimiz mumkin:
 
 ```css
 .train {
@@ -219,56 +218,56 @@ So we could use `ease-out` for our slowing down train:
 }
 ```
 
-But it looks a bit differently.
+Lekin u biroz boshqacha ko'rinadi.
 
-**A Bezier curve can make the animation exceed its range.**
+**Bezier egri chizig'i animatsiyani o'z oralig'idan oshirib yuborishi mumkin.**
 
-The control points on the curve can have any `y` coordinates: even negative or huge ones. Then the Bezier curve would also extend very low or high, making the animation go beyond its normal range.
+Egri chiziqdagi nazorat nuqtalari har qanday `y` koordinatlariga ega bo'lishi mumkin: hatto manfiy yoki kattaroq. Keyin Bezier egri chizig'i ham juda past yoki baland cho'ziladi va animatsiya normal oralig'idan tashqariga chiqadi.
 
-In the example below the animation code is:
+Quyidagi misolda animatsiya kodi:
 ```css
 .train {
   left: 100px;
   transition: left 5s cubic-bezier(.5, -1, .5, 2);
-  /* JavaScript sets left to 400px */
+  /* JavaScript left ni 400px ga o'rnatadi */
 }
 ```
 
-The property `left` should animate from `100px` to `400px`.
+`left` xususiyati `100px`dan `400px`gacha animatsiya qilinishi kerak.
 
-But if you click the train, you'll see that:
+Lekin poyezdni bossangiz, quyidagini ko'rasiz:
 
-- First, the train goes *back*: `left` becomes less than `100px`.
-- Then it goes forward, a little bit farther than `400px`.
-- And then back again -- to `400px`.
+- Avval poyezd *orqaga* boradi: `left` `100px`dan kam bo'ladi.
+- Keyin u oldinga, `400px`dan biroz uzoqroq boradi.
+- Va keyin yana orqaga -- `400px`gacha.
 
 [codetabs src="train-over"]
 
-Why it happens is pretty obvious if we look at the graph of the given Bezier curve:
+Nima uchun bu sodir bo'lishi berilgan Bezier egri chizig'ining grafikiga qarash bilan aniq:
 
 ![](bezier-train-over.svg)
 
-We moved the `y` coordinate of the 2nd point below zero, and for the 3rd point we made it over `1`, so the curve goes out of the "regular" quadrant. The `y` is out of the "standard" range `0..1`.
+Biz 2-nuqtaning `y` koordinatasini noldan pastga surdik va 3-nuqta uchun uni `1`dan yuqori qildik, shuning uchun egri chiziq "oddiy" kvadrantdan chiqadi. `y` "standart" `0..1` oralig'idan tashqarida.
 
-As we know, `y` measures "the completion of the animation process". The value `y = 0` corresponds to the starting property value and `y = 1` -- the ending value. So values `y<0` move the property beyond the starting `left` and `y>1` -- past the final `left`.
+Bilganimizdek, `y` "animatsiya jarayonining tugallanishini" o'lchaydi. `y = 0` qiymati boshlang'ich xususiyat qiymatiga, `y = 1` esa yakuniy qiymatga mos keladi. Shunday qilib, `y<0` qiymatlar xususiyatni boshlang'ich `left`dan tashqariga, `y>1` esa yakuniy `left`dan tashqariga siljitadi.
 
-That's a "soft" variant for sure. If we put `y` values like `-99` and `99` then the train would jump out of the range much more.
+Bu, albatta, "yumshoq" variant. Agar biz `-99` va `99` kabi `y` qiymatlarini qo'ysak, poyezd oraliqdan ancha tashqariga chiqib ketardi.
 
-But how do we make a Bezier curve for a specific task? There are many tools. For instance, we can do it on the site <http://cubic-bezier.com/>.
+Lekin muayyan vazifa uchun Bezier egri chizig'ini qanday yaratamiz? Ko'pgina vositalar mavjud. Masalan, buni <http://cubic-bezier.com/> saytida qilishimiz mumkin.
 
-### Steps
+### Qadamlar
 
-The timing function `steps(number of steps[, start/end])` allows splitting an animation into steps.
+Timing funksiyasi `steps(qadamlar soni[, start/end])` animatsiyani qadamlarga bo'lish imkonini beradi.
 
-Let's see that in an example with digits.
+Keling, buni raqamlar misolida ko'raylik.
 
-Here's a list of digits, without any animations, just as a source:
+Mana animatsiyasiz raqamlar ro'yxati, faqat manba sifatida:
 
 [codetabs src="step-list"]
 
-We'll make the digits appear in a discrete way by making the part of the list outside of the red "window" invisible and shifting the list to the left with each step.
+Biz raqamlarni diskret tarzda paydo qilish uchun qizil "oyna"dan tashqaridagi ro'yxat qismini ko'rinmas qilamiz va har qadamda ro'yxatni chapga siljitamiz.
 
-There will be 9 steps, a step-move for each digit:
+9 qadam bo'ladi, har bir raqam uchun qadam-harakat:
 
 ```css
 #stripe.animate  {
@@ -277,58 +276,58 @@ There will be 9 steps, a step-move for each digit:
 }
 ```
 
-In action:
+Amalda:
 
 [codetabs src="step"]
 
-The first argument of `steps(9, start)` is the number of steps. The transform will be split into 9 parts (10% each). The time interval is automatically divided into 9 parts as well, so `transition: 9s` gives us 9 seconds for the whole animation – 1 second per digit.
+`steps(9, start)` ning birinchi argumenti qadamlar soni. Transformatsiya 9 qismga bo'linadi (har biri 10%). Vaqt intervali ham avtomatik ravishda 9 qismga bo'linadi, shuning uchun `transition: 9s` bizga butun animatsiya uchun 9 soniya beradi -- har raqam uchun 1 soniya.
 
-The second argument is one of two words: `start` or `end`.
+Ikkinchi argument ikkita so'zdan biri: `start` yoki `end`.
 
-The `start` means that in the beginning of animation we need to make the first step immediately.
+`start` degani, animatsiya boshida biz birinchi qadamni darhol qilishimiz kerak.
 
-We can observe that during the animation: when we click on the digit it changes to `1` (the first step) immediately, and then changes in the beginning of the next second.
+Buni animatsiya davomida kuzatishimiz mumkin: raqamni bossak, u darhol `1`ga o'zgaradi (birinchi qadam), keyin keyingi soniya boshida o'zgaradi.
 
-The process is progressing like this:
+Jarayon quyidagicha boradi:
 
-- `0s` -- `-10%` (first change in the beginning of the 1st second, immediately)
+- `0s` -- `-10%` (1-soniyaning boshida birinchi o'zgarish, darhol)
 - `1s` -- `-20%`
 - ...
 - `8s` -- `-80%`
-- (the last second shows the final value).
+- (oxirgi soniya yakuniy qiymatni ko'rsatadi).
 
-The alternative value `end` would mean that the change should be applied not in the beginning, but at the end of each second.
+Muqobil qiymat `end` o'zgarish har soniyaning boshida emas, balki oxirida qo'llanilishi kerakligini bildiradi.
 
-So the process would go like this:
+Shunday qilib, jarayon quyidagicha boradi:
 
 - `0s` -- `0`
-- `1s` -- `-10%` (first change at the end of the 1st second)
+- `1s` -- `-10%` (1-soniya oxirida birinchi o'zgarish)
 - `2s` -- `-20%`
 - ...
 - `9s` -- `-90%`
 
-Here's `steps(9, end)` in action (note the pause between the first digit change):
+Mana `steps(9, end)` amalda (birinchi raqam o'zgarishi orasidagi pauza'ga e'tibor bering):
 
 [codetabs src="step-end"]
 
-There are also shorthand values:
+Qisqartma qiymatlari ham mavjud:
 
-- `step-start` -- is the same as `steps(1, start)`. That is, the animation starts immediately and takes 1 step. So it starts and finishes immediately, as if there were no animation.
-- `step-end` -- the same as `steps(1, end)`: make the animation in a single step at the end of `transition-duration`.
+- `step-start` -- `steps(1, start)` bilan bir xil. Ya'ni, animatsiya darhol boshlanadi va 1 qadam oladi. Shunday qilib, u darhol boshlanadi va tugaydi, go'yo animatsiya yo'qdek.
+- `step-end` -- `steps(1, end)` bilan bir xil: animatsiyani `transition-duration` oxirida bitta qadamda amalga oshiring.
 
-These values are rarely used, because that's not really animation, but rather a single-step change.
+Bu qiymatlar kamdan-kam ishlatiladi, chunki bu haqiqatan ham animatsiya emas, balki bitta qadam o'zgarishi.
 
-## Event transitionend
+## transitionend hodisasi
 
-When the CSS animation finishes the `transitionend` event triggers.
+CSS animatsiyasi tugaganda `transitionend` hodisasi ishga tushadi.
 
-It is widely used to do an action after the animation is done. Also we can join animations.
+U animatsiya tugagandan keyin harakat qilish uchun keng qo'llaniladi. Shuningdek, biz animatsiyalarni birlashtirishimiz mumkin.
 
-For instance, the ship in the example below starts to sail there and back when clicked, each time farther and farther to the right:
+Masalan, quyidagi misoldagi kema bosilganda u yerga va qaytganda suzib boradi, har safar o'ngga qarab uzoqroq va uzoqroq:
 
 [iframe src="boat" height=300 edit link]
 
-The animation is initiated by the function `go` that re-runs each time the transition finishes, and flips the direction:
+Animatsiya har safar o'tish tugaganda qayta ishlaydigan va yo'nalishni o'zgartiradigan `go` funksiyasi tomonidan boshlanadi:
 
 ```js
 boat.onclick = function() {
@@ -337,11 +336,11 @@ boat.onclick = function() {
 
   function go() {
     if (times % 2) {
-      // sail to the right
+      // o'ngga suzish
       boat.classList.remove('back');
       boat.style.marginLeft = 100 * times + 200 + 'px';
     } else {
-      // sail to the left
+      // chapga suzish
       boat.classList.add('back');
       boat.style.marginLeft = 100 * times - 200 + 'px';
     }
@@ -357,40 +356,40 @@ boat.onclick = function() {
 };
 ```
 
-The event object for `transitionend` has a few specific properties:
+`transitionend` uchun hodisa ob'ekti bir nechta maxsus xususiyatlarga ega:
 
 `event.propertyName`
-: The property that has finished animating. Can be good if we animate multiple properties simultaneously.
+: Animatsiyasi tugagan xususiyat. Bir vaqtning o'zida bir nechta xususiyatni animatsiya qilsak foydali bo'lishi mumkin.
 
 `event.elapsedTime`
-: The time (in seconds) that the animation took, without `transition-delay`.
+: Animatsiya olgan vaqt (soniyalarda), `transition-delay`siz.
 
 ## Keyframes
 
-We can join multiple simple animations together using the `@keyframes` CSS rule.
+Biz `@keyframes` CSS qoidasidan foydalanib bir nechta oddiy animatsiyalarni birlashtirishimiz mumkin.
 
-It specifies the "name" of the animation and rules - what, when and where to animate. Then using the `animation` property, we can attach the animation to the element and specify additional parameters for it.
+U animatsiyaning "nomi"ni va qoidalarni belgilaydi - nimani, qachon va qayerda animatsiya qilishni. Keyin `animation` xususiyatidan foydalanib, biz animatsiyani elementga biriktirish va uning uchun qo'shimcha parametrlarni belgilashimiz mumkin.
 
-Here's an example with explanations:
+Mana tushuntirishlar bilan misol:
 
 ```html run height=60 autorun="no-epub" no-beautify
 <div class="progress"></div>
 
 <style>
 *!*
-  @keyframes go-left-right {        /* give it a name: "go-left-right" */
-    from { left: 0px; }             /* animate from left: 0px */
-    to { left: calc(100% - 50px); } /* animate to left: 100%-50px */
+  @keyframes go-left-right {        /* unga nom bering: "go-left-right" */
+    from { left: 0px; }             /* left: 0px dan animatsiya qiling */
+    to { left: calc(100% - 50px); } /* left: 100%-50px gacha animatsiya qiling */
   }
 */!*
 
   .progress {
 *!*
     animation: go-left-right 3s infinite alternate;
-    /* apply the animation "go-left-right" to the element
-       duration 3 seconds
-       number of times: infinite
-       alternate direction every time
+    /* "go-left-right" animatsiyasini elementga qo'llang
+       davomiyligi 3 soniya
+       marta soni: cheksiz
+       har safar yo'nalishni o'zgartiring
     */
 */!*
 
@@ -403,25 +402,25 @@ Here's an example with explanations:
 </style>
 ```
 
-There are many articles about `@keyframes` and a [detailed specification](https://drafts.csswg.org/css-animations/).
+`@keyframes` haqida ko'plab maqolalar va [batafsil spetsifikatsiya](https://drafts.csswg.org/css-animations/) mavjud.
 
-You probably won't need `@keyframes` often, unless everything is in constant motion on your sites.
+Saytlaringizda hamma narsa doimiy harakatda bo'lmasa, ehtimol sizga `@keyframes` tez-tez kerak bo'lmaydi.
 
-## Summary
+## Xulosa
 
-CSS animations allow smoothly (or not) animated changes of one or multiple CSS properties.
+CSS animatsiyalari bitta yoki bir nechta CSS xususiyatlarining silliq (yoki yo'q) animatsiya o'zgarishlariga imkon beradi.
 
-They are good for most animation tasks. We're also able to use JavaScript for animations, the next chapter is devoted to that.
+Ular ko'pchilik animatsiya vazifalari uchun yaxshi. Shuningdek, biz animatsiyalar uchun JavaScript'dan foydalanishimiz mumkin, keyingi bob bunga bag'ishlangan.
 
-Limitations of CSS animations compared to JavaScript animations:
+JavaScript animatsiyalariga nisbatan CSS animatsiyalarining cheklovlari:
 
-```compare plus="CSS animations" minus="JavaScript animations"
-+ Simple things done simply.
-+ Fast and lightweight for CPU.
-- JavaScript animations are flexible. They can implement any animation logic, like an "explosion" of an element.
-- Not just property changes. We can create new elements in JavaScript as part of the animation.
+```compare plus="CSS animatsiyalari" minus="JavaScript animatsiyalari"
++ Oddiy ishlar oddiy amalga oshiriladi.
++ CPU uchun tez va yengil.
+- JavaScript animatsiyalari moslashuvchan. Ular element "portlashi" kabi har qanday animatsiya mantiqini amalga oshirishi mumkin.
+- Faqat xususiyat o'zgarishlari emas. Biz JavaScript'da animatsiyaning bir qismi sifatida yangi elementlar yaratishimiz mumkin.
 ```
 
-The majority of animations can be implemented using CSS as described in this chapter. And the `transitionend` event allows JavaScript to be run after the animation, so it integrates fine with the code.
+Animatsiyalarning aksariyati ushbu bobda tasvirlanganidek CSS yordamida amalga oshirilishi mumkin. Va `transitionend` hodisasi animatsiyadan keyin JavaScript'ni ishga tushirish imkonini beradi, shuning uchun u kod bilan yaxshi integratsiya qilinadi.
 
-But in the next chapter we'll do some JavaScript animations to cover more complex cases.
+Lekin keyingi bobda biz murakkabroq holatlarni qamrab olish uchun JavaScript animatsiyalarini qilamiz.

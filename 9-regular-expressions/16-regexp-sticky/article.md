@@ -1,55 +1,54 @@
+# Yopishqoq bayroq "y", pozitsiyada qidirish
 
-# Sticky flag "y", searching at position
+`pattern:y` bayrog'i manba satrda berilgan pozitsiyada qidiruvni amalga oshirish imkonini beradi.
 
-The flag `pattern:y` allows to perform the search at the given position in the source string.
+`pattern:y` bayrog'ining foydalanish holatini tushunish va regexplarning usullarini yaxshiroq anglash uchun amaliy misolni ko'rib chiqamiz.
 
-To grasp the use case of `pattern:y` flag, and better understand the ways of regexps, let's explore a practical example.
+Regexplar uchun umumiy vazifalardan biri "leksik tahlil": bizda matn bor, masalan, dasturlash tilida, va uning strukturaviy elementlarini topishimiz kerak. Masalan, HTML teglar va atributlarga ega, JavaScript kodi funksiyalar, o'zgaruvchilar va hokazolarga ega.
 
-One of common tasks for regexps is "lexical analysis": we get a text, e.g. in a programming language, and need to find its structural elements. For instance, HTML has tags and attributes, JavaScript code has functions, variables, and so on.
+Leksik analizatorlar yozish o'zining vositalari va algoritmlari bilan maxsus sohadir, shuning uchun biz u yerga chuqur kirmaymiz, ammo umumiy vazifa bor: berilgan pozitsiyada biror narsani o'qish.
 
-Writing lexical analyzers is a special area, with its own tools and algorithms, so we don't go deep in there, but there's a common task: to read something at the given position.
+Masalan, bizda `subject:let varName = "value"` kod satri bor va undan `4` pozitsiyasida boshlanadigan o'zgaruvchi nomini o'qishimiz kerak.
 
-E.g. we have a code string `subject:let varName = "value"`, and we need to read the variable name from it, that starts at position `4`.
+Biz o'zgaruvchi nomini `pattern:\w+` regexp yordamida qidiramiz. Aslida, JavaScript o'zgaruvchilar nomlari aniq moslik uchun biroz murakkabroq regexp talab qiladi, ammo bu yerda bu muhim emas.
 
-We'll look for variable name using regexp `pattern:\w+`. Actually, JavaScript variable names need a bit more complex regexp for accurate matching, but here it doesn't matter.
+- `str.match(/\w+/)` chaqiruvi faqat satrdagi birinchi so'zni (`let`) topadi. Bu bizga kerak emas.
+- Biz `pattern:g` bayrog'ini qo'shishimiz mumkin. Ammo keyin `str.match(/\w+/g)` chaqiruvi matndagi barcha so'zlarni qidiradi, bizga esa `4` pozitsiyasidagi bitta so'z kerak. Yana bizga kerak bo'lgan narsa emas.
 
-- A call to `str.match(/\w+/)` will find only the first word in the line (`let`). That's not it.
-- We can add the flag `pattern:g`. But then the call `str.match(/\w+/g)` will look for all words in the text, while we need one word at position `4`. Again, not what we need.
+**Xo'sh, berilgan pozitsiyada aniq regexpni qanday qidirish kerak?**
 
-**So, how to search for a regexp exactly at the given position?**
+`regexp.exec(str)` usulidan foydalanishga harakat qilaylik.
 
-Let's try using method `regexp.exec(str)`.
+`pattern:g` va `pattern:y` bayroqlari bo'lmagan `regexp` uchun bu usul faqat birinchi moslikni qidiradi, u `str.match(regexp)` kabi ishlaydi.
 
-For a `regexp` without flags `pattern:g` and `pattern:y`, this method looks only for the first match, it works exactly like `str.match(regexp)`.
+...Ammo agar `pattern:g` bayrog'i bo'lsa, u `str` da qidiruvni `regexp.lastIndex` xususiyatida saqlangan pozitsiyadan boshlaydi. Va agar moslik topsa, `regexp.lastIndex` ni moslikdan keyin darhol indeksga o'rnatadi.
 
-...But if there's flag `pattern:g`, then it performs the search in `str`, starting from position stored in the `regexp.lastIndex` property. And, if it finds a match, then sets `regexp.lastIndex` to the index immediately after the match.
+Boshqacha qilib aytganda, `regexp.lastIndex` qidiruv uchun boshlang'ich nuqta bo'lib xizmat qiladi, har bir `regexp.exec(str)` chaqiruvi uni yangi qiymatga o'rnatadi ("oxirgi moslikdan keyin"). Bu, albatta, faqat `pattern:g` bayrog'i bo'lgan taqdirda.
 
-In other words, `regexp.lastIndex` serves as a starting point for the search, that each `regexp.exec(str)` call resets to the new value ("after the last match"). That's only if there's `pattern:g` flag, of course.
+Shunday qilib, `regexp.exec(str)` ga ketma-ket chaqiruvlar mosliklarni birin-ketin qaytaradi.
 
-So, successive calls to `regexp.exec(str)` return matches one after another.
-
-Here's an example of such calls:
+Mana bunday chaqiruvlarning misoli:
 
 ```js run
-let str = 'let varName'; // Let's find all words in this string
+let str = 'let varName'; // Keling, bu satrdagi barcha so'zlarni topaylik
 let regexp = /\w+/g;
 
-alert(regexp.lastIndex); // 0 (initially lastIndex=0)
+alert(regexp.lastIndex); // 0 (dastlab lastIndex=0)
 
 let word1 = regexp.exec(str);
-alert(word1[0]); // let (1st word)
-alert(regexp.lastIndex); // 3 (position after the match)
+alert(word1[0]); // let (1-so'z)
+alert(regexp.lastIndex); // 3 (moslikdan keyingi pozitsiya)
 
 let word2 = regexp.exec(str);
-alert(word2[0]); // varName (2nd word)
-alert(regexp.lastIndex); // 11 (position after the match)
+alert(word2[0]); // varName (2-so'z)
+alert(regexp.lastIndex); // 11 (moslikdan keyingi pozitsiya)
 
 let word3 = regexp.exec(str);
-alert(word3); // null (no more matches)
-alert(regexp.lastIndex); // 0 (resets at search end)
+alert(word3); // null (boshqa moslik yo'q)
+alert(regexp.lastIndex); // 0 (qidiruv oxirida qayta o'rnatiladi)
 ```
 
-We can get all matches in the loop:
+Barcha mosliklarni tsiklda olishimiz mumkin:
 
 ```js run
 let str = 'let varName';
@@ -58,24 +57,24 @@ let regexp = /\w+/g;
 let result;
 
 while (result = regexp.exec(str)) {
-  alert( `Found ${result[0]} at position ${result.index}` );
-  // Found let at position 0, then
-  // Found varName at position 4
+  alert( `${result[0]} ni ${result.index} pozitsiyasida topdi` );
+  // let ni 0 pozitsiyasida topdi, keyin
+  // varName ni 4 pozitsiyasida topdi
 }
 ```
 
-Such use of `regexp.exec` is an alternative to method `str.matchAll`, with a bit more control over the process.
+`regexp.exec` ning bunday foydalanishi jarayonni biroz ko'proq nazorat qilish bilan `str.matchAll` usuliga muqobildir.
 
-Let's go back to our task.
+Vazifamizga qaytaylik.
 
-We can manually set `lastIndex` to `4`, to start the search from the given position!
+Biz qidiruvni berilgan pozitsiyadan boshlash uchun `lastIndex` ni qo'lda `4` ga o'rnatishimiz mumkin!
 
-Like this:
+Mana shunday:
 
 ```js run
 let str = 'let varName = "value"';
 
-let regexp = /\w+/g; // without flag "g", property lastIndex is ignored
+let regexp = /\w+/g; // "g" bayrog'isiz lastIndex xususiyati e'tiborga olinmaydi
 
 *!*
 regexp.lastIndex = 4;
@@ -85,15 +84,15 @@ let word = regexp.exec(str);
 alert(word); // varName
 ```
 
-Hooray! Problem solved! 
+Voy! Muammo hal qilindi!
 
-We performed a search of `pattern:\w+`, starting from position `regexp.lastIndex = 4`.
+Biz `regexp.lastIndex = 4` pozitsiyasidan boshlab `pattern:\w+` qidiruvini amalga oshirdik.
 
-The result is correct.
+Natija to'g'ri.
 
-...But wait, not so fast.
+...Ammo kuting, unchalik tez emas.
 
-Please note: the `regexp.exec` call starts searching at position `lastIndex` and then goes further. If there's no word at position `lastIndex`, but it's somewhere after it, then it will be found:
+E'tibor bering: `regexp.exec` chaqiruvi `lastIndex` pozitsiyasidan qidirishni boshlaydi va keyin davom etadi. Agar `lastIndex` pozitsiyasida so'z bo'lmasa, lekin u undan keyin biror joyda bo'lsa, u topiladi:
 
 ```js run
 let str = 'let varName = "value"';
@@ -101,21 +100,21 @@ let str = 'let varName = "value"';
 let regexp = /\w+/g;
 
 *!*
-// start the search from position 3
+// 3 pozitsiyasidan qidiruvni boshlash
 regexp.lastIndex = 3;
 */!*
 
 let word = regexp.exec(str); 
-// found the match at position 4
+// 4 pozitsiyasida moslik topdi
 alert(word[0]); // varName
 alert(word.index); // 4
 ```
 
-For some tasks, including the lexical analysis, that's just wrong. We need to find a match exactly at the given position at the text, not somewhere after it. And that's what the flag `y` is for.
+Leksik tahlil kabi ba'zi vazifalar uchun bu shunchaki noto'g'ri. Bizga matnda berilgan pozitsiyada aniq moslik kerak, undan keyin biror joyda emas. Va `y` bayrog'i aynan shu uchun.
 
-**The flag `pattern:y` makes `regexp.exec` to search exactly at position `lastIndex`, not "starting from" it.**
+**`pattern:y` bayrog'i `regexp.exec` ni aniq `lastIndex` pozitsiyasida qidirish uchun majbur qiladi, undan "boshlash" emas.**
 
-Here's the same search with flag `pattern:y`:
+Mana `pattern:y` bayrog'i bilan bir xil qidiruv:
 
 ```js run
 let str = 'let varName = "value"';
@@ -123,16 +122,16 @@ let str = 'let varName = "value"';
 let regexp = /\w+/y;
 
 regexp.lastIndex = 3;
-alert( regexp.exec(str) ); // null (there's a space at position 3, not a word)
+alert( regexp.exec(str) ); // null (3 pozitsiyasida bo'sh joy bor, so'z emas)
 
 regexp.lastIndex = 4;
-alert( regexp.exec(str) ); // varName (word at position 4)
+alert( regexp.exec(str) ); // varName (4 pozitsiyasida so'z)
 ```
 
-As we can see, regexp `pattern:/\w+/y` doesn't match at position `3` (unlike the flag  `pattern:g`), but matches at position `4`.
+Ko'rib turganimizdek, `pattern:/\w+/y` regexp `3` pozitsiyasida mos kelmaydi (`pattern:g` bayrog'idan farqli o'laroq), ammo `4` pozitsiyasida mos keladi.
 
-Not only that's what we need, there's an important performance gain when using flag `pattern:y`.
+Bu nafaqat bizga kerak bo'lgan narsa, `pattern:y` bayrog'idan foydalanganda muhim ishlash yutug'i bor.
 
-Imagine, we have a long text, and there are no matches in it, at all. Then a search with flag `pattern:g` will go till the end of the text and find nothing, and this will take significantly more time than the search with flag `pattern:y`, that checks only the exact position.
+Tasavvur qiling, bizda uzun matn bor va unda umuman mosliklar yo'q. Keyin `pattern:g` bayrog'i bilan qidiruv matn oxirigacha boradi va hech narsa topmaydi, va bu faqat aniq pozitsiyani tekshiradigan `pattern:y` bayrog'i bilan qidiruvdan sezilarli darajada ko'proq vaqt oladi.
 
-In tasks like lexical analysis, there are usually many searches at an exact position, to check what we have there. Using flag `pattern:y` is the key for correct implementations and a good performance.
+Leksik tahlil kabi vazifalarda odatda u yerda nimamiz borligini tekshirish uchun aniq pozitsiyada ko'plab qidiruvlar bo'ladi. `pattern:y` bayrog'idan foydalanish to'g'ri amalga oshirish va yaxshi ishlash uchun kalitdir.

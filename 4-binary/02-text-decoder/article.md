@@ -1,30 +1,30 @@
-# TextDecoder and TextEncoder
+# TextDecoder va TextEncoder
 
-What if the binary data is actually a string? For instance, we received a file with textual data.
+Agar binary ma'lumot aslida string bo'lsa nima bo'ladi? Masalan, biz matnli ma'lumotlarga ega faylni oldik.
 
-The build-in [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) object allows to read the value into an actual JavaScript string, given the buffer and the encoding.
+O'rnatilgan [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) obyekti buffer va kodlashni hisobga olgan holda qiymatni haqiqiy JavaScript string ga o'qish imkonini beradi.
 
-We first need to create it:
+Avval uni yaratishimiz kerak:
 ```js
 let decoder = new TextDecoder([label], [options]);
 ```
 
-- **`label`** -- the encoding, `utf-8` by default, but `big5`, `windows-1251` and many other are also supported.
-- **`options`** -- optional object:
-  - **`fatal`** -- boolean, if `true` then throw an exception for invalid (non-decodable) characters, otherwise (default) replace them with character `\uFFFD`.
-  - **`ignoreBOM`** -- boolean, if `true` then ignore BOM (an optional byte-order Unicode mark), rarely needed.
+- **`label`** -- kodlash, standart bo'yicha `utf-8`, lekin `big5`, `windows-1251` va ko'p boshqalar ham qo'llab-quvvatlanadi.
+- **`options`** -- ixtiyoriy obyekt:
+  - **`fatal`** -- boolean, agar `true` bo'lsa, yaroqsiz (decode qilib bo'lmaydigan) belgilar uchun istisno tashlaydi, aks holda (standart) ularni `\uFFFD` belgisi bilan almashtiradi.
+  - **`ignoreBOM`** -- boolean, agar `true` bo'lsa, BOM ni (ixtiyoriy bayt-tartib Unicode belgisi) e'tiborsiz qoldiradi, kamdan-kam kerak bo'ladi.
 
-...And then decode:
+...Va keyin decode qilish:
 
 ```js
 let str = decoder.decode([input], [options]);
 ```
 
-- **`input`** -- `BufferSource` to decode.
-- **`options`** -- optional object:
-  - **`stream`** -- true for decoding streams, when `decoder` is called repeatedly with incoming chunks of data. In that case a multi-byte character may occasionally split between chunks. This options tells `TextDecoder` to memorize "unfinished" characters and decode them when the next chunk comes.
+- **`input`** -- decode qilinadigan `BufferSource`.
+- **`options`** -- ixtiyoriy obyekt:
+  - **`stream`** -- oqimlarni decode qilish uchun true, `decoder` kiruvchi ma'lumot bo'laklari bilan takroran chaqirilganda. Bu holda ko'p baytli belgi ba'zan bo'laklar orasida bo'linishi mumkin. Bu parametr `TextDecoder` ga "tugallanmagan" belgilarni eslab qolish va keyingi bo'lak kelganda ularni decode qilish haqida aytadi.
 
-For instance:
+Masalan:
 
 ```js run
 let uint8Array = new Uint8Array([72, 101, 108, 108, 111]);
@@ -32,21 +32,19 @@ let uint8Array = new Uint8Array([72, 101, 108, 108, 111]);
 alert( new TextDecoder().decode(uint8Array) ); // Hello
 ```
 
-
 ```js run
 let uint8Array = new Uint8Array([228, 189, 160, 229, 165, 189]);
 
 alert( new TextDecoder().decode(uint8Array) ); // 你好
 ```
 
-We can decode a part of the buffer by creating a subarray view for it:
-
+Buffer ning bir qismini uning uchun subarray view yaratish orqali decode qilishimiz mumkin:
 
 ```js run
 let uint8Array = new Uint8Array([0, 72, 101, 108, 108, 111, 0]);
 
-// the string is in the middle
-// create a new view over it, without copying anything
+// string o'rtada
+// hech narsani nusxalamasdan uning ustida yangi view yaratish
 let binaryString = uint8Array.subarray(1, -1);
 
 alert( new TextDecoder().decode(binaryString) ); // Hello
@@ -54,19 +52,19 @@ alert( new TextDecoder().decode(binaryString) ); // Hello
 
 ## TextEncoder
 
-[TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder) does the reverse thing -- converts a string into bytes.
+[TextEncoder](https://encoding.spec.whatwg.org/#interface-textencoder) teskari ishni bajaradi -- string ni baytlarga aylantiradi.
 
-The syntax is:
+Sintaksis:
 
 ```js
 let encoder = new TextEncoder();
 ```
 
-The only encoding it supports is "utf-8".
+U qo'llab-quvvatlaydigan yagona kodlash "utf-8".
 
-It has two methods:
-- **`encode(str)`** -- returns `Uint8Array` from a string.
-- **`encodeInto(str, destination)`** -- encodes `str` into `destination` that must be `Uint8Array`.
+Uning ikkita usuli bor:
+- **`encode(str)`** -- string dan `Uint8Array` qaytaradi.
+- **`encodeInto(str, destination)`** -- `str` ni `Uint8Array` bo'lishi kerak bo'lgan `destination` ga kodlaydi.
 
 ```js run
 let encoder = new TextEncoder();

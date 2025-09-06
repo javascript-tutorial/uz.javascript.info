@@ -1,16 +1,15 @@
+Naqsh boshlanishi aniq: `pattern:<style`.
 
-The pattern start is obvious: `pattern:<style`.
+Lekin biz shunchaki `pattern:<style.*?>` yoza olmaymiz, chunki `match:<styler>` unga mos keladi.
 
-...But then we can't simply write `pattern:<style.*?>`, because `match:<styler>` would match it.
+Bizga `match:<style`dan keyin bo'sh joy, so'ngra ixtiyoriy ravishda boshqa narsa yoki `match:>` tugashi kerak.
 
-We need either a space after `match:<style` and then optionally something else or the ending `match:>`.
+Regexp tilida: `pattern:<style(>|\s.*?>)`.
 
-In the regexp language: `pattern:<style(>|\s.*?>)`.
-
-In action:
+Amalda:
 
 ```js run
 let regexp = /<style(>|\s.*?>)/g;
 
-alert( '<style> <styler> <style test="...">'.match(regexp) ); // <style>, <style test="...">
+alert('<style> <styler> <style test="...">'.match(regexp)); // <style>, <style test="...">
 ```

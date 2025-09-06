@@ -1,42 +1,42 @@
-# Coordinates
+# Koordinatalar
 
-To move elements around we should be familiar with coordinates.
+Elementlarni harakatlantirish uchun koordinatalar bilan tanish bo'lishimiz kerak.
 
-Most JavaScript methods deal with one of two coordinate systems:
+JavaScript usullarining ko'pchiligi ikkita koordinata tizimidan biri bilan ishlaydi:
 
-1. **Relative to the window** - similar to `position:fixed`, calculated from the window top/left edge.
-    - we'll denote these coordinates as `clientX/clientY`, the reasoning for such name will become clear later, when we study event properties.
-2. **Relative to the document** - similar to `position:absolute` in the document root, calculated from the document top/left edge.
-    - we'll denote them `pageX/pageY`.
+1. **Oynaga nisbatan** - `position:fixed` ga o'xshash, oynaning yuqori/chap chetidan hisoblanadi.
+    - bu koordinatalarni `clientX/clientY` deb belgilaymiz, bunday nomlanishning sababi keyinroq event xususiyatlarini o'rganganimizda aniq bo'ladi.
+2. **Hujjatga nisbatan** - hujjat ildizidagi `position:absolute` ga o'xshash, hujjatning yuqori/chap chetidan hisoblanadi.
+    - ularni `pageX/pageY` deb belgilaymiz.
 
-When the page is scrolled to the very beginning, so that the top/left corner of the window is exactly the document top/left corner, these coordinates equal each other. But after the document shifts, window-relative coordinates of elements change, as elements move across the window, while document-relative coordinates remain the same.
+Sahifa eng boshigacha skroll qilinganda, ya'ni oynaning yuqori/chap burchagi aynan hujjatning yuqori/chap burchagi bo'lganda, bu koordinatalar bir-biriga teng bo'ladi. Ammo hujjat siljigandan keyin, elementlarning oynaga nisbatan koordinatalari o'zgaradi, chunki elementlar oyna bo'ylab harakatlanadilar, hujjatga nisbatan koordinatalar esa bir xil qoladi.
 
-On this picture we take a point in the document and demonstrate its coordinates before the scroll (left) and after it (right):
+Ushbu rasmda biz hujjatdagi nuqtani olamiz va skrolldan oldingi (chap) va keyingi (o'ng) koordinatalarini ko'rsatamiz:
 
 ![](document-and-window-coordinates-scrolled.svg)
 
-When the document scrolled:
-- `pageY` - document-relative coordinate stayed the same, it's counted from the document top (now scrolled out).
-- `clientY` - window-relative coordinate did change (the arrow became shorter), as the same point became closer to window top.
+Hujjat skroll qilinganda:
+- `pageY` - hujjatga nisbatan koordinata bir xil qoldi, u hujjat yuqorisidan hisoblanadi (hozir skroll qilingan).
+- `clientY` - oynaga nisbatan koordinata o'zgaradi (o'q qisqaroq bo'ldi), chunki xuddi shu nuqta oyna yuqorisiga yaqinroq bo'ldi.
 
-## Element coordinates: getBoundingClientRect
+## Element koordinatalari: getBoundingClientRect
 
-The method `elem.getBoundingClientRect()` returns window coordinates for a minimal rectangle that encloses `elem` as an object of built-in [DOMRect](https://www.w3.org/TR/geometry-1/#domrect) class.
+`elem.getBoundingClientRect()` usuli `elem` ni o'rab turgan minimal to'rtburchak uchun oyna koordinatalarini o'rnatilgan [DOMRect](https://www.w3.org/TR/geometry-1/#domrect) sinfi obyekti sifatida qaytaradi.
 
-Main `DOMRect` properties:
+Asosiy `DOMRect` xususiyatlari:
 
-- `x/y` -- X/Y-coordinates of the rectangle origin relative to window,
-- `width/height` -- width/height of the rectangle (can be negative).
+- `x/y` -- to'rtburchak boshlanishining oynaga nisbatan X/Y koordinatalari,
+- `width/height` -- to'rtburchakning kengligi/balandligi (manfiy bo'lishi mumkin).
 
-Additionally, there are derived properties:
+Qo'shimcha ravishda, hosila xususiyatlar mavjud:
 
-- `top/bottom` -- Y-coordinate for the top/bottom rectangle edge,
-- `left/right` -- X-coordinate for the left/right rectangle edge.
+- `top/bottom` -- yuqori/pastki to'rtburchak cheti uchun Y-koordinata,
+- `left/right` -- chap/o'ng to'rtburchak cheti uchun X-koordinata.
 
 ```online
-For instance click this button to see its window coordinates:
+Misol uchun, ushbu tugmani bosing va uning oyna koordinatalarini ko'ring:
 
-<p><input id="brTest" type="button" value="Get coordinates using button.getBoundingClientRect() for this button" onclick='showRect(this)'/></p>
+<p><input id="brTest" type="button" value="Bu tugma uchun button.getBoundingClientRect() yordamida koordinatalar olish" onclick='showRect(this)'/></p>
 
 <script>
 function showRect(elem) {
@@ -53,66 +53,64 @@ right:${r.right}
 }
 </script>
 
-If you scroll the page and repeat, you'll notice that as window-relative button position changes, its window coordinates (`y/top/bottom` if you scroll vertically) change as well.
+Agar sahifani skroll qilsangiz va takrorlasangiz, oynaga nisbatan tugma holati o'zgarganligi sababli, uning oyna koordinatalari (vertikal skroll qilsangiz `y/top/bottom`) ham o'zgarishini sezasiz.
 ```
 
-Here's the picture of `elem.getBoundingClientRect()` output:
+Mana `elem.getBoundingClientRect()` natijasining tasviri:
 
 ![](coordinates.svg)
 
-As you can see, `x/y` and `width/height` fully describe the rectangle. Derived properties can be easily calculated from them:
+Ko'rib turganingizdek, `x/y` va `width/height` to'rtburchakni to'liq tasvirlaydi. Hosila xususiyatlar ulardan osongina hisoblanishi mumkin:
 
 - `left = x`
 - `top = y`
 - `right = x + width`
 - `bottom = y + height`
 
-Please note:
+E'tibor bering:
 
-- Coordinates may be decimal fractions, such as `10.5`. That's normal, internally browser uses fractions in calculations. We don't have to round them when setting to `style.left/top`.
-- Coordinates may be negative. For instance, if the page is scrolled so that `elem` is now above the window, then `elem.getBoundingClientRect().top` is negative.
+- Koordinatalar `10.5` kabi o'nli kasrlar bo'lishi mumkin. Bu normal, brauzer ichida hisob-kitoblarda kasrlardan foydalanadi. Biz `style.left/top` ga o'rnatganda ularni yumaloqlashimiz shart emas.
+- Koordinatalar manfiy bo'lishi mumkin. Masalan, agar sahifa shunday skroll qilinganki, `elem` endi oynadan yuqorida bo'lsa, u holda `elem.getBoundingClientRect().top` manfiy bo'ladi.
 
-```smart header="Why derived properties are needed? Why does `top/left` exist if there's `x/y`?"
-Mathematically, a rectangle is uniquely defined with its starting point `(x,y)` and the direction vector `(width,height)`. So the additional derived properties are for convenience.
+```smart header="Nega hosila xususiyatlar kerak? Agar `x/y` mavjud bo'lsa, nima uchun `top/left` mavjud?"
+Matematik jihatdan to'rtburchak o'zining boshlang'ich nuqtasi `(x,y)` va yo'nalish vektori `(width,height)` bilan noyob tarzda aniqlanadi. Shunday qilib, qo'shimcha hosila xususiyatlar qulaylik uchun.
 
-Technically it's possible for `width/height` to be negative, that allows for "directed" rectangle, e.g. to represent mouse selection with properly marked start and end.
+Texnik jihatdan `width/height` ning manfiy bo'lishi mumkin, bu "yo'naltirilgan" to'rtburchak uchun imkon beradi, masalan sichqon tanlovini to'g'ri belgilangan boshlanish va oxiri bilan ifodalash uchun.
 
-Negative `width/height` values mean that the rectangle starts at its bottom-right corner and then "grows" left-upwards.
-
-Here's a rectangle with negative `width` and `height` (e.g. `width=-200`, `height=-100`):
+Mana manfiy `width` va `height` bo'lgan to'rtburchak (masalan `width=-200`, `height=-100`):
 
 ![](coordinates-negative.svg)
 
-As you can see, `left/top` do not equal `x/y` in such case.
+Ko'rib turganingizdek, bunday holatda `left/top` `x/y` ga teng emas.
 
-In practice though, `elem.getBoundingClientRect()` always returns positive width/height, here we mention negative `width/height` only for you to understand why these seemingly duplicate properties are not actually duplicates.
+Amalda esa `elem.getBoundingClientRect()` har doim musbat kenglik/balandlik qaytaradi, bu yerda manfiy `width/height` ni faqat bu bir xil ko'rinadigan xususiyatlar aslida takrorlanmasligi sababini tushunishingiz uchun eslatamiz.
 ```
 
-```warn header="Internet Explorer: no support for `x/y`"
-Internet Explorer doesn't support `x/y` properties for historical reasons.
+```warn header="Internet Explorer: `x/y` qo'llab-quvvatlamaydi"
+Internet Explorer tarixiy sabablarga ko'ra `x/y` xususiyatlarini qo'llab-quvvatlamaydi.
 
-So we can either make a polyfill (add getters in `DomRect.prototype`) or just use `top/left`, as they are always the same as `x/y` for positive `width/height`, in particular in the result of `elem.getBoundingClientRect()`.
+Shunday qilib, biz yoki polyfill yasashimiz mumkin (`DomRect.prototype` da getterlar qo'shish) yoki shunchaki `top/left` dan foydalanishimiz mumkin, chunki ular musbat `width/height` uchun, xususan `elem.getBoundingClientRect()` natijasida har doim `x/y` bilan bir xil.
 ```
 
-```warn header="Coordinates right/bottom are different from CSS position properties"
-There are obvious similarities between window-relative coordinates and CSS `position:fixed`.
+```warn header="Koordinatalar right/bottom CSS position xususiyatlaridan farq qiladi"
+Oynaga nisbatan koordinatalar va CSS `position:fixed` o'rtasida aniq o'xshashliklar bor.
 
-But in CSS positioning, `right` property means the distance from the right edge, and `bottom` property means the distance from the bottom edge.
+Ammo CSS joylashtirishda `right` xususiyati o'ng chetdan masofani, `bottom` xususiyati esa pastki chetdan masofani anglatadi.
 
-If we just look at the picture above, we can see that in JavaScript it is not so. All window coordinates are counted from the top-left corner, including these ones.
+Yuqoridagi rasmga nazar tashlaydigan bo'lsak, JavaScript da bunday emasligini ko'ramiz. Barcha oyna koordinatalari chap-yuqori burchakdan hisoblanadi, ularni ham o'z ichiga olgan holda.
 ```
 
 ## elementFromPoint(x, y) [#elementFromPoint]
 
-The call to `document.elementFromPoint(x, y)` returns the most nested element at window coordinates `(x, y)`.
+`document.elementFromPoint(x, y)` ga chaqiruv oyna koordinatalari `(x, y)` dagi eng ichki joylashgan elementni qaytaradi.
 
-The syntax is:
+Sintaksis:
 
 ```js
 let elem = document.elementFromPoint(x, y);
 ```
 
-For instance, the code below highlights and outputs the tag of the element that is now in the middle of the window:
+Masalan, quyidagi kod oynaning o'rtasida hozir turgan elementni ajratib ko'rsatadi va uning tegini chiqaradi:
 
 ```js run
 let centerX = document.documentElement.clientWidth / 2;
@@ -124,43 +122,43 @@ elem.style.background = "red";
 alert(elem.tagName);
 ```
 
-As it uses window coordinates, the element may be different depending on the current scroll position.
+Oyna koordinatalaridan foydalanganligi sababli, element joriy skroll holatiga qarab farq qilishi mumkin.
 
-````warn header="For out-of-window coordinates the `elementFromPoint` returns `null`"
-The method `document.elementFromPoint(x,y)` only works if `(x,y)` are inside the visible area.
+````warn header="Oynadan tashqari koordinatalar uchun `elementFromPoint` `null` qaytaradi"
+`document.elementFromPoint(x,y)` usuli faqat `(x,y)` ko'rinadigan maydon ichida bo'lsa ishlaydi.
 
-If any of the coordinates is negative or exceeds the window width/height, then it returns `null`.
+Agar koordinatalardan birortasi manfiy bo'lsa yoki oyna kengligi/balandligidan oshsa, u `null` qaytaradi.
 
-Here's a typical error that may occur if we don't check for it:
+Mana uni tekshirmasak yuz berishi mumkin bo'lgan tipik xato:
 
 ```js
 let elem = document.elementFromPoint(x, y);
-// if the coordinates happen to be out of the window, then elem = null
+// agar koordinatalar oynadan tashqarida bo'lsa, elem = null
 *!*
-elem.style.background = ''; // Error!
+elem.style.background = ''; // Xato!
 */!*
 ```
 ````
 
-## Using for "fixed" positioning
+## "Fixed" joylashtirishda foydalanish
 
-Most of time we need coordinates in order to position something.
+Ko'pincha bizga biror narsani joylashtirishda koordinatalar kerak bo'ladi.
 
-To show something near an element, we can use `getBoundingClientRect` to get its coordinates, and then CSS `position` together with `left/top` (or `right/bottom`).
+Element yonida biror narsani ko'rsatish uchun biz uning koordinatalarini olish uchun `getBoundingClientRect` dan foydalanishimiz va keyin CSS `position` ni `left/top` (yoki `right/bottom`) bilan birga ishlatishimiz mumkin.
 
-For instance, the function `createMessageUnder(elem, html)` below shows the message under `elem`:
+Masalan, quyidagi `createMessageUnder(elem, html)` funksiyasi `elem` ostida xabar ko'rsatadi:
 
 ```js
 let elem = document.getElementById("coords-show-mark");
 
 function createMessageUnder(elem, html) {
-  // create message element
+  // xabar elementi yaratish
   let message = document.createElement('div');
-  // better to use a css class for the style here
+  // bu yerda uslub uchun css sinfidan foydalanish yaxshiroq
   message.style.cssText = "position:fixed; color: red";
 
 *!*
-  // assign coordinates, don't forget "px"!
+  // koordinatalar belgilash, "px" ni unutmang!
   let coords = elem.getBoundingClientRect();
 
   message.style.left = coords.left + "px";
@@ -172,45 +170,45 @@ function createMessageUnder(elem, html) {
   return message;
 }
 
-// Usage:
-// add it for 5 seconds in the document
-let message = createMessageUnder(elem, 'Hello, world!');
+// Foydalanish:
+// hujjatga 5 soniyaga qo'shish
+let message = createMessageUnder(elem, 'Salom, dunyo!');
 document.body.append(message);
 setTimeout(() => message.remove(), 5000);
 ```
 
 ```online
-Click the button to run it:
+Ishga tushirish uchun tugmani bosing:
 
-<button id="coords-show-mark">Button with id="coords-show-mark", the message will appear under it</button>
+<button id="coords-show-mark">id="coords-show-mark" bo'lgan tugma, xabar uning ostida paydo bo'ladi</button>
 ```
 
-The code can be modified to show the message at the left, right, below, apply CSS animations to "fade it in" and so on. That's easy, as we have all the coordinates and sizes of the element.
+Kodni chapga, o'ngga, pastga ko'rsatish, CSS animatsiyalarini qo'llash va boshqalar uchun o'zgartirish mumkin. Bu oson, chunki bizda elementning barcha koordinatalari va o'lchamlari bor.
 
-But note the important detail: when the page is scrolled, the message flows away from the button.
+Ammo muhim detailga e'tibor bering: sahifa skroll qilinganda xabar tugmadan uzoqlashadi.
 
-The reason is obvious: the message element relies on `position:fixed`, so it remains at the same place of the window while the page scrolls away.
+Sababi aniq: xabar elementi `position:fixed` ga tayanadi, shuning uchun sahifa skroll qilinganda oynaning bir xil joyida qoladi.
 
-To change that, we need to use document-based coordinates and `position:absolute`.
+Buni o'zgartirish uchun bizga hujjat asosidagi koordinatalar va `position:absolute` dan foydalanish kerak.
 
-## Document coordinates [#getCoords]
+## Hujjat koordinatalari [#getCoords]
 
-Document-relative coordinates start from the upper-left corner of the document, not the window.
+Hujjatga nisbatan koordinatalar oyna emas, balki hujjatning chap-yuqori burchagidan boshlanadi.
 
-In CSS, window coordinates correspond to `position:fixed`, while document coordinates are similar to `position:absolute` on top.
+CSS da oyna koordinatalari `position:fixed` ga mos keladi, hujjat koordinatalari esa yuqorida joylashgan `position:absolute` ga o'xshaydi.
 
-We can use `position:absolute` and `top/left` to put something at a certain place of the document, so that it remains there during a page scroll. But we need the right coordinates first.
+Biz biror narsani hujjatning ma'lum joyiga qo'yish uchun `position:absolute` va `top/left` dan foydalanishimiz mumkin, shunda sahifa skroll qilinayotganda ham u o'sha yerda qoladi. Ammo avval to'g'ri koordinatalar kerak.
 
-There's no standard method to get the document coordinates of an element. But it's easy to write it.
+Elementning hujjat koordinatalarini olish uchun standart usul yo'q. Ammo uni yozish oson.
 
-The two coordinate systems are connected by the formula:
-- `pageY` = `clientY` + height of the scrolled-out vertical part of the document.
-- `pageX` = `clientX` + width of the scrolled-out horizontal part of the document.
+Ikki koordinata tizimi quyidagi formula bilan bog'langan:
+- `pageY` = `clientY` + hujjatning skroll qilingan vertikal qismining balandligi.
+- `pageX` = `clientX` + hujjatning skroll qilingan gorizontal qismining kengligi.
 
-The function `getCoords(elem)` will take window coordinates from `elem.getBoundingClientRect()` and add the current scroll to them:
+`getCoords(elem)` funksiyasi `elem.getBoundingClientRect()` dan oyna koordinatalarini olib, ularga joriy skrollni qo'shadi:
 
 ```js
-// get document coordinates of the element
+// elementning hujjat koordinatalarini olish
 function getCoords(elem) {
   let box = elem.getBoundingClientRect();
 
@@ -223,9 +221,9 @@ function getCoords(elem) {
 }
 ```
 
-If in the example above we used it with `position:absolute`, then the message would stay near the element on scroll.
+Agar yuqoridagi misolda biz uni `position:absolute` bilan ishlatsak, xabar skroll qilinganda element yonida qoladi.
 
-The modified `createMessageUnder` function:
+O'zgartirilgan `createMessageUnder` funksiyasi:
 
 ```js
 function createMessageUnder(elem, html) {
@@ -243,13 +241,13 @@ function createMessageUnder(elem, html) {
 }
 ```
 
-## Summary
+## Xulosa
 
-Any point on the page has coordinates:
+Sahifadagi har qanday nuqta koordinatalarga ega:
 
-1. Relative to the window -- `elem.getBoundingClientRect()`.
-2. Relative to the document -- `elem.getBoundingClientRect()` plus the current page scroll.
+1. Oynaga nisbatan -- `elem.getBoundingClientRect()`.
+2. Hujjatga nisbatan -- `elem.getBoundingClientRect()` plus joriy sahifa skrolli.
 
-Window coordinates are great to use with `position:fixed`, and document coordinates do well with `position:absolute`.
+Oyna koordinatalari `position:fixed` bilan ishlatish uchun ajoyib, hujjat koordinatalari esa `position:absolute` bilan yaxshi ishlaydi.
 
-Both coordinate systems have their pros and cons; there are times we need one or the other one, just like CSS `position` `absolute` and `fixed`.
+Ikki koordinata tizimi ham o'z afzalliklari va kamchiliklariga ega; bizga ba'zida biri yoki boshqasi kerak bo'ladi, xuddi CSS `position` `absolute` va `fixed` kabi.

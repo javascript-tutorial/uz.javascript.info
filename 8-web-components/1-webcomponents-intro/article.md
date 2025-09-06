@@ -1,76 +1,76 @@
-# From the orbital height
+# Orbital balandlikdan
 
-This section describes a set of modern standards for "web components".
+Ushbu bo'lim "web komponentlar" uchun zamonaviy standartlar to'plamini tasvirlaydi.
 
-As of now, these standards are under development. Some features are well-supported and integrated into the modern HTML/DOM standard, while others are yet in draft stage. You can try examples in any browser, Google Chrome is probably the most up to date with these features. Guess, that's because Google fellows are behind many of the related specifications.
+Hozircha bu standartlar ishlab chiqilmoqda. Ba'zi xususiyatlar yaxshi qo'llab-quvvatlanadi va zamonaviy HTML/DOM standartiga integratsiya qilingan, boshqalari esa hali loyiha bosqichida. Misollarni har qanday brauzerda sinab ko'rishingiz mumkin, Google Chrome bu xususiyatlar bilan eng yangi hisoblanadi. Ehtimol, buning sababi Google xodimlari ko'plab tegishli spetsifikatsiyalar ortida turishidir.
 
-## What's common between...
+## Ular orasida nima umumiy...
 
-The whole component idea is nothing new. It's used in many frameworks and elsewhere.
+Butun komponent g'oyasi yangi emas. U ko'plab framework'larda va boshqa joylarda ishlatiladi.
 
-Before we move to implementation details, take a look at this great achievement of humanity:
+Amalga oshirish tafsilotlariga o'tishdan oldin, insoniyatning ushbu buyuk yutuqiga qarang:
 
 ![](satellite.jpg)
 
-That's the International Space Station (ISS).
+Bu Xalqaro Kosmik Stansiya (ISS).
 
-And this is how it's made inside (approximately):
+Va bu uning ichida qanday yasalganini ko'rsatadi (taxminan):
 
 ![](satellite-expanded.jpg)
 
-The International Space Station:
-- Consists of many components.
-- Each component, in its turn, has many smaller details inside.
-- The components are very complex, much more complicated than most websites.
-- Components are developed internationally, by teams from different countries, speaking different languages.
+Xalqaro Kosmik Stansiya:
+- Ko'plab komponentlardan iborat.
+- Har bir komponent, o'z navbatida, ichida ko'plab kichikroq tafsilotlarga ega.
+- Komponentlar juda murakkab, ko'pgina veb-saytlardan ancha murakkab.
+- Komponentlar xalqaro miqyosda, turli mamlakatlardan, turli tilarda gaplashadigan jamoalar tomonidan ishlab chiqilgan.
 
-...And this thing flies, keeps humans alive in space!
+...Va bu narsa uchadi, odamlarni kosmosda tirik saqlaydi!
 
-How such complex devices are created?
+Bunday murakkab qurilmalar qanday yaratiladi?
 
-Which principles we could borrow to make our development same-level reliable and scalable? Or, at least, close to it.
+Bizning ishlab chiqishimizni bir xil darajada ishonchli va kengaytiriladigan qilish uchun qaysi prinsiplarni qarz olishimiz mumkin? Yoki hech bo'lmaganda unga yaqin.
 
-## Component architecture
+## Komponent arxitekturasi
 
-The well known rule for developing complex software is: don't make complex software.
+Murakkab dasturiy ta'minotni ishlab chiqish uchun taniqli qoida: murakkab dasturiy ta'minot yasama.
 
-If something becomes complex -- split it into simpler parts and connect in the most obvious way.
+Agar biror narsa murakkab bo'lib qolsa -- uni oddiyroq qismlarga bo'ling va eng aniq usulda ulang.
 
-**A good architect is the one who can make the complex simple.**
+**Yaxshi arxitektor - murakkabni oddiy qila oladigan kimsadir.**
 
-We can split user interface into visual components: each of them has own place on the page, can "do" a well-described task, and is separate from the others.
+Biz foydalanuvchi interfeysini vizual komponentlarga bo'lishimiz mumkin: ularning har biri sahifada o'z o'rniga ega, yaxshi tasvirlangan vazifani "bajarishi" mumkin va boshqalardan alohida.
 
-Let's take a look at a website, for example Twitter.
+Keling, veb-saytga qaraylik, masalan Twitter.
 
-It naturally splits into components:
+U tabiiy ravishda komponentlarga bo'linadi:
 
 ![](web-components-twitter.svg)
 
-1. Top navigation.
-2. User info.
-3. Follow suggestions.
-4. Submit form.
-5. (and also 6, 7) -- messages.
+1. Yuqori navigatsiya.
+2. Foydalanuvchi ma'lumotlari.
+3. Kuzatish takliflari.
+4. Yuborish formasi.
+5. (shuningdek, 6, 7) -- xabarlar.
 
-Components may have subcomponents, e.g. messages may be parts of a higher-level "message list" component. A clickable user picture itself may be a component, and so on.
+Komponentlar pastki komponentlarga ega bo'lishi mumkin, masalan xabarlar yuqori darajadagi "xabarlar ro'yxati" komponentining qismlari bo'lishi mumkin. Bosiladigan foydalanuvchi rasmi o'zi komponent bo'lishi mumkin va hokazo.
 
-How do we decide, what is a component? That comes from intuition, experience and common sense. Usually it's a separate visual entity that we can describe in terms of what it does and how it interacts with the page. In the case above, the page has blocks, each of them plays its own role, it's logical to make these components.
+Qanday qilib nima komponent ekanligini hal qilamiz? Bu intuitsiya, tajriba va sog'lom fikrdan keladi. Odatda bu alohida vizual obyekt bo'lib, biz uni nima qilishi va sahifa bilan qanday o'zaro ta'sir qilishi nuqtai nazaridan tasvirlay olamiz. Yuqoridagi holatda sahifada bloklar bor, ularning har biri o'z rolini o'ynaydi, bu komponentlarni yaratish mantiqiy.
 
-A component has:
-- Its own JavaScript class.
-- DOM structure, managed solely by its class, outside code doesn't access it ("encapsulation" principle).
-- CSS styles, applied to the component.
-- API: events, class methods etc, to interact with other components.
+Komponent quyidagilarga ega:
+- O'zining JavaScript klassi.
+- DOM tuzilmasi, faqat o'z klassi tomonidan boshqariladi, tashqi kod unga kirmaydi ("inkapsulyatsiya" printsipi).
+- CSS uslublari, komponentga qo'llaniladi.
+- API: hodisalar, klass metodlari va boshqalar, boshqa komponentlar bilan o'zaro ta'sir qilish uchun.
 
-Once again, the whole "component" thing is nothing special.
+Yana bir bor, butun "komponent" narsasi maxsus emas.
 
-There exist many frameworks and development methodologies to build them, each with its own bells and whistles. Usually, special CSS classes and conventions are used to provide "component feel" -- CSS scoping and DOM encapsulation.
+Ularni qurish uchun ko'plab framework'lar va ishlab chiqish metodologiyalari mavjud, har biri o'zining qo'ng'iroqlari va hushtak-hushtak bilan. Odatda "komponent hissi"ni ta'minlash uchun maxsus CSS klasslari va konventsiyalardan foydalaniladi -- CSS ko'lami va DOM inkapsulyatsiyasi.
 
-"Web components" provide built-in browser capabilities for that, so we don't have to emulate them any more.
+"Web komponentlar" buning uchun o'rnatilgan brauzer imkoniyatlarini taqdim etadi, shuning uchun endi ularni taqlid qilishimiz shart emas.
 
-- [Custom elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements) -- to define custom HTML elements.
-- [Shadow DOM](https://dom.spec.whatwg.org/#shadow-trees) -- to create an internal DOM for the component, hidden from the others.
-- [CSS Scoping](https://drafts.csswg.org/css-scoping/) -- to declare styles that only apply inside the Shadow DOM of the component.
-- [Event retargeting](https://dom.spec.whatwg.org/#retarget) and other minor stuff to make custom components better fit the development.
+- [Custom elements](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements) -- maxsus HTML elementlarini aniqlash uchun.
+- [Shadow DOM](https://dom.spec.whatwg.org/#shadow-trees) -- komponent uchun ichki DOM yaratish uchun, boshqalardan yashirilgan.
+- [CSS Scoping](https://drafts.csswg.org/css-scoping/) -- faqat komponentning Shadow DOM ichida qo'llaniladigan uslublarni e'lon qilish uchun.
+- [Event retargeting](https://dom.spec.whatwg.org/#retarget) va boshqa kichik narsalar maxsus komponentlarni ishlab chiqishga yaxshiroq moslashish uchun.
 
-In the next chapter we'll go into details of "Custom Elements" -- the fundamental and well-supported feature of web components, good on its own.
+Keyingi bobda biz "Custom Elements"ning tafsilotlariga kiramiz -- web komponentlarning asosiy va yaxshi qo'llab-quvvatlanadigan xususiyati, o'z-o'zidan yaxshi.

@@ -1,62 +1,61 @@
-// <td> under the mouse right now (if any)
+// <td> hozir sichqoncha ostida (agar mavjud bo'lsa)
 let currentElem = null;
 
-table.onmouseover = function(event) {
-  // before entering a new element, the mouse always leaves the previous one
-  // if currentElem is set, we didn't leave the previous <td>,
-  // that's a mouseover inside it, ignore the event
+table.onmouseover = function (event) {
+  // yangi elementni kiritishdan oldin sichqoncha har doim oldingi elementni tark etadi
+  // agar currentElem o'rnatilgan bo'lsa, biz oldingi <td> dan chiqmadik,
+  // bu uning ichida sichqonchani bosish, hodisani e'tiborsiz qoldiring
   if (currentElem) return;
 
-  let target = event.target.closest('td');
+  let target = event.target.closest("td");
 
-  // we moved not into a <td> - ignore
+  // biz <td> ga ko'chdik - e'tibor bermang
   if (!target) return;
 
-  // moved into <td>, but outside of our table (possible in case of nested tables)
-  // ignore
+  // <td> ga ko'chirildi, lekin jadvalimizdan tashqarida (jadvallar o'rnatilgan bo'lsa mumkin)
+  // e'tibor bermang
   if (!table.contains(target)) return;
 
-  // hooray! we entered a new <td>
+  // urrraaa! biz yangi <td> ga kirdik
   currentElem = target;
   onEnter(currentElem);
 };
 
-
-table.onmouseout = function(event) {
-  // if we're outside of any <td> now, then ignore the event
-  // that's probably a move inside the table, but out of <td>,
-  // e.g. from <tr> to another <tr>
+table.onmouseout = function (event) {
+  // agar biz hozir biron bir <td> dan tashqarida bo'lsak, hodisaga e'tibor bermang
+  // bu jadval ichidagi harakat, lekin <td> dan tashqarida,
+  // masalan. <tr> dan boshqa <tr> ga
   if (!currentElem) return;
 
-  // we're leaving the element – where to? Maybe to a descendant?
+  // biz elementni qoldiramiz – qayerga? Balki vorisigadir?
   let relatedTarget = event.relatedTarget;
 
   while (relatedTarget) {
-    // go up the parent chain and check – if we're still inside currentElem
-    // then that's an internal transition – ignore it
+    // ota-ona zanjiriga o'ting va biz hali ham currentElem ichida ekanligimizni tekshiring
+    // keyin bu ichki o'tish - unga e'tibor bermang
     if (relatedTarget == currentElem) return;
 
     relatedTarget = relatedTarget.parentNode;
   }
 
-  // we left the <td>. really.
+  // biz <td> ni tark etdik.
   onLeave(currentElem);
   currentElem = null;
 };
 
-// any functions to handle entering/leaving an element
+// elementni kiritish/chiqish bilan bog'liq har qanday funktsiyalar
 function onEnter(elem) {
-  elem.style.background = 'pink';
+  elem.style.background = "pink";
 
-  // show that in textarea
+  // buni matn maydonida ko'rsating
   text.value += `over -> ${currentElem.tagName}.${currentElem.className}\n`;
   text.scrollTop = 1e6;
 }
 
 function onLeave(elem) {
-  elem.style.background = '';
+  elem.style.background = "";
 
-  // show that in textarea
+  // buni matn maydonida ko'rsating
   text.value += `out <- ${elem.tagName}.${elem.className}\n`;
   text.scrollTop = 1e6;
 }

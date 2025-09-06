@@ -1,1 +1,1 @@
-To append text to each `<li>` we can alter the text node `data`.
+Har bir `<li>` ga matn qo'shish uchun biz `ma'lumotlar` matn tugunini o'zgartirishimiz mumkin.

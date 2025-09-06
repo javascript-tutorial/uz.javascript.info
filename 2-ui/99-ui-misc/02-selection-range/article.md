@@ -4,37 +4,37 @@ libs:
 
 ---
 
-# Selection and Range
+# Tanlash va Range
 
-In this chapter we'll cover selection in the document, as well as selection in form fields, such as `<input>`.
+Bu bobda biz hujjatdagi tanlashni, shuningdek `<input>` kabi forma maydonlaridagi tanlashni ko'rib chiqamiz.
 
-JavaScript can access an existing selection, select/deselect DOM nodes as a whole or partially, remove the selected content from the document, wrap it into a tag, and so on.
+JavaScript mavjud tanlashga kirishishi, DOM tugunlarini to'liq yoki qisman tanlashi/tanlamasligini bekor qilishi, tanlangan kontentni hujjatdan olib tashlashi, uni tegga o'rashi va hokazolarni amalga oshirishi mumkin.
 
-You can find some recipes for common tasks at the end of the chapter, in "Summary" section. Maybe that covers your current needs, but you'll get much more if you read the whole text.
+Bobning oxiridagi "Xulosa" qismida umumiy vazifalar uchun ba'zi retseptlarni topishingiz mumkin. Balki bu sizning hozirgi ehtiyojlaringizni qondiradi, lekin butun matnni o'qisangiz ko'proq narsalarni olasiz.
 
-The underlying `Range` and `Selection` objects are easy to grasp, and then you'll need no recipes to make them do what you want.
+Asosiy `Range` va `Selection` obyektlari tushunish oson va keyin ulardan xohlagan narsangizni qildirish uchun hech qanday retseptga ehtiyoj qolmaydi.
 
 ## Range
 
-The basic concept of selection is [Range](https://dom.spec.whatwg.org/#ranges), that is essentially a pair of "boundary points": range start and range end.
+Tanlashning asosiy kontseptsiyasi [Range](https://dom.spec.whatwg.org/#ranges) bo'lib, u asosan bir juft "chegara nuqtalari"dir: range boshlanishi va range tugashi.
 
-A `Range` object is created without parameters:
+`Range` obyekti parametrlarsiz yaratiladi:
 
 ```js
 let range = new Range();
 ```
 
-Then we can set the selection boundaries using `range.setStart(node, offset)` and `range.setEnd(node, offset)`.
+Keyin biz `range.setStart(node, offset)` va `range.setEnd(node, offset)` yordamida tanlash chegaralarini o'rnatishimiz mumkin.
 
-As you might guess, further we'll use the `Range` objects for selection, but first let's create few such objects.
+Taxmin qilganingizdek, keyinroq biz `Range` obyektlarini tanlash uchun ishlatamiz, lekin avval bunday bir necha obyektlarni yaratamiz.
 
-### Selecting the text partially
+### Matnni qisman tanlash
 
-The interesting thing is that the first argument `node` in both methods can be either a text node or an element node, and the meaning of the second argument depends on that.
+Qiziqarli tomoni shundaki, ikkala usuldagi birinchi argument `node` matn tuguni yoki element tuguni bo'lishi mumkin va ikkinchi argumentning ma'nosi bunga bog'liq.
 
-**If `node` is a text node, then `offset` must be the position in its text.**
+**Agar `node` matn tuguni bo'lsa, u holda `offset` uning matndagi pozitsiya bo'lishi kerak.**
 
-For example, given the element `<p>Hello</p>`, we can create the range containing the letters "ll" as follows:
+Masalan, `<p>Hello</p>` elementi berilgan bo'lsa, biz "ll" harflarini o'z ichiga olgan range yaratishimiz mumkin:
 
 ```html run
 <p id="p">Hello</p>
@@ -43,28 +43,28 @@ For example, given the element `<p>Hello</p>`, we can create the range containin
   range.setStart(p.firstChild, 2);
   range.setEnd(p.firstChild, 4);
   
-  // toString of a range returns its content as text
+  // range ning toString usuli uning kontentini matn sifatida qaytaradi
   console.log(range); // ll
 </script>
 ```
 
-Here we take the first child of `<p>` (that's the text node) and specify the text positions inside it:
+Bu yerda biz `<p>` ning birinchi bolasini olamiz (bu matn tuguni) va uning ichidagi matn pozitsiyalarini belgilaymiz:
 
 ![](range-hello-1.svg)
 
-### Selecting element nodes
+### Element tugunlarini tanlash
 
-**Alternatively, if `node` is an element node, then `offset` must be the child number.** 
+**Muqobil ravishda, agar `node` element tuguni bo'lsa, u holda `offset` bola raqami bo'lishi kerak.** 
 
-That's handy for making ranges that contain nodes as a whole, not stop somewhere inside their text.
+Bu tugunlarni to'liq o'z ichiga olgan range yaratish uchun qulay, ularning matnining biror joyida to'xtab qolmaslik uchun.
 
-For example, we have a more complex document fragment:
+Masalan, bizda yanada murakkab hujjat fragmenti bor:
 
 ```html autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 ```
 
-Here's its DOM structure with both element and text nodes:
+Mana uning element va matn tugunlari bilan DOM tuzilishi:
 
 <div class="select-p-domtree"></div>
 
@@ -102,20 +102,20 @@ let selectPDomtree = {
 drawHtmlTree(selectPDomtree, 'div.select-p-domtree', 690, 320);
 </script>
 
-Let's make a range for `"Example: <i>italic</i>"`.
+Keling, `"Example: <i>italic</i>"` uchun range yarataylik.
 
-As we can see, this phrase consists of exactly two children of `<p>`, with indexes `0` and `1`:
+Ko'rib turganimizdek, bu ibora aniq `<p>` ning ikkita bolasidan iborat, indekslari `0` va `1`:
 
 ![](range-example-p-0-1.svg)
 
-- The starting point has `<p>` as the parent `node`, and `0` as the offset.
+- Boshlanish nuqtasi `<p>` ni ota `node` sifatida va `0` ni offset sifatida oladi.
 
-    So we can set it as `range.setStart(p, 0)`.
-- The ending point also has `<p>` as the parent `node`, but `2` as the offset (it specifies the range up to, but not including `offset`).
+    Shuning uchun biz uni `range.setStart(p, 0)` deb o'rnatishimiz mumkin.
+- Tugash nuqtasi ham `<p>` ni ota `node` sifatida oladi, lekin `2` ni offset sifatida oladi (u range ni `offset` gacha, lekin uni o'z ichiga olmasdan belgilaydi).
 
-    So we can set it as `range.setEnd(p, 2)`.
+    Shuning uchun biz uni `range.setEnd(p, 2)` deb o'rnatishimiz mumkin.
 
-Here's the demo. If you run it, you can see that the text gets selected:
+Mana demo. Agar uni ishga tushirsangiz, matnning tanlanganini ko'rishingiz mumkin:
 
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -128,21 +128,21 @@ Here's the demo. If you run it, you can see that the text gets selected:
   range.setEnd(p, 2);
 */!*
 
-  // toString of a range returns its content as text, without tags
+  // range ning toString usuli uning kontentini teglar o'chirilgan holda matn sifatida qaytaradi
   console.log(range); // Example: italic
 
-  // apply this range for document selection (explained later below)
+  // bu range ni hujjat tanlashi uchun qo'llang (keyinroq tushuntiriladi)
   document.getSelection().addRange(range);
 </script>
 ```
 
-Here's a more flexible test stand where you can set range start/end numbers and explore other variants:
+Bu yerda range boshlanishi/tugashi raqamlarini o'rnatishingiz va boshqa variantlarni o'rganishingiz mumkin bo'lgan yanada moslashuvchan test standidir:
 
 ```html run autorun
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 
-From <input id="start" type="number" value=1> – To <input id="end" type="number" value=4>
-<button id="button">Click to select</button>
+Dan <input id="start" type="number" value=1> – Gacha <input id="end" type="number" value=4>
+<button id="button">Tanlash uchun bosing</button>
 <script>
   button.onclick = () => {
   *!*
@@ -152,32 +152,32 @@ From <input id="start" type="number" value=1> – To <input id="end" type="numbe
     range.setEnd(p, end.value);
   */!*
 
-    // apply the selection, explained later below
+    // tanlashni qo'llash, keyinroq tushuntiriladi
     document.getSelection().removeAllRanges();
     document.getSelection().addRange(range);
   };
 </script>
 ```
 
-E.g. selecting in the same `<p>` from offset `1` to `4` gives us the range `<i>italic</i> and <b>bold</b>`:
+Masalan, bir xil `<p>` da `1` dan `4` gacha offset bilan tanlash bizga `<i>italic</i> and <b>bold</b>` range beradi:
 
 ![](range-example-p-1-3.svg)
 
-```smart header="Starting and ending nodes can be different"
-We don't have to use the same node in `setStart` and `setEnd`. A range may span across many unrelated nodes. It's only important that the end is after the start in the document.
+```smart header="Boshlanish va tugash tugunlari turlicha bo'lishi mumkin"
+`setStart` va `setEnd` da bir xil tugunni ishlatishimiz shart emas. Range ko'plab bog'liq bo'lmagan tugunlar bo'ylab cho'zilishi mumkin. Faqat tugash hujjatda boshlanishdan keyin kelishi muhim.
 ```
 
-### Selecting a bigger fragment
+### Kattaroq fragmentni tanlash
 
-Let's make a bigger selection in our example, like this:
+Misolimizda kattaroq tanlov qilaylik:
 
 ![](range-example-p-2-b-3.svg)
 
-We already know how to do that. We just need to set the start and the end as a relative offset in text nodes.
+Buni qanday qilishni allaqachon bilamiz. Faqat boshlanish va tugashni matn tugunlaridagi nisbiy offset sifatida o'rnatishimiz kerak.
 
-We need to create a range, that:
-- starts from position 2 in `<p>` first child (taking all but two first letters of "Ex<b>ample:</b> ")
-- ends at the position 3 in `<b>` first child (taking first three letters of "<b>bol</b>d", but no more):
+Bizga quyidagicha range yaratish kerak:
+- `<p>` birinchi bolasining 2-pozitsiyasidan boshlanadi ("Ex<b>ample:</b> " dan dastlabki ikkita harfni olib tashlab)
+- `<b>` birinchi bolasining 3-pozitsiyasida tugaydi ("<b>bol</b>d" dan dastlabki uchta harfni olib, boshqasini olmasdan):
 
 ```html run
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
@@ -190,75 +190,74 @@ We need to create a range, that:
 
   console.log(range); // ample: italic and bol
 
-  // use this range for selection (explained later)
+  // bu range ni tanlash uchun ishlating (keyinroq tushuntiriladi)
   window.getSelection().addRange(range);
 </script>
 ```
 
-As you can see, it's fairly easy to make a range of whatever we want.
+Ko'rib turganimizdek, xohlagan range yaratish juda oson.
 
-If we'd like to take nodes as a whole, we can pass elements in `setStart/setEnd`. Otherwise, we can work on the text level. 
+Agar tugunlarni to'liq olmoqchi bo'lsak, `setStart/setEnd` ga elementlarni berishimiz mumkin. Aks holda, matn darajasida ishlashimiz mumkin.
 
-## Range properties
+## Range xossalari
 
-The range object that we created in the example above has following properties:
+Yuqoridagi misolda yaratilgan range obyektining quyidagi xossalari bor:
 
 ![](range-example-p-2-b-3-range.svg)
 
-- `startContainer`, `startOffset` -- node and offset of the start,
-  - in the example above: first text node inside `<p>` and `2`.
-- `endContainer`, `endOffset` -- node and offset of the end,
-  - in the example above: first text node inside `<b>` and `3`.
-- `collapsed` -- boolean, `true` if the range starts and ends on the same point (so there's no content inside the range),
-  - in the example above: `false`
-- `commonAncestorContainer` -- the nearest common ancestor of all nodes within the range,
-  - in the example above: `<p>`
+- `startContainer`, `startOffset` -- boshlanishning tuguni va offseti,
+  - yuqoridagi misolda: `<p>` ichidagi birinchi matn tuguni va `2`.
+- `endContainer`, `endOffset` -- tugashning tuguni va offseti,
+  - yuqoridagi misolda: `<b>` ichidagi birinchi matn tuguni va `3`.
+- `collapsed` -- boolean, agar range bir xil nuqtada boshlanib tugasa `true` (shuning uchun range ichida hech qanday kontent yo'q),
+  - yuqoridagi misolda: `false`
+- `commonAncestorContainer` -- range ichidagi barcha tugunlarning eng yaqin umumiy ajdodi,
+  - yuqoridagi misolda: `<p>`
 
+## Range tanlash usullari
 
-## Range selection methods
+Range larni boshqarish uchun ko'plab qulay usullar mavjud.
 
-There are many convenience methods to manipulate ranges.
+Biz allaqachon `setStart` va `setEnd` ni ko'rdik, mana boshqa shunga o'xshash usullar.
 
-We've already seen `setStart` and `setEnd`, here are other similar methods.
+Range boshlanishini o'rnatish:
 
-Set range start:
+- `setStart(node, offset)` boshlanishni o'rnatish: `node` dagi `offset` pozitsiyasida
+- `setStartBefore(node)` boshlanishni o'rnatish: `node` dan darhol oldin
+- `setStartAfter(node)` boshlanishni o'rnatish: `node` dan darhol keyin
 
-- `setStart(node, offset)` set start at: position `offset` in `node`
-- `setStartBefore(node)` set start at: right before `node`
-- `setStartAfter(node)` set start at: right after `node`
+Range tugashini o'rnatish (shunga o'xshash usullar):
 
-Set range end (similar methods):
+- `setEnd(node, offset)` tugashni o'rnatish: `node` dagi `offset` pozitsiyasida
+- `setEndBefore(node)` tugashni o'rnatish: `node` dan darhol oldin
+- `setEndAfter(node)` tugashni o'rnatish: `node` dan darhol keyin
 
-- `setEnd(node, offset)` set end at: position `offset` in `node`
-- `setEndBefore(node)` set end at: right before `node`
-- `setEndAfter(node)` set end at: right after `node`
+Texnik jihatdan, `setStart/setEnd` har qanday narsani qila oladi, lekin ko'proq usullar ko'proq qulaylik beradi.
 
-Technically, `setStart/setEnd` can do anything, but more methods provide more convenience.
+Barcha bu usullarda `node` ham matn ham element tuguni bo'lishi mumkin: matn tugunlari uchun `offset` shuncha belgilarni o'tkazib yuboradi, element tugunlari uchun esa shuncha bola tugunlarni.
 
-In all these methods, `node` can be both a text or element node: for text nodes `offset` skips that many of characters, while for element nodes that many child nodes.
+Range yaratishning yana ham ko'p usullari:
+- `selectNode(node)` butun `node` ni tanlash uchun range ni o'rnatish
+- `selectNodeContents(node)` butun `node` kontentini tanlash uchun range ni o'rnatish
+- `collapse(toStart)` agar `toStart=true` bo'lsa end=start o'rnatish, aks holda start=end o'rnatish, shu tariqa range ni yig'ish
+- `cloneRange()` bir xil start/end bilan yangi range yaratish
 
-Even more methods to create ranges:
-- `selectNode(node)` set range to select the whole `node`
-- `selectNodeContents(node)` set range to select the whole `node` contents
-- `collapse(toStart)` if `toStart=true` set end=start, otherwise set start=end, thus collapsing the range
-- `cloneRange()` creates a new range with the same start/end
+## Range tahrirlash usullari
 
-## Range editing methods
+Range yaratilgandan so'ng, biz uning kontentini quyidagi usullar yordamida boshqarishimiz mumkin:
 
-Once the range is created, we can manipulate its content using these methods:
+- `deleteContents()` -- range kontentini hujjatdan olib tashlash
+- `extractContents()` -- range kontentini hujjatdan olib tashlash va [DocumentFragment](info:modifying-document#document-fragment) sifatida qaytarish
+- `cloneContents()` -- range kontentini nusxalash va [DocumentFragment](info:modifying-document#document-fragment) sifatida qaytarish
+- `insertNode(node)` -- `node` ni hujjatga range boshida kiritish
+- `surroundContents(node)` -- range kontenti atrofida `node` ni o'rash. Buning ishlashi uchun range o'z ichidagi barcha elementlar uchun ochilish va yopilish teglarini o'z ichiga olishi kerak: `<i>abc` kabi qisman range lar yo'q.
 
-- `deleteContents()` -- remove range content from the document
-- `extractContents()` -- remove range content from the document and return as [DocumentFragment](info:modifying-document#document-fragment)
-- `cloneContents()` -- clone range content and return as [DocumentFragment](info:modifying-document#document-fragment)
-- `insertNode(node)` -- insert `node` into the document at the beginning of the range
-- `surroundContents(node)` -- wrap `node` around range content. For this to work, the range must contain both opening and closing tags for all elements inside it: no partial ranges like `<i>abc`.
+Bu usullar yordamida biz tanlangan tugunlar bilan deyarli har qanday narsani qila olamiz.
 
-With these methods we can do basically anything with selected nodes.
-
-Here's the test stand to see them in action:
+Mana ularni amalda ko'rish uchun test standi:
 
 ```html run refresh autorun height=260
-Click buttons to run methods on the selection, "resetExample" to reset it.
+Tanlashda usullarni ishga tushirish uchun tugmalarni bosing, uni tiklash uchun "resetExample".
 
 <p id="p">Example: <i>italic</i> and <b>bold</b></p>
 
@@ -266,7 +265,7 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 <script>
   let range = new Range();
 
-  // Each demonstrated method is represented here:
+  // Har bir ko'rsatilgan usul bu yerda ifodalangan:
   let methods = {
     deleteContents() {
       range.deleteContents()
@@ -312,112 +311,111 @@ Click buttons to run methods on the selection, "resetExample" to reset it.
 </script>
 ```
 
-There also exist methods to compare ranges, but these are rarely used. When you need them, please refer to the [spec](https://dom.spec.whatwg.org/#interface-range) or [MDN manual](mdn:/api/Range).
-
+Range larni solishtirish usullari ham mavjud, lekin ular kamdan-kam ishlatiladi. Ular kerak bo'lganda, [spec](https://dom.spec.whatwg.org/#interface-range) yoki [MDN qo'llanma](mdn:/api/Range) ga murojaat qiling.
 
 ## Selection
 
-`Range` is a generic object for managing selection ranges. Although, creating a `Range` doesn't mean that we see a selection on screen.
+`Range` tanlash range larini boshqarish uchun umumiy obyektdir. Garchi, `Range` yaratish ekranda tanlashni ko'rishimizni anglatmaydi.
 
-We may create `Range` objects, pass them around -- they do not visually select anything on their own.
+Biz `Range` obyektlarini yaratishimiz, ularni o'tkazishimiz mumkin -- ular o'z-o'zidan vizual ravishda hech narsani tanlamaydi.
 
-The document selection is represented by `Selection` object, that can be obtained as `window.getSelection()` or `document.getSelection()`. A selection may include zero or more ranges. At least, the [Selection API specification](https://www.w3.org/TR/selection-api/) says so. In practice though, only Firefox allows to select multiple ranges in the document by using `key:Ctrl+click` (`key:Cmd+click` for Mac).
+Hujjat tanlashi `Selection` obyekti bilan ifodalanadi, uni `window.getSelection()` yoki `document.getSelection()` sifatida olish mumkin. Tanlash nol yoki ko'proq range larni o'z ichiga olishi mumkin. Hech bo'lmaganda, [Selection API spetsifikatsiyasi](https://www.w3.org/TR/selection-api/) shunday deydi. Amalda esa, faqat Firefox `key:Ctrl+click` (`key:Cmd+click` Mac uchun) yordamida hujjatda bir nechta range larni tanlashga imkon beradi.
 
-Here's a screenshot of a selection with 3 ranges, made in Firefox:
+Mana Firefox da yaratilgan 3 ta range bilan tanlashning skrinshotı:
 
 ![](selection-firefox.svg)
 
-Other browsers support at maximum 1 range. As we'll see, some of `Selection` methods imply that there may be many ranges, but again, in all browsers except Firefox, there's at maximum 1.
+Boshqa brauzerlar maksimal 1 ta range ni qo'llab-quvvatlaydi. Ko'rib turganimizdek, ba'zi `Selection` usullari ko'plab range lar bo'lishi mumkinligini nazarda tutadi, lekin yana, Firefox bundan mustasno barcha brauzerlarda maksimal 1 ta range bor.
 
-Here's a small demo that shows the current selection (select something and click) as text:
+Mana joriy tanlashni (biror narsani tanlab, bosing) matn sifatida ko'rsatadigan kichik demo:
 
 <button onclick="alert(document.getSelection())">alert(document.getSelection())</button>
 
-## Selection properties
+## Selection xossalari
 
-As said, a selection may in theory contain multiple ranges. We can get these range objects using the method:
+Aytilganidek, tanlash nazariy jihatdan bir nechta range larni o'z ichiga olishi mumkin. Biz bu range obyektlarini quyidagi usul yordamida olishimiz mumkin:
 
-- `getRangeAt(i)` -- get i-th range, starting from `0`. In all browsers except Firefox, only `0` is used.
+- `getRangeAt(i)` -- i-chi range ni olish, `0` dan boshlab. Firefox bundan mustasno barcha brauzerlarda faqat `0` ishlatiladi.
 
-Also, there exist properties that often provide better convenience.
+Shuningdek, ko'pincha yaxshiroq qulaylikni taqdim etadigan xossalar mavjud.
 
-Similar to a range, a selection object has a start, called "anchor", and the end, called "focus".
+Range ga o'xshab, selection obyekti "langar" deb ataladigan boshlanish va "fokus" deb ataladigan tugashga ega.
 
-The main selection properties are:
+Asosiy selection xossalari:
 
-- `anchorNode` -- the node where the selection starts,
-- `anchorOffset` -- the offset in `anchorNode` where the selection starts,
-- `focusNode` -- the node where the selection ends,
-- `focusOffset` -- the offset in `focusNode` where the selection ends,
-- `isCollapsed` -- `true` if selection selects nothing (empty range), or doesn't exist.
-- `rangeCount` -- count of ranges in the selection, maximum `1` in all browsers except Firefox.
+- `anchorNode` -- selection boshlangan tugun,
+- `anchorOffset` -- selection boshlangan `anchorNode` dagi offset,
+- `focusNode` -- selection tugagan tugun,
+- `focusOffset` -- selection tugagan `focusNode` dagi offset,
+- `isCollapsed` -- agar selection hech narsani tanlamasa (bo'sh range) yoki mavjud bo'lmasa `true`.
+- `rangeCount` -- selection dagi range lar soni, Firefox bundan mustasno barcha brauzerlarda maksimal `1`.
 
-```smart header="Selection end/start vs Range"
+```smart header="Selection tugashi/boshlanishi vs Range"
 
-There's an important differences of a selection anchor/focus compared with a `Range` start/end.
+Selection langar/fokusi bilan `Range` boshlanish/tugashi o'rtasida muhim farqlar bor.
 
-As we know, `Range` objects always have their start before the end. 
+Bilganimizdek, `Range` obyektlari har doim tugashdan oldin boshlanishga ega. 
 
-For selections, that's not always the case.
+Selection lar uchun bu har doim ham unday emas.
 
-Selecting something with a mouse can be done in both directions: either "left-to-right" or "right-to-left".
+Sichqoncha bilan biror narsani tanlash ikkala yo'nalishda ham amalga oshirilishi mumkin: "chapdan-o'ngga" yoki "o'ngdan-chapga".
 
-In other words, when the mouse button is pressed, and then it moves forward in the document, then its end (focus) will be after its start (anchor).
+Boshqacha qilib aytganda, sichqoncha tugmasi bosilganda va keyin hujjatda oldinga siljisa, uning tugashi (fokus) boshlanishidan (langar) keyin bo'ladi.
 
-E.g. if the user starts selecting with mouse and goes from "Example" to "italic":
+Masalan, agar foydalanuvchi sichqoncha bilan tanlashni boshlasa va "Example" dan "italic" ga o'tsa:
 
 ![](selection-direction-forward.svg)
 
-...But the same selection could be done backwards: starting from  "italic" to "Example" (backward direction), then its end (focus) will be before the start (anchor):
+...Lekin bir xil tanlash teskari yo'nalishda ham amalga oshirilishi mumkin: "italic" dan "Example" ga (teskari yo'nalish), keyin uning tugashi (fokus) boshlanishidan (langar) oldin bo'ladi:
 
 ![](selection-direction-backward.svg)
 ```
 
-## Selection events
+## Selection hodisalari
 
-There are events on to keep track of selection:
+Selection ni kuzatib borish uchun hodisalar mavjud:
 
-- `elem.onselectstart` -- when a selection *starts* specifically on element `elem` (or inside it). For instance, when the user presses the mouse button on it and starts to move the pointer.
-    - Preventing the default action cancels the selection start. So starting a selection from this element becomes impossible, but the element is still selectable. The visitor just needs to start the selection from elsewhere.
-- `document.onselectionchange` -- whenever a selection changes or starts.
-    - Please note: this handler can be set only on `document`, it tracks all selections in it.
+- `elem.onselectstart` -- tanlash aniq `elem` elementida (yoki uning ichida) *boshlanganda*. Masalan, foydalanuvchi sichqoncha tugmasini ustiga bosib, ko'rsatkichni harakatlantira boshlasa.
+    - Standart harakatni oldini olish tanlash boshlanishini bekor qiladi. Shuning uchun bu elementdan tanlashni boshlash imkonsiz bo'ladi, lekin element hali ham tanlanishi mumkin. Tashrif buyuruvchi faqat tanlashni boshqa joydan boshlashi kerak.
+- `document.onselectionchange` -- tanlash o'zgarganda yoki boshlanganda.
+    - Esda tuting: bu ishlov beruvchi faqat `document` da o'rnatilishi mumkin, u undagi barcha tanlashlarni kuzatadi.
 
-### Selection tracking demo
+### Selection kuzatuv demosi
 
-Here's a small demo. It tracks the current selection on the `document` and shows its boundaries:
+Mana kichik demo. U `document` dagi joriy tanlashni kuzatadi va uning chegaralarini ko'rsatadi:
 
 ```html run height=80
-<p id="p">Select me: <i>italic</i> and <b>bold</b></p>
+<p id="p">Meni tanla: <i>italic</i> and <b>bold</b></p>
 
-From <input id="from" disabled> – To <input id="to" disabled>
+Dan <input id="from" disabled> – Gacha <input id="to" disabled>
 <script>
   document.onselectionchange = function() {
     let selection = document.getSelection();
 
     let {anchorNode, anchorOffset, focusNode, focusOffset} = selection;
 
-    // anchorNode and focusNode are text nodes usually
+    // anchorNode va focusNode odatda matn tugunlari
     from.value = `${anchorNode?.data}, offset ${anchorOffset}`;
     to.value = `${focusNode?.data}, offset ${focusOffset}`;
   };
 </script>
 ```
 
-### Selection copying demo
+### Selection nusxalash demosi
 
-There are two approaches to copying the selected content:
+Tanlangan kontentni nusxalashning ikkita yondashuvi mavjud:
 
-1. We can use `document.getSelection().toString()` to get it as text.
-2. Otherwise, to copy the full DOM, e.g. if we need to keep formatting, we can get the underlying ranges with `getRangesAt(...)`. A `Range` object, in turn, has `cloneContents()` method that clones its content and returns as `DocumentFragment` object, that we can insert elsewhere.
+1. Uni matn sifatida olish uchun `document.getSelection().toString()` dan foydalanishimiz mumkin.
+2. Aks holda, to'liq DOM ni nusxalash uchun, masalan formatlashni saqlashimiz kerak bo'lsa, `getRangesAt(...)` bilan asosiy range larni olishimiz mumkin. `Range` obyekti, o'z navbatida, uning kontentini nusxalaydigan va `DocumentFragment` obyekti sifatida qaytaradigan `cloneContents()` usuliga ega, buni boshqa joyga kiritishimiz mumkin.
 
-Here's the demo of copying the selected content both as text and as DOM nodes:
+Mana tanlangan kontentni ham matn, ham DOM tugunlari sifatida nusxalash demosi:
 
 ```html run height=100
-<p id="p">Select me: <i>italic</i> and <b>bold</b></p>
+<p id="p">Meni tanla: <i>italic</i> and <b>bold</b></p>
 
-Cloned: <span id="cloned"></span>
+Nusxalangan: <span id="cloned"></span>
 <br>
-As text: <span id="astext"></span>
+Matn sifatida: <span id="astext"></span>
 
 <script>
   document.onselectionchange = function() {
@@ -425,111 +423,111 @@ As text: <span id="astext"></span>
 
     cloned.innerHTML = astext.innerHTML = "";
 
-    // Clone DOM nodes from ranges (we support multiselect here)
+    // Range lardan DOM tugunlarini nusxalash (bu yerda multiselect ni qo'llab-quvvatlaymiz)
     for (let i = 0; i < selection.rangeCount; i++) {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
 
-    // Get as text
+    // Matn sifatida olish
     astext.innerHTML += selection;
   };
 </script>
 ```
 
-## Selection methods
+## Selection usullari
 
-We can work with the selection by addding/removing ranges:
+Biz range lar qo'shish/olib tashlash orqali tanlash bilan ishlashimiz mumkin:
 
-- `getRangeAt(i)` -- get i-th range, starting from `0`. In all browsers except Firefox, only `0` is used.
-- `addRange(range)` -- add `range` to selection. All browsers except Firefox ignore the call, if the selection already has an associated range.
-- `removeRange(range)` -- remove `range` from the selection.
-- `removeAllRanges()` -- remove all ranges.
-- `empty()` -- alias to `removeAllRanges`.
+- `getRangeAt(i)` -- i-chi range ni olish, `0` dan boshlab. Firefox bundan mustasno barcha brauzerlarda faqat `0` ishlatiladi.
+- `addRange(range)` -- tanlashga `range` qo'shish. Agar tanlash allaqachon bog'langan range ga ega bo'lsa, Firefox bundan mustasno barcha brauzerlar chaqiruvni e'tiborsiz qoldiradi.
+- `removeRange(range)` -- tanlashdan `range` ni olib tashlash.
+- `removeAllRanges()` -- barcha range larni olib tashlash.
+- `empty()` -- `removeAllRanges` ning taxallusi.
 
-There are also convenience methods to manipulate the selection range directly, without intermediate `Range` calls:
+Oraliq `Range` chaqiruvlarisiz to'g'ridan-to'g'ri tanlash range ni boshqarish uchun qulay usullar ham mavjud:
 
-- `collapse(node, offset)` -- replace selected range with a new one that starts and ends at the given `node`, at position `offset`.
-- `setPosition(node, offset)` -- alias to `collapse`.
-- `collapseToStart()` - collapse (replace with an empty range) to selection start,
-- `collapseToEnd()` - collapse to selection end,
-- `extend(node, offset)` - move focus of the selection to the given `node`, position `offset`,
-- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - replace selection range with the given start `anchorNode/anchorOffset` and end `focusNode/focusOffset`. All content in-between them is selected.
-- `selectAllChildren(node)` -- select all children of the `node`.
-- `deleteFromDocument()` -- remove selected content from the document.
-- `containsNode(node, allowPartialContainment = false)` -- checks whether the selection contains `node` (partially if the second argument is `true`)
+- `collapse(node, offset)` -- tanlangan range ni berilgan `node` da, `offset` pozitsiyasida boshlanib tugaydigan yangi bilan almashtirish.
+- `setPosition(node, offset)` -- `collapse` ning taxallusi.
+- `collapseToStart()` - tanlash boshiga yig'ish (bo'sh range bilan almashtirish),
+- `collapseToEnd()` - tanlash oxiriga yig'ish,
+- `extend(node, offset)` - tanlashning fokusini berilgan `node` ga, `offset` pozitsiyasiga o'tkazish,
+- `setBaseAndExtent(anchorNode, anchorOffset, focusNode, focusOffset)` - tanlash range ni berilgan boshlang'ich `anchorNode/anchorOffset` va oxirgi `focusNode/focusOffset` bilan almashtirish. Ular orasidagi barcha kontent tanlanadi.
+- `selectAllChildren(node)` -- `node` ning barcha bolalarini tanlash.
+- `deleteFromDocument()` -- tanlangan kontentni hujjatdan olib tashlash.
+- `containsNode(node, allowPartialContainment = false)` -- tanlash `node` ni o'z ichiga olgan-olmaganligini tekshiradi (ikkinchi argument `true` bo'lsa qisman ham).
 
-For most tasks these methods are just fine, there's no need to access the underlying `Range` object.
+Ko'pgina vazifalar uchun bu usullar etarli, asosiy `Range` obyektiga kirish kerak emas.
 
-For example, selecting the whole contents of the paragraph `<p>`:
+Masalan, `<p>` paragrafning butun kontentini tanlash:
 
 ```html run
-<p id="p">Select me: <i>italic</i> and <b>bold</b></p>
+<p id="p">Meni tanla: <i>italic</i> and <b>bold</b></p>
 
 <script>
-  // select from 0th child of <p> to the last child
+  // <p> ning 0-bolasidan oxirgi bolagacha tanlash
   document.getSelection().setBaseAndExtent(p, 0, p, p.childNodes.length);
 </script>
 ```
 
-The same thing using ranges:
+Range lar yordamida bir xil narsa:
 
 ```html run
-<p id="p">Select me: <i>italic</i> and <b>bold</b></p>
+<p id="p">Meni tanla: <i>italic</i> and <b>bold</b></p>
 
 <script>
   let range = new Range();
-  range.selectNodeContents(p); // or selectNode(p) to select the <p> tag too
+  range.selectNodeContents(p); // yoki <p> tegini ham tanlash uchun selectNode(p)
 
-  document.getSelection().removeAllRanges(); // clear existing selection if any
+  document.getSelection().removeAllRanges(); // agar mavjud tanlash bor bo'lsa tozalash
   document.getSelection().addRange(range);
 </script>
 ```
 
-```smart header="To select something, remove the existing selection first"
-If a document selection already exists, empty it first with `removeAllRanges()`. And then add ranges. Otherwise, all browsers except Firefox ignore new ranges.
+```smart header="Biror narsani tanlash uchun avval mavjud tanlashni olib tashlang"
+Agar hujjatda tanlash allaqachon mavjud bo'lsa, avval uni `removeAllRanges()` bilan bo'shating. Va keyin range lar qo'shing. Aks holda, Firefox bundan mustasno barcha brauzerlar yangi range larni e'tiborsiz qoldiradi.
 
-The exception is some selection methods, that replace the existing selection, such as `setBaseAndExtent`.
+Istisno ba'zi tanlash usullari bo'lib, ular mavjud tanlashni almashtiradi, masalan `setBaseAndExtent`.
 ```
 
-## Selection in form controls
+## Forma boshqaruvlarida tanlash
 
-Form elements, such as `input` and `textarea` provide [special API for selection](https://html.spec.whatwg.org/#textFieldSelection), without `Selection` or `Range` objects. As an input value is a pure text, not HTML, there's no need for such objects, everything's much simpler.
+`input` va `textarea` kabi forma elementlari `Selection` yoki `Range` obyektlarisiz [tanlash uchun maxsus API](https://html.spec.whatwg.org/#textFieldSelection) taqdim etadi. Input qiymati HTML emas, balki sof matn bo'lgani uchun bunday obyektlarga ehtiyoj yo'q, hamma narsa ancha sodda.
 
-Properties:
-- `input.selectionStart` -- position of selection start (writeable),
-- `input.selectionEnd` -- position of selection end (writeable),
-- `input.selectionDirection` -- selection direction, one of: "forward", "backward" or "none" (if e.g. selected with a double mouse click),
+Xossalar:
+- `input.selectionStart` -- tanlash boshlanish pozitsiyasi (yozish mumkin),
+- `input.selectionEnd` -- tanlash tugash pozitsiyasi (yozish mumkin),
+- `input.selectionDirection` -- tanlash yo'nalishi, quyidagilardan biri: "forward", "backward" yoki "none" (masalan ikki marta sichqoncha bosish bilan tanlangan bo'lsa),
 
-Events:
-- `input.onselect` -- triggers when something is selected.
+Hodisalar:
+- `input.onselect` -- biror narsa tanlanganida ishga tushadi.
 
-Methods:
+Usullar:
 
-- `input.select()` -- selects everything in the text control (can be `textarea` instead of `input`),
-- `input.setSelectionRange(start, end, [direction])` -- change the selection to span from position `start` till `end`, in the given direction (optional).
-- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- replace a range of text with the new text.
+- `input.select()` -- matn boshqaruvida hamma narsani tanlaydi (`input` o'rniga `textarea` bo'lishi mumkin),
+- `input.setSelectionRange(start, end, [direction])` -- tanlashni `start` pozitsiyasidan `end` gacha, berilgan yo'nalishda (ixtiyoriy) o'zgartirishadi.
+- `input.setRangeText(replacement, [start], [end], [selectionMode])` -- matn oralig'ini yangi matn bilan almashtirish.
 
-    Optional arguments `start` and `end`, if provided, set the range start and end, otherwise user selection is used.
+    Ixtiyoriy argumentlar `start` va `end`, agar berilgan bo'lsa, oraliq boshlanishi va tugashini belgilaydi, aks holda foydalanuvchi tanlashi ishlatiladi.
 
-    The last argument, `selectionMode`, determines how the selection will be set after the text has been replaced. The possible values are:
+    Oxirgi argument, `selectionMode`, matn almashtirilgandan keyin tanlash qanday o'rnatilishini belgilaydi. Mumkin bo'lgan qiymatlar:
 
-    - `"select"` -- the newly inserted text will be selected.
-    - `"start"` -- the selection range collapses just before the inserted text (the cursor will be immediately before it).
-    - `"end"` -- the selection range collapses just after the inserted text (the cursor will be right after it).
-    - `"preserve"` -- attempts to preserve the selection. This is the default.
+    - `"select"` -- yangi kiritilgan matn tanlanadi.
+    - `"start"` -- tanlash oralig'i kiritilgan matndan darhol oldin yig'iladi (kursor uning darhol oldida bo'ladi).
+    - `"end"` -- tanlash oralig'i kiritilgan matndan darhol keyin yig'iladi (kursor uning darhol keyin bo'ladi).
+    - `"preserve"` -- tanlashni saqlashga harakat qiladi. Bu standart.
 
-Now let's see these methods in action.
+Endi bu usullarni amalda ko'raylik.
 
-### Example: tracking selection
+### Misol: tanlashni kuzatish
 
-For example, this code uses `onselect` event to track selection:
+Masalan, bu kod tanlashni kuzatish uchun `onselect` hodisasidan foydalanadi:
 
 ```html run autorun
 <textarea id="area" style="width:80%;height:60px">
-Selecting in this text updates values below.
+Bu matndagi tanlash quyidagi qiymatlarni yangilaydi.
 </textarea>
 <br>
-From <input id="from" disabled> – To <input id="to" disabled>
+Dan <input id="from" disabled> – Gacha <input id="to" disabled>
 
 <script>
   area.onselect = function() {
@@ -539,54 +537,53 @@ From <input id="from" disabled> – To <input id="to" disabled>
 </script>
 ```
 
-Please note:
-- `onselect` triggers when something is selected, but not when the selection is removed.
-- `document.onselectionchange` event should not trigger for selections inside a form control, according to the [spec](https://w3c.github.io/selection-api/#dfn-selectionchange), as it's not related to `document` selection and ranges. Some browsers generate it, but we shouldn't rely on it.
+Esda tuting:
+- `onselect` biror narsa tanlanganida ishga tushadi, lekin tanlash olib tashlanganida emas.
+- [spec](https://w3c.github.io/selection-api/#dfn-selectionchange) ga ko'ra, forma boshqaruvi ichidagi tanlashlar uchun `document.onselectionchange` hodisasi ishga tushmasligi kerak, chunki u `document` tanlashi va range lari bilan bog'liq emas. Ba'zi brauzerlar uni hosil qiladi, lekin biz unga tayanmasligimiz kerak.
 
+### Misol: kursorni harakatlantirish
 
-### Example: moving cursor
+Biz `selectionStart` va `selectionEnd` ni o'zgartirishimiz mumkin, bu tanlashni o'rnatadi.
 
-We can change `selectionStart` and `selectionEnd`, that sets the selection.
+Muhim chegara holati - `selectionStart` va `selectionEnd` bir-biriga teng bo'lganda. U holda bu aniq kursor pozitsiyasidir. Yoki boshqacha qilib aytganda, hech narsa tanlanmaganda, tanlash kursor pozitsiyasida yig'ilgan.
 
-An important edge case is when `selectionStart` and `selectionEnd` equal each other. Then it's exactly the cursor position. Or, to rephrase, when nothing is selected, the selection is collapsed at the cursor position.
+Shunday qilib, `selectionStart` va `selectionEnd` ni bir xil qiymatga o'rnatish orqali kursorni harakatlantiramiz.
 
-So, by setting `selectionStart` and `selectionEnd` to the same value, we move the cursor.
-
-For example:
+Masalan:
 
 ```html run autorun
 <textarea id="area" style="width:80%;height:60px">
-Focus on me, the cursor will be at position 10.
+Menga fokuslan, kursor 10-pozitsiyada bo'ladi.
 </textarea>
 
 <script>
   area.onfocus = () => {
-    // zero delay setTimeout to run after browser "focus" action finishes
+    // brauzer "focus" harakat tugagandan keyin ishga tushishi uchun nol kechikish setTimeout
     setTimeout(() => {
-      // we can set any selection
-      // if start=end, the cursor is exactly at that place
+      // biz har qanday tanlash o'rnatishimiz mumkin
+      // agar start=end bo'lsa, kursor aniq o'sha joyda
       area.selectionStart = area.selectionEnd = 10;
     });
   };
 </script>
 ```
 
-### Example: modifying selection
+### Misol: tanlashni o'zgartirish
 
-To modify the content of the selection, we can use `input.setRangeText()` method. Of course, we can read `selectionStart/End` and, with the knowledge of the selection, change the corresponding substring of `value`, but `setRangeText` is more powerful and often more convenient.
+Tanlash kontentini o'zgartirish uchun `input.setRangeText()` usulidan foydalanishimiz mumkin. Albatta, biz `selectionStart/End` ni o'qishimiz va tanlash haqida ma'lumot bilan `value` ning tegishli pastki qatorini o'zgartirishimiz mumkin, lekin `setRangeText` kuchliroq va ko'pincha qulayroq.
 
-That's a somewhat complex method. In its simplest one-argument form it replaces the user selected range and removes the selection.
+Bu biroz murakkab usul. Eng oddiy bir argumentli shaklida u foydalanuvchi tanlagan oraliqni almashtiradi va tanlashni olib tashlaydi.
 
-For example, here the user selection will be wrapped by `*...*`:
+Masalan, bu yerda foydalanuvchi tanlashi `*...*` bilan o'raladi:
 
 ```html run autorun
-<input id="input" style="width:200px" value="Select here and click the button">
-<button id="button">Wrap selection in stars *...*</button>
+<input id="input" style="width:200px" value="Bu yerdan tanlab tugmani bosing">
+<button id="button">Tanlashni yulduzchalar bilan o'rash *...*</button>
 
 <script>
 button.onclick = () => {
   if (input.selectionStart == input.selectionEnd) {
-    return; // nothing is selected
+    return; // hech narsa tanlanmagan
   }
 
   let selected = input.value.slice(input.selectionStart, input.selectionEnd);
@@ -595,51 +592,50 @@ button.onclick = () => {
 </script>
 ```
 
-With more arguments, we can set range `start` and `end`.
+Ko'proq argumentlar bilan biz `start` va `end` oralig'ini o'rnatishimiz mumkin.
 
-In this example we find `"THIS"` in the input text, replace it and keep the replacement selected:
+Bu misolda biz input matnida `"BU"` ni topamiz, uni almashtiramiz va almashtirishni tanlangan holda saqlaymiz:
 
 ```html run autorun
-<input id="input" style="width:200px" value="Replace THIS in text">
-<button id="button">Replace THIS</button>
+<input id="input" style="width:200px" value="Matndagi BU so'zni almashtiring">
+<button id="button">BU ni almashtirish</button>
 
 <script>
 button.onclick = () => {
-  let pos = input.value.indexOf("THIS");
+  let pos = input.value.indexOf("BU");
   if (pos >= 0) {
-    input.setRangeText("*THIS*", pos, pos + 4, "select");
-    input.focus(); // focus to make selection visible
+    input.setRangeText("*BU*", pos, pos + 2, "select");
+    input.focus(); // tanlashni ko'rinadigan qilish uchun fokus
   }
 };
 </script>
 ```
 
-### Example: insert at cursor
+### Misol: kursor joyiga kiritish
 
-If nothing is selected, or we use equal `start` and `end` in `setRangeText`, then the new text is just inserted, nothing is removed.
+Agar hech narsa tanlanmagan bo'lsa yoki `setRangeText` da teng `start` va `end` ishlatilsa, yangi matn shunchaki kiritiladi, hech narsa olib tashlanmaydi.
 
-We can also insert something "at the cursor" using `setRangeText`.
+`setRangeText` yordamida "kursor joyiga" biror narsani kiritishimiz ham mumkin.
 
-Here's a button that inserts `"HELLO"` at the cursor position and puts the cursor immediately after it. If the selection is not empty, then it gets replaced (we can detect it by comparing `selectionStart!=selectionEnd` and do something else instead):
+Mana kursor pozitsiyasiga `"SALOM"` kiritadigan va kursorni uning darhol keyin qo'yadigan tugma. Agar tanlash bo'sh bo'lmasa, u almashtiriladi (buni `selectionStart!=selectionEnd` ni solishtirib aniqlashimiz va o'rniga boshqa narsa qilishimiz mumkin):
 
 ```html run autorun
-<input id="input" style="width:200px" value="Text Text Text Text Text">
-<button id="button">Insert "HELLO" at cursor</button>
+<input id="input" style="width:200px" value="Matn Matn Matn Matn Matn">
+<button id="button">Kursor joyiga "SALOM" kiritish</button>
 
 <script>
   button.onclick = () => {
-    input.setRangeText("HELLO", input.selectionStart, input.selectionEnd, "end");
+    input.setRangeText("SALOM", input.selectionStart, input.selectionEnd, "end");
     input.focus();
   };    
 </script>
 ```
 
+## Tanlab bo'lmasligini ta'minlash
 
-## Making unselectable
+Biror narsani tanlab bo'lmasligi uchun uchta yo'l bor:
 
-To make something unselectable, there are three ways:
-
-1. Use CSS property `user-select: none`.
+1. `user-select: none` CSS xossasidan foydalanish.
 
     ```html run
     <style>
@@ -647,70 +643,68 @@ To make something unselectable, there are three ways:
       user-select: none;
     }
     </style>
-    <div>Selectable <div id="elem">Unselectable</div> Selectable</div>
+    <div>Tanlanuvchi <div id="elem">Tanlanmaydigan</div> Tanlanuvchi</div>
     ```
 
-    This doesn't allow the selection to start at `elem`. But the user may start the selection elsewhere and include `elem` into it.
+    Bu tanlashning `elem` da boshlanishiga imkon bermaydi. Lekin foydalanuvchi tanlashni boshqa joydan boshlashi va `elem` ni unga kiritishi mumkin.
 
-    Then `elem` will become a part of `document.getSelection()`, so the selection actually happens, but its content is usually ignored in copy-paste.
+    Keyin `elem` `document.getSelection()` ning bir qismiga aylanadi, shuning uchun tanlash haqiqatda sodir bo'ladi, lekin uning kontenti odatda nusxa-joylashtirish da e'tiborga olinmaydi.
 
-
-2. Prevent default action in `onselectstart` or `mousedown` events.
+2. `onselectstart` yoki `mousedown` hodisalaridagi standart harakatni oldini olish.
 
     ```html run
-    <div>Selectable <div id="elem">Unselectable</div> Selectable</div>
+    <div>Tanlanuvchi <div id="elem">Tanlanmaydigan</div> Tanlanuvchi</div>
 
     <script>
       elem.onselectstart = () => false;
     </script>
     ```
 
-    This prevents starting the selection on `elem`, but the visitor may start it at another element, then extend to `elem`.
+    Bu `elem` da tanlashni boshlashga to'sqinlik qiladi, lekin tashrif buyuruvchi uni boshqa elementda boshlashi, keyin `elem` ga kengaytirishi mumkin.
 
-    That's convenient when there's another event handler on the same action that triggers the select (e.g. `mousedown`). So we disable the selection to avoid conflict, still allowing `elem` contents to be copied.
+    Bu bir xil harakatda tanlashni ishga tushiradigan boshqa hodisa ishlov beruvchisi bo'lganida qulay (masalan `mousedown`). Shuning uchun biz ziddiyatni oldini olish uchun tanlashni o'chiramiz, lekin `elem` kontentlarini nusxalashga imkon beramiz.
 
-3. We can also clear the selection post-factum after it happens with `document.getSelection().empty()`. That's rarely used, as this causes unwanted blinking as the selection appears-disappears.
+3. Shuningdek, tanlash sodir bo'lgandan keyin `document.getSelection().empty()` bilan uni tozalashimiz mumkin. Bu kamdan-kam ishlatiladi, chunki tanlash paydo bo'lib-yo'qolishi natijasida istalmagan miltillashga sabab bo'ladi.
 
-## References
+## Havolalar
 
 - [DOM spec: Range](https://dom.spec.whatwg.org/#ranges)
 - [Selection API](https://www.w3.org/TR/selection-api/#dom-globaleventhandlers-onselectstart)
 - [HTML spec: APIs for the text control selections](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#textFieldSelection)
 
+## Xulosa
 
-## Summary
+Biz tanlashlar uchun ikkita turli API ni ko'rib chiqdik:
 
-We covered two different APIs for selections:
+1. Hujjat uchun: `Selection` va `Range` obyektlari.
+2. `input`, `textarea` uchun: qo'shimcha usullar va xossalar.
 
-1. For document: `Selection` and `Range` objects.
-2. For `input`, `textarea`: additional methods and properties.
+Ikkinchi API juda oddiy, chunki u matn bilan ishlaydi.
 
-The second API is very simple, as it works with text.
+Eng ko'p ishlatiladigan retseptlar, ehtimol:
 
-The most used recipes are probably:
-
-1. Getting the selection:
+1. Tanlashni olish:
     ```js
     let selection = document.getSelection();
 
-    let cloned = /* element to clone the selected nodes to */;
+    let cloned = /* tanlangan tugunlarni nusxalash uchun element */;
 
-    // then apply Range methods to selection.getRangeAt(0)
-    // or, like here, to all ranges to support multi-select
+    // keyin selection.getRangeAt(0) ga Range usullarini qo'llang
+    // yoki bu kabi, multi-select ni qo'llab-quvvatlash uchun barcha range larga
     for (let i = 0; i < selection.rangeCount; i++) {
       cloned.append(selection.getRangeAt(i).cloneContents());
     }
     ```
-2. Setting the selection:
+2. Tanlashni o'rnatish:
     ```js
     let selection = document.getSelection();
 
-    // directly:
+    // to'g'ridan-to'g'ri:
     selection.setBaseAndExtent(...from...to...);
 
-    // or we can create a range and:
+    // yoki biz range yaratishimiz va:
     selection.removeAllRanges();
     selection.addRange(range);
     ```
 
-And finally, about the cursor. The cursor position in editable elements, like `<textarea>` is always at the start or the end of the selection. We can use it  to get cursor position or to move the cursor by setting `elem.selectionStart` and `elem.selectionEnd`.
+Va nihoyat, kursor haqida. `<textarea>` kabi tahrirlash mumkin bo'lgan elementlardagi kursor pozitsiyasi har doim tanlashning boshida yoki oxirida bo'ladi. Biz uni kursor pozitsiyasini olish yoki `elem.selectionStart` va `elem.selectionEnd` ni o'rnatish orqali kursorni harakatlantirish uchun ishlatishimiz mumkin.

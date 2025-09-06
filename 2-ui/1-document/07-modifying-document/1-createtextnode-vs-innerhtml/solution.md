@@ -1,15 +1,15 @@
-Answer: **1 and 3**.
+Javob: **1 va 3**.
 
-Both commands result in adding the `text` "as text" into the `elem`.
+Ikkala buyruq ham `elem`ga `matn`ni «matn sifatida» qo'shishga olib keladi.
 
-Here's an example:
+Mana bir misol:
 
 ```html run height=80
 <div id="elem1"></div>
 <div id="elem2"></div>
 <div id="elem3"></div>
 <script>
-  let text = '<b>text</b>';
+  let text = "<b>text</b>";
 
   elem1.append(document.createTextNode(text));
   elem2.innerHTML = text;

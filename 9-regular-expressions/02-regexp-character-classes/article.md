@@ -1,14 +1,14 @@
-# Character classes
+# Belgilar sinflari
 
-Consider a practical task -- we have a phone number like `"+7(903)-123-45-67"`, and we need to turn it into pure numbers: `79031234567`.
+Amaliy vazifani ko'rib chiqaylik -- bizda `"+7(903)-123-45-67"` kabi telefon raqami bor va uni toza raqamlarga aylantirmoqchimiz: `79031234567`.
 
-To do so, we can find and remove anything that's not a number. Character classes can help with that.
+Buning uchun biz raqam bo'lmagan hamma narsani topib, olib tashlashimiz mumkin. Belgilar sinflari bunga yordam beradi.
 
-A *character class* is a special notation that matches any symbol from a certain set.
+*Belgilar sinfi* - bu ma'lum to'plamdan istalgan belgiga mos keladigan maxsus belgi.
 
-For the start, let's explore the "digit" class. It's written as `pattern:\d` and corresponds to "any single digit".
+Boshidan, "raqam" sinfini ko'rib chiqaylik. U `pattern:\d` ko'rinishida yoziladi va "har qanday bitta raqam"ga mos keladi.
 
-For instance, let's find the first digit in the phone number:
+Masalan, telefon raqamidagi birinchi raqamni topaylik:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -18,39 +18,39 @@ let regexp = /\d/;
 alert( str.match(regexp) ); // 7
 ```
 
-Without the flag `pattern:g`, the regular expression only looks for the first match, that is the first digit `pattern:\d`.
+`pattern:g` bayrog'isiz doimiy ifoda faqat birinchi moslikni qidiradi, ya'ni birinchi raqam `pattern:\d`.
 
-Let's add the `pattern:g` flag to find all digits:
+Barcha raqamlarni topish uchun `pattern:g` bayrog'ini qo'shaylik:
 
 ```js run
 let str = "+7(903)-123-45-67";
 
 let regexp = /\d/g;
 
-alert( str.match(regexp) ); // array of matches: 7,9,0,3,1,2,3,4,5,6,7
+alert( str.match(regexp) ); // mosliklar massivi: 7,9,0,3,1,2,3,4,5,6,7
 
-// let's make the digits-only phone number of them:
+// ulardan faqat raqamli telefon raqami yasaylik:
 alert( str.match(regexp).join('') ); // 79031234567
 ```
 
-That was a character class for digits. There are other character classes as well.
+Bu raqamlar uchun belgilar sinfi edi. Boshqa belgilar sinflari ham mavjud.
 
-Most used are:
+Eng ko'p ishlatiladiganlar:
 
-`pattern:\d` ("d" is from "digit")
-: A digit: a character from `0` to `9`.
+`pattern:\d` ("d" "digit"dan)
+: Raqam: `0` dan `9` gacha belgi.
 
-`pattern:\s` ("s" is from "space")
-: A space symbol: includes spaces, tabs `\t`, newlines `\n` and few other rare characters, such as `\v`, `\f` and `\r`.
+`pattern:\s` ("s" "space"dan)
+: Bo'sh joy belgisi: bo'shliqlar, tablar `\t`, yangi qatorlar `\n` va `\v`, `\f`, `\r` kabi kam uchraydigan boshqa belgilarni o'z ichiga oladi.
 
-`pattern:\w` ("w" is from "word")
-: A "wordly" character: either a letter of Latin alphabet or a digit or an underscore `_`. Non-Latin letters (like cyrillic or hindi) do not belong to `pattern:\w`.
+`pattern:\w` ("w" "word"dan)
+: "So'z" belgisi: lotin alifbosining harfi yoki raqam yoki pastki chiziq `_`. Lotin bo'lmagan harflar (masalan, kirill yoki hindi) `pattern:\w`ga tegishli emas.
 
-For instance, `pattern:\d\s\w` means a "digit" followed by a "space character" followed by a "wordly character", such as `match:1 a`.
+Masalan, `pattern:\d\s\w` degani "raqam", keyin "bo'shliq belgisi", keyin "so'z belgisi", masalan `match:1 a`.
 
-**A regexp may contain both regular symbols and character classes.**
+**Doimiy ifoda oddiy belgilar va belgilar sinflarini o'z ichiga olishi mumkin.**
 
-For instance, `pattern:CSS\d` matches a string `match:CSS` with a digit after it:
+Masalan, `pattern:CSS\d` `match:CSS` satriga undan keyin raqam bilan mos keladi:
 
 ```js run
 let str = "Is there CSS4?";
@@ -59,32 +59,32 @@ let regexp = /CSS\d/
 alert( str.match(regexp) ); // CSS4
 ```
 
-Also we can use many character classes:
+Shuningdek, ko'plab belgilar sinflarini ishlatishimiz mumkin:
 
 ```js run
 alert( "I love HTML5!".match(/\s\w\w\w\w\d/) ); // ' HTML5'
 ```
 
-The match (each regexp character class has the corresponding result character):
+Moslik (har bir regexp belgilar sinfi tegishli natija belgisiga ega):
 
 ![](love-html5-classes.svg)
 
-## Inverse classes
+## Teskari sinflar
 
-For every character class there exists an "inverse class", denoted with the same letter, but uppercased.
+Har bir belgilar sinfi uchun bir xil harf bilan, lekin katta harfda yozilgan "teskari sinf" mavjud.
 
-The "inverse" means that it matches all other characters, for instance:
+"Teskari" degani u boshqa barcha belgilarga mos keladi, masalan:
 
 `pattern:\D`
-: Non-digit: any character except `pattern:\d`, for instance a letter.
+: Raqam emas: `pattern:\d` dan tashqari har qanday belgi, masalan harf.
 
 `pattern:\S`
-: Non-space: any character except `pattern:\s`, for instance a letter.
+: Bo'shliq emas: `pattern:\s` dan tashqari har qanday belgi, masalan harf.
 
 `pattern:\W`
-: Non-wordly character: anything but `pattern:\w`, e.g a non-latin letter or a space.
+: So'z belgisi emas: `pattern:\w` dan tashqari hamma narsa, masalan lotin bo'lmagan harf yoki bo'shliq.
 
-In the beginning of the chapter we saw how to make a number-only phone number from a string like `subject:+7(903)-123-45-67`: find all digits and join them.
+Bob boshida `subject:+7(903)-123-45-67` kabi satrdan faqat raqamli telefon raqami yasashni ko'rdik: barcha raqamlarni topib, ularni birlashtirdik.
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -92,7 +92,7 @@ let str = "+7(903)-123-45-67";
 alert( str.match(/\d/g).join('') ); // 79031234567
 ```
 
-An alternative, shorter way is to find non-digits `pattern:\D` and remove them from the string:
+Muqobil, qisqaroq yo'l - raqam bo'lmagan `pattern:\D` belgilarni topib, ularni satrdan olib tashlash:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -100,104 +100,104 @@ let str = "+7(903)-123-45-67";
 alert( str.replace(/\D/g, "") ); // 79031234567
 ```
 
-## A dot is "any character"
+## Nuqta "har qanday belgi"
 
-A dot `pattern:.` is a special character class that matches "any character except a newline".
+Nuqta `pattern:.` - bu "yangi qatordan tashqari har qanday belgi"ga mos keladigan maxsus belgilar sinfi.
 
-For instance:
+Masalan:
 
 ```js run
 alert( "Z".match(/./) ); // Z
 ```
 
-Or in the middle of a regexp:
+Yoki doimiy ifoda o'rtasida:
 
 ```js run
 let regexp = /CS.4/;
 
 alert( "CSS4".match(regexp) ); // CSS4
 alert( "CS-4".match(regexp) ); // CS-4
-alert( "CS 4".match(regexp) ); // CS 4 (space is also a character)
+alert( "CS 4".match(regexp) ); // CS 4 (bo'shliq ham belgi)
 ```
 
-Please note that a dot means "any character", but not the "absence of a character". There must be a character to match it:
+E'tibor bering, nuqta "har qanday belgi" degani, lekin "belgi yo'qligi" emas. Unga mos kelishi uchun belgi bo'lishi kerak:
 
 ```js run
-alert( "CS4".match(/CS.4/) ); // null, no match because there's no character for the dot
+alert( "CS4".match(/CS.4/) ); // null, moslik yo'q chunki nuqta uchun belgi yo'q
 ```
 
-### Dot as literally any character with "s" flag
+### "s" bayrog'i bilan tom ma'noda har qanday belgi
 
-By default, a dot doesn't match the newline character `\n`.
+Sukut bo'yicha, nuqta yangi qator belgisi `\n`ga mos kelmaydi.
 
-For instance, the regexp `pattern:A.B` matches `match:A`, and then `match:B` with any character between them, except a newline `\n`:
+Masalan, `pattern:A.B` regexp `match:A`ga, keyin oralarda har qanday belgi bilan `match:B`ga mos keladi, yangi qator `\n` bundan mustasno:
 
 ```js run
-alert( "A\nB".match(/A.B/) ); // null (no match)
+alert( "A\nB".match(/A.B/) ); // null (moslik yo'q)
 ```
 
-There are many situations when we'd like a dot to mean literally "any character", newline included.
+Nuqtaning tom ma'noda "har qanday belgi", yangi qator ham dahil, degani kerak bo'lgan ko'p holatlar mavjud.
 
-That's what flag `pattern:s` does. If a regexp has it, then a dot `pattern:.` matches literally any character:
+`pattern:s` bayrog'i aynan shuni qiladi. Agar doimiy ifodada u bo'lsa, nuqta `pattern:.` tom ma'noda har qanday belgiga mos keladi:
 
 ```js run
-alert( "A\nB".match(/A.B/s) ); // A\nB (match!)
+alert( "A\nB".match(/A.B/s) ); // A\nB (moslik!)
 ```
 
-````warn header="Not supported in IE"
-The `pattern:s` flag is not supported in IE.
+````warn header="IE da qo'llab-quvvatlanmaydi"
+`pattern:s` bayrog'i IE da qo'llab-quvvatlanmaydi.
 
-Luckily, there's an alternative, that works everywhere. We can use a regexp like `pattern:[\s\S]` to match "any character" (this pattern will be covered in the article <info:regexp-character-sets-and-ranges>).
+Yaxshiyamki, hamma joyda ishlaydigan muqobil bor. Biz "har qanday belgi"ga mos kelish uchun `pattern:[\s\S]` kabi regexp ishlatishimiz mumkin (bu naqsh <info:regexp-character-sets-and-ranges> maqolasida ko'rib chiqiladi).
 
 ```js run
-alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (match!)
+alert( "A\nB".match(/A[\s\S]B/) ); // A\nB (moslik!)
 ```
 
-The pattern `pattern:[\s\S]` literally says: "a space character OR not a space character". In other words, "anything". We could use another pair of complementary classes, such as `pattern:[\d\D]`, that doesn't matter. Or even the `pattern:[^]` -- as it means match any character except nothing.
+`pattern:[\s\S]` naqshi tom ma'noda: "bo'shliq belgisi YOKI bo'shliq belgisi emas". Boshqacha qilib aytganda, "hamma narsa". Biz `pattern:[\d\D]` kabi boshqa to'ldiruvchi sinflar juftligini ishlatishimiz mumkin, bu muhim emas. Yoki hatto `pattern:[^]` -- chunki bu hech narsadan tashqari har qanday belgiga mos kelish degani.
 
-Also we can use this trick if we want both kind of "dots" in the same pattern: the actual dot `pattern:.` behaving the regular way ("not including a newline"), and also a way to match "any character" with `pattern:[\s\S]` or alike.
+Shuningdek, bir xil naqshda har ikkala "nuqta" turini xohlasak, bu hiyladan foydalanishimiz mumkin: oddiy yo'l bilan ishlaydigan haqiqiy nuqta `pattern:.` ("yangi qatorni o'z ichiga olmaydi") va `pattern:[\s\S]` yoki shunga o'xshash bilan "har qanday belgi"ga mos kelish usuli.
 ````
 
-````warn header="Pay attention to spaces"
-Usually we pay little attention to spaces. For us strings `subject:1-5` and `subject:1 - 5` are nearly identical.
+````warn header="Bo'shliqlarga e'tibor bering"
+Odatda biz bo'shliqlarga kam e'tibor beramiz. Biz uchun `subject:1-5` va `subject:1 - 5` satrlar deyarli bir xil.
 
-But if a regexp doesn't take spaces into account, it may fail to work.
+Lekin agar doimiy ifoda bo'shliqlarni hisobga olmasa, u ishlamay qolishi mumkin.
 
-Let's try to find digits separated by a hyphen:
-
-```js run
-alert( "1 - 5".match(/\d-\d/) ); // null, no match!
-```
-
-Let's fix it adding spaces into the regexp `pattern:\d - \d`:
+Defis bilan ajratilgan raqamlarni topishga harakat qilaylik:
 
 ```js run
-alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, now it works
-// or we can use \s class:
-alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, also works
+alert( "1 - 5".match(/\d-\d/) ); // null, moslik yo'q!
 ```
 
-**A space is a character. Equal in importance with any other character.**
+Doimiy ifodaga bo'shliqlar qo'shib `pattern:\d - \d` tuzataylik:
 
-We can't add or remove spaces from a regular expression and expect it to work the same.
+```js run
+alert( "1 - 5".match(/\d - \d/) ); // 1 - 5, endi ishlaydi
+// yoki \s sinfidan foydalanishimiz mumkin:
+alert( "1 - 5".match(/\d\s-\s\d/) ); // 1 - 5, bu ham ishlaydi
+```
 
-In other words, in a regular expression all characters matter, spaces too.
+**Bo'shliq - bu belgi. Boshqa har qanday belgi bilan teng ahamiyatga ega.**
+
+Biz doimiy ifodadan bo'shliqlarni qo'sha yoki olib tashlay olmaymiz va uning bir xil ishlashini kutolmaymiz.
+
+Boshqacha qilib aytganda, doimiy ifodada barcha belgilar muhim, bo'shliqlar ham.
 ````
 
-## Summary
+## Xulosa
 
-There exist following character classes:
+Quyidagi belgilar sinflari mavjud:
 
-- `pattern:\d` -- digits.
-- `pattern:\D` -- non-digits.
-- `pattern:\s` -- space symbols, tabs, newlines.
-- `pattern:\S` -- all but `pattern:\s`.
-- `pattern:\w` -- Latin letters, digits, underscore `'_'`.
-- `pattern:\W` -- all but `pattern:\w`.
-- `pattern:.` -- any character if with the regexp `'s'` flag, otherwise any except a newline `\n`.
+- `pattern:\d` -- raqamlar.
+- `pattern:\D` -- raqam emas.
+- `pattern:\s` -- bo'shliq belgilari, tablar, yangi qatorlar.
+- `pattern:\S` -- `pattern:\s` dan tashqari hammasi.
+- `pattern:\w` -- lotin harflari, raqamlar, pastki chiziq `'_'`.
+- `pattern:\W` -- `pattern:\w` dan tashqari hammasi.
+- `pattern:.` -- regexp `'s'` bayrog'i bilan har qanday belgi, aks holda yangi qator `\n` dan tashqari hamma.
 
-...But that's not all!
+...Lekin bu hammasi emas!
 
-Unicode encoding, used by JavaScript for strings, provides many properties for characters, like: which language the letter belongs to (if it's a letter), is it a punctuation sign, etc.
+JavaScript satrlar uchun ishlatiladigan Unicode kodlash belgilar uchun ko'plab xususiyatlarni taqdim etadi, masalan: harf qaysi tilga tegishli (agar harf bo'lsa), tinish belgisimi va hokazo.
 
-We can search by these properties as well. That requires flag `pattern:u`, covered in the next article.
+Biz bu xususiyatlar bo'yicha ham qidirishimiz mumkin. Bu `pattern:u` bayrog'ini talab qiladi, keyingi maqolada ko'rib chiqiladi.

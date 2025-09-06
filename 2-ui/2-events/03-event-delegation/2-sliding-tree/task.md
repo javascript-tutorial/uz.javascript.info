@@ -2,13 +2,13 @@ importance: 5
 
 ---
 
-# Tree menu
+# Daraxt menyusi
 
-Create a tree that shows/hides node children on click:
+Bosish orqali tugun bolalarini ko'rsatadigan/yashiradigan daraxt yarating:
 
 [iframe border=1 src="solution"]
 
-Requirements:
+Talablar:
 
-- Only one event handler (use delegation)
-- A click outside the node title (on an empty space) should not do anything.
+- Faqat bitta voqea ishlovchisi (delegatsiyadan foydalaning)
+- Tugun sarlavhasidan tashqarida bosish (bo'sh joyda) hech narsa qilmasligi kerak.

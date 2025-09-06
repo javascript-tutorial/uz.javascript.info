@@ -1,95 +1,94 @@
-# Popups and window methods
+# Popuplar va window usullari
 
-A popup window is one of the oldest methods to show additional document to user.
+Popup oynasi foydalanuvchiga qo'shimcha hujjatni ko'rsatishning eng qadimiy usullaridan biri.
 
-Basically, you just run:
+Asosan, siz shunchaki ishga tushirasiz:
 ```js
 window.open('https://javascript.info/')
 ```
 
-...And it will open a new window with given URL. Most modern browsers are configured to open url in new tabs instead of separate windows.
+...Va u berilgan URL bilan yangi oyna ochadi. Ko'pgina zamonaviy brauzerlar alohida oynalar o'rniga yangi tablarda url ochish uchun sozlangan.
 
-Popups exist from really ancient times. The initial idea was to show another content without closing the main window. As of now, there are other ways to do that: we can load content dynamically with [fetch](info:fetch) and show it in a dynamically generated `<div>`. So, popups is not something we use everyday.
+Popuplar juda qadimiy zamonlardan mavjud. Dastlabki g'oya asosiy oynani yopmasdan boshqa kontentni ko'rsatish edi. Hozirgi vaqtda buni qilishning boshqa usullari ham bor: biz kontentni [fetch](info:fetch) bilan dinamik ravishda yuklab, uni dinamik yaratilgan `<div>` da ko'rsatishimiz mumkin. Shuning uchun popuplar har kuni foydalanadigan narsa emas.
 
-Also, popups are tricky on mobile devices, that don't show multiple windows simultaneously.
+Shuningdek, popuplar bir vaqtning o'zida bir nechta oynani ko'rsatmaydigan mobil qurilmalarda muammoli.
 
-Still, there are tasks where popups are still used, e.g. for OAuth authorization (login with Google/Facebook/...), because:
+Shunga qaramay, popuplar hali ham ishlatiladigan vazifalar mavjud, masalan OAuth avtorizatsiyasi (Google/Facebook/... bilan kirish) uchun, chunki:
 
-1. A popup is a separate window which has its own independent JavaScript environment. So opening a popup from a third-party, non-trusted site is safe.
-2. It's very easy to open a popup.
-3. A popup can navigate (change URL) and send messages to the opener window.
+1. Popup o'zining mustaqil JavaScript muhitiga ega alohida oyna. Shuning uchun uchinchi tomon, ishonchsiz saytdan popup ochish xavfsiz.
+2. Popup ochish juda oson.
+3. Popup navigatsiya qilishi (URL ni o'zgartirishi) va ochuvchi oynaga xabarlar yuborishi mumkin.
 
-## Popup blocking
+## Popup bloklash
 
-In the past, evil sites abused popups a lot. A bad page could open tons of popup windows with ads. So now most browsers try to block popups and protect the user.
+O'tmishda yomon saytlar popuplar bilan juda ko'p suiiste'mol qilishgan. Yomon sahifa reklamalar bilan ko'plab popup oynalarini ocha olgan. Shuning uchun endi ko'pgina brauzerlar popuplarni bloklashga va foydalanuvchini himoya qilishga harakat qiladi.
 
-**Most browsers block popups if they are called outside of user-triggered event handlers like `onclick`.**
+**Ko'pgina brauzerlar `onclick` kabi foydalanuvchi tomonidan ishga tushirilgan hodisa ishlov beruvchilari tashqarisida chaqirilsa popuplarni bloklaydi.**
 
-For example:
+Masalan:
 ```js
-// popup blocked
+// popup bloklangan
 window.open('https://javascript.info');
 
-// popup allowed
+// popup ruxsat etilgan
 button.onclick = () => {
   window.open('https://javascript.info');
 };
 ```
 
-This way users are somewhat protected from unwanted popups, but the functionality is not disabled totally.
+Shunday qilib foydalanuvchilar keraksiz popuplardan ma'lum darajada himoyalangan, lekin funksionallik to'liq o'chirilmagan.
 
-What if the popup opens from `onclick`, but after `setTimeout`? That's a bit tricky.
+Agar popup `onclick` dan ochilsa, lekin `setTimeout` dan keyin nima bo'ladi? Bu biroz murakkab.
 
-Try this code:
+Bu kodni sinab ko'ring:
 
 ```js run
-// open after 3 seconds
+// 3 soniyadan keyin ochish
 setTimeout(() => window.open('http://google.com'), 3000);
 ```
 
-The popup opens in Chrome, but gets blocked in Firefox.
+Popup Chrome da ochiladi, lekin Firefox da bloklanadi.
 
-...If we decrease the delay, the popup works in Firefox too:
+...Agar kechikishni kamaytirsak, popup Firefox da ham ishlaydi:
 
 ```js run
-// open after 1 seconds
+// 1 soniyadan keyin ochish
 setTimeout(() => window.open('http://google.com'), 1000);
 ```
 
-The difference is that Firefox treats a timeout of 2000ms or less are acceptable, but after it -- removes the "trust", assuming that now it's "outside of the user action". So the first one is blocked, and the second one is not.
+Farqi shundaki, Firefox 2000ms yoki undan kam timeout ni maqbul deb hisoblaydi, lekin undan keyin -- "ishonch"ni olib tashlaydi, endi bu "foydalanuvchi harakatidan tashqarida" deb hisoblaydi. Shuning uchun birinchisi bloklanadi, ikkinchisi esa yo'q.
 
 ## window.open
 
-The syntax to open a popup is: `window.open(url, name, params)`:
+Popup ochish sintaksisi: `window.open(url, name, params)`:
 
 url
-: An URL to load into the new window.
+: Yangi oynaga yuklanadigan URL.
 
 name
-: A name of the new window. Each window has a `window.name`, and here we can specify which window to use for the popup. If there's already a window with such name -- the given URL opens in it, otherwise a new window is opened.
+: Yangi oynaning nomi. Har bir oynada `window.name` mavjud va bu yerda popup uchun qaysi oynadan foydalanishni belgilashimiz mumkin. Agar bunday nomli oyna allaqachon mavjud bo'lsa -- berilgan URL unda ochiladi, aks holda yangi oyna ochiladi.
 
 params
-: The configuration string for the new window. It contains settings, delimited by a comma. There must be no spaces in params, for instance: `width=200,height=100`.
+: Yangi oyna uchun konfiguratsiya qatori. U vergul bilan ajratilgan sozlamalarni o'z ichiga oladi. Params da bo'shliqlar bo'lmasligi kerak, masalan: `width=200,height=100`.
 
-Settings for `params`:
+`params` uchun sozlamalar:
 
-- Position:
-  - `left/top` (numeric) -- coordinates of the window top-left corner on the screen. There is a limitation: a new window cannot be positioned offscreen.
-  - `width/height` (numeric) -- width and height of a new window. There is a limit on minimal width/height, so it's impossible to create an invisible window.
-- Window features:
-  - `menubar` (yes/no) -- shows or hides the browser menu on the new window.
-  - `toolbar` (yes/no) -- shows or hides the browser navigation bar (back, forward, reload etc) on the new window.
-  - `location` (yes/no) -- shows or hides the URL field in the new window. FF and IE don't allow to hide it by default.
-  - `status` (yes/no) -- shows or hides the status bar. Again, most browsers force it to show.
-  - `resizable` (yes/no) -- allows to disable the resize for the new window. Not recommended.
-  - `scrollbars` (yes/no) -- allows to disable the scrollbars for the new window. Not recommended.
+- Pozitsiya:
+  - `left/top` (raqamli) -- ekrandagi oynaning yuqori-chap burchagi koordinatalari. Cheklov bor: yangi oyna ekrandan tashqarida joylashtirilishi mumkin emas.
+  - `width/height` (raqamli) -- yangi oynaning kengligi va balandligi. Minimal kenglik/balandlik chegarasi bor, shuning uchun ko'rinmas oyna yaratish mumkin emas.
+- Oyna xususiyatlari:
+  - `menubar` (yes/no) -- yangi oynada brauzer menyusini ko'rsatish yoki yashirish.
+  - `toolbar` (yes/no) -- yangi oynada brauzer navigatsiya panelini (orqaga, oldinga, qayta yuklash va hokazo) ko'rsatish yoki yashirish.
+  - `location` (yes/no) -- yangi oynada URL maydonini ko'rsatish yoki yashirish. FF va IE standart bo'yicha uni yashirishga ruxsat bermaydi.
+  - `status` (yes/no) -- status panelini ko'rsatish yoki yashirish. Shunga qaramay, ko'pgina brauzerlar uni ko'rsatishga majbur qiladi.
+  - `resizable` (yes/no) -- yangi oyna uchun o'lchamini o'zgartirishni o'chirishga imkon beradi. Tavsiya etilmaydi.
+  - `scrollbars` (yes/no) -- yangi oyna uchun scroll panellarini o'chirishga imkon beradi. Tavsiya etilmaydi.
 
+Shuningdek, odatda ishlatilmaydigan kamroq qo'llab-quvvatlanadigan brauzerga xos xususiyatlar ham mavjud. Misollar uchun <a href="https://developer.mozilla.org/en/DOM/window.open">MDN dagi window.open</a> ni tekshiring.
 
-There is also a number of less supported browser-specific features, which are usually not used. Check <a href="https://developer.mozilla.org/en/DOM/window.open">window.open in MDN</a> for examples.
+## Misol: minimalistik oyna
 
-## Example: a minimalistic window   
-
-Let's open a window with minimal set of features, just to see which of them browser allows to disable:
+Keling, minimal xususiyatlar to'plami bilan oyna ochamiz, shunchaki brauzer qaysi birlarini o'chirishga ruxsat berishini ko'rish uchun:
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -98,9 +97,9 @@ width=0,height=0,left=-1000,top=-1000`;
 open('/', 'test', params);
 ```
 
-Here most "window features" are disabled and window is positioned offscreen. Run it and see what really happens. Most browsers "fix" odd things like zero `width/height` and offscreen `left/top`. For instance, Chrome open such a window with full width/height, so that it occupies the full screen.
+Bu yerda ko'pgina "oyna xususiyatlari" o'chirilgan va oyna ekrandan tashqarida joylashtirilgan. Uni ishga tushiring va nima sodir bo'lishini ko'ring. Ko'pgina brauzerlar nol `width/height` va ekrandan tashqaridagi `left/top` kabi g'alati narsalarni "tuzatadi". Masalan, Chrome bunday oynani to'liq kenglik/balandlik bilan ochadi, shuning uchun u butun ekranni egallaydi.
 
-Let's add normal positioning options and reasonable `width`, `height`, `left`, `top` coordinates:
+Keling, normal joylashish parametrlarini va o'rtacha `width`, `height`, `left`, `top` koordinatalarini qo'shamiz:
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -109,56 +108,56 @@ width=600,height=300,left=100,top=100`;
 open('/', 'test', params);
 ```
 
-Most browsers show the example above as required.
+Ko'pgina brauzerlar yuqoridagi misolni kerak bo'lganidek ko'rsatadi.
 
-Rules for omitted settings:
+Qoldirilgan sozlamalar uchun qoidalar:
 
-- If there is no 3rd argument in the `open` call, or it is empty, then the default window parameters are used.
-- If there is a string of params, but some `yes/no` features are omitted, then the omitted features assumed to have `no` value. So if you specify params, make sure you explicitly set all required features to yes.
-- If there is no `left/top` in params, then the browser tries to open a new window near the last opened window.
-- If there is no `width/height`, then the new window will be the same size as the last opened.
+- Agar `open` chaqiruvida 3-chi argument yo'q bo'lsa yoki bo'sh bo'lsa, standart oyna parametrlari ishlatiladi.
+- Agar params qatori mavjud bo'lsa, lekin ba'zi `yes/no` xususiyatlari qoldirilgan bo'lsa, qoldirilgan xususiyatlar `no` qiymatiga ega deb hisoblanadi. Shuning uchun agar params ni belgilasangiz, barcha kerakli xususiyatlarni aniq ravishda yes ga o'rnatganingizga ishonch hosil qiling.
+- Agar params da `left/top` yo'q bo'lsa, brauzer oxirgi ochildigan oyna yaqinida yangi oyna ochishga harakat qiladi.
+- Agar `width/height` yo'q bo'lsa, yangi oyna oxirgi ochildigan bilan bir xil o'lchamda bo'ladi.
 
-## Accessing popup from window
+## Oynadan popup ga kirish
 
-The `open` call returns a reference to the new window. It can be used to manipulate it's properties, change location and even more.
+`open` chaqiruvi yangi oynaga havola qaytaradi. U xususiyatlarini boshqarish, joylashuvni o'zgartirish va hatto ko'proq narsalar uchun ishlatilishi mumkin.
 
-In this example, we generate popup content from JavaScript:
+Bu misolda biz popup kontentini JavaScript dan yaratamiz:
 
 ```js
 let newWin = window.open("about:blank", "hello", "width=200,height=200");
 
-newWin.document.write("Hello, world!");
+newWin.document.write("Salom, dunyo!");
 ```
 
-And here we modify the contents after loading:
+Va bu yerda yuklanishdan keyin kontentni o'zgartiramiz:
 
 ```js run
 let newWindow = open('/', 'example', 'width=300,height=300')
 newWindow.focus();
 
-alert(newWindow.location.href); // (*) about:blank, loading hasn't started yet
+alert(newWindow.location.href); // (*) about:blank, yuklash hali boshlanmagan
 
 newWindow.onload = function() {
-  let html = `<div style="font-size:30px">Welcome!</div>`;
+  let html = `<div style="font-size:30px">Xush kelibsiz!</div>`;
 *!*
   newWindow.document.body.insertAdjacentHTML('afterbegin', html);
 */!*
 };
 ```
 
-Please note: immediately after `window.open`, the new window isn't loaded yet. That's demonstrated by `alert` in line `(*)`. So we wait for `onload` to modify it. We could also use `DOMContentLoaded` handler for `newWin.document`.
+Esda tuting: `window.open` dan darhol keyin yangi oyna hali yuklanmagan. Bu `(*)` qatordagi `alert` orqali ko'rsatilgan. Shuning uchun uni o'zgartirish uchun `onload` ni kutamiz. Shuningdek, `newWin.document` uchun `DOMContentLoaded` ishlov beruvchisidan ham foydalanishimiz mumkin.
 
-```warn header="Same origin policy"
-Windows may freely access content of each other only if they come from the same origin (the same protocol://domain:port).
+```warn header="Bir xil kelib chiqish siyosati"
+Oynalar bir-birining kontentiga faqat bir xil kelib chiqishdan (bir xil protocol://domain:port) kelgan taqdirdagina erkin kirishlari mumkin.
 
-Otherwise, e.g. if the main window is from `site.com`, and the popup from `gmail.com`, that's impossible for user safety reasons. For the details, see chapter <info:cross-window-communication>.
+Aks holda, masalan asosiy oyna `site.com` dan, popup esa `gmail.com` dan bo'lsa, foydalanuvchi xavfsizligi sabablariga ko'ra bu mumkin emas. Tafsilotlar uchun <info:cross-window-communication> bobini ko'ring.
 ```
 
-## Accessing window from popup
+## Popup dan oynaga kirish
 
-A popup may access the "opener" window as well using `window.opener` reference. It is `null` for all windows except popups.
+Popup ham `window.opener` havolasi yordamida "ochuvchi" oynaga kirishi mumkin. Bu popuplardan tashqari barcha oynalar uchun `null`.
 
-If you run the code below, it replaces the opener (current) window content with "Test":
+Agar quyidagi kodni ishga tushirsangiz, u ochuvchi (joriy) oyna kontentini "Test" bilan almashtiradi:
 
 ```js run
 let newWin = window.open("about:blank", "hello", "width=200,height=200");
@@ -168,19 +167,19 @@ newWin.document.write(
 );
 ```
 
-So the connection between the windows is bidirectional: the main window and the popup have a reference to each other.
+Shunday qilib, oynalar orasidagi aloqa ikki tomonlama: asosiy oyna va popup bir-biriga havolaga ega.
 
-## Closing a popup
+## Popup ni yopish
 
-To close a window: `win.close()`.
+Oynani yopish uchun: `win.close()`.
 
-To check if a window is closed: `win.closed`.
+Oyna yopilganligini tekshirish uchun: `win.closed`.
 
-Technically, the `close()` method is available for any `window`, but `window.close()` is ignored by most browsers if `window` is not created with `window.open()`. So it'll only work on a popup.
+Texnik jihatdan, `close()` usuli har qanday `window` uchun mavjud, lekin `window` `window.open()` bilan yaratilmagan bo'lsa, ko'pgina brauzerlar `window.close()` ni e'tiborsiz qoldiradi. Shuning uchun u faqat popup da ishlaydi.
 
-The `closed` property is `true` if the window is closed. That's useful to check if the popup (or the main window) is still open or not. A user can close it anytime, and our code should take that possibility into account.
+`closed` xossasi oyna yopilgan bo'lsa `true` bo'ladi. Bu popup (yoki asosiy oyna) hali ochiq yoki yo'qligini tekshirish uchun foydali. Foydalanuvchi uni istalgan vaqtda yopishi mumkin va bizning kodimiz bu imkoniyatni hisobga olishi kerak.
 
-This code loads and then closes the window:
+Bu kod oynani yuklaydi va keyin yopadi:
 
 ```js run
 let newWindow = open('/', 'example', 'width=300,height=300');
@@ -191,88 +190,87 @@ newWindow.onload = function() {
 };
 ```
 
+## Harakatlantirish va o'lchamini o'zgartirish
 
-## Moving and resizing
-
-There are methods to move/resize a window:
+Oynani harakatlantirish/o'lchamini o'zgartirish uchun usullar mavjud:
 
 `win.moveBy(x,y)`
-: Move the window relative to current position `x` pixels to the right and `y` pixels down. Negative values are allowed (to move left/up).
+: Oynani joriy pozitsiyadan nisbatan `x` piksel o'ngga va `y` piksel pastga siljitish. Salbiy qiymatlar ruxsat etilgan (chapga/yuqoriga siljitish uchun).
 
 `win.moveTo(x,y)`
-: Move the window to coordinates `(x,y)` on the screen.
+: Oynani ekrandagi `(x,y)` koordinatalariga siljitish.
 
 `win.resizeBy(width,height)`
-: Resize the window by given `width/height` relative to the current size. Negative values are allowed.
+: Oynani joriy o'lchamga nisbatan berilgan `width/height` ga o'zgartirish. Salbiy qiymatlar ruxsat etilgan.
 
 `win.resizeTo(width,height)`
-: Resize the window to the given size.
+: Oynani berilgan o'lchamga o'zgartirish.
 
-There's also `window.onresize` event.
+`window.onresize` hodisasi ham mavjud.
 
-```warn header="Only popups"
-To prevent abuse, the browser usually blocks these methods. They only work reliably on popups that we opened, that have no additional tabs.
+```warn header="Faqat popuplar"
+Suiiste'molni oldini olish uchun, brauzer odatda bu usullarni bloklaydi. Ular faqat biz ochgan, qo'shimcha tablarisiz popuplarda ishonchli ishlaydi.
 ```
 
-```warn header="No minification/maximization"
-JavaScript has no way to minify or maximize a window. These OS-level functions are hidden from Frontend-developers.
+```warn header="Kichraytirish/kattalashtirishsiz"
+JavaScript da oynani kichraytirish yoki kattalashtirish imkoni yo'q. Bu OS darajasidagi funksiyalar Frontend-ishlab chiquvchilardan yashirilgan.
 
-Move/resize methods do not work for maximized/minimized windows.
+Harakatlantirish/o'lchamini o'zgartirish usullari maksimallashtirilen/minimallashtirilen oynalar uchun ishlamaydi.
 ```
 
-## Scrolling a window
+## Oynani aylantirish
 
-We already talked about scrolling a window in the chapter <info:size-and-scroll-window>.
+Biz <info:size-and-scroll-window> bobida oynani aylantirish haqida allaqachon gaplashdik.
 
 `win.scrollBy(x,y)`
-: Scroll the window `x` pixels right and `y` down relative the current scroll. Negative values are allowed.
+: Oynani joriy aylantirish nisbatan `x` piksel o'ngga va `y` pastga aylantirish. Salbiy qiymatlar ruxsat etilgan.
 
 `win.scrollTo(x,y)`
-: Scroll the window to the given coordinates `(x,y)`.
+: Oynani berilgan `(x,y)` koordinatalariga aylantirish.
 
 `elem.scrollIntoView(top = true)`
-: Scroll the window to make `elem` show up at the top (the default) or at the bottom for `elem.scrollIntoView(false)`.
+: `elem` ni yuqorida (standart) ko'rsatish uchun oynani aylantirish yoki `elem.scrollIntoView(false)` uchun pastda.
 
-There's also `window.onscroll` event.
+`window.onscroll` hodisasi ham mavjud.
 
-## Focus/blur on a window
+## Oynada fokus/blur
 
-Theoretically, there are `window.focus()` and `window.blur()` methods to focus/unfocus on a window. And there are also `focus/blur` events that allow to catch the moment when the visitor focuses on a window and switches elsewhere.
+Nazariy jihatdan, oynaga fokus/fokusni yo'qotish uchun `window.focus()` va `window.blur()` usullari mavjud. Va shuningdek tashrif buyuruvchi oynaga fokuslanish va boshqa joyga o'tish paytini ushlash uchun `focus/blur` hodisalari ham bor.
 
-Although, in practice they are severely limited, because in the past evil pages abused them. 
+Garchi, amalda ular jiddiy cheklangan, chunki o'tmishda yomon sahifalar ularni suiiste'mol qilgan.
 
-For instance, look at this code:
+Masalan, bu kodga qarang:
 
 ```js run
 window.onblur = () => window.focus();
 ```
 
-When a user attempts to switch out of the window (`window.onblur`), it brings the window back into focus. The intention is to "lock" the user within the `window`.
+Foydalanuvchi oynadan chiqishga harakat qilganda (`window.onblur`), u oynani yana fokusga qaytaradi. Maqsad foydalanuvchini `window` ichida "qulflash".
 
-So browsers had to introduce many limitations to forbid the code like that and protect the user from ads and evils pages. They depend on the browser.
+Shuning uchun brauzerlar bunday kodni taqiqlash va foydalanuvchini reklamalar va yomon sahifalardan himoya qilish uchun ko'plab cheklovlarni kiritishga majbur bo'ldi. Ular brauzerga bog'liq.
 
-For instance, a mobile browser usually ignores `window.focus()` completely. Also focusing doesn't work when a popup opens in a separate tab rather than a new window.
+Masalan, mobil brauzer odatda `window.focus()` ni butunlay e'tiborsiz qoldiradi. Shuningdek, popup yangi oyna emas, balki alohida tabda ochilganda fokuslash ishlamaydi.
 
-Still, there are some use cases when such calls do work and can be useful.
+Shunga qaramay, bunday chaqiruvlar ishlaydigan va foydali bo'lishi mumkin bo'lgan ba'zi foydalanish holatlari mavjud.
 
-For instance:
+Masalan:
 
-- When we open a popup, it's might be a good idea to run a `newWindow.focus()` on it. Just in case, for some OS/browser combinations it ensures that the user is in the new window now.
-- If we want to track when a visitor actually uses our web-app, we can track `window.onfocus/onblur`. That allows us to suspend/resume in-page activities, animations etc. But please note that the `blur` event means that the visitor switched out from the window, but they still may observe it. The window is in the background, but still may be visible.
+- Popup ochganimizda, unda `newWindow.focus()` ni ishga tushirish yaxshi fikr bo'lishi mumkin. Har ehtimolga qarshi, ba'zi OS/brauzer kombinatsiyalari uchun bu foydalanuvchi endi yangi oynada ekanligini ta'minlaydi.
+- Agar tashrif buyuruvchi haqiqatda bizning veb-ilovamizni ishlatayotganini kuzatishni xohlasak, `window.onfocus/onblur` ni kuzatishimiz mumkin. Bu bizga sahifa ichidagi faoliyatlar, animatsiyalar va hokazolarni to'xtatish/davom ettirish imkonini beradi. Lekin esda tutingki, `blur` hodisasi tashrif buyuruvchi oynadan chiqib ketganini anglatadi, lekin ular uni hali ham kuzatishlari mumkin. Oyna fonda, lekin hali ham ko'rinadigan bo'lishi mumkin.
 
-## Summary   
+## Xulosa
 
-Popup windows are used rarely, as there are alternatives: loading and displaying information in-page, or in iframe.
+Popup oynalar kamdan-kam ishlatiladi, chunki muqobillar mavjud: ma'lumotni sahifa ichida yoki iframe da yuklash va ko'rsatish.
 
-If we're going to open a popup, a good practice is to inform the user about it. An "opening window" icon near a link or button would allow the visitor to survive the focus shift and keep both windows in mind.
+Agar popup ochmoqchi bo'lsak, yaxshi amaliyot foydalanuvchini bu haqda xabardor qilish. Havola yoki tugma yaqinidagi "oyna ochish" belgisi tashrif buyuruvchiga fokus o'zgarishidan omon qolish va ikkala oynani ham esda saqlash imkonini beradi.
 
-- A popup can be opened by the `open(url, name, params)` call. It returns the reference to the newly opened window.
-- Browsers block `open` calls from the code outside of user actions. Usually a notification appears, so that a user may allow them.
-- Browsers open a new tab by default, but if sizes are provided, then it'll be a popup window.
-- The popup may access the opener window using the `window.opener` property.
-- The main window and the popup can freely read and modify each other if they have the same origin. Otherwise, they can change location of each other and [exchange messages](info:cross-window-communication).
+- Popup `open(url, name, params)` chaqiruvi bilan ochilishi mumkin. U yangi ochildigan oynaga havolani qaytaradi.
+- Brauzerlar foydalanuvchi harakatlaridan tashqaridagi koddan `open` chaqiruvlarini bloklaydi. Odatda bildirishnoma paydo bo'ladi, shunda foydalanuvchi ularga ruxsat berishi mumkin.
+- Brauzerlar standart bo'yicha yangi tab ochadi, lekin o'lchamlar berilgan bo'lsa, popup oyna bo'ladi.
+- Popup `window.opener` xossasi yordamida ochuvchi oynaga kirishi mumkin.
+- Asosiy oyna va popup bir xil kelib chiqishga ega bo'lsa, bir-birini erkin o'qishi va o'zgartirishi mumkin. Aks holda, ular bir-birining joylashuvini o'zgartirishi va [xabarlar almashishi](info:cross-window-communication) mumkin.
 
-To close the popup: use `close()` call. Also the user may close them (just like any other windows). The `window.closed` is `true` after that.
+Popup ni yopish uchun: `close()` chaqiruvidan foydalaning. Shuningdek, foydalanuvchi ularni (boshqa oynalar kabi) yopishi mumkin. Undan keyin `window.closed` `true` bo'ladi.
 
-- Methods `focus()` and `blur()` allow to focus/unfocus a window. But they don't work all the time.
-- Events `focus` and `blur` allow to track switching in and out of the window. But please note that a  window may still be visible even in the background state, after `blur`.
+- `focus()` va `blur()` usullari oynaga fokus/fokusni yo'qotish imkonini beradi. Lekin ular har doim ham ishlamaydi.
+- `focus` va `blur` hodisalari oynaga kirish va undan chiqishni kuzatish imkonini beradi. Lekin esda tutingki, `blur` dan keyin ham oyna fon holatida ko'rinishi mumkin.

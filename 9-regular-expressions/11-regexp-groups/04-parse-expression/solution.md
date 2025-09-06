@@ -1,44 +1,47 @@
-A regexp for a number is: `pattern:-?\d+(\.\d+)?`. We created it in the previous task.
+# Arifmetik ifoda tahlilchisi
 
-An operator is `pattern:[-+*/]`. The hyphen `pattern:-` goes first in the square brackets, because in the middle it would mean a character range, while we just want a character `-`.
+Raqam uchun regexp: `pattern:-?\d+(\.\d+)?`. Buni oldingi vazifada yaratgan edik.
 
-The slash `/` should be escaped inside a JavaScript regexp `pattern:/.../`, we'll do that later.
+Operator `pattern:[-+*/]`. Tire `pattern:-` kvadrat qavslarda birinchi o'rinda turadi, chunki o'rtada bo'lsa belgilar diapazonini bildiradi, biz esa shunchaki `-` belgisini xohlaymiz.
 
-We need a number, an operator, and then another number. And optional spaces between them.
+Qiyshiq chiziq `/` JavaScript regexp `pattern:/.../` ichida ekranlanishi kerak, buni keyinroq qilamiz.
 
-The full regular expression: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`.
+Bizga raqam, operator, keyin yana raqam kerak. Va ular orasida ixtiyoriy bo'shliqlar.
 
-It has 3 parts, with `pattern:\s*` between them:
-1. `pattern:-?\d+(\.\d+)?` - the first number,
-1. `pattern:[-+*/]` - the operator,
-1. `pattern:-?\d+(\.\d+)?` - the second number.
+To'liq doimiy ifoda: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`.
 
-To make each of these parts a separate element of the result array, let's enclose them in parentheses: `pattern:(-?\d+(\.\d+)?)\s*([-+*/])\s*(-?\d+(\.\d+)?)`.
+Unda `pattern:\s*` bilan ajratilgan 3 ta qism bor:
 
-In action:
+1. `pattern:-?\d+(\.\d+)?` - birinchi raqam,
+2. `pattern:[-+*/]` - operator,
+3. `pattern:-?\d+(\.\d+)?` - ikkinchi raqam.
+
+Bu qismlarning har birini natijalar massivining alohida elementi qilish uchun ularni qavslarga o'raylik: `pattern:(-?\d+(\.\d+)?)\s*([-+*/])\s*(-?\d+(\.\d+)?)`.
+
+Amalda:
 
 ```js run
 let regexp = /(-?\d+(\.\d+)?)\s*([-+*\/])\s*(-?\d+(\.\d+)?)/;
 
-alert( "1.2 + 12".match(regexp) );
+alert("1.2 + 12".match(regexp));
 ```
 
-The result includes:
+Natija quyidagilarni o'z ichiga oladi:
 
-- `result[0] == "1.2 + 12"` (full match)
-- `result[1] == "1.2"` (first group `(-?\d+(\.\d+)?)` -- the first number, including the decimal part)
-- `result[2] == ".2"` (second group`(\.\d+)?` -- the first decimal part)
-- `result[3] == "+"` (third group `([-+*\/])` -- the operator)
-- `result[4] == "12"` (forth group `(-?\d+(\.\d+)?)` -- the second number)
-- `result[5] == undefined` (fifth group `(\.\d+)?` -- the last decimal part is absent, so it's undefined)
+- `result[0] == "1.2 + 12"` (to'liq moslik)
+- `result[1] == "1.2"` (birinchi guruh `(-?\d+(\.\d+)?)` -- birinchi raqam, o'nli qism bilan birga)
+- `result[2] == ".2"` (ikkinchi guruh `(\.\d+)?` -- birinchi o'nli qism)
+- `result[3] == "+"` (uchinchi guruh `([-+*\/])` -- operator)
+- `result[4] == "12"` (to'rtinchi guruh `(-?\d+(\.\d+)?)` -- ikkinchi raqam)
+- `result[5] == undefined` (beshinchi guruh `(\.\d+)?` -- oxirgi o'nli qism yo'q, shuning uchun undefined)
 
-We only want the numbers and the operator, without the full match or the decimal parts, so let's "clean" the result a bit.
+Bizga faqat raqamlar va operator kerak, to'liq moslik yoki o'nli qismlar emas, shuning uchun natijani biroz "tozalaylik".
 
-The full match (the arrays first item) can be removed by shifting the array `result.shift()`.
+To'liq moslikni (massivning birinchi elementi) massivni siljitish `result.shift()` orqali olib tashlash mumkin.
 
-Groups that contain decimal parts (number 2 and 4) `pattern:(.\d+)` can be excluded by adding  `pattern:?:` to the beginning: `pattern:(?:\.\d+)?`.
+O'nli qismlarni o'z ichiga olgan guruhlar (2 va 4 raqamli) `pattern:(.\d+)` ni boshiga `pattern:?:` qo'shish orqali chiqarib tashlash mumkin: `pattern:(?:\.\d+)?`.
 
-The final solution:
+Yakuniy yechim:
 
 ```js run
 function parse(expr) {
@@ -52,5 +55,5 @@ function parse(expr) {
   return result;
 }
 
-alert( parse("-1.23 * 3.45") );  // -1.23, *, 3.45
+alert(parse("-1.23 * 3.45")); // -1.23, *, 3.45
 ```

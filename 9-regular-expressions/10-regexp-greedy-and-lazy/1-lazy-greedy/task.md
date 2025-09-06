@@ -1,7 +1,7 @@
-# A match for /d+? d+?/
+# /d+? d+?/ patterniga to'g'ri keladimi
 
-What's the match here?
+Bu yerda qanday moslik bor?
 
 ```js
-alert( "123 456".match(/\d+? \d+?/g) ); // ?
+alert("123 456".match(/\d+? \d+?/g)); // ?
 ```

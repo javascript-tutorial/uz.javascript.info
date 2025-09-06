@@ -1,24 +1,25 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# DOM children
+# DOM bolalari
 
-Look at this page:
+Bu sahifaga qarang:
 
 ```html
 <html>
-<body>
-  <div>Users:</div>
-  <ul>
-    <li>John</li>
-    <li>Pete</li>
-  </ul>
-</body>
+  <body>
+    <div>Foydalanuvchilar:</div>
+    <ul>
+      <li>John</li>
+      <li>Pete</li>
+    </ul>
+  </body>
 </html>
 ```
 
-For each of the following, give at least one way of how to access them:
-- The `<div>` DOM node?
-- The `<ul>` DOM node?
-- The second `<li>` (with Pete)?
+Quyidagilarning har biri uchun ularga kirishning kamida bitta usulini bering:
+
+- `<div>` DOM tuguni?
+- `<ul>` DOM tuguni?
+- Ikkinchi `<li>` (Pit bilan)?

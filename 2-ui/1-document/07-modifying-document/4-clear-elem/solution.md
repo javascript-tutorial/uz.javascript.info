@@ -1,19 +1,18 @@
-
-First, let's see how *not* to do it:
+Birinchidan, buni qanday qilish kerakligini ko'rib chiqamiz:
 
 ```js
 function clear(elem) {
-  for (let i=0; i < elem.childNodes.length; i++) {
-      elem.childNodes[i].remove();
+  for (let i = 0; i < elem.childNodes.length; i++) {
+    elem.childNodes[i].remove();
   }
 }
 ```
 
-That won't work, because the call to `remove()` shifts the collection `elem.childNodes`, so elements start from the index `0` every time. But `i` increases, and some elements will be skipped.
+Bu ishlamaydi, chunki `remove()` chaqiruvi `elem.childNodes` to‘plamini o‘zgartiradi, shuning uchun elementlar har safar `0` indeksidan boshlanadi. Lekin `i` ortadi va ba`zi elementlar o'tkazib yuboriladi.
 
-The `for..of` loop also does the same.
+`for..of` sikli ham xuddi shunday qiladi.
 
-The right variant could be:
+To'g'ri variant quyidagilar bo'lishi mumkin:
 
 ```js
 function clear(elem) {
@@ -23,10 +22,10 @@ function clear(elem) {
 }
 ```
 
-And also there's a simpler way to do the same:
+Bundan tashqari, xuddi shunday qilishning oddiy usuli bor:
 
 ```js
 function clear(elem) {
-  elem.innerHTML = '';
+  elem.innerHTML = "";
 }
 ```

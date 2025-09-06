@@ -1,5 +1,5 @@
-An empty string is the only match: it starts and immediately finishes.
+Bo'sh satrning o'zi mos keladi: u boshlanadi va darhol tugaydi.
 
-The task once again demonstrates that anchors are not characters, but tests.
+Vazifa shuni yana bir bor ko'rsatadiki langarlar qahramonlar emas, balki sinovlar ekanligini.
 
-The string is empty `""`. The engine first matches the `pattern:^` (input start), yes it's there, and then immediately the end `pattern:$`, it's here too. So there's a match.
+Satr bo'sh `""`. Dvigatel avval `pattern:^` (kirish boshlanishi) ga to'g'ri keladi, ha shu yerda, so'ngra darhol oxirgi `pattern:$`, u ham shu yerda. Demak, mos keladi.

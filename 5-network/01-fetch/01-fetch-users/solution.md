@@ -1,26 +1,25 @@
+Bizga kerak foydalanuvchilarni olishimiz uchun: `fetch('https://api.github.com/users/USERNAME')`.
 
-To fetch a user we need: `fetch('https://api.github.com/users/USERNAME')`.
+Agar javob `200` holatiga ega bo'lsa, JS obyektini o'qish uchun `.json()` ga qo'ng'iroq qiling.
 
-If the response has status `200`, call `.json()` to read the JS object.
+Aks holda, agar `fetch` bajarilmasa yoki javob 200 bo'lmagan maqomga ega bo'lsa, hosil bo'lgan massivda shunchaki `null`ni qaytaramiz.
 
-Otherwise, if a `fetch` fails, or the response has non-200 status, we just return `null` in the resulting array.
-
-So here's the code:
+Kod quyidagicha:
 
 ```js demo
 async function getUsers(names) {
   let jobs = [];
 
-  for(let name of names) {
+  for (let name of names) {
     let job = fetch(`https://api.github.com/users/${name}`).then(
-      successResponse => {
+      (successResponse) => {
         if (successResponse.status != 200) {
           return null;
         } else {
           return successResponse.json();
         }
       },
-      failResponse => {
+      (failResponse) => {
         return null;
       }
     );
@@ -33,8 +32,8 @@ async function getUsers(names) {
 }
 ```
 
-Please note: `.then` call is attached directly to `fetch`, so that when we have the response, it doesn't wait for other fetches, but starts to read `.json()` immediately.
+Iltimos, diqqat qiling: `.then`ni chaqirish to'g'ridan-to'g'ri `fetch` ga biriktiriladi, shuning uchun biz javob olganimizda, u boshqa chaqiruvlarni kutmasdan, darhol `.json()` ni o'qiy boshlaydi.
 
-If we used `await Promise.all(names.map(name => fetch(...)))`, and call `.json()` on the results, then it would wait for all fetches to respond. By adding `.json()` directly to each `fetch`, we ensure that individual fetches start reading data as JSON without waiting for each other.
+Agar biz natijalarda `await Promise.all(names.map(name => fetch(...)))` dan foydalansak va `.json()` ga qo`ng`iroq qilsak, u barcha chaqiruvlar javob berishini kutadi. Har bir “olish” ga toʻgʻridan-toʻgʻri `.json()` qoʻshish orqali biz individual yuklashlar bir-birini kutmasdan maʼlumotlarni JSON sifatida oʻqiy boshlashini taʼminlaymiz.
 
-That's an example of how low-level Promise API can still be useful even if we mainly use `async/await`.
+Bu past darajadagi Promise API qanchalik foydali bo'lishining misoli, hatto biz asosan `async/await` dan foydalansak ham.

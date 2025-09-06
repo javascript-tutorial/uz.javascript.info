@@ -1,22 +1,22 @@
-importance: 3
+muhimlik: 3
 
 ---
 
-# Why "return false" doesn't work?
+# Nima uchun "return false" ishlamaydi?
 
-Why in the code below `return false` doesn't work at all?
+Nima uchun quyidagi kodda `return false` umuman ishlamaydi?
 
 ```html autorun run
 <script>
   function handler() {
-    alert( "..." );
+    alert("...");
     return false;
   }
 </script>
 
-<a href="https://w3.org" onclick="handler()">the browser will go to w3.org</a>
+<a href="https://w3.org" onclick="handler()">brauzer w3.org saytiga o'tadi</a>
 ```
 
-The browser follows the URL on click, but we don't want it.
+Brauzer bosish orqali URL manzilini kuzatib boradi, lekin biz buni xohlamaymiz.
 
-How to fix?
+Qanday tuzatish kerak?

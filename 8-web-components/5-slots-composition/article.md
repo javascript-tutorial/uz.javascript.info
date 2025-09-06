@@ -1,33 +1,33 @@
-# Shadow DOM slots, composition
+# Shadow DOM slotlar, kompozitsiya
 
-Many types of components, such as tabs, menus, image galleries, and so on, need the content to render.
+Ko'plab komponent turlari, masalan tablar, menyular, rasm galereyalari va boshqalar, render qilish uchun kontentga muhtoj.
 
-Just like built-in browser `<select>` expects `<option>` items, our `<custom-tabs>` may expect the actual tab content to be passed. And a `<custom-menu>` may expect menu items.
+Xuddi o'rnatilgan brauzer `<select>` elementi `<option>` elementlarini kutganidek, bizning `<custom-tabs>` ham haqiqiy tab kontentini qabul qilishi mumkin. Va `<custom-menu>` menyu elementlarini kutishi mumkin.
 
-The code that makes use of `<custom-menu>` can look like this:
+`<custom-menu>`dan foydalanadigan kod quyidagicha ko'rinishi mumkin:
 
 ```html
 <custom-menu>
-  <title>Candy menu</title>
-  <item>Lollipop</item>
-  <item>Fruit Toast</item>
-  <item>Cup Cake</item>
+  <title>Shirinlik menyusi</title>
+  <item>Lolipop</item>
+  <item>Mevali tost</item>
+  <item>Kek</item>
 </custom-menu>
 ```
 
-...Then our component should render it properly, as a nice menu with given title and items, handle menu events, etc.
+...Keyin bizning komponentimiz uni to'g'ri render qilishi kerak, berilgan sarlavha va elementlar bilan chiroyli menyu sifatida, menyu hodisalarini boshqarishi va hokazo.
 
-How to implement it?
+Buni qanday amalga oshirish mumkin?
 
-We could try to analyze the element content and dynamically copy-rearrange DOM nodes. That's possible, but if we're moving elements to shadow DOM, then CSS styles from the document do not apply in there, so the visual styling may be lost. Also that requires some coding.
+Biz element kontentini tahlil qilishga va DOM tugunlarini dinamik ravishda nusxalash-qayta tartibga solishga harakat qilishimiz mumkin. Bu mumkin, lekin agar biz elementlarni shadow DOM ga ko'chirayotgan bo'lsak, unda hujjatdan CSS uslublari u yerda qo'llanilmaydi, shuning uchun vizual uslub yo'qolishi mumkin. Shuningdek, bu biroz kodlashni talab qiladi.
 
-Luckily, we don't have to. Shadow DOM supports `<slot>` elements, that are automatically filled by the content from light DOM.
+Yaxshiyamki, bizga buni qilish shart emas. Shadow DOM `<slot>` elementlarini qo'llab-quvvatlaydi, ular light DOM dan kontent bilan avtomatik to'ldiriladi.
 
-## Named slots
+## Nomlangan slotlar
 
-Let's see how slots work on a simple example.
+Slotlar qanday ishlashini oddiy misolda ko'raylik.
 
-Here, `<user-card>` shadow DOM provides two slots, filled from light DOM:
+Bu yerda `<user-card>` shadow DOM ikki slot taqdim etadi, light DOM dan to'ldiriladi:
 
 ```html run autorun="no-epub" untrusted height=80
 <script>
@@ -35,12 +35,12 @@ customElements.define('user-card', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `
-      <div>Name:
+      <div>Ism:
 *!*
         <slot name="username"></slot>
 */!*
       </div>
-      <div>Birthday:
+      <div>Tug'ilgan kun:
 *!*
         <slot name="birthday"></slot>
 */!*
@@ -51,49 +51,49 @@ customElements.define('user-card', class extends HTMLElement {
 </script>
 
 <user-card>
-  <span *!*slot="username"*/!*>John Smith</span>
+  <span *!*slot="username"*/!*>Jon Smit</span>
   <span *!*slot="birthday"*/!*>01.01.2001</span>
 </user-card>
 ```
 
-In the shadow DOM, `<slot name="X">` defines an "insertion point", a place where elements with `slot="X"` are rendered.
+Shadow DOM da `<slot name="X">` "kiritish nuqtasi"ni belgilaydi, `slot="X"` bo'lgan elementlar render qilinadigan joy.
 
-Then the browser performs "composition": it takes elements from the light DOM and renders them in corresponding slots of the shadow DOM. At the end, we have exactly what we want -- a component that can be filled with data.
+Keyin brauzer "kompozitsiya" amalga oshiradi: u light DOM dan elementlarni oladi va ularni shadow DOM ning tegishli slotlarida render qiladi. Oxirida biz aynan xohlagan narsaga ega bo'lamiz -- ma'lumotlar bilan to'ldirilishi mumkin bo'lgan komponent.
 
-Here's the DOM structure after the script, not taking composition into account:
+Mana kompozitsiyani hisobga olmasdan skriptdan keyingi DOM tuzilmasi:
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Ism:
       <slot name="username"></slot>
     </div>
-    <div>Birthday:
+    <div>Tug'ilgan kun:
       <slot name="birthday"></slot>
     </div>
-  <span slot="username">John Smith</span>
+  <span slot="username">Jon Smit</span>
   <span slot="birthday">01.01.2001</span>
 </user-card>
 ```
 
-We created the shadow DOM, so here it is, under `#shadow-root`. Now the element has both light and shadow DOM.
+Biz shadow DOM yaratdik, demak u `#shadow-root` ostida. Endi elementda ham light, ham shadow DOM bor.
 
-For rendering purposes, for each `<slot name="...">` in shadow DOM, the browser looks for `slot="..."` with the same name in the light DOM. These elements are rendered inside the slots:
+Render qilish maqsadlari uchun shadow DOM dagi har bir `<slot name="...">` uchun brauzer light DOM da bir xil nomga ega `slot="..."` ni qidiradi. Bu elementlar slotlar ichida render qilinadi:
 
 ![](shadow-dom-user-card.svg)
 
-The result is called "flattened" DOM:
+Natija "tekislangan" DOM deb ataladi:
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Ism:
       <slot name="username">
-        <!-- slotted element is inserted into the slot -->
-        <span slot="username">John Smith</span>
+        <!-- slotlangan element slot ichiga kiritiladi -->
+        <span slot="username">Jon Smit</span>
       </slot>
     </div>
-    <div>Birthday:
+    <div>Tug'ilgan kun:
       <slot name="birthday">
         <span slot="birthday">01.01.2001</span>
       </slot>
@@ -101,76 +101,76 @@ The result is called "flattened" DOM:
 </user-card>
 ```
 
-...But the flattened DOM exists only for rendering and event-handling purposes. It's kind of "virtual". That's how things are shown. But the nodes in the document are actually not moved around!
+...Lekin tekislangan DOM faqat render qilish va hodisalarni boshqarish maqsadlari uchun mavjud. Bu bir navi "virtual". Narsalar shunday ko'rsatiladi. Lekin hujjatdagi tugunlar aslida harakatlantirilmaydi!
 
-That can be easily checked if we run `querySelectorAll`: nodes are still at their places.
+Buni agar `querySelectorAll` ni ishga tushirsak, osongina tekshirish mumkin: tugunlar hali ham o'z joylarida:
 
 ```js
-// light DOM <span> nodes are still at the same place, under `<user-card>`
+// light DOM <span> tugunlari hali ham bir xil joyda, `<user-card>` ostida
 alert( document.querySelectorAll('user-card span').length ); // 2
 ```
 
-So, the flattened DOM is derived from shadow DOM by inserting slots. The browser renders it and uses for style inheritance, event propagation (more about that later). But JavaScript still sees the document "as is", before flattening.
+Shunday qilib, tekislangan DOM slotlarni kiritish orqali shadow DOM dan olinadi. Brauzer uni render qiladi va uslub merosi, hodisalar tarqalishi uchun ishlatadi (bu haqda keyinroq). Lekin JavaScript hali ham hujjatni "bor hol"da, tekislashdan oldin ko'radi.
 
-````warn header="Only top-level children may have slot=\"...\" attribute"
-The `slot="..."` attribute is only valid for direct children of the shadow host (in our example, `<user-card>` element). For nested elements it's ignored.
+````warn header="Faqat yuqori darajadagi bolalar slot=\"...\" atributiga ega bo'lishi mumkin"
+`slot="..."` atributi faqat shadow host ning bevosita bolalari uchun to'g'ri (bizning misolimizda `<user-card>` elementi). Ichki joylashgan elementlar uchun u e'tiborga olinmaydi.
 
-For example, the second `<span>` here is ignored (as it's not a top-level child of `<user-card>`):
+Masalan, bu yerdagi ikkinchi `<span>` e'tiborga olinmaydi (`<user-card>` ning yuqori darajadagi bolasi emas):
 ```html
 <user-card>
-  <span slot="username">John Smith</span>
+  <span slot="username">Jon Smit</span>
   <div>
-    <!-- invalid slot, must be direct child of user-card -->
+    <!-- noto'g'ri slot, user-card ning bevosita bolasi bo'lishi kerak -->
     <span slot="birthday">01.01.2001</span>
   </div>
 </user-card>
 ```
 ````
 
-If there are multiple elements in light DOM with the same slot name, they are appended into the slot, one after another.
+Agar light DOM da bir xil slot nomiga ega bir nechta element bo'lsa, ular slotga birin-ketin qo'shiladi.
 
-For example, this:
+Masalan, bu:
 ```html
 <user-card>
-  <span slot="username">John</span>
-  <span slot="username">Smith</span>
+  <span slot="username">Jon</span>
+  <span slot="username">Smit</span>
 </user-card>
 ```
 
-Gives this flattened DOM with two elements in `<slot name="username">`:
+`<slot name="username">` da ikki element bilan bunday tekislangan DOM ni beradi:
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Ism:
       <slot name="username">
-        <span slot="username">John</span>
-        <span slot="username">Smith</span>
+        <span slot="username">Jon</span>
+        <span slot="username">Smit</span>
       </slot>
     </div>
-    <div>Birthday:
+    <div>Tug'ilgan kun:
       <slot name="birthday"></slot>
     </div>
 </user-card>
 ```
 
-## Slot fallback content
+## Slot zaxira kontenti
 
-If we put something inside a `<slot>`, it becomes the fallback, "default" content. The browser shows it if there's no corresponding filler in light DOM.
+Agar biz `<slot>` ichiga biror narsa qo'ysak, u zaxira, "sukut bo'yicha" kontent bo'ladi. Brauzer light DOM da tegishli to'ldiruvchi bo'lmasa, uni ko'rsatadi.
 
-For example, in this piece of shadow DOM, `Anonymous` renders if there's no `slot="username"` in light DOM.
+Masalan, shadow DOM ning ushbu qismida, agar light DOM da `slot="username"` bo'lmasa, `Anonim` render qilinadi.
 
 ```html
-<div>Name:
-  <slot name="username">Anonymous</slot>
+<div>Ism:
+  <slot name="username">Anonim</slot>
 </div>
 ```
 
-## Default slot: first unnamed
+## Sukut bo'yicha slot: birinchi nomsiz
 
-The first `<slot>` in shadow DOM that doesn't have a name is a "default" slot. It gets all nodes from the light DOM that aren't slotted elsewhere.
+Shadow DOM dagi nomi bo'lmagan birinchi `<slot>` "sukut bo'yicha" slot hisoblanadi. U light DOM dan boshqa joyga slotlanmagan barcha tugunlarni oladi.
 
-For example, let's add the default slot to our `<user-card>` that shows all unslotted information about the user:
+Masalan, keling, foydalanuvchi haqida barcha slotlanmagan ma'lumotlarni ko'rsatadigan sukut bo'yicha slotni `<user-card>` ga qo'shaylik:
 
 ```html run autorun="no-epub" untrusted height=140
 <script>
@@ -178,14 +178,14 @@ customElements.define('user-card', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `
-    <div>Name:
+    <div>Ism:
       <slot name="username"></slot>
     </div>
-    <div>Birthday:
+    <div>Tug'ilgan kun:
       <slot name="birthday"></slot>
     </div>
     <fieldset>
-      <legend>Other information</legend>
+      <legend>Boshqa ma'lumotlar</legend>
 *!*
       <slot></slot>
 */!*
@@ -197,69 +197,69 @@ customElements.define('user-card', class extends HTMLElement {
 
 <user-card>
 *!*
-  <div>I like to swim.</div>
+  <div>Men suzishni yaxshi ko'raman.</div>
 */!*
-  <span slot="username">John Smith</span>
+  <span slot="username">Jon Smit</span>
   <span slot="birthday">01.01.2001</span>
 *!*
-  <div>...And play volleyball too!</div>
+  <div>...Va voleybol o'ynashni ham!</div>
 */!*
 </user-card>
 ```
 
-All the unslotted light DOM content gets into the "Other information" fieldset.
+Barcha slotlanmagan light DOM kontenti "Boshqa ma'lumotlar" fieldset ichiga tushadi.
 
-Elements are appended to a slot one after another, so both unslotted pieces of information are in the default slot together.
+Elementlar slotga birin-ketin qo'shiladi, shuning uchun ikkala slotlanmagan ma'lumot bo'lagi sukut bo'yicha slotda birga bo'ladi.
 
-The flattened DOM looks like this:
+Tekislangan DOM quyidagicha ko'rinadi:
 
 ```html
 <user-card>
   #shadow-root
-    <div>Name:
+    <div>Ism:
       <slot name="username">
-        <span slot="username">John Smith</span>
+        <span slot="username">Jon Smit</span>
       </slot>
     </div>
-    <div>Birthday:
+    <div>Tug'ilgan kun:
       <slot name="birthday">
         <span slot="birthday">01.01.2001</span>
       </slot>
     </div>
     <fieldset>
-      <legend>Other information</legend>
+      <legend>Boshqa ma'lumotlar</legend>
 *!*
       <slot>
-        <div>I like to swim.</div>
-        <div>...And play volleyball too!</div>
+        <div>Men suzishni yaxshi ko'raman.</div>
+        <div>...Va voleybol o'ynashni ham!</div>
       </slot>
 */!*
     </fieldset>
 </user-card>
 ```
 
-## Menu example
+## Menyu misoli
 
-Now let's back to `<custom-menu>`, mentioned at the beginning of the chapter.
+Endi bob boshida tilga olingan `<custom-menu>` ga qaytaylik.
 
-We can use slots to distribute elements.
+Biz elementlarni taqsimlash uchun slotlardan foydalanishimiz mumkin.
 
-Here's the markup for `<custom-menu>`:
+Mana `<custom-menu>` uchun markup:
 
 ```html
 <custom-menu>
-  <span slot="title">Candy menu</span>
-  <li slot="item">Lollipop</li>
-  <li slot="item">Fruit Toast</li>
-  <li slot="item">Cup Cake</li>
+  <span slot="title">Shirinlik menyusi</span>
+  <li slot="item">Lolipop</li>
+  <li slot="item">Mevali tost</li>
+  <li slot="item">Kek</li>
 </custom-menu>
 ```
 
-The shadow DOM template with proper slots:
+To'g'ri slotlar bilan shadow DOM shabloni:
 
 ```html
 <template id="tmpl">
-  <style> /* menu styles */ </style>
+  <style> /* menyu uslublari */ </style>
   <div class="menu">
     <slot name="title"></slot>
     <ul><slot name="item"></slot></ul>
@@ -267,72 +267,72 @@ The shadow DOM template with proper slots:
 </template>
 ```
 
-1. `<span slot="title">` goes into `<slot name="title">`.
-2. There are many `<li slot="item">` in the template, but only one `<slot name="item">` in the template. So all such `<li slot="item">` are appended to `<slot name="item">` one after another, thus forming the list.
+1. `<span slot="title">` `<slot name="title">` ga boradi.
+2. Shablonda ko'plab `<li slot="item">` bor, lekin shablonda faqat bitta `<slot name="item">`. Shuning uchun barcha bunday `<li slot="item">` lar `<slot name="item">` ga birin-ketin qo'shiladi va shunday qilib ro'yxat hosil bo'ladi.
 
-The flattened DOM becomes:
+Tekislangan DOM quyidagicha bo'ladi:
 
 ```html
 <custom-menu>
   #shadow-root
-    <style> /* menu styles */ </style>
+    <style> /* menyu uslublari */ </style>
     <div class="menu">
       <slot name="title">
-        <span slot="title">Candy menu</span>
+        <span slot="title">Shirinlik menyusi</span>
       </slot>
       <ul>
         <slot name="item">
-          <li slot="item">Lollipop</li>
-          <li slot="item">Fruit Toast</li>
-          <li slot="item">Cup Cake</li>
+          <li slot="item">Lolipop</li>
+          <li slot="item">Mevali tost</li>
+          <li slot="item">Kek</li>
         </slot>
       </ul>
     </div>
 </custom-menu>
 ```
 
-One might notice that, in a valid DOM, `<li>` must be a direct child of `<ul>`. But that's flattened DOM, it describes how the component is rendered, such thing happens naturally here.
+To'g'ri DOM da `<li>` `<ul>` ning bevosita bolasi bo'lishi kerakligini payqash mumkin. Lekin bu tekislangan DOM, u komponent qanday render qilinishini tasvirlaydi, bunday narsa bu yerda tabiiy ravishda sodir bo'ladi.
 
-We just need to add a `click` handler to open/close the list, and the `<custom-menu>` is ready:
+Biz faqat ro'yxatni ochish/yopish uchun `click` ishlovchisini qo'shishimiz kerak va `<custom-menu>` tayyor:
 
 ```js
 customElements.define('custom-menu', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
 
-    // tmpl is the shadow DOM template (above)
+    // tmpl shadow DOM shabloni (yuqorida)
     this.shadowRoot.append( tmpl.content.cloneNode(true) );
 
-    // we can't select light DOM nodes, so let's handle clicks on the slot
+    // biz light DOM tugunlarini tanlay olmaymiz, shuning uchun slotdagi bosishlarni boshqaraylik
     this.shadowRoot.querySelector('slot[name="title"]').onclick = () => {
-      // open/close the menu
+      // menyuni ochish/yopish
       this.shadowRoot.querySelector('.menu').classList.toggle('closed');
     };
   }
 });
 ```
 
-Here's the full demo:
+Mana to'liq demo:
 
 [iframe src="menu" height=140 edit]
 
-Of course, we can add more functionality to it: events, methods and so on.
+Albatta, biz unga ko'proq funksionallik qo'shishimiz mumkin: hodisalar, metodlar va hokazo.
 
-## Updating slots
+## Slotlarni yangilash
 
-What if the outer code wants to add/remove menu items dynamically?
+Agar tashqi kod dinamik ravishda menyu elementlarini qo'shish/olib tashlashni xohlasa-chi?
 
-**The browser monitors slots and updates the rendering if slotted elements are added/removed.**
+**Brauzer slotlarni kuzatadi va slotlangan elementlar qo'shilsa/olib tashlansa, renderni yangilaydi.**
 
-Also, as light DOM nodes are not copied, but just rendered in slots, the changes inside them immediately become visible.
+Shuningdek, light DOM tugunlari nusxalanmagani, faqat slotlarda render qilingani uchun, ular ichidagi o'zgarishlar darhol ko'rinadigan bo'ladi.
 
-So we don't have to do anything to update rendering. But if the component code wants to know about slot changes, then `slotchange` event is available.
+Shuning uchun renderni yangilash uchun hech narsa qilishimiz shart emas. Lekin agar komponent kodi slot o'zgarishlari haqida bilishni xohlasa, `slotchange` hodisasi mavjud.
 
-For example, here the menu item is inserted dynamically after 1 second, and the title changes after 2 seconds:
+Masalan, bu yerda menyu elementi 1 soniyadan keyin dinamik ravishda kiritiladi va sarlavha 2 soniyadan keyin o'zgaradi:
 
 ```html run untrusted height=80
 <custom-menu id="menu">
-  <span slot="title">Candy menu</span>
+  <span slot="title">Shirinlik menyusi</span>
 </custom-menu>
 
 <script>
@@ -344,7 +344,7 @@ customElements.define('custom-menu', class extends HTMLElement {
       <ul><slot name="item"></slot></ul>
     </div>`;
 
-    // shadowRoot can't have event handlers, so using the first child
+    // shadowRoot da hodisa ishlovchilari bo'lishi mumkin emas, shuning uchun birinchi boladan foydalanamiz
     this.shadowRoot.firstElementChild.addEventListener('slotchange',
       e => alert("slotchange: " + e.target.name)
     );
@@ -352,49 +352,49 @@ customElements.define('custom-menu', class extends HTMLElement {
 });
 
 setTimeout(() => {
-  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Lollipop</li>')
+  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Lolipop</li>')
 }, 1000);
 
 setTimeout(() => {
-  menu.querySelector('[slot="title"]').innerHTML = "New menu";
+  menu.querySelector('[slot="title"]').innerHTML = "Yangi menyu";
 }, 2000);
 </script>
 ```
 
-The menu rendering updates each time without our intervention.
+Menyu render bizning aralashuvimiz siz har safar yangilanadi.
 
-There are two `slotchange` events here:
+Bu yerda ikkita `slotchange` hodisasi bor:
 
-1. At initialization:
+1. Initsializatsiyada:
 
-    `slotchange: title` triggers immediately, as the `slot="title"` from the light DOM gets into the corresponding slot.
-2. After 1 second:
+    `slotchange: title` darhol ishga tushadi, chunki light DOM dan `slot="title"` tegishli slotga tushadi.
+2. 1 soniyadan keyin:
 
-    `slotchange: item` triggers, when a new `<li slot="item">` is added.
+    `slotchange: item` ishga tushadi, yangi `<li slot="item">` qo'shilganda.
 
-Please note: there's no `slotchange` event after 2 seconds, when the content of `slot="title"` is modified. That's because there's no slot change. We modify the content inside the slotted element, that's another thing.
+E'tibor bering: 2 soniyadan keyin `slotchange` hodisasi yo'q, `slot="title"` kontenti o'zgartirilganda. Buning sababi slot o'zgarishi yo'q. Biz slotlangan element ichidagi kontentni o'zgartiramiz, bu boshqa narsa.
 
-If we'd like to track internal modifications of light DOM from JavaScript, that's also possible using a more generic mechanism: [MutationObserver](info:mutation-observer).
+Agar biz JavaScript dan light DOM ning ichki o'zgarishlarini kuzatishni xohlasak, bu ham umumiyroq mexanizm yordamida mumkin: [MutationObserver](info:mutation-observer).
 
 ## Slot API
 
-Finally, let's mention the slot-related JavaScript methods.
+Nihoyat, slot bilan bog'liq JavaScript metodlarini eslatib o'taylik.
 
-As we've seen before, JavaScript looks at the "real" DOM, without flattening. But, if the shadow tree has `{mode: 'open'}`, then we can figure out which elements assigned to a slot and, vise-versa, the slot by the element inside it:
+Avval ko'rganimizdek, JavaScript "haqiqiy" DOM ga, tekislashsiz qaradi. Lekin agar shadow daraxt `{mode: 'open'}` ga ega bo'lsa, biz qaysi elementlar slotga tayinlanganini va aksincha, element bo'yicha slotni aniqlay olamiz:
 
-- `node.assignedSlot` -- returns the `<slot>` element that the `node` is assigned to.
-- `slot.assignedNodes({flatten: true/false})` -- DOM nodes, assigned to the slot. The `flatten` option is `false` by default. If explicitly set to `true`, then it looks more deeply into the flattened DOM, returning nested slots in case of nested components and the fallback content if no node assigned.
-- `slot.assignedElements({flatten: true/false})` -- DOM elements, assigned to the slot (same as above, but only element nodes).
+- `node.assignedSlot` -- `node` tayinlangan `<slot>` elementini qaytaradi.
+- `slot.assignedNodes({flatten: true/false})` -- slotga tayinlangan DOM tugunlari. `flatten` opsiyasi sukut bo'yicha `false`. Agar aniq ravishda `true` ga o'rnatilsa, u tekislangan DOM ga chuqurroq qaradi, ichki komponentlar holatida ichki slotlarni va hech qanday tugun tayinlanmagan bo'lsa zaxira kontentni qaytaradi.
+- `slot.assignedElements({flatten: true/false})` -- slotga tayinlangan DOM elementlari (yuqoridagi bilan bir xil, lekin faqat element tugunlari).
 
-These methods are useful when we need not just show the slotted content, but also track it in JavaScript.
+Bu metodlar biz slotlangan kontentni ko'rsatishimiz shart bo'lmaganda, balki JavaScript da uni kuzatishimiz kerak bo'lganda foydali.
 
-For example, if `<custom-menu>` component wants to know, what it shows, then it could track `slotchange` and get the items from `slot.assignedElements`:
+Masalan, agar `<custom-menu>` komponenti nima ko'rsatayotganini bilishni xohlasa, u `slotchange` ni kuzatishi va `slot.assignedElements` dan elementlarni olishi mumkin:
 
 ```html run untrusted height=120
 <custom-menu id="menu">
-  <span slot="title">Candy menu</span>
-  <li slot="item">Lollipop</li>
-  <li slot="item">Fruit Toast</li>
+  <span slot="title">Shirinlik menyusi</span>
+  <li slot="item">Lolipop</li>
+  <li slot="item">Mevali tost</li>
 </custom-menu>
 
 <script>
@@ -408,50 +408,49 @@ customElements.define('custom-menu', class extends HTMLElement {
       <ul><slot name="item"></slot></ul>
     </div>`;
 
-    // triggers when slot content changes
+    // slot kontenti o'zgarsa ishga tushadi
 *!*
     this.shadowRoot.firstElementChild.addEventListener('slotchange', e => {
       let slot = e.target;
       if (slot.name == 'item') {
         this.items = slot.assignedElements().map(elem => elem.textContent);
-        alert("Items: " + this.items);
+        alert("Elementlar: " + this.items);
       }
     });
 */!*
   }
 });
 
-// items update after 1 second
+// elementlar 1 soniyadan keyin yangilanadi
 setTimeout(() => {
-  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Cup Cake</li>')
+  menu.insertAdjacentHTML('beforeEnd', '<li slot="item">Kek</li>')
 }, 1000);
 </script>
 ```
 
+## Xulosa
 
-## Summary
+Odatda, agar elementda shadow DOM bo'lsa, uning light DOM ko'rsatilmaydi. Slotlar light DOM dan elementlarni shadow DOM ning belgilangan joylarida ko'rsatish imkonini beradi.
 
-Usually, if an element has shadow DOM, then its light DOM is not displayed. Slots allow to show elements from light DOM in specified places of shadow DOM.
+Ikki xil slot mavjud:
 
-There are two kinds of slots:
+- Nomlangan slotlar: `<slot name="X">...</slot>` -- `slot="X"` bilan light bolalarni oladi.
+- Sukut bo'yicha slot: nomsiz birinchi `<slot>` (keyingi nomsiz slotlar e'tiborga olinmaydi) -- slotlanmagan light bolalarni oladi.
+- Agar bir xil slot uchun ko'plab elementlar bo'lsa -- ular birin-ketin qo'shiladi.
+- `<slot>` elementining kontenti zaxira sifatida ishlatiladi. Slot uchun light bolalar bo'lmasa ko'rsatiladi.
 
-- Named slots: `<slot name="X">...</slot>` -- gets light children with `slot="X"`.
-- Default slot: the first `<slot>` without a name (subsequent unnamed slots are ignored) -- gets unslotted light children.
-- If there are many elements for the same slot -- they are appended one after another.
-- The content of `<slot>` element is used as a fallback. It's shown if there are no light children for the slot.
+Slotlangan elementlarni ularning slotlari ichida render qilish jarayoni "kompozitsiya" deb ataladi. Natija "tekislangan DOM" deb ataladi.
 
-The process of rendering slotted elements inside their slots is called "composition". The result is called a "flattened DOM".
+Kompozitsiya aslida tugunlarni siljitmaydi, JavaScript nuqtai nazaridan DOM hali ham bir xil.
 
-Composition does not really move nodes, from JavaScript point of view the DOM is still same.
+JavaScript slotlarga metodlar yordamida kirishi mumkin:
+- `slot.assignedNodes/Elements()` -- `slot` ichidagi tugunlar/elementlarni qaytaradi.
+- `node.assignedSlot` -- teskari xususiyat, tugun bo'yicha slotni qaytaradi.
 
-JavaScript can access slots using methods:
-- `slot.assignedNodes/Elements()` -- returns nodes/elements inside the `slot`.
-- `node.assignedSlot` -- the reverse property, returns slot by a node.
+Agar biz nimani ko'rsatayotganimizni bilishni xohlasak, slot kontentini quyidagilar yordamida kuzatishimiz mumkin:
+- `slotchange` hodisasi -- slot birinchi marta to'ldirilganda va slotlangan elementning har qanday qo'shish/olib tashlash/almashtirish operatsiyasida ishga tushadi, lekin uning bolalari emas. Slot `event.target` hisoblanadi.
+- [MutationObserver](info:mutation-observer) slot kontentiga chuqurroq kirish, uning ichidagi o'zgarishlarni kuzatish uchun.
 
-If we'd like to know what we're showing, we can track slot contents using:
-- `slotchange` event -- triggers the first time a slot is filled, and on any add/remove/replace operation of the slotted element, but not its children. The slot is `event.target`.
-- [MutationObserver](info:mutation-observer) to go deeper into slot content, watch changes inside it.
+Endi light DOM dan elementlarni shadow DOM da qanday ko'rsatishni bilganimizdan keyin, ularni to'g'ri uslublash haqida ko'raylik. Asosiy qoida shundaki, shadow elementlar ichkarida, light elementlar esa tashqarida uslublanadi, lekin sezilarli istisnolar bor.
 
-Now, as we know how to show elements from light DOM in shadow DOM, let's see how to style them properly. The basic rule is that shadow elements are styled inside, and light elements -- outside, but there are notable exceptions.
-
-We'll see the details in the next chapter.
+Tafsilotlarni keyingi bobda ko'ramiz.

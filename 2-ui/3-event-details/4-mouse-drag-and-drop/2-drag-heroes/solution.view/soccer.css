@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
@@ -10,7 +11,7 @@ html, body {
   float: left;
 }
 
-/* heroes and the ball (dragables) */
+/* qahramonlar va to'p (dragables) */
 
 .hero {
   background: url(https://js.cx/drag-heroes/heroes.png);

@@ -1,1 +1,1 @@
-We'll be using `rows` and `cells` properties to access diagonal table cells.
+Diagonal jadval kataklariga kirish uchun biz `satrlar` va `katakchalar` xususiyatlaridan foydalanamiz.

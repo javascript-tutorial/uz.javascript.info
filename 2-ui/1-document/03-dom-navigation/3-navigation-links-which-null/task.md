@@ -1,10 +1,10 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# The sibling question
+# Sibling (yonma yon dom elementlari) savoli
 
-If `elem` -- is an arbitrary DOM element node...
+Agar `elem` -- ixtiyoriy DOM element tugun bo'lsa...
 
-- Is it true that `elem.lastChild.nextSibling` is always `null`?
-- Is it true that `elem.children[0].previousSibling` is always `null` ?
+- `elem.lastChild.nextSibling` har doim `null` ekanligi rostmi?
+- `elem.children[0].previousSibling` har doim `null` ekanligi rostmi?

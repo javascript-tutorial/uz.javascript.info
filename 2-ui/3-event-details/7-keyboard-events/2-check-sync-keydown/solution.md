@@ -1,6 +1,5 @@
+Biz ikkita ishlov beruvchidan foydalanishimiz kerak: `document.onkeydown` va `document.onkeyup`.
 
-We should use two handlers: `document.onkeydown` and `document.onkeyup`.
+Hozir bosilgan tugmachalarni ushlab turish uchun `pressed = new Set()` to'plamini yarataylik.
 
-Let's create a set `pressed = new Set()` to keep currently pressed keys.
-
-The first handler adds to it, while the second one removes from it. Every time on `keydown` we check if we have enough keys pressed, and run the function if it is so.
+Birinchi ishlov beruvchi unga qo'shadi, ikkinchisi esa undan olib tashlaydi. Har safar `keydown` da bizda yetarlicha tugmalar bosilganligini tekshiramiz va agar shunday bo'lsa, funktsiyani ishga tushiramiz.

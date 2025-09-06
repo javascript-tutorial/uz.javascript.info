@@ -1,33 +1,29 @@
-importance: 5
+# Modal forma
 
----
+`html` xabari, input maydoni va `OK/CANCEL` tugmalari bilan formani ko'rsatuvchi `showPrompt(html, callback)` funksiyasini yarating.
 
-# Modal form
+- Foydalanuvchi matn maydoniga biror narsa yozishi va `key:Enter` yoki OK tugmasini bosishi kerak, keyin kiritilgan qiymat bilan `callback(value)` chaqiriladi.
+- Aks holda, agar foydalanuvchi `key:Esc` yoki CANCEL tugmasini bossa, `callback(null)` chaqiriladi.
 
-Create a function `showPrompt(html, callback)` that shows a form with the message `html`, an input field and buttons `OK/CANCEL`.
+Ikkala holatda ham bu kirish jarayonini tugatadi va formani olib tashlaydi.
 
-- A user should type something into a text field and press `key:Enter` or the OK button, then `callback(value)` is called with the value they entered.
-- Otherwise if the user presses `key:Esc` or CANCEL, then `callback(null)` is called.
+Talablar:
 
-In both cases that ends the input process and removes the form.
+- Forma oynaning markazida bo'lishi kerak.
+- Forma *modal* bo'lishi kerak. Boshqacha qilib aytganda, foydalanuvchi uni yopmaguncha sahifaning qolgan qismi bilan hech qanday o'zaro ta'sir mumkin emas.
+- Forma ko'rsatilganda, fokus foydalanuvchi uchun `<input>` ichida bo'lishi kerak.
+- `key:Tab`/`key:Shift+Tab` tugmalari forma maydonlari orasida fokusni siljitishi kerak, uni boshqa sahifa elementlariga chiqishiga ruxsat bermang.
 
-Requirements:
-
-- The form should be in the center of the window.
-- The form is *modal*. In other words, no interaction with the rest of the page is possible until the user closes it.
-- When the form is shown, the focus should be inside the `<input>` for the user.
-- Keys `key:Tab`/`key:Shift+Tab` should shift the focus between form fields, don't allow it to leave for other page elements.
-
-Usage example:
+Foydalanish misoli:
 
 ```js
-showPrompt("Enter something<br>...smart :)", function(value) {
+showPrompt("Biror narsa kiriting<br>...aqlli :)", function(value) {
   alert(value);
 });
 ```
 
-A demo in the iframe:
+Iframe dagi demo:
 
 [iframe src="solution" height=160 border=1]
 
-P.S. The source document has HTML/CSS for the form with fixed positioning, but it's up to you to make it modal.
+P.S. Manba hujjatda sobit pozitsiyaga ega forma uchun HTML/CSS mavjud, lekin uni modal qilish sizga bog'liq.

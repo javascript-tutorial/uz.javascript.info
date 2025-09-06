@@ -1,13 +1,12 @@
-'use strict';
+"use strict";
 
 class HoverIntent {
-
   constructor({
-    sensitivity = 0.1, // speed less than 0.1px/ms means "hovering over an element"
-    interval = 100,    // measure mouse speed once per 100ms
+    sensitivity = 0.1, // tezlik 0,1px/ms dan kam boʻlsa, bu “element ustiga oʻtish” degan maʼnoni anglatadi.
+    interval = 100, // sichqoncha tezligini 100 ms uchun bir marta o'lchang
     elem,
     over,
-    out
+    out,
   }) {
     this.sensitivity = sensitivity;
     this.interval = interval;
@@ -15,50 +14,48 @@ class HoverIntent {
     this.over = over;
     this.out = out;
 
-    // make sure "this" is the object in event handlers.
+    // "this" hodisa ishlov beruvchilarida ob'ekt ekanligiga ishonch hosil qiling.
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onMouseOver = this.onMouseOver.bind(this);
     this.onMouseOut = this.onMouseOut.bind(this);
 
-    // and in time-measuring function (called from setInterval)
+    // va vaqtni o'lchash funktsiyasida (setInterval dan chaqiriladi)
     this.trackSpeed = this.trackSpeed.bind(this);
 
     elem.addEventListener("mouseover", this.onMouseOver);
 
     elem.addEventListener("mouseout", this.onMouseOut);
-
   }
 
   onMouseOver(event) {
-
     if (this.isOverElement) {
-      // if we're over the element, then ignore the event
-      // we are already measuring the speed
+      // agar biz elementdan oshib ketgan bo'lsak, hodisaga e'tibor bermang
+      // biz allaqachon tezlikni o'lchayapmiz
       return;
     }
 
     this.isOverElement = true;
 
-    // after every mousemove we'll be check the distance
-    // between the previous and the current mouse coordinates
-    // if it's less than sensivity, then the speed is slow
+    // Har bir sichqoncha harakatidan keyin biz masofani tekshiramiz
+    // oldingi va joriy sichqoncha koordinatalari o'rtasida
+    // agar sezgirlikdan past bo'lsa, tezlik sekin
 
     this.prevX = event.pageX;
     this.prevY = event.pageY;
     this.prevTime = Date.now();
 
-    elem.addEventListener('mousemove', this.onMouseMove);
+    elem.addEventListener("mousemove", this.onMouseMove);
     this.checkSpeedInterval = setInterval(this.trackSpeed, this.interval);
   }
 
   onMouseOut(event) {
-    // if left the element
+    // element qoldirilsa
     if (!event.relatedTarget || !elem.contains(event.relatedTarget)) {
       this.isOverElement = false;
-      this.elem.removeEventListener('mousemove', this.onMouseMove);
+      this.elem.removeEventListener("mousemove", this.onMouseMove);
       clearInterval(this.checkSpeedInterval);
       if (this.isHover) {
-        // if there was a stop over the element
+        // agar element ustida to'xtash bo'lsa
         this.out.call(this.elem, event);
         this.isHover = false;
       }
@@ -72,17 +69,18 @@ class HoverIntent {
   }
 
   trackSpeed() {
-
     let speed;
 
     if (!this.lastTime || this.lastTime == this.prevTime) {
-      // cursor didn't move
+      // kursor harakatlanmadi
       speed = 0;
     } else {
-      speed = Math.sqrt(
-        Math.pow(this.prevX - this.lastX, 2) +
-        Math.pow(this.prevY - this.lastY, 2)
-      ) / (this.lastTime - this.prevTime);
+      speed =
+        Math.sqrt(
+          Math.pow(this.prevX - this.lastX, 2) +
+            Math.pow(this.prevY - this.lastY, 2)
+        ) /
+        (this.lastTime - this.prevTime);
     }
 
     if (speed < this.sensitivity) {
@@ -90,7 +88,7 @@ class HoverIntent {
       this.isHover = true;
       this.over.call(this.elem, event);
     } else {
-      // speed fast, remember new coordinates as the previous ones
+      // tez suring, oldingi kabi yangi koordinatalarni eslab qoling
       this.prevX = this.lastX;
       this.prevY = this.lastY;
       this.prevTime = this.lastTime;
@@ -98,9 +96,8 @@ class HoverIntent {
   }
 
   destroy() {
-    elem.removeEventListener('mousemove', this.onMouseMove);
-    elem.removeEventListener('mouseover', this.onMouseOver);
-    elem.removeEventListener('mouseout', this.onMouseOut);
+    elem.removeEventListener("mousemove", this.onMouseMove);
+    elem.removeEventListener("mouseover", this.onMouseOver);
+    elem.removeEventListener("mouseout", this.onMouseOut);
   }
-
 }

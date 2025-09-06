@@ -1,9 +1,8 @@
-
-Solution:
+Yechim:
 
 ```js run
 let regexp = /\.{3,}/g;
-alert( "Hello!... How goes?.....".match(regexp) ); // ..., .....
+alert("Salom!... Qanday ketyapti?.....".match(regexp)); // ..., .....
 ```
 
-Please note that the dot is a special character, so we have to escape it and insert as `\.`.
+Esda tutingki, nuqta maxsus belgidir, shuning uchun biz undan qochishimiz va `\.` sifatida kiritishimiz kerak.

@@ -1,9 +1,8 @@
+Birinchidan, biz barcha tashqi havolalarni topishimiz kerak.
 
-First, we need to find all external references.
+Buning ikkita yo'l bor.
 
-There are two ways.
-
-The first is to find all links using `document.querySelectorAll('a')` and then filter out what we need:
+Birinchisi, `document.querySelectorAll('a')` yordamida barcha havolalarni topish va keyin bizga kerak bo'lgan narsalarni filtrlash:
 
 ```js
 let links = document.querySelectorAll('a');
@@ -12,25 +11,25 @@ for (let link of links) {
 *!*
   let href = link.getAttribute('href');
 */!*
-  if (!href) continue; // no attribute
+  if (!href) continue; // attributsiz
 
-  if (!href.includes('://')) continue; // no protocol
+  if (!href.includes('://')) continue; // protokolsiz
 
-  if (href.startsWith('http://internal.com')) continue; // internal
+  if (href.startsWith('http://internal.com')) continue; // ichki
 
   link.style.color = 'orange';
 }
 ```
 
-Please note: we use `link.getAttribute('href')`. Not `link.href`, because we need the value from HTML.
+Esda tuting: biz `link.getAttribute('href')` dan foydalanamiz. `link.href` emas, chunki bizga HTML qiymati kerak.
 
-...Another, simpler way would be to add the checks to CSS selector:
+Yana bir oddiy usul CSS selektoriga chek qo'shishdir:
 
 ```js
-// look for all links that have :// in href
-// but href doesn't start with http://internal.com
+// href da :// bo'lgan barcha havolalarni qidiring
+// lekin href http://internal.com bilan boshlanmaydi
 let selector = 'a[href*="://"]:not([href^="http://internal.com"])';
 let links = document.querySelectorAll(selector);
 
-links.forEach(link => link.style.color = 'orange');
+links.forEach((link) => (link.style.color = "orange"));
 ```

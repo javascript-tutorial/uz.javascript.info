@@ -1,20 +1,20 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Place the ball in the field center
+# To'pni maydon markaziga qo'ying
 
-Here's how the source document looks:
+Manba hujjatning ko'rinishi quyidagicha:
 
 [iframe src="source" edit link height=180]
 
-What are coordinates of the field center?
+Maydon markazining koordinatalari qanday?
 
-Calculate them and use to place the ball into the center of the green field:
+Ularni hisoblang va to'pni yashil maydonning markaziga qo'yish uchun foydalaning:
 
 [iframe src="solution" height=180]
 
-- The element should be moved by JavaScript, not CSS.
-- The code should work with any ball size (`10`, `20`, `30` pixels) and any field size, not be bound to the given values.
+- Element CSS emas, balki JavaScript orqali ko'chirilishi kerak.
+- Kod har qanday shar o'lchami (`10`, `20`, `30` piksel) va istalgan maydon o'lchami bilan ishlashi kerak, berilgan qiymatlarga bog`lanmasligi kerak.
 
-P.S. Sure, centering could be done with CSS, but here we want exactly JavaScript. Further we'll meet other topics and more complex situations when JavaScript must be used. Here we do a "warm-up".
+P.S. Albatta, markazlashtirish CSS yordamida amalga oshirilishi mumkin, ammo bu erda biz aynan JavaScript-ni xohlaymiz. Keyinchalik JavaScript-dan foydalanish kerak bo'lgan boshqa mavzular va murakkabroq vaziyatlar bilan tanishamiz.

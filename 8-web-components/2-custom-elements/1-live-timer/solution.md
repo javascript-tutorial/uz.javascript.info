@@ -1,4 +1,4 @@
+Yodda tuting:
 
-Please note:
-1. We clear `setInterval` timer when the element is removed from the document. That's important, otherwise it continues ticking even if not needed any more. And the browser can't clear the memory from this element and referenced by it.
-2. We can access current date as `elem.date` property. All class methods and properties are naturally element methods and properties.
+1. Element hujjatdan olib tashlanganida biz `setInterval` taymerini tozalaymiz. Bu muhim, aks holda, agar kerak bo'lmasa ham, u tiqishni davom ettiradi. Va brauzer ushbu elementdan xotirani tozalay olmaydi va u tomonidan havola qilinadi.
+2. Joriy sanaga `elem.date` xususiyati sifatida kirishimiz mumkin. Barcha sinf usullari va xususiyatlari tabiiy ravishda element usullari va xususiyatlaridir.

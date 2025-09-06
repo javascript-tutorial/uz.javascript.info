@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
   <div id="carousel" class="carousel">
     <button class="arrow prev">⇦</button>
     <div class="gallery">
@@ -27,7 +24,7 @@
   </div>
 
   <script>
-    /* label the images, just for convenience, to visually track them */
+    /* qulaylik uchun tasvirlarni vizual kuzatish uchun ularni etiketlang */
     let i = 1;
     for(let li of carousel.querySelectorAll('li')) {
       li.style.position = 'relative';
@@ -35,27 +32,27 @@
       i++;
     }
 
-    /* configuration */
-    let width = 130; // image width
-    let count = 3; // visible images count
+    /* konfiguretsiya */
+    let width = 130; // rasm kengligi
+    let count = 3; // ko'rinadigan rasmlar soni
 
     let list = carousel.querySelector('ul');
     let listElems = carousel.querySelectorAll('li');
 
-    let position = 0; // ribbon scroll position
+    let position = 0; // lentani aylantirish pozitsiyasi
 
     carousel.querySelector('.prev').onclick = function() {
-      // shift left
+      // chapga surish
       position += width * count;
-      // can't move to the left too much, end of images
+      // chapga juda ko'p harakat qila olmaydi, tasvirlarning oxiri bo'lgani sabab
       position = Math.min(position, 0)
       list.style.marginLeft = position + 'px';
     };
 
     carousel.querySelector('.next').onclick = function() {
-      // shift right
+      // o'nga surish
       position -= width * count;
-      // can only shift the ribbbon for (total ribbon length - visible count) images
+      // faqat (tasmaning umumiy uzunligi - ko'rinadigan soni) tasvirlar uchun lentani siljitishi mumkin
       position = Math.max(position, -width * (listElems.length - count));
       list.style.marginLeft = position + 'px';
     };

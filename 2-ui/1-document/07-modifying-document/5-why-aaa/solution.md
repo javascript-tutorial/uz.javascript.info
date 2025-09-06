@@ -1,9 +1,9 @@
-The HTML in the task is incorrect. That's the reason of the odd thing.
+Vazifadagi HTML noto'g'ri. Bu g'alati narsaning sababi.
 
-The browser has to fix it automatically. But there may be no text inside the `<table>`: according to the spec only table-specific tags are allowed. So the browser shows `"aaa"` *before* the `<table>`.
+Brauzer uni avtomatik ravishda tuzatishi kerak. Lekin `<table>` ichida matn bo'lmasligi mumkin: spetsifikatsiyaga ko'ra faqat jadvalga xos teglarga ruxsat beriladi. Shunday qilib, brauzer `<table>` dan \* oldin `"aaa"` ni ko'rsatadi.
 
-Now it's obvious that when we remove the table, it remains.
+Endi stolni olib tashlaganimizda, u qolishi aniq.
 
-The question can be easily answered by exploring the DOM using the browser tools. You'll see `"aaa"` before the `<table>`.
+Savolga brauzer vositalaridan foydalangan holda DOMni o'rganish orqali osongina javob berish mumkin. Siz `<table>` oldidan `aaa` ni ko`rasiz.
 
-The HTML standard specifies in detail how to process bad HTML, and such behavior of the browser is correct.
+HTML standarti yomon HTMLni qanday qayta ishlashni batafsil belgilaydi va brauzerning bunday xatti-harakati to'g'ri.

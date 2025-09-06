@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <script>
-let eventSource;
+  let eventSource;
 
-function start() { // when "Start" button pressed
-  if (!window.EventSource) {
-    // IE or an old browser
-    alert("The browser doesn't support EventSource.");
-    return;
+  function start() {
+    // "Start" tugmasi bosilganda
+    if (!window.EventSource) {
+      // IE yoki eski brauzer
+      alert("Brauzer EventSource-ni qo'llab-quvvatlamaydi.");
+      return;
+    }
+
+    eventSource = new EventSource("digits");
+
+    eventSource.onopen = function (e) {
+      log("Tadbir: ochiq");
+    };
+
+    eventSource.onerror = function (e) {
+      log("Tadbir: xato");
+      if (this.readyState == EventSource.CONNECTING) {
+        log(`Qayta ulanmoqda (readyState=${this.readyState})...`);
+      } else {
+        log("Xatolik yuz berdi.");
+      }
+    };
+
+    eventSource.addEventListener("bye", function (e) {
+      log("Tadbir: xayr, ma'lumot: " + e.data);
+    });
+
+    eventSource.onmessage = function (e) {
+      log("Tadbir: xabar, ma'lumot: " + e.data);
+    };
   }
 
-  eventSource = new EventSource('digits');
+  function stop() {
+    // "To'xtatish" tugmasi bosilganda
+    eventSource.close();
+    log("eventSource.close()");
+  }
 
-  eventSource.onopen = function(e) {
-    log("Event: open");
-  };
-
-  eventSource.onerror = function(e) {
-    log("Event: error");
-    if (this.readyState == EventSource.CONNECTING) {
-      log(`Reconnecting (readyState=${this.readyState})...`);
-    } else {
-      log("Error has occured.");
-    }
-  };
-
-  eventSource.addEventListener('bye', function(e) {
-    log("Event: bye, data: " + e.data);
-  });
-
-  eventSource.onmessage = function(e) {
-    log("Event: message, data: " + e.data);
-  };
-}
-
-function stop() { // when "Stop" button pressed
-  eventSource.close();
-  log("eventSource.close()");
-}
-
-function log(msg) {
-  logElem.innerHTML += msg + "<br>";
-  document.documentElement.scrollTop = 99999999;
-}
+  function log(msg) {
+    logElem.innerHTML += msg + "<br>";
+    document.documentElement.scrollTop = 99999999;
+  }
 </script>
 
-<button onclick="start()">Start</button> Press the "Start" to begin.
+<button onclick="start()">Start</button> Boshlash uchun "Start" tugmasini
+bosing.
 <div id="logElem" style="margin: 6px 0"></div>
 
-<button onclick="stop()">Stop</button> "Stop" to finish.
+<button onclick="stop()">Stop</button> Tugatish uchun "Stop".

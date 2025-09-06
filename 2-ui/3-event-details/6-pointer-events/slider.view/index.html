@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css" />
 
 <div id="slider" class="slider">
   <div class="thumb"></div>
 </div>
 
 <script>
-  let thumb = slider.querySelector('.thumb');
+  let thumb = slider.querySelector(".thumb");
   let shiftX;
 
-  thumb.onpointerdown = function(event) {
-    event.preventDefault(); // prevent selection start (browser action)
+  thumb.onpointerdown = function (event) {
+    event.preventDefault(); // tanlov boshlanishini oldini olish (brauzer harakati)
 
     shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
     thumb.setPointerCapture(event.pointerId);
   };
 
-  thumb.onpointermove = function(event) {
+  thumb.onpointermove = function (event) {
     let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
 
-    // if the pointer is out of slider => adjust left to be within the bounaries
+    // agar ko'rsatgich slayderdan tashqarida bo'lsa => chegaralar ichida bo'lishi uchun chap tomonni sozlang
     if (newLeft < 0) {
       newLeft = 0;
     }
@@ -29,9 +29,8 @@
       newLeft = rightEdge;
     }
 
-    thumb.style.left = newLeft + 'px';
+    thumb.style.left = newLeft + "px";
   };
 
   thumb.ondragstart = () => false;
-
 </script>

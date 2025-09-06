@@ -1,14 +1,14 @@
-# Shadow DOM and events
+# Shadow DOM va hodisalar
 
-The idea behind shadow tree is to encapsulate internal implementation details of a component.
+Shadow daraxt g'oyasi komponentning ichki amalga oshirish tafsilotlarini inkapsulyatsiya qilishdir.
 
-Let's say, a click event happens inside a shadow DOM of `<user-card>` component. But scripts in the main document have no idea about the shadow DOM internals, especially if the component comes from a 3rd-party library.  
+Aytaylik, `<user-card>` komponentining shadow DOM ichida click hodisasi sodir bo'ldi. Lekin asosiy hujjatdagi skriptlar shadow DOM ning ichki qismlari haqida hech narsa bilmaydi, ayniqsa komponent uchinchi tomon kutubxonasidan kelgan bo'lsa.
 
-So, to keep the details encapsulated, the browser *retargets* the event.
+Shuning uchun tafsilotlarni inkapsulyatsiya qilib saqlash uchun brauzer hodisani *qayta yo'naltiradi*.
 
-**Events that happen in shadow DOM have the host element as the target, when caught outside of the component.**
+**Shadow DOM da sodir bo'ladigan hodisalar komponentdan tashqarida ushlanganda host elementni maqsad sifatida oladi.**
 
-Here's a simple example:
+Mana oddiy misol:
 
 ```html run autorun="no-epub" untrusted height=60
 <user-card></user-card>
@@ -18,33 +18,33 @@ customElements.define('user-card', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `<p>
-      <button>Click me</button>
+      <button>Meni bosing</button>
     </p>`;
     this.shadowRoot.firstElementChild.onclick =
-      e => alert("Inner target: " + e.target.tagName);
+      e => alert("Ichki maqsad: " + e.target.tagName);
   }
 });
 
 document.onclick =
-  e => alert("Outer target: " + e.target.tagName);
+  e => alert("Tashqi maqsad: " + e.target.tagName);
 </script>
 ```
 
-If you click on the button, the messages are:
+Agar siz tugmani bossangiz, xabarlar quyidagicha bo'ladi:
 
-1. Inner target: `BUTTON` -- internal event handler gets the correct target, the element inside shadow DOM.
-2. Outer target: `USER-CARD` -- document event handler gets shadow host as the target.
+1. Ichki maqsad: `BUTTON` -- ichki hodisa ishlovchisi to'g'ri maqsadni oladi, shadow DOM ichidagi element.
+2. Tashqi maqsad: `USER-CARD` -- hujjat hodisa ishlovchisi shadow host ni maqsad sifatida oladi.
 
-Event retargeting is a great thing to have, because the outer document doesn't have to know  about component internals. From its point of view, the event happened on `<user-card>`.
+Hodisani qayta yo'naltirish ajoyib narsa, chunki tashqi hujjat komponent ichki qismlari haqida bilishi shart emas. Uning nuqtai nazaridan, hodisa `<user-card>` da sodir bo'ldi.
 
-**Retargeting does not occur if the event occurs on a slotted element, that physically lives in the light DOM.**
+**Agar hodisa slotlangan elementda sodir bo'lsa, qayta yo'naltirish sodir bo'lmaydi, chunki u fizik jihatdan light DOM da yashaydi.**
 
-For example, if a user clicks on `<span slot="username">` in the example below, the event target is exactly this `span` element, for both shadow and light handlers:
+Masalan, agar foydalanuvchi quyidagi misoldagi `<span slot="username">` ni bosса, hodisaning maqsadi aynan shu `span` elementi bo'ladi, ham shadow ham light ishlovchilar uchun:
 
 ```html run autorun="no-epub" untrusted height=60
 <user-card id="userCard">
 *!*
-  <span slot="username">John Smith</span>
+  <span slot="username">Jon Smit</span>
 */!*
 </user-card>
 
@@ -53,61 +53,59 @@ customElements.define('user-card', class extends HTMLElement {
   connectedCallback() {
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `<div>
-      <b>Name:</b> <slot name="username"></slot>
+      <b>Ism:</b> <slot name="username"></slot>
     </div>`;
 
     this.shadowRoot.firstElementChild.onclick =
-      e => alert("Inner target: " + e.target.tagName);
+      e => alert("Ichki maqsad: " + e.target.tagName);
   }
 });
 
-userCard.onclick = e => alert(`Outer target: ${e.target.tagName}`);
+userCard.onclick = e => alert(`Tashqi maqsad: ${e.target.tagName}`);
 </script>
 ```
 
-If a click happens on `"John Smith"`, for both inner and outer handlers the target is `<span slot="username">`. That's an element from the light DOM, so no retargeting.
+Agar "Jon Smit" ga bosish sodir bo'lsa, ham ichki ham tashqi ishlovchilar uchun maqsad `<span slot="username">` bo'ladi. Bu light DOM dan element, shuning uchun qayta yo'naltirish yo'q.
 
-On the other hand, if the click occurs on an element originating from shadow DOM, e.g. on `<b>Name</b>`, then, as it bubbles out of the shadow DOM, its `event.target` is reset to `<user-card>`.
+Boshqa tomondan, agar bosish shadow DOM dan kelib chiqqan elementda sodir bo'lsa, masalan `<b>Ism</b>` da, u shadow DOM dan ko'piklanib chiqayotganda, uning `event.target` i `<user-card>` ga qayta o'rnatiladi.
 
-## Bubbling, event.composedPath()
+## Ko'piklanish, event.composedPath()
 
-For purposes of event bubbling, flattened DOM is used.
+Hodisalarning ko'piklanishi maqsadlari uchun tekislangan DOM ishlatiladi.
 
-So, if we have a slotted element, and an event occurs somewhere inside it, then it bubbles up to the `<slot>` and upwards.
+Shunday qilib, agar bizda slotlangan element bo'lsa va hodisa uning ichida biror joyda sodir bo'lsa, u `<slot>` gacha va yuqoriga ko'piklanadi.
 
-The full path to the original event target, with all the shadow elements, can be obtained using `event.composedPath()`. As we can see from the name of the method, that path is taken after the composition.
+Barcha shadow elementlar bilan asl hodisa maqsadiga to'liq yo'lni `event.composedPath()` yordamida olish mumkin. Metodning nomidan ko'rib turganimizdek, bu yo'l kompozitsiyadan keyin olinadi.
 
-In the example above, the flattened DOM is:
+Yuqoridagi misolda tekislangan DOM:
 
 ```html
 <user-card id="userCard">
   #shadow-root
     <div>
-      <b>Name:</b>
+      <b>Ism:</b>
       <slot name="username">
-        <span slot="username">John Smith</span>
+        <span slot="username">Jon Smit</span>
       </slot>
     </div>
 </user-card>
 ```
 
+Shunday qilib, `<span slot="username">` ga bosish uchun `event.composedPath()` ga chaqiruv massiv qaytaradi: [`span`, `slot`, `div`, `shadow-root`, `user-card`, `body`, `html`, `document`, `window`]. Bu kompozitsiyadan keyin tekislangan DOM dagi maqsad elementdan aynan ota-ona zanjiri.
 
-So, for a click on `<span slot="username">`, a call to `event.composedPath()` returns an array: [`span`, `slot`, `div`, `shadow-root`, `user-card`, `body`, `html`, `document`, `window`]. That's exactly the parent chain from the target element in the flattened DOM, after the composition.
+```warn header="Shadow daraxt tafsilotlari faqat `{mode:'open'}` daraxtlar uchun taqdim etiladi"
+Agar shadow daraxt `{mode: 'closed'}` bilan yaratilgan bo'lsa, kompozitsiya yo'li host dan boshlanadi: `user-card` va yuqoriga.
 
-```warn header="Shadow tree details are only provided for `{mode:'open'}` trees"
-If the shadow tree was created with `{mode: 'closed'}`, then the composed path starts from the host: `user-card` and upwards.
-
-That's the similar principle as for other methods that work with shadow DOM. Internals of closed trees are completely hidden.
+Bu shadow DOM bilan ishlaydigan boshqa metodlar uchun ham xuddi shunday printsip. Yopiq daraxtlarning ichki qismlari butunlay yashirilgan.
 ```
-
 
 ## event.composed
 
-Most events successfully bubble through a shadow DOM boundary. There are few events that do not.
+Ko'pgina hodisalar shadow DOM chegarasi orqali muvaffaqiyatli ko'piklanadi. Ko'piklanmaydigan bir nechta hodisalar mavjud.
 
-This is governed by the `composed` event object property. If it's `true`, then the event does cross the boundary. Otherwise, it only can be caught from inside the shadow DOM.
+Bu `composed` hodisa ob'ekti xususiyati bilan boshqariladi. Agar u `true` bo'lsa, hodisa chegarani kesib o'tadi. Aks holda, u faqat shadow DOM ichidan ushlilishi mumkin.
 
-If you take a look at [UI Events specification](https://www.w3.org/TR/uievents), most events have `composed: true`:
+Agar siz [UI Events spetsifikatsiyasi](https://www.w3.org/TR/uievents) ga qarасаngiz, ko'pgina hodisalar `composed: true` ga ega:
 
 - `blur`, `focus`, `focusin`, `focusout`,
 - `click`, `dblclick`,
@@ -115,22 +113,22 @@ If you take a look at [UI Events specification](https://www.w3.org/TR/uievents),
 - `wheel`,
 - `beforeinput`, `input`, `keydown`, `keyup`.
 
-All touch events and pointer events also have `composed: true`.
+Barcha touch hodisalari va pointer hodisalari ham `composed: true` ga ega.
 
-There are some events that have `composed: false` though:
+`composed: false` ga ega bo'lgan ba'zi hodisalar mavjud:
 
-- `mouseenter`, `mouseleave` (they do not bubble at all),
+- `mouseenter`, `mouseleave` (ular umuman ko'piklanmaydi),
 - `load`, `unload`, `abort`, `error`,
 - `select`,
 - `slotchange`.
 
-These events can be caught only on elements within the same DOM, where the event target resides.
+Bu hodisalar faqat hodisaning maqsadi joylashgan bir xil DOM dagi elementlarda ushlilishi mumkin.
 
-## Custom events
+## Maxsus hodisalar
 
-When we dispatch custom events, we need to set both `bubbles` and `composed` properties to `true` for it to bubble up and out of the component.
+Maxsus hodisalarni yuborayotganda, uni komponentdan yuqoriga va tashqariga ko'piklanishi uchun ham `bubbles` ham `composed` xususiyatlarini `true` ga o'rnatishimiz kerak.
 
-For example, here we create `div#inner` in the shadow DOM of `div#outer` and trigger two events on it. Only the one with `composed: true` makes it outside to the document:
+Masalan, bu yerda biz `div#outer` ning shadow DOM ida `div#inner` yaratamiz va unda ikkita hodisani ishga tushiramiz. Faqat `composed: true` bilan bo'lgani hujjatga chiqadi:
 
 ```html run untrusted height=0
 <div id="outer"></div>
@@ -167,26 +165,26 @@ inner.dispatchEvent(new CustomEvent('test', {
 </script>
 ```
 
-## Summary
+## Xulosa
 
-Events only cross shadow DOM boundaries if their `composed` flag is set to `true`.
+Hodisalar faqat ularning `composed` bayrog'i `true` ga o'rnatilgan bo'lsa, shadow DOM chegaralarini kesib o'tadi.
 
-Built-in events mostly have `composed: true`, as described in the relevant specifications:
+O'rnatilgan hodisalar asosan `composed: true` ga ega, tegishli spetsifikatsiyalarda tasvirlanganidek:
 
 - UI Events <https://www.w3.org/TR/uievents>.
 - Touch Events <https://w3c.github.io/touch-events>.
 - Pointer Events <https://www.w3.org/TR/pointerevents>.
-- ...And so on.
+- ...Va hokazo.
 
-Some built-in events that have `composed: false`:
+`composed: false` ga ega bo'lgan ba'zi o'rnatilgan hodisalar:
 
-- `mouseenter`, `mouseleave` (also do not bubble),
+- `mouseenter`, `mouseleave` (shuningdek ko'piklanmaydi),
 - `load`, `unload`, `abort`, `error`,
 - `select`,
 - `slotchange`.
 
-These events can be caught only on elements within the same DOM.
+Bu hodisalar faqat bir xil DOM dagi elementlarda ushlilishi mumkin.
 
-If we dispatch a `CustomEvent`, then we should explicitly set `composed: true`.
+Agar biz `CustomEvent` yuborayotgan bo'lsak, `composed: true` ni aniq o'rnatishimiz kerak.
 
-Please note that in case of nested components, one shadow DOM may be nested into another. In that case composed events bubble through all shadow DOM boundaries. So, if an event is intended only for the immediate enclosing component, we can also dispatch it on the shadow host and set `composed: false`. Then it's out of the component shadow DOM, but won't bubble up to higher-level DOM.
+Ichki komponentlar holatida bir shadow DOM boshqasiga ichkarilashishi mumkinligini unutmang. Bunday holatda composed hodisalar barcha shadow DOM chegaralari orqali ko'piklanadi. Shunday qilib, agar hodisa faqat bevosita o'rab turgan komponent uchun mo'ljallangan bo'lsa, biz uni shadow host da ham yuborishimiz va `composed: false` ni o'rnatishimiz mumkin. Unda u komponent shadow DOM dan chiqadi, lekin yuqori darajadagi DOM ga ko'piklanmaydi.

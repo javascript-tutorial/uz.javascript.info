@@ -1,23 +1,23 @@
-# Form properties and methods
+# Forma xossalari va metodlari
 
-Forms and control elements, such as `<input>` have a lot of special properties and events.
+`<input>` kabi formalar va boshqaruv elementlari ko'plab maxsus xossalar va hodisalarga ega.
 
-Working with forms will be much more convenient when we learn them.
+Ularni o'rgansak, formalar bilan ishlash ancha qulayroq bo'ladi.
 
-## Navigation: form and elements
+## Navigatsiya: forma va elementlar
 
-Document forms are members of the special collection `document.forms`.
+Hujjat formalari maxsus `document.forms` kolleksiyasining a'zolaridir.
 
-That's a so-called *"named collection"*: it's both named and ordered. We can use both the name or the number in the document to get the form.
+Bu *"nomlangan kolleksiya"* deb ataladi: u ham nomlangan, ham tartibli. Formani olish uchun hujjatdagi nom yoki raqamdan foydalanishimiz mumkin.
 
 ```js no-beautify
-document.forms.my; // the form with name="my"
-document.forms[0]; // the first form in the document
+document.forms.my; // name="my" ga ega forma
+document.forms[0]; // hujjatdagi birinchi forma
 ```
 
-When we have a form, then any element is available in the named collection `form.elements`.
+Formaga ega bo'lganimizda, har qanday element `form.elements` nomlangan kolleksiyasida mavjud.
 
-For instance:
+Masalan:
 
 ```html run height=40
 <form name="my">
@@ -26,19 +26,19 @@ For instance:
 </form>
 
 <script>
-  // get the form
-  let form = document.forms.my; // <form name="my"> element
+  // formani olish
+  let form = document.forms.my; // <form name="my"> elementi
 
-  // get the element
-  let elem = form.elements.one; // <input name="one"> element
+  // elementni olish
+  let elem = form.elements.one; // <input name="one"> elementi
 
   alert(elem.value); // 1
 </script>
 ```
 
-There may be multiple elements with the same name. This is typical with radio buttons and checkboxes.
+Bir xil nomga ega bir nechta elementlar bo'lishi mumkin. Bu radio tugmalar va checkbox lar uchun odatiy holdir.
 
-In that case, `form.elements[name]` is a *collection*. For instance:
+Bunday holda, `form.elements[name]` *kolleksiya* hisoblanadi. Masalan:
 
 ```html run height=40
 <form>
@@ -57,19 +57,18 @@ alert(ageElems[0]); // [object HTMLInputElement]
 </script>
 ```
 
-These navigation properties do not depend on the tag structure. All control elements, no matter how deep they are in the form, are available in `form.elements`.
+Bu navigatsiya xossalari teg tuzilishiga bog'liq emas. Barcha boshqaruv elementlari, formada qanchalik chuqur joylashgan bo'lishidan qat'i nazar, `form.elements` da mavjud.
 
+````smart header="Fieldsetlar \"subformalari\" sifatida"
+Forma ichida bir yoki bir nechta `<fieldset>` elementiga ega bo'lishi mumkin. Ularda ham ular ichidagi forma boshqaruvlarini ro'yxatga oluvchi `elements` xossasi mavjud.
 
-````smart header="Fieldsets as \"subforms\""
-A form may have one or many `<fieldset>` elements inside it. They also have `elements` property that lists form controls inside them.
-
-For instance:
+Masalan:
 
 ```html run height=80
 <body>
   <form id="form">
     <fieldset name="userFields">
-      <legend>info</legend>
+      <legend>ma'lumot</legend>
       <input name="login" type="text">
     </fieldset>
   </form>
@@ -81,7 +80,7 @@ For instance:
     let fieldset = form.elements.userFields;
     alert(fieldset); // HTMLFieldSetElement
 
-    // we can get the input by name both from the form and from the fieldset
+    // biz input ni ham formadan, ham fieldset dan nom bo'yicha olishimiz mumkin
     alert(fieldset.elements.login == form.elements.login); // true
 */!*
   </script>
@@ -89,14 +88,14 @@ For instance:
 ```
 ````
 
-````warn header="Shorter notation: `form.name`"
-There's a shorter notation: we can access the element as `form[index/name]`.
+````warn header="Qisqaroq yozuv: `form.name`"
+Qisqaroq yozuv mavjud: biz elementga `form[index/name]` sifatida kirishimiz mumkin.
 
-In other words, instead of `form.elements.login` we can write `form.login`.
+Boshqacha qilib aytganda, `form.elements.login` o'rniga `form.login` yozishimiz mumkin.
 
-That also works, but there's a minor issue: if we access an element, and then change its `name`, then it is still available under the old name (as well as under the new one).
+Bu ham ishlaydi, lekin kichik muammo bor: agar biz elementga kirsak va keyin uning `name` ini o'zgartirsak, u hali ham eski nom ostida mavjud bo'ladi (yangi nom ostida ham).
 
-That's easy to see in an example:
+Buni misolda osongina ko'rish mumkin:
 
 ```html run height=40
 <form id="form">
@@ -104,34 +103,33 @@ That's easy to see in an example:
 </form>
 
 <script>
-  alert(form.elements.login == form.login); // true, the same <input>
+  alert(form.elements.login == form.login); // true, bir xil <input>
 
-  form.login.name = "username"; // change the name of the input
+  form.login.name = "username"; // input nomini o'zgartirish
 
-  // form.elements updated the name:
+  // form.elements nomni yangiladi:
   alert(form.elements.login); // undefined
   alert(form.elements.username); // input
 
 *!*
-  // form allows both names: the new one and the old one
+  // forma ikkala nomga ham ruxsat beradi: yangi va eski
   alert(form.username == form.login); // true
 */!*
 </script>
 ```
 
-That's usually not a problem, however, because we rarely change names of form elements.
-
+Bu odatda muammo emas, chunki biz forma elementlarining nomlarini kamdan-kam o'zgartiramiz.
 ````
 
-## Backreference: element.form
+## Teskari havola: element.form
 
-For any element, the form is available as `element.form`. So a form references all elements, and elements reference the form.
+Har qanday element uchun forma `element.form` sifatida mavjud. Demak, forma barcha elementlarga havola qiladi va elementlar formaga havola qiladi.
 
-Here's the picture:
+Mana rasm:
 
 ![](form-navigation.svg)
 
-For instance:
+Masalan:
 
 ```html run height=40
 <form id="form">
@@ -140,85 +138,85 @@ For instance:
 
 <script>
 *!*
-  // form -> element
+  // forma -> element
   let login = form.login;
 
-  // element -> form
+  // element -> forma
   alert(login.form); // HTMLFormElement
 */!*
 </script>
 ```
 
-## Form elements
+## Forma elementlari
 
-Let's talk about form controls.
+Forma boshqaruvlari haqida gaplashaylik.
 
-### input and textarea
+### input va textarea
 
-We can access their value as `input.value` (string) or `input.checked` (boolean) for checkboxes.
+Biz ularning qiymatiga `input.value` (string) yoki checkbox lar uchun `input.checked` (boolean) sifatida kirishimiz mumkin.
 
-Like this:
+Mana bunday:
 
 ```js
-input.value = "New value";
-textarea.value = "New text";
+input.value = "Yangi qiymat";
+textarea.value = "Yangi matn";
 
-input.checked = true; // for a checkbox or radio button
+input.checked = true; // checkbox yoki radio tugma uchun
 ```
 
-```warn header="Use `textarea.value`, not `textarea.innerHTML`"
-Please note that even though `<textarea>...</textarea>` holds its value as nested HTML, we should never use `textarea.innerHTML` to access it.
+```warn header="`textarea.innerHTML` emas, `textarea.value` dan foydalaning"
+Diqqat qiling, `<textarea>...</textarea>` o'z qiymatini ichki HTML sifatida saqlasa ham, unga kirish uchun hech qachon `textarea.innerHTML` dan foydalanmasligimiz kerak.
 
-It stores only the HTML that was initially on the page, not the current value.
+U faqat dastlab sahifada bo'lgan HTML ni saqlaydi, joriy qiymatni emas.
 ```
 
-### select and option
+### select va option
 
-A `<select>` element has 3 important properties:
+`<select>` elementi 3 ta muhim xossaga ega:
 
-1. `select.options` -- the collection of `<option>` subelements,
-2. `select.value` -- the *value* of the currently selected `<option>`,
-3. `select.selectedIndex` -- the *number* of the currently selected `<option>`.
+1. `select.options` -- `<option>` kichik elementlarining kolleksiyasi,
+2. `select.value` -- hozirda tanlangan `<option>` ning *qiymati*,
+3. `select.selectedIndex` -- hozirda tanlangan `<option>` ning *raqami*.
 
-They provide three different ways of setting a value for a `<select>`:
+Ular `<select>` uchun qiymat o'rnatishning uchta turli usulini beradi:
 
-1. Find the corresponding `<option>` element (e.g. among `select.options`) and set its `option.selected` to `true`.
-2. If we know a new value: set `select.value` to the new value.
-3. If we know the new option number: set `select.selectedIndex` to that number.
+1. Tegishli `<option>` elementini toping (masalan, `select.options` orasida) va uning `option.selected` ni `true` ga o'rnating.
+2. Agar yangi qiymatni bilsak: `select.value` ni yangi qiymatga o'rnating.
+3. Agar yangi option raqamini bilsak: `select.selectedIndex` ni o'sha raqamga o'rnating.
 
-Here is an example of all three methods:
+Mana uchala usulning misoli:
 
 ```html run
 <select id="select">
-  <option value="apple">Apple</option>
-  <option value="pear">Pear</option>
-  <option value="banana">Banana</option>
+  <option value="apple">Olma</option>
+  <option value="pear">Nok</option>
+  <option value="banana">Banan</option>
 </select>
 
 <script>
-  // all three lines do the same thing
+  // uchala qator ham bir xil ishni qiladi
   select.options[2].selected = true; 
   select.selectedIndex = 2;
   select.value = 'banana';
-  // please note: options start from zero, so index 2 means the 3rd option.
+  // diqqat: optionlar noldan boshlanadi, shuning uchun 2-indeks 3-option ni anglatadi.
 </script>
 ```
 
-Unlike most other controls, `<select>` allows to select multiple options at once if it has `multiple` attribute. This attribute is rarely used, though.
+Ko'pgina boshqa boshqaruvlardan farqli o'laroq, `<select>` agar `multiple` atributiga ega bo'lsa, bir vaqtda bir nechta optionni tanlash imkonini beradi. Garchi bu atribut kamdan-kam ishlatiladi.
 
-For multiple selected values, use the first way of setting values: add/remove the `selected` property from `<option>` subelements.
+Ko'plab tanlangan qiymatlar uchun qiymatlarni o'rnatishning birinchi usulidan foydalaning: `<option>` kichik elementlaridan `selected` xossasini qo'shing/olib tashlang.
 
-Here's an example of how to get selected values from a multi-select:
+Mana multi-select dan tanlangan qiymatlarni qanday olish misoli:
 
 ```html run
 <select id="select" *!*multiple*/!*>
   <option value="blues" selected>Blues</option>
   <option value="rock" selected>Rock</option>
-  <option value="classic">Classic</option>
+  <option value="classic">Klassik</option>
 </select>
 
 <script>
-  // get all selected values from multi-select
+  // multi-select dan barcha tanlangan qiymatlarni olish
   let selected = Array.from(select.options)
     .filter(option => option.selected)
     .map(option => option.value);
@@ -227,72 +225,72 @@ Here's an example of how to get selected values from a multi-select:
 </script>
 ```
 
-The full specification of the `<select>` element is available in the specification <https://html.spec.whatwg.org/multipage/forms.html#the-select-element>.
+`<select>` elementining to'liq spetsifikatsiyasi <https://html.spec.whatwg.org/multipage/forms.html#the-select-element> spetsifikatsiyasida mavjud.
 
 ### new Option
 
-In the [specification](https://html.spec.whatwg.org/multipage/forms.html#the-option-element) there's a nice short syntax to create an `<option>` element:
+[Spetsifikatsiya](https://html.spec.whatwg.org/multipage/forms.html#the-option-element)da `<option>` elementini yaratish uchun yaxshi qisqa sintaksis mavjud:
 
 ```js
 option = new Option(text, value, defaultSelected, selected);
 ```
 
-This syntax is optional. We can use `document.createElement('option')` and set attributes manually. Still, it may be shorter, so here are the parameters:
+Bu sintaksis ixtiyoriy. Biz `document.createElement('option')` dan foydalanishimiz va atributlarni qo'lda o'rnatishimiz mumkin. Shunga qaramay, u qisqaroq bo'lishi mumkin, shuning uchun mana parametrlar:
 
-- `text` -- the text inside the option,
-- `value` -- the option value,
-- `defaultSelected` -- if `true`, then `selected` HTML-attribute is created,
-- `selected` -- if `true`, then the option is selected.
+- `text` -- option ichidagi matn,
+- `value` -- option qiymati,
+- `defaultSelected` -- agar `true` bo'lsa, `selected` HTML-atributi yaratiladi,
+- `selected` -- agar `true` bo'lsa, option tanlangan.
 
-The difference between `defaultSelected` and `selected` is that `defaultSelected` sets the HTML-attribute (that we can get using `option.getAttribute('selected')`, while `selected` sets whether the option is selected or not.
+`defaultSelected` va `selected` orasidagi farq shundaki, `defaultSelected` HTML-atributni o'rnatadi (uni `option.getAttribute('selected')` dan foydalanib olishimiz mumkin), `selected` esa option tanlanganligini yoki tanlanmaganligini belgilaydi.
 
-In practice, one should usually set _both_ values to `true` or `false`. (Or, simply omit them; both default to `false`.)
+Amalda, odatda ikkala qiymatni ham `true` yoki `false` ga o'rnatish kerak. (Yoki, shunchaki ularni o'tkazib yuborish; ikkalasi ham standart ravishda `false`.)
 
-For instance, here's a new "unselected" option:
-
-```js
-let option = new Option("Text", "value");
-// creates <option value="value">Text</option>
-```
-
-The same option, but selected:
+Masalan, mana yangi "tanlanmagan" option:
 
 ```js
-let option = new Option("Text", "value", true, true);
+let option = new Option("Matn", "qiymat");
+// <option value="qiymat">Matn</option> yaratadi
 ```
 
-Option elements have properties:
+Xuddi shu option, lekin tanlangan:
+
+```js
+let option = new Option("Matn", "qiymat", true, true);
+```
+
+Option elementlari xossalarga ega:
 
 `option.selected`
-: Is the option selected.
+: Option tanlanganmi.
 
 `option.index`
-: The number of the option among the others in its `<select>`.
+: O'z `<select>` idagi boshqalar orasida optionning raqami.
 
 `option.text`
-: Text content of the option (seen by the visitor).
+: Optionning matn mazmuni (tashrif buyuruvchi tomonidan ko'riladi).
 
-## References
+## Havolalar
 
-- Specification: <https://html.spec.whatwg.org/multipage/forms.html>.
+- Spetsifikatsiya: <https://html.spec.whatwg.org/multipage/forms.html>.
 
-## Summary
+## Xulosa
 
-Form navigation:
+Forma navigatsiyasi:
 
 `document.forms`
-: A form is available as `document.forms[name/index]`.
+: Forma `document.forms[name/index]` sifatida mavjud.
 
 `form.elements`  
-: Form elements are available as `form.elements[name/index]`, or can use just `form[name/index]`. The `elements` property also works for `<fieldset>`.
+: Forma elementlari `form.elements[name/index]` sifatida mavjud yoki shunchaki `form[name/index]` dan foydalanish mumkin. `elements` xossasi `<fieldset>` uchun ham ishlaydi.
 
 `element.form`
-: Elements reference their form in the `form` property.
+: Elementlar o'z formasiga `form` xossasida havola qiladi.
 
-Value is available as `input.value`, `textarea.value`, `select.value`, etc. (For checkboxes and radio buttons, use `input.checked` to determine whether a value is selected.)
+Qiymat `input.value`, `textarea.value`, `select.value` va h.k. sifatida mavjud. (Checkbox va radio tugmalar uchun qiymat tanlanganligini aniqlash uchun `input.checked` dan foydalaning.)
 
-For `<select>`, one can also get the value by the index `select.selectedIndex` or through the options collection `select.options`.
+`<select>` uchun qiymatni `select.selectedIndex` indeksi orqali yoki `select.options` optionlar kolleksiyasi orqali ham olish mumkin.
 
-These are the basics to start working with forms. We'll meet many examples further in the tutorial.
+Bular formalar bilan ishlashni boshlash uchun asoslar. Darslikda keyinroq ko'plab misollarni uchratamiz.
 
-In the next chapter we'll cover `focus` and `blur` events that may occur on any element, but are mostly handled on forms.
+Keyingi bobda biz har qanday elementda sodir bo'lishi mumkin bo'lgan, lekin asosan formalarda qayta ishlanadigan `focus` va `blur` hodisalarini ko'rib chiqamiz.

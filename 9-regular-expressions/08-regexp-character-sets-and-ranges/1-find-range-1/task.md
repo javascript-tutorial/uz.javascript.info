@@ -1,5 +1,5 @@
 # Java[^script]
 
-We have a regexp `pattern:/Java[^script]/`.
+Bizda regex `pattern:/Javascript]/` mavjud.
 
-Does it match anything in the string `subject:Java`? In the string `subject:JavaScript`?
+U `subject: Java` qatoridagi biror narsaga mos keladimi? `subject: JavaScript` qatorida?

@@ -1,27 +1,23 @@
-let http = require('http');
-let url = require('url');
-let querystring = require('querystring');
-let static = require('node-static');
-let file = new static.Server('.', {
-  cache: 0
+let http = require("http");
+let url = require("url");
+let querystring = require("querystring");
+let static = require("node-static");
+let file = new static.Server(".", {
+  cache: 0,
 });
 
-
 function accept(req, res) {
-
-  if (req.url == '/phones.json') {
-    // stall a bit to let "loading" message show up
-    setTimeout(function() {
+  if (req.url == "/phones.json") {
+    // "Yuklash" xabari paydo bo'lishi uchun biroz to'xtab turing
+    setTimeout(function () {
       file.serve(req, res);
     }, 2000);
   } else {
     file.serve(req, res);
   }
-
 }
 
-
-// ------ запустить сервер -------
+// ------ serverni ishga tushirish -------
 
 if (!module.parent) {
   http.createServer(accept).listen(8080);

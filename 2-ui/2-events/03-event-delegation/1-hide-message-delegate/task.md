@@ -2,12 +2,12 @@ importance: 5
 
 ---
 
-# Hide messages with delegation
+# Delegatsiya bilan xabarlarni yashirish
 
-There's a list of messages with removal buttons `[x]`. Make the buttons work.
+`[x]` olib tashlash tugmalari bo'lgan xabarlar ro'yxati mavjud. Tugmalarning ishlashini ta'minlang.
 
-Like this:
+Shunga o'xshash:
 
 [iframe src="solution" height=420]
 
-P.S. Should be only one event listener on the container, use event delegation.
+P.S. Konteynerda faqat bitta voqea tinglovchisi bo'lishi kerak, hodisa delegatsiyasidan foydalaning.

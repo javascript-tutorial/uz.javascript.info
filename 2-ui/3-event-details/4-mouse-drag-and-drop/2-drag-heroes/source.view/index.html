@@ -1,41 +1,55 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="soccer.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="soccer.css">
-</head>
+  <body>
+    <h2>Superqahramonlarni futbol maydoniga joylashtiring.</h2>
 
-<body>
+    <p>
+      Superqahramonlar va to'p "draggable" sinfiga ega elementlardir. Qilish
+      ular haqiqatan ham tortilishi mumkin.
+    </p>
 
-  <h2>Place superheroes around the soccer field.</h2>
+    <p>
+      Muhim: oyna tomonidan sudrab olishni cheklang. Agar sudrab olinadigan oyna
+      tepasiga yetib borsa yoki pastda bo'lsa, sahifani yana siljitishimiz
+      kerak.
+    </p>
 
-  <p>Superheroes and the ball are elements with the class "draggable". Make them really draggable.</p>
+    <p>
+      Agar sizning ekraningiz butun hujjatga sig'adigan darajada katta bo'lsa --
+      oyna qiling Vertikal aylantirishni olish uchun kichikroq qilib, uni sinab
+      ko'rishingiz mumkin.
+    </p>
 
-  <p>Important: limit dragging by the window. If a draggable reaches window top or bottom, then the page should scroll to let us drag it further.</p>
+    <p>
+      Ushbu vazifada vertikal aylantirishni boshqarish kifoya. Yo'q odatda
+      gorizontal aylantirish va agar kerak bo'lsa, xuddi shunday tarzda ishlov
+      beriladi.
+    </p>
 
-  <p>If your screen is big enough to fit the whole document -- make the window smaller to get vertical scrolling, so that you could test it.</p>
+    <p>
+      Va yana bir narsa: qahramonlar hech qachon sahifani tark etmasligi mumkin.
+      Agar ular yetib borishsa Hujjatning chetida, uning tashqarisiga sudrab
+      chiqmaydi.
+    </p>
 
-  <p>In this task it's enough to handle vertical scrolling. There's no horizontal scrolling usually, and it's handled the similar way if needed.</p>
+    <div id="field"></div>
 
-  <p>And one more thing: heroes may never leave the page. If they reach the edge of the document, no dragging outside of it.</p>
+    <div class="hero draggable" id="hero1"></div>
+    <div class="hero draggable" id="hero2"></div>
+    <div class="hero draggable" id="hero3"></div>
+    <div class="hero draggable" id="hero4"></div>
+    <div class="hero draggable" id="hero5"></div>
+    <div class="hero draggable" id="hero6"></div>
 
-  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" class="draggable" />
 
-  </div>
+    <div style="clear: both"></div>
 
-  <div class="hero draggable" id="hero1"></div>
-  <div class="hero draggable" id="hero2"></div>
-  <div class="hero draggable" id="hero3"></div>
-  <div class="hero draggable" id="hero4"></div>
-  <div class="hero draggable" id="hero5"></div>
-  <div class="hero draggable" id="hero6"></div>
-
-  <img src="https://en.js.cx/clipart/ball.svg" class="draggable">
-
-  <div style="clear:both"></div>
-
-  <script src="soccer.js"></script>
-</body>
-
+    <script src="soccer.js"></script>
+  </body>
 </html>

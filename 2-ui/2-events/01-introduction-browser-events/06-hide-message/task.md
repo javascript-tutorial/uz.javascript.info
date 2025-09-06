@@ -1,13 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Add a closing button
+# Yopish tugmachasini qo'shing
 
-There's a list of messages.
+Xabarlar ro'yxati bor.
 
-Use JavaScript to add a closing button to the right-upper corner of each message.
+Har bir xabarning o'ng yuqori burchagiga yopish tugmasi qo'shish uchun JavaScript-dan foydalaning.
 
-The result should look like this:
+Natija quyidagicha ko'rinishi kerak:
 
 [iframe src="solution" height=450]

@@ -1,42 +1,36 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <button onclick="loadPhones()" id="button">phones.json ni yukla!</button>
 
-  <button onclick="loadPhones()" id="button">Load phones.json!</button>
+    <script>
+      function loadPhones() {
+        let xhr = new XMLHttpRequest();
 
-  <script>
-    function loadPhones() {
+        xhr.open("GET", "phones.json");
 
-      let xhr = new XMLHttpRequest();
+        xhr.send();
 
-      xhr.open('GET', 'phones.json');
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState != 4) return;
 
+          button.innerHTML = "Complete!";
 
-      xhr.send();
+          if (xhr.status != 200) {
+            // xatolikni tutib olish
+            alert(xhr.status + ": " + xhr.statusText);
+          } else {
+            // natijani ko'rsatish
+            alert(xhr.responseText);
+          }
+        };
 
-
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState != 4) return;
-
-        button.innerHTML = 'Complete!';
-
-        if (xhr.status != 200) {
-          // handle error
-          alert(xhr.status + ': ' + xhr.statusText);
-        } else {
-          // show result
-          alert(xhr.responseText);
-        }
-
+        button.innerHTML = "Loading...";
+        button.disabled = true;
       }
-
-      button.innerHTML = 'Loading...';
-      button.disabled = true;
-    }
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>

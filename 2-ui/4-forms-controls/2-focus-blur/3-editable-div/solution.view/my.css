@@ -14,12 +14,12 @@
 }
 
 .edit {
-  /* replace padding with border (still 3px not to shift the contents) */
+  /* to'ldirishni chegara bilan almashtiring (tarkibni o'zgartirmaslik uchun hali ham 3px) */
   border: 3px solid blue;
   padding: 0px;
 }
 
 .edit:focus {
-  /* remove focus border in Safari */
+  /* Safari-da fokus chegarasini olib tashlang */
   outline: none;
 }

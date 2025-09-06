@@ -1,13 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Animate the ball bouncing to the right
+# To'pning o'ngga sakrashini jonlantiring
 
-Make the ball bounce to the right. Like this:
+To'pni o'ngga sakrashga harakat qiling. Shunga o'xshash:
 
 [iframe height=250 src="solution"]
 
-Write the animation code. The distance to the left is `100px`.
+Animatsiya kodini yozing. Chapdagi masofa `100px`.
 
-Take the solution of the previous task <info:task/animate-ball> as the source.
+Manba sifatida oldingi <info:task/animate-ball> topshirig'ining yechimini oling.

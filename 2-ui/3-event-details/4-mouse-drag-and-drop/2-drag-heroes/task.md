@@ -1,20 +1,20 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Drag superheroes around the field
+# Superqahramonlarni maydon bo'ylab harakatlantiring
 
-This task can help you to check understanding of several aspects of Drag'n'Drop and DOM.
+Bu vazifa Drag'n'Drop va DOMning bir qancha jihatlarini tushunishingizni tekshirishga yordam beradi.
 
-Make all elements with class `draggable` -- draggable. Like a ball in the chapter.
+Barcha elementlarni `draggable` klassi -- sudrab olinadigan qilib qo'ying. Bobdagi to'p kabi.
 
-Requirements:
+Talablar:
 
-- Use event delegation to track drag start: a single event handler on `document` for `mousedown`.
-- If elements are dragged to top/bottom window edges -- the page scrolls up/down to allow further dragging.
-- There is no horizontal scroll (this makes the task a bit simpler, adding it is easy).
-- Draggable elements or their parts should never leave the window, even after swift mouse moves.
+- Drag startni kuzatish uchun hodisa delegatsiyasidan foydalaning: `mousedown` uchun `document` da bitta hodisa ishlov beruvchisi.
+- Agar elementlar oynaning yuqori/pastki chetlariga tortilgan bo'lsa -- keyingi sudrab olish uchun sahifa yuqoriga/pastga aylantiriladi.
+- Gorizontal aylantirish yo'q (bu vazifani biroz soddalashtiradi, qo'shish oson).
+- Sichqonchaning tez harakatlanishidan keyin ham sudrab olinadigan elementlar yoki ularning qismlari hech qachon oynadan chiqmasligi kerak.
 
-The demo is too big to fit it here, so here's the link.
+Namoyish juda katta, shuning uchun bu yerda havola.
 
 [demo src="solution"]

@@ -1,14 +1,14 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Count descendants
+# Avlodlarni sanash
 
-There's a tree structured as nested `ul/li`.
+Bu yerda `ul/li` shaklida tuzilgan daraxt bor.
 
-Write the code that for each `<li>` shows:
+Har bir `<li>` uchun quyidagi kodni yozing:
 
-1. What's the text inside it (without the subtree)
-2. The number of nested `<li>` -- all descendants, including the deeply nested ones.
+1. Uning ichidagi matn nima (pastki daraxtsiz)
+2. Uyalangan `<li>` soni -- barcha avlodlar, shu jumladan chuqur joylashganlar.
 
 [demo src="solution"]

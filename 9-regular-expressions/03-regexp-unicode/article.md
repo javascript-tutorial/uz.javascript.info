@@ -1,12 +1,12 @@
-# Unicode: flag "u" and class \p{...}
+# Unicode: "u" bayrog'i va \p{...} sinfi
 
-JavaScript uses [Unicode encoding](https://en.wikipedia.org/wiki/Unicode) for strings. Most characters are encoded with 2 bytes, but that allows to represent at most 65536 characters.
+JavaScript satrlar uchun [Unicode kodlash](https://en.wikipedia.org/wiki/Unicode)dan foydalanadi. Ko'pgina belgilar 2 bayt bilan kodlanadi, lekin bu ko'pi bilan 65536 belgini ifodalash imkonini beradi.
 
-That range is not big enough to encode all possible characters, that's why some rare characters are encoded with 4 bytes, for instance like `𝒳` (mathematical X) or `😄` (a smile), some hieroglyphs and so on.
+Bu diapazon barcha mumkin bo'lgan belgilarni kodlash uchun etarli emas, shuning uchun ba'zi kam uchraydigan belgilar 4 bayt bilan kodlanadi, masalan `𝒳` (matematik X) yoki `😄` (tabassum), ba'zi ierogliflar va hokazo.
 
-Here are the Unicode values of some characters:
+Mana ba'zi belgilarning Unicode qiymatlari:
 
-| Character  | Unicode | Bytes count in Unicode  |
+| Belgi  | Unicode | Unicode dagi baytlar soni  |
 |------------|---------|--------|
 | a | `0x0061` |  2 |
 | ≈ | `0x2248` |  2 |
@@ -14,102 +14,101 @@ Here are the Unicode values of some characters:
 |𝒴| `0x1d4b4` | 4 |
 |😄| `0x1f604` | 4 |
 
-So characters like `a` and `≈` occupy 2 bytes, while codes for `𝒳`, `𝒴` and `😄` are longer, they have 4 bytes.
+Shunday qilib, `a` va `≈` kabi belgilar 2 baytni egallaydi, `𝒳`, `𝒴` va `😄` uchun kodlar esa uzunroq, ular 4 baytga ega.
 
-Long time ago, when JavaScript language was created, Unicode encoding was simpler: there were no 4-byte characters. So, some language features still handle them incorrectly.
+Uzoq vaqt oldin, JavaScript tili yaratilganda, Unicode kodlash oddiyroq edi: 4 baytli belgilar yo'q edi. Shuning uchun ba'zi til xususiyatlari hali ham ularni noto'g'ri boshqaradi.
 
-For instance, `length` thinks that here are two characters:
+Masalan, `length` bu yerda ikkita belgi borligini hisoblaydi:
 
 ```js run
 alert('😄'.length); // 2
 alert('𝒳'.length); // 2
 ```
 
-...But we can see that there's only one, right? The point is that `length` treats 4 bytes as two 2-byte characters. That's incorrect, because they must be considered only together (so-called "surrogate pair", you can read about them in the article <info:string>).
+...Lekin biz faqat bittasini ko'rishimiz mumkin, to'g'rimi? Gap shundaki, `length` 4 baytni ikkita 2 baytli belgi sifatida ko'radi. Bu noto'g'ri, chunki ular faqat birgalikda ko'rib chiqilishi kerak ("surrogate pair" deb ataladi, ular haqida <info:string> maqolasida o'qishingiz mumkin).
 
-By default, regular expressions also treat 4-byte "long characters" as a pair of 2-byte ones. And, as it happens with strings, that may lead to odd results. We'll see that a bit later, in the article <info:regexp-character-sets-and-ranges>.
+Sukut bo'yicha, doimiy ifodalar ham 4 baytli "uzun belgilar"ni 2 baytli juftlik sifatida ko'radi. Va satrlar bilan bo'lgani kabi, bu g'alati natijalarga olib kelishi mumkin. Buni biroz keyinroq <info:regexp-character-sets-and-ranges> maqolasida ko'ramiz.
 
-Unlike strings, regular expressions have flag `pattern:u` that fixes such problems. With such flag, a regexp handles 4-byte characters correctly. And also Unicode property search becomes available, we'll get to it next.
+Satrlardan farqli o'laroq, doimiy ifodalarda bunday muammolarni hal qiluvchi `pattern:u` bayrog'i mavjud. Bunday bayroq bilan regexp 4 baytli belgilarni to'g'ri boshqaradi. Shuningdek, Unicode xususiyatlari bo'yicha qidiruv imkoni paydo bo'ladi, bunga keyinroq o'tamiz.
 
-## Unicode properties \p{...}
+## Unicode xususiyatlari \p{...}
 
-Every character in Unicode has a lot of properties. They describe what "category" the character belongs to, contain miscellaneous information about it.
+Unicode-da har bir belgi ko'plab xususiyatlarga ega. Ular belgi qaysi "toifa"ga tegishli ekanligini tasvirlaydi, u haqida turli ma'lumotlarni o'z ichiga oladi.
 
-For instance, if a character has `Letter` property, it means that the character belongs to an alphabet (of any language). And `Number` property means that it's a digit: maybe Arabic or Chinese, and so on.
+Masalan, agar belgida `Letter` xususiyati bo'lsa, bu belgi alifboga (har qanday tilning) tegishli ekanligini anglatadi. Va `Number` xususiyati bu raqam ekanligini bildiradi: arab yoki xitoy va hokazo.
 
-We can search for characters with a property, written as `pattern:\p{…}`. To use `pattern:\p{…}`, a regular expression must have flag `pattern:u`.
+Biz `pattern:\p{…}` ko'rinishida yozilgan xususiyatga ega belgilarni qidira olamiz. `pattern:\p{…}`dan foydalanish uchun doimiy ifoda `pattern:u` bayrog'iga ega bo'lishi kerak.
 
-For instance, `\p{Letter}` denotes a letter in any language. We can also use `\p{L}`, as `L` is an alias of `Letter`. There are shorter aliases for almost every property.
+Masalan, `\p{Letter}` har qanday tildagi harfni bildiradi. Shuningdek, `\p{L}`dan ham foydalanishimiz mumkin, chunki `L` - `Letter`ning taxallusi. Deyarli har bir xususiyat uchun qisqaroq taxalluslar mavjud.
 
-In the example below three kinds of letters will be found: English, Georgian and Korean.
+Quyidagi misolda uch xil harflar topiladi: ingliz, gruzin va koreys.
 
 ```js run
 let str = "A ბ ㄱ";
 
 alert( str.match(/\p{L}/gu) ); // A,ბ,ㄱ
-alert( str.match(/\p{L}/g) ); // null (no matches, \p doesn't work without the flag "u")
+alert( str.match(/\p{L}/g) ); // null (moslik yo'q, \p "u" bayrog'isiz ishlamaydi)
 ```
 
-Here's the main character categories and their subcategories:
+Mana asosiy belgilar toifalari va ularning kichik toifalari:
 
-- Letter `L`:
-  - lowercase `Ll`
-  - modifier `Lm`,
-  - titlecase `Lt`,
-  - uppercase `Lu`,
-  - other `Lo`.
-- Number `N`:
-  - decimal digit `Nd`,
-  - letter number `Nl`,
-  - other `No`.
-- Punctuation `P`:
-  - connector `Pc`,
-  - dash `Pd`,
-  - initial quote `Pi`,
-  - final quote `Pf`,
-  - open `Ps`,
-  - close `Pe`,
-  - other `Po`.
-- Mark `M` (accents etc):
-  - spacing combining `Mc`,
-  - enclosing `Me`,
-  - non-spacing `Mn`.
-- Symbol `S`:
-  - currency `Sc`,
-  - modifier `Sk`,
-  - math `Sm`,
-  - other `So`.
-- Separator `Z`:
-  - line `Zl`,
-  - paragraph `Zp`,
-  - space `Zs`.
-- Other `C`:
-  - control `Cc`,
+- Harf `L`:
+  - kichik harf `Ll`
+  - modifikator `Lm`,
+  - bosh harf `Lt`,
+  - katta harf `Lu`,
+  - boshqa `Lo`.
+- Raqam `N`:
+  - o'nli raqam `Nd`,
+  - harf raqami `Nl`,
+  - boshqa `No`.
+- Tinish belgilari `P`:
+  - bog'lovchi `Pc`,
+  - tire `Pd`,
+  - boshlang'ich tirnoq `Pi`,
+  - oxirgi tirnoq `Pf`,
+  - ochuvchi `Ps`,
+  - yopuvchi `Pe`,
+  - boshqa `Po`.
+- Belgi `M` (urg'u va boshqalar):
+  - bo'shliq birlashuvchi `Mc`,
+  - o'rab oluvchi `Me`,
+  - bo'shliqsiz `Mn`.
+- Ramz `S`:
+  - valyuta `Sc`,
+  - modifikator `Sk`,
+  - matematik `Sm`,
+  - boshqa `So`.
+- Ajratuvchi `Z`:
+  - qator `Zl`,
+  - paragraf `Zp`,
+  - bo'shliq `Zs`.
+- Boshqa `C`:
+  - boshqaruv `Cc`,
   - format `Cf`,
-  - not assigned `Cn`,
-  - private use `Co`,
+  - tayinlanmagan `Cn`,
+  - shaxsiy foydalanish `Co`,
   - surrogate `Cs`.
 
+Shunday qilib, masalan, agar bizga kichik harflar kerak bo'lsa, `pattern:\p{Ll}` yozishimiz mumkin, tinish belgilari: `pattern:\p{P}` va hokazo.
 
-So, e.g. if we need letters in lower case, we can write `pattern:\p{Ll}`, punctuation signs: `pattern:\p{P}` and so on.
+Boshqa hosila toifalar ham mavjud, masalan:
+- `Alphabetic` (`Alpha`), Harflar `L`, harf raqamlari `Nl` (masalan, Ⅻ - rim raqami 12 uchun belgi), va boshqa ba'zi ramzlar `Other_Alphabetic` (`OAlpha`) ni o'z ichiga oladi.
+- `Hex_Digit` o'n oltilik raqamlarni o'z ichiga oladi: `0-9`, `a-f`.
+- ...Va hokazo.
 
-There are also other derived categories, like:
-- `Alphabetic` (`Alpha`), includes Letters `L`, plus letter numbers `Nl` (e.g. Ⅻ - a character for the roman number 12), plus some other symbols `Other_Alphabetic` (`OAlpha`).
-- `Hex_Digit` includes hexadecimal digits: `0-9`, `a-f`.
-- ...And so on.
+Unicode ko'plab turli xususiyatlarni qo'llab-quvvatlaydi, ularning to'liq ro'yxati ko'p joy talab qiladi, shuning uchun mana havolalar:
 
-Unicode supports many different properties, their full list would require a lot of space, so here are the references:
+- Belgi bo'yicha barcha xususiyatlar ro'yxati: <https://unicode.org/cldr/utility/character.jsp>.
+- Xususiyat bo'yicha barcha belgilar ro'yxati: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
+- Xususiyatlar uchun qisqa taxalluslar: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
+- Barcha xususiyatlar bilan matn formatidagi Unicode belgilarining to'liq bazasi: <https://www.unicode.org/Public/UCD/latest/ucd/>.
 
-- List all properties by a character: <https://unicode.org/cldr/utility/character.jsp>.
-- List all characters by a property: <https://unicode.org/cldr/utility/list-unicodeset.jsp>.
-- Short aliases for properties: <https://www.unicode.org/Public/UCD/latest/ucd/PropertyValueAliases.txt>.
-- A full base of Unicode characters in text format, with all properties, is here: <https://www.unicode.org/Public/UCD/latest/ucd/>.
+### Misol: o'n oltilik raqamlar
 
-### Example: hexadecimal numbers
+Masalan, `xFF` ko'rinishida yozilgan o'n oltilik raqamlarni qidiraylik, bu yerda `F` hex raqam (0..9 yoki A..F).
 
-For instance, let's look for hexadecimal numbers, written as `xFF`, where `F` is a hex digit (0..9 or A..F).
-
-A hex digit can be denoted as `pattern:\p{Hex_Digit}`:
+Hex raqam `pattern:\p{Hex_Digit}` ko'rinishida belgilanishi mumkin:
 
 ```js run
 let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
@@ -117,27 +116,27 @@ let regexp = /x\p{Hex_Digit}\p{Hex_Digit}/u;
 alert("number: xAF".match(regexp)); // xAF
 ```
 
-### Example: Chinese hieroglyphs
+### Misol: Xitoy ierogliflari
 
-Let's look for Chinese hieroglyphs.
+Xitoy ierogliflarini qidiraylik.
 
-There's a Unicode property `Script` (a writing system), that may have a value: `Cyrillic`, `Greek`, `Arabic`, `Han` (Chinese) and so on, [here's the full list](https://en.wikipedia.org/wiki/Script_(Unicode)).
+`Script` (yozuv tizimi) Unicode xususiyati mavjud, u quyidagi qiymatlarga ega bo'lishi mumkin: `Cyrillic`, `Greek`, `Arabic`, `Han` (Xitoy) va hokazo, [to'liq ro'yxat shu yerda](https://en.wikipedia.org/wiki/Script_(Unicode)).
 
-To look for characters in a given writing system we should use `pattern:Script=<value>`, e.g. for Cyrillic letters: `pattern:\p{sc=Cyrillic}`, for Chinese hieroglyphs: `pattern:\p{sc=Han}`, and so on:
+Berilgan yozuv tizimidagi belgilarni qidirish uchun `pattern:Script=<qiymat>`dan foydalanishimiz kerak, masalan kirill harflari uchun: `pattern:\p{sc=Cyrillic}`, xitoy ierogliflari uchun: `pattern:\p{sc=Han}`, va hokazo:
 
 ```js run
-let regexp = /\p{sc=Han}/gu; // returns Chinese hieroglyphs
+let regexp = /\p{sc=Han}/gu; // xitoy ierogliflarini qaytaradi
 
 let str = `Hello Привет 你好 123_456`;
 
 alert( str.match(regexp) ); // 你,好
 ```
 
-### Example: currency
+### Misol: valyuta
 
-Characters that denote a currency, such as `$`, `€`, `¥`, have Unicode property  `pattern:\p{Currency_Symbol}`, the short alias: `pattern:\p{Sc}`.
+`$`, `€`, `¥` kabi valyutani bildiruvchi belgilar `pattern:\p{Currency_Symbol}` Unicode xususiyatiga ega, qisqa taxallus: `pattern:\p{Sc}`.
 
-Let's use it to look for prices in the format "currency, followed by a digit":
+"Valyuta, keyin raqam" formatidagi narxlarni qidirish uchun undan foydalanamiz:
 
 ```js run
 let regexp = /\p{Sc}\d/gu;
@@ -147,15 +146,15 @@ let  str = `Prices: $2, €1, ¥9`;
 alert( str.match(regexp) ); // $2,€1,¥9
 ```
 
-Later, in the article <info:regexp-quantifiers> we'll see how to look for numbers that contain many digits.
+Keyinroq, <info:regexp-quantifiers> maqolasida ko'plab raqamlarni o'z ichiga olgan raqamlarni qanday qidirishni ko'ramiz.
 
-## Summary
+## Xulosa
 
-Flag `pattern:u` enables the support of Unicode in regular expressions.
+`pattern:u` bayrog'i doimiy ifodalarda Unicode qo'llab-quvvatlashni yoqadi.
 
-That means two things:
+Bu ikki narsani anglatadi:
 
-1. Characters of 4 bytes are handled correctly: as a single character, not two 2-byte characters.
-2. Unicode properties can be used in the search: `\p{…}`.
+1. 4 baytli belgilar to'g'ri boshqariladi: bitta belgi sifatida, ikkita 2 baytli belgi emas.
+2. Unicode xususiyatlari qidiruvda ishlatilishi mumkin: `\p{…}`.
 
-With Unicode properties we can look for words in given languages, special characters (quotes, currencies) and so on.
+Unicode xususiyatlari bilan biz berilgan tillardagi so'zlar, maxsus belgilar (qo'shtirnoqlar, valyutalar) va hokazolarni qidirishimiz mumkin.

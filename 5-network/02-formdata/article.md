@@ -1,26 +1,25 @@
-
 # FormData
 
-This chapter is about sending HTML forms: with or without files, with additional fields and so on.
+Bu bob HTML formalarni yuborish haqida: fayllar bilan yoki faylsiz, qo'shimcha maydonlar bilan va hokazo.
 
-[FormData](https://xhr.spec.whatwg.org/#interface-formdata) objects can help with that. As you might have guessed, it's the object to represent HTML form data.
+[FormData](https://xhr.spec.whatwg.org/#interface-formdata) obyektlari bunda yordam berishi mumkin. Taxmin qilganingiz kabi, bu HTML form ma'lumotlarini ifodalash uchun obyekt.
 
-The constructor is:
+Konstruktor:
 ```js
 let formData = new FormData([form]);
 ```
 
-If HTML `form` element is provided, it automatically captures its fields.
+Agar HTML `form` elementi berilsa, u avtomatik ravishda uning maydonlarini oladi.
 
-The special thing about `FormData` is that network methods, such as `fetch`, can accept a `FormData` object as a body. It's encoded and sent out with `Content-Type: multipart/form-data`.
+`FormData` ning o'ziga xos tomoni shundaki, `fetch` kabi tarmoq usullari `FormData` obyektini body sifatida qabul qilishi mumkin. U kodlanadi va `Content-Type: multipart/form-data` bilan yuboriladi.
 
-From the server point of view, that looks like a usual form submission.
+Server nuqtai nazaridan, bu odatiy form yuborish kabi ko'rinadi.
 
-## Sending a simple form
+## Oddiy formani yuborish
 
-Let's send a simple form first.
+Avval oddiy formani yuboraylik.
 
-As you can see, that's almost one-liner:
+Ko'rib turganingizdek, bu deyarli bir qator:
 
 ```html run autorun
 <form id="formElem">
@@ -47,48 +46,48 @@ As you can see, that's almost one-liner:
 </script>
 ```
 
-In this example, the server code is not presented, as it's beyond our scope. The server accepts the POST request and replies "User saved".
+Ushbu misolda server kodi ko'rsatilmagan, chunki u bizning doiramizdan tashqarida. Server POST so'rovni qabul qiladi va "Foydalanuvchi saqlandi" deb javob beradi.
 
-## FormData Methods
+## FormData Metodlari
 
-We can modify fields in `FormData` with methods:
+`FormData` da maydonlarni metodlar bilan o'zgartirishimiz mumkin:
 
-- `formData.append(name, value)` - add a form field with the given `name` and `value`,
-- `formData.append(name, blob, fileName)` - add a field as if it were `<input type="file">`, the third argument `fileName` sets file name (not form field name), as it were a name of the file in user's filesystem,
-- `formData.delete(name)` - remove the field with the given `name`,
-- `formData.get(name)` - get the value of the field with the given `name`,
-- `formData.has(name)` - if there exists a field with the given `name`, returns `true`, otherwise `false`
+- `formData.append(name, value)` - berilgan `name` va `value` bilan form maydoni qo'shish,
+- `formData.append(name, blob, fileName)` - maydonni `<input type="file">` kabi qo'shish, uchinchi argument `fileName` fayl nomini o'rnatadi (form maydon nomi emas), xuddi foydalanuvchi fayl tizimidagi faylning nomi kabi,
+- `formData.delete(name)` - berilgan `name` li maydonni o'chirish,
+- `formData.get(name)` - berilgan `name` li maydonning qiymatini olish,
+- `formData.has(name)` - agar berilgan `name` li maydon mavjud bo'lsa `true`, aks holda `false` qaytaradi
 
-A form is technically allowed to have many fields with the same `name`, so multiple calls to `append` add more same-named fields.
+Texnik jihatdan form bir xil `name` li ko'plab maydonga ega bo'lishi mumkin, shuning uchun `append` ga bir necha marta chaqirish bir xil nomli ko'proq maydonlar qo'shadi.
 
-There's also method `set`, with the same syntax as `append`. The difference is that `.set` removes all fields with the given `name`, and then appends a new field. So it makes sure there's only one field with such `name`, the rest is just like `append`:
+`append` bilan bir xil sintaksisga ega `set` metodi ham bor. Farqi shundaki, `.set` berilgan `name` li barcha maydonlarni o'chiradi, so'ngra yangi maydon qo'shadi. Shunday qilib, u bunday `name` li faqat bitta maydon mavjudligiga ishonch hosil qiladi, qolganlari `append` kabi:
 
 - `formData.set(name, value)`,
 - `formData.set(name, blob, fileName)`.
 
-Also we can iterate over formData fields using `for..of` loop:
+Shuningdek, `for..of` sikli yordamida formData maydonlari bo'ylab takrorlashimiz mumkin:
 
 ```js run
 let formData = new FormData();
 formData.append('key1', 'value1');
 formData.append('key2', 'value2');
 
-// List key/value pairs
+// Kalit/qiymat juftliklarini ro'yxatlash
 for(let [name, value] of formData) {
-  alert(`${name} = ${value}`); // key1 = value1, then key2 = value2
+  alert(`${name} = ${value}`); // key1 = value1, keyin key2 = value2
 }
 ```
 
-## Sending a form with a file
+## Fayl bilan formani yuborish
 
-The form is always sent as `Content-Type: multipart/form-data`, this encoding allows to send files. So, `<input type="file">` fields are sent also, similar to a usual form submission.
+Form har doim `Content-Type: multipart/form-data` sifatida yuboriladi, bu kodlash fayllarni yuborish imkonini beradi. Shunday qilib, `<input type="file">` maydonlari ham odatiy form yuborish kabi yuboriladi.
 
-Here's an example with such form:
+Bunday form bilan misol:
 
 ```html run autorun
 <form id="formElem">
   <input type="text" name="firstName" value="John">
-  Picture: <input type="file" name="picture" accept="image/*">
+  Rasm: <input type="file" name="picture" accept="image/*">
   <input type="submit">
 </form>
 
@@ -110,21 +109,21 @@ Here's an example with such form:
 </script>
 ```
 
-## Sending a form with Blob data
+## Blob ma'lumotlar bilan formani yuborish
 
-As we've seen in the chapter <info:fetch>, it's easy to send dynamically generated binary data e.g. an image, as `Blob`. We can supply it directly as `fetch` parameter `body`.
+<info:fetch> bobida ko'rganimizdek, masalan, tasvir kabi dinamik yaratilgan ikkilik ma'lumotlarni `Blob` sifatida yuborish oson. Uni to'g'ridan-to'g'ri `fetch` parametri `body` sifatida berish mumkin.
 
-In practice though, it's often convenient to send an image not separately, but as a part of the form, with additional fields, such as "name" and other metadata.
+Amalda esa, tasvirni alohida emas, balki "name" va boshqa metadata kabi qo'shimcha maydonlar bilan formaning bir qismi sifatida yuborish ko'pincha qulay.
 
-Also, servers are usually more suited to accept multipart-encoded forms, rather than raw binary data.
+Bundan tashqari, serverlar odatda xom ikkilik ma'lumotlardan ko'ra multipart-kodlangan formalarni qabul qilish uchun ko'proq mos keladi.
 
-This example submits an image from `<canvas>`, along with some other fields, as a form, using `FormData`:
+Ushbu misol `<canvas>` dan tasvirni boshqa maydonlar bilan birga `FormData` yordamida form sifatida yuboradi:
 
 ```html run autorun height="90"
 <body style="margin:0">
   <canvas id="canvasElem" width="100" height="80" style="border:1px solid"></canvas>
 
-  <input type="button" value="Submit" onclick="submit()">
+  <input type="button" value="Yuborish" onclick="submit()">
 
   <script>
     canvasElem.onmousemove = function(e) {
@@ -154,36 +153,36 @@ This example submits an image from `<canvas>`, along with some other fields, as 
 </body>
 ```
 
-Please note how the image `Blob` is added:
+Tasvir `Blob` qanday qo'shilganiga e'tibor bering:
 
 ```js
 formData.append("image", imageBlob, "image.png");
 ```
 
-That's same as if there were `<input type="file" name="image">` in the form, and the visitor submitted a file named `"image.png"` (3rd argument) with the data `imageBlob` (2nd argument) from their filesystem.
+Bu formada `<input type="file" name="image">` mavjud bo'lgani kabi va tashrif buyuruvchi o'z fayl tizimidan `imageBlob` ma'lumotlari (2-chi argument) bilan `"image.png"` nomli faylni (3-chi argument) yuborgan kabi.
 
-The server reads form data and the file, as if it were a regular form submission.
+Server form ma'lumotlari va faylini odatiy form yuborish kabi o'qiydi.
 
-## Summary
+## Xulosa
 
-[FormData](https://xhr.spec.whatwg.org/#interface-formdata) objects are used to capture HTML form and submit it using `fetch` or another network method.
+[FormData](https://xhr.spec.whatwg.org/#interface-formdata) obyektlari HTML formani olish va uni `fetch` yoki boshqa tarmoq usuli bilan yuborish uchun ishlatiladi.
 
-We can either create `new FormData(form)` from an HTML form, or create a object without a form at all, and then append fields with methods:
+Biz HTML formidan `new FormData(form)` yaratishimiz mumkin yoki umuman formasiz obyekt yaratib, keyin metodlar bilan maydonlar qo'shishimiz mumkin:
 
 - `formData.append(name, value)`
 - `formData.append(name, blob, fileName)`
 - `formData.set(name, value)`
 - `formData.set(name, blob, fileName)`
 
-Let's note two peculiarities here:
+Bu yerda ikkita xususiyatni qayd etamiz:
 
-1. The `set` method removes fields with the same name, `append` doesn't. That's the only difference between them.
-2. To send a file, 3-argument syntax is needed, the last argument is a file name, that normally is taken from user filesystem for `<input type="file">`.
+1. `set` metodi bir xil nomli maydonlarni o'chiradi, `append` o'chirmaydi. Ular orasidagi yagona farq shu.
+2. Faylni yuborish uchun 3 argumentli sintaksis kerak, oxirgi argument fayl nomi bo'lib, u odatda `<input type="file">` uchun foydalanuvchi fayl tizimidan olinadi.
 
-Other methods are:
+Boshqa metodlar:
 
 - `formData.delete(name)`
 - `formData.get(name)`
 - `formData.has(name)`
 
-That's it!
+Hammasi shu!

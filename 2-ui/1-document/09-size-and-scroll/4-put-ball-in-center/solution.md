@@ -1,53 +1,55 @@
-The ball has `position:absolute`. It means that its `left/top` coordinates are measured from the nearest positioned element, that is `#field` (because it has `position:relative`).
+To'p `position:absolute` ga ega. Bu uning `left/top` koordinatalari eng yaqin joylashtirilgan elementdan, ya'ni `#field` dan o'lchanishini anglatadi (chunki u `position:relative` ga ega).
 
-The coordinates start from the inner left-upper corner of the field:
+Koordinatalar maydonning ichki chap-yuqori burchagidan boshlanadi:
 
 ![](field.svg)
 
-The inner field width/height is `clientWidth/clientHeight`. So the field center has coordinates `(clientWidth/2, clientHeight/2)`.
+Ichki maydon kengligi/balandligi `clientWidth/clientHeight` dir. Demak, maydon markazi `(clientWidth/2, clientHeight/2)` koordinatalariga ega.
 
-...But if we set `ball.style.left/top` to such values, then not the ball as a whole, but the left-upper edge of the ball would be in the center:
+...Ammo agar biz `ball.style.left/top` ni bunday qiymatlarga o'rnatdik, u holda butun to'p emas, balki to'pning chap-yuqori chegarasi markazda bo'ladi:
 
 ```js
-ball.style.left = Math.round(field.clientWidth / 2) + 'px';
-ball.style.top = Math.round(field.clientHeight / 2) + 'px';
+ball.style.left = Math.round(field.clientWidth / 2) + "px";
+ball.style.top = Math.round(field.clientHeight / 2) + "px";
 ```
 
-Here's how it looks:
+Qanday ko'rinishi:
 
 [iframe height=180 src="ball-half"]
 
-To align the ball center with the center of the field, we should move the ball to the half of its width to the left and to the half of its height to the top:
+To'p markazini maydon markazi bilan tekislash uchun to'pni chapga uning kengligining yarmiga va yuqoriga uning balandligining yarmiga siljitishimiz kerak:
 
 ```js
-ball.style.left = Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + 'px';
-ball.style.top = Math.round(field.clientHeight / 2 - ball.offsetHeight / 2) + 'px';
+ball.style.left =
+  Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + "px";
+ball.style.top =
+  Math.round(field.clientHeight / 2 - ball.offsetHeight / 2) + "px";
 ```
 
-Now the ball is finally centered.
+Endi to'p nihoyat markazlashtirildi.
 
-````warn header="Attention: the pitfall!"
+````warn header="E'tibor: tuzoq!"
 
-The code won't work reliably while `<img>` has no width/height:
+`<img>` ning kengligi/balandligi bo'lmagan vaqtda kod ishonchli ishlamaydi:
 
 ```html
 <img src="ball.png" id="ball">
 ```
 ````
 
-When the browser does not know the width/height of an image (from tag attributes or CSS), then it assumes them to equal `0` until the image finishes loading.
+Brauzer rasm kengligi/balandligini bilmasa (teg atributlari yoki CSS dan), u rasm yuklanib bo'lgunga qadar ularni `0` ga teng deb hisoblaydi.
 
-So the value of `ball.offsetWidth` will be `0` until the image loads. That leads to wrong coordinates in the code above.
+Shunday qilib, `ball.offsetWidth` qiymati rasm yuklanguncha `0` bo'ladi. Bu yuqoridagi kodda noto'g'ri koordinatalarga olib keladi.
 
-After the first load, the browser usually caches the image, and on reloads it will have the size immediately. But on the first load the value of `ball.offsetWidth` is `0`.
+Birinchi yuklanishdan keyin brauzer odatda rasmni keshga saqlaydi va qayta yuklashda darhol o'lchamga ega bo'ladi. Ammo birinchi yuklanishda `ball.offsetWidth` qiymati `0`.
 
-We should fix that by adding `width/height` to `<img>`:
+Buni `<img>` ga `width/height` qo'shish orqali tuzatishimiz kerak:
 
 ```html
 <img src="ball.png" *!*width="40" height="40"*/!* id="ball">
 ```
 
-...Or provide the size in CSS:
+...Yoki CSS da o'lchamni belgilang:
 
 ```css
 #ball {

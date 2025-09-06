@@ -1,58 +1,64 @@
-# Node properties: type, tag and contents
+---
+libs:
+  - d3
+  - domtree
+---
 
-Let's get a more in-depth look at DOM nodes.
+# Tugun xususiyatlari: tur, teg va tarkib
 
-In this chapter we'll see more into what they are and learn their most used properties.
+DOM tugunlariga chuqurroq nazar tashlaylik.
 
-## DOM node classes
+Ushbu bobda biz ular nima ekanligini ko'rib chiqamiz va eng ko'p ishlatiladigan xususiyatlarini o'rganamiz.
 
-Different DOM nodes may have different properties. For instance, an element node corresponding to tag `<a>` has link-related properties, and the one corresponding to `<input>` has input-related properties and so on. Text nodes are not the same as element nodes. But there are also common properties and methods between all of them, because all classes of DOM nodes form a single hierarchy.
+## DOM tugun klasslari
 
-Each DOM node belongs to the corresponding built-in class.
+Turli DOM tugunlari turli xususiyatlarga ega bo'lishi mumkin. Masalan, `<a>` tegiga mos keladigan element tuguni havola bilan bog'liq xususiyatlarga ega, `<input>` ga mos keluvchisi esa input bilan bog'liq xususiyatlarga ega va hokazo. Matn tugunlari element tugunlari bilan bir xil emas. Lekin ular orasida umumiy xususiyatlar va metodlar ham mavjud, chunki barcha DOM tugun klasslari yagona ierarxiyani tashkil qiladi.
 
-The root of the hierarchy is [EventTarget](https://dom.spec.whatwg.org/#eventtarget), that is inherited by  [Node](http://dom.spec.whatwg.org/#interface-node), and other DOM nodes inherit from it.
+Har bir DOM tuguni tegishli o'rnatilgan klassga tegishli.
 
-Here's the picture, explanations to follow:
+Ierarxiyaning ildizi [EventTarget](https://dom.spec.whatwg.org/#eventtarget) bo'lib, undan [Node](http://dom.spec.whatwg.org/#interface-node) meros oladi va boshqa DOM tugunlari undan meros oladi.
+
+Mana rasm, tushuntirishlar keyinroq:
 
 ![](dom-class-hierarchy.svg)
 
-The classes are:
+Klasslar:
 
-- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- is the root "abstract" class. Objects of that class are never created. It serves as a base, so that all DOM nodes support so-called "events", we'll study them later.
-- [Node](http://dom.spec.whatwg.org/#interface-node) -- is also an "abstract" class, serving as a base  for DOM nodes. It provides the core tree functionality: `parentNode`, `nextSibling`, `childNodes` and so on (they are getters). Objects of `Node` class are never created. But there are concrete node classes that inherit from it, namely: `Text` for text nodes, `Element` for element nodes and more exotic ones like `Comment` for comment nodes.
-- [Element](http://dom.spec.whatwg.org/#interface-element) -- is a base class for DOM elements. It provides element-level navigation like `nextElementSibling`, `children` and searching methods like `getElementsByTagName`, `querySelector`. A browser supports not only HTML, but also XML and SVG. The `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` and `HTMLElement`.
-- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- is finally the basic class for all HTML elements. It is inherited by concrete HTML elements:
-    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- the class for `<input>` elements,
-    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- the class for `<body>` elements,
-    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- the class for `<a>` elements,
-    - ...and so on, each tag has its own class that may provide specific properties and methods.
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- ildiz "mavhum" klass. Bu klassning obyektlari hech qachon yaratilmaydi. U asos bo'lib xizmat qiladi, shunda barcha DOM tugunlari "hodisalar" deb ataladigan narsani qo'llab-quvvatlaydi, biz ularni keyinroq o'rganamiz.
+- [Node](http://dom.spec.whatwg.org/#interface-node) -- bu ham "mavhum" klass bo'lib, DOM tugunlari uchun asos bo'lib xizmat qiladi. U asosiy daraxt funksionalligini taqdim etadi: `parentNode`, `nextSibling`, `childNodes` va hokazo (bular getter'lardir). `Node` klassining obyektlari hech qachon yaratilmaydi. Lekin undan meros oladigan aniq tugun klasslari mavjud, ya'ni: matn tugunlari uchun `Text`, element tugunlari uchun `Element` va izoh tugunlari uchun `Comment` kabi boshqa ekzotik klasslar.
+- [Element](http://dom.spec.whatwg.org/#interface-element) -- DOM elementlari uchun asos klass. U element darajasidagi navigatsiyani taqdim etadi, masalan `nextElementSibling`, `children` va `getElementsByTagName`, `querySelector` kabi qidiruv metodlari. Brauzer nafaqat HTML, balki XML va SVG ni ham qo'llab-quvvatlaydi. `Element` klassi aniqroq klasslar uchun asos bo'lib xizmat qiladi: `SVGElement`, `XMLElement` va `HTMLElement`.
+- [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) -- nihoyat barcha HTML elementlari uchun asosiy klass. Undan aniq HTML elementlari meros oladi:
+    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- `<input>` elementlari uchun klass,
+    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- `<body>` elementlari uchun klass,
+    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- `<a>` elementlari uchun klass,
+    - ...va hokazo, har bir tegning aniq xususiyatlar va metodlarni taqdim etishi mumkin bo'lgan o'z klassi bor.
 
-So, the full set of properties and methods of a given node comes as the result of the inheritance.
+Shunday qilib, berilgan tugunning barcha xususiyatlar va metodlari to'plami merosxo'rlik natijasida hosil bo'ladi.
 
-For example, let's consider the DOM object for an `<input>` element. It belongs to [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) class.
+Masalan, `<input>` element uchun DOM obyektini ko'rib chiqaylik. U [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) klassiga tegishli.
 
-It gets properties and methods as a superposition of (listed in inheritance order):
+U xususiyatlar va metodlarni quyidagi klasslardan superpozitsiya sifatida oladi (merosxo'rlik tartibida):
 
-- `HTMLInputElement` -- this class provides input-specific properties,
-- `HTMLElement` -- it provides common HTML element methods (and getters/setters),
-- `Element` -- provides generic element methods,
-- `Node` -- provides common DOM node properties,
-- `EventTarget` -- gives the support for events (to be covered),
-- ...and finally it inherits from `Object`, so "plain object" methods like `hasOwnProperty` are also available.
+- `HTMLInputElement` -- bu klass input-ga xos xususiyatlarni taqdim etadi,
+- `HTMLElement` -- umumiy HTML element metodlarini (va getter/setter'larni) taqdim etadi,
+- `Element` -- umumiy element metodlarini taqdim etadi,
+- `Node` -- umumiy DOM tugun xususiyatlarini taqdim etadi,
+- `EventTarget` -- hodisalar uchun qo'llab-quvvatlash beradi (keyinroq yoritiladi),
+- ...va nihoyat u `Object`dan meros oladi, shuning uchun `hasOwnProperty` kabi "oddiy obyekt" metodlari ham mavjud.
 
-To see the DOM node class name, we can recall that an object usually has the `constructor` property. It references the class constructor, and `constructor.name` is its name:
+DOM tugun klass nomini ko'rish uchun, obyektda odatda `constructor` xususiyati borligini eslaymiz. U klass konstruktoriga havola qiladi va `constructor.name` uning nomi:
 
 ```js run
 alert( document.body.constructor.name ); // HTMLBodyElement
 ```
 
-...Or we can just `toString` it:
+...Yoki shunchaki uni `toString` qilishimiz mumkin:
 
 ```js run
 alert( document.body ); // [object HTMLBodyElement]
 ```
 
-We also can use `instanceof` to check the inheritance:
+Merosxo'rlikni tekshirish uchun `instanceof` dan ham foydalanishimiz mumkin:
 
 ```js run
 alert( document.body instanceof HTMLBodyElement ); // true
@@ -62,38 +68,38 @@ alert( document.body instanceof Node ); // true
 alert( document.body instanceof EventTarget ); // true
 ```
 
-As we can see, DOM nodes are regular JavaScript objects. They use prototype-based classes for inheritance.
+Ko'rib turganingizdek, DOM tugunlari oddiy JavaScript obyektlaridir. Ular merosxo'rlik uchun prototipga asoslangan klasslardan foydalanadilar.
 
-That's also easy to see by outputting an element with `console.dir(elem)` in a browser. There in the console you can see `HTMLElement.prototype`, `Element.prototype` and so on.
+Buni brauzerdagi `console.dir(elem)` yordamida elementni chiqarish orqali ham osongina ko'rish mumkin. Konsolda siz `HTMLElement.prototype`, `Element.prototype` va hokazolarni ko'rishingiz mumkin.
 
-```smart header="`console.dir(elem)` versus `console.log(elem)`"
-Most browsers support two commands in their developer tools: `console.log` and `console.dir`. They output their arguments to the console. For JavaScript objects these commands usually do the same.
+```smart header="`console.dir(elem)` va `console.log(elem)` farqi"
+Ko'pgina brauzerlar o'zlarining dasturchi vositalarida ikkita buyruqni qo'llab-quvvatlaydi: `console.log` va `console.dir`. Ular o'z argumentlarini konsolga chiqaradi. JavaScript obyektlari uchun bu buyruqlar odatda bir xil ish qiladi.
 
-But for DOM elements they are different:
+Lekin DOM elementlari uchun ular boshqacha:
 
-- `console.log(elem)` shows the element DOM tree.
-- `console.dir(elem)` shows the element as a DOM object, good to explore its properties.
+- `console.log(elem)` element DOM daraxtini ko'rsatadi.
+- `console.dir(elem)` elementni DOM obyekti sifatida ko'rsatadi, uning xususiyatlarini o'rganish uchun yaxshi.
 
-Try it on `document.body`.
+Buni `document.body` da sinab ko'ring.
 ```
 
-````smart header="IDL in the spec"
-In the specification, DOM classes aren't described by using JavaScript, but a special [Interface description language](https://en.wikipedia.org/wiki/Interface_description_language) (IDL), that is usually easy to understand.
+````smart header="Spetsifikatsiyada IDL"
+Spetsifikatsiyada DOM klasslari JavaScript yordamida emas, balki maxsus [Interface description language](https://en.wikipedia.org/wiki/Interface_description_language) (IDL) yordamida tasvirlangan, bu odatda tushunish oson.
 
-In IDL all properties are prepended with their types. For instance, `DOMString`, `boolean` and so on.
+IDL da barcha xususiyatlar o'z turlari bilan boshlanadi. Masalan, `DOMString`, `boolean` va hokazo.
 
-Here's an excerpt from it, with comments:
+Mana undan parcha, izohlar bilan:
 
 ```js
-// Define HTMLInputElement
+// HTMLInputElement ni belgilash
 *!*
-// The colon ":" means that HTMLInputElement inherits from HTMLElement
+// ":" belgisi HTMLInputElement HTMLElement dan meros olishini anglatadi
 */!*
 interface HTMLInputElement: HTMLElement {
-  // here go properties and methods of <input> elements
+  // bu yerda <input> elementlarining xususiyatlari va metodlari keladi
 
 *!*
-  // "DOMString" means that the value of a property is a string
+  // "DOMString" xususiyat qiymati satr ekanligini anglatadi
 */!*
   attribute DOMString accept;
   attribute DOMString alt;
@@ -101,12 +107,12 @@ interface HTMLInputElement: HTMLElement {
   attribute DOMString value;
 
 *!*
-  // boolean value property (true/false)
+  // boolean qiymat xususiyati (true/false)
   attribute boolean autofocus;
 */!*
   ...
 *!*
-  // now the method: "void" means that the method returns no value
+  // endi metod: "void" metod hech qanday qiymat qaytarmasligini anglatadi
 */!*
   void select();
   ...
@@ -114,386 +120,383 @@ interface HTMLInputElement: HTMLElement {
 ```
 ````
 
-## The "nodeType" property
+## "nodeType" xususiyati
 
-The `nodeType` property provides one more, "old-fashioned" way to get the "type" of a DOM node.
+`nodeType` xususiyati DOM tugunining "turini" olishning yana bir "eski uslub" usulini taqdim etadi.
 
-It has a numeric value:
-- `elem.nodeType == 1` for element nodes,
-- `elem.nodeType == 3` for text nodes,
-- `elem.nodeType == 9` for the document object,
-- there are few other values in [the specification](https://dom.spec.whatwg.org/#node).
+Unda raqamli qiymat bor:
+- `elem.nodeType == 1` element tugunlari uchun,
+- `elem.nodeType == 3` matn tugunlari uchun,
+- `elem.nodeType == 9` hujjat obyekti uchun,
+- [spetsifikatsiyada](https://dom.spec.whatwg.org/#node) bir nechta boshqa qiymatlar mavjud.
 
-For instance:
+Masalan:
 
 ```html run
 <body>
   <script>  
   let elem = document.body;
 
-  // let's examine what it is?
+  // bu nima ekanligini tekshiraylik?
   alert(elem.nodeType); // 1 => element
 
-  // and the first child is...
-  alert(elem.firstChild.nodeType); // 3 => text
+  // va birinchi bola bu...
+  alert(elem.firstChild.nodeType); // 3 => matn
 
-  // for the document object, the type is 9
+  // hujjat obyekti uchun tur 9
   alert( document.nodeType ); // 9
   </script>
 </body>
 ```
 
-In modern scripts, we can use `instanceof` and other class-based tests to see the node type, but sometimes `nodeType` may be simpler. We can only read `nodeType`, not change it.
+Zamonaviy skriptlarda biz tugun turini ko'rish uchun `instanceof` va boshqa klassga asoslangan testlardan foydalanishimiz mumkin, lekin ba'zan `nodeType` soddaroq bo'lishi mumkin. Biz `nodeType` ni faqat o'qishimiz mumkin, o'zgartira olmaymiz.
 
-## Tag: nodeName and tagName
+## Teg: nodeName va tagName
 
-Given a DOM node, we can read its tag name from `nodeName` or `tagName` properties:
+DOM tugun berilgan bo'lsa, uning teg nomini `nodeName` yoki `tagName` xususiyatlaridan o'qishimiz mumkin:
 
-For instance:
+Masalan:
 
 ```js run
 alert( document.body.nodeName ); // BODY
 alert( document.body.tagName ); // BODY
 ```
 
-Is there any difference between `tagName` and `nodeName`?
+`tagName` va `nodeName` orasida farq bormi?
 
-Sure, the difference is reflected in their names, but is indeed a bit subtle.
+Albatta, farq ularning nomlarida aks etgan, lekin haqiqatan ham biroz nozik.
 
-- The `tagName` property exists only for `Element` nodes.
-- The `nodeName` is defined for any `Node`:
-    - for elements it means the same as `tagName`.
-    - for other node types (text, comment, etc.) it has a string with the node type.
+- `tagName` xususiyati faqat `Element` tugunlari uchun mavjud.
+- `nodeName` har qanday `Node` uchun belgilangan:
+    - elementlar uchun u `tagName` bilan bir xil ma'noni anglatadi.
+    - boshqa tugun turlari uchun (matn, izoh va hokazo) unda tugun turi bilan satr bor.
 
-In other words, `tagName` is only supported by element nodes (as it originates from `Element` class), while `nodeName` can say something about other node types.
+Boshqacha qilib aytganda, `tagName` faqat element tugunlari tomonidan qo'llab-quvvatlanadi (`Element` klassidan kelib chiqqani uchun), `nodeName` esa boshqa tugun turlari haqida ham nimadir aytishi mumkin.
 
-For instance, let's compare `tagName` and `nodeName` for the `document` and a comment node:
-
+Masalan, `document` va izoh tuguni uchun `tagName` va `nodeName` ni taqqoslaylik:
 
 ```html run
-<body><!-- comment -->
+<body><!-- izoh -->
 
   <script>
-    // for comment
-    alert( document.body.firstChild.tagName ); // undefined (not an element)
+    // izoh uchun
+    alert( document.body.firstChild.tagName ); // undefined (element emas)
     alert( document.body.firstChild.nodeName ); // #comment
 
-    // for document
-    alert( document.tagName ); // undefined (not an element)
+    // hujjat uchun
+    alert( document.tagName ); // undefined (element emas)
     alert( document.nodeName ); // #document
   </script>
 </body>
 ```
 
-If we only deal with elements, then we can use both `tagName` and `nodeName` - there's no difference.
+Agar biz faqat elementlar bilan ishlasak, `tagName` va `nodeName` dan foydalanishimiz mumkin - farq yo'q.
 
-```smart header="The tag name is always uppercase except in XML mode"
-The browser has two modes of processing documents: HTML and XML. Usually the HTML-mode is used for webpages. XML-mode is enabled when the browser receives an XML-document with the header: `Content-Type: application/xml+xhtml`.
+```smart header="Teg nomi XML rejimdan tashqari har doim katta harfda"
+Brauzer hujjatlarni qayta ishlashning ikkita rejimiga ega: HTML va XML. Odatda veb-sahifalar uchun HTML rejimi ishlatiladi. XML rejimi brauzer XML-hujjatni quyidagi sarlavha bilan olganda yoqiladi: `Content-Type: application/xml+xhtml`.
 
-In HTML mode `tagName/nodeName` is always uppercased: it's `BODY` either for `<body>` or `<BoDy>`.
+HTML rejimida `tagName/nodeName` har doim katta harfda: `<body>` yoki `<BoDy>` uchun `BODY` bo'ladi.
 
-In XML mode the case is kept "as is". Nowadays XML mode is rarely used.
+XML rejimida registr "o'z holatida" saqlanadi. Hozir XML rejimi kamdan-kam qo'llaniladi.
 ```
 
+## innerHTML: tarkib
 
-## innerHTML: the contents
+[innerHTML](https://w3c.github.io/DOM-Parsing/#the-innerhtml-mixin) xususiyati element ichidagi HTML ni satr sifatida olish imkonini beradi.
 
-The [innerHTML](https://w3c.github.io/DOM-Parsing/#the-innerhtml-mixin) property allows to get the HTML inside the element as a string.
+Biz uni o'zgartirishimiz ham mumkin. Shuning uchun bu sahifani o'zgartirishning eng kuchli usullaridan biri.
 
-We can also modify it. So it's one of the most powerful ways to change the page.
-
-The example shows the contents of `document.body` and then replaces it completely:
+Misol `document.body` ning tarkibini ko'rsatadi va keyin uni butunlay almashtiradi:
 
 ```html run
 <body>
-  <p>A paragraph</p>
-  <div>A div</div>
+  <p>Paragraf</p>
+  <div>Div</div>
 
   <script>
-    alert( document.body.innerHTML ); // read the current contents
-    document.body.innerHTML = 'The new BODY!'; // replace it
+    alert( document.body.innerHTML ); // joriy tarkibni o'qish
+    document.body.innerHTML = 'Yangi BODY!'; // uni almashtirish
   </script>
 
 </body>
 ```
 
-We can try to insert invalid HTML, the browser will fix our errors:
+Noto'g'ri HTML kiritishga harakat qilishimiz mumkin, brauzer bizning xatolarimizni tuzatadi:
 
 ```html run
 <body>
 
   <script>
-    document.body.innerHTML = '<b>test'; // forgot to close the tag
-    alert( document.body.innerHTML ); // <b>test</b> (fixed)
+    document.body.innerHTML = '<b>test'; // tegni yopishni unutdik
+    alert( document.body.innerHTML ); // <b>test</b> (tuzatildi)
   </script>
 
 </body>
 ```
 
-```smart header="Scripts don't execute"
-If `innerHTML` inserts a `<script>` tag into the document -- it becomes a part of HTML, but doesn't execute.
+```smart header="Skriptlar bajarilmaydi"
+Agar `innerHTML` hujjatga `<script>` tegini kiritsa -- u HTML ning bir qismi bo'ladi, lekin bajarilmaydi.
 ```
 
-### Beware: "innerHTML+=" does a full overwrite
+### Ehtiyot bo'ling: "innerHTML+=" to'liq qayta yozishni amalga oshiradi
 
-We can append HTML to an element by using `elem.innerHTML+="more html"`.
+Biz `elem.innerHTML+="ko'proq html"` dan foydalanib elementga HTML qo'shishimiz mumkin.
 
-Like this:
+Quyidagicha:
 
 ```js
-chatDiv.innerHTML += "<div>Hello<img src='smile.gif'/> !</div>";
-chatDiv.innerHTML += "How goes?";
+chatDiv.innerHTML += "<div>Salom<img src='smile.gif'/> !</div>";
+chatDiv.innerHTML += "Qanday hollar?";
 ```
 
-But we should be very careful about doing it, because what's going on is *not* an addition, but a full overwrite.
+Lekin buni qilishda juda ehtiyot bo'lishimiz kerak, chunki sodir bo'layotgan narsa qo'shish *emas*, balki to'liq qayta yozish.
 
-Technically, these two lines do the same:
+Texnik jihatdan, bu ikki qator bir xil ish qiladi:
 
 ```js
 elem.innerHTML += "...";
-// is a shorter way to write:
+// quyidagini yozishning qisqaroq usuli:
 *!*
 elem.innerHTML = elem.innerHTML + "..."
 */!*
 ```
 
-In other words, `innerHTML+=` does this:
+Boshqacha qilib aytganda, `innerHTML+=` quyidagilarni qiladi:
 
-1. The old contents is removed.
-2. The new `innerHTML` is written instead (a concatenation of the old and the new one).
+1. Eski tarkib olib tashlanadi.
+2. Yangi `innerHTML` uning o'rniga yoziladi (eskisi va yangisining birlashtmasi).
 
-**As the content is "zeroed-out" and rewritten from the scratch, all images and other resources will be reloaded**.
+**Tarkib "nolga aylantirilgani" va noldan qayta yozilgani uchun, barcha rasmlar va boshqa resurslar qayta yuklanadi**.
 
-In the `chatDiv` example above the line `chatDiv.innerHTML+="How goes?"` re-creates the HTML content and reloads `smile.gif` (hope it's cached). If `chatDiv` has a lot of other text and images, then the reload becomes clearly visible.
+Yuqoridagi `chatDiv` misolida `chatDiv.innerHTML+="Qanday hollar?"` qatori HTML tarkibini qayta yaratadi va `smile.gif` ni qayta yuklaydi (umid qilamanki, u keshda). Agar `chatDiv` da ko'p boshqa matn va rasmlar bo'lsa, qayta yuklash aniq ko'rinadi.
 
-There are other side-effects as well. For instance, if the existing text was selected with the mouse, then most browsers will remove the selection upon rewriting `innerHTML`. And if there was an `<input>` with a text entered by the visitor, then the text will be removed. And so on.
+Boshqa nojo'ya ta'sirlar ham bor. Masalan, agar mavjud matn sichqoncha bilan tanlangan bo'lsa, ko'pgina brauzerlar `innerHTML` ni qayta yozishda tanlovni olib tashlaydi. Va agar tashrif buyuruvchi tomonidan matn kiritilgan `<input>` bo'lsa, matn olib tashlanadi. Va hokazo.
 
-Luckily, there are other ways to add HTML besides `innerHTML`, and we'll study them soon.
+Yaxshiyamki, `innerHTML`dan tashqari HTML qo'shishning boshqa usullari ham bor va biz ularni tez orada o'rganamiz.
 
-## outerHTML: full HTML of the element
+## outerHTML: elementning to'liq HTML i
 
-The `outerHTML` property contains the full HTML of the element. That's like `innerHTML` plus the element itself.
+`outerHTML` xususiyati elementning to'liq HTML ini o'z ichiga oladi. Bu `innerHTML` plus elementning o'zi kabi.
 
-Here's an example:
+Mana misol:
 
 ```html run
-<div id="elem">Hello <b>World</b></div>
+<div id="elem">Salom <b>Dunyo</b></div>
 
 <script>
-  alert(elem.outerHTML); // <div id="elem">Hello <b>World</b></div>
+  alert(elem.outerHTML); // <div id="elem">Salom <b>Dunyo</b></div>
 </script>
 ```
 
-**Beware: unlike `innerHTML`, writing to `outerHTML` does not change the element. Instead, it replaces it in the DOM.**
+**Ehtiyot bo'ling: `innerHTML`dan farqli o'laroq, `outerHTML`ga yozish elementni o'zgartirmaydi. Buning o'rniga, uni DOM da almashtiradi.**
 
-Yeah, sounds strange, and strange it is, that's why we make a separate note about it here. Take a look.
+Ha, g'alati eshitiladi va g'alati, shuning uchun biz bu haqida alohida eslatma qilamiz. Qarang.
 
-Consider the example:
+Misolni ko'rib chiqing:
 
 ```html run
-<div>Hello, world!</div>
+<div>Salom, dunyo!</div>
 
 <script>
   let div = document.querySelector('div');
 
 *!*
-  // replace div.outerHTML with <p>...</p>
+  // div.outerHTML ni <p>...</p> bilan almashtirish
 */!*
-  div.outerHTML = '<p>A new element</p>'; // (*)
+  div.outerHTML = '<p>Yangi element</p>'; // (*)
 
 *!*
-  // Wow! 'div' is still the same!
+  // Voy! 'div' hali ham bir xil!
 */!*
-  alert(div.outerHTML); // <div>Hello, world!</div> (**)
+  alert(div.outerHTML); // <div>Salom, dunyo!</div> (**)
 </script>
 ```
 
-Looks really odd, right?
+Haqiqatan ham g'alati ko'rinadi, shunday emasmi?
 
-In the line `(*)` we replaced `div` with `<p>A new element</p>`. In the outer document (the DOM) we can see the new content instead of the `<div>`. But, as we can see in line `(**)`, the value of the old `div` variable hasn't changed!
+`(*)` qatorida biz `div` ni `<p>Yangi element</p>` bilan almashtirdik. Tashqi hujjatda (DOM da) biz `<div>` o'rniga yangi tarkibni ko'rishimiz mumkin. Lekin `(**)` qatorida ko'rib turganingizdek, eski `div` o'zgaruvchisining qiymati o'zgarmagan!
 
-The `outerHTML` assignment does not modify the DOM element (the object referenced by, in this case, the variable 'div'), but removes it from the DOM and inserts the new HTML in its place.
+`outerHTML` tayinlashi DOM elementni (bu holda 'div' o'zgaruvchisi tomonidan havola qilingan obyektni) o'zgartirmaydi, balki uni DOM dan olib tashlaydi va uning o'rniga yangi HTML ni kiritadi.
 
-So what happened in `div.outerHTML=...` is:
-- `div` was removed from the document.
-- Another piece of HTML `<p>A new element</p>` was inserted in its place.
-- `div` still has its old value. The new HTML wasn't saved to any variable.
+Shunday qilib, `div.outerHTML=...` da sodir bo'lgan narsa:
+- `div` hujjatdan olib tashlandi.
+- Boshqa HTML qismi `<p>Yangi element</p>` uning o'rniga kiritildi.
+- `div` hali ham eski qiymatiga ega. Yangi HTML hech qanday o'zgaruvchiga saqlanmadi.
 
-It's so easy to make an error here: modify `div.outerHTML` and then continue to work with `div` as if it had the new content in it. But it doesn't. Such thing is correct for `innerHTML`, but not for `outerHTML`.
+Bu yerda xato qilish juda oson: `div.outerHTML` ni o'zgartirish va keyin `div` bilan xuddi unda yangi tarkib bor kabi ishlashni davom ettirish. Lekin bunday emas. Bunday narsa `innerHTML` uchun to'g'ri, lekin `outerHTML` uchun emas.
 
-We can write to `elem.outerHTML`, but should keep in mind that it doesn't change the element we're writing to ('elem'). It puts the new HTML in its place instead. We can get references to the new elements by querying the DOM.
+Biz `elem.outerHTML` ga yozishimiz mumkin, lekin yozayotgan elementni ('elem') o'zgartirmasligini yodda tutishimiz kerak. Buning o'rniga yangi HTML ni uning o'rniga qo'yadi. DOM ni so'rab yangi elementlarga havolalar olishimiz mumkin.
 
-## nodeValue/data: text node content
+## nodeValue/data: matn tuguni tarkibi
 
-The `innerHTML` property is only valid for element nodes.
+`innerHTML` xususiyati faqat element tugunlari uchun amal qiladi.
 
-Other node types, such as text nodes, have their counterpart: `nodeValue` and `data` properties. These two are almost the same for practical use, there are only minor specification differences. So we'll use `data`, because it's shorter.
+Boshqa tugun turlari, masalan matn tugunlari, o'zlarining hamkasbi bor: `nodeValue` va `data` xususiyatlari. Bu ikkitasi amaliy foydalanish uchun deyarli bir xil, faqat kichik spetsifikatsiya farqlari bor. Shuning uchun biz `data` dan foydalanamiz, chunki u qisqaroq.
 
-An example of reading the content of a text node and a comment:
+Matn tuguni va izoh tarkibini o'qish misoli:
 
 ```html run height="50"
 <body>
-  Hello
-  <!-- Comment -->
+  Salom
+  <!-- Izoh -->
   <script>
     let text = document.body.firstChild;
 *!*
-    alert(text.data); // Hello
+    alert(text.data); // Salom
 */!*
 
     let comment = text.nextSibling;
 *!*
-    alert(comment.data); // Comment
+    alert(comment.data); // Izoh
 */!*
   </script>
 </body>
 ```
 
-For text nodes we can imagine a reason to read or modify them, but why comments?
+Matn tugunlari uchun ularni o'qish yoki o'zgartirishning sababini tasavvur qilishimiz mumkin, lekin izohlar nima uchun?
 
-Sometimes developers embed information or template instructions into HTML in them, like this:
+Ba'zan dasturchilar HTML ga ma'lumot yoki shablon ko'rsatmalarini quyidagicha joylashtiradilar:
 
 ```html
-<!-- if isAdmin -->
-  <div>Welcome, Admin!</div>
+<!-- agar isAdmin -->
+  <div>Xush kelibsiz, Admin!</div>
 <!-- /if -->
 ```
 
-...Then JavaScript can read it from `data` property and process embedded instructions.
+...Keyin JavaScript uni `data` xususiyatidan o'qib, joylashtirilgan ko'rsatmalarni qayta ishlashi mumkin.
 
-## textContent: pure text
+## textContent: sof matn
 
-The `textContent` provides access to the *text* inside the element: only text, minus all `<tags>`.
+`textContent` element ichidagi *matn*ga kirish imkonini beradi: faqat matn, barcha `<tags>`siz.
 
-For instance:
+Masalan:
 
 ```html run
 <div id="news">
-  <h1>Headline!</h1>
-  <p>Martians attack people!</p>
+  <h1>Sarlavha!</h1>
+  <p>Marsliklar odamlarga hujum qilmoqda!</p>
 </div>
 
 <script>
-  // Headline! Martians attack people!
+  // Sarlavha! Marsliklar odamlarga hujum qilmoqda!
   alert(news.textContent);
 </script>
 ```
 
-As we can see, only text is returned, as if all `<tags>` were cut out, but the text in them remained.
+Ko'rib turganingizdek, faqat matn qaytariladi, xuddi barcha `<tags>` kesilgan, lekin ulardagi matn qolgan kabi.
 
-In practice, reading such text is rarely needed.
+Amaliyotda bunday matnni o'qish kamdan-kam kerak bo'ladi.
 
-**Writing to `textContent` is much more useful, because it allows to write text the "safe way".**
+**`textContent`ga yozish ancha foydali, chunki u matnni "xavfsiz usulda" yozish imkonini beradi.**
 
-Let's say we have an arbitrary string, for instance entered by a user, and want to show it.
+Aytaylik, bizda ixtiyoriy satr bor, masalan foydalanuvchi tomonidan kiritilgan va uni ko'rsatishni xohlaymiz.
 
-- With `innerHTML` we'll have it inserted "as HTML", with all HTML tags.
-- With `textContent` we'll have it inserted "as text", all symbols are treated literally.
+- `innerHTML` bilan u "HTML sifatida" kiritiladi, barcha HTML teglari bilan.
+- `textContent` bilan u "matn sifatida" kiritiladi, barcha belgilar tom ma'noda qabul qilinadi.
 
-Compare the two:
+Ikkitasini taqqoslang:
 
 ```html run
 <div id="elem1"></div>
 <div id="elem2"></div>
 
 <script>
-  let name = prompt("What's your name?", "<b>Winnie-the-Pooh!</b>");
+  let name = prompt("Ismingiz nima?", "<b>Vinni-Pux!</b>");
 
   elem1.innerHTML = name;
   elem2.textContent = name;
 </script>
 ```
 
-1. The first `<div>` gets the name "as HTML": all tags become tags, so we see the bold name.
-2. The second `<div>` gets the name "as text", so we literally see `<b>Winnie-the-Pooh!</b>`.
+1. Birinchi `<div>` ismni "HTML sifatida" oladi: barcha teglar tegga aylanadi, shuning uchun biz qalin ismni ko'ramiz.
+2. Ikkinchi `<div>` ismni "matn sifatida" oladi, shuning uchun biz tom ma'noda `<b>Vinni-Pux!</b>` ni ko'ramiz.
 
-In most cases, we expect the text from a user, and want to treat it as text. We don't want unexpected HTML in our site. An assignment to `textContent` does exactly that.
+Ko'pgina hollarda biz foydalanuvchidan matn kutamiz va uni matn sifatida ko'rishni xohlaymiz. Biz saytimizda kutilmagan HTML ni xohlamaymiz. `textContent`ga tayinlash aynan shuni qiladi.
 
-## The "hidden" property
+## "hidden" xususiyati
 
-The "hidden" attribute and the DOM property specifies whether the element is visible or not.
+"hidden" atributi va DOM xususiyati element ko'rinadimi yoki yo'qmi belgilaydi.
 
-We can use it in HTML or assign it using JavaScript, like this:
+Biz uni HTML da ishlatishimiz yoki JavaScript yordamida tayinlashimiz mumkin, quyidagicha:
 
 ```html run height="80"
-<div>Both divs below are hidden</div>
+<div>Quyidagi ikkala div ham yashiringan</div>
 
-<div hidden>With the attribute "hidden"</div>
+<div hidden>"hidden" atributi bilan</div>
 
-<div id="elem">JavaScript assigned the property "hidden"</div>
+<div id="elem">JavaScript "hidden" xususiyatini tayinladi</div>
 
 <script>
   elem.hidden = true;
 </script>
 ```
 
-Technically, `hidden` works the same as `style="display:none"`. But it's shorter to write.
+Texnik jihatdan, `hidden` `style="display:none"` bilan bir xil ishlaydi. Lekin yozish uchun qisqaroq.
 
-Here's a blinking element:
-
+Mana miltillovchi element:
 
 ```html run height=50
-<div id="elem">A blinking element</div>
+<div id="elem">Miltillovchi element</div>
 
 <script>
   setInterval(() => elem.hidden = !elem.hidden, 1000);
 </script>
 ```
 
-## More properties
+## Ko'proq xususiyatlar
 
-DOM elements also have additional properties, in particular those that depend on the class:
+DOM elementlari qo'shimcha xususiyatlarga ham ega, xususan klassga bog'liq bo'lganlar:
 
-- `value` -- the value for `<input>`, `<select>` and `<textarea>` (`HTMLInputElement`, `HTMLSelectElement`...).
-- `href` -- the "href" for `<a href="...">` (`HTMLAnchorElement`).
-- `id` -- the value of "id" attribute, for all elements (`HTMLElement`).
-- ...and much more...
+- `value` -- `<input>`, `<select>` va `<textarea>` uchun qiymat (`HTMLInputElement`, `HTMLSelectElement`...).
+- `href` -- `<a href="...">` uchun "href" (`HTMLAnchorElement`).
+- `id` -- barcha elementlar uchun "id" atributining qiymati (`HTMLElement`).
+- ...va boshqa ko'p narsalar...
 
-For instance:
+Masalan:
 
 ```html run height="80"
-<input type="text" id="elem" value="value">
+<input type="text" id="elem" value="qiymat">
 
 <script>
   alert(elem.type); // "text"
   alert(elem.id); // "elem"
-  alert(elem.value); // value
+  alert(elem.value); // qiymat
 </script>
 ```
 
-Most standard HTML attributes have the corresponding DOM property, and we can access it like that.
+Ko'pgina standart HTML atributlari tegishli DOM xususiyatiga ega va biz unga shunday murojaat qilishimiz mumkin.
 
-If we want to know the full list of supported properties for a given class, we can find them in the specification. For instance, `HTMLInputElement` is documented at <https://html.spec.whatwg.org/#htmlinputelement>.
+Agar berilgan klass uchun qo'llab-quvvatlanadigan xususiyatlarning to'liq ro'yxatini bilishni istasak, ularni spetsifikatsiyada topishimiz mumkin. Masalan, `HTMLInputElement` <https://html.spec.whatwg.org/#htmlinputelement> da hujjatlashtirilgan.
 
-Or if we'd like to get them fast or are interested in a concrete browser specification -- we can always output the element using `console.dir(elem)` and read the properties. Or explore "DOM properties" in the Elements tab of the browser developer tools.
+Yoki agar ularni tez olishni istasak yoki aniq brauzer spetsifikatsiyasiga qiziqsak -- biz har doim `console.dir(elem)` yordamida elementni chiqarib, xususiyatlarni o'qishimiz mumkin. Yoki brauzer dasturchi vositalarining Elements tabidagi "DOM properties" ni o'rganishimiz mumkin.
 
-## Summary
+## Xulosa
 
-Each DOM node belongs to a certain class. The classes form a hierarchy. The full set of properties and methods come as the result of inheritance.
+Har bir DOM tuguni ma'lum bir klassga tegishli. Klasslar ierarxiya tashkil qiladi. To'liq xususiyatlar va metodlar to'plami merosxo'rlik natijasida keladi.
 
-Main DOM node properties are:
+Asosiy DOM tugun xususiyatlari:
 
 `nodeType`
-: We can use it to see if a node is a text or an element node. It has a numeric value: `1` for elements,`3` for text nodes, and a few others for other node types. Read-only.
+: Uni tugun matn yoki element tuguni ekanligini ko'rish uchun ishlatishimiz mumkin. Unda raqamli qiymat bor: elementlar uchun `1`, matn tugunlari uchun `3` va boshqa tugun turlari uchun bir nechta boshqalar. Faqat o'qish.
 
 `nodeName/tagName`
-: For elements, tag name (uppercased unless XML-mode). For non-element nodes `nodeName` describes what it is. Read-only.
+: Elementlar uchun teg nomi (XML rejimdan tashqari katta harfda). Element bo'lmagan tugunlar uchun `nodeName` u nima ekanligini tasvirlaydi. Faqat o'qish.
 
 `innerHTML`
-: The HTML content of the element. Can be modified.
+: Elementning HTML tarkibi. O'zgartirilishi mumkin.
 
 `outerHTML`
-: The full HTML of the element. A write operation into `elem.outerHTML` does not touch `elem` itself. Instead it gets replaced with the new HTML in the outer context.
+: Elementning to'liq HTML i. `elem.outerHTML` ga yozish operatsiyasi `elem` ning o'ziga tegmaydi. Buning o'rniga u tashqi kontekstda yangi HTML bilan almashtiriladi.
 
 `nodeValue/data`
-: The content of a non-element node (text, comment). These two are almost the same, usually we use `data`. Can be modified.
+: Element bo'lmagan tugunning tarkibi (matn, izoh). Bu ikkitasi deyarli bir xil, odatda biz `data` dan foydalanamiz. O'zgartirilishi mumkin.
 
 `textContent`
-: The text inside the element: HTML minus all `<tags>`. Writing into it puts the text inside the element, with all special characters and tags treated exactly as text. Can safely insert user-generated text and protect from unwanted HTML insertions.
+: Element ichidagi matn: HTML minus barcha `<tags>`. Unga yozish matnni element ichiga qo'yadi, barcha maxsus belgilar va teglar aniq matn sifatida qaraladi. Foydalanuvchi tomonidan yaratilgan matnni xavfsiz kiritish va kiritmagan HTML dan himoyalash mumkin.
 
 `hidden`
-: When set to `true`, does the same as CSS `display:none`.
+: `true` ga o'rnatilganda, CSS `display:none` bilan bir xil ish qiladi.
 
-DOM nodes also have other properties depending on their class. For instance, `<input>` elements (`HTMLInputElement`) support `value`, `type`, while `<a>` elements (`HTMLAnchorElement`) support `href` etc. Most standard HTML attributes have a corresponding DOM property.
+DOM tugunlari o'z klassiga qarab boshqa xususiyatlarga ham ega. Masalan, `<input>` elementlari (`HTMLInputElement`) `value`, `type` ni qo'llab-quvvatlaydi, `<a>` elementlari (`HTMLAnchorElement`) esa `href` va hokazolarni qo'llab-quvvatlaydi. Ko'pgina standart HTML atributlari tegishli DOM xususiyatiga ega.
 
-However, HTML attributes and DOM properties are not always the same, as we'll see in the next chapter.
+Biroq, HTML atributlari va DOM xususiyatlari har doim bir xil emas, buni keyingi bobda ko'ramiz.

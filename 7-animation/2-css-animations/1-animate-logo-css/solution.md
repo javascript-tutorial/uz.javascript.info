@@ -1,17 +1,17 @@
+CSS ham `width` va `height` ni jonlantirish uchun:
 
-CSS to animate both `width` and `height`:
 ```css
-/* original class */
+/* original sinf */
 
 #flyjet {
   transition: all 3s;
 }
 
-/* JS adds .growing */
+/* JS .growing ni qo'shadi */
 #flyjet.growing {
   width: 400px;
   height: 240px;
 }
 ```
 
-Please note that `transitionend` triggers two times -- once for every property. So if we don't perform an additional check then the message would show up 2 times.
+Esda tutingki, `transitionend` ikki marta ishga tushadi -- har bir xususiyat uchun bir marta. Shunday qilib, agar biz qo'shimcha tekshiruv o'tkazmasak, xabar 2 marta paydo bo'ladi.

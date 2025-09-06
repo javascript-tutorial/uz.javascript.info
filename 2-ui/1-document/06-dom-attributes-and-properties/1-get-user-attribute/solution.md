@@ -1,20 +1,18 @@
-
 ```html run height=100
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <div data-widget-name="menu">Janr tanlang</div>
 
-  <div data-widget-name="menu">Choose the genre</div>
+    <script>
+      // elementni olish
+      let elem = document.querySelector("[data-widget-name]");
 
-  <script>
-    // getting it
-    let elem = document.querySelector('[data-widget-name]');
-
-    // reading the value
-    alert(elem.dataset.widgetName);
-    // or
-    alert(elem.getAttribute('data-widget-name'));
-  </script>
-</body>
+      // qiymatni o'qish
+      alert(elem.dataset.widgetName);
+      // yoki
+      alert(elem.getAttribute("data-widget-name"));
+    </script>
+  </body>
 </html>
 ```

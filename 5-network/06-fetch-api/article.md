@@ -1,119 +1,118 @@
-
 # Fetch API
 
-So far, we know quite a bit about `fetch`.
+Hozirgacha biz `fetch` haqida ancha bilim oldik.
 
-Let's see the rest of API, to cover all its abilities.
+API ning qolgan qismini ko'rib chiqaylik, uning barcha imkoniyatlarini qamrab olish uchun.
 
 ```smart
-Please note: most of these options are used rarely. You may skip this chapter and still use `fetch` well.
+Diqqat qiling: bu opsiyalarning ko'pchiligi kamdan-kam ishlatiladi. Siz bu bobni o'tkazib yuborib, `fetch` dan yaxshi foydalanishingiz mumkin.
 
-Still, it's good to know what `fetch` can do, so if the need arises, you can return and read the details.
+Shunga qaramay, `fetch` nima qila olishini bilish yaxshi, shuning uchun ehtiyoj tug'ilsa, qaytib kelib batafsil ma'lumotlarni o'qishingiz mumkin.
 ```
 
-Here's the full list of all possible `fetch` options with their default values (alternatives in comments):
+Mana barcha mumkin bo'lgan `fetch` opsiyalarining to'liq ro'yxati ularning standart qiymatlari bilan (izohlarda muqobillar):
 
 ```js
 let promise = fetch(url, {
-  method: "GET", // POST, PUT, DELETE, etc.
+  method: "GET", // POST, PUT, DELETE va boshqalar.
   headers: {
-    // the content type header value is usually auto-set
-    // depending on the request body
+    // content type header qiymati odatda avtomatik o'rnatiladi
+    // request body ga bog'liq holda
     "Content-Type": "text/plain;charset=UTF-8"
   },
-  body: undefined // string, FormData, Blob, BufferSource, or URLSearchParams
-  referrer: "about:client", // or "" to send no Referer header,
-  // or an url from the current origin
+  body: undefined // string, FormData, Blob, BufferSource, yoki URLSearchParams
+  referrer: "about:client", // yoki Referer header yubormaslik uchun "",
+  // yoki joriy origin dan url
   referrerPolicy: "no-referrer-when-downgrade", // no-referrer, origin, same-origin...
   mode: "cors", // same-origin, no-cors
   credentials: "same-origin", // omit, include
-  cache: "default", // no-store, reload, no-cache, force-cache, or only-if-cached
+  cache: "default", // no-store, reload, no-cache, force-cache, yoki only-if-cached
   redirect: "follow", // manual, error
-  integrity: "", // a hash, like "sha256-abcdef1234567890"
+  integrity: "", // hash, masalan "sha256-abcdef1234567890"
   keepalive: false, // true
-  signal: undefined, // AbortController to abort request
+  signal: undefined, // so'rovni to'xtatish uchun AbortController
   window: window // null
 });
 ```
 
-An impressive list, right?
+Ta'sirchan ro'yxat, to'g'rimi?
 
-We fully covered `method`, `headers` and `body` in the chapter <info:fetch>.
+Biz <info:fetch> bobida `method`, `headers` va `body` ni to'liq ko'rib chiqdik.
 
-The `signal` option is covered in <info:fetch-abort>.
+`signal` opsiyasi <info:fetch-abort> da ko'rilgan.
 
-Now let's explore the remaining capabilities.
+Endi qolgan imkoniyatlarni o'rganaylik.
 
 ## referrer, referrerPolicy
 
-These options govern how `fetch` sets the HTTP `Referer` header.
+Bu opsiyalar `fetch` HTTP `Referer` header'ini qanday o'rnatishini boshqaradi.
 
-Usually that header is set automatically and contains the url of the page that made the request. In most scenarios, it's not important at all, sometimes, for security purposes, it makes sense to remove or shorten it.
+Odatda bu header avtomatik o'rnatiladi va so'rov qilgan sahifaning url'ini o'z ichiga oladi. Ko'pgina stsenariylarda bu umuman muhim emas, ba'zida xavfsizlik maqsadida uni olib tashlash yoki qisqartirish mantiqiy.
 
-**The `referrer` option allows to set any `Referer` (within the current origin) or remove it.**
+**`referrer` opsiyasi istalgan `Referer` ni (joriy origin ichida) o'rnatish yoki uni olib tashlash imkonini beradi.**
 
-To send no referer, set an empty string:
+Hech qanday referer yubormaslik uchun bo'sh string o'rnating:
 ```js
 fetch('/page', {
 *!*
-  referrer: "" // no Referer header
+  referrer: "" // Referer header yo'q
 */!*
 });
 ```
 
-To set another url within the current origin:
+Joriy origin ichida boshqa url o'rnatish uchun:
 
 ```js
 fetch('/page', {
-  // assuming we're on https://javascript.info
-  // we can set any Referer header, but only within the current origin
+  // https://javascript.info da ekanligimizni faraz qilamiz
+  // biz istalgan Referer header o'rnatishimiz mumkin, lekin faqat joriy origin ichida
 *!*
   referrer: "https://javascript.info/anotherpage"
 */!*
 });
 ```
 
-**The `referrerPolicy` option sets general rules for `Referer`.**
+**`referrerPolicy` opsiyasi `Referer` uchun umumiy qoidalarni o'rnatadi.**
 
-Requests are split into 3 types:
+So'rovlar 3 turga bo'linadi:
 
-1. Request to the same origin.
-2. Request to another origin.
-3. Request from HTTPS to HTTP (from safe to unsafe protocol).
+1. Bir xil origin ga so'rov.
+2. Boshqa origin ga so'rov.
+3. HTTPS dan HTTP ga so'rov (xavfsiz protokoldan xavfsiz bo'lmagan protokolga).
 
-Unlike the `referrer` option that allows to set the exact `Referer` value, `referrerPolicy` tells the browser general rules for each request type.
+Aniq `Referer` qiymatini o'rnatish imkonini beruvchi `referrer` opsiyasidan farqli o'laroq, `referrerPolicy` brauzerga har bir so'rov turi uchun umumiy qoidalarni aytadi.
 
-Possible values are described in the [Referrer Policy specification](https://w3c.github.io/webappsec-referrer-policy/):
+Mumkin bo'lgan qiymatlar [Referrer Policy spetsifikatsiyasi](https://w3c.github.io/webappsec-referrer-policy/)da tasvirlangan:
 
-- **`"no-referrer-when-downgrade"`** -- the default value: full `Referer` is always sent, unless we send a request from HTTPS to HTTP (to the less secure protocol).
-- **`"no-referrer"`** -- never send `Referer`.
-- **`"origin"`** -- only send the origin in `Referer`, not the full page URL, e.g. only `http://site.com` instead of `http://site.com/path`.
-- **`"origin-when-cross-origin"`** -- send the full `Referer` to the same origin, but only the origin part for cross-origin requests (as above).
-- **`"same-origin"`** -- send the full `Referer` to the same origin, but no `Referer` for cross-origin requests.
-- **`"strict-origin"`** -- send only the origin, not the `Referer` for HTTPS→HTTP requests.
-- **`"strict-origin-when-cross-origin"`** -- for same-origin send the full `Referer`, for cross-origin send only the origin, unless it's HTTPS→HTTP request, then send nothing.
-- **`"unsafe-url"`** -- always send the full url in `Referer`, even for HTTPS→HTTP requests.
+- **`"no-referrer-when-downgrade"`** -- standart qiymat: to'liq `Referer` har doim yuboriladi, faqat HTTPS dan HTTP ga (kamroq xavfsiz protokolga) so'rov yuborganimizda bundan mustasno.
+- **`"no-referrer"`** -- hech qachon `Referer` yubormaslik.
+- **`"origin"`** -- `Referer` da faqat origin yuborish, to'liq sahifa URL emas, masalan `http://site.com/path` o'rniga faqat `http://site.com`.
+- **`"origin-when-cross-origin"`** -- bir xil origin ga to'liq `Referer` yuborish, lekin cross-origin so'rovlar uchun faqat origin qismi (yuqoridagidek).
+- **`"same-origin"`** -- bir xil origin ga to'liq `Referer` yuborish, lekin cross-origin so'rovlar uchun `Referer` yo'q.
+- **`"strict-origin"`** -- faqat origin yuborish, HTTPS→HTTP so'rovlar uchun `Referer` yo'q.
+- **`"strict-origin-when-cross-origin"`** -- same-origin uchun to'liq `Referer` yuborish, cross-origin uchun faqat origin, agar HTTPS→HTTP so'rov bo'lmasa, unda hech narsa yubormaslik.
+- **`"unsafe-url"`** -- har doim to'liq url ni `Referer` da yuborish, hatto HTTPS→HTTP so'rovlar uchun ham.
 
-Here's a table with all combinations:
+Mana barcha kombinatsiyalar bilan jadval:
 
-| Value | To same origin | To another origin | HTTPS→HTTP |
-|-------|----------------|-------------------|------------|
+| Qiymat | Bir xil origin ga | Boshqa origin ga | HTTPS→HTTP |
+|--------|------------------|------------------|------------|
 | `"no-referrer"` | - | - | - |
-| `"no-referrer-when-downgrade"` or `""` (default) | full | full | - |
+| `"no-referrer-when-downgrade"` yoki `""` (standart) | to'liq | to'liq | - |
 | `"origin"` | origin | origin | origin |
-| `"origin-when-cross-origin"` | full | origin | origin |
-| `"same-origin"` | full | - | - |
+| `"origin-when-cross-origin"` | to'liq | origin | origin |
+| `"same-origin"` | to'liq | - | - |
 | `"strict-origin"` | origin | origin | - |
-| `"strict-origin-when-cross-origin"` | full | origin | - |
-| `"unsafe-url"` | full | full | full |
+| `"strict-origin-when-cross-origin"` | to'liq | origin | - |
+| `"unsafe-url"` | to'liq | to'liq | to'liq |
 
-Let's say we have an admin zone with a URL structure that shouldn't be known from outside of the site.
+Faraz qilaylik, bizda saytdan tashqarida ma'lum bo'lmasligi kerak bo'lgan URL strukturasiga ega admin zonasi bor.
 
-If we send a `fetch`, then by default it always sends the `Referer` header with the full url of our page (except when we request from HTTPS to HTTP, then no `Referer`).
+Agar biz `fetch` yuborsak, sukut bo'yicha u har doim sahifamizning to'liq url'i bilan `Referer` header'ini yuboradi (HTTPS dan HTTP ga so'rov yuborganimizda bundan mustasno, o'shanda `Referer` yo'q).
 
-E.g. `Referer: https://javascript.info/admin/secret/paths`.
+Masalan `Referer: https://javascript.info/admin/secret/paths`.
 
-If we'd like other websites know only the origin part, not the URL-path, we can set the option:
+Agar boshqa veb-saytlar faqat origin qismini bilishini istasak, URL-path ni emas, opsiyani o'rnatishimiz mumkin:
 
 ```js
 fetch('https://another.com/page', {
@@ -122,66 +121,66 @@ fetch('https://another.com/page', {
 });
 ```
 
-We can put it to all `fetch` calls, maybe integrate into JavaScript library of our project that does all requests and uses `fetch` inside.
+Biz buni barcha `fetch` chaqiruvlariga qo'yishimiz mumkin, ehtimol loyihamizdagi barcha so'rovlarni bajaradigan va ichida `fetch` dan foydalanadigan JavaScript kutubxonasiga integratsiya qilishimiz mumkin.
 
-Its only difference compared to the default behavior is that for requests to another origin `fetch` sends only the origin part of the URL (e.g. `https://javascript.info`, without path). For requests to our origin we still get the full `Referer` (maybe useful for debugging purposes).
+Standart xatti-harakatdan yagona farqi shundaki, boshqa origin ga so'rovlar uchun `fetch` faqat URL ning origin qismini yuboradi (masalan `https://javascript.info`, yo'lsiz). Bizning origin ga so'rovlar uchun biz hali ham to'liq `Referer` ni olamiz (debug maqsadlari uchun foydali bo'lishi mumkin).
 
-```smart header="Referrer policy is not only for `fetch`"
-Referrer policy, described in the [specification](https://w3c.github.io/webappsec-referrer-policy/), is not just for `fetch`, but more global.
+```smart header="Referrer policy faqat `fetch` uchun emas"
+[Spetsifikatsiya](https://w3c.github.io/webappsec-referrer-policy/)da tasvirlangan Referrer policy faqat `fetch` uchun emas, balki ko'proq global.
 
-In particular, it's possible to set the default policy for the whole page using the `Referrer-Policy` HTTP header, or per-link, with `<a rel="noreferrer">`.
+Xususan, `Referrer-Policy` HTTP header yordamida butun sahifa uchun standart siyosatni yoki `<a rel="noreferrer">` bilan har bir havola uchun o'rnatish mumkin.
 ```
 
 ## mode
 
-The `mode` option is a safe-guard that prevents occasional cross-origin requests:
+`mode` opsiyasi tasodifiy cross-origin so'rovlarni oldini oluvchi himoya-qorovul:
 
-- **`"cors"`** -- the default, cross-origin requests are allowed, as described in <info:fetch-crossorigin>,
-- **`"same-origin"`** -- cross-origin requests are forbidden,
-- **`"no-cors"`** -- only safe cross-origin requests are allowed.
+- **`"cors"`** -- standart, cross-origin so'rovlariga ruxsat beriladi, <info:fetch-crossorigin>da tasvirlanganidek,
+- **`"same-origin"`** -- cross-origin so'rovlari taqiqlangan,
+- **`"no-cors"`** -- faqat xavfsiz cross-origin so'rovlariga ruxsat beriladi.
 
-This option may be useful when the URL for `fetch` comes from a 3rd-party, and we want a "power off switch" to limit cross-origin capabilities.
+Bu opsiya `fetch` uchun URL uchinchi tomondan kelganda va cross-origin imkoniyatlarni cheklash uchun "o'chirish tugmasi" ni xohlaganimizda foydali bo'lishi mumkin.
 
 ## credentials
 
-The `credentials` option specifies whether `fetch` should send cookies and HTTP-Authorization headers with the request.
+`credentials` opsiyasi `fetch` so'rov bilan cookie va HTTP-Authorization header'larini yuborishini belgilaydi.
 
-- **`"same-origin"`** -- the default, don't send for cross-origin requests,
-- **`"include"`** -- always send, requires `Accept-Control-Allow-Credentials` from cross-origin server in order for JavaScript to access the response, that was covered in the chapter <info:fetch-crossorigin>,
-- **`"omit"`** -- never send, even for same-origin requests.
+- **`"same-origin"`** -- standart, cross-origin so'rovlar uchun yubormaslik,
+- **`"include"`** -- har doim yuborish, JavaScript javobga kirishi uchun cross-origin serverdan `Accept-Control-Allow-Credentials` talab qiladi, bu <info:fetch-crossorigin> bobida ko'rilgan,
+- **`"omit"`** -- hech qachon yubormaslik, hatto same-origin so'rovlar uchun ham.
 
 ## cache
 
-By default, `fetch` requests make use of standard HTTP-caching. That is, it respects the `Expires` and `Cache-Control` headers, sends `If-Modified-Since` and so on. Just like regular HTTP-requests do.
+Sukut bo'yicha, `fetch` so'rovlari standart HTTP-keshlashdan foydalanadi. Ya'ni, u `Expires` va `Cache-Control` header'larini hurmat qiladi, `If-Modified-Since` va boshqalarni yuboradi. Xuddi oddiy HTTP-so'rovlar qilgani kabi.
 
-The `cache` options allows to ignore HTTP-cache or fine-tune its usage:
+`cache` opsiyalari HTTP-keshni e'tiborsiz qoldirish yoki uning ishlatilishini nozik sozlash imkonini beradi:
 
-- **`"default"`** -- `fetch` uses standard HTTP-cache rules and headers,
-- **`"no-store"`** -- totally ignore HTTP-cache, this mode becomes the default if we set a header `If-Modified-Since`, `If-None-Match`, `If-Unmodified-Since`, `If-Match`, or `If-Range`,
-- **`"reload"`** -- don't take the result from HTTP-cache (if any), but populate the cache with the response (if the response headers permit this action),
-- **`"no-cache"`** -- create a conditional request if there is a cached response, and a normal request otherwise. Populate HTTP-cache with the response,
-- **`"force-cache"`** -- use a response from HTTP-cache, even if it's stale. If there's no response in HTTP-cache, make a regular HTTP-request, behave normally,
-- **`"only-if-cached"`** -- use a response from HTTP-cache, even if it's stale. If there's no response in HTTP-cache, then error. Only works when `mode` is `"same-origin"`.
+- **`"default"`** -- `fetch` standart HTTP-kesh qoidalari va header'larini ishlatadi,
+- **`"no-store"`** -- HTTP-keshni butunlay e'tiborsiz qoldirish, agar biz `If-Modified-Since`, `If-None-Match`, `If-Unmodified-Since`, `If-Match`, yoki `If-Range` header'ini o'rnatsak, bu rejim standart bo'ladi,
+- **`"reload"`** -- HTTP-keshdan natija olmaydi (agar mavjud bo'lsa), lekin javob bilan keshni to'ldiradi (agar javob header'lari bu harakatga ruxsat bersa),
+- **`"no-cache"`** -- keshlangan javob mavjud bo'lsa shartli so'rov yaratadi, aks holda oddiy so'rov. HTTP-keshni javob bilan to'ldiradi,
+- **`"force-cache"`** -- HTTP-keshdan javobdan foydalanadi, hatto eski bo'lsa ham. Agar HTTP-keshda javob bo'lmasa, oddiy HTTP-so'rov qiladi, normal harakat qiladi,
+- **`"only-if-cached"`** -- HTTP-keshdan javobdan foydalanadi, hatto eski bo'lsa ham. Agar HTTP-keshda javob bo'lmasa, xato. Faqat `mode` `"same-origin"` bo'lganda ishlaydi.
 
 ## redirect
 
-Normally, `fetch` transparently follows HTTP-redirects, like 301, 302 etc.
+Odatda, `fetch` HTTP-redirectlarni (301, 302 va boshqalar) shaffof ravishda kuzatib boradi.
 
-The `redirect` option allows to change that:
+`redirect` opsiyasi buni o'zgartirishga imkon beradi:
 
-- **`"follow"`** -- the default, follow HTTP-redirects,
-- **`"error"`** -- error in case of HTTP-redirect,
-- **`"manual"`** -- allows to process HTTP-redirects manually. In case of redirect, we'll get a special response object, with `response.type="opaqueredirect"` and zeroed/empty status and most other properies.
+- **`"follow"`** -- standart, HTTP-redirectlarni kuzatib borish,
+- **`"error"`** -- HTTP-redirect bo'lsa xato,
+- **`"manual"`** -- HTTP-redirectlarni qo'lda qayta ishlash imkonini beradi. Redirect bo'lsa, biz `response.type="opaqueredirect"` va nol/bo'sh status va boshqa ko'pgina xususiyatlar bilan maxsus javob obyektini olamiz.
 
 ## integrity
 
-The `integrity` option allows to check if the response matches the known-ahead checksum.
+`integrity` opsiyasi javob oldindan ma'lum bo'lgan checksumga mos kelishini tekshirish imkonini beradi.
 
-As described in the [specification](https://w3c.github.io/webappsec-subresource-integrity/), supported hash-functions are SHA-256, SHA-384, and SHA-512, there might be others depending on the browser.
+[Spetsifikatsiya](https://w3c.github.io/webappsec-subresource-integrity/)da tasvirlanganidek, qo'llab-quvvatlanadigan hash-funktsiyalar SHA-256, SHA-384 va SHA-512, brauzerga qarab boshqalari ham bo'lishi mumkin.
 
-For example, we're downloading a file, and we know that it's SHA-256 checksum is "abcdef" (a real checksum is longer, of course).
+Masalan, biz fayl yuklamoqdamiz va uning SHA-256 checksum'i "abcdef" ekanligini bilamiz (haqiqiy checksum uzunroq, albatta).
 
-We can put it in the `integrity` option, like this:
+Biz uni `integrity` opsiyasiga quyidagicha qo'yishimiz mumkin:
 
 ```js
 fetch('http://site.com/file', {
@@ -189,23 +188,23 @@ fetch('http://site.com/file', {
 });
 ```
 
-Then `fetch` will calculate SHA-256 on its own and compare it with our string. In case of a mismatch, an error is triggered.
+Keyin `fetch` o'z-o'zidan SHA-256 ni hisoblab, bizning stringimiz bilan solishtiradi. Mos kelmaslik holatida xato yuzaga keladi.
 
 ## keepalive
 
-The `keepalive` option indicates that the request may "outlive" the webpage that initiated it.
+`keepalive` opsiyasi so'rov uni boshlagan veb-sahifadan "uzoqroq yashashi" mumkinligini ko'rsatadi.
 
-For example, we gather statistics on how the current visitor uses our page (mouse clicks, page fragments he views), to analyze and improve the user experience.
+Masalan, biz joriy tashrif buyuruvchi sahifamizni qanday ishlatiganini (sichqoncha bosilishlari, u ko'radigan sahifa qismlari) to'playmiz, foydalanuvchi tajribasini tahlil qilish va yaxshilash uchun.
 
-When the visitor leaves our page -- we'd like to save the data to our server.
+Tashrif buyuruvchi sahifamizni tark etganda -- biz ma'lumotlarni serverimizga saqlashni xohlaymiz.
 
-We can use the `window.onunload` event for that:
+Buning uchun `window.onunload` event'idan foydalanishimiz mumkin:
 
 ```js run
 window.onunload = function() {
   fetch('/analytics', {
     method: 'POST',
-    body: "statistics",
+    body: "statistika",
 *!*
     keepalive: true
 */!*
@@ -213,12 +212,12 @@ window.onunload = function() {
 };
 ```
 
-Normally, when a document is unloaded, all associated network requests are aborted. But the `keepalive` option tells the browser to perform the request in the background, even after it leaves the page. So this option is essential for our request to succeed.
+Odatda, hujjat yukdan tushirilganda, barcha bog'liq tarmoq so'rovlari to'xtatiladi. Lekin `keepalive` opsiyasi brauzerga sahifani tark etgandan keyin ham so'rovni fonda bajarishni aytadi. Shunday qilib, bu opsiya bizning so'rovimiz muvaffaqiyatli bo'lishi uchun muhim.
 
-It has a few limitations:
+Uning bir nechta cheklovlari bor:
 
-- We can't send megabytes: the body limit for `keepalive` requests is 64KB.
-    - If we need to gather a lot of statistics about the visit, we should send it out regularly in packets, so that there won't be a lot left for the last `onunload` request.
-    - This limit applies to all `keepalive` requests together. In other words, we can perform multiple `keepalive` requests in parallel, but the sum of their body lengths should not exceed 64KB.
-- We can't handle the server response if the document is unloaded. So in our example `fetch` will succeed due to `keepalive`, but subsequent functions won't work.
-    - In most cases, such as sending out statistics, it's not a problem, as the server just accepts the data and usually sends an empty response to such requests.
+- Biz megabaytlar yubora olmaymiz: `keepalive` so'rovlar uchun body chegarasi 64KB.
+    - Agar tashrif haqida ko'p statistika to'plashimiz kerak bo'lsa, uni muntazam ravishda paketlarda yuborishimiz kerak, shunda oxirgi `onunload` so'rov uchun ko'p narsa qolmaydi.
+    - Bu chegara barcha `keepalive` so'rovlariga birgalikda tegishli. Boshqacha qilib aytganda, biz bir nechta `keepalive` so'rovlarni parallel bajarishimiz mumkin, lekin ularning body uzunliklari yig'indisi 64KB dan oshmasligi kerak.
+- Hujjat yukdan tushirilgan bo'lsa, server javobini boshqara olmaymiz. Shunday qilib, bizning misolimizda `keepalive` tufayli `fetch` muvaffaqiyatli bo'ladi, lekin keyingi funktsiyalar ishlamaydi.
+    - Statistika yuborish kabi ko'pgina hollarda bu muammo emas, chunki server shunchaki ma'lumotlarni qabul qiladi va odatda bunday so'rovlarga bo'sh javob yuboradi.

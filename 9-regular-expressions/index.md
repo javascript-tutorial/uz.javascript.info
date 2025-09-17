@@ -1,3 +1,3 @@
-# Regular expressions
+# Muntazam ifodalar
 
-Regular expressions is a powerful way of doing search and replace in strings.
+Muntazam ifodalar qatorlarda qidirish va almashtirishning kuchli usulidir.

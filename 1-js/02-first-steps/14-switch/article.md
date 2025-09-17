@@ -47,11 +47,7 @@ switch (a) {
     break;
 */!*
   case 5:
-<<<<<<< HEAD:1-js/02-first-steps/13-switch/article.md
     alert( 'Juda katta' );
-=======
-    alert( 'Too big' );
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/14-switch/article.md
     break;
   default:
     alert( "Men bunday qiymatlarni bilmayman" );
@@ -86,13 +82,13 @@ switch (a) {
 Yuqoridagi misolda biz uchta `alert` ning ketma-ket bajarilishini ko'ramiz:
 
 ```js
-alert( 'Aynan!' );
-alert( 'Juda katta' );
-alert( "Men bunday qiymatlarni bilmayman" );
+alert("Aynan!");
+alert("Juda katta");
+alert("Men bunday qiymatlarni bilmayman");
 ```
 
-````smart header="Har qanday ifoda `switch/case` argumenti bo'lishi mumkin"
-Ikkala `switch` va `case` o'zboshimchalik bilan ifodalashga imkon beradi.
+````smart header="Har qanday ifoda `switch/case`argumenti bo'lishi mumkin"
+Ikkala`switch`va`case` o'zboshimchalik bilan ifodalashga imkon beradi.
 
 Masalan:
 
@@ -111,6 +107,7 @@ switch (+a) {
     alert("bu ishlamaydi");
 }
 ```
+
 Bu yerda `+a` `1` ni beradi, bu `b` bilan `case` da taqqoslanadi va tegishli kod bajariladi.
 
 ````
@@ -130,11 +127,7 @@ switch (a) {
     break;
 
 *!*
-<<<<<<< HEAD:1-js/02-first-steps/13-switch/article.md
   case 3:                    // (*) ikkita case guruhlashtirildi
-=======
-  case 3: // (*) grouped two cases
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/14-switch/article.md
   case 5:
     alert("Noto'g'ri!");
     alert("Nega siz matematikadan dars olmagansiz?");
@@ -179,3 +172,4 @@ switch (arg) {
 1. `0`, `1` uchun birinchi `alert` ishlaydi.
 2. `2` uchun ikkinchi `alert` ishlaydi.
 3. Ammo `3` uchun `prompt` natijasi `"3"` matnidir, bu `3` raqamiga qat'iy teng emas `===`. Shunday qilib `case 3` da o'lik kod bor! `Default` holat bajariladi.
+````

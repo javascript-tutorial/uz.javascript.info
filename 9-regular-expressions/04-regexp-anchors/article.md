@@ -1,34 +1,34 @@
-# Anchors: string start ^ and end $
+# Langarlar: satr boshi ^ va oxiri $
 
-The caret `pattern:^` and dollar `pattern:$` characters have special meaning in a regexp. They are called "anchors".
+Karet `pattern:^` va dollar `pattern:$` belgilari doimiy ifodada maxsus ma'noga ega. Ular "langarlar" deb ataladi.
 
-The caret `pattern:^` matches at the beginning of the text, and the dollar `pattern:$` -- at the end.
+Karet `pattern:^` matn boshida mos keladi, dollar `pattern:$` esa oxirida.
 
-For instance, let's test if the text starts with `Mary`:
+Masalan, matn `Mary` bilan boshlanadimi deb tekshiraylik:
 
 ```js run
 let str1 = "Mary had a little lamb";
 alert( /^Mary/.test(str1) ); // true
 ```
 
-The pattern `pattern:^Mary` means: "string start and then Mary".
+`pattern:^Mary` naqshi: "satr boshi va keyin Mary" degani.
 
-Similar to this, we can test if the string ends with `snow` using `pattern:snow$`:
+Xuddi shunday, satr `snow` bilan tugaydimi deb `pattern:snow$` yordamida tekshirishimiz mumkin:
 
 ```js run
 let str1 = "it's fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 
-In these particular cases we could use string methods `startsWith/endsWith` instead. Regular expressions should be used for more complex tests.
+Bu aniq hollarda biz `startsWith/endsWith` satr metodlaridan ham foydalanishimiz mumkin edi. Doimiy ifodalar murakkab testlar uchun ishlatilishi kerak.
 
-## Testing for a full match
+## To'liq moslik uchun test
 
-Both anchors together `pattern:^...$` are often used to test whether or not a string fully matches the pattern. For instance, to check if the user input is in the right format.
+Ikkala langar birgalikda `pattern:^...$` ko'pincha satr naqshga to'liq mos keladimi yoki yo'qligini tekshirish uchun ishlatiladi. Masalan, foydalanuvchi kiritgan ma'lumot to'g'ri formatdami deb tekshirish uchun.
 
-Let's check whether or not a string is a time in `12:34` format. That is: two digits, then a colon, and then another two digits.
+Satr `12:34` formatida vaqtmi yoki yo'qligini tekshiraylik. Ya'ni: ikkita raqam, keyin ikki nuqta, keyin yana ikkita raqam.
 
-In regular expressions language that's `pattern:\d\d:\d\d`:
+Doimiy ifodalar tilida bu `pattern:\d\d:\d\d`:
 
 ```js run
 let goodInput = "12:34";
@@ -39,14 +39,14 @@ alert( regexp.test(goodInput) ); // true
 alert( regexp.test(badInput) ); // false
 ```
 
-Here the match for `pattern:\d\d:\d\d` must start exactly after the beginning of the text `pattern:^`, and the end `pattern:$` must immediately follow.
+Bu yerda `pattern:\d\d:\d\d` uchun moslik aynan matn boshi `pattern:^` dan keyin boshlanishi va oxiri `pattern:$` darhol ergashishi kerak.
 
-The whole string must be exactly in this format. If there's any deviation or an extra character, the result is `false`.
+Butun satr aynan shu formatda bo'lishi kerak. Agar biron bir chetga chiqish yoki qo'shimcha belgi bo'lsa, natija `false` bo'ladi.
 
-Anchors behave differently if flag `pattern:m` is present. We'll see that in the next article.
+Agar `pattern:m` bayrog'i mavjud bo'lsa, langarlar boshqacha harakat qiladi. Buni keyingi maqolada ko'ramiz.
 
-```smart header="Anchors have \"zero width\""
-Anchors `pattern:^` and `pattern:$` are tests. They have zero width.
+```smart header="Langarlar \"nol kenglik\"ga ega"
+`pattern:^` va `pattern:$` langarlar testlardir. Ular nol kenglikka ega.
 
-In other words, they do not match a character, but rather force the regexp engine to check the condition (text start/end).
+Boshqacha qilib aytganda, ular belgiga mos kelmaydi, balki regexp dvigatelini shart (matn boshi/oxiri) ni tekshirishga majbur qiladi.
 ```

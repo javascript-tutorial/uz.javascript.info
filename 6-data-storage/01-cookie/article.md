@@ -1,80 +1,78 @@
 # Cookies, document.cookie
 
-Cookies are small strings of data that are stored directly in the browser. They are a part of the HTTP protocol, defined by the [RFC 6265](https://tools.ietf.org/html/rfc6265) specification.
+Cookie'lar to'g'ridan-to'g'ri brauzerde saqlanadigan kichik ma'lumot satr'laridir. Ular [RFC 6265](https://tools.ietf.org/html/rfc6265) spetsifikatsiyasi bilan belgilangan HTTP protokolining bir qismidir.
 
-Cookies are usually set by a web-server using the response `Set-Cookie` HTTP-header. Then, the browser automatically adds them to (almost) every request to the same domain using the `Cookie` HTTP-header.
+Cookie'lar odatda veb-server tomonidan `Set-Cookie` HTTP-header javobidan foydalanib o'rnatiladi. Keyin brauzer ularni bir xil domanga deyarli har bir so'rovga `Cookie` HTTP-header yordamida avtomatik qo'shadi.
 
-One of the most widespread use cases is authentication:
+Eng keng tarqalgan foydalanish holatlaridan biri autentifikatsiya:
 
-1. Upon sign in, the server uses the `Set-Cookie` HTTP-header in the response to set a cookie with a unique "session identifier".
-2. Next time when the request is sent to the same domain, the browser sends the cookie over the net using the `Cookie` HTTP-header.
-3. So the server knows who made the request.
+1. Tizimga kirishda server javobda noyob "sessiya identifikatori" bilan cookie o'rnatish uchun `Set-Cookie` HTTP-header'idan foydalanadi.
+2. Keyingi safar bir xil domanga so'rov yuborilganda, brauzer `Cookie` HTTP-header yordamida cookie'ni tarmoq orqali yuboradi.
+3. Shuning uchun server kim so'rov qilganini biladi.
 
-We can also access cookies from the browser, using `document.cookie` property.
+Biz cookie'larga brauzerdan ham `document.cookie` xususiyati orqali kira olamiz.
 
-There are many tricky things about cookies and their options. In this chapter we'll cover them in detail.
+Cookie'lar va ularning opsiyalari haqida ko'plab murakkab narsalar bor. Ushbu bobda biz ularni batafsil ko'rib chiqamiz.
 
-## Reading from document.cookie
+## document.cookie dan o'qish
 
 ```online
-Does your browser store any cookies from this site? Let's see:
+Sizning brauzeringiz ushbu saytdan biron cookie'larni saqlaydimi? Keling, ko'raylik:
 ```
 
 ```offline
-Assuming you're on a website, it's possible to see the cookies from it, like this:
+Veb-saytda ekanligingizni hisobga olsak, undan cookie'larni ko'rishingiz mumkin:
 ```
 
 ```js run
-// At javascript.info, we use Google Analytics for statistics,
-// so there should be some cookies
+// javascript.info da biz statistika uchun Google Analytics ishlatamiz,
+// shuning uchun ba'zi cookie'lar bo'lishi kerak
 alert( document.cookie ); // cookie1=value1; cookie2=value2;...
 ```
 
+`document.cookie` ning qiymati `; ` bilan ajratilgan `name=value` juftliklaridan iborat. Har biri alohida cookie.
 
-The value of `document.cookie` consists of `name=value` pairs, delimited by `; `. Each one is a separate cookie.
+Ma'lum bir cookie'ni topish uchun `document.cookie` ni `; ` bo'yicha ajratib, keyin to'g'ri nomni topishimiz mumkin. Buning uchun regular expression yoki array funktsiyalaridan foydalanishimiz mumkin.
 
-To find a particular cookie, we can split `document.cookie` by `; `, and then find the right name. We can use either a regular expression or array functions to do that.
+Buni o'quvchi uchun mashq sifatida qoldiramiz. Bundan tashqari, bob oxirida cookie'larni boshqarish uchun yordamchi funktsiyalarni topasiz.
 
-We leave it as an exercise for the reader. Also, at the end of the chapter you'll find helper functions to manipulate cookies.
+## document.cookie ga yozish
 
-## Writing to document.cookie
+Biz `document.cookie` ga yoza olamiz. Lekin bu ma'lumot xususiyati emas, bu accessor (getter/setter). Unga tayinlash maxsus ravishda qaraladi.
 
-We can write to `document.cookie`. But it's not a data property, it's an accessor (getter/setter). An assignment to it is treated specially.
+**`document.cookie` ga yozish operatsiyasi faqat unda eslatilgan cookie'larni yangilaydi, lekin boshqa cookie'larga tegmaydi.**
 
-**A write operation to `document.cookie` updates only cookies mentioned in it, but doesn't touch other cookies.**
-
-For instance, this call sets a cookie with the name `user` and value `John`:
+Masalan, bu chaqiruv `user` nomi va `John` qiymati bilan cookie o'rnatadi:
 
 ```js run
-document.cookie = "user=John"; // update only cookie named 'user'
-alert(document.cookie); // show all cookies
+document.cookie = "user=John"; // faqat 'user' nomli cookie'ni yangilash
+alert(document.cookie); // barcha cookie'larni ko'rsatish
 ```
 
-If you run it, then probably you'll see multiple cookies. That's because the `document.cookie=` operation does not overwrite all cookies. It only sets the mentioned cookie `user`.
+Agar siz buni ishga tushirsangiz, ehtimol bir nechta cookie'larni ko'rasiz. Buning sababi `document.cookie=` operatsiyasi barcha cookie'larni qayta yozmaydi. U faqat eslatilgan `user` cookie'sini o'rnatadi.
 
-Technically, name and value can have any characters. To keep the valid formatting, they should be escaped using a built-in `encodeURIComponent` function:
+Texnik jihatdan, nom va qiymat har qanday belgilarga ega bo'lishi mumkin. To'g'ri formatni saqlash uchun ular o'rnatilgan `encodeURIComponent` funktsiyasi yordamida kodlanishi kerak:
 
 ```js run
-// special characters (spaces), need encoding
-let name = "my name";
+// maxsus belgilar (bo'shliqlar), kodlash kerak
+let name = "mening ismim";
 let value = "John Smith"
 
-// encodes the cookie as my%20name=John%20Smith
+// cookie'ni my%20name=John%20Smith sifatida kodlaydi
 document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
 
 alert(document.cookie); // ...; my%20name=John%20Smith
 ```
 
-
-```warn header="Limitations"
-There are few limitations:
-- The `name=value` pair, after `encodeURIComponent`, should not exceed 4KB. So we can't store anything huge in a cookie.
-- The total number of cookies per domain is limited to around 20+, the exact limit depends on the browser.
+```warn header="Cheklovlar"
+Bir nechta cheklovlar bor:
+- `encodeURIComponent` dan keyingi `name=value` juftligi 4KB dan oshmasligi kerak. Shuning uchun cookie'da juda katta narsalarni saqlay olmaymiz.
+- Har bir domen uchun cookie'larning umumiy soni taxminan 20+ ga cheklangan, aniq chegara brauzerga bog'liq.
 ```
 
-Cookies have several options, many of them are important and should be set.
+Cookie'lar bir nechta opsiyalarga ega, ularning ko'pchiligi muhim va o'rnatilishi kerak.
 
-The options are listed after `key=value`, delimited by `;`, like this:
+Opsiyalar `key=value` dan keyin, `;` bilan ajratilgan holda ro'yxatlanadi:
 
 ```js run
 document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
@@ -84,83 +82,83 @@ document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
 
 - **`path=/mypath`**
 
-The url path prefix must be absolute. It makes the cookie accessible for pages under that path. By default, it's the current path.
+URL yo'l prefiksi mutlaq bo'lishi kerak. Bu cookie'ni o'sha yo'l ostidagi sahifalar uchun kirish mumkin qiladi. Sukut bo'yicha, bu joriy yo'l.
 
-If a cookie is set with `path=/admin`, it's visible at pages `/admin` and `/admin/something`, but not at `/home` or `/adminpage`.
+Agar cookie `path=/admin` bilan o'rnatilgan bo'lsa, u `/admin` va `/admin/something` sahifalarida ko'rinadi, lekin `/home` yoki `/adminpage` da emas.
 
-Usually, we should set `path` to the root: `path=/` to make the cookie accessible from all website pages.
+Odatda biz `path` ni ildizga o'rnatishimiz kerak: `path=/` cookie'ni barcha veb-sayt sahifalaridan kirish mumkin qilish uchun.
 
 ## domain
 
 - **`domain=site.com`**
 
-A domain defines where the cookie is accessible. In practice though, there are limitations. We can't set any domain.
+Domen cookie qayerda kirish mumkinligini belgilaydi. Amalda cheklovlar bor. Biz har qanday domenni o'rnata olmaymiz.
 
-By default, a cookie is accessible only at the domain that set it. So, if the cookie was set by `site.com`, we won't get it at `other.com`.
+Sukut bo'yicha, cookie faqat uni o'rnatgan domenda kirish mumkin. Shunday qilib, agar cookie `site.com` tomonidan o'rnatilgan bo'lsa, biz uni `other.com` da olmaymiz.
 
-...But what's more tricky, we also won't get the cookie at a subdomain `forum.site.com`!
+...Lekin yanada murakkabi, biz cookie'ni subdomen `forum.site.com` da ham olmaymiz!
 
 ```js
-// at site.com
+// site.com da
 document.cookie = "user=John"
 
-// at forum.site.com
-alert(document.cookie); // no user
+// forum.site.com da
+alert(document.cookie); // user yo'q
 ```
 
-**There's no way to let a cookie be accessible from another 2nd-level domain, so `other.com` will never receive a cookie set at `site.com`.**
+**Cookie'ni boshqa 2-darajali domendan kirish mumkin qilishning yo'li yo'q, shuning uchun `other.com` hech qachon `site.com` da o'rnatilgan cookie'ni olmaydi.**
 
-It's a safety restriction, to allow us to store sensitive data in cookies, that should be available only on one site.
+Bu xavfsizlik cheklovi, bizga cookie'larda maxfiy ma'lumotlarni saqlash imkonini beradi, bu faqat bitta saytda mavjud bo'lishi kerak.
 
-...But if we'd like to allow subdomains like `forum.site.com` to get a cookie, that's possible. When setting a cookie at `site.com`, we should explicitly set the `domain` option to the root domain: `domain=site.com`:
+...Lekin agar biz `forum.site.com` kabi subdomenlarning cookie olishiga ruxsat bermoqchi bo'lsak, bu mumkin. `site.com` da cookie o'rnatishda `domain` opsiyasini ildiz domenga aniq o'rnatishimiz kerak: `domain=site.com`:
 
 ```js
-// at site.com
-// make the cookie accessible on any subdomain *.site.com:
+// site.com da
+// cookie'ni har qanday subdomen *.site.com da kirish mumkin qilish:
 document.cookie = "user=John; domain=site.com"
 
-// later
+// keyinroq
 
-// at forum.site.com
-alert(document.cookie); // has cookie user=John
+// forum.site.com da
+alert(document.cookie); // user=John cookie'si mavjud
 ```
 
-For historical reasons, `domain=.site.com` (a dot before `site.com`) also works the same way, allowing access to the cookie from subdomains. That's an old notation and should be used if we need to support very old browsers.
+Tarixiy sabablarga ko'ra, `domain=.site.com` (`site.com` dan oldingi nuqta) ham xuddi shu tarzda ishlaydi, subdomenlardan cookie'ga kirishga imkon beradi. Bu eski yozuv va agar juda eski brauzerlarni qo'llab-quvvatlashimiz kerak bo'lsa, ishlatilishi kerak.
 
-So, the `domain` option allows to make a cookie accessible at subdomains.
+Shunday qilib, `domain` opsiyasi cookie'ni subdomenlardan kirish mumkin qilish imkonini beradi.
 
 ## expires, max-age
 
-By default, if a cookie doesn't have one of these options, it disappears when the browser is closed. Such cookies are called "session cookies"
+Sukut bo'yicha, agar cookie'da ushbu opsiyalardan biri bo'lmasa, brauzer yopilganda u yo'qoladi. Bunday cookie'lar "sessiya cookie'lari" deb ataladi.
 
-To let cookies survive a browser close, we can set either the `expires` or `max-age` option.
+Cookie'larning brauzer yopilishidan omon qolishi uchun `expires` yoki `max-age` opsiyasini o'rnatishimiz mumkin.
 
 - **`expires=Tue, 19 Jan 2038 03:14:07 GMT`**
 
-The cookie expiration date defines the time, when the browser will automatically delete it.
+Cookie amal qilish muddati brauzer uni avtomatik o'chiradigan vaqtni belgilaydi.
 
-The date must be exactly in this format, in the GMT timezone. We can use `date.toUTCString` to get it. For instance, we can set the cookie to expire in 1 day:
+Sana aynan shu formatda, GMT vaqt zonasida bo'lishi kerak. Uni olish uchun `date.toUTCString` dan foydalanishimiz mumkin. Masalan, cookie'ni 1 kun ichida tugashiga o'rnatishimiz mumkin:
 
 ```js
-// +1 day from now
+// hozirgidan +1 kun
 let date = new Date(Date.now() + 86400e3);
 date = date.toUTCString();
 document.cookie = "user=John; expires=" + date;
 ```
 
-If we set `expires` to a date in the past, the cookie is deleted.
+Agar `expires` ni o'tmishdagi sanaga o'rnatsak, cookie o'chiriladi.
 
 -  **`max-age=3600`**
 
-Is an alternative to `expires` and specifies the cookie's expiration in seconds from the current moment.
+`expires` ga alternativ bo'lib, cookie'ning joriy momentdan boshlab soniyalarda amal qilish muddatini belgilaydi.
 
-If set to zero or a negative value, the cookie is deleted:
+Agar nol yoki manfiy qiymatga o'rnatilsa, cookie o'chiriladi:
 
 ```js
-// cookie will die in +1 hour from now
+// cookie hozirgidan +1 soat ichida o'ladi
 document.cookie = "user=John; max-age=3600";
 
-// delete cookie (let it expire right now)
+// cookie'ni o'chirish (hoziroq tugashini)
 document.cookie = "user=John; max-age=0";
 ```
 
@@ -168,126 +166,124 @@ document.cookie = "user=John; max-age=0";
 
 - **`secure`**
 
-The cookie should be transferred only over HTTPS.
+Cookie faqat HTTPS orqali uzatilishi kerak.
 
-**By default, if we set a cookie at `http://site.com`, then it also appears at `https://site.com` and vice versa.**
+**Sukut bo'yicha, agar biz `http://site.com` da cookie o'rnatsak, u `https://site.com` da ham paydo bo'ladi va aksincha.**
 
-That is, cookies are domain-based, they do not distinguish between the protocols.
+Ya'ni, cookie'lar domenlarga asoslangan, ular protokollarni ajratmaydi.
 
-With this option, if a cookie is set by `https://site.com`, then it doesn't appear when the same site is accessed by HTTP, as `http://site.com`. So if a cookie has sensitive content that should never be sent over unencrypted HTTP, the `secure` flag is the right thing.
+Ushbu opsiya bilan, agar cookie `https://site.com` tomonidan o'rnatilgan bo'lsa, bir xil sayt HTTP orqali `http://site.com` sifatida kirilganda paydo bo'lmaydi. Shunday qilib, agar cookie'da shifrlash orqali yuborilmasligi kerak bo'lgan maxfiy kontent bo'lsa, `secure` bayrog'i to'g'ri narsa.
 
 ```js
-// assuming we're on https:// now
-// set the cookie to be secure (only accessible over HTTPS)
+// https:// da ekanligimizni taxmin qilib
+// cookie'ni secure qilish (faqat HTTPS orqali kirish mumkin)
 document.cookie = "user=John; secure";
 ```  
 
 ## samesite
 
-That's another security attribute `samesite`. It's designed to protect from so-called XSRF (cross-site request forgery) attacks.
+Bu yana bir xavfsizlik atributi `samesite`. U XSRF (cross-site request forgery) hujumlaridan himoyalash uchun mo'ljallangan.
 
-To understand how it works and when it's useful, let's take a look at XSRF attacks.
+Uning qanday ishlashini va qachon foydali ekanligini tushunish uchun XSRF hujumlariga qaraylik.
 
-### XSRF attack
+### XSRF hujumi
 
-Imagine, you are logged into the site `bank.com`. That is: you have an authentication cookie from that site. Your browser sends it to `bank.com` with every request, so that it recognizes you and performs all sensitive financial operations.
+Tasavvur qiling, siz `bank.com` saytiga kirgansiz. Ya'ni: o'sha saytdan autentifikatsiya cookie'si bor. Sizning brauzeringiz uni har so'rov bilan `bank.com` ga yuboradi, shuning uchun u sizni taniydi va barcha maxfiy moliyaviy operatsiyalarni bajaradi.
 
-Now, while browsing the web in another window, you accidentally come to another site `evil.com`. That site has JavaScript code that submits a form `<form action="https://bank.com/pay">` to `bank.com` with fields that initiate a transaction to the hacker's account.
+Endi boshqa oynada vebni ko'rib chiqayotganda siz tasodifan boshqa sayt `evil.com` ga keldingiz. O'sha saytda hakerning hisobiga tranzaksiyani boshlaydigan maydonlar bilan `bank.com` ga `<form action="https://bank.com/pay">` shakli yuboradigan JavaScript kodi bor.
 
-The browser sends cookies every time you visit the site `bank.com`, even if the form was submitted from `evil.com`. So the bank recognizes you and actually performs the payment.
+Brauzer `bank.com` saytiga har safar kirganingizda cookie'larni yuboradi, hatto forma `evil.com` dan yuborilgan bo'lsa ham. Shuning uchun bank sizni taniydi va to'lovni haqiqatan ham amalga oshiradi.
 
 ![](cookie-xsrf.svg)
 
-That's a so-called "Cross-Site Request Forgery" (in short, XSRF) attack.
+Bu "Cross-Site Request Forgery" (qisqacha XSRF) hujumi deb ataladi.
 
-Real banks are protected from it of course. All forms generated by `bank.com` have a special field, a so-called "XSRF protection token", that an evil page can't generate or extract from a remote page. It can submit a form there, but can't get the data back. The site `bank.com` checks for such token in every form it receives.
+Haqiqiy banklar albatta bundan himoyalangan. `bank.com` tomonidan yaratilgan barcha formalarda maxsus maydon, "XSRF himoya tokeni" deb ataladigan narsalar bor, yomon sahifa buni yarata olmaydi yoki masofaviy sahifadan ajrata olmaydi. U formani yuborishi mumkin, lekin ma'lumotni qaytarib ololmaydi. `bank.com` sayt qabul qiladigan har bir formada bunday tokenni tekshiradi.
 
-Such a protection takes time to implement though. We need to ensure that every form has the required token field, and we must also check all requests.
+Bunday himoya amalga oshirish vaqt talab qiladi. Har bir formada kerakli token maydoni borligini ta'minlashimiz va barcha so'rovlarni ham tekshirishimiz kerak.
 
-### Enter cookie samesite option
+### Cookie samesite opsiyasi
 
-The cookie `samesite` option provides another way to protect from such attacks, that (in theory) should not require "xsrf protection tokens".
+Cookie `samesite` opsiyasi bunday hujumlardan himoyalanishning yana bir usulini taqdim etadi, bu (nazariy jihatdan) "xsrf himoya tokenlarini" talab qilmasligi kerak.
 
-It has two possible values:
+Uning ikkita mumkin bo'lgan qiymati bor:
 
-- **`samesite=strict` (same as `samesite` without value)**
+- **`samesite=strict` (`samesite` qiymatsiz bilan bir xil)**
 
-A cookie with `samesite=strict` is never sent if the user comes from outside the same site.
+`samesite=strict` bilan cookie foydalanuvchi bir xil saytdan tashqaridan kelsa hech qachon yuborilmaydi.
 
-In other words, whether a user follows a link from their mail or submits a form from `evil.com`, or does any operation that originates from another domain, the cookie is not sent.
+Boshqacha qilib aytganda, foydalanuvchi o'z pochtasidan havolaga amal qilsa yoki `evil.com` dan forma yubor sa, yoki boshqa domendan boshqa operatsiyani bajaris , cookie yuborilmaydi.
 
-If authentication cookies have the `samesite` option, then a XSRF attack has no chances to succeed, because a submission from `evil.com` comes without cookies. So `bank.com` will not recognize the user and will not proceed with the payment.
+Agar autentifikatsiya cookie'larida `samesite` opsiyasi bo'lsa, XSRF hujumi muvaffaq bo'lish imkoni yo'q, chunki `evil.com` dan yuborish cookie'larsiz keladi. Shuning uchun `bank.com` foydalanuvchini tanimaydi va to'lov bilan davom etmaydi.
 
-The protection is quite reliable. Only operations that come from `bank.com` will send the `samesite` cookie, e.g. a form submission from another page at `bank.com`.
+Himoya ancha ishonchli. Faqat `bank.com` dan kelgan operatsiyalar `samesite` cookie'sini yuboradi, masalan `bank.com` dagi boshqa sahifadan forma yuborish.
 
-Although, there's a small inconvenience.
+Garchi, kichik noqulaylik bor.
 
-When a user follows a legitimate link to `bank.com`, like from their own notes, they'll be surprised that `bank.com` does not recognize them. Indeed, `samesite=strict` cookies are not sent in that case.
+Foydalanuvchi o'z eslatmalaridan kabi `bank.com` ga qonuniy havolaga amal qilganda, `bank.com` uni tanimasligidan hayron bo'ladi. Haqiqatan ham, `samesite=strict` cookie'lari bunday holatda yuborilmaydi.
 
-We could work around that by using two cookies: one for "general recognition", only for the purposes of saying: "Hello, John", and the other one for data-changing operations with `samesite=strict`. Then, a person coming from outside of the site will see a welcome, but payments must be initiated from the bank's website, for the second cookie to be sent.
+Biz buni ikkita cookie ishlatib hal qilishimiz mumkin: biri "umumiy tanish" uchun, faqat "Salom, John" deyish maqsadi uchun, ikkinchisi esa `samesite=strict` bilan ma'lumot o'zgartiradigan operatsiyalar uchun. Keyin saytdan tashqaridan kelgan odam xush kelibsizni ko'radi, lekin to'lovlar ikkinchi cookie yuborilishi uchun bank veb-saytidan boshlanishi kerak.
 
 - **`samesite=lax`**
 
-A more relaxed approach that also protects from XSRF and doesn't break the user experience.
+XSRF dan himoyaladigan va foydalanuvchi tajribasini buzmaydigan yanada yumshoq yondashuv.
 
-Lax mode, just like `strict`, forbids the browser to send cookies when coming from outside the site, but adds an exception.
+Lax rejimi, xuddi `strict` kabi, brauzerni saytdan tashqaridan kelganda cookie'lar yuborishni taqiqlaydi, lekin istisno qo'shadi.
 
-A `samesite=lax` cookie is sent if both of these conditions are true:
-1. The HTTP method is "safe" (e.g. GET, but not POST).
+`samesite=lax` cookie agar ikkala shart ham to'g'ri bo'lsa yuboriladi:
+1. HTTP metodi "xavfsiz" (masalan GET, lekin POST emas).
 
-    The full list of safe HTTP methods is in the [RFC7231 specification](https://tools.ietf.org/html/rfc7231). Basically, these are the methods that should be used for reading, but not writing the data. They must not perform any data-changing operations. Following a link is always GET, the safe method.
+    Xavfsiz HTTP metodlarning to'liq ro'yxati [RFC7231 spetsifikatsiyasi](https://tools.ietf.org/html/rfc7231) da. Asosan, bular o'qish uchun ishlatilishi kerak bo'lgan metodlar, yozish uchun emas. Ular hech qanday ma'lumot o'zgartiradigan operatsiyalarni bajarmasligi kerak. Havolaga amal qilish har doim GET, xavfsiz metod.
 
-2. The operation performs a top-level navigation (changes URL in the browser address bar).
+2. Operatsiya yuqori darajali navigatsiyani amalga oshiradi (brauzer manzil satrida URL ni o'zgartiradi).
 
-    That's usually true, but if the navigation is performed in an `<iframe>`, then it's not top-level. Also, JavaScript methods for network requests do not perform any navigation, hence they don't fit.
+    Bu odatda to'g'ri, lekin navigatsiya `<iframe>` da amalga oshirilsa, u yuqori darajada emas. Shuningdek, tarmoq so'rovlari uchun JavaScript metodlari hech qanday navigatsiyani amalga oshirmaydi, shuning uchun ular mos kelmaydi.
 
-So, what `samesite=lax` does, is to basically allow the most common "go to URL" operation to have cookies. E.g. opening a website link from notes that satisfy these conditions.
+Shunday qilib, `samesite=lax` ning qilishi asosan eng keng tarqalgan "URL ga o'tish" operatsiyasiga cookie'lar bo'lishiga ruxsat beradi. Masalan, bu shartlarni qanoatlantiruvchi eslatmalardan veb-sayt havolasini ochish.
 
-But anything more complicated, like a network request from another site or a form submission, loses cookies.
+Lekin yanada murakkab narsa, boshqa saytdan tarmoq so'rovi yoki forma yuborish kabi, cookie'larni yo'qotadi.
 
-If that's fine for you, then adding `samesite=lax` will probably not break the user experience and add protection.
+Agar bu sizga mos kelsa, `samesite=lax` qo'shish ehtimol foydalanuvchi tajribasini buzmaydi va himoya qo'shadi.
 
-Overall, `samesite` is a great option. 
+Umuman olganda, `samesite` ajoyib opsiya.
 
-There's a drawback:
+Kamchiligi bor:
 
-- `samesite` is ignored (not supported) by very old browsers, year 2017 or so.
+- `samesite` juda eski brauzerlar tomonidan e'tiborga olinmaydi (qo'llab-quvvatlanmaydi), 2017-yil atrofida.
 
-**So if we solely rely on `samesite` to provide protection, then old browsers will be vulnerable.**
+**Shuning uchun agar biz faqat himoya berish uchun `samesite` ga tayanadigan bo'lsak, eski brauzerlar zaif bo'ladi.**
 
-But we surely can use `samesite` together with other protection measures, like xsrf tokens, to add an additional layer of defence and then, in the future, when old browsers die out, we'll probably be able to drop xsrf tokens.
+Lekin biz himoyaning qo'shimcha qatlamini qo'shish uchun `samesite` ni xsrf tokenlari kabi boshqa himoya choralari bilan birga ishlatishimiz mumkin va keyin, kelajakda eski brauzerlar yo'q bo'lganda, ehtimol xsrf tokenlarini tashlab qo'ya olamiz.
 
 ## httpOnly
 
-This option has nothing to do with JavaScript, but we have to mention it for completeness.
+Bu opsiyaning JavaScript bilan hech qanday aloqasi yo'q, lekin to'liqlik uchun uni eslatishimiz kerak.
 
-The web-server uses the `Set-Cookie` header to set a cookie. Also, it may set the `httpOnly` option.
+Veb-server cookie o'rnatish uchun `Set-Cookie` header'idan foydalanadi. Shuningdek, u `httpOnly` opsiyasini o'rnatishi mumkin.
 
-This option forbids any JavaScript access to the cookie. We can't see such a cookie or manipulate it using `document.cookie`.
+Bu opsiya cookie'ga har qanday JavaScript kirishni taqiqlaydi. Biz bunday cookie'ni ko'ra olmaymiz yoki `document.cookie` yordamida manipulyatsiya qila olmaymiz.
 
-That's used as a precaution measure, to protect from certain attacks when a hacker injects his own JavaScript code into a page and waits for a user to visit that page. That shouldn't be possible at all, hackers should not be able to inject their code into our site, but there may be bugs that let them do it.
+Bu haker sahifaga o'z JavaScript kodini kiritib, foydalanuvchi o'sha sahifaga tashrif buyurishini kutganida ba'zi hujumlardan himoyalanish uchun ehtiyot chorasi sifatida ishlatiladi. Bu umuman mumkin bo'lmasligi kerak, hakerlar bizning saytimizga o'z kodlarini kirita olmasligi kerak, lekin buni amalga oshirishga imkon beruvchi xatolar bo'lishi mumkin.
 
+Odatda, agar bunday narsa sodir bo'lsa va foydalanuvchi haker JavaScript kodi bilan veb-sahifaga tashrif buyursa, o'sha kod ijro etiladi va autentifikatsiya ma'lumotlarini o'z ichiga olgan foydalanuvchi cookie'lari bilan `document.cookie` ga kirishni oladi. Bu yomon.
 
-Normally, if such a thing happens, and a user visits a web-page with hacker's JavaScript code, then that code executes and gains access to `document.cookie` with user cookies containing authentication information. That's bad.
+Lekin agar cookie `httpOnly` bo'lsa, `document.cookie` uni ko'rmaydi, shuning uchun u himoyalangan.
 
-But if a cookie is `httpOnly`, then `document.cookie` doesn't see it, so it is protected.
+## Ilova: Cookie funktsiyalari
 
-## Appendix: Cookie functions
+Mana cookie'lar bilan ishlash uchun kichik funktsiyalar to'plami, `document.cookie` ni qo'lda o'zgartirishdan ko'ra qulayroq.
 
-Here's a small set of functions to work with cookies, more convenient than a manual modification of `document.cookie`.
-
-There exist many cookie libraries for that, so these are for demo purposes. Fully working though.
-
+Buning uchun ko'plab cookie kutubxonalari mavjud, shuning uchun bular demo maqsadlari uchun. Garchi to'liq ishlaydigan.
 
 ### getCookie(name)
 
-The shortest way to access a cookie is to use a [regular expression](info:regular-expressions).
+Cookie'ga kirishning eng qisqa yo'li [regular expression](info:regular-expressions) dan foydalanish.
 
-The function `getCookie(name)` returns the cookie with the given `name`:
+`getCookie(name)` funktsiyasi berilgan `name` bilan cookie'ni qaytaradi:
 
 ```js
-// returns the cookie with the given name,
-// or undefined if not found
+// berilgan nomdagi cookie'ni qaytaradi,
+// topilmasa undefined
 function getCookie(name) {
   let matches = document.cookie.match(new RegExp(
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
@@ -296,20 +292,20 @@ function getCookie(name) {
 }
 ```
 
-Here `new RegExp` is generated dynamically, to match `; name=<value>`.
+Bu yerda `new RegExp` dinamik ravishda yaratiladi, `; name=<value>` ga mos kelish uchun.
 
-Please note that a cookie value is encoded, so `getCookie` uses a built-in `decodeURIComponent` function to decode it.
+Diqqat qiling, cookie qiymati kodlangan, shuning uchun `getCookie` uni dekodlash uchun o'rnatilgan `decodeURIComponent` funktsiyasidan foydalanadi.
 
 ### setCookie(name, value, options)
 
-Sets the cookie's `name` to the given `value` with `path=/` by default (can be modified to add other defaults):
+Cookie'ning `name` ini berilgan `value` ga sukut bo'yicha `path=/` bilan o'rnatadi (boshqa standartlarni qo'shish uchun o'zgartirilishi mumkin):
 
 ```js run
 function setCookie(name, value, options = {}) {
 
   options = {
     path: '/',
-    // add other defaults here if necessary
+    // kerak bo'lsa bu yerga boshqa standartlarni qo'shing
     ...options
   };
 
@@ -330,13 +326,13 @@ function setCookie(name, value, options = {}) {
   document.cookie = updatedCookie;
 }
 
-// Example of use:
+// Foydalanish misoli:
 setCookie('user', 'John', {secure: true, 'max-age': 3600});
 ```
 
 ### deleteCookie(name)
 
-To delete a cookie, we can call it with a negative expiration date:
+Cookie'ni o'chirish uchun uni manfiy amal qilish sanasi bilan chaqirishimiz mumkin:
 
 ```js
 function deleteCookie(name) {
@@ -346,87 +342,82 @@ function deleteCookie(name) {
 }
 ```
 
-```warn header="Updating or deleting must use same path and domain"
-Please note: when we update or delete a cookie, we should use exactly the same path and domain options as when we set it.
+```warn header="Yangilash yoki o'chirish bir xil path va domain ishlatishi kerak"
+Diqqat qiling: cookie'ni yangilaganimizda yoki o'chirganimizda, uni o'rnatganimizda ishlatgan path va domain opsiyalarini aynan bir xil ishlatishimiz kerak.
 ```
 
-Together: [cookie.js](cookie.js).
+Birga: [cookie.js](cookie.js).
 
+## Ilova: Uchinchi tomon cookie'lari
 
-## Appendix: Third-party cookies
+Cookie foydalanuvchi tashrif buyurayotgan sahifadan boshqa domen tomonidan joylashtirilgan bo'lsa, "uchinchi tomon" deb ataladi.
 
-A cookie is called "third-party" if it's placed by a domain other than the page the user is visiting.
-
-For instance:
-1. A page at `site.com` loads a banner from another site: `<img src="https://ads.com/banner.png">`.
-2. Along with the banner, the remote server at `ads.com` may set the `Set-Cookie` header with a cookie like `id=1234`. Such a cookie originates from the `ads.com` domain, and will only be visible at `ads.com`:
+Masalan:
+1. `site.com` dagi sahifa boshqa saytdan banner yuklaydi: `<img src="https://ads.com/banner.png">`.
+2. Banner bilan birga, `ads.com` dagi masofaviy server `id=1234` kabi cookie bilan `Set-Cookie` header'ini o'rnatishi mumkin. Bunday cookie `ads.com` domenidan kelib chiqadi va faqat `ads.com` da ko'rinadi:
 
     ![](cookie-third-party.svg)
 
-3. Next time when `ads.com` is accessed, the remote server gets the `id` cookie and recognizes the user:
+3. Keyingi safar `ads.com` ga kirilganda, masofaviy server `id` cookie'sini oladi va foydalanuvchini taniydi:
 
     ![](cookie-third-party-2.svg)
 
-4. What's even more important is, when the user moves from `site.com` to another site `other.com`, which also has a banner, then `ads.com` gets the cookie, as it belongs to `ads.com`, thus recognizing the visitor and tracking him as he moves between sites:
+4. Yanada muhimi, foydalanuvchi `site.com` dan banneri ham bo'lgan boshqa sayt `other.com` ga o'tganda, `ads.com` cookie'ni oladi, chunki u `ads.com` ga tegishli, shuning uchul tashrif buyuruvchini taniydi va u saytlar orasida harakatlanayotganda kuzatib boradi:
 
     ![](cookie-third-party-3.svg)
 
+Uchinchi tomon cookie'lari an'anaviy ravishda kuzatuv va reklama xizmatlari uchun ishlatiladi, ularning tabiatiga ko'ra. Ular kelib chiqqan domenga bog'langan, shuning uchun `ads.com` turli saytlar orasida bir xil foydalanuvchini kuzatib borishi mumkin, agar ularning barchasi unga kirsa.
 
-Third-party cookies are traditionally used for tracking and ads services, due to their nature. They are bound to the originating domain, so `ads.com` can track the same user between different sites, if they all access it.
+Tabiiyki, ba'zi odamlar kuzatuvni yoqtirmaydi, shuning uchun brauzerlar bunday cookie'larni o'chirishga imkon beradi.
 
-Naturally, some people don't like being tracked, so browsers allow to disable such cookies.
-
-Also, some modern browsers employ special policies for such cookies:
-- Safari does not allow third-party cookies at all.
-- Firefox comes with a "black list" of third-party domains where it blocks third-party cookies.
-
+Shuningdek, ba'zi zamonaviy brauzerlar bunday cookie'lar uchun maxsus siyosatlar ishlatadi:
+- Safari uchinchi tomon cookie'lariga umuman ruxsat bermaydi.
+- Firefox uchinchi tomon cookie'larini bloklaydigan uchinchi tomon domenlarining "qora ro'yxati" bilan keladi.
 
 ```smart
-If we load a script from a third-party domain, like `<script src="https://google-analytics.com/analytics.js">`, and that script uses `document.cookie` to set a cookie, then such cookie is not third-party.
+Agar biz uchinchi tomon domenidan script yuklasakuchinchi tomon domenidan script yuklasak, masalan `<script src="https://google-analytics.com/analytics.js">`, va bu script cookie o'rnatish uchun `document.cookie` dan foydalansa, bunday cookie uchinchi tomon emas.
 
-If a script sets a cookie, then no matter where the script came from -- the cookie belongs to the domain of the current webpage.
+Agar script cookie o'rnatsa, script qayerdan kelganidan qat'i nazar -- cookie joriy veb-sahifa domeniga tegishli.
 ```
 
-## Appendix: GDPR
+## Ilova: GDPR
 
-This topic is not related to JavaScript at all, just something to keep in mind when setting cookies.
+Bu mavzu JavaScript bilan umuman bog'liq emas, faqat cookie'lar o'rnatishda yodda tutish kerak bo'lgan narsa.
 
-There's a legislation in Europe called GDPR, that enforces a set of rules for websites to respect the users' privacy. One of these rules is to require an explicit permission for tracking cookies from the user.
+Evropada foydalanuvchilar shaxsiyligini hurmat qilish uchun veb-saytlar qoididlari majmini majburlash uchun GDPR deb ataladigan qonun bor. Bu qoidalardan biri foydalanuvchidan kuzatuv cookie'lari uchun aniq ruxsatni talab qiladi.
 
-Please note, that's only about tracking/identifying/authorizing cookies.
+Diqqat qiling, bu faqat kuzatuv/identifikatsiya/avtorizatsiya cookie'lari haqida.
 
-So, if we set a cookie that just saves some information, but neither tracks nor identifies the user, then we are free to do it.
+Shunday qilib, agar biz faqat ba'zi ma'lumotlarni saqlaydigan, lekin foydalanuvchini kuzatmaydigan yoki identifikatsiya qilmaydigan cookie o'rnatsak, uni erkin qilishimiz mumkin.
 
-But if we are going to set a cookie with an authentication session or a tracking id, then a user must allow that.
+Lekin agar biz autentifikatsiya sessiyasi yoki kuzatuv id'si bilan cookie o'rnatmoqchi bo'lsak, foydalanuvchi bunga ruxsat berishi kerak.
 
-Websites generally have two variants of following GDPR. You must have seen them both already in the web:
+Veb-saytlarda odatda GDPR ga rioya qilishning ikkita varianti bor. Ikkalasini ham vebda allaqachon ko'rganingiz kerak:
 
-1. If a website wants to set tracking cookies only for authenticated users.
+1. Agar veb-sayt kuzatuv cookie'larini faqat autentifikatsiya qilingan foydalanuvchilar uchun o'rnatmoqchi bo'lsa.
 
-    To do so, the registration form should have a checkbox like "accept the privacy policy" (that describes how cookies are used), the user must check it, and then the website is free to set auth cookies.
+    Buning uchun ro'yxatdan o'tish formasida "shaxsiy hayot siyosatini qabul qilaman" (cookie'lar qanday ishlatilishini tasvirlaydigan) kabi checkbox bo'lishi kerak, foydalanuvchi uni belgilashi kerak, keyin veb-sayt auth cookie'larini o'rnatishda erkin.
 
-2. If a website wants to set tracking cookies for everyone.
+2. Agar veb-sayt hamma uchun kuzatuv cookie'larini o'rnatmoqchi bo'lsa.
 
-    To do so legally, a website shows a modal "splash screen" for newcomers, and requires them to agree to the cookies. Then the website can set them and let people see the content. That can be disturbing for new visitors though. No one likes to see such "must-click" modal splash screens instead of the content. But GDPR requires an explicit agreement.
+    Buni qonuniy qilish uchun veb-sayt yangi kelganlar uchun modal "splash screen" ko'rsatadi va ulardan cookie'larga rozi bo'lishni talab qiladi. Keyin veb-sayt ularni o'rnatishi va odamlarga kontentni ko'rishga imkon berishi mumkin. Bu yangi tashrif buyuruvchilar uchun bezovta qiluvchi bo'lishi mumkin. Hech kim kontent o'rniga bunday "bosish kerak" modal splash screen'larni ko'rishni yoqtirmaydi. Lekin GDPR aniq kelishuvni talab qiladi.
 
+GDPR faqat cookie'lar haqida emas, balki boshqa shaxsiy hayot bilan bog'liq masalalar haqida ham, lekin bu bizning doiramizdan juda tashqarida.
 
-GDPR is not only about cookies, it's about other privacy-related issues too, but that's too much beyond our scope.
+## Xulosa
 
+`document.cookie` cookie'larga kirish imkonini beradi
+- yozish operatsiyalari faqat unda eslatilgan cookie'larni o'zgartiradi.
+- nom/qiymat kodlanishi kerak.
+- bitta cookie 4KB dan oshmasligi kerak, har bir sayt uchun 20+ cookie (brauzerga bog'liq).
 
-## Summary
+Cookie opsiyalari:
+- `path=/`, sukut bo'yicha joriy yo'l, cookie'ni faqat o'sha yo'l ostida ko'rinishini ta'minlaydi.
+- `domain=site.com`, sukut bo'yicha cookie faqat joriy domenda ko'rinadi. Agar domen aniq o'rnatilgan bo'lsa, cookie subdomenlarda ko'rinadigan bo'ladi.
+- `expires` yoki `max-age` cookie amal qilish vaqtini o'rnatadi. Ularsiz cookie brauzer yopilganda o'ladi.
+- `secure` cookie'ni faqat HTTPS ga aylantiradi.
+- `samesite` brauzerni saytdan tashqaridan kelayotgan so'rovlar bilan cookie yuborishni taqiqlaydi. Bu XSRF hujumlarining oldini olishga yordam beradi.
 
-`document.cookie` provides access to cookies
-- write operations modify only cookies mentioned in it.
-- name/value must be encoded.
-- one cookie must not exceed 4KB, 20+ cookies per site (depends on the browser).
-
-Cookie options:
-- `path=/`, by default current path, makes the cookie visible only under that path.
-- `domain=site.com`, by default a cookie is visible on the current domain only. If the domain is set explicitly, the cookie becomes visible on subdomains.
-- `expires` or `max-age` sets the cookie expiration time. Without them the cookie dies when the browser is closed.
-- `secure` makes the cookie HTTPS-only.
-- `samesite` forbids the browser to send the cookie with requests coming from outside the site. This helps to prevent XSRF attacks.
-
-Additionally:
-- Third-party cookies may be forbidden by the browser, e.g. Safari does that by default.
-- When setting a tracking cookie for EU citizens, GDPR requires to ask for permission.
+Qo'shimcha:
+- Uchinchi tomon cookie'lari brauzer tomonidan taqiqlanishi mumkin, masalan Safari buni sukut bo'yicha qiladi.
+- Yevropa fuqarolari uchun kuzatuv cookie'sini o'rnatishda GDPR ruxsat so'rashni talab qiladi.

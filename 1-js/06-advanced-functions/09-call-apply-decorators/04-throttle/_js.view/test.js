@@ -1,4 +1,4 @@
-describe("throttle(f, 1000)", function() {
+describe("throttle(f, 1000)", function () {
   let f1000;
   let log = "";
 
@@ -6,17 +6,17 @@ describe("throttle(f, 1000)", function() {
     log += a;
   }
 
-  before(function() {
+  before(function () {
     this.clock = sinon.useFakeTimers();
     f1000 = throttle(f, 1000);
   });
 
-  it("the first call runs now", function() {
+  it("the first call runs now", function () {
     f1000(1); // runs now
     assert.equal(log, "1");
   });
 
-  it("then calls are ignored till 1000ms when the last call works", function() {
+  it("then calls are ignored till 1000ms when the last call works", function () {
     f1000(2); // (throttling - less than 1000ms since the last run)
     f1000(3); // (throttling - less than 1000ms since the last run)
     // after 1000 ms f(3) call is scheduled
@@ -27,7 +27,7 @@ describe("throttle(f, 1000)", function() {
     assert.equal(log, "13"); // log==13, the call to f1000(3) is made
   });
 
-  it("the third call waits 1000ms after the second call", function() {
+  it("the third call waits 1000ms after the second call", function () {
     this.clock.tick(100);
     f1000(4); // (throttling - less than 1000ms since the last run)
     this.clock.tick(100);
@@ -40,24 +40,21 @@ describe("throttle(f, 1000)", function() {
     assert.equal(log, "136"); // the last call was f(6)
   });
 
-  after(function() {
+  after(function () {
     this.clock.restore();
   });
-
 });
 
-describe('throttle', () => {
-
-  it('runs a forwarded call once', done => {
-    let log = '';
-    const f = str => log += str;
+describe("throttle", () => {
+  it("runs a forwarded call once", (done) => {
+    let log = "";
+    const f = (str) => (log += str);
     const f10 = throttle(f, 10);
-    f10('once');
+    f10("once");
 
     setTimeout(() => {
-      assert.equal(log, 'once');
+      assert.equal(log, "once");
       done();
     }, 20);
   });
-
 });

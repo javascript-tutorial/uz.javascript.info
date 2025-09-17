@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -9,10 +9,9 @@ Natija qanday? Nima uchun?
 ```js
 let arr = ["a", "b"];
 
-arr.push(function() {
-  alert( this );
-})
+arr.push(function () {
+  alert(this);
+});
 
 arr[2](); // ?
 ```
-

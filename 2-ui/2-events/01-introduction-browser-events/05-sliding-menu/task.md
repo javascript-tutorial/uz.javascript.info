@@ -1,11 +1,11 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Create a sliding menu
+# Qo'zg'aluvchi menyu yarating
 
-Create a menu that opens/collapses on click:
+Bosish orqali ochiladigan/yiqilib tushadigan menyu yarating:
 
 [iframe border=1 height=100 src="solution"]
 
-P.S. HTML/CSS of the source document is to be modified.
+P.S. Manba hujjatning HTML/CSS-ni o'zgartirish kerak.

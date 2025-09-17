@@ -1,82 +1,80 @@
+# Custom elementlar
 
-# Custom elements
+Biz o'z klassimiz bilan tasvirlangan custom HTML elementlarni yaratishimiz mumkin, o'z metodlari va xususiyatlari, hodisalari va boshqalar bilan.
 
-We can create custom HTML elements, described by our class, with its own methods and properties, events and so on.
+Custom element aniqlangandan so'ng, biz uni o'rnatilgan HTML elementlar bilan teng darajada ishlatishimiz mumkin.
 
-Once a custom element is defined, we can use it on par with built-in HTML elements.
+Bu ajoyib, chunki HTML lug'ati boy, lekin cheksiz emas. `<easy-tabs>`, `<sliding-carousel>`, `<beautiful-upload>` elementlari yo'q... Bizga kerak bo'lishi mumkin bo'lgan boshqa har qanday tegni o'ylab ko'ring.
 
-That's great, as HTML dictionary is rich, but not infinite. There are no `<easy-tabs>`, `<sliding-carousel>`, `<beautiful-upload>`... Just think of any other tag we might need.
+Biz ularni maxsus klass bilan aniqlay olamiz va keyin ular har doim HTML ning bir qismi bo'lgandek ishlatamiz.
 
-We can define them with a special class, and then use as if they were always a part of HTML.
+Custom elementlarning ikki turi mavjud:
 
-There are two kinds of custom elements:
+1. **Avtonom custom elementlar** -- "mutlaqo yangi" elementlar, abstrakt `HTMLElement` klassini kengaytiradi.
+2. **Moslashtirilgan o'rnatilgan elementlar** -- o'rnatilgan elementlarni kengaytiradi, masalan `HTMLButtonElement` asosidagi moslashtirilgan tugma va boshqalar.
 
-1. **Autonomous custom elements** -- "all-new" elements, extending the abstract `HTMLElement` class.
-2. **Customized built-in elements** -- extending built-in elements, like a customized button, based on `HTMLButtonElement` etc.
+Avval avtonom elementlarni ko'rib chiqamiz, keyin moslashtirilgan o'rnatilganlarga o'tamiz.
 
-First we'll cover autonomous elements, and then move to customized built-in ones.
+Custom element yaratish uchun biz brauzerga u haqida bir nechta tafsilotlarni aytishimiz kerak: uni qanday ko'rsatish kerak, element sahifaga qo'shilganda yoki olib tashlaganda nima qilish kerak va hokazo.
 
-To create a custom element, we need to tell the browser several details about it: how to show it, what to do when the element is added or removed to page, etc.
+Bu maxsus metodlar bilan klass yaratish orqali amalga oshiriladi. Bu oson, chunki metodlar kam va ularning barchasi ixtiyoriy.
 
-That's done by making a class with special methods. That's easy, as there are only few methods, and all of them are optional.
-
-Here's a sketch with the full list:
+Mana to'liq ro'yxat bilan eskiz:
 
 ```js
 class MyElement extends HTMLElement {
   constructor() {
     super();
-    // element created
+    // element yaratildi
   }
 
   connectedCallback() {
-    // browser calls this method when the element is added to the document
-    // (can be called many times if an element is repeatedly added/removed)
+    // element hujjatga qo'shilganda brauzer bu metodini chaqiradi
+    // (agar element qayta-qayta qo'shilsa/olib tashlansa, ko'p marta chaqirilishi mumkin)
   }
 
   disconnectedCallback() {
-    // browser calls this method when the element is removed from the document
-    // (can be called many times if an element is repeatedly added/removed)
+    // element hujjatdan olib tashlaganda brauzer bu metodini chaqiradi
+    // (agar element qayta-qayta qo'shilsa/olib tashlansa, ko'p marta chaqirilishi mumkin)
   }
 
   static get observedAttributes() {
-    return [/* array of attribute names to monitor for changes */];
+    return [/* o'zgarishlarni kuzatish uchun atribut nomlari massivi */];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    // called when one of attributes listed above is modified
+    // yuqorida sanab o'tilgan atributlardan biri o'zgartirilganda chaqiriladi
   }
 
   adoptedCallback() {
-    // called when the element is moved to a new document
-    // (happens in document.adoptNode, very rarely used)
+    // element yangi hujjatga ko'chirilganda chaqiriladi
+    // (document.adoptNode da sodir bo'ladi, juda kamdan-kam ishlatiladi)
   }
 
-  // there can be other element methods and properties
+  // boshqa element metodlari va xususiyatlari bo'lishi mumkin
 }
 ```
 
-After that, we need to register the element:
+Shundan so'ng, elementni ro'yxatdan o'tkazishimiz kerak:
 
 ```js
-// let the browser know that <my-element> is served by our new class
+// brauzerga <my-element> bizning yangi klassimiz tomonidan xizmat qilinishini bildiring
 customElements.define("my-element", MyElement);
 ```
 
-Now for any HTML elements with tag `<my-element>`, an instance of `MyElement` is created, and the aforementioned methods are called. We also can `document.createElement('my-element')` in JavaScript.
+Endi `<my-element>` tegi bilan har qanday HTML elementlari uchun `MyElement`ning nusxasi yaratiladi va yuqorida aytilgan metodlar chaqiriladi. Shuningdek, biz JavaScript da `document.createElement('my-element')` ni chaqirishimiz mumkin.
 
-```smart header="Custom element name must contain a hyphen `-`"
-Custom element name must have a hyphen `-`, e.g. `my-element` and `super-button` are valid names, but `myelement` is not.
+```smart header="Custom element nomi tire `-` ni o'z ichiga olishi kerak"
+Custom element nomi tire `-`ni o'z ichiga olishi kerak, masalan `my-element` va `super-button` to'g'ri nomlar, lekin `myelement` emas.
 
-That's to ensure that there are no name conflicts between built-in and custom HTML elements.
+Bu o'rnatilgan va custom HTML elementlar o'rtasida nom to'qnashuvlari yo'qligini ta'minlash uchun.
 ```
 
-## Example: "time-formatted"
+## Misol: "time-formatted"
 
-For example, there already exists `<time>` element in HTML, for date/time. But it doesn't do any formatting by itself.
+Masalan, HTML da sana/vaqt uchun `<time>` elementi allaqachon mavjud. Lekin u o'zi hech qanday formatlashni qilmaydi.
 
-Let's create `<time-formatted>` element that displays the time in a nice, language-aware format:
-
+Keling, vaqtni chiroyli, tilga mos formatda ko'rsatadigan `<time-formatted>` elementini yarataylik:
 
 ```html run height=50 autorun="no-epub"
 <script>
@@ -115,43 +113,41 @@ customElements.define("time-formatted", TimeFormatted); // (2)
 ></time-formatted>
 ```
 
-1. The class has only one method `connectedCallback()` -- the browser calls it when `<time-formatted>` element is added to page (or when HTML parser detects it), and it uses the built-in [Intl.DateTimeFormat](mdn:/JavaScript/Reference/Global_Objects/DateTimeFormat) data formatter, well-supported across the browsers, to show a nicely formatted time.
-2. We need to register our new element by `customElements.define(tag, class)`.
-3. And then we can use it everywhere.
+1. Klassda faqat bitta `connectedCallback()` metodi bor -- `<time-formatted>` elementi sahifaga qo'shilganda (yoki HTML parser uni aniqlayotganda) brauzer uni chaqiradi va chiroyli formatlangan vaqtni ko'rsatish uchun brauzerlarda yaxshi qo'llab-quvvatlanadigan o'rnatilgan [Intl.DateTimeFormat](mdn:/JavaScript/Reference/Global_Objects/DateTimeFormat) ma'lumot formatlovchisidan foydalanadi.
+2. Biz yangi elementimizni `customElements.define(tag, class)` orqali ro'yxatdan o'tkazishimiz kerak.
+3. Va keyin uni hamma joyda ishlatishimiz mumkin.
 
+```smart header="Custom elementlar yangilanishi"
+Agar brauzer `customElements.define` dan oldin `<time-formatted>` elementlarga duch kelsa, bu xato emas. Lekin element hali noma'lum, har qanday nostandart teg kabi.
 
-```smart header="Custom elements upgrade"
-If the browser encounters any `<time-formatted>` elements before `customElements.define`, that's not an error. But the element is yet unknown, just like any non-standard tag.
+Bunday "aniqlanmagan" elementlarni CSS selektori `:not(:defined)` bilan shakllantirish mumkin.
 
-Such "undefined" elements can be styled with CSS selector `:not(:defined)`.
+`customElement.define` chaqirilganda, ular "yangilanadi": har biri uchun `TimeFormatted` ning yangi nusxasi yaratiladi va `connectedCallback` chaqiriladi. Ular `:defined` bo'ladi.
 
-When `customElement.define` is called, they are "upgraded": a new instance of `TimeFormatted`
-is created for each, and `connectedCallback` is called. They become `:defined`.
-
-To get the information about custom elements, there are methods:
-- `customElements.get(name)` -- returns the class for a custom element with the given `name`,
-- `customElements.whenDefined(name)` -- returns a promise that resolves (without value) when a custom element with the given `name` becomes defined.
+Custom elementlar haqida ma'lumot olish uchun metodlar mavjud:
+- `customElements.get(name)` -- berilgan `name` bilan custom element uchun klassni qaytaradi,
+- `customElements.whenDefined(name)` -- berilgan `name` bilan custom element aniqlanganda hal qilinadigan promise qaytaradi (qiymatsiz).
 ```
 
-```smart header="Rendering in `connectedCallback`, not in `constructor`"
-In the example above, element content is rendered (created) in `connectedCallback`.
+```smart header="`connectedCallback` da render qilish, `constructor` da emas"
+Yuqoridagi misolda element mazmuni `connectedCallback` da render qilinadi (yaratiladi).
 
-Why not in the `constructor`?
+Nima uchun `constructor` da emas?
 
-The reason is simple: when `constructor` is called, it's yet too early. The element is created, but the browser did not yet process/assign attributes at this stage: calls to `getAttribute` would return `null`. So we can't really render there.
+Sabab oddiy: `constructor` chaqirilganda, hali juda erta. Element yaratilgan, lekin brauzer hali bu bosqichda atributlarni qayta ishlamagan/tayinlamagan: `getAttribute` ga chaqiruvlar `null` qaytaradi. Shuning uchun biz u yerda haqiqatan ham render qila olmaymiz.
 
-Besides, if you think about it, that's better performance-wise -- to delay the work until it's really needed.
+Bundan tashqari, agar bu haqida o'ylasangiz, bu ishlash nuqtai nazaridan yaxshiroq -- ishni haqiqatan ham kerak bo'lgunga qadar kechiktirish.
 
-The `connectedCallback` triggers when the element is added to the document. Not just appended to another element as a child, but actually becomes a part of the page. So we can build detached DOM, create elements and prepare them for later use. They will only be actually rendered when they make it into the page.
+`connectedCallback` element hujjatga qo'shilganda ishga tushadi. Boshqa elementga farzand sifatida qo'shilgandagina emas, balki haqiqatan ham sahifaning bir qismiga aylanganida. Shunday qilib, biz ajratilgan DOM qurish, elementlar yaratish va ularni keyingi foydalanish uchun tayyorlashimiz mumkin. Ular faqat sahifaga kirganda haqiqatan ham render qilinadi.
 ```
 
-## Observing attributes
+## Atributlarni kuzatish
 
-In the current implementation of `<time-formatted>`, after the element is rendered, further attribute changes don't have any effect. That's strange for an HTML element. Usually, when we change an attribute, like `a.href`, we expect the change to be immediately visible. So let's fix this.
+`<time-formatted>` ning joriy amalga oshirilishida element render qilingandan keyin atributlarning keyingi o'zgarishlari hech qanday ta'sir ko'rsatmaydi. Bu HTML element uchun g'alati. Odatda, `a.href` kabi atributni o'zgartirganimizda, o'zgarish darhol ko'rinadigan bo'lishini kutamiz. Keling, buni tuzataylik.
 
-We can observe attributes by providing their list in `observedAttributes()` static getter. For such attributes, `attributeChangedCallback` is called when they are modified. It doesn't trigger for other, unlisted attributes (that's for performance reasons).
+Biz ularning ro'yxatini `observedAttributes()` statik getter da taqdim etish orqali atributlarni kuzatishimiz mumkin. Bunday atributlar uchun ular o'zgartirilganda `attributeChangedCallback` chaqiriladi. Bu boshqa, ro'yxatga kiritilmagan atributlar uchun ishga tushmaydi (bu ishlash sabablari uchun).
 
-Here's a new `<time-formatted>`, that auto-updates when attributes change:
+Mana atributlar o'zgartirilganda avtomatik yangilanadigan yangi `<time-formatted>`:
 
 ```html run autorun="no-epub" height=50
 <script>
@@ -208,19 +204,19 @@ setInterval(() => elem.setAttribute('datetime', new Date()), 1000); // (5)
 </script>
 ```
 
-1. The rendering logic is moved to `render()` helper method.
-2. We call it once when the element is inserted into page.
-3. For a change of an attribute, listed in `observedAttributes()`, `attributeChangedCallback` triggers.
-4. ...and re-renders the element.
-5. At the end, we can easily make a live timer.
+1. Render mantigi `render()` yordamchi metodiga ko'chirilgan.
+2. Element sahifaga kiritilganda uni bir marta chaqiramiz.
+3. `observedAttributes()` da sanab o'tilgan atributning o'zgarishi uchun `attributeChangedCallback` ishga tushadi.
+4. ...va elementni qayta render qiladi.
+5. Oxirida biz osongina jonli taymer yasashimiz mumkin.
 
-## Rendering order
+## Render qilish tartibi
 
-When HTML parser builds the DOM, elements are processed one after another, parents before children. E.g. if we have `<outer><inner></inner></outer>`, then `<outer>` element is created and connected to DOM first, and then `<inner>`.
+HTML parser DOM qurganda, elementlar ketma-ket qayta ishlanadi, ota-onalar bolalardan oldin. Masalan, agar bizda `<outer><inner></inner></outer>` bo'lsa, `<outer>` elementi avval yaratiladi va DOM ga ulanadi, keyin `<inner>`.
 
-That leads to important consequences for custom elements.
+Bu custom elementlar uchun muhim oqibatlarga olib keladi.
 
-For example, if a custom element tries to access `innerHTML` in `connectedCallback`, it gets nothing:
+Masalan, agar custom element `connectedCallback` da `innerHTML` ga kirishga harakat qilsa, u hech narsa olmaydi:
 
 ```html run height=40
 <script>
@@ -228,7 +224,7 @@ customElements.define('user-info', class extends HTMLElement {
 
   connectedCallback() {
 *!*
-    alert(this.innerHTML); // empty (*)
+    alert(this.innerHTML); // bo'sh (*)
 */!*
   }
 
@@ -240,15 +236,15 @@ customElements.define('user-info', class extends HTMLElement {
 */!*
 ```
 
-If you run it, the `alert` is empty.
+Agar uni ishga tushirsangiz, `alert` bo'sh.
 
-That's exactly because there are no children on that stage, the DOM is unfinished. HTML parser connected the custom element `<user-info>`, and is going to proceed to its children, but just didn't yet.
+Bu aynan shu bosqichda bolalar yo'qligi sababli, DOM tugallanmagan. HTML parser custom element `<user-info>` ni uladi va uning bolalariga o'tishga tayyor, lekin hali yo'q.
 
-If we'd like to pass information to custom element, we can use attributes. They are available immediately.
+Agar biz custom elementga ma'lumot uzatmoqchi bo'lsak, atributlardan foydalanishimiz mumkin. Ular darhol mavjud.
 
-Or, if we really need the children, we can defer access to them with zero-delay `setTimeout`.
+Yoki, agar bizga haqiqatan ham bolalar kerak bo'lsa, nol kechikishli `setTimeout` bilan ularga kirishni kechiktirishimiz mumkin.
 
-This works:
+Bu ishlaydi:
 
 ```html run height=40
 <script>
@@ -268,13 +264,13 @@ customElements.define('user-info', class extends HTMLElement {
 */!*
 ```
 
-Now the `alert` in line `(*)` shows "John", as we run it asynchronously, after the HTML parsing is complete. We can process children if needed and finish the initialization.
+Endi `(*)` satridagi `alert` "John" ni ko'rsatadi, chunki biz uni HTML tahlili tugagandan keyin asinxron ravishda ishga tushiramiz. Agar kerak bo'lsa, bolalarni qayta ishlashimiz va initsializatsiyani tugatishimiz mumkin.
 
-On the other hand, this solution is also not perfect. If nested custom elements also use `setTimeout` to initialize themselves, then they queue up: the outer `setTimeout` triggers first, and then the inner one.
+Boshqa tomondan, bu yechim ham mukammal emas. Agar ichki custom elementlar ham o'zlarini initsializatsiya qilish uchun `setTimeout` dan foydalansa, ular navbatga turadilar: tashqi `setTimeout` avval, keyin ichki ishga tushadi.
 
-So the outer element finishes the initialization before the inner one.
+Shunday qilib, tashqi element ichki elementdan oldin initsializatsiyani tugatadi.
 
-Let's demonstrate that on example:
+Keling, buni misolda ko'rsataylik:
 
 ```html run height=0
 <script>
@@ -293,50 +289,50 @@ customElements.define('user-info', class extends HTMLElement {
 */!*
 ```
 
-Output order:
+Chiqish tartibi:
 
 1. outer connected.
 2. inner connected.
 3. outer initialized.
 4. inner initialized.
 
-We can clearly see that the outer element finishes initialization `(3)` before the inner one `(4)`.
+Tashqi element ichki elementdan `(4)` oldin `(3)` initsializatsiyani tugatishini aniq ko'rishimiz mumkin.
 
-There's no built-in callback that triggers after nested elements are ready. If needed, we can implement such thing on our own. For instance, inner elements can dispatch events like `initialized`, and outer ones can listen and react on them.
+Ichki elementlar tayyor bo'lgandan keyin ishga tushadigan o'rnatilgan callback yo'q. Agar kerak bo'lsa, buni o'zimiz amalga oshirishimiz mumkin. Masalan, ichki elementlar `initialized` kabi hodisalarni jo'natishi mumkin va tashqi elementlar ularni tinglashi va ularga javob berishi mumkin.
 
-## Customized built-in elements
+## Moslashtirilgan o'rnatilgan elementlar
 
-New elements that we create, such as `<time-formatted>`, don't have any associated semantics. They are unknown to search engines, and accessibility devices can't handle them.
+Biz yaratgan yangi elementlar, masalan `<time-formatted>`, hech qanday bog'liq semantikaga ega emas. Ular qidiruv tizimlariga noma'lum va accessibility qurilmalari ularni boshqara olmaydi.
 
-But such things can be important. E.g, a search engine would be interested to know that we actually show a time. And if we're making a special kind of button, why not reuse the existing `<button>` functionality?
+Lekin bunday narsalar muhim bo'lishi mumkin. Masalan, qidiruv tizimi biz haqiqatan ham vaqt ko'rsatayotganimizni bilishdan manfaatdor bo'ladi. Va agar biz maxsus turdagi tugma yasayotgan bo'lsak, nima uchun mavjud `<button>` funksionalligini qayta ishlatmaymiz?
 
-We can extend and customize built-in HTML elements by inheriting from their classes.
+Biz ularning klasslaridan meros olib o'rnatilgan HTML elementlarni kengaytirishimiz va moslashtira olamiz.
 
-For example, buttons are instances of `HTMLButtonElement`, let's build upon it.
+Masalan, tugmalar `HTMLButtonElement` nusxalari, keling, uni asosga olaylik.
 
-1. Extend `HTMLButtonElement` with our class:
+1. Klassimiz bilan `HTMLButtonElement` ni kengaytiring:
 
     ```js
-    class HelloButton extends HTMLButtonElement { /* custom element methods */ }
+    class HelloButton extends HTMLButtonElement { /* custom element metodlari */ }
     ```
 
-2. Provide the third argument to `customElements.define`, that specifies the tag:
+2. Tegni belgilaydigan `customElements.define` ga uchinchi argumentni taqdim eting:
     ```js
     customElements.define('hello-button', HelloButton, *!*{extends: 'button'}*/!*);
     ```    
 
-    There may be different tags that share the same DOM-class, that's why specifying `extends` is needed.
+    Bir xil DOM-klassni baham ko'radigan turli teglar bo'lishi mumkin, shuning uchun `extends` ni belgilash kerak.
 
-3. At the end, to use our custom element, insert a regular `<button>` tag, but add `is="hello-button"` to it:
+3. Oxirida, custom elementimizdan foydalanish uchun oddiy `<button>` tegini kiriting, lekin unga `is="hello-button"` qo'shing:
     ```html
     <button is="hello-button">...</button>
     ```
 
-Here's a full example:
+Mana to'liq misol:
 
 ```html run autorun="no-epub"
 <script>
-// The button that says "hello" on click
+// Bosilganda "hello" deb aytadigan tugma
 class HelloButton extends HTMLButtonElement {
 *!*
   constructor() {
@@ -352,28 +348,28 @@ customElements.define('hello-button', HelloButton, {extends: 'button'});
 </script>
 
 *!*
-<button is="hello-button">Click me</button>
+<button is="hello-button">Meni bosing</button>
 */!*
 
 *!*
-<button is="hello-button" disabled>Disabled</button>
+<button is="hello-button" disabled>O'chirilgan</button>
 */!*
 ```
 
-Our new button extends the built-in one. So it keeps the same styles and standard features like `disabled` attribute.
+Bizning yangi tugmamiz o'rnatilgan tugmani kengaytiradi. Shunday qilib, u bir xil uslublar va `disabled` atributi kabi standart xususiyatlarni saqlaydi.
 
-## References
+## Manbalar
 
 - HTML Living Standard: <https://html.spec.whatwg.org/#custom-elements>.
-- Compatiblity: <https://caniuse.com/#feat=custom-elementsv1>.
+- Muvofiqlik: <https://caniuse.com/#feat=custom-elementsv1>.
 
-## Summary
+## Xulosa
 
-Custom elements can be of two types:
+Custom elementlar ikki turdagi bo'lishi mumkin:
 
-1. "Autonomous" -- new tags, extending `HTMLElement`.
+1. "Avtonom" -- `HTMLElement` ni kengaytiradigan yangi teglar.
 
-    Definition scheme:
+    Ta'rif sxemasi:
 
     ```js
     class MyElement extends HTMLElement {
@@ -388,13 +384,13 @@ Custom elements can be of two types:
     /* <my-element> */
     ```
 
-2. "Customized built-in elements" -- extensions of existing elements.
+2. "Moslashtirilgan o'rnatilgan elementlar" -- mavjud elementlarning kengaytmalari.
 
-    Requires one more `.define` argument, and `is="..."` in HTML:
+    Yana bitta `.define` argumenti va HTML da `is="..."` talab qiladi:
     ```js
     class MyButton extends HTMLButtonElement { /*...*/ }
     customElements.define('my-button', MyElement, {extends: 'button'});
     /* <button is="my-button"> */
     ```
 
-Custom elements are well-supported among browsers. There's a polyfill <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.
+Custom elementlar brauzerlar orasida yaxshi qo'llab-quvvatlanadi. Polyfill mavjud <https://github.com/webcomponents/polyfills/tree/master/packages/webcomponentsjs>.

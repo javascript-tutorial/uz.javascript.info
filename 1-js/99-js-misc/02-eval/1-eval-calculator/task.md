@@ -1,11 +1,11 @@
-importance: 4
+muhimlik: 4
 
 ---
 
-# Eval-calculator
+# Eval kalkulyator
 
-Create a calculator that prompts for an arithmetic expression and returns its result.
+Arifmetik ifodani talab qiladigan va uning natijasini qaytaradigan kalkulyator yarating.
 
-There's no need to check the expression for correctness in this task. Just evaluate and return the result.
+Bu vazifada ifodaning toʻgʻriligini tekshirishning hojati yoʻq. Faqat baholang va natijani qaytaring.
 
 [demo]

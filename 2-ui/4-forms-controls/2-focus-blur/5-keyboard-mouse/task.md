@@ -1,13 +1,13 @@
-importance: 4
+muhimlik: 4
 
 ---
 
-# Keyboard-driven mouse
+# Klaviaturada boshqariladigan sichqoncha
 
-Focus on the mouse. Then use arrow keys to move it:
+Sichqonchaga e'tibor qarating. Keyin uni siljitish uchun o'q tugmalaridan foydalaning:
 
 [demo src="solution"]
 
-P.S. Don't put event handlers anywhere except the `#mouse` element.
+P.S. Hodisa ishlov beruvchilarini `#mouse` elementidan boshqa joyga qoʻymang.
 
-P.P.S. Don't modify HTML/CSS, the approach should be generic and work with any element.
+P.P.S. HTML/CSS-ni o'zgartirmang, yondashuv umumiy bo'lishi va har qanday element bilan ishlashi kerak.

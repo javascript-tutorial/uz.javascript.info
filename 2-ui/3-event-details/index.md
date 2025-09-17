@@ -1,3 +1,3 @@
-# UI Events
+# FI (Foydalanuvchi Interfeysi) voqealari
 
-Here we cover most important user interface events and how to work with them.
+Bu yerda biz foydalanuvchi interfeysining eng muhim voqealari va ular bilan qanday ishlashni ko'rib chiqamiz.

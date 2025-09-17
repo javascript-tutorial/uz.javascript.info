@@ -1,6 +1,6 @@
+Algoritm:
 
-The algorithm:
-1. Make `img` for every source.
-2. Add `onload/onerror` for every image.
-3. Increase the counter when either `onload` or `onerror` triggers.
-4. When the counter value equals to the sources count -- we're done: `callback()`.
+1. Har bir manba uchun `img` qiling.
+2. Har bir tasvir uchun `onload/onerror` qo‘shing.
+3. `onload` yoki `onerror` ishga tushganda hisoblagichni oshiring.
+4. Hisoblagich qiymati manbalar soniga teng bo'lsa, biz tugatdik: `backback()`.

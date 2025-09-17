@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -9,11 +9,11 @@ importance: 4
 Funktsiya faqat massivni o'zgartirishi kerak. Hech narsa qaytarmasligi kerak.
 
 Masalan:
+
 ```js
 let arr = [5, 3, 8, 1];
 
 filterRangeInPlace(arr, 1, 4); // 1 dan 4 gacha raqamalrdan tashqari raqamlarni chiqarib tashladi
 
-
-alert( arr ); // [3, 1]
+alert(arr); // [3, 1]
 ```

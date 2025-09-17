@@ -2,10 +2,10 @@ importance: 5
 
 ---
 
-# Hide on click
+# Bosish orqali yashirish
 
-Add JavaScript to the `button` to make `<div id="text">` disappear when we click it.
+Uni bosganimizda `<div id="text">` yoʻqolishi uchun `tugma`ga JavaScript qoʻshing.
 
-The demo:
+Demo:
 
 [iframe border=1 src="solution" height=80]

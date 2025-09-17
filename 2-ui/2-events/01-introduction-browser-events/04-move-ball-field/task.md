@@ -1,21 +1,21 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Move the ball across the field
+# To'pni maydon bo'ylab harakatlantiring
 
-Move the ball across the field to a click. Like this:
+Bir marta bosish uchun to'pni maydon bo'ylab harakatlantiring. Shunga o'xshash:
 
 [iframe src="solution" height="260" link]
 
-Requirements:
+Talablar:
 
-- The ball center should come exactly under the pointer on click (if possible without crossing the field edge).
-- CSS-animation is welcome.
-- The ball must not cross field boundaries.
-- When the page is scrolled, nothing should break.
+- To'p markazi chertganda ko'rsatgich ostida bo'lishi kerak (agar iloji bo'lsa, maydon chetini kesib o'tmasdan).
+- CSS-animatsiyalariga xush kelibsiz.
+- To'p maydon chegaralarini kesib o'tmasligi kerak.
+- Sahifani aylantirganda, hech narsa buzilmasligi kerak.
 
-Notes:
+Eslatmalar:
 
-- The code should also work with different ball and field sizes, not be bound to any fixed values.
-- Use properties `event.clientX/event.clientY` for click coordinates.
+- Kod, shuningdek, har xil to'p va maydon o'lchamlari bilan ishlashi kerak, hech qanday sobit qiymatlarga bog'lanmasligi kerak.
+- Bosish koordinatalari uchun `event.clientX/event.clientY` xususiyatlaridan foydalaning.

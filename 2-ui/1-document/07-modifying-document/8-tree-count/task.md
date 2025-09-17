@@ -1,13 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Show descendants in a tree
+# Daraxtda avlodlarni ko'rsating
 
-There's a tree organized as nested `ul/li`.
+Uyali `ul/li` shaklida tashkil etilgan daraxt bor.
 
-Write the code that adds to each `<li>` the number of its descendants. Skip leaves (nodes without children).
+Har bir `<li>`ga uning avlodlari sonini qo'shadigan kodni yozing. Barglarni o'tkazib yuboring (bolalarsiz tugunlar).
 
-The result:
+Natija:
 
 [iframe border=1 src="solution"]

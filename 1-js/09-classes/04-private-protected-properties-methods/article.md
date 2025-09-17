@@ -1,4 +1,3 @@
-
 # Xususiy va himoyalangan xususiyatlar va usullar
 
 Obyektga yo'naltirilgan dasturlashning eng muhim tamoyillaridan biri -- ichki interfeysni tashqi interfeysdan ajratish.
@@ -23,7 +22,7 @@ Ko'p tafsilotlar. Ammo biz hech narsani bilmasdan foydalanishimiz mumkin.
 
 Qahva mashinalari juda ishonchli, shunday emasmi? Biz uni bir necha yillar davomida ishlatishimiz mumkin va agar biror narsa noto'g'ri bo'lsa -- uni ta'mirlash uchun olib boramiz.
 
-Qahva mashinasining ishonchliligi va soddaligi siri -- barcha tafsilotlar yaxshi sozlangan va ichkarida *yashiringan*.
+Qahva mashinasining ishonchliligi va soddaligi siri -- barcha tafsilotlar yaxshi sozlangan va ichkarida _yashiringan_.
 
 Agar biz kofe mashinasidan himoya qopqog'ini olib tashlasak, unda undan foydalanish ancha murakkab bo'ladi (qayerga bosish kerak?) Va xavfli (elektr toki urishi mumkin).
 
@@ -35,8 +34,8 @@ Ammo ichki tafsilotlarni yashirish uchun biz himoya qopqog'idan emas, balki til 
 
 Obyektga yo'naltirilgan dasturlashda xususiyatlar va usullar ikki guruhga bo'linadi:
 
-- *Ichki interfeys* -- usullar va xususiyatlar, klassning boshqa usullaridan foydalanish mumkin, ammo tashqaridan emas.
-- *Tashqi interfeys* -- usullari va xususiyatlari, klass tashqarisida ham mavjud.
+- _Ichki interfeys_ -- usullar va xususiyatlar, klassning boshqa usullaridan foydalanish mumkin, ammo tashqaridan emas.
+- _Tashqi interfeys_ -- usullari va xususiyatlari, klass tashqarisida ham mavjud.
 
 Agar biz kofe mashinasi bilan o'xshashlikni davom ettirsak -- uning ichida yashiringan narsa: qozon trubkasi, isitish elementi va boshqalar -- bu uning ichki interfeysi.
 
@@ -48,29 +47,16 @@ Shunday qilib, biz obyekt haqida kerak bo'lgan narsa, uning tashqi interfeysini 
 
 Bu umumiy kirish edi.
 
-<<<<<<< HEAD
 JavaScript-da uchta xususiyat va a'zolar mavjud:
 
 - Ommaviy: istalgan joydan kirish mumkin. Ular tashqi interfeysni o'z ichiga oladi. Hozirga qadar biz faqat ommaviy xususiyat va usullardan foydalanganmiz.
 - Shaxsiy: faqat klass ichidan kirish mumkin. Bu ichki interfeys uchun.
 
 Ko'pgina boshqa tillarda "himoyalangan" maydonlar mavjud: ularga faqat klass ichkarisidan va uni kengaytiradigan joylardan kirish mumkin. Ular ichki interfeys uchun ham foydalidir. Ular ma'lum ma'noda xususiylarga qaraganda kengroq tarqalgan, chunki biz odatda kengaytmani to'g'ri bajarish uchun meros qilib olingan klasslarni xohlaymiz.
-=======
-In JavaScript, there are two types of object fields (properties and methods):
-
-- Public: accessible from anywhere. They comprise the external interface. Until now we were only using public properties and methods.
-- Private: accessible only from inside the class. These are for the internal interface.
-
-In many other languages there also exist "protected" fields: accessible only from inside the class and those extending it (like private, but plus access from inheriting classes). They are also useful for the internal interface. They are in a sense more widespread than private ones, because we usually want inheriting classes to gain access to them.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Himoyalangan maydonlar JavaScript-da til darajasida amalga oshirilmaydi, ammo amalda ular juda qulaydir, shuning uchun ular taqlid qilinadi.
 
-<<<<<<< HEAD
 Keyingi bosqichda biz ushbu turdagi barcha xususiyatlarga ega bo'lgan JavaScript-da kofe mashinasini tayyorlaymiz. Qahva mashinasida juda ko'p tafsilotlar bor, biz ularni sodda saqlash uchun modellashtirmaymiz (iloji bo'lsa ham).
-=======
-Now we'll make a coffee machine in JavaScript with all these types of properties. A coffee machine has a lot of details, we won't model them to stay simple (though we could).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## "WaterAmount" ni himoya qilish
 
@@ -82,9 +68,8 @@ class CoffeeMachine {
 
   constructor(power) {
     this.power = power;
-    alert( `Qahva mashinasi yaratildi, quvvat: ${power}` );
+    alert(`Qahva mashinasi yaratildi, quvvat: ${power}`);
   }
-
 }
 
 // kofe mashinasini yarating
@@ -100,11 +85,7 @@ Keling, `waterAmount` xususiyatini himoyalanganga o'zgartirib, uni ko'proq nazor
 
 **Himoyalangan xususiyatlar odatda pastki chiziq bilan `_` belgilanadi.**
 
-<<<<<<< HEAD
 Bu til darajasida amalga oshirilmaydi, ammo bunday xususiyatlar va usullarga tashqi tomondan kirish mumkin emas degan kelishuv mavjud. Ko'pgina dasturchilar unga amal qilishadi.
-=======
-That is not enforced on the language level, but there's a well-known convention between programmers that such properties and methods should not be accessed from the outside.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Shunday qilib, bizning xususiyatimiz `_waterAmount` deb nomlanadi:
 
@@ -113,13 +94,7 @@ class CoffeeMachine {
   _waterAmount = 0;
 
   set waterAmount(value) {
-<<<<<<< HEAD
     if (value < 0) throw new Error("Salbiy suv");
-=======
-    if (value < 0) {
-      value = 0;
-    }
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     this._waterAmount = value;
   }
 
@@ -130,7 +105,6 @@ class CoffeeMachine {
   constructor(power) {
     this._power = power;
   }
-
 }
 
 // kofe mashinasini yarating
@@ -140,11 +114,7 @@ let coffeeMachine = new CoffeeMachine(100);
 coffeeMachine.waterAmount = -10; // Error: Salbiy suv
 ```
 
-<<<<<<< HEAD
 Endi kirish nazorat ostida, shuning uchun suvni noldan pastga o'rnatish muvaffaqiyatsiz tugadi.
-=======
-Now the access is under control, so setting the water amount below zero becomes impossible.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Faqat o'qish uchun "power"
 
@@ -165,7 +135,6 @@ class CoffeeMachine {
   get power() {
     return this._power;
   }
-
 }
 
 // kofe mashinasini yarating
@@ -186,11 +155,7 @@ class CoffeeMachine {
   _waterAmount = 0;
 
   *!*setWaterAmount(value)*/!* {
-<<<<<<< HEAD
     if (value < 0) throw new Error("Salbiy suv");
-=======
-    if (value < 0) value = 0;
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     this._waterAmount = value;
   }
 
@@ -202,15 +167,9 @@ class CoffeeMachine {
 new CoffeeMachine().setWaterAmount(100);
 ```
 
-<<<<<<< HEAD
 Bu biroz ko'proq ko'rinadi, ammo funktsiyalar yanada moslashuvchan. Ular bir nechta argumentlarni qabul qilishlari mumkin (hattoki bizga hozir kerak bo'lmasa ham). Shunday qilib, kelajak uchun, agar biror narsani qayta ishlashimiz kerak bo'lsa, funktsiyalar xavfsizroq tanlovdir.
 
 Albatta, bu yerda savdo-sotiq mavjud. Boshqa tomondan, get/set sintaksisini qisqartiradi, shuning uchun oxir-oqibat qat'iy qoidalar yo'q, shuning uchun siz qaror qilishingiz kerak.
-=======
-That looks a bit longer, but functions are more flexible. They can accept multiple arguments (even if we don't need them right now).
-
-On the other hand, get/set syntax is shorter, so ultimately there's no strict rule, it's up to you to decide.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ````
 
 ```smart header="Himoyalangan maydonlar meros qilib olinadi"
@@ -227,11 +186,7 @@ Xususiy xususiyatlar va usullar uchun til darajasida qo'llab-quvvatlashni ta'min
 
 Maxfiy ma'lumotlar `#` dan boshlanishi kerak. Ularga faqat klass ichidan kirish mumkin.
 
-<<<<<<< HEAD
 Masalan, biz bu yerda xususiy `#waterLimit` xususiyatini qo'shamiz va suvni tekshirish mantig'ini alohida usulga ajratamiz:
-=======
-For instance, here's a private `#waterLimit` property and the water-checking private method `#fixWaterAmount`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 class CoffeeMachine {
@@ -240,15 +195,9 @@ class CoffeeMachine {
 */!*
 
 *!*
-<<<<<<< HEAD
   #checkWater(value) {
     if (value < 0) throw new Error("Salbiy suv");
     if (value > this.#waterLimit) throw new Error("Juda ko'p suv");
-=======
-  #fixWaterAmount(value) {
-    if (value < 0) return 0;
-    if (value > this.#waterLimit) return this.#waterLimit;
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
   }
 */!*
 
@@ -265,12 +214,10 @@ let coffeeMachine = new CoffeeMachine();
 coffeeMachine.#fixWaterAmount(123); // Error
 coffeeMachine.#waterLimit = 1000; // Error
 */!*
-<<<<<<< HEAD
 
 coffeeMachine.waterAmount = 100; // Ishlaydi
-=======
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
+
 .
 Til darajasida `#` bu maydon shaxsiy ekanligini ko'rsatuvchi maxsus belgidir. Biz unga tashqaridan yoki meros klasslaridan kira olmaymiz.
 
@@ -280,7 +227,6 @@ Masalan, `waterAmount` ni `#waterAmount` uchun kirish qismiga aylantiramiz:
 
 ```js run
 class CoffeeMachine {
-
   #waterAmount = 0;
 
   get waterAmount() {
@@ -288,11 +234,7 @@ class CoffeeMachine {
   }
 
   set waterAmount(value) {
-<<<<<<< HEAD
     if (value < 0) throw new Error("Salbiy suv");
-=======
-    if (value < 0) value = 0;
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
     this.#waterAmount = value;
   }
 }
@@ -317,21 +259,12 @@ class MegaCoffeeMachine extends CoffeeMachine {
 }
 ```
 
-<<<<<<< HEAD
 Ko'pgina stsenariylarda bunday cheklash juda jiddiy. Agar biz CoffeeMachine-ni kengaytirsak, uning ichki qismiga kirish uchun qonuniy sabablarga ega bo'lishimiz mumkin. Shuning uchun himoyalangan maydonlar ko'pincha til sintaksisida qo'llab-quvvatlanmasa ham ishlatiladi.
 
 ````warn
 Shaxsiy maydonlar alohida ahamiyatga ega.
 
 Esingizda bo'lsin, odatda biz this[name] yordamida maydonlariga kirishimiz mumkin:
-=======
-In many scenarios such limitation is too severe. If we extend a `CoffeeMachine`, we may have legitimate reasons to access its internals. That's why protected fields are used more often, even though they are not supported by the language syntax.
-
-````warn header="Private fields are not available as this[name]"
-Private fields are special.
-
-As we know, usually we can access fields using `this[name]`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 class User {
@@ -348,21 +281,12 @@ Shaxsiy maydonlarda bu mumkin emas: `this['#name']` ishlamaydi. Bu maxfiylikni t
 
 ## Xulosa
 
-<<<<<<< HEAD
-OOP nuqtai nazaridan ichki interfeysni tashqi interfeysdan ajratish deyiladi [inkapsulatsiya]("https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)").
-=======
-In terms of OOP, delimiting of the internal interface from the external one is called [encapsulation](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+OOP nuqtai nazaridan ichki interfeysni tashqi interfeysdan ajratish deyiladi [inkapsulatsiya](<"https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">).
 
 Bu quyidagi afzalliklarni beradi:
 
-<<<<<<< HEAD
 O'zlarini oyoqlariga otmasliklari uchun foydalanuvchilarni himoya qilish
 : Tasavvur qiling, kofe mashinasidan foydalangan holda ishlab chiquvchilar jamoasi mavjud. U "Best CoffeeMachine" kompaniyasi tomonidan tayyorlangan va yaxshi ishlaydi, ammo himoya qoplamasi olib tashlangan. Shunday qilib, ichki interfeys ochiladi.
-=======
-Protection for users, so that they don't shoot themselves in the foot
-: Imagine, there's a team of developers using a coffee machine. It was made by the "Best CoffeeMachine" company, and works fine, but a protective cover was removed. So the internal interface is exposed.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     Barcha ishlab chiquvchilar madaniyatli -- ular kofe mashinasidan maqsadga muvofiq foydalanadilar. Ammo ulardan biri John eng aqlli ekaniga qaror qildi va qahva mashinasining ichki qismida bir oz o'zgartirishlar kiritdi. Shunday qilib, ikki kundan keyin qahva mashinasi ishlamay qoldi.
 
@@ -373,7 +297,6 @@ Protection for users, so that they don't shoot themselves in the foot
 Qo'llab-quvvatlanadigan
 : Dasturlashdagi vaziyat haqiqiy hayot qahva mashinasiga qaraganda ancha murakkab, chunki biz uni bir marta sotib olmaymiz. Kod doimiy ravishda ishlab chiqilib va takomillashib boradi.
 
-<<<<<<< HEAD
     **Agar biz ichki interfeysni qat'iy chegaralab qo'ysak, u holda klass ishlab chiqaruvchisi o'zining ichki xususiyatlari va usullarini, hatto foydalanuvchilarga xabar bermasdan ham, bemalol o'zgartirishi mumkin.**
 
     Ishlab chiqish ancha oson, agar ma'lum usullarning nomini o'zgartirish, ularning parametrlarini o'zgartirish va hatto olib tashlash mumkinligini bilsangiz, chunki hech qanday tashqi kod ularga bog'liq emas.
@@ -382,31 +305,14 @@ Qo'llab-quvvatlanadigan
 
 Murakkablikni yashirish
 : Odamlar oddiy narsalarni ishlatishni yaxshi ko'rishadi. Hech bo'lmaganda tashqaridan. Ichkarida bo'lgan narsa boshqacha.
-=======
-    **If we strictly delimit the internal interface, then the developer of the class can freely change its internal properties and methods, even without informing the users.**
-
-    If you're a developer of such class, it's great to know that private methods can be safely renamed, their parameters can be changed, and even removed, because no external code depends on them.
-
-    For users, when a new version comes out, it may be a total overhaul internally, but still simple to upgrade if the external interface is the same.
-
-Hiding complexity
-: People adore using things that are simple. At least from outside. What's inside is a different thing.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
     Dasturchilar ham bundan mustasno emas.
 
     **Amalga oshirish tafsilotlari yashirin bo'lsa, u har doim qulay bo'ldi, va oddiy, yaxshi hujjatlashtirilgan tashqi interfeysi mavjud.**
 
-<<<<<<< HEAD
 Ichki interfeysni yashirish uchun biz himoyalangan yoki umumiy xususiyatlardan foydalanamiz:
 
 - Himoyalangan maydonlar `_` dan boshlanadi. Bu taniqli anjuman, til darajasida bajarilmagan. Dasturchilar faqat o'z sinfidan `_` dan boshlanadigan maydonga va undan meros qolgan klasslarga kirishlari kerak.
 - Shaxsiy maydonlar `#` bilan boshlanadi. JavaScript biz faqat sinf ichidagilarga kira olishimizga ishonch hosil qiladi.
-=======
-To hide an internal interface we use either protected or private properties:
-
-- Protected fields start with `_`. That's a well-known convention, not enforced at the language level. Programmers should only access a field starting with `_` from its class and classes inheriting from it.
-- Private fields start with `#`. JavaScript makes sure we can only access those from inside the class.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Hozirda shaxsiy maydonlar brauzerlar orasida yaxshi qo'llab-quvvatlanmaydi, lekin ularni to'ldirish mumkin.

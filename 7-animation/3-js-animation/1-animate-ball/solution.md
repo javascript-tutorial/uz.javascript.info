@@ -1,10 +1,10 @@
-To bounce we can use CSS property `top` and `position:absolute` for the ball inside the field with `position:relative`.
+Qaytish uchun maydon ichidagi to'p uchun `top` va `position: absolute` CSS xususiyatidan foydalanishimiz mumkin.
 
-The bottom coordinate of the field is `field.clientHeight`. The CSS `top` property refers to the upper edge of the ball. So it should go from `0` till `field.clientHeight - ball.clientHeight`, that's the final lowest position of the upper edge of the ball.
+Maydonning pastki koordinatasi `field.clientHeight`. CSS `top` xususiyati to'pning yuqori chetiga ishora qiladi. Demak, u `0` dan `field.clientHeight - ball.clientHeight` gacha borishi kerak, bu to'pning yuqori chetining oxirgi eng past holati.
 
-To get the "bouncing" effect we can use the timing function `bounce` in `easeOut` mode.
+`O'tish` effektini olish uchun biz `easeOut` rejimida `bounce` vaqt funksiyasidan foydalanishimiz mumkin.
 
-Here's the final code for the animation:
+Mana animatsiyaning yakuniy kodi:
 
 ```js
 let to = field.clientHeight - ball.clientHeight;
@@ -13,7 +13,7 @@ animate({
   duration: 2000,
   timing: makeEaseOut(bounce),
   draw(progress) {
-    ball.style.top = to * progress + 'px'
-  }
+    ball.style.top = to * progress + "px";
+  },
 });
 ```

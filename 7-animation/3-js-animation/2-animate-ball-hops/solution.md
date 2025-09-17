@@ -1,32 +1,32 @@
-In the task <info:task/animate-ball> we had only one property to animate. Now we need one more: `elem.style.left`.
+<info:task/animate-ball> topshirig'ida bizda jonlantirish uchun faqat bitta xususiyat bor edi. Endi bizga yana bitta kerak: `elem.style.left`.
 
-The horizontal coordinate changes by another law: it does not "bounce", but gradually increases shifting the ball to the right.
+Gorizontal koordinata boshqa qonun bilan o'zgaradi: u `sakrash` emas, balki to'pni o'ngga siljitishni asta-sekin oshiradi.
 
-We can write one more `animate` for it.
+Buning uchun yana bitta `animate` yozishimiz mumkin.
 
-As the time function we could use `linear`, but something like `makeEaseOut(quad)` looks much better.
+Vaqt funksiyasi sifatida biz `linear` dan foydalanishimiz mumkin, ammo `makeEaseOut(quad)` kabi narsa ancha yaxshi ko'rinadi.
 
-The code:
+Kod:
 
 ```js
 let height = field.clientHeight - ball.clientHeight;
 let width = 100;
 
-// animate top (bouncing)
+// tepaga jonlantirish (sakrab)
 animate({
   duration: 2000,
   timing: makeEaseOut(bounce),
-  draw: function(progress) {
-    ball.style.top = height * progress + 'px'
-  }
+  draw: function (progress) {
+    ball.style.top = height * progress + "px";
+  },
 });
 
-// animate left (moving to the right)
+// chapga jonlantirish (o'ngga harakatlanish)
 animate({
   duration: 2000,
   timing: makeEaseOut(quad),
-  draw: function(progress) {
-    ball.style.left = width * progress + "px"
-  }
+  draw: function (progress) {
+    ball.style.left = width * progress + "px";
+  },
 });
 ```

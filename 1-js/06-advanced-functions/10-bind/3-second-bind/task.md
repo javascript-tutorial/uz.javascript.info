@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -13,8 +13,7 @@ function f() {
   alert(this.name);
 }
 
-f = f.bind( {name: "John"} ).bind( {name: "Ann" } );
+f = f.bind({ name: "John" }).bind({ name: "Ann" });
 
 f();
 ```
-

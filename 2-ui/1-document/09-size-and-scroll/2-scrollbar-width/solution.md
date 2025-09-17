@@ -1,16 +1,16 @@
-To get the scrollbar width, we can create an element with the scroll, but without borders and paddings.
+O'tkazish paneli kengligini olish uchun biz aylantirish bilan element yaratishimiz mumkin, lekin chegaralar va to'ldirishlarsiz.
 
-Then the difference between its full width `offsetWidth` and the inner content area width `clientWidth` will be exactly the scrollbar:
+Keyin uning to'liq kengligi `offsetWidth` va ichki kontent maydoni kengligi `clientWidth` o'rtasidagi farq aynan aylantirish paneli bo'ladi:
 
 ```js run
-// create a div with the scroll
-let div = document.createElement('div');
+// aylantirish orqali div yarating
+let div = document.createElement("div");
 
-div.style.overflowY = 'scroll';
-div.style.width = '50px';
-div.style.height = '50px';
+div.style.overflowY = "scroll";
+div.style.width = "50px";
+div.style.height = "50px";
 
-// must put it in the document, otherwise sizes will be 0
+// uni hujjatga qo'yish kerak, aks holda o'lchamlar 0 bo'ladi
 document.body.append(div);
 let scrollWidth = div.offsetWidth - div.clientWidth;
 

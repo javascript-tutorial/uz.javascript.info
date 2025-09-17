@@ -1,13 +1,7 @@
 # Ninja kodi
 
-
-<<<<<<< HEAD
 ```quote author="Konfutsiy"
 O'ylamasdan o'rganish mehnatni yo'qotadi; o'rganmasdan o'ylash xavfli.
-=======
-```quote author="Confucius (Analects)"
-Learning without thought is labor lost; thought without learning is perilous.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
 O'tmishdagi dasturchi ninjalar ushbu hiyla-nayranglardan foydalanib, kod saqlovchilarning ongini charxlashdi.
@@ -18,11 +12,9 @@ Boshlang'ich dasturchilar ba'zan ularni dasturchi ninjalardan ham yaxshiroq foyd
 
 Ularni diqqat bilan o'qing va kimligingizni bilib oling -- ninja, boshlang'ich dasturchi yoki kod gurusi?
 
-
 ```warn header="Ironiya aniqlandi"
 Ko'pchilik ninja yo'llaridan yurishga harakat qiladi. Muvaffaqiyatli bo'lganlar oz.
 ```
-
 
 ## Qisqalik aqlning ruhidir
 
@@ -34,7 +26,7 @@ Masalan; misol uchun, uchlik operatorga, bir ko'z tashlang `'?'`:
 
 ```js
 // taniqli javascript kutubxonasidan olingan
-i = i ? i < 0 ? Math.max(0, len + i) : i : 0;
+i = i ? (i < 0 ? Math.max(0, len + i) : i) : 0;
 ```
 
 Ajoyib, to'g'rimi? Agar siz shunday yozsangiz, ushbu satrga duch kelgan va `i` ning qiymati nima ekanligini tushunishga harakat qilgan dastruchi quvnoq vaqt o'tkazishini aytadi. Keyin javob izlab huzuringizga keladi.
@@ -47,11 +39,7 @@ Qisqasi har doim yaxshiroq ekanligini ularga ayting. Ularni ninja yo'llariga bos
 Kim biladi - gapirmaydi. Kim aytadi - bilmaydi.
 ```
 
-<<<<<<< HEAD
 Tezroq kodlashning yana bir usuli - hamma joyda bitta harfli o'zgaruvchan nomlardan foydalanish. `a`, `b` yoki `c` kabi.
-=======
-Another way to code shorter is to use single-letter variable names everywhere. Like `a`, `b` or `c`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Qisqa o'zgaruvchi kodda o'rmondagi haqiqiy ninja singari yo'qoladi. Hech kim uni muharrirning "qidiruvi" yordamida topa olmaydi. Va hatto kimdir buni tushungan taqdirda ham, u `a` yoki `b` ismlari nimani anglatishini "hal qila olmaydi".
 
@@ -83,19 +71,19 @@ Buyuk tasvirning shakli yo'q.
 
 Ism tanlashda eng mavhum so'zdan foydalanishga harakat qiling. `obj`, `data`, `value`, `itrem`, `elem` va boshqalar.
 
-- **O'zgaruvchan uchun ideal nom bu `data`.** Uni iloji boricha hamma joyda ishlating. Darhaqiqat, har bir o'zgaruvchanlarda *ma'lumotlar* saqlanadi, to'g'rimi?
+- **O'zgaruvchan uchun ideal nom bu `data`.** Uni iloji boricha hamma joyda ishlating. Darhaqiqat, har bir o'zgaruvchanlarda _ma'lumotlar_ saqlanadi, to'g'rimi?
 
-    ...Agar `data` allaqachon olingan bo'lsa, nima qilish kerak? `value` ni sinab ko'ring, u ham universaldir. Axir o'zgaruvchan oxir oqibat *qiymat* oladi.
+  ...Agar `data` allaqachon olingan bo'lsa, nima qilish kerak? `value` ni sinab ko'ring, u ham universaldir. Axir o'zgaruvchan oxir oqibat _qiymat_ oladi.
 
 - **O'zgaruvchani turiga qarab nomlang: `str`, `num`...**
 
-    Ularni sinab ko'ring. Yosh tashabbuskor hayron bo'lishi mumkin -- bunday nomlar ninja uchun haqiqatan ham foydalimi? Albatta!
+  Ularni sinab ko'ring. Yosh tashabbuskor hayron bo'lishi mumkin -- bunday nomlar ninja uchun haqiqatan ham foydalimi? Albatta!
 
-    Albatta, o'zgaruvchanning nomi hali ham nimanidirni anglatadi. Bu o'zgaruvchanning ichida nima borligini aytadi: matn, raqam yoki boshqa narsa. Tashqaridan kelgan kishi kodni tushunishga harakat qilganda, aslida umuman ma'lumot yo'qligini ko'rib hayron bo'ladi! Va oxir-oqibat sizning yaxshi o'ylangan kodingizni o'zgartira olmaydi.
+  Albatta, o'zgaruvchanning nomi hali ham nimanidirni anglatadi. Bu o'zgaruvchanning ichida nima borligini aytadi: matn, raqam yoki boshqa narsa. Tashqaridan kelgan kishi kodni tushunishga harakat qilganda, aslida umuman ma'lumot yo'qligini ko'rib hayron bo'ladi! Va oxir-oqibat sizning yaxshi o'ylangan kodingizni o'zgartira olmaydi.
 
-    Koddagi nosozliklarni tuzatuvchi orqali qiymat turini topish oson. Ammo o'zgaruvchanning ma'nosi nima? U qaysi matni/raqamni saqlaydi?
+  Koddagi nosozliklarni tuzatuvchi orqali qiymat turini topish oson. Ammo o'zgaruvchanning ma'nosi nima? U qaysi matni/raqamni saqlaydi?
 
-    Kod ustida uzoq meditatsiya qilmasdan, bu kodni chuna ololmaysiz!
+  Kod ustida uzoq meditatsiya qilmasdan, bu kodni chuna ololmaysiz!
 
 - **...Ammo endi bunday nomlar qolmasa nima bo'ladi?** Raqam qo'shing: `data1, item2, elem5`...
 
@@ -107,21 +95,15 @@ Sizning kodingizni faqat chindan ham diqqatli dasturchi tushunishi kerak. Ammo b
 
 Imkoningiz bor joyda ularni aralashtiring.
 
-Bunday kodni tez o'qish imkonsiz bo'lib qoladi. Xato bo'lsa ... Ummm ... Biz uzoq vaqtga tiqilib qoldik, choy tayyorlasayam bo'ladi. 
-
+Bunday kodni tez o'qish imkonsiz bo'lib qoladi. Xato bo'lsa ... Ummm ... Biz uzoq vaqtga tiqilib qoldik, choy tayyorlasayam bo'ladi.
 
 ## Aqlli sinonimlar
 
-<<<<<<< HEAD
 ```quote author="Konfutsiy"
 Eng qiyin narsa - qorong'i xonada qora mushukni topishdir, ayniqsa agar u yerda mushuk bo'lmasa.
-=======
-```quote author="Laozi (Tao Te Ching)"
-The Tao that can be told is not the eternal Tao. The name that can be named is not the eternal name.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ```
 
-*Bir xil* narsalarga *o'xshash* nomlardan foydalanish hayotni yanada qiziqarli qiladi va jamoatchilikka ijodingizni namoyish etadi.
+_Bir xil_ narsalarga _o'xshash_ nomlardan foydalanish hayotni yanada qiziqarli qiladi va jamoatchilikka ijodingizni namoyish etadi.
 
 Masalan, funktsiya prefikslarini ko'rib chiqing. Agar funktsiya ekranda xabarni ko'rsatsa - uni `displayMessage` kabi `display...` bilan boshlang. Va agar boshqa funktsiya ekranda foydalanuvchi nomi kabi yana bir narsani ko'rsatsa, uni `show...` bilan boshlang (`showName` kabi).
 
@@ -150,11 +132,7 @@ Buning o'rniga mavjud nomlarni qayta ishlating. Ularga faqat yangi qiymatlarni y
 
 Funksiyada faqat parametr sifatida berilgan o'zgaruvchanlardan foydalanishga harakat qiling.
 
-<<<<<<< HEAD
-Bu o'zgaruvchanda *hozir* nima borligini aniqlashni qiyinlashtirishi mumkin. Va bu qayerdan kelib chiqqanligi. Intuitivligi zaif odam kodni satrma-bosqich tahlil qilishi va har bir kod bo'limi orqali o'zgarishlarni kuzatishi kerak boladi.
-=======
-That would make it really hard to identify what's exactly in the variable *now*. And also where it comes from. The purpose is to develop the intuition and memory of a person reading the code. A person with weak intuition would have to analyze the code line-by-line and track the changes through every code branch.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Bu o'zgaruvchanda _hozir_ nima borligini aniqlashni qiyinlashtirishi mumkin. Va bu qayerdan kelib chiqqanligi. Intuitivligi zaif odam kodni satrma-bosqich tahlil qilishi va har bir kod bo'limi orqali o'zgarishlarni kuzatishi kerak boladi.
 
 **Yondashuvning ilg'or varianti - bu qiymatni tsikl yoki funktsiya o'rtasida yashirin ravishda (!) almashtirish.**
 
@@ -172,11 +150,7 @@ function ninjaFunction(elem) {
 
 Funktsiyaning ikkinchi yarmida `elem` bilan ishlashni istagan boshqa dasturchi hayron qoladi ... Faqat koddagi nosozliklarni tuzatish paytida, kodni o'rganib chiqib, ular klon bilan ishlashayotganini bilib olishadi!
 
-<<<<<<< HEAD
 Ushbu texnikani muntazam ravishda kodda ko'rdik. Tajribali ninjaga qarshi ham samarali.
-=======
-Seen in code regularly. Deadly effective even against an experienced ninja.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## O'yin-kulgi uchun pastki chiziqlar
 
@@ -190,13 +164,7 @@ Aqlli ninja pastki chiziqlarni kodning bir joyiga qo'yadi va boshqa joylarda qo'
 
 Hamma sizning subyektlaringiz qanchalik ajoyibligini ko'rsin! `superElement`, `megaFrame` va `niceItem` kabi nomlar o'quvchini ravshanlashtiradi.
 
-<<<<<<< HEAD
 Darhaqiqat, bir tomondan, bir narsa yozilgan: `super...`, `mega...`, `nice...`. Ammo boshqa tomondan - bu tafsilotlarni keltirib chiqarmaydi. O'quvchi yashirin ma'no izlashga qaror qilishi va bir-ikki soat davomida mulohaza yuritishi mumkin.
-
-=======
-Indeed, from one hand, something is written: `super..`, `mega..`, `nice..` But from the other hand -- that brings no details. A reader may decide to look for a hidden meaning and meditate for an hour or two of their paid working time.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
-
 
 ## Tashqi o'zgaruvchanlarni bir-biriga bog'lab qo'ying
 
@@ -205,11 +173,7 @@ Nurda bo'lganingizda, zulmatda hech narsa ko'rmaysiz.<br>
 Zulmatda bo'lganingizda, hamma narsani nurda ko'rishingiz mumkin.
 ```
 
-<<<<<<< HEAD
 Funktsiya ichidagi va tashqarisidagi o'zgaruvchanlar uchun bir xil nomlardan foydalaning. Oddiy. Hech qanday harakat talab etilmaydi.
-=======
-Use same names for variables inside and outside a function. As simple. No efforts to invent new names.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 let *!*user*/!* = authenticateUser();
@@ -226,9 +190,7 @@ function render() {
 
 `render` ichiga sakrab tushgan dasturchi, ehtimol tashqi foydalanuvchini soya qilingan ichki `user` mavjudligini sezmaydi.
 
-
 Keyin ular tashqi o'zgaruvchanni, `authenticateUser()` natijasini hisobga olib, `user` bilan ishlashga harakat qilishadi... Tuzoq paydo bo'ldi! Salom, koddagi nosozliklarni tuzatuvchi...
-
 
 ## Hamma joyda yon ta'sir mavjud!
 
@@ -243,7 +205,6 @@ Funktsiya `is..`, `check..` yoki `find...` deb nomlangan bo'lib, ijro etganda bi
 O'zingizning asl fikringizni ko'rsating! `checkPermission` chaqiruvi `true/false` emas, balki tekshirish natijalarini murakkab obyektga qaytaring.
 
 `If(checkPermission(..))` yozishga urinayotgan dasturchilar, nima uchun u ishlamayapti, deb hayron bo'lishadi. Ularga ayting: "Hujjatlarni o'qing!". Va ushbu maqolani bering.
-
 
 ## Kuchli funktsiyalar!
 

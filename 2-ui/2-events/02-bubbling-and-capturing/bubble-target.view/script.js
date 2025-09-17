@@ -1,10 +1,9 @@
+form.onclick = function (event) {
+  event.target.style.backgroundColor = "yellow";
 
-form.onclick = function(event) {
-  event.target.style.backgroundColor = 'yellow';
-
-  // chrome needs some time to paint yellow
+  // xromni sariq rangga bo'yash uchun biroz vaqt kerak
   setTimeout(() => {
     alert("target = " + event.target.tagName + ", this=" + this.tagName);
-    event.target.style.backgroundColor = ''
+    event.target.style.backgroundColor = "";
   }, 0);
 };

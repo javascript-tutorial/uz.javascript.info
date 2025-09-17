@@ -1,41 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8">
+    <style>
+      #protector {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 99999999;
+      }
+    </style>
+  </head>
 
-  <style>
-    #protector {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 99999999;
-    }
-  </style>
+  <body>
+    <div id="protector">
+      <a href="/" target="_blank">Saytga o'tish</a>
+    </div>
 
-</head>
+    <script>
+      if (top.document.domain == document.domain) {
+        protector.remove();
+      }
+    </script>
 
-<body>
+    Ushbu matn har doim ko'rinadi. Ammo agar sahifa hujjat ichida ochiq bo'lsa
+    boshqa domen, uning ustidagi div har qanday harakatni oldini oladi.
 
-<div id="protector">
-  <a href="/" target="_blank">Go to the site</a>
-</div>
-
-<script>
-
-  if (top.document.domain == document.domain) {
-    protector.remove();
-  }
-
-</script>
-
-  This text is always visible.
-
-  But if the page was open inside a document from another domain, the div over it would prevent any actions.
-
-  <button onclick="alert(1)">Click wouldn't work in that case</button>
-
-</body>
+    <button onclick="alert(1)">Bunday holda bosish ishlamaydi</button>
+  </body>
 </html>

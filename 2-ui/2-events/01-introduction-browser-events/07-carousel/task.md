@@ -1,13 +1,13 @@
-importance: 4
+muhimlik: 4
 
 ---
 
-# Carousel
+#Karusel
 
-Create a "carousel" -- a ribbon of images that can be scrolled by clicking on arrows.
+"Karusel" yarating -- o'qlarni bosish orqali aylantirilishi mumkin bo'lgan tasvirlar lentasi.
 
 [iframe height=200 src="solution"]
 
-Later we can add more features to it: infinite scrolling, dynamic loading etc.
+Keyinchalik biz unga qo'shimcha funktsiyalarni qo'shishimiz mumkin: cheksiz aylantirish, dinamik yuklash va hk.
 
-P.S. For this task HTML/CSS structure is actually 90% of the solution.
+P.S. Ushbu vazifa uchun HTML/CSS tuzilishi aslida yechimning 90% ni tashkil qiladi.

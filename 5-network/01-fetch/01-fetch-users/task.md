@@ -1,13 +1,13 @@
-# Fetch users from GitHub
+# Foydalanuvchilarni GITHUBdan olish
 
-Create an async function `getUsers(names)`, that gets an array of GitHub logins, fetches the users from GitHub and returns an array of GitHub users.
+GitHub loginlari qatorini oladigan, foydalanuvchilarni GitHub'dan oladigan va GitHub foydalanuvchilari qatorini qaytaradigan `getUsers(names)` asinxron funksiyasini yarating.
 
-The GitHub url with user information for the given `USERNAME` is: `https://api.github.com/users/USERNAME`.
+Berilgan `USERNAME` uchun foydalanuvchi ma'lumotlariga ega GitHub url: `https://api.github.com/users/USERNAME`.
 
-There's a test example in the sandbox.
+Sandboxda sinov namunasi mavjud.
 
-Important details:
+Muhim tafsilotlar:
 
-1. There should be one `fetch` request per user.
-2. Requests shouldn't wait for each other. So that the data arrives as soon as possible.
-3. If any request fails, or if there's no such user, the function should return `null` in the resulting array.
+1. Har bir foydalanuvchi uchun bitta `fetch` soʻrovi boʻlishi kerak.
+2. So'rovlar bir-birini kutmasligi kerak. Shunday qilib, ma'lumotlar imkon qadar tezroq keladi.
+3. Agar biron-bir so'rov bajarilmasa yoki bunday foydalanuvchi bo'lmasa, funktsiya olingan massivda `null` qiymatini qaytarishi kerak.

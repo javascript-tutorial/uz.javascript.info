@@ -1,12 +1,13 @@
-Answers: **no, yes**.
+Javoblar: **no, yes**.
 
-- In the script `subject:Java` it doesn't match anything, because `pattern:[^script]` means "any character except given ones". So the regexp looks for `"Java"` followed by one such symbol, but there's a string end, no symbols after it.
+- `subject:Java` skriptida u hech narsaga mos kelmaydi, chunki `pattern:[^script]` "berilganlardan tashqari har qanday belgi" degan ma'noni anglatadi. Shunday qilib, regexp `"Java"` dan keyin bitta shunday belgini qidiradi, lekin satr oxiri bor, undan keyin hech qanday belgi yo'q.
 
-    ```js run
-    alert( "Java".match(/Java[^script]/) ); // null
-    ```
-- Yes, because the `pattern:[^script]` part matches the character `"S"`. It's not one of `pattern:script`. As the regexp is case-sensitive (no `pattern:i` flag), it treats `"S"` as a different character from `"s"`.
+  ```js run
+  alert("Java".match(/Java[^script]/)); // null
+  ```
 
-    ```js run
-    alert( "JavaScript".match(/Java[^script]/) ); // "JavaS"
-    ```
+- Ha, chunki `pattern:[^script]` qismi `"S"` belgisiga mos keladi. Bu "pattern:script" dan biri emas. Regexp katta-kichik harflarga sezgir bo'lgani uchun (`"pattern:i"` bayrog'i yo'q), u `"S"` ni `"s"` dan boshqa belgi sifatida ko'radi.
+
+  ```js run
+  alert("JavaScript".match(/Java[^script]/)); // "JavaS"
+  ```

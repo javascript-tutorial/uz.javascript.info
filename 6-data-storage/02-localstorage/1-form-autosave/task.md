@@ -1,10 +1,9 @@
+# Shakl maydonini avtomatik saqlash
 
-# Autosave a form field
+Har bir oʻzgarishda uning qiymatini "avtomatik saqlaydigan" `textarea` maydonini yarating.
 
-Create a `textarea` field that "autosaves" its value on every change.
+Shunday qilib, agar foydalanuvchi tasodifan sahifani yopsa va uni qayta ochsa, u o'zining tugallanmagan ma'lumotlarini joyida topadi.
 
-So, if the user accidentally closes the page, and opens it again, he'll find his unfinished input at place.
-
-Like this:
+Shunga o'xshash:
 
 [iframe src="solution" height=120]

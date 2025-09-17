@@ -1,24 +1,24 @@
-# Bubbling and capturing
+# Bubbling va Capturing
 
-Let's start with an example.
+Misoldan boshlaylik.
 
-This handler is assigned to `<div>`, but also runs if you click any nested tag like `<em>` or `<code>`:
+Bu ishlov beruvchi `<div>` ga tayinlangan, lekin siz `<em>` yoki `<code>` kabi ichki tegga bosganda ham ishlaydi:
 
 ```html autorun height=60
-<div onclick="alert('The handler!')">
-  <em>If you click on <code>EM</code>, the handler on <code>DIV</code> runs.</em>
+<div onclick="alert('Ishlov beruvchi!')">
+  <em>Agar siz <code>EM</code> ga bossangiz, <code>DIV</code> dagi ishlov beruvchi ishlaydi.</em>
 </div>
 ```
 
-Isn't it a bit strange? Why does the handler on `<div>` run if the actual click was on `<em>`?
+Bu biroz g'alati emasmi? Nega haqiqiy bosish `<em>` da bo'lgan bo'lsa ham, `<div>` dagi ishlov beruvchi ishlaydi?
 
 ## Bubbling
 
-The bubbling principle is simple.
+Bubbling printsipi oddiy.
 
-**When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.**
+**Element ustida hodisa sodir bo'lganda, u avval undagi ishlov beruvchilarni ishga tushiradi, keyin ota-elementdagi, so'ngra barcha ajdodlarda yuqoriga qarab.**
 
-Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of them:
+Aytaylik, bizda 3 ta ichki element `FORM > DIV > P` bor va har birida ishlov beruvchi bor:
 
 ```html run autorun
 <style>
@@ -35,124 +35,122 @@ Let's say we have 3 nested elements `FORM > DIV > P` with a handler on each of t
 </form>
 ```
 
-A click on the inner `<p>` first runs `onclick`:
-1. On that `<p>`.
-2. Then on the outer `<div>`.
-3. Then on the outer `<form>`.
-4. And so on upwards till the `document` object.
+Ichki `<p>` ga bosish avval `onclick` ni ishga tushiradi:
+1. O'sha `<p>` da.
+2. Keyin tashqi `<div>` da.
+3. Keyin tashqi `<form>` da.
+4. Va hokazo `document` obyektiga qadar yuqoriga.
 
 ![](event-order-bubbling.svg)
 
-So if we click on `<p>`, then we'll see 3 alerts: `p` -> `div` -> `form`.
+Shuning uchun agar biz `<p>` ga bossak, 3 ta ogohlantirish ko'ramiz: `p` -> `div` -> `form`.
 
-The process is called "bubbling", because events "bubble" from the inner element up through parents like a bubble in the water.
+Bu jarayon "bubbling" deb ataladi, chunki hodisalar ichki elementdan ota-elementlar orqali suvdagi pufakcha kabi "puflanadi".
 
-```warn header="*Almost* all events bubble."
-The key word in this phrase is "almost".
+```warn header="*Deyarli* barcha hodisalar bubble qiladi."
+Bu jumlada asosiy so'z "deyarli".
 
-For instance, a `focus` event does not bubble. There are other examples too, we'll meet them. But still it's an exception, rather than a rule, most events do bubble.
+Masalan, `focus` hodisasi bubble qilmaydi. Boshqa misollar ham bor, biz ularga duch kelamiz. Lekin bu istisno, qoida emas, ko'pchilik hodisalar bubble qiladi.
 ```
 
 ## event.target
 
-A handler on a parent element can always get the details about where it actually happened.
+Ota element ustidagi ishlov beruvchi doim qayerda sodir bo'lganligi haqidagi tafsilotlarni olishi mumkin.
 
-**The most deeply nested element that caused the event is called a *target* element, accessible as `event.target`.**
+**Hodisani keltirib chiqargan eng chuqur ichki element *target* element deb ataladi va `event.target` orqali kirish mumkin.**
 
-Note the differences from `this` (=`event.currentTarget`):
+`this` (`=event.currentTarget`) dan farqlarni qayd eting:
 
-- `event.target` -- is the "target" element that initiated the event, it doesn't change through the bubbling process.
-- `this` -- is the "current" element, the one that has a currently running handler on it.
+- `event.target` -- hodisani boshlagan "target" element, u bubbling jarayonida o'zgarmaydi.
+- `this` -- "joriy" element, hozirda ishlov beruvchi ishlab turgan element.
 
-For instance, if we have a single handler `form.onclick`, then it can "catch" all clicks inside the form. No matter where the click happened, it bubbles up to `<form>` and runs the handler.
+Masalan, agar bizda bitta `form.onclick` ishlov beruvchi bo'lsa, u forma ichidagi barcha bosilishlarni "ushlab" olishi mumkin. Bosish qayerda sodir bo'lishidan qat'i nazar, u `<form>` ga bubble qiladi va ishlov beruvchini ishga tushiradi.
 
-In `form.onclick` handler:
+`form.onclick` ishlov beruvchisida:
 
-- `this` (=`event.currentTarget`) is the `<form>` element, because the handler runs on it.
-- `event.target` is the actual element inside the form that was clicked.
+- `this` (`=event.currentTarget`) `<form>` elementi, chunki ishlov beruvchi unda ishlaydi.
+- `event.target` forma ichida bosilgan haqiqiy element.
 
-Check it out:
+Buni tekshirib ko'ring:
 
 [codetabs height=220 src="bubble-target"]
 
-It's possible that `event.target` could equal `this` -- it happens when the click is made directly on the `<form>` element.
+`event.target` `this` ga teng bo'lishi mumkin -- bu bosish to'g'ridan-to'g'ri `<form>` elementida amalga oshirilganda sodir bo'ladi.
 
-## Stopping bubbling
+## Bubbling ni to'xtatish
 
-A bubbling event goes from the target element straight up. Normally it goes upwards till `<html>`, and then to `document` object, and some events even reach `window`, calling all handlers on the path.
+Bubble qilayotgan hodisa target elementdan to'g'ri yuqoriga boradi. Odatda u `<html>` gacha, keyin `document` obyektiga boradi va ba'zi hodisalar hatto `window` ga yetadi, yo'lda barcha ishlov beruvchilarni chaqiradi.
 
-But any handler may decide that the event has been fully processed and stop the bubbling.
+Lekin har qanday ishlov beruvchi hodisa to'liq qayta ishlanganligini hal qilishi va bubbling ni to'xtatishi mumkin.
 
-The method for it is `event.stopPropagation()`.
+Buning usuli `event.stopPropagation()`.
 
-For instance, here `body.onclick` doesn't work if you click on `<button>`:
+Masalan, bu yerda agar siz `<button>` ga bossangiz, `body.onclick` ishlamaydi:
 
 ```html run autorun height=60
-<body onclick="alert(`the bubbling doesn't reach here`)">
-  <button onclick="event.stopPropagation()">Click me</button>
+<body onclick="alert(`bubbling bu yerga yetmaydi`)">
+  <button onclick="event.stopPropagation()">Menga bosing</button>
 </body>
 ```
 
 ```smart header="event.stopImmediatePropagation()"
-If an element has multiple event handlers on a single event, then even if one of them stops the bubbling, the other ones still execute.
+Agar elementda bitta hodisa uchun bir nechta ishlov beruvchi bo'lsa, ulardan biri bubbling ni to'xtatgan bo'lsa ham, qolganlar bajariladi.
 
-In other words, `event.stopPropagation()` stops the move upwards, but on the current element all other handlers will run.
+Boshqacha qilib aytganda, `event.stopPropagation()` yuqoriga harakatni to'xtatadi, lekin joriy elementda barcha boshqa ishlov beruvchilar ishlaydi.
 
-To stop the bubbling and prevent handlers on the current element from running, there's a method `event.stopImmediatePropagation()`. After it no other handlers execute.
+Bubbling ni to'xtatish va joriy elementdagi ishlov beruvchilarni ishga tushirmaslik uchun `event.stopImmediatePropagation()` metodi mavjud. Bundan keyin boshqa hech qanday ishlov beruvchi bajarilmaydi.
 ```
 
-```warn header="Don't stop bubbling without a need!"
-Bubbling is convenient. Don't stop it without a real need: obvious and architecturally well thought out.
+```warn header="Zaruratsiz bubbling ni to'xtatmang!"
+Bubbling qulay. Haqiqiy zarurat bo'lmasa uni to'xtatmang: aniq va arxitektur jihatdan yaxshi o'ylangan.
 
-Sometimes `event.stopPropagation()` creates hidden pitfalls that later may become problems.
+Ba'zan `event.stopPropagation()` yashirin tuzoqlar yaratadi, ular keyinchalik muammolarga aylanishi mumkin.
 
-For instance:
+Masalan:
 
-1. We create a nested menu. Each submenu handles clicks on its elements and calls `stopPropagation` so that the outer menu won't trigger.
-2. Later we decide to catch clicks on the whole window, to track users' behavior (where people click). Some analytic systems do that. Usually the code uses `document.addEventListener('click'…)` to catch all clicks.
-3. Our analytic won't work over the area where clicks are stopped by `stopPropagation`. Sadly, we've got a "dead zone".
+1. Biz ichki menyu yaratamiz. Har bir pastki menyu o'z elementlarida bosilishlarni qayta ishlaydi va tashqi menyu ishga tushmaslik uchun `stopPropagation` chaqiradi.
+2. Keyinchalik biz foydalanuvchilar xatti-harakatlarini kuzatish uchun (odamlar qayerga bosishini) butun oyna bo'ylab bosilishlarni ushlashga qaror qilamiz. Ba'zi analitik tizimlar buni qiladi. Odatda kod barcha bosilishlarni ushlash uchun `document.addEventListener('click'…)` dan foydalanadi.
+3. Bizning analitik `stopPropagation` tomonidan to'xtatilgan hududda ishlamaydi. Afsuski, bizda "o'lik zona" paydo bo'ldi.
 
-There's usually no real need to prevent the bubbling. A task that seemingly requires that may be solved by other means. One of them is to use custom events, we'll cover them later. Also we can write our data into the `event` object in one handler and read it in another one, so we can pass to handlers on parents information about the processing below.
+Bubbling ni oldini olishning haqiqiy zarurati odatda yo'q. Bu talab qilinadigan vazifa boshqa usullar bilan hal qilinishi mumkin. Ulardan biri maxsus hodisalardan foydalanish, buni keyinroq ko'rib chiqamiz. Shuningdek, biz bir ishlov beruvchida ma'lumotlarni `event` obyektiga yozishimiz va boshqasida o'qishimiz mumkin, shuning uchun pastdagi qayta ishlash haqidagi ma'lumotlarni ota-elementlardagi ishlov beruvchilarga uzatishimiz mumkin.
 ```
-
 
 ## Capturing
 
-There's another phase of event processing called "capturing". It is rarely used in real code, but sometimes can be useful.
+"Capturing" deb ataladigan hodisa qayta ishlashning yana bir fazasi mavjud. U haqiqiy kodda kamdan-kam qo'llaniladi, lekin ba'zan foydali bo'lishi mumkin.
 
-The standard [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+Standart [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) hodisa tarqalishining 3 fazasini tasvirlaydi:
 
-1. Capturing phase -- the event goes down to the element.
-2. Target phase -- the event reached the target element.
-3. Bubbling phase -- the event bubbles up from the element.
+1. Capturing fazasi -- hodisa elementga pastga boradi.
+2. Target fazasi -- hodisa target elementga yetdi.
+3. Bubbling fazasi -- hodisa elementdan yuqoriga bubble qiladi.
 
-Here's the picture of a click on `<td>` inside a table, taken from the specification:
+Mana jadval ichidagi `<td>` ga bosishning spetsifikatsiyadan olingan rasmi:
 
 ![](eventflow.svg)
 
-That is: for a click on `<td>` the event first goes through the ancestors chain down to the element (capturing phase), then it reaches the target and triggers there (target phase), and then it goes up (bubbling phase), calling handlers on its way.
+Ya'ni: `<td>` ga bosish uchun hodisa avval ajdodlar zanjiri orqali elementga pastga boradi (capturing fazasi), keyin target ga yetadi va u yerda ishga tushadi (target fazasi), so'ngra yuqoriga boradi (bubbling fazasi), yo'lda ishlov beruvchilarni chaqiradi.
 
-**Before we only talked about bubbling, because the capturing phase is rarely used. Normally it is invisible to us.**
+**Ilgari biz faqat bubbling haqida gapirdik, chunki capturing fazasi kamdan-kam ishlatiladi. Odatda u bizga ko'rinmaydi.**
 
-Handlers added using `on<event>`-property or using HTML attributes or using two-argument `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+`on<event>`-xossasi yoki HTML atributlari yordamida yoki ikki argumentli `addEventListener(event, handler)` dan foydalanib qo'shilgan ishlov beruvchilar capturing haqida hech narsa bilmaydi, ular faqat 2-chi va 3-chi fazalarda ishlaydi.
 
-To catch an event on the capturing phase, we need to set the handler `capture` option to `true`:
+Capturing fazasida hodisani ushlash uchun ishlov beruvchining `capture` parametrini `true` qilib o'rnatishimiz kerak:
 
 ```js
 elem.addEventListener(..., {capture: true})
-// or, just "true" is an alias to {capture: true}
+// yoki, shunchaki "true" {capture: true} ning taxallusi
 elem.addEventListener(..., true)
 ```
 
-There are two possible values of the `capture` option:
+`capture` parametrining ikki mumkin bo'lgan qiymati bor:
 
-- If it's `false` (default), then the handler is set on the bubbling phase.
-- If it's `true`, then the handler is set on the capturing phase.
+- Agar u `false` (sukut bo'yicha) bo'lsa, ishlov beruvchi bubbling fazasida o'rnatiladi.
+- Agar u `true` bo'lsa, ishlov beruvchi capturing fazasida o'rnatiladi.
 
+E'tibor bering, rasmiy ravishda 3 faza bo'lsa-da, 2-chi faza ("target fazasi": hodisa elementga yetdi) alohida qayta ishlanmaydi: capturing va bubbling fazalaridagi ishlov beruvchilar o'sha fazada ishga tushadi.
 
-Note that while formally there are 3 phases, the 2nd phase ("target phase": the event reached the element) is not handled separately: handlers on both capturing and bubbling phases trigger at that phase.
-
-Let's see both capturing and bubbling in action:
+Capturing va bubbling ni amalda ko'raylik:
 
 ```html run autorun height=140 edit
 <style>
@@ -176,50 +174,49 @@ Let's see both capturing and bubbling in action:
 </script>
 ```
 
-The code sets click handlers on *every* element in the document to see which ones are working.
+Kod hujjatdagi *har* elementga bosish ishlov beruvchisini o'rnatadi, qaysi biri ishlayotganini ko'rish uchun.
 
-If you click on `<p>`, then the sequence is:
+Agar siz `<p>` ga bossangiz, ketma-ketlik quyidagicha bo'ladi:
 
-1. `HTML` -> `BODY` -> `FORM` -> `DIV` (capturing phase, the first listener):
-2. `P` (target phase, triggers two times, as we've set two listeners: capturing and bubbling)
-3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+1. `HTML` -> `BODY` -> `FORM` -> `DIV` (capturing fazasi, birinchi tinglovchi):
+2. `P` (target fazasi, ikki marta ishga tushadi, chunki biz ikkita tinglovchi o'rnatdik: capturing va bubbling)
+3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling fazasi, ikkinchi tinglovchi).
 
-There's a property `event.eventPhase` that tells us the number of the phase on which the event was caught. But it's rarely used, because we usually know it in the handler.
+`event.eventPhase` xossasi mavjud bo'lib, u hodisa qaysi fazada ushlanganligining raqamini aytadi. Lekin u kamdan-kam ishlatiladi, chunki biz odatda buni ishlov beruvchida bilamiz.
 
-```smart header="To remove the handler, `removeEventListener` needs the same phase"
-If we `addEventListener(..., true)`, then we should mention the same phase in `removeEventListener(..., true)` to correctly remove the handler.
+```smart header="Ishlov beruvchini olib tashlash uchun, `removeEventListener` ga bir xil faza kerak"
+Agar biz `addEventListener(..., true)` qilsak, ishlov beruvchini to'g'ri olib tashlash uchun `removeEventListener(..., true)` da bir xil fazani eslatishimiz kerak.
 ```
 
-````smart header="Listeners on same element and same phase run in their set order"
-If we have multiple event handlers on the same phase, assigned to the same element with `addEventListener`, they run in the same order as they are created:
+````smart header="Bir elementda va bir fazada tinglovchilar o'rnatilgan tartibda ishlaydi"
+Agar bizda `addEventListener` bilan bir xil elementga tayinlangan bir xil fazada bir nechta hodisa ishlov beruvchi bo'lsa, ular yaratilgan tartibda ishlaydi:
 
 ```js
-elem.addEventListener("click", e => alert(1)); // guaranteed to trigger first
+elem.addEventListener("click", e => alert(1)); // birinchi bo'lib ishga tushishi kafolatlanagan
 elem.addEventListener("click", e => alert(2));
 ```
 ````
 
+## Xulosa
 
-## Summary
+Hodisa sodir bo'lganda -- u sodir bo'lgan eng ichki element "target element" (`event.target`) sifatida belgilanadi.
 
-When an event happens -- the most nested element where it happens gets labeled as the "target element" (`event.target`).
+- Keyin hodisa hujjat ildizidan `event.target` ga pastga harakat qiladi, yo'lda `addEventListener(..., true)` bilan tayinlangan ishlov beruvchilarni chaqiradi (`true` `{capture: true}` ning qisqartmasi).
+- Keyin ishlov beruvchilar target elementning o'zida chaqiriladi.
+- Keyin hodisa `event.target` dan ildizga bubble qiladi, `on<event>`, HTML atributlari va 3-chi argumentsiz yoki 3-chi argument `false/{capture:false}` bilan `addEventListener` yordamida tayinlangan ishlov beruvchilarni chaqiradi.
 
-- Then the event moves down from the document root to `event.target`, calling handlers assigned with `addEventListener(..., true)` on the way (`true` is a shorthand for `{capture: true}`).
-- Then handlers are called on the target element itself.
-- Then the event bubbles up from `event.target` to the root, calling handlers assigned using `on<event>`, HTML attributes and `addEventListener` without the 3rd argument or with the 3rd argument `false/{capture:false}`.
+Har bir ishlov beruvchi `event` obyekti xossalariga kirishi mumkin:
 
-Each handler can access `event` object properties:
+- `event.target` -- hodisani boshlagan eng chuqur element.
+- `event.currentTarget` (=`this`) -- hodisani qayta ishlovchi joriy element (ishlov beruvchi bo'lgan element)
+- `event.eventPhase` -- joriy faza (capturing=1, target=2, bubbling=3).
 
-- `event.target` -- the deepest element that originated the event.
-- `event.currentTarget` (=`this`) -- the current element that handles the event (the one that has the handler on it)
-- `event.eventPhase` -- the current phase (capturing=1, target=2, bubbling=3).
+Har qanday hodisa ishlov beruvchi `event.stopPropagation()` ni chaqirib hodisani to'xtatishi mumkin, lekin bu tavsiya etilmaydi, chunki biz yuqorida kerak bo'lmasligiga ishonch hosil qila olmaymiz, balki butunlay boshqa narsalar uchun.
 
-Any event handler can stop the event by calling `event.stopPropagation()`, but that's not recommended, because we can't really be sure we won't need it above, maybe for completely different things.
+Capturing fazasi juda kamdan-kam ishlatiladi, odatda biz hodisalarni bubbling da qayta ishlaymiz. Va buning ortida mantiq bor.
 
-The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logic behind that.
+Haqiqiy dunyoda baxtsiz hodisa sodir bo'lganda, mahalliy hokimiyat avval javob beradi. Ular hodisa sodir bo'lgan hududni eng yaxshi biladi. Keyin kerak bo'lsa yuqori darajadagi hokimiyat.
 
-In real world, when an accident happens, local authorities react first. They know best the area where it happened. Then higher-level authorities if needed.
+Hodisa ishlov beruvchilari uchun ham xuddi shunday. Ma'lum bir elementga ishlov beruvchi o'rnatgan kod element va uning nima qilishi haqida maksimal tafsilotlarni biladi. Ma'lum bir `<td>` dagi ishlov beruvchi aynan o'sha `<td>` uchun mos kelishi mumkin, u haqida hamma narsani biladi, shuning uchun birinchi imkoniyatni olishi kerak. Keyin uning bevosita ota-onasi ham kontekst haqida biladi, lekin biroz kamroq, va hokazo umumiy tushunchalarni qayta ishlovchi va oxirgi ishlaydigan eng yuqori elementgacha.
 
-The same for event handlers. The code that set the handler on a particular element knows maximum details about the element and what it does. A handler on a particular `<td>` may be suited for that exactly `<td>`, it knows everything about it, so it should get the chance first. Then its immediate parent also knows about the context, but a little bit less, and so on till the very top element that handles general concepts and runs the last one.
-
-Bubbling and capturing lay the foundation for "event delegation" -- an extremely powerful event handling pattern that we study in the next chapter.
+Bubbling va capturing keyingi bobda o'rganiladigan "hodisa delegatsiyasi" -- hodisalarni qayta ishlashning juda kuchli shakli uchun poydevor yaratadi.

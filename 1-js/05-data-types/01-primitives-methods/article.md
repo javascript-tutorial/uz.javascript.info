@@ -1,43 +1,29 @@
 # Ibtidoiylardagi usullar
 
-<<<<<<< HEAD
 JavaScript bizga ibtidoiylar (matnlar, raqamlar va boshqalar) bilan xuddi obyektlar kabi ishlashga imkon beradi.
 
 Ular, shuningdek, chaqirish qilish usullarini taqdim etadilar. Biz ularni yaqinda o'rganib chiqamiz, lekin avval uning qanday ishlashini bilib olamiz, chunki, albatta, ibtidoiylar obyekt emas (va bu yerda biz buni yanada aniqroq qilamiz).
-=======
-JavaScript allows us to work with primitives (strings, numbers, etc.) as if they were objects. They also provide methods to call as such. We will study those soon, but first we'll see how it works because, of course, primitives are not objects (and here we will make it even clearer).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Keling, ibtidoiylar va obyektlar o'rtasidagi asosiy farqlarni ko'rib chiqaylik.
 
 Ibtidoiylar
 
-<<<<<<< HEAD
 - Ibtidoiy turdagi qiymatdir.
 - 6 ta ibtidoiy tur mavjud: `string`, `number`, `boolean`, `symbol`, `null` va `undefined`.
-=======
-- Is a value of a primitive type.
-- There are 7 primitive types: `string`, `number`, `bigint`, `boolean`, `symbol`, `null` and `undefined`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Obyektlar
 
-<<<<<<< HEAD
 - Bir nechta qiymatlarni xususiyat sifatida saqlashga qodir.
 - `{}` bilan yaratilishi mumkin, masalan: `{name:" John ", age: 30}`. JavaScript-da boshqa turdagi obyektlar mavjud; funktsiyalar, masalan, obyektlardir.
-=======
-- Is capable of storing multiple values as properties.
-- Can be created with `{}`, for instance: `{name: "John", age: 30}`. There are other kinds of objects in JavaScript: functions, for example, are objects.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Obyektlarning eng yaxshi tomonlaridan biri shundaki, biz funktsiyani uning xususiyatlaridan biri sifatida saqlashimiz mumkin.
 
 ```js run
 let john = {
   name: "John",
-  sayHi: function() {
+  sayHi: function () {
     alert("Salom do'stim!");
-  }
+  },
 };
 
 john.sayHi(); // Salom do'stim!
@@ -49,50 +35,31 @@ Ko'pgina tilning ichida o'rnatilgan obyektlar allaqachon mavjud, masalan, sanala
 
 Biroq, bu imkoniyatlarning salbiy tomoni bor!
 
-<<<<<<< HEAD
 Obyektlar ibtidoiylarga qaraganda "og'irroq". Ular ichki texnikani qo'llab-quvvatlash uchun qo'shimcha manbalarni talab qiladi. Ammo xususiyatlar va usullar dasturlashda juda foydali bo'lganligi sababli, JavaScript interpretatori qo'shimcha yukni kamaytirish uchun ularni optimallashtirishga harakat qiladi.
-=======
-Objects are "heavier" than primitives. They require additional resources to support the internal machinery.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ## Obyekt sifatida ibtidoiy
 
 JavaScript-ni yaratuvchisi duch kelgan paradoks:
 
-<<<<<<< HEAD
 - Matn yoki raqam kabi ibtidoiylar bilan ishlashni istagan juda ko'p narsa bor. Agar ular bilan usullar orqali ishlashimiz mumkin bo'lsa, bu ajoyib bo'lar edi.
 - Ibtidoiylar imkon qadar tez va yengil bo'lishi kerak.
-=======
-- There are many things one would want to do with a primitive like a string or a number. It would be great to access them using methods.
-- Primitives must be as fast and lightweight as possible.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Yechim biroz noqulay ko'rinadi, ammo bu yerda:
 
-<<<<<<< HEAD
 1. Ibtidoiylar hali ham ibtidoiy. Istalgandak, bitta qiymat.
 2. Til matnlar, raqamlar, mantiqiy turdagi qiymatlar va belgilarning usullari va xususiyatlariga kirishga imkon beradi.
 3. Bu sodir bo'lganda, qo'shimcha funktsiyalarni ta'minlaydigan maxsus "o'ralish-obyekti" yaratiladi va keyin yo'q qilinadi.
-=======
-1. Primitives are still primitive. A single value, as desired.
-2. The language allows access to methods and properties of strings, numbers, booleans and symbols.
-3. In order for that to work, a special "object wrapper" that provides the extra functionality is created, and then is destroyed.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 "O'ralish-obyekti" har bir ibtidoiy tur uchun har xil va ular quyidagicha nomlanadi: `String`, `Number`, `Boolean` va `Symbol`. Shunday qilib, ular turli xil usullar to'plamini taqdim etadilar.
 
-<<<<<<< HEAD
 Masalan, [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) usuli mavjud , bu tepa registr matni qaytaradi.
-=======
-For instance, there exists a string method [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) that returns a capitalized `str`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Bu shunday ishlaydi:
 
 ```js run
 let str = "Salom";
 
-alert( str.toUpperCase() ); // SALOM
+alert(str.toUpperCase()); // SALOM
 ```
 
 Oddiy, to'g'rimi? Mana aslida nima `str.toUpperCase()` da sodir bo'ladi:
@@ -110,56 +77,44 @@ Raqamning o'ziga xos usullari mavjud, masalan, [toFixed (n)](https://developer.m
 ```js run
 let n = 1.23456;
 
-alert( n.toFixed(2) ); // 1.23
+alert(n.toFixed(2)); // 1.23
 ```
 
 <Info:number> va <info:string> boblarida ko'proq usullarni ko'rib chiqamiz.
 
-
-<<<<<<< HEAD
-````warn header="`String/Number/Boolean` konstruktorlari faqat ichki foydalanish uchun mo'ljallangan"
-Java kabi ba'zi tillar `new Number(1)` yoki `new Boolean(false)` kabi sintaksis yordamida ibtidoiylar uchun "o'ralish-obyektini" yaratishga imkon beradi.
-=======
-````warn header="Constructors `String/Number/Boolean` are for internal use only"
-Some languages like Java allow us to explicitly create "wrapper objects" for primitives using a syntax like `new Number(1)` or `new Boolean(false)`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+````warn header="`String/Number/Boolean`konstruktorlari faqat ichki foydalanish uchun mo'ljallangan"
+Java kabi ba'zi tillar`new Number(1)`yoki`new Boolean(false)` kabi sintaksis yordamida ibtidoiylar uchun "o'ralish-obyektini" yaratishga imkon beradi.
 
 JavaScript-da, bu tarixiy sabablarga ko'ra mumkin, ammo juda **tavsiya etilmaydi**. Bir nechta joylarda ishlar chalkashib ketadi.
 
 Masalan:
 
 ```js run
-alert( typeof 0 ); // "number"
+alert(typeof 0); // "number"
 
-alert( typeof new Number(0) ); // "object"!
+alert(typeof new Number(0)); // "object"!
 ```
 
-<<<<<<< HEAD
 Va bundan keyin `zero` obyekt bo'lganligi sababli ogohlantirish paydo bo'ladi:
-=======
-Objects are always truthy in `if`, so here the alert will show up:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let zero = new Number(0);
 
-<<<<<<< HEAD
-if (zero) { // zero bu true, chunki u obyekt
-  alert( "nol - bu to'g'rimi?!?" );
-=======
-if (zero) { // zero is true, because it's an object
-  alert( "zero is truthy!?!" );
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+if (zero) {
+  // zero bu true, chunki u obyekt
+  alert("nol - bu to'g'rimi?!?");
 }
 ```
 
 Boshqa tomondan, xuddi shu `String/Number/Boolean` funktsiyalaridan `new` dan foydalanish umuman foydali narsadir. Ular qiymatni tegishli turga o'zgartiradilar: matnga, raqamga yoki mantiqiy qiymatga(ibtidoiy).
 
 Misol uchun, quyidagi butunlay joizdir:
+
 ```js
 let num = Number("123"); // matni raqamga aylantirish
 ```
-````
+
+`````
 
 
 ````warn header="null/undefined usullarga ega emas"
@@ -169,7 +124,7 @@ Bunday qiymat xususiyatiga kirishga urinish xatoga yo'l qo'yadi:
 
 ```js run
 alert(null.test); // xato
-````
+`````
 
 ## Xulosa
 

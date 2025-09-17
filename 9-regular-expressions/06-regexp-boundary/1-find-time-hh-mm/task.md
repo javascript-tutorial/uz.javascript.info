@@ -1,9 +1,9 @@
-# Find the time
+# Vaqtni toping
 
-The time has a format: `hours:minutes`. Both hours and minutes has two digits, like `09:00`.
+Vaqt formati bor: `soat:daqiqa`. Soat va daqiqalarda ikkita raqam mavjud, masalan, `09:00`.
 
-Make a regexp to find time in the string: `subject:Breakfast at 09:00 in the room 123:456.`
+Satrda vaqt topish uchun regexp kiriting: `mavzu: 123:456 xonada soat 09:00 nonushta.`
 
-P.S. In this task there's no need to check time correctness yet, so `25:99` can also be a valid result.
+P.S. Bu vazifada hali vaqt toʻgʻriligini tekshirishning hojati yoʻq, shuning uchun `25:99` ham haqiqiy natija boʻlishi mumkin.
 
-P.P.S. The regexp shouldn't match `123:456`.
+P.P.S. Regexp `123:456` ga mos kelmasligi kerak.

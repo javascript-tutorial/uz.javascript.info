@@ -1,4 +1,4 @@
-importance: 3
+muhimlik: 3
 
 ---
 
@@ -7,6 +7,5 @@ importance: 3
 Quyidagi kod nimani chiqaradi?
 
 ```js
-alert( alert(1) || 2 || alert(3) );
+alert(alert(1) || 2 || alert(3));
 ```
-

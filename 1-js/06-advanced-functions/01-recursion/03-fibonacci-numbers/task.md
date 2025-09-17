@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -15,7 +15,9 @@ Fibonachchi raqamlari [Oltin nisbat](https://en.wikipedia.org/wiki/Golden_ratio)
 Kod namunasi:
 
 ```js
-function fib(n) { /* sizning kodingiz */ }
+function fib(n) {
+  /* sizning kodingiz */
+}
 
 alert(fib(3)); // 2
 alert(fib(7)); // 13

@@ -1,5 +1,3 @@
-function byField(fieldName){
-
+function byField(fieldName) {
   // Your code goes here.
-
 }

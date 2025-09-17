@@ -1,15 +1,15 @@
-describe("topSalary", function() {
-  it("returns top-paid person", function() {
+describe("topSalary", function () {
+  it("eng ko'p to'lanadigan insonni topish", function () {
     let salaries = {
-      "John": 100,
-      "Pete": 300,
-      "Mary": 250
+      John: 100,
+      Pete: 300,
+      Mary: 250,
     };
 
-    assert.equal( topSalary(salaries), "Pete" );
+    assert.equal(topSalary(salaries), "Pete");
   });
 
-  it("returns null for the empty object", function() {
-    assert.isNull( topSalary({}) );
+  it("bo'sh obyektlar uchun null qaytaradi", function () {
+    assert.isNull(topSalary({}));
   });
 });

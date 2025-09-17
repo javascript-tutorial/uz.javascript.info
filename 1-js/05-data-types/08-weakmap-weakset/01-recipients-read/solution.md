@@ -1,43 +1,64 @@
-Let's store read messages in `WeakSet`:
+# WeakSet yordamida o'qilgan xabarlarni saqlash
+
+Keling, o'qilgan xabarlarni `WeakSet` da saqlaylik:
 
 ```js run
 let messages = [
-  {text: "Hello", from: "John"},
-  {text: "How goes?", from: "John"},
-  {text: "See you soon", from: "Alice"}
+  { text: "Salom", from: "John" },
+  { text: "Ishlar qalay?", from: "John" },
+  { text: "Ko'rishguncha", from: "Alice" },
 ];
 
 let readMessages = new WeakSet();
 
-// two messages have been read
+// ikkita xabar o'qildi
 readMessages.add(messages[0]);
 readMessages.add(messages[1]);
-// readMessages has 2 elements
+// readMessages da 2 ta element bor
 
-// ...let's read the first message again!
+// ...keling birinchi xabarni yana o'qiylik!
 readMessages.add(messages[0]);
-// readMessages still has 2 unique elements
+// readMessages hali ham 2 ta noyob elementga ega
 
-// answer: was the message[0] read?
-alert("Read message 0: " + readMessages.has(messages[0])); // true
+// javob: messages[0] o'qildimi?
+alert("0-xabar o'qildi: " + readMessages.has(messages[0])); // true
 
 messages.shift();
-// now readMessages has 1 element (technically memory may be cleaned later)
+// endi readMessages da 1 ta element bor (texnik jihatdan xotira keyinroq tozlanishi mumkin)
 ```
 
-The `WeakSet` allows to store a set of messages and easily check for the existence of a message in it.
+`WeakSet` xabarlar to'plamini saqlashga va unda xabarning mavjudligini oson tekshirishga imkon beradi.
 
-It cleans up itself automatically. The tradeoff is that we can't iterate over it,  can't get "all read messages" from it directly. But we can do it by iterating over all messages and filtering those that are in the set.
+U o'zini avtomatik ravishda tozlaydi. Buning evaziga biz uni iterate qila olmaymiz, undan to'g'ridan-to'g'ri "barcha o'qilgan xabarlar"ni ololmaymiz. Ammo biz buni barcha xabarlar bo'ylab iterate qilib va to'plamda bo'lganlarini filtrlash orqali amalga oshirishimiz mumkin.
 
-Another, different solution could be to add a property like `message.isRead=true` to a message after it's read. As messages objects are managed by another code, that's generally discouraged, but we can use a symbolic property to avoid conflicts.
+## Muqobil yechim - Simbolik xususiyat
 
-Like this:
+Boshqa, boshqacha yechim xabar o'qilgandan keyin unga `message.isRead=true` kabi xususiyat qo'shish bo'lishi mumkin. Xabar objektlari boshqa kod tomonidan boshqarilganligi sababli, bu odatda tavsiya etilmaydi, lekin konfliktlardan qochish uchun simbolik xususiyatdan foydalanishimiz mumkin.
+
+Mana bunday:
+
 ```js
-// the symbolic property is only known to our code
+// simbolik xususiyat faqat bizning kodimizga ma'lum
 let isRead = Symbol("isRead");
 messages[0][isRead] = true;
 ```
 
-Now third-party code probably won't see our extra property.
+Endi uchinchi tomon kodi bizning qo'shimcha xususiyatimizni ko'rmasligi mumkin.
 
-Although symbols allow to lower the probability of problems, using `WeakSet` is better from the architectural point of view.
+## Yondashuvlarni taqqoslash
+
+| Yondashuv | Afzalliklari | Kamchiliklari |
+|-----------|--------------|---------------|
+| **WeakSet** | • Avtomatik tozlanish<br>• Arxitektura jihatdan toza<br>• Noyoblikni ta'minlaydi | • Iterate qilib bo'lmaydi<br>• To'g'ridan-to'g'ri barcha elementlarni olib bo'lmaydi |
+| **Simbolik xususiyat** | • Iterate qilish mumkin<br>• Konfliktlar ehtimoli past | • Qo'lda boshqarish kerak<br>• Objektni o'zgartirish |
+
+Garchi simbollar muammolar ehtimolini pasaytirishga yordam bersa ham, arxitektura nuqtai nazaridan `WeakSet` dan foydalanish yaxshiroqdir.
+
+## Nima uchun WeakSet yaxshiroq?
+
+1. **Toza arxitektura**: Biz boshqa kodning objektlarini o'zgartirmaymiz
+2. **Avtomatik tozlanish**: Xabar yo'q qilinganda, o'qish holati ham avtomatik o'chadi  
+3. **Xotira samaradorligi**: Keraksiz ma'lumotlar to'planmaydi
+4. **Enkapsulatsiya**: O'qish holati alohida boshqariladi
+
+Bu misol WeakSet ning real loyihalarda qanday ishlatilishini ko'rsatadi - vaqtinchalik holatni saqlash va avtomatik tozlanishdan foydalanish uchun.

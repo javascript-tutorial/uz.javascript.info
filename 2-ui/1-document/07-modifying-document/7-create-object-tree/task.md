@@ -1,51 +1,51 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Create a tree from the object
+# Ob'ektdan daraxt yarating
 
-Write a function `createTree` that creates a nested `ul/li` list from the nested object.
+O'rnatilgan ob'ektdan o'rnatilgan `ul/li` ro'yxatini yaratuvchi `createTree` funksiyasini yozing.
 
-For instance:
+Masalan; misol uchun:
 
 ```js
 let data = {
-  "Fish": {
-    "trout": {},
-    "salmon": {}
+  Baliq: {
+    gulmoh: {},
+    salmon: {},
   },
 
-  "Tree": {
-    "Huge": {
-      "sequoia": {},
-      "oak": {}
+  Daraxt: {
+    Katta: {
+      sekvoya: {},
+      eman: {},
     },
-    "Flowering": {
-      "apple tree": {},
-      "magnolia": {}
-    }
-  }
+    Gullaydigan: {
+      "olma daraxti": {},
+      magnolia: {},
+    },
+  },
 };
 ```
 
-The syntax:
+Sintaksis:
 
 ```js
 let container = document.getElementById('container');
 *!*
-createTree(container, data); // creates the tree in the container
+createTree(container, data); // quti ichida daraxtni yaratadi
 */!*
 ```
 
-The result (tree) should look like this:
+Natija (daraxt) quyidagicha ko'rinishi kerak:
 
 [iframe border=1 src="build-tree-dom"]
 
-Choose one of two ways of solving this task:
+Ushbu vazifani hal qilishning ikkita usulidan birini tanlang:
 
-1. Create the HTML for the tree and then assign to `container.innerHTML`.
-2. Create tree nodes and append with DOM methods.
+1. Daraxt uchun HTML yarating va keyin `container.innerHTML` ga tayinlang.
+2. Daraxt tugunlarini yarating va DOM usullari bilan qo'shing.
 
-Would be great if you could do both.
+Agar ikkalasini ham qila olsangiz ajoyib bo'lardi.
 
-P.S. The tree should not have "extra" elements like empty `<ul></ul>` for the leaves.
+P.S. Daraxtda barglar uchun bo'sh `<ul></ul>` kabi "qo'shimcha" elementlar bo'lmasligi kerak.

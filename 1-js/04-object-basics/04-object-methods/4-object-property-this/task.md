@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -12,12 +12,11 @@ Bu erda `makeUser` funktsiyasi obyektni qaytaradi.
 function makeUser() {
   return {
     name: "John",
-    ref: this
+    ref: this,
   };
 }
 
 let user = makeUser();
 
-alert( user.ref.name ); // Natijasi nma?
+alert(user.ref.name); // Natijasi nma?
 ```
-

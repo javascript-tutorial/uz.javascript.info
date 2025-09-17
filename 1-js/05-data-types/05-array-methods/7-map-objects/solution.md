@@ -1,4 +1,3 @@
-
 ```js run no-beautify
 let john = { name: "John", surname: "Smith", id: 1 };
 let pete = { name: "Pete", surname: "Hunt", id: 2 };
@@ -25,13 +24,10 @@ alert( usersMapped[0].id ); // 1
 alert( usersMapped[0].fullName ); // John Smith
 ```
 
-<<<<<<< HEAD
 Iltimos, o'q funktsiyalari uchun biz qo'shimcha qavslardan foydalanishimiz kerakligini unutmang.
-=======
-Please note that in the arrow functions we need to use additional brackets. 
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Biz bunday yozolmaymiz:
+
 ```js
 let usersMapped = users.map(user => *!*{*/!*
   fullName: `${user.name} ${user.surname}`,
@@ -51,5 +47,3 @@ let usersMapped = users.map(user => *!*({*/!*
 ```
 
 Endi yaxshi.
-
-

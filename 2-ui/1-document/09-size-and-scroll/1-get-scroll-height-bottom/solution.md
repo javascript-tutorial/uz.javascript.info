@@ -1,7 +1,7 @@
-The solution is:
+Javob:
 
 ```js
 let scrollBottom = elem.scrollHeight - elem.scrollTop - elem.clientHeight;
 ```
 
-In other words: (full height) minus (scrolled out top part) minus (visible part) -- that's exactly the scrolled out bottom part.
+Boshqacha qilib aytadigan bo'lsak: (to'liq balandlikda) minus (yuqori tomonga aylantirilgan) minus (ko'rinadigan qism) - bu aynan pastga aylantirilgan pastki qism.

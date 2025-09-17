@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -28,4 +28,3 @@ alert( counter2() ); // ?
 alert( counter2() ); // ?
 */!*
 ```
-

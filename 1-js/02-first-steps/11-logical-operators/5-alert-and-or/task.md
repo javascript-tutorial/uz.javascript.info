@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -7,6 +7,5 @@ importance: 5
 Natija qanday bo'ladi?
 
 ```js
-alert( null || 2 && 3 || 4 );
+alert(null || (2 && 3) || 4);
 ```
-

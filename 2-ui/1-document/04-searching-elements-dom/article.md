@@ -1,14 +1,20 @@
-# Searching: getElement*, querySelector*
+---
+libs:
+  - d3
+  - domtree
+---
 
-DOM navigation properties are great when elements are close to each other. What if they are not? How to get an arbitrary element of the page?
+# Qidirish: getElement*, querySelector*
 
-There are additional searching methods for that.
+DOM navigatsiya xususiyatlari elementlar bir-biriga yaqin bo'lganda ajoyib. Agar ular yaqin bo'lmasa-chi? Sahifaning ixtiyoriy elementini qanday olish mumkin?
 
-## document.getElementById or just id
+Buning uchun qo'shimcha qidirish metodlari mavjud.
 
-If an element has the `id` attribute, we can get the element using the method `document.getElementById(id)`, no matter where it is.
+## document.getElementById yoki shunchaki id
 
-For instance:
+Agar elementda `id` atributi bo'lsa, uni qayerda joylashganidan qat'i nazar `document.getElementById(id)` metodidan foydalanib olishimiz mumkin.
+
+Masalan:
 
 ```html run
 <div id="elem">
@@ -16,17 +22,17 @@ For instance:
 </div>
 
 <script>
-  // get the element
+  // elementni olish
 *!*
   let elem = document.getElementById('elem');
 */!*
 
-  // make its background red
+  // uning fonini qizil qilish
   elem.style.background = 'red';
 </script>
 ```
 
-Also, there's a global variable named by `id` that references the element:
+Shuningdek, `id` nomi bilan global o'zgaruvchi mavjud bo'lib, u elementga havola qiladi:
 
 ```html run
 <div id="*!*elem*/!*">
@@ -34,60 +40,60 @@ Also, there's a global variable named by `id` that references the element:
 </div>
 
 <script>
-  // elem is a reference to DOM-element with id="elem"
+  // elem - bu id="elem" bilan DOM-elementga havola
   elem.style.background = 'red';
 
-  // id="elem-content" has a hyphen inside, so it can't be a variable name
-  // ...but we can access it using square brackets: window['elem-content']
+  // id="elem-content" ichida defis bor, shuning uchun o'zgaruvchi nomi bo'la olmaydi
+  // ...lekin uni kvadrat qavslar yordamida olishimiz mumkin: window['elem-content']
 </script>
 ```
 
-...That's unless we declare a JavaScript variable with the same name, then it takes precedence:
+...Bu xuddi shu nom bilan JavaScript o'zgaruvchisini e'lon qilmasagimizgina, aks holda u ustunlik qiladi:
 
 ```html run untrusted height=0
 <div id="elem"></div>
 
 <script>
-  let elem = 5; // now elem is 5, not a reference to <div id="elem">
+  let elem = 5; // endi elem 5 ga teng, <div id="elem"> ga havola emas
 
   alert(elem); // 5
 </script>
 ```
 
-```warn header="Please don't use id-named global variables to access elements"
-This behavior is described [in the specification](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem), so it's kind of standard. But it is supported mainly for compatibility.
+```warn header="Elementlarga murojaat qilish uchun id nomli global o'zgaruvchilardan foydalanmang"
+Bu xatti-harakat [spetsifikatsiyada](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem) tasvirlangan, shuning uchun bu standart hisoblanadi. Lekin u asosan muvofiqlik uchun qo'llab-quvvatlanadi.
 
-The browser tries to help us by mixing namespaces of JS and DOM. That's fine for simple scripts, inlined into HTML, but generally isn't a good thing. There may be naming conflicts. Also, when one reads JS code and doesn't have HTML in view, it's not obvious where the variable comes from.
+Brauzer JS va DOM nomlar maydonlarini aralashtirish orqali bizga yordam berishga harakat qiladi. Bu HTML ga kiritilgan oddiy skriptlar uchun yaxshi, lekin umuman yaxshi narsa emas. Nom to'qnashuvi bo'lishi mumkin. Bundan tashqari, kimdir JS kodini o'qiganda va HTML ko'rinishda bo'lmasa, o'zgaruvchi qayerdan kelganini bilish qiyin.
 
-Here in the tutorial we use `id` to directly reference an element for brevity, when it's obvious where the element comes from.
+Bu qo'llanmada biz qisqalik uchun element qayerdan kelgani aniq bo'lganda `id` dan bevosita foydalanish uchun ishlatamiz.
 
-In real life `document.getElementById` is the preferred method.
+Haqiqiy hayotda `document.getElementById` afzal qilingan metod hisoblanadi.
 ```
 
-```smart header="The `id` must be unique"
-The `id` must be unique. There can be only one element in the document with the given `id`.
+```smart header="`id` noyob bo'lishi kerak"
+`id` noyob bo'lishi kerak. Hujjatda berilgan `id` bilan faqat bitta element bo'lishi mumkin.
 
-If there are multiple elements with the same `id`, then the behavior of methods that use it is unpredictable, e.g. `document.getElementById` may return any of such elements at random. So please stick to the rule and keep `id` unique.
+Agar bir xil `id` bilan bir nechta elementlar bo'lsa, unda undan foydalanadigan metodlarning xatti-harakati oldindan aytib bo'lmaydi, masalan `document.getElementById` bunday elementlardan istalganini tasodifiy qaytarishi mumkin. Shuning uchun qoidaga rioya qiling va `id` ni noyob saqlang.
 ```
 
-```warn header="Only `document.getElementById`, not `anyElem.getElementById`"
-The method `getElementById` can be called only on `document` object. It looks for the given `id` in the whole document.
+```warn header="Faqat `document.getElementById`, `anyElem.getElementById` emas"
+`getElementById` metodi faqat `document` obyektida chaqirilishi mumkin. U berilgan `id` ni butun hujjatda qidiradi.
 ```
 
-## querySelectorAll [#querySelectorAll]
+## querySelectorAll {#querySelectorAll}
 
-By far, the most versatile method, `elem.querySelectorAll(css)` returns all elements inside `elem` matching the given CSS selector.
+Hozirgacha eng ko'p qirrali metod `elem.querySelectorAll(css)` berilgan CSS selektoriga mos keladigan `elem` ichidagi barcha elementlarni qaytaradi.
 
-Here we look for all `<li>` elements that are last children:
+Bu yerda oxirgi bola bo'lgan barcha `<li>` elementlarni qidiramiz:
 
 ```html run
 <ul>
-  <li>The</li>
+  <li>Bu</li>
   <li>test</li>
 </ul>
 <ul>
-  <li>has</li>
-  <li>passed</li>
+  <li>muvaffaqiyatli</li>
+  <li>o'tdi</li>
 </ul>
 <script>
 *!*
@@ -95,44 +101,44 @@ Here we look for all `<li>` elements that are last children:
 */!*
 
   for (let elem of elements) {
-    alert(elem.innerHTML); // "test", "passed"
+    alert(elem.innerHTML); // "test", "o'tdi"
   }
 </script>
 ```
 
-This method is indeed powerful, because any CSS selector can be used.
+Bu metod haqiqatan ham kuchli, chunki har qanday CSS selektordan foydalanish mumkin.
 
-```smart header="Can use pseudo-classes as well"
-Pseudo-classes in the CSS selector like `:hover` and `:active` are also supported. For instance, `document.querySelectorAll(':hover')` will return the collection with elements that the pointer is over now (in nesting order: from the outermost `<html>` to the most nested one).
+```smart header="Pseudo-klasslardan ham foydalanish mumkin"
+CSS selektordagi `:hover` va `:active` kabi pseudo-klasslar ham qo'llab-quvvatlanadi. Masalan, `document.querySelectorAll(':hover')` hozir kursor ustida turgan elementlar to'plamini qaytaradi (ichma-ich tartibda: eng tashqi `<html>` dan eng ichki gacha).
 ```
 
-## querySelector [#querySelector]
+## querySelector {#querySelector}
 
-The call to `elem.querySelector(css)` returns the first element for the given CSS selector.
+`elem.querySelector(css)` chaqiruvi berilgan CSS selektor uchun birinchi elementni qaytaradi.
 
-In other words, the result is the same as `elem.querySelectorAll(css)[0]`, but the latter is looking for *all* elements and picking one, while `elem.querySelector` just looks for one. So it's faster and also shorter to write.
+Boshqacha qilib aytganda, natija `elem.querySelectorAll(css)[0]` bilan bir xil, lekin ikkinchisi *barcha* elementlarni qidirib, birini tanlaydi, `elem.querySelector` esa faqat birini qidiradi. Shuning uchun u tezroq va yozish uchun qisqaroq.
 
 ## matches
 
-Previous methods were searching the DOM.
+Oldingi metodlar DOM ni qidirardi.
 
-The [elem.matches(css)](http://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+[elem.matches(css)](http://dom.spec.whatwg.org/#dom-element-matches) hech narsani qidirmaydi, u shunchaki `elem` berilgan CSS-selektorga mos kelishini tekshiradi. U `true` yoki `false` qaytaradi.
 
-The method comes in handy when we are iterating over elements (like in an array or something) and trying to filter out those that interest us.
+Bu metod elementlar ustida takrorlash (massivdagi kabi yoki boshqa narsa) va bizni qiziqtiradigan narsalarni filtrlashga harakat qilganda foydali bo'ladi.
 
-For instance:
+Masalan:
 
 ```html run
 <a href="http://example.com/file.zip">...</a>
 <a href="http://ya.ru">...</a>
 
 <script>
-  // can be any collection instead of document.body.children
+  // document.body.children o'rniga har qanday to'plam bo'lishi mumkin
   for (let elem of document.body.children) {
 *!*
     if (elem.matches('a[href$="zip"]')) {
 */!*
-      alert("The archive reference: " + elem.href );
+      alert("Arxiv havolasi: " + elem.href );
     }
   }
 </script>
@@ -140,21 +146,21 @@ For instance:
 
 ## closest
 
-*Ancestors* of an element are: parent, the parent of parent, its parent and so on. The ancestors together form the chain of parents from the element to the top.
+Elementning *ajdodlari* bu: ota-ona, ota-onaning ota-onasi, uning ota-onasi va hokazo. Ajdodlar birga elementdan tepaga qadar ota-onalar zanjirini tashkil qiladi.
 
-The method `elem.closest(css)` looks for the nearest ancestor that matches the CSS-selector. The `elem` itself is also included in the search.
+`elem.closest(css)` metodi CSS-selektorga mos keladigan eng yaqin ajdodni qidiradi. `elem` ning o'zi ham qidiruvga kiritiladi.
 
-In other words, the method `closest` goes up from the element and checks each of parents. If it matches the selector, then the search stops, and the ancestor is returned.
+Boshqacha qilib aytganda, `closest` metodi elementdan yuqoriga chiqadi va har bir ota-onani tekshiradi. Agar u selektorga mos kelsa, qidiruv to'xtaydi va ajdod qaytariladi.
 
-For instance:
+Masalan:
 
 ```html run
-<h1>Contents</h1>
+<h1>Mundarija</h1>
 
 <div class="contents">
   <ul class="book">
-    <li class="chapter">Chapter 1</li>
-    <li class="chapter">Chapter 1</li>
+    <li class="chapter">1-bob</li>
+    <li class="chapter">2-bob</li>
   </ul>
 </div>
 
@@ -164,44 +170,44 @@ For instance:
   alert(chapter.closest('.book')); // UL
   alert(chapter.closest('.contents')); // DIV
 
-  alert(chapter.closest('h1')); // null (because h1 is not an ancestor)
+  alert(chapter.closest('h1')); // null (chunki h1 ajdod emas)
 </script>
 ```
 
 ## getElementsBy*
 
-There are also other methods to look for nodes by a tag, class, etc.
+Teg, klass va hokazo bo'yicha tugunlarni qidirish uchun boshqa metodlar ham mavjud.
 
-Today, they are mostly history, as `querySelector` is more powerful and shorter to write.
+Bugungi kunda ular asosan tarix, chunki `querySelector` kuchliroq va yozish uchun qisqaroq.
 
-So here we cover them mainly for completeness, while you can still find them in the old scripts.
+Shuning uchun biz ularni asosan to'liqlik uchun yoritamiz, garchi eski skriptlarda ularni hali ham topishingiz mumkin.
 
-- `elem.getElementsByTagName(tag)` looks for elements with the given tag and returns the collection of them. The `tag` parameter can also be a star `"*"` for "any tags".
-- `elem.getElementsByClassName(className)` returns elements that have the given CSS class.
-- `document.getElementsByName(name)` returns elements with the given `name` attribute, document-wide. Very rarely used.
+- `elem.getElementsByTagName(tag)` berilgan teg bilan elementlarni qidiradi va ularning to'plamini qaytaradi. `tag` parametri "har qanday teglar" uchun yulduzcha `"*"` ham bo'lishi mumkin.
+- `elem.getElementsByClassName(className)` berilgan CSS klassiga ega elementlarni qaytaradi.
+- `document.getElementsByName(name)` berilgan `name` atributiga ega elementlarni hujjat bo'ylab qaytaradi. Juda kamdan-kam qo'llaniladi.
 
-For instance:
+Masalan:
 ```js
-// get all divs in the document
+// hujjatdagi barcha divlarni olish
 let divs = document.getElementsByTagName('div');
 ```
 
-Let's find all `input` tags inside the table:
+Jadval ichidagi barcha `input` teglarini topaylik:
 
 ```html run height=50
 <table id="table">
   <tr>
-    <td>Your age:</td>
+    <td>Yoshingiz:</td>
 
     <td>
       <label>
-        <input type="radio" name="age" value="young" checked> less than 18
+        <input type="radio" name="age" value="young" checked> 18 dan kichik
       </label>
       <label>
-        <input type="radio" name="age" value="mature"> from 18 to 50
+        <input type="radio" name="age" value="mature"> 18 dan 50 gacha
       </label>
       <label>
-        <input type="radio" name="age" value="senior"> more than 60
+        <input type="radio" name="age" value="senior"> 60 dan katta
       </label>
     </td>
   </tr>
@@ -218,66 +224,66 @@ Let's find all `input` tags inside the table:
 </script>
 ```
 
-```warn header="Don't forget the `\"s\"` letter!"
-Novice developers sometimes forget the letter `"s"`. That is, they try to call `getElementByTagName` instead of <code>getElement<b>s</b>ByTagName</code>.
+```warn header="`\"s\"` harfini unutmang!"
+Yangi boshlovchi dasturchilar ba'zan `"s"` harfini unutadilar. Ya'ni ular <code>getElement<b>s</b>ByTagName</code> o'rniga `getElementByTagName` ni chaqirishga harakat qiladi.
 
-The `"s"` letter is absent in `getElementById`, because it returns a single element. But `getElementsByTagName` returns a collection of elements, so there's `"s"` inside.
+`getElementById` da `"s"` harfi yo'q, chunki u bitta elementni qaytaradi. Lekin `getElementsByTagName` elementlar to'plamini qaytaradi, shuning uchun ichida `"s"` bor.
 ```
 
-````warn header="It returns a collection, not an element!"
-Another widespread novice mistake is to write:
+````warn header="Bu to'plamni qaytaradi, element emas!"
+Yana bir keng tarqalgan yangi boshlovchi xatosi:
 
 ```js
-// doesn't work
+// ishlamaydi
 document.getElementsByTagName('input').value = 5;
 ```
 
-That won't work, because it takes a *collection* of inputs and assigns the value to it rather than to elements inside it.
+Bu ishlamaydi, chunki u inputlar *to'plamini* oladi va qiymatni uning ichidagi elementlarga emas, balki unga tayinlaydi.
 
-We should either iterate over the collection or get an element by its index, and then assign, like this:
+Biz yo'ki to'plam ustida takrorlashimiz yoki elementni indeksi orqali olib, keyin quyidagicha tayinlashimiz kerak:
 
 ```js
-// should work (if there's an input)
+// ishlashi kerak (agar input bo'lsa)
 document.getElementsByTagName('input')[0].value = 5;
 ```
 ````
 
-Looking for `.article` elements:
+`.article` elementlarini qidirish:
 
 ```html run height=50
 <form name="my-form">
-  <div class="article">Article</div>
-  <div class="long article">Long article</div>
+  <div class="article">Maqola</div>
+  <div class="long article">Uzun maqola</div>
 </form>
 
 <script>
-  // find by name attribute
+  // name atributi bo'yicha topish
   let form = document.getElementsByName('my-form')[0];
 
-  // find by class inside the form
+  // forma ichida klass bo'yicha topish
   let articles = form.getElementsByClassName('article');
-  alert(articles.length); // 2, found two elements with class "article"
+  alert(articles.length); // 2, "article" klassiga ega ikkita element topildi
 </script>
 ```
 
-## Live collections
+## Jonli to'plamlar
 
-All methods `"getElementsBy*"` return a *live* collection. Such collections always reflect the current state of the document and "auto-update" when it changes.
+Barcha `"getElementsBy*"` metodlari *jonli* to'plamni qaytaradi. Bunday to'plamlar har doim hujjatning joriy holatini aks ettiradi va u o'zgarganda "avtomatik yangilanadi".
 
-In the example below, there are two scripts.
+Quyidagi misolda ikkita skript mavjud.
 
-1. The first one creates a reference to the collection of `<div>`. As of now, its length is `1`.
-2. The second scripts runs after the browser meets one more `<div>`, so its length is `2`.
+1. Birinchisi `<div>` to'plamiga havola yaratadi. Hozircha uning uzunligi `1`.
+2. Ikkinchi skript brauzer yana bitta `<div>` ni uchratgandan keyin ishlaydi, shuning uchun uning uzunligi `2`.
 
 ```html run
-<div>First div</div>
+<div>Birinchi div</div>
 
 <script>
   let divs = document.getElementsByTagName('div');
   alert(divs.length); // 1
 </script>
 
-<div>Second div</div>
+<div>Ikkinchi div</div>
 
 <script>
 *!*
@@ -286,20 +292,19 @@ In the example below, there are two scripts.
 </script>
 ```
 
-In contrast, `querySelectorAll` returns a *static* collection. It's like a fixed array of elements.
+Aksincha, `querySelectorAll` *statik* to'plamni qaytaradi. Bu elementlarning qat'iy massiviga o'xshaydi.
 
-If we use it instead, then both scripts output `1`:
-
+Agar uni o'rniga ishlatilsa, ikkala skript ham `1` ni chiqaradi:
 
 ```html run
-<div>First div</div>
+<div>Birinchi div</div>
 
 <script>
   let divs = document.querySelectorAll('div');
   alert(divs.length); // 1
 </script>
 
-<div>Second div</div>
+<div>Ikkinchi div</div>
 
 <script>
 *!*
@@ -308,31 +313,31 @@ If we use it instead, then both scripts output `1`:
 </script>
 ```
 
-Now we can easily see the difference. The static collection did not increase after the appearance of a new `div` in the document.
+Endi biz farqni osongina ko'rishimiz mumkin. Statik to'plam hujjatda yangi `div` paydo bo'lgandan keyin ko'paymadi.
 
-## Summary
+## Xulosa
 
-There are 6 main methods to search for nodes in DOM:
+DOM da tugunlarni qidirish uchun 6 ta asosiy metod mavjud:
 
 <table>
 <thead>
 <tr>
-<td>Method</td>
-<td>Searches by...</td>
-<td>Can call on an element?</td>
-<td>Live?</td>
+<td>Metod</td>
+<td>Nima bo'yicha qidiradi...</td>
+<td>Elementda chaqirish mumkinmi?</td>
+<td>Jonlimi?</td>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>querySelector</code></td>
-<td>CSS-selector</td>
+<td>CSS-selektor</td>
 <td>✔</td>
 <td>-</td>
 </tr>
 <tr>
 <td><code>querySelectorAll</code></td>
-<td>CSS-selector</td>
+<td>CSS-selektor</td>
 <td>✔</td>
 <td>-</td>
 </tr>
@@ -350,25 +355,25 @@ There are 6 main methods to search for nodes in DOM:
 </tr>
 <tr>
 <td><code>getElementsByTagName</code></td>
-<td>tag or <code>'*'</code></td>
+<td>teg yoki <code>'*'</code></td>
 <td>✔</td>
 <td>✔</td>
 </tr>
 <tr>
 <td><code>getElementsByClassName</code></td>
-<td>class</td>
+<td>klass</td>
 <td>✔</td>
 <td>✔</td>
 </tr>
 </tbody>
 </table>
 
-By far the most used are `querySelector` and `querySelectorAll`, but `getElement(s)By*` can be sporadically helpful or found in the old scripts.
+Eng ko'p ishlatiladiganlari `querySelector` va `querySelectorAll`, lekin `getElement(s)By*` vaqti-vaqti bilan foydali bo'lishi yoki eski skriptlarda topilishi mumkin.
 
-Besides that:
+Bundan tashqari:
 
-- There is `elem.matches(css)` to check if `elem` matches the given CSS selector.
-- There is `elem.closest(css)` to look for the nearest ancestor that matches the given CSS-selector. The `elem` itself is also checked.
+- `elem.matches(css)` `elem` berilgan CSS selektoriga mos kelishini tekshirish uchun mavjud.
+- `elem.closest(css)` berilgan CSS-selektorga mos keladigan eng yaqin ajdodni qidirish uchun mavjud. `elem` ning o'zi ham tekshiriladi.
 
-And let's mention one more method here to check for the child-parent relationship, as it's sometimes useful:
--  `elemA.contains(elemB)` returns true if `elemB` is inside `elemA` (a descendant of `elemA`) or when `elemA==elemB`.
+Va bu yerda bola-ota-ona munosabatini tekshirish uchun yana bir metoddan gaplashaylik, chunki u ba'zan foydali bo'ladi:
+- `elemA.contains(elemB)` agar `elemB` `elemA` ichida bo'lsa (`elemA` ning avlodi) yoki `elemA==elemB` bo'lsa `true` qaytaradi.

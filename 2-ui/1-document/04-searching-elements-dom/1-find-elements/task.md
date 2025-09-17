@@ -1,18 +1,18 @@
+---
 importance: 4
-
 ---
 
-# Search for elements
+# Elementlarni qidirish
 
-Here's the document with the table and form.
+Bu yerda jadval va forma bilan hujjat berilgan.
 
-How to find?...
+Qanday topish kerak?...
 
-1. The table with `id="age-table"`.
-2. All `label` elements inside that table (there should be 3 of them).
-3. The first `td` in that table (with the word "Age").
-4. The `form` with `name="search"`.
-5. The first `input` in that form.
-6. The last `input` in that form.
+1. `id="age-table"` bilan jadvalni.
+2. Ushbu jadval ichidagi barcha `label` elementlarini (ulardan 3 tasi bo'lishi kerak).
+3. Ushbu jadvaldagi birinchi `td` ni ("Yosh" so'zi bilan).
+4. `name="search"` bilan `form` ni.
+5. Ushbu formadagi birinchi `input` ni.
+6. Ushbu formadagi oxirgi `input` ni.
 
-Open the page [table.html](table.html) in a separate window and make use of browser tools for that.
+[table.html](table.html) sahifasini alohida oynada oching va buning uchun brauzer vositalaridan foydalaning.

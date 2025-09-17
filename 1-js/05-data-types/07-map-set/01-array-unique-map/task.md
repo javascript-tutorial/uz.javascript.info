@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -15,11 +15,19 @@ function unique(arr) {
   /* sizning kodingiz */
 }
 
-let values = ["Hare", "Krishna", "Hare", "Krishna",
-  "Krishna", "Krishna", "Hare", "Hare", ":-O"
+let values = [
+  "Hare",
+  "Krishna",
+  "Hare",
+  "Krishna",
+  "Krishna",
+  "Krishna",
+  "Hare",
+  "Hare",
+  ":-O",
 ];
 
-alert( unique(values) ); // Hare, Krishna, :-O
+alert(unique(values)); // Hare, Krishna, :-O
 ```
 
 P.S. Bu erda matnlar ishlatildi, lekin har qanday turdagi qiymatlar ishlatilishi mumkin.

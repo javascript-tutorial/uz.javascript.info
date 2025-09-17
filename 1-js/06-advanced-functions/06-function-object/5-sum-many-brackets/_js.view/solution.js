@@ -1,5 +1,4 @@
 function sum(a) {
-
   let currentSum = a;
 
   function f(b) {
@@ -7,7 +6,7 @@ function sum(a) {
     return f;
   }
 
-  f.toString = function() {
+  f.toString = function () {
     return currentSum;
   };
 

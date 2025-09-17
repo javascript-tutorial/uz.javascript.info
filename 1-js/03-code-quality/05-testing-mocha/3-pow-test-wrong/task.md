@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -7,7 +7,7 @@ importance: 5
 Quyidagi `pow` testida nima nosozlik?
 
 ```js
-it("x ni n darajaga ko'taradi", function() {
+it("x ni n darajaga ko'taradi", function () {
   let x = 5;
 
   let result = x;

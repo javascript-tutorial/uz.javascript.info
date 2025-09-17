@@ -1,12 +1,12 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Hide self
+# O'zini yashirish
 
-Create a button that hides itself on click.
+Bosish paytida o'zini yashiradigan tugma yarating.
 
 ```online
-Like this:
+Shunga o'xshash:
 <input type="button" onclick="this.hidden=true" value="Click to hide">
 ```

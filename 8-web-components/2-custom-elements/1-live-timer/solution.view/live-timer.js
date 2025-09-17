@@ -1,5 +1,4 @@
 class LiveTimer extends HTMLElement {
-
   render() {
     this.innerHTML = `
     <time-formatted hour="numeric" minute="numeric" second="numeric">
@@ -9,7 +8,8 @@ class LiveTimer extends HTMLElement {
     this.timerElem = this.firstElementChild;
   }
 
-  connectedCallback() { // (2)
+  connectedCallback() {
+    // (2)
     if (!this.rendered) {
       this.render();
       this.rendered = true;
@@ -19,14 +19,13 @@ class LiveTimer extends HTMLElement {
 
   update() {
     this.date = new Date();
-    this.timerElem.setAttribute('datetime', this.date);
-    this.dispatchEvent(new CustomEvent('tick', { detail: this.date }));
+    this.timerElem.setAttribute("datetime", this.date);
+    this.dispatchEvent(new CustomEvent("tick", { detail: this.date }));
   }
 
   disconnectedCallback() {
-    clearInterval(this.timer); // important to let the element be garbage-collected
+    clearInterval(this.timer); // elementning garbage-collected bo'lishiga ruxsat berish muhimdir
   }
-
 }
 
 customElements.define("live-timer", LiveTimer);

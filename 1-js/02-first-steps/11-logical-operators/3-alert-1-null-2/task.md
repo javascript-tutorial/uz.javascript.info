@@ -7,6 +7,5 @@ importance: 5
 Quyidagi kod nimani chiqaradi?
 
 ```js
-alert( 1 && null && 2 );
+alert(1 && null && 2);
 ```
-

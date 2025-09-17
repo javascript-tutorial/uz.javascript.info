@@ -1,13 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Image gallery
+# Rasmlar galereyasi
 
-Create an image gallery where the main image changes by the click on a thumbnail.
+Eskiz ustiga bosish orqali asosiy rasm o'zgaradigan rasm galereyasini yarating.
 
-Like this:
+Shunga o'xshash:
 
 [iframe src="solution" height=600]
 
-P.S. Use event delegation.
+P.S. Voqea delegatsiyasidan foydalaning.

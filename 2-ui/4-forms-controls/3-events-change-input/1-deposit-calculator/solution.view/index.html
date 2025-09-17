@@ -1,112 +1,137 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      td select,
+      td input {
+        width: 150px;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <style>
-    td select,
-    td input {
-      width: 150px;
-    }
+      #diagram td {
+        vertical-align: bottom;
+        text-align: center;
+        padding: 10px;
+      }
 
-    #diagram td {
-      vertical-align: bottom;
-      text-align: center;
-      padding: 10px;
-    }
+      #diagram div {
+        margin: auto;
+      }
+    </style>
+  </head>
 
-    #diagram div {
-      margin: auto;
-    }
-  </style>
-</head>
+  <body>
+    <h1>Depozit kalkulyatori</h1>
 
-<body>
+    <form name="calculator">
+      <table>
+        <tr>
+          <td><strong>Boshlang'ich depozit:</strong></td>
+          <td>
+            <input name="money" type="number" value="10000" required />
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Necha oy?</strong></td>
+          <td>
+            <select name="months">
+              <option value="3">3 (minimum)</option>
+              <option value="6">6 (yarim yil)</option>
+              <option value="12" selected>12 (bir yil)</option>
+              <option value="18">18 (1,5 yil)</option>
+              <option value="24">24 (2 yil)</option>
+              <option value="30">30 (2,5 yil)</option>
+              <option value="36">36 (3 yil)</option>
+              <option value="60">60 (5 yil)</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Yillik foiz stavkasi:</strong></td>
+          <td>
+            <input name="interest" type="number" value="5" required />
+          </td>
+        </tr>
+      </table>
+    </form>
 
-  Deposit calculator.
+    <div class="calculation-result">
+      <table id="diagram">
+        <tr>
+          <th>Edi:</th>
+          <th>Bo'ladi:</th>
+        </tr>
+        <tr>
+          <th id="money-before">10000</th>
+          <th id="money-after">10000</th>
+        </tr>
+        <tr>
+          <td>
+            <div class="bar-container">
+              <div
+                style="
+                  background: #dc3545;
+                  width: 40px;
+                  height: 100px;
+                  border-radius: 4px;
+                "
+              ></div>
+            </div>
+          </td>
+          <td>
+            <div class="bar-container">
+              <div
+                style="
+                  background: #28a745;
+                  width: 40px;
+                  height: 100px;
+                  border-radius: 4px;
+                "
+                id="height-after"
+              ></div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
-  <form name="calculator">
-    <table>
-      <tr>
-        <td>Initial deposit</td>
-        <td>
-          <input name="money" type="number" value="10000" required>
-        </td>
-      </tr>
-      <tr>
-        <td>How many months?</td>
-        <td>
-          <select name="months">
-            <option value="3">3 (minimum)</option>
-            <option value="6">6 (half-year)</option>
-            <option value="12" selected>12 (one year)</option>
-            <option value="18">18 (1.5 years)</option>
-            <option value="24">24 (2 years)</option>
-            <option value="30">30 (2.5 years)</option>
-            <option value="36">36 (3 years)</option>
-            <option value="60">60 (5   years)</option>
-          </select>
-        </td>
-      </tr>
-      <tr>
-        <td>Interest per year?</td>
-        <td>
-          <input name="interest" type="number" value="5" required>
-        </td>
-      </tr>
-    </table>
+    <script>
+      let form = document.forms.calculator;
 
+      form.money.oninput = calculate;
+      form.months.onchange = calculate;
+      form.interest.oninput = calculate;
 
-  </form>
+      function calculate() {
+        let initial = +form.money.value;
+        if (!initial) return;
 
+        let interest = form.interest.value * 0.01;
+        if (!interest) return;
 
-  <table id="diagram">
-    <tr>
-      <th>Was:</th>
-      <th>Becomes:</th>
-    </tr>
-    <tr>
-      <th id="money-before"></th>
-      <th id="money-after"></th>
-    </tr>
-    <td>
-      <div style="background: red;width:40px;height:100px"></div>
-    </td>
-    <td>
-      <div style="background: green;width:40px;height:0" id="height-after"></div>
-    </td>
-  </table>
+        let years = form.months.value / 12;
+        if (!years) return;
 
-  <script>
+        // Oddiy foiz hisobi (murakkab foiz o'rniga)
+        let result = Math.round(initial * (1 + interest * years));
 
-    let form = document.forms.calculator;
+        // Diagramma balandligini hisoblash
+        let heightRatio = result / initial;
+        let height = Math.min(heightRatio * 100, 200) + "px"; // Maksimal balandlikni cheklash
 
-    form.money.oninput = calculate;
-    form.months.onchange = calculate;
-    form.interest.oninput = calculate;
+        document.getElementById("height-after").style.height = height;
+        document.getElementById("money-before").innerHTML =
+          formatMoney(initial);
+        document.getElementById("money-after").innerHTML = formatMoney(result);
+      }
 
-    function calculate() {
-      let initial = +form.money.value;
-      if (!initial) return;
+      // Pulni formatlash funksiyasi
+      function formatMoney(amount) {
+        return new Intl.NumberFormat("uz-UZ").format(amount) + " so'm";
+      }
 
-      let interest = form.interest.value * 0.01;
-
-      if (!interest) return;
-
-      let years = form.months.value / 12;
-      if (!years) return;
-
-      let result = Math.round(initial * (1 + interest * years));
-
-      let height = result / form.money.value * 100 + 'px';
-      document.getElementById('height-after').style.height = height;
-      document.getElementById('money-before').innerHTML = form.money.value;
-      document.getElementById('money-after').innerHTML = result;
-    }
-
-    calculate();
-  </script>
-
-
-</body>
+      // Boshlang'ich hisoblash
+      calculate();
+    </script>
+  </body>
 </html>

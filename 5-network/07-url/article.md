@@ -1,28 +1,27 @@
+# URL obyektlari
 
-# URL objects
+O'rnatilgan [URL](https://url.spec.whatwg.org/#api) klassi URL yaratish va tahlil qilish uchun qulay interfeys taqdim etadi.
 
-The built-in [URL](https://url.spec.whatwg.org/#api) class provides a convenient interface for creating and parsing URLs.
+Aynan `URL` obyektini talab qiladigan tarmoq metodlari yo'q, stringlar yetarli. Shuning uchun texnik jihatdan `URL` dan foydalanishimiz shart emas. Lekin ba'zida bu juda foydali bo'lishi mumkin.
 
-There are no networking methods that require exactly a `URL` object, strings are good enough. So technically we don't have to use `URL`. But sometimes it can be really helpful.
+## URL yaratish
 
-## Creating a URL
-
-The syntax to create a new `URL` object:
+Yangi `URL` obyektini yaratish sintaksisi:
 
 ```js
 new URL(url, [base])
 ```
 
-- **`url`** -- the full URL or only path (if base is set, see below),
-- **`base`** -- an optional base URL: if set and `url` argument has only path, then the URL is generated relative to `base`.
+- **`url`** -- to'liq URL yoki faqat yo'l (agar base o'rnatilgan bo'lsa, pastga qarang),
+- **`base`** -- ixtiyoriy bazaviy URL: agar o'rnatilgan bo'lsa va `url` argumenti faqat yo'lga ega bo'lsa, URL `base`ga nisbatan yaratiladi.
 
-For example:
+Masalan:
 
 ```js
 let url = new URL('https://javascript.info/profile/admin');
 ```
 
-These two URLs are same:
+Bu ikki URL bir xil:
 
 ```js run
 let url1 = new URL('https://javascript.info/profile/admin');
@@ -32,7 +31,7 @@ alert(url1); // https://javascript.info/profile/admin
 alert(url2); // https://javascript.info/profile/admin
 ```
 
-We can easily create a new URL based on the path relative to an existing URL:
+Mavjud URL ga nisbatan yo'l asosida yangi URL ni osonlik bilan yaratishimiz mumkin:
 
 ```js run
 let url = new URL('https://javascript.info/profile/admin');
@@ -41,7 +40,7 @@ let newUrl = new URL('tester', url);
 alert(newUrl); // https://javascript.info/profile/tester
 ```
 
-The `URL` object immediately allows us to access its components, so it's a nice way to parse the url, e.g.:
+`URL` obyekti darhol uning komponentlariga kirishga imkon beradi, shuning uchun bu url ni tahlil qilishning yaxshi usuli, masalan:
 
 ```js run
 let url = new URL('https://javascript.info/url');
@@ -51,79 +50,77 @@ alert(url.host);     // javascript.info
 alert(url.pathname); // /url
 ```
 
-Here's the cheatsheet for URL components:
+Mana URL komponentlari uchun eslatma varaqasi:
 
 ![](url-object.svg)
 
-- `href` is the full url, same as `url.toString()`
-- `protocol` ends with the colon character `:`
-- `search` - a string of parameters, starts with the question mark `?`
-- `hash` starts with the hash character `#`
-- there may be also `user` and `password` properties if HTTP authentication is present: `http://login:password@site.com` (not painted above, rarely used).
+- `href` to'liq url, `url.toString()` bilan bir xil
+- `protocol` ikki nuqta belgisi `:` bilan tugaydi
+- `search` - parametrlar satri, savol belgisi `?` bilan boshlanadi
+- `hash` hash belgisi `#` bilan boshlanadi
+- HTTP autentifikatsiya mavjud bo'lsa `user` va `password` xususiyatlari ham bo'lishi mumkin: `http://login:password@site.com` (yuqorida chizilmagan, kamdan-kam ishlatiladi).
 
+```smart header="Biz string o'rniga tarmoq (va boshqa ko'plab) metodlarga `URL` obyektlarini berishimiz mumkin"
+Biz `URL` obyektini `fetch` yoki `XMLHttpRequest` da, URL-string kutilgan deyarli hamma joyda ishlatishimiz mumkin.
 
-```smart header="We can pass `URL` objects to networking (and most other) methods instead of a string"
-We can use a `URL` object in `fetch` or `XMLHttpRequest`, almost everywhere where a URL-string is expected.
-
-Generally, the `URL` object can be passed to any method instead of a string, as most methods will perform the string conversion, that turns a `URL` object into a string with full URL.
+Umuman olganda, `URL` obyekti string o'rniga istalgan metodga berilishi mumkin, chunki ko'pchilik metodlar string konvertatsiyasini bajaradi, bu esa `URL` obyektini to'liq URL bilan stringga aylantiradi.
 ```
 
 ## SearchParams "?..."
 
-Let's say we want to create a url with given search params, for instance, `https://google.com/search?query=JavaScript`.
+Faraz qilaylik, biz berilgan qidiruv parametrlari bilan url yaratmoqchimiz, masalan, `https://google.com/search?query=JavaScript`.
 
-We can provide them in the URL string:
+Biz ularni URL stringida berishimiz mumkin:
 
 ```js
 new URL('https://google.com/search?query=JavaScript')
 ```
 
-...But parameters need to be encoded if they contain spaces, non-latin letters, etc (more about that below).
+...Lekin parametrlar bo'shliqlar, lotin bo'lmagan harflar va boshqalarni o'z ichiga olgan bo'lsa kodlanishi kerak (bu haqda pastda batafsil).
 
-So there's a URL property for that: `url.searchParams`, an object of type [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams).
+Buning uchun URL xususiyati bor: `url.searchParams`, [URLSearchParams](https://url.spec.whatwg.org/#urlsearchparams) turida obyekt.
 
-It provides convenient methods for search parameters:
+U qidiruv parametrlari uchun qulay metodlarni taqdim etadi:
 
-- **`append(name, value)`** -- add the parameter by `name`,
-- **`delete(name)`** -- remove the parameter by `name`,
-- **`get(name)`** -- get the parameter by `name`,
-- **`getAll(name)`** -- get all parameters with the same `name` (that's possible, e.g. `?user=John&user=Pete`),
-- **`has(name)`** -- check for the existence of the parameter by `name`,
-- **`set(name, value)`** -- set/replace the parameter,
-- **`sort()`** -- sort parameters by name, rarely needed,
-- ...and it's also iterable, similar to `Map`.
+- **`append(name, value)`** -- `name` bo'yicha parametr qo'shish,
+- **`delete(name)`** -- `name` bo'yicha parametrni o'chirish,
+- **`get(name)`** -- `name` bo'yicha parametrni olish,
+- **`getAll(name)`** -- bir xil `name` bilan barcha parametrlarni olish (bu mumkin, masalan `?user=John&user=Pete`),
+- **`has(name)`** -- `name` bo'yicha parametrning mavjudligini tekshirish,
+- **`set(name, value)`** -- parametrni o'rnatish/almashtirish,
+- **`sort()`** -- parametrlarni nom bo'yicha tartiblash, kamdan-kam kerak,
+- ...va u ham takrorlanuvchi, `Map`ga o'xshash.
 
-An example with parameters that contain spaces and punctuation marks:
+Bo'shliqlar va tinish belgilarini o'z ichiga olgan parametrlar bilan misol:
 
 ```js run
 let url = new URL('https://google.com/search');
 
-url.searchParams.set('q', 'test me!'); // added parameter with a space and !
+url.searchParams.set('q', 'test me!'); // bo'shliq va ! bilan parametr qo'shildi
 
 alert(url); // https://google.com/search?q=test+me%21
 
-url.searchParams.set('tbs', 'qdr:y'); // added parameter with a colon :
+url.searchParams.set('tbs', 'qdr:y'); // ikki nuqta : bilan parametr qo'shildi
 
-// parameters are automatically encoded
+// parametrlar avtomatik kodlanadi
 alert(url); // https://google.com/search?q=test+me%21&tbs=qdr%3Ay
 
-// iterate over search parameters (decoded)
+// qidiruv parametrlari bo'ylab takrorlash (dekodlangan)
 for(let [name, value] of url.searchParams) {
-  alert(`${name}=${value}`); // q=test me!, then tbs=qdr:y
+  alert(`${name}=${value}`); // q=test me!, keyin tbs=qdr:y
 }
 ```
 
+## Kodlash
 
-## Encoding
+URL'larda qaysi belgilarga ruxsat berilgani va qaysilariga ruxsat berilmagani belgilaydigan [RFC3986](https://tools.ietf.org/html/rfc3986) standarti mavjud.
 
-There's a standard [RFC3986](https://tools.ietf.org/html/rfc3986) that defines which characters are allowed in URLs and which are not.
+Ruxsat berilmaganlar kodlanishi kerak, masalan lotin bo'lmagan harflar va bo'shliqlar - ularning UTF-8 kodlari bilan almashtiriladi, `%` bilan prefiks qo'yiladi, masalan `%20` (bo'shliq `+` bilan kodlanishi mumkin, tarixiy sabablarga ko'ra, lekin bu istisno).
 
-Those that are not allowed, must be encoded, for instance non-latin letters and spaces - replaced with their UTF-8 codes, prefixed by `%`, such as `%20` (a space can be encoded by `+`, for historical reasons, but that's an exception).
-
-The good news is that `URL` objects handle all that automatically. We just supply all parameters unencoded, and then convert the `URL` to string:
+Yaxshi xabar shundaki, `URL` obyektlari bularning barchasini avtomatik boshqaradi. Biz barcha parametrlarni kodlanmagan holda beramiz, so'ngra `URL` ni stringga aylantiramiz:
 
 ```js run
-// using some cyrillic characters for this example
+// bu misol uchun kirill harflaridan foydalanish
 
 let url = new URL('https://ru.wikipedia.org/wiki/Тест');
 
@@ -131,50 +128,50 @@ url.searchParams.set('key', 'ъ');
 alert(url); //https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D1%81%D1%82?key=%D1%8A
 ```
 
-As you can see, both `Тест` in the url path and `ъ` in the parameter are encoded.
+Ko'rib turganingizdek, url yo'lidagi `Тест` ham, parametrdagi `ъ` ham kodlangan.
 
-The URL became longer, because each cyrillic letter is represented with two bytes in UTF-8, so there are two `%..` entities.
+URL uzunroq bo'ldi, chunki har bir kirill harfi UTF-8 da ikki bayt bilan ifodalanadi, shuning uchun ikkita `%..` entity bor.
 
-### Encoding strings
+### Stringlarni kodlash
 
-In old times, before `URL` objects appeared, people used strings for URLs.
+Qadim zamonlarda, `URL` obyektlari paydo bo'lishidan oldin, odamlar URL'lar uchun stringlardan foydalanishgan.
 
-As of now, `URL` objects are often more convenient, but strings can still be used as well. In many cases using a string makes the code shorter.
+Hozirgi kunda `URL` obyektlari ko'pincha qulayroq, lekin stringlar ham ishlatilishi mumkin. Ko'p hollarda string ishlatish kodni qisqartiradi.
 
-If we use a string though, we need to encode/decode special characters manually.
+Agar biz stringdan foydalansak, maxsus belgilarni qo'lda kodlash/dekodlash kerak.
 
-There are built-in functions for that:
+Buning uchun o'rnatilgan funktsiyalar bor:
 
-- [encodeURI](mdn:/JavaScript/Reference/Global_Objects/encodeURI) - encodes URL as a whole.
-- [decodeURI](mdn:/JavaScript/Reference/Global_Objects/decodeURI) - decodes it back.
-- [encodeURIComponent](mdn:/JavaScript/Reference/Global_Objects/encodeURIComponent) - encodes a URL component, such as a search parameter, or a hash, or a pathname.
-- [decodeURIComponent](mdn:/JavaScript/Reference/Global_Objects/decodeURIComponent) - decodes it back.
+- [encodeURI](mdn:/JavaScript/Reference/Global_Objects/encodeURI) - URL ni butunlay kodlaydi.
+- [decodeURI](mdn:/JavaScript/Reference/Global_Objects/decodeURI) - uni orqaga dekodlaydi.
+- [encodeURIComponent](mdn:/JavaScript/Reference/Global_Objects/encodeURIComponent) - qidiruv parametri, hash yoki pathname kabi URL komponentini kodlaydi.
+- [decodeURIComponent](mdn:/JavaScript/Reference/Global_Objects/decodeURIComponent) - uni orqaga dekodlaydi.
 
-A natural question is: "What's the difference between `encodeURIComponent` and `encodeURI`? When we should use either?"
+Tabiiy savol: "`encodeURIComponent` va `encodeURI` o'rtasidagi farq nima? Qachon qaysi birini ishlatishimiz kerak?"
 
-That's easy to understand if we look at the URL, that's split into components in the picture above:
+Buni tushunish oson, agar yuqoridagi rasmda komponentlarga bo'lingan URL ga qaratsak:
 
 ```
 https://site.com:8080/path/page?p1=v1&p2=v2#hash
 ```
 
-As we can see, characters such as `:`, `?`, `=`, `&`, `#` are allowed in URL.
+Ko'rib turganingizdek, `:`, `?`, `=`, `&`, `#` kabi belgilarga URL da ruxsat berilgan.
 
-...On the other hand, if we look at a single URL component, such as a search parameter, these characters must be encoded, not to break the formatting.
+...Boshqa tomondan, agar biz qidiruv parametri kabi yagona URL komponentiga qaratsak, bu belgilar formatni buzmaslik uchun kodlanishi kerak.
 
-- `encodeURI` encodes only characters that are totally forbidden in URL.
-- `encodeURIComponent` encodes same characters, and, in addition to them, characters `#`, `$`, `&`, `+`, `,`, `/`, `:`, `;`, `=`, `?` and `@`.
+- `encodeURI` faqat URL da butunlay taqiqlangan belgilarni kodlaydi.
+- `encodeURIComponent` bir xil belgilarni kodlaydi va ularga qo'shimcha ravishda `#`, `$`, `&`, `+`, `,`, `/`, `:`, `;`, `=`, `?` va `@` belgilarini ham kodlaydi.
 
-So, for a whole URL we can use `encodeURI`:
+Shunday qilib, butun URL uchun biz `encodeURI` dan foydalanishimiz mumkin:
 
 ```js run
-// using cyrillic characters in url path
+// url yo'lida kirill harflaridan foydalanish
 let url = encodeURI('http://site.com/привет');
 
 alert(url); // http://site.com/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82
 ```
 
-...While for URL parameters we should use `encodeURIComponent` instead:
+...URL parametrlari uchun esa `encodeURIComponent` dan foydalanishimiz kerak:
 
 ```js run
 let music = encodeURIComponent('Rock&Roll');
@@ -183,7 +180,7 @@ let url = `https://google.com/search?q=${music}`;
 alert(url); // https://google.com/search?q=Rock%26Roll
 ```
 
-Compare it with `encodeURI`:
+Buni `encodeURI` bilan solishtiring:
 
 ```js run
 let music = encodeURI('Rock&Roll');
@@ -192,26 +189,26 @@ let url = `https://google.com/search?q=${music}`;
 alert(url); // https://google.com/search?q=Rock&Roll
 ```
 
-As we can see, `encodeURI` does not encode `&`, as this is a legit character in URL as a whole.
+Ko'rib turganingizdek, `encodeURI` `&` ni kodlamaydi, chunki bu URL da umuman qonuniy belgi.
 
-But we should encode `&` inside a search parameter, otherwise, we get `q=Rock&Roll` - that is actually `q=Rock` plus some obscure parameter `Roll`. Not as intended.
+Lekin biz qidiruv parametri ichida `&` ni kodlashimiz kerak, aks holda `q=Rock&Roll` olamiz - bu aslida `q=Rock` va noma'lum `Roll` parametri. Niyat qilinganidek emas.
 
-So we should use only `encodeURIComponent` for each search parameter, to correctly insert it in the URL string. The safest is to encode both name and value, unless we're absolutely sure that it has only allowed characters.
+Shuning uchun har bir qidiruv parametri uchun uni URL stringga to'g'ri qo'shish uchun faqat `encodeURIComponent` dan foydalanishimiz kerak. Eng xavfsizi ham nom, ham qiymatni kodlash, faqat ruxsat etilgan belgilarga ega ekanligiga mutlaqo ishonch hosil qilmagan taqdirda.
 
-````smart header="Encoding difference compared to `URL`"
-Classes [URL](https://url.spec.whatwg.org/#url-class) and [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams) are based on the latest URI specification: [RFC3986](https://tools.ietf.org/html/rfc3986), while `encode*` functions are based on the obsolete version [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
+````smart header="`URL` ga nisbatan kodlash farqi"
+[URL](https://url.spec.whatwg.org/#url-class) va [URLSearchParams](https://url.spec.whatwg.org/#interface-urlsearchparams) klasslari eng so'nggi URI spetsifikatsiyasiga asoslangan: [RFC3986](https://tools.ietf.org/html/rfc3986), `encode*` funktsiyalar esa eski versiyaga asoslangan [RFC2396](https://www.ietf.org/rfc/rfc2396.txt).
 
-There are a few differences, e.g. IPv6 addresses are encoded differently:
+Bir nechta farqlar bor, masalan IPv6 manzillari boshqacha kodlanadi:
 
 ```js run
-// valid url with IPv6 address
+// IPv6 manzili bilan yaroqli url
 let url = 'http://[2607:f8b0:4005:802::1007]/';
 
 alert(encodeURI(url)); // http://%5B2607:f8b0:4005:802::1007%5D/
 alert(new URL(url)); // http://[2607:f8b0:4005:802::1007]/
 ```
 
-As we can see, `encodeURI` replaced square brackets `[...]`, that's not correct, the reason is: IPv6 urls did not exist at the time of RFC2396 (August 1998).
+Ko'rib turganingizdek, `encodeURI` kvadrat qavslarni `[...]` almashtirdi, bu noto'g'ri, sababi: IPv6 url'lari RFC2396 davridai (1998-yil avgust) mavjud emas edi.
 
-Such cases are rare, `encode*` functions work well most of the time.
+Bunday holatlar kamdan-kam uchraydi, `encode*` funktsiyalar ko'p vaqtda yaxshi ishlaydi.
 ````

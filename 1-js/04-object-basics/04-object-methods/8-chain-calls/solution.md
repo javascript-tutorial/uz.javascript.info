@@ -29,11 +29,5 @@ ladder.up().up().down().up().down().showStep(); // 1
 Biz har bir satr uchun bitta chaqiruv yozishimiz mumkin. Uzoq zanjirlar uchun o'qilishni oson qiladi:
 
 ```js
-ladder
-  .up()
-  .up()
-  .down()
-  .up()
-  .down()
-  .showStep(); // 1
+ladder.up().up().down().up().down().showStep(); // 1
 ```

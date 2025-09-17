@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -11,4 +11,3 @@ Kodni yozing, har bir amal uchun bitta satr:
 3. `Smith` qiymati bilan `surname` xususiyatini qo'shing.
 4. `name` qiymatini `Pete` ga o'zgartiring.
 5. Ob'ektdan `name` xususiyatini olib tashlang.
-

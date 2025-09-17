@@ -1,37 +1,37 @@
-# Pointer events
+# Pointer hodisalari
 
-Pointer events are a modern way to handle input from a variety of pointing devices, such as a mouse, a pen/stylus, a touchscreen, and so on.
+Pointer hodisalari sichqoncha, qalam/stylus, sensorli ekran va boshqalar kabi turli xil ko'rsatkich qurilmalaridan kirishni boshqarishning zamonaviy usulidir.
 
-## The brief history
+## Qisqacha tarix
 
-Let's make a small overview, so that you understand the general picture and the place of Pointer Events among other event types.
+Kichik sharh beramiz, shunda siz umumiy rasmni va Pointer hodisalarning boshqa hodisa turlari orasidagi o'rnini tushunasiz.
 
-- Long ago, in the past, there were only mouse events.
+- Uzoq vaqt oldin, o'tmishda faqat sichqoncha hodisalari mavjud edi.
 
-    Then touch devices became widespread, phones and tablets in particular. For the existing scripts to work, they generated (and still generate) mouse events. For instance, tapping a touchscreen generates `mousedown`. So touch devices worked well with web pages.
+    Keyin sensorli qurilmalar, xususan telefonlar va planshetlar keng tarqaldi. Mavjud skriptlar ishlashi uchun ular sichqoncha hodisalarini hosil qildi (va hali ham qiladilar). Masalan, sensorli ekranga tegish `mousedown` ni hosil qiladi. Shuning uchun sensorli qurilmalar veb-sahifalar bilan yaxshi ishladi.
     
-    But touch devices have more capabilities than a mouse. For example, it's possible to touch multiple points at once ("multi-touch"). Although, mouse events don't have necessary properties to handle such multi-touches.
+    Lekin sensorli qurilmalar sichqonchadan ko'proq imkoniyatlarga ega. Masalan, bir vaqtda bir nechta nuqtaga tegish mumkin ("multi-touch"). Garchi, sichqoncha hodisalarida bunday multi-touchlarni qayta ishlash uchun kerakli xossalar yo'q.
 
-- So touch events were introduced, such as `touchstart`, `touchend`, `touchmove`, that have touch-specific properties (we don't cover them in detail here, because pointer events are even better).
+- Shuning uchun `touchstart`, `touchend`, `touchmove` kabi touch hodisalari kiritildi, ularda touchga xos xossalar bor (biz ularni batafsil ko'rib chiqmaymiz, chunki pointer hodisalari yanada yaxshiroq).
 
-    Still, it wasn't enough, as there are many other devices, such as pens, that have their own features. Also, writing code that listens for both touch and mouse events was cumbersome. 
+    Shunga qaramay, bu yetarli emas edi, chunki qalam kabi o'ziga xos xususiyatlarga ega ko'plab boshqa qurilmalar mavjud. Bundan tashqari, ham touch, ham sichqoncha hodisalarini tinglovchi kod yozish mashaqqatli edi.
 
-- To solve these issues, the new standard Pointer Events was introduced. It provides a single set of events for all kinds of pointing devices.
+- Bu muammolarni hal qilish uchun yangi standart Pointer hodisalari kiritildi. U barcha turdagi ko'rsatkich qurilmalari uchun yagona hodisalar to'plamini taqdim etadi.
 
-As of now, [Pointer Events Level 2](https://www.w3.org/TR/pointerevents2/) specification is supported in all major browsers, while the newer [Pointer Events Level 3](https://w3c.github.io/pointerevents/) is in the works and is mostly compartible with Pointer Events level 2. 
+Hozirda [Pointer Events Level 2](https://www.w3.org/TR/pointerevents2/) spetsifikatsiyasi barcha asosiy brauzerlarda qo'llab-quvvatlanadi, yangi [Pointer Events Level 3](https://w3c.github.io/pointerevents/) esa ishlab chiqilmoqda va asosan Pointer Events level 2 bilan mos keladi.
 
-Unless you develop for old browsers, such as Internet Explorer 10, or for Safari 12 or below, there's no point in using mouse or touch events any more -- we can switch to pointer events.
+Agar siz Internet Explorer 10 yoki Safari 12 va undan pastroq kabi eski brauzerlar uchun ishlab chiqmasangiz, endi sichqoncha yoki touch hodisalaridan foydalanishning ma'nosi yo'q -- biz pointer hodisalariga o'tishimiz mumkin.
 
-Then your code will work well with both touch and mouse devices.
+Shunda kodingiz ham touch, ham sichqoncha qurilmalari bilan yaxshi ishlaydi.
 
-That said, there are some important peculiarities that one should know in order to use Pointer Events correctly and avoid surprises. We'll make note of them in this article.
+Shu bilan birga, Pointer hodisalarini to'g'ri ishlatish va kutilmagan holatlardan qochish uchun bilish kerak bo'lgan ba'zi muhim xususiyatlar mavjud. Biz ularni ushbu maqolada qayd etamiz.
 
-## Pointer event types
+## Pointer hodisa turlari
 
-Pointer events are named similarly to mouse events:
+Pointer hodisalari sichqoncha hodisalariga o'xshash nomlanadi:
 
-| Pointer event | Similar mouse event |
-|---------------|-------------|
+| Pointer hodisasi | O'xshash sichqoncha hodisasi |
+|------------------|---------------------|
 | `pointerdown` | `mousedown` |
 | `pointerup` | `mouseup` |
 | `pointermove` | `mousemove` |
@@ -43,206 +43,206 @@ Pointer events are named similarly to mouse events:
 | `gotpointercapture` | - |
 | `lostpointercapture` | - |
 
-As we can see, for every `mouse<event>`, there's a `pointer<event>` that plays a similar role. Also there are 3 additional pointer events that don't have a corresponding `mouse...` counterpart, we'll explain them soon. 
+Ko'rib turganimizdek, har bir `mouse<event>` uchun o'xshash rol o'ynaydigan `pointer<event>` mavjud. Bundan tashqari, mos keladigan `mouse...` qariydoshi bo'lmagan 3 ta qo'shimcha pointer hodisasi mavjud, biz ularni tez orada tushuntiramiz.
 
-```smart header="Replacing `mouse<event>` with `pointer<event>` in our code"
-We can replace `mouse<event>` events with `pointer<event>` in our code and expect things to continue working fine with mouse.
+```smart header="Kodimizdagi `mouse<event>` ni `pointer<event>` bilan almashtirish"
+Biz kodimizdagi `mouse<event>` hodisalarini `pointer<event>` bilan almashtirshimiz va sichqoncha bilan ishlashda davom etishini kutishimiz mumkin.
 
-The support for touch devices will also "magically" improve. Although, we may need to add `touch-action: none` in some places in CSS. We'll cover it below in the section about `pointercancel`. 
+Sensorli qurilmalar uchun qo'llab-quvvatlash ham "sehrli" tarzda yaxshilanadi. Garchi, CSS da ba'zi joylarda `touch-action: none` qo'shishimiz kerak bo'lishi mumkin. Buni quyida `pointercancel` haqidagi bo'limda ko'rib chiqamiz.
 ```
 
-## Pointer event properties
+## Pointer hodisa xossalari
 
-Pointer events have the same properties as mouse events, such as `clientX/Y`, `target`, etc., plus some others:
+Pointer hodisalari sichqoncha hodisalari bilan bir xil xossalarga ega, masalan `clientX/Y`, `target` va h.k., shuningdek ba'zi boshqalar:
 
-- `pointerId` - the unique identifier of the pointer causing the event.
+- `pointerId` - hodisani keltirib chiqaruvchi pointerning noyob identifikatori.
     
-    Browser-generated. Allows us to handle multiple pointers, such as a touchscreen with stylus and multi-touch (examples will follow).
-- `pointerType` - the pointing device type. Must be a string, one of: "mouse", "pen" or "touch". 
+    Brauzer tomonidan yaratiladi. Ko'p pointerlarni qayta ishlashga imkon beradi, masalan stylusli sensorli ekran va multi-touch (misollar keyinroq keladi).
+- `pointerType` - ko'rsatkich qurilmasi turi. Satr bo'lishi kerak, quyidagilardan biri: "mouse", "pen" yoki "touch".
 
-    We can use this property to react differently on various pointer types.
-- `isPrimary` - is `true` for the primary pointer (the first finger in multi-touch).
+    Biz bu xossani turli pointer turlariga turlicha javob berish uchun ishlatishimiz mumkin.
+- `isPrimary` - asosiy pointer uchun `true` (multi-touchda birinchi barmoq).
 
-Some pointer devices measure contact area and pressure, e.g. for a finger on the touchscreen, there are additional properties for that:
+Ba'zi pointer qurilmalari kontakt maydoni va bosimni o'lchaydi, masalan sensorli ekrandagi barmoq uchun buning uchun qo'shimcha xossalar mavjud:
 
-- `width` - the width of the area where the pointer (e.g. a finger) touches the device. Where unsupported, e.g. for a mouse, it's always `1`. 
-- `height` - the height of the area where the pointer touches the device. Where unsupported, it's always `1`.
-- `pressure` - the pressure of the pointer tip, in range from 0 to 1. For devices that don't support pressure must be either `0.5` (pressed) or `0`.
-- `tangentialPressure` - the normalized tangential pressure.
-- `tiltX`, `tiltY`, `twist` - pen-specific properties that describe how the pen is positioned relative the surface.
+- `width` - pointer (masalan barmoq) qurilmaga teginadigan maydonning kengligi. Qo'llab-quvvatlanmagan joylarda, masalan sichqoncha uchun, u doim `1`.
+- `height` - pointer qurilmaga teginadigan maydonning balandligi. Qo'llab-quvvatlanmagan joylarda, u doim `1`.
+- `pressure` - pointer uchining bosimi, 0 dan 1 gacha diapazonda. Bosimni qo'llab-quvvatlamaydigan qurilmalar uchun `0.5` (bosilgan) yoki `0` bo'lishi kerak.
+- `tangentialPressure` - normallashtirilgan tangensial bosim.
+- `tiltX`, `tiltY`, `twist` - qalamga xos xossalar, qalam sirtga nisbatan qanday joylashganini tasvirlaydi.
 
-These properties aren't supported by most devices, so they are rarely used. You can find the details about them in the [specification](https://w3c.github.io/pointerevents/#pointerevent-interface) if needed.
+Bu xossalar ko'pchilik qurilmalarda qo'llab-quvvatlanmaydi, shuning uchun kamdan-kam ishlatiladi. Kerak bo'lsa, ular haqida batafsil ma'lumotni [spetsifikatsiya](https://w3c.github.io/pointerevents/#pointerevent-interface)da topishingiz mumkin.
 
 ## Multi-touch
 
-One of the things that mouse events totally don't support is multi-touch: a user can touch in several places at once on their phone or tablet, or perform special gestures.
+Sichqoncha hodisalari umuman qo'llab-quvvatlamaydigan narsalardan biri multi-touch: foydalanuvchi telefon yoki planshetida bir vaqtda bir nechta joyga tegishi yoki maxsus imo-ishoralar bajarishi mumkin.
 
-Pointer Events allow handling multi-touch with the help of the `pointerId` and `isPrimary` properties.
+Pointer hodisalari `pointerId` va `isPrimary` xossalari yordamida multi-touchni qayta ishlashga imkon beradi.
 
-Here's what happens when a user touches a touchscreen in one place, then puts another finger somewhere else on it:
+Foydalanuvchi sensorli ekranning bir joyiga tegganda, keyin boshqa barmoqni boshqa joyga qo'yganda nima sodir bo'ladi:
 
-1. At the first finger touch:
-    - `pointerdown` with `isPrimary=true` and some `pointerId`.
-2. For the second finger and more fingers (assuming the first one is still touching):
-    - `pointerdown` with `isPrimary=false` and a different `pointerId` for every finger.
+1. Birinchi barmoq teginishida:
+    - `isPrimary=true` va biror `pointerId` bilan `pointerdown`.
+2. Ikkinchi barmoq va ko'proq barmoqlar uchun (birinchisi hali teginayotgan deb faraz qilsak):
+    - har bir barmoq uchun `isPrimary=false` va boshqa `pointerId` bilan `pointerdown`.
 
-Please note: the `pointerId` is assigned not to the whole device, but for each touching finger. If we use 5 fingers to simultaneously touch the screen, we have 5 `pointerdown` events, each with their respective coordinates and a different `pointerId`.
+Diqqat qiling: `pointerId` butun qurilmaga emas, balki har bir teginuvchi barmoq uchun tayinlanadi. Agar biz 5 barmoq bilan bir vaqtda ekranga tegadigan bo'lsak, bizda 5 ta `pointerdown` hodisasi bo'ladi, har biri o'z koordinatalari va boshqa `pointerId` bilan.
 
-The events associated with the first finger always have `isPrimary=true`.
+Birinchi barmoq bilan bog'liq hodisalar doim `isPrimary=true` ga ega.
 
-We can track multiple touching fingers using their `pointerId`. When the user moves and then removes a finger, we get `pointermove` and `pointerup` events with the same `pointerId` as we had in `pointerdown`.
+Biz ularning `pointerId` yordamida ko'plab teginuvchi barmoqlarni kuzatishimiz mumkin. Foydalanuvchi barmoqni harakat qildirganda va keyin olib tashlaganda, biz `pointerdown` da bo'lgani kabi bir xil `pointerId` bilan `pointermove` va `pointerup` hodisalarini olamiz.
 
 ```online
-Here's the demo that logs `pointerdown` and `pointerup` events:
+Mana `pointerdown` va `pointerup` hodisalarini qayd qiluvchi demo:
 
 [iframe src="multitouch" edit height=200]
 
-Please note: you must be using a touchscreen device, such as a phone or a tablet, to actually see the difference in `pointerId/isPrimary`. For single-touch devices, such as a mouse, there'll be always same `pointerId` with `isPrimary=true`, for all pointer events.
+Diqqat qiling: `pointerId/isPrimary` dagi farqni haqiqatdan ham ko'rish uchun telefon yoki planshet kabi sensorli ekran qurilmasidan foydalanish kerak. Sichqoncha kabi bitta teginish qurilmalari uchun barcha pointer hodisalar uchun doim `isPrimary=true` bilan bir xil `pointerId` bo'ladi.
 ```
 
-## Event: pointercancel
+## Hodisa: pointercancel
 
-The `pointercancel` event fires when there's an ongoing pointer interaction, and then something happens that causes it to be aborted, so that no more pointer events are generated. 
+`pointercancel` hodisasi davom etayotgan pointer o'zaro ta'sir bo'lganda ishga tushadi va keyin uni bekor qiladigan narsa sodir bo'ladi, shuning uchun boshqa pointer hodisalar hosil bo'lmaydi.
 
-Such causes are: 
-- The pointer device hardware was physically disabled.
-- The device orientation changed (tablet rotated). 
-- The browser decided to handle the interaction on its own, considering it a mouse gesture or zoom-and-pan action or something else.
+Bunday sabablar:
+- Pointer qurilmasi apparati jismonan o'chirilgan.
+- Qurilma orientatsiyasi o'zgargan (planshet aylantirilgan).
+- Brauzer o'zaro ta'sirni o'zi boshqarishga qaror qilgan, uni sichqoncha harakati yoki zoom va pan harakati yoki boshqa narsa deb hisoblagan.
 
-We'll demonstrate `pointercancel` on a practical example to see how it affects us.
+`pointercancel` ni bizga qanday ta'sir qilishini ko'rish uchun amaliy misolda namoyish etamiz.
 
-Let's say we're impelementing drag'n'drop for a ball, just as in the beginning of the article <info:mouse-drag-and-drop>.
+Aytaylik, biz <info:mouse-drag-and-drop> maqolasining boshidagi kabi to'p uchun drag'n'drop ni amalga oshirmoqdamiz.
 
-Here is the flow of user actions and the corresponding events:
+Mana foydalanuvchi harakatlari oqimi va tegishli hodisalar:
 
-1) The user presses on an image, to start dragging
-    - `pointerdown` event fires
-2) Then they start moving the pointer (thus dragging the image)
-    - `pointermove` fires, maybe several times
-3) And then the surprise happens! The browser has native drag'n'drop support for images, that kicks in and takes over the drag'n'drop process, thus generating `pointercancel` event.
-    - The browser now handles drag'n'drop of the image on its own. The user may even drag the ball image out of the browser, into their Mail program or a File Manager.
-    - No more `pointermove` events for us.
+1) Foydalanuvchi sudrab boshlash uchun rasmga bosadi
+    - `pointerdown` hodisasi ishga tushadi
+2) Keyin ular pointerni harakatlantira boshlaydi (shu bilan rasmni sudraydi)
+    - `pointermove` ishga tushadi, ehtimol bir necha marta
+3. Va keyin kutilmagan narsa sodir bo'ladi! Brauzerni rasmlar uchun mahalliy drag'n'drop qo'llab-quvvatlashi kirib, drag'n'drop jarayonini o'z qo'liga olib, `pointercancel` hodisasini hosil qiladi.
+    - Brauzer endi rasmni drag'n'drop ini o'zi boshqaradi. Foydalanuvchi hatto to'p rasmini brauzerdan tashqariga, Mail dasturiga yoki Fayl menejeriga sudrab olib ketishi mumkin.
+    - Biz uchun boshqa `pointermove` hodisalari yo'q.
 
-So the issue is that the browser "hijacks" the interaction: `pointercancel` fires in the beginning of the "drag-and-drop" process, and no more `pointermove` events are generated.
+Demak, muammo shundaki, brauzer o'zaro ta'sirni "o'g'irlaydi": "drag-and-drop" jarayonining boshida `pointercancel` ishga tushadi va boshqa `pointermove` hodisalari hosil bo'lmaydi.
 
 ```online
-Here's the drag'n'drop demo with loggin of pointer events (only `up/down`, `move` and `cancel`) in the `textarea`: 
+Mana pointer hodisalarini qayd qiluvchi drag'n'drop demosi (`textarea` da faqat `up/down`, `move` va `cancel`):
 
 [iframe src="ball" height=240 edit]
 ```
 
-We'd like to implement the drag'n'drop on our own, so let's tell the browser not to take it over.
+Biz drag'n'drop ni o'zimiz amalga oshirmoqchimiz, shuning uchun brauzerni buni o'z qo'liga olmasligini ayting.
 
-**Prevent the default browser action to avoid `pointercancel`.**
+**`pointercancel` dan qochish uchun standart brauzer harakatining oldini oling.**
 
-We need to do two things:
+Bizga ikki narsa qilish kerak:
 
-1. Prevent native drag'n'drop from happening:
-    - We can do this by setting `ball.ondragstart = () => false`, just as described in the article <info:mouse-drag-and-drop>.
-    - That works well for mouse events.
-2. For touch devices, there are other touch-related browser actions (besides drag'n'drop). To avoid problems with them too:
-    - Prevent them by setting `#ball { touch-action: none }` in CSS. 
-    - Then our code will start working on touch devices.
+1. Mahalliy drag'n'drop sodir bo'lishining oldini olish:
+    - Buni <info:mouse-drag-and-drop> maqolasida tasvirlanganidek `ball.ondragstart = () => false` o'rnatish orqali qilishimiz mumkin.
+    - Bu sichqoncha hodisalari uchun yaxshi ishlaydi.
+2. Sensorli qurilmalar uchun boshqa touch bilan bog'liq brauzer harakatlari (drag'n'drop dan tashqari) mavjud. Ular bilan ham muammolardan qochish uchun:
+    - CSS da `#ball { touch-action: none }` o'rnatish orqali ularning oldini oling.
+    - Keyin kodimiz sensorli qurilmalarda ishlay boshlaydi.
 
-After we do that, the events will work as intended, the browser won't hijack the process and doesn't emit `pointercancel`.
+Buni qilganimizdan so'ng, hodisalar mo'ljallanganidek ishlaydi, brauzer jarayonni o'g'irlamaydi va `pointercancel` chiqarmaydi.
 
 ```online
-This demo adds these lines:
+Bu demo ushbu qatorlarni qo'shadi:
 
 [iframe src="ball-2" height=240 edit]
 
-As you can see, there's no `pointercancel` any more.
+Ko'rib turganimizdek, endi `pointercancel` yo'q.
 ```
 
-Now we can add the code to actually move the ball, and our drag'n'drop will work for mouse devices and touch devices.
+Endi biz to'pni haqiqatdan ham harakatlantirish uchun kod qo'shishimiz mumkin va bizning drag'n'drop sichqoncha qurilmalari va sensorli qurilmalar uchun ishlaydi.
 
 ## Pointer capturing
 
-Pointer capturing is a special feature of pointer events.
+Pointer capturing - pointer hodisalarining maxsus xususiyatidir.
 
-The idea is very simple, but may seem quite odd at first, as nothing like that exists for any other event type.
+G'oya juda oddiy, lekin avvaliga juda g'alati tuyulishi mumkin, chunki boshqa hodisa turlari uchun bunday narsa mavjud emas.
 
-The main method is:
-- `elem.setPointerCapture(pointerId)` - binds events with the given `pointerId` to `elem`. After the call all pointer events with the same `pointerId` will have `elem` as the target (as if happened on `elem`), no matter where in document they really happened.
+Asosiy usul:
+- `elem.setPointerCapture(pointerId)` - berilgan `pointerId` bilan hodisalarni `elem` ga bog'laydi. Chaqiruvdan keyin bir xil `pointerId` ga ega barcha pointer hodisalar `elem` ni target sifatida oladilar (xuddi `elem` da sodir bo'lgandek), hujjatda qayerda sodir bo'lishidan qat'i nazar.
 
-In other words, `elem.setPointerCapture(pointerId)` retargets all subsequent events with the given `pointerId` to `elem`.
+Boshqacha qilib aytganda, `elem.setPointerCapture(pointerId)` berilgan `pointerId` bilan barcha keyingi hodisalarni `elem` ga qayta yo'naltiradi.
 
-The binding is removed:
-- automatically when `pointerup` or `pointercancel` events occur,
-- automatically when `elem` is removed from the document,
-- when `elem.releasePointerCapture(pointerId)` is called.
+Bog'lanish olib tashlanadi:
+- `pointerup` yoki `pointercancel` hodisalari sodir bo'lganda avtomatik,
+- `elem` hujjatdan olib tashlanganida avtomatik,
+- `elem.releasePointerCapture(pointerId)` chaqirilganda.
 
-**Pointer capturing can be used to simplify drag'n'drop kind of interactions.**
+**Pointer capturing drag'n'drop kabi o'zaro ta'sirlarni soddalashtirish uchun ishlatilishi mumkin.**
 
-As an example, let's recall how one can implement a custom slider, described in the <info:mouse-drag-and-drop>.
+Misol sifatida <info:mouse-drag-and-drop> da tasvirlangan maxsus slayderní qanday amalga oshirishni eslaymiz.
 
-We make a slider element with the strip and the "runner" (`thumb`) inside it.
+Biz ichida tasmasi va "runner" (`thumb`) bor slaydeir elementini yaratamiz.
 
-Then it works like this:
+Keyin u shunday ishlaydi:
 
-1. The user presses on the slider `thumb` - `pointerdown` triggers.
-2. Then they move the pointer - `pointermove` triggers, and we move the `thumb` along.
-    - ...As the pointer moves, it may leave the slider `thumb`: go above or below it. The `thumb` should move strictly horizontally, remaining aligned with the pointer.
+1. Foydalanuvchi slaydeir `thumb` ni bosadi - `pointerdown` ishga tushadi.
+2. Keyin ular pointerni harakatlantiradi - `pointermove` ishga tushadi va biz `thumb` ni harakatlantiramy.
+    - ...Pointer harakat qilarkan, u slaydeir `thumb` dan chiqib ketishi mumkin: ustiga yoki pastiga borishi. `thumb` qat'iy gorizontal harakat qilishi, pointer bilan hizalanib qolishi kerak.
 
-So, to track all pointer movements, including when it goes above/below the `thumb`, we had to assign `pointermove` event handler on the whole `document`.
+Shuning uchun barcha pointer harakatlarini kuzatish uchun, shu jumladan `thumb` ustiga/pastiga borišída ham, biz `pointermove` hodisa işlov beruvchisini butun `document` ga tayinlashimiz kerak edi.
 
-That solution looks a bit "dirty". One of the problems is that pointer movements around the document may cause side effects, trigger other event handlers, totally not related to the slider.
+Bu yechim biroz "iflos" ko'rinadi. Muammolardan biri shundaki, hujjat atrofidagi pointer harakatlari yon ta'sirlarni keltirib chiqarishi, slaydeir bilan umuman bog'liq bo'lmagan boshqa hodisa ishlov beruvchilarni ishga tushirishi mumkin.
 
-Pointer capturing provides a means to bind `pointermove` to `thumb` and avoid any such problems:
+Pointer capturing `pointermove` ni `thumb` ga bog'lash va bunday muammolardan qochish vositasini beradi:
 
-- We can call `thumb.setPointerCapture(event.pointerId)` in `pointerdown` handler,
-- Then future pointer events until `pointerup/cancel` will be retargeted to `thumb`. 
-- When `pointerup` happens (dragging complete), the binding is removed automatically, we don't need to care about it.
+- Biz `pointerdown` ishlov beruvchida `thumb.setPointerCapture(event.pointerId)` ni chaqirshimiz mumkin,
+- Keyin `pointerup/cancel` gacha bo'lgan kelajak pointer hodisalar `thumb` ga qayta yo'naltiriladi.
+- `pointerup` sodir bo'lganda (sudrab tugatilganda), bog'lanish avtomatik olib tashlanadi, bu haqida g'amxo'rlik qilishimiz shart emas.
 
-So, even if the user moves the pointer around the whole document, events handlers will be called on `thumb`. Besides, coordinate properties of the event objects, such as `clientX/clientY` will still be correct - the capturing only affects `target/currentTarget`.
+Shunday qilib, foydalanuvchi pointerni butun hujjat bo'ylab harakatlantirsa ham, hodisa ishlov beruvchilar `thumb` da chaqiriladi. Bundan tashqari, hodisa obyektlarining koordinata xossalari, masalan `clientX/clientY` hali ham to'g'ri bo'ladi - capturing faqat `target/currentTarget` ga ta'sir qiladi.
 
-Here's the essential code:
+Mana asosiy kod:
 
 ```js
 thumb.onpointerdown = function(event) {
-  // retarget all pointer events (until pointerup) to thumb
+  // barcha pointer hodisalarni (pointerup gacha) thumb ga qayta yo'naltirish
   thumb.setPointerCapture(event.pointerId);
 };
 
 thumb.onpointermove = function(event) {
-  // moving the slider: listen on the thumb, as all pointer events are retargeted to it
+  // slayderni harakatlantirish: thumb ni tinglaymiz, chunki barcha pointer hodisalar unga qayta yo'naltiriladi
   let newLeft = event.clientX - slider.getBoundingClientRect().left;
   thumb.style.left = newLeft + 'px';
 };
 
-// note: no need to call thumb.releasePointerCapture, 
-// it happens on pointerup automatically
+// diqqat: thumb.releasePointerCapture ni chaqirish shart emas,
+// u pointerup da avtomatik sodir bo'ladi
 ```
 
 ```online
-The full demo:
+To'liq demo:
 
 [iframe src="slider" height=100 edit]
 ```
 
-At the end, pointer capturing gives us two benefits:
-1. The code becomes cleaner as we don't need to add/remove handlers on the whole `document` any more. The binding is released automatically.
-2. If there are any `pointermove` handlers in the document, they won't be accidentally triggered by the pointer while the user is dragging the slider.
+Oxir-oqibat, pointer capturing bizga ikkita foyda beradi:
+1. Kod tozaroq bo'ladi, chunki biz endi butun `document` da ishlov beruvchilarni qo'shish/olib tashlashimiz shart emas. Bog'lanish avtomatik ravishda chiqariladi.
+2. Agar hujjatda biror `pointermove` ishlov beruvchilar bo'lsa, foydalanuvchi slayderni sudrab ketayotganda pointer tomonidan ular tasodifan ishga tushmaydi.
 
-### Pointer capturing events
+### Pointer capturing hodisalari
 
-There are two associated pointer events:
+Ikkita bog'liq pointer hodisasi mavjud:
 
-- `gotpointercapture` fires when an element uses `setPointerCapture` to enable capturing.
-- `lostpointercapture` fires when the capture is released: either explicitly with `releasePointerCapture` call, or automatically on `pointerup`/`pointercancel`.
+- `gotpointercapture` - element capturing ni yoqish uchun `setPointerCapture` dan foydalanganda ishga tushadi.
+- `lostpointercapture` - capturing chiqarilganda ishga tushadi: `releasePointerCapture` chaqiruvi bilan aniq yoki `pointerup`/`pointercancel` da avtomatik.
 
-## Summary
+## Xulosa
 
-Pointer events allow handling mouse, touch and pen events simultaneously, with a single piece of code.
+Pointer hodisalari sichqoncha, touch va qalam hodisalarini bir vaqtda, yagona kod qismi bilan qayta ishlash imkonini beradi.
 
-Pointer events extend mouse events. We can replace `mouse` with `pointer` in event names and expect our code to continue working for mouse, with better support for other device types.
+Pointer hodisalari sichqoncha hodisalarini kengaytiradi. Biz hodisa nomlarida `mouse` ni `pointer` bilan almashtirishimiz mumkin va kodimiz sichqoncha uchun ishlashda davom etishini, boshqa qurilma turlari uchun yaxshiroq qo'llab-quvvatlash bilan kutishimiz mumkin.
 
-For drag'n'drops and complex touch interactions that the browser may decide to hijack and handle on its own - remember to cancel the default action on events and set `touch-events: none` in CSS for elements that we engage.
+Drag'n'droplar va brauzer o'zi hijack qilish va boshqarishga qaror qilishi mumkin bo'lgan murakkab touch o'zaro ta'sirlar uchun - hodisalarda standart harakatni bekor qilishni va biz ishtirok etadigan elementlar uchun CSS da `touch-events: none` o'rnatishni eslang.
 
-Additional abilities of pointer events are:
+Pointer hodisalarining qo'shimcha qobiliyatlari:
 
-- Multi-touch support using `pointerId` and `isPrimary`.
-- Device-specific properties, such as `pressure`, `width/height`, and others.
-- Pointer capturing: we can retarget all pointer events to a specific element until `pointerup`/`pointercancel`.
+- `pointerId` va `isPrimary` yordamida multi-touch qo'llab-quvvatlash.
+- Qurilmaga xos xossalar, masalan `pressure`, `width/height` va boshqalar.
+- Pointer capturing: biz `pointerup`/`pointercancel` gacha barcha pointer hodisalarni ma'lum elementga qayta yo'naltirishimiz mumkin.
 
-As of now, pointer events are supported in all major browsers, so we can safely switch to them, especially if IE10- and Safari 12- are not needed. And even with those browsers, there are polyfills that enable the support of pointer events.
+Hozirda pointer hodisalari barcha asosiy brauzerlarda qo'llab-quvvatlanadi, shuning uchun biz xavfsiz ravishda ularga o'tishimiz mumkin, ayniqsa IE10- va Safari 12- kerak bo'lmasa. Va hatto o'sha brauzerlar bilan ham pointer hodisalar qo'llab-quvvatlashini yoqadigan polifilllar mavjud.

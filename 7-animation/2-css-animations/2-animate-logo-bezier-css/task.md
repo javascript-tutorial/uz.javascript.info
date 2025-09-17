@@ -1,13 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Animate the flying plane (CSS)
+# Uchar samolyotni animatsiya qilish (CSS)
 
-Modify the solution of the previous task <info:task/animate-logo-css> to make the plane grow more than its original size 400x240px (jump out), and then return to that size.
+Oldingi vazifaning yechimini <info:task/animate-logo-css> oʻzgartirib, samolyot asl oʻlchamidan 400x240px (tashqariga sakrab) oʻsadi va keyin oʻsha oʻlchamga qayting.
 
-Here's how it should look (click on the plane):
+Bu qanday ko'rinishi kerak (samolyot ustiga bosing):
 
 [iframe src="solution" height=350]
 
-Take the solution of the previous task as the source.
+Oldingi vazifaning yechimini manba sifatida oling.

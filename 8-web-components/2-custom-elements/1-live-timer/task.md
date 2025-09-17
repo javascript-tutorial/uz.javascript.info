@@ -1,20 +1,20 @@
+# Jonli taymer elementi
 
-# Live timer element
+Bizda yaxshi formatlangan vaqtni ko'rsatish uchun `<time-formatted>` elementi allaqachon mavjud.
 
-We already have `<time-formatted>` element to show a nicely formatted time.
+Joriy vaqtni ko'rsatish uchun `<live-taymer>` elementini yarating:
 
-Create `<live-timer>` element to show the current time:
-1. It should use `<time-formatted>` internally, not duplicate its functionality.
-2. Ticks (updates) every second.
-3. For every tick, a custom event named `tick` should be generated, with the current date in `event.detail` (see chapter <info:dispatch-events>).
+1. U `<time-formatted>` dan ichki foydalanishi kerak, uning funksiyalarini takrorlamasligi kerak.
+2. Har soniyada belgilash (yangilanishlar).
+3. Har bir belgi uchun joriy sana `event.detail` da ko'rsatilgan `tabel` nomli maxsus hodisa yaratilishi kerak (<info:dispatch-events> bobiga qarang).
 
-Usage:
+Foydalanish:
 
 ```html
 <live-timer id="elem"></live-timer>
 
 <script>
-  elem.addEventListener('tick', event => console.log(event.detail));
+  elem.addEventListener("tick", (event) => console.log(event.detail));
 </script>
 ```
 

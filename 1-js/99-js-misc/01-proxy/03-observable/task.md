@@ -1,13 +1,12 @@
+# Kuzatiluvchilar
 
-# Observable
+Proksi-serverni qaytarish orqali "ob'ektni kuzatilishi mumkin bo'lgan" "makeObservable(target)" funksiyasini yarating.
 
-Create a function `makeObservable(target)` that "makes the object observable" by returning a proxy.
-
-Here's how it should work:
+Bu qanday ishlashi kerak:
 
 ```js run
 function makeObservable(target) {
-  /* your code */
+  /* sizning kodingiz */
 }
 
 let user = {};
@@ -20,8 +19,8 @@ user.observe((key, value) => {
 user.name = "John"; // alerts: SET name=John
 ```
 
-In other words, an object returned by `makeObservable` is just like the original one, but also has the method `observe(handler)` that sets `handler` function to be called on any property change.
+Boshqacha qilib aytadigan bo'lsak, `makeObservable` tomonidan qaytarilgan ob'ekt xuddi asl ob'ektga o'xshaydi, lekin har qanday xususiyat o'zgarishida "ishlovchi" funksiyasini o'rnatuvchi `observe(handler)` usuliga ega.
 
-Whenever a property changes, `handler(key, value)` is called with the name and value of the property.
+Xususiyat o'zgarganda, `handler(kalit, qiymat)` xususiyat nomi va qiymati bilan chaqiriladi.
 
-P.S. In this task, please only take care about writing to a property. Other operations can be implemented in a similar way.
+P.S. Ushbu vazifada, iltimos, faqat xotiraga yozish haqida ehtiyot bo'ling. Boshqa operatsiyalar ham xuddi shunday tarzda amalga oshirilishi mumkin.

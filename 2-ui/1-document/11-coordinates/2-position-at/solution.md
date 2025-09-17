@@ -1,4 +1,4 @@
-In this task we only need to accurately calculate the coordinates. See the code for details.
+Ushbu vazifada biz faqat koordinatalarni aniq hisoblashimiz kerak. Tafsilotlar uchun kodga qarang.
 
-Please note: the elements must be in the document to read `offsetHeight` and other properties.
-A hidden (`display:none`) or out of the document element has no size.
+E'tibor bering: "offsetHeight" va boshqa xususiyatlarni o'qish uchun elementlar hujjatda bo'lishi kerak.
+Yashirin (`displey: yo`q`) yoki hujjatdan tashqari elementning o`lchami yo`q.

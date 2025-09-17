@@ -1,10 +1,10 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Add an option to select
+# Tanlash uchun variant qo'shing
 
-There's a `<select>`:
+`<select>` mavjud:
 
 ```html
 <select id="genres">
@@ -13,10 +13,10 @@ There's a `<select>`:
 </select>
 ```
 
-Use JavaScript to:
+JavaScript-dan foydalaning:
 
-1. Show the value and the text of the selected option.
-2. Add an option: `<option value="classic">Classic</option>`.
-3. Make it selected.
+1. Tanlangan variantning qiymati va matnini ko'rsating.
+2. Variant qo‘shing: `<option value="classic">Klassik</option>`.
+3. Uni tanlab qo'ying.
 
-Note, if you've done everything right, your alert should show `blues`.
+E'tibor bering, agar siz hamma narsani to'g'ri bajargan bo'lsangiz, ogohlantirishingizda `ko'klar` ko'rinishi kerak.

@@ -1,4 +1,4 @@
-importance: 4
+muhimlik: 4
 
 ---
 
@@ -25,7 +25,7 @@ Turli `n` uchun faktoriallarning qiymatlari:
 Vazifa rekursiv chaqiriqlar yordamida `n!` ni hisoblaydigan `factorial(n)` funktsiyani yozishdan iborat.
 
 ```js
-alert( factorial(5) ); // 120
+alert(factorial(5)); // 120
 ```
 
 P.S. Maslahat: `n!` ni `n * (n-1)!` deb yozish mumkin! Masalan: `3! = 3*2! = 3*2*1! = 6`

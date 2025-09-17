@@ -1,12 +1,12 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Which handlers run?
+# Qaysi ishlovchilar ishlaydi?
 
-There's a button in the variable. There are no handlers on it.
+O'zgaruvchida tugma mavjud. Unda ishlovchilar yo'q.
 
-Which handlers run on click after the following code? Which alerts show up?
+Qaysi ishlov beruvchilar quyidagi koddan keyin bosish orqali ishlaydi? Qaysi ogohlantirishlar paydo bo'ladi?
 
 ```js no-beautify
 button.addEventListener("click", () => alert("1"));

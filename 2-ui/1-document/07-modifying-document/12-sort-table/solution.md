@@ -1,18 +1,20 @@
-The solution is short, yet may look a bit tricky, so here I provide it with extensive comments:
+Yechim qisqa, ammo biroz qiyin ko'rinishi mumkin, shuning uchun men unga keng sharhlar beraman:
 
 ```js
 let sortedRows = Array.from(table.tBodies[0].rows) // 1
-  .sort((rowA, rowB) => rowA.cells[0].innerHTML.localeCompare(rowB.cells[0].innerHTML));
+  .sort((rowA, rowB) =>
+    rowA.cells[0].innerHTML.localeCompare(rowB.cells[0].innerHTML)
+  );
 
 table.tBodies[0].append(...sortedRows); // (3)
 ```
 
-The step-by-step algorthm:
+Bosqichma-bosqich algoritm:
 
-1. Get all `<tr>`, from `<tbody>`.
-2. Then sort them comparing by the content of the first `<td>` (the name field).
-3. Now insert nodes in the right order by `.append(...sortedRows)`.
+1. `<tbody>` dan barcha `<tr>`-ni oling.
+2. Keyin ularni birinchi `<td>` (ism maydoni) mazmuni bo'yicha taqqoslab tartiblang.
+3. Endi tugunlarni `.append(...sortedRows)` orqali kerakli tartibda kiriting.
 
-We don't have to remove row elements, just "re-insert", they leave the old place automatically.
+Biz qator elementlarini olib tashlashimiz shart emas, shunchaki "qayta kiritish", ular eski joyni avtomatik ravishda tark etishadi.
 
-P.S. In our case, there's an explicit `<tbody>` in the table, but even if HTML table doesn't have `<tbody>`, the DOM structure always has it.
+P.S. Bizning holatda, jadvalda aniq `<tbody>` mavjud, lekin HTML jadvalida `<tbody>` bo'lmasa ham, DOM tuzilmasi har doim shunday bo'ladi.

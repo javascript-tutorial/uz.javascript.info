@@ -2,7 +2,7 @@
 
 Rekursiv mantiq bu erda biroz hiyla-nayrang.
 
-Avvaliga ro'yxatning qolgan qismini chiqarishimiz kerak, *keyin*  joriyini chiqarishimiz kerak:
+Avvaliga ro'yxatning qolgan qismini chiqarishimiz kerak, _keyin_ joriyini chiqarishimiz kerak:
 
 ```js run
 let list = {
@@ -13,14 +13,13 @@ let list = {
       value: 3,
       next: {
         value: 4,
-        next: null
-      }
-    }
-  }
+        next: null,
+      },
+    },
+  },
 };
 
 function printReverseList(list) {
-
   if (list.next) {
     printReverseList(list.next);
   }
@@ -37,11 +36,7 @@ To'g'ridan-to'g'ri chiqishdan ko'ra tsikl varianti biroz murakkabroq.
 
 Bizning `ro'yxatimizdan` oxirgi qiymatni olishning imkoni yo'q. Shuningdek, biz "orqaga qaytishimiz" mumkin emas.
 
-<<<<<<< HEAD
 Shunday qilib, biz avval elementlarni to'g'ridan-to'g'ri tartibda ko'rib chiqish va ularni massivda eslab qolish, keyin esa eslab qolgan elementlarni teskari tartibda chiqarish:
-=======
-So what we can do is to first go through the items in the direct order and remember them in an array, and then output what we remembered in the reverse order:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let list = {
@@ -52,10 +47,10 @@ let list = {
       value: 3,
       next: {
         value: 4,
-        next: null
-      }
-    }
-  }
+        next: null,
+      },
+    },
+  },
 };
 
 function printReverseList(list) {
@@ -68,7 +63,7 @@ function printReverseList(list) {
   }
 
   for (let i = arr.length - 1; i >= 0; i--) {
-    alert( arr[i] );
+    alert(arr[i]);
   }
 }
 

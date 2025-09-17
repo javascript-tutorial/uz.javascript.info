@@ -1,14 +1,13 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# agar (nolga teng matn)
+# agar (nolga teng matn bo'lsa)
 
 `alert` ko'rsatiladimi?
 
 ```js
 if ("0") {
-  alert( 'Hello' );
+  alert("Salom");
 }
 ```
-

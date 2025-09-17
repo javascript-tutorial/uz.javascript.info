@@ -1,10 +1,10 @@
-importance: 3
+muhimlik: 3
 
 ---
 
-# Tag in comment
+# Izohda belgilang
 
-What does this code show?
+Bu kod nimani ko'rsatadi?
 
 ```html
 <script>
@@ -12,6 +12,6 @@ What does this code show?
 
   body.innerHTML = "<!--" + body.tagName + "-->";
 
-  alert( body.firstChild.data ); // what's here?
+  alert( body.firstChild.data ); // Bu qayerda?
 </script>
 ```

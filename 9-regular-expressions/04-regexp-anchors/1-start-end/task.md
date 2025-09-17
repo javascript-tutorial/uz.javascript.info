@@ -1,3 +1,3 @@
 # Regexp ^$
 
-Which string matches the pattern `pattern:^$`?
+Qaysi qator `pattern:^$` naqshiga mos keladi?

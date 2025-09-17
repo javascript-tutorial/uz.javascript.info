@@ -1,36 +1,29 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <style>
+      #train {
+        position: relative;
+        cursor: pointer;
+      }
+    </style>
+  </head>
 
-<head>
-  <style>
-    #train {
-      position: relative;
-      cursor: pointer;
-    }
-  </style>
-</head>
+  <body>
+    <img id="train" src="https://js.cx/clipart/train.gif" />
 
-<body>
+    <script>
+      train.onclick = function () {
+        let start = Date.now();
 
-  <img id="train" src="https://js.cx/clipart/train.gif">
+        let timer = setInterval(function () {
+          let timePassed = Date.now() - start;
 
+          train.style.left = timePassed / 5 + "px";
 
-  <script>
-    train.onclick = function() {
-      let start = Date.now();
-
-      let timer = setInterval(function() {
-        let timePassed = Date.now() - start;
-
-        train.style.left = timePassed / 5 + 'px';
-
-        if (timePassed > 2000) clearInterval(timer);
-
-      }, 20);
-    }
-  </script>
-
-
-</body>
-
+          if (timePassed > 2000) clearInterval(timer);
+        }, 20);
+      };
+    </script>
+  </body>
 </html>

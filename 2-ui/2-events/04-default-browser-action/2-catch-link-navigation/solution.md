@@ -1,5 +1,5 @@
-That's a great use of the event delegation pattern.
+Bu tadbir delegatsiyasi naqshidan ajoyib foydalanish.
 
-In real life instead of asking we can send a "logging" request to the server that saves the information about where the visitor left. Or we can load the content and show it right in the page (if allowable).
+Haqiqiy hayotda so'rash o'rniga biz tashrif buyuruvchining qaerga ketganligi haqidagi ma'lumotlarni saqlaydigan serverga "ro'yxatga olish" so'rovini yuborishimiz mumkin. Yoki biz tarkibni yuklashimiz va uni sahifada ko'rsatishimiz mumkin (agar ruxsat berilsa).
 
-All we need is to catch the `contents.onclick` and use `confirm` to ask the user. A good idea would be to use `link.getAttribute('href')` instead of `link.href` for the URL. See the solution for details.
+Bizga kerak bo'lgan narsa - `contents.onclick` ni qo'lga olish va foydalanuvchidan so'rash uchun `tasdiqlash`dan foydalanish. URL uchun `link.href` o'rniga `link.getAttribute('href')` dan foydalanish yaxshi fikrdir. Tafsilotlar uchun yechimga qarang.

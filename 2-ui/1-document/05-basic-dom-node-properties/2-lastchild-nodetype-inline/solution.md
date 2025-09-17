@@ -1,17 +1,17 @@
-There's a catch here.
+# DOM Script Bajarilish Vaqti
 
-At the time of `<script>` execution the last DOM node is exactly `<script>`, because the browser did not process the rest of the page yet.
+Bu yerda bir noziklik bor.
 
-So the result is `1` (element node).
+`<script>` bajarilish vaqtida oxirgi DOM tugun aynan `<script>` hisoblanadi, chunki brauzer hali sahifaning qolgan qismini qayta ishlamagan.
 
-```html run height=60
+Shuning uchun natija `1` (element tugun).
+
+```html
 <html>
-
-<body>
-  <script>
-    alert(document.body.lastChild.nodeType);
-  </script>
-</body>
-
+  <body>
+    <script>
+      alert(document.body.lastChild.nodeType);
+    </script>
+  </body>
 </html>
 ```

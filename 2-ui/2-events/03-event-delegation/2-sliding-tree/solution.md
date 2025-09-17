@@ -1,4 +1,4 @@
-The solution has two parts.
+Yechim ikki qismdan iborat.
 
-1. Wrap every tree node title into `<span>`. Then we can CSS-style them on `:hover` and handle clicks exactly on text, because `<span>` width is exactly the text width (unlike without it).
-2. Set a handler to the `tree` root node and handle clicks on that `<span>` titles.
+1. Har bir daraxt tugun sarlavhasini `<span>` ichiga oʻrang. Keyin biz ularni `:hover` da CSS-uslubini qo'yishimiz va chertishlarni aynan matnga ishlov berishimiz mumkin, chunki `<span>` kengligi aynan matn kengligidir (unsiz farqli o'laroq).
+2. `Daraxt` ildiz tuguniga ishlov beruvchini o'rnating va ushbu `<span>` sarlavhalarini bosish bilan ishlov bering.

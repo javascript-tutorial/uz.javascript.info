@@ -1,37 +1,37 @@
-# Dispatching custom events
+# Maxsus eventlarni jo'natish
 
-We can not only assign handlers, but also generate events from JavaScript.
+Biz nafaqat handlerlar belgilashimiz, balki JavaScript dan eventlar ham yaratishimiz mumkin.
 
-Custom events can be used to create "graphical components". For instance, a root element of our own JS-based menu may trigger events telling what happens with the menu: `open` (menu open), `select` (an item is selected) and so on. Another code may listen for the events and observe what's happening with the menu.
+Maxsus eventlar "grafik komponentlar" yaratish uchun ishlatilishi mumkin. Masalan, o'zimizning JS-ga asoslangan menyumizning ildiz elementi menyu bilan nima bo'layotganini bildiruvchi eventlarni ishga tushirishi mumkin: `open` (menyu ochish), `select` (element tanlash) va boshqalar. Boshqa kod eventlarni tinglashi va menyu bilan nima bo'layotganini kuzatishi mumkin.
 
-We can generate not only completely new events, that we invent for our own purposes, but also built-in ones, such as `click`, `mousedown` etc. That may be helpful for automated testing.
+Biz nafaqat o'z maqsadlarimiz uchun ixtiro qilgan butunlay yangi eventlarni, balki `click`, `mousedown` va boshqalar kabi o'rnatilgan eventlarni ham yaratishimiz mumkin. Bu avtomatlashtirilgan test qilish uchun foydali bo'lishi mumkin.
 
-## Event constructor
+## Event konstruktor
 
-Built-in event classes form a hierarchy, similar to DOM element classes. The root is the built-in [Event](http://www.w3.org/TR/dom/#event) class.
+O'rnatilgan event sinflari DOM element sinflariga o'xshash ierarxiya hosil qiladi. Ildizi o'rnatilgan [Event](http://www.w3.org/TR/dom/#event) sinfi.
 
-We can create `Event` objects like this:
+Biz `Event` obyektlarini quyidagicha yaratishimiz mumkin:
 
 ```js
 let event = new Event(type[, options]);
 ```
 
-Arguments:
+Argumentlar:
 
-- *type* -- event type, a string like `"click"` or our own like `"my-event"`.
-- *options* -- the object with two optional properties:
-  - `bubbles: true/false` -- if `true`, then the event bubbles.
-  - `cancelable: true/false` -- if `true`, then the "default action"  may be prevented. Later we'll see what it means for custom events.
+- *type* -- event turi, `"click"` kabi satr yoki `"my-event"` kabi o'zimizniki.
+- *options* -- ikkita ixtiyoriy xususiyatga ega obyekt:
+  - `bubbles: true/false` -- agar `true` bo'lsa, event pufaklanadi.
+  - `cancelable: true/false` -- agar `true` bo'lsa, "standart amal" oldini olish mumkin. Keyinroq bu maxsus eventlar uchun nimani anglatishini ko'ramiz.
 
-  By default both are false: `{bubbles: false, cancelable: false}`.
+  Standart bo'yicha ikkalasi ham false: `{bubbles: false, cancelable: false}`.
 
 ## dispatchEvent
 
-After an event object is created, we should "run" it on an element using the call `elem.dispatchEvent(event)`.
+Event obyekti yaratilgandan keyin, uni `elem.dispatchEvent(event)` chaqiruvi yordamida elementda "ishga tushirish"imiz kerak.
 
-Then handlers react on it as if it were a regular browser event. If the event was created with the `bubbles` flag, then it bubbles.
+Keyin handlerlar xuddi oddiy brauzer eventi bo'lgandek unga javob beradi. Agar event `bubbles` bayrog'i bilan yaratilgan bo'lsa, u pufaklanadi.
 
-In the example below the `click` event is initiated in JavaScript. The handler works same way as if the button was clicked:
+Quyidagi misolda `click` eventi JavaScript da ishga tushiriladi. Handler tugma bosilgandagi kabi ishlaydi:
 
 ```html run no-beautify
 <button id="elem" onclick="alert('Click!');">Autoclick</button>
@@ -43,46 +43,45 @@ In the example below the `click` event is initiated in JavaScript. The handler w
 ```
 
 ```smart header="event.isTrusted"
-There is a way to tell a "real" user event from a script-generated one.
+"Haqiqiy" foydalanuvchi eventini skript tomonidan yaratilgandan farqlashning usuli bor.
 
-The property `event.isTrusted` is `true` for events that come from real user actions and `false` for script-generated events.
+`event.isTrusted` xususiyati haqiqiy foydalanuvchi amallaridan kelgan eventlar uchun `true` va skript tomonidan yaratilgan eventlar uchun `false`.
 ```
 
-## Bubbling example
+## Pufaklash misoli
 
-We can create a bubbling event with the name `"hello"` and catch it on `document`.
+Biz `"hello"` nomi bilan pufaklanadigan event yaratib, uni `document` da tutishimiz mumkin.
 
-All we need is to set `bubbles` to `true`:
+Bizga faqat `bubbles` ni `true` ga o'rnatish kerak:
 
 ```html run no-beautify
-<h1 id="elem">Hello from the script!</h1>
+<h1 id="elem">Skriptdan salom!</h1>
 
 <script>
-  // catch on document...
+  // document da tutish...
   document.addEventListener("hello", function(event) { // (1)
-    alert("Hello from " + event.target.tagName); // Hello from H1
+    alert("Salom " + event.target.tagName + " dan"); // Salom H1 dan
   });
 
-  // ...dispatch on elem!
+  // ...elem da jo'natish!
   let event = new Event("hello", {bubbles: true}); // (2)
   elem.dispatchEvent(event);
 
-  // the handler on document will activate and display the message.
+  // document dagi handler faollashadi va xabarni ko'rsatadi.
 
 </script>
 ```
 
+Eslatmalar:
 
-Notes:
+1. Maxsus eventlarimiz uchun `addEventListener` dan foydalanishimiz kerak, chunki `on<event>` faqat o'rnatilgan eventlar uchun mavjud, `document.onhello` ishlamaydi.
+2. `bubbles:true` o'rnatish kerak, aks holda event yuqoriga pufaklanmaydi.
 
-1. We should use `addEventListener` for our custom events, because `on<event>` only exists for built-in events, `document.onhello` doesn't work.
-2. Must set `bubbles:true`, otherwise the event won't bubble up.
+Pufaklash mexanizmi o'rnatilgan (`click`) va maxsus (`hello`) eventlar uchun bir xil. Tutish va pufaklash bosqichlari ham mavjud.
 
-The bubbling mechanics is the same for built-in (`click`) and custom (`hello`) events. There are also capturing and bubbling stages.
+## MouseEvent, KeyboardEvent va boshqalar
 
-## MouseEvent, KeyboardEvent and others
-
-Here's a short list of classes for UI Events from the [UI Event specification](https://www.w3.org/TR/uievents):
+Mana [UI Event spetsifikatsiyasi](https://www.w3.org/TR/uievents) dan UI Eventlari uchun sinflarning qisqa ro'yxati:
 
 - `UIEvent`
 - `FocusEvent`
@@ -91,11 +90,11 @@ Here's a short list of classes for UI Events from the [UI Event specification](h
 - `KeyboardEvent`
 - ...
 
-We should use them instead of `new Event` if we want to create such events. For instance, `new MouseEvent("click")`.
+Agar biz bunday eventlarni yaratmoqchi bo'lsak, `new Event` o'rniga ulardan foydalanishimiz kerak. Masalan, `new MouseEvent("click")`.
 
-The right constructor allows to specify standard properties for that type of event.
+To'g'ri konstruktor o'sha turdagi event uchun standart xususiyatlarni belgilash imkonini beradi.
 
-Like `clientX/clientY` for a mouse event:
+Sichqon eventi uchun `clientX/clientY` kabi:
 
 ```js run
 let event = new MouseEvent("click", {
@@ -110,40 +109,40 @@ alert(event.clientX); // 100
 */!*
 ```
 
-Please note: the generic `Event` constructor does not allow that.
+E'tibor bering: umumiy `Event` konstruktor buni imkon bermaydi.
 
-Let's try:
+Sinab ko'raylik:
 
 ```js run
 let event = new Event("click", {
-  bubbles: true, // only bubbles and cancelable
-  cancelable: true, // work in the Event constructor
+  bubbles: true, // faqat bubbles va cancelable
+  cancelable: true, // Event konstruktorida ishlaydi
   clientX: 100,
   clientY: 100
 });
 
 *!*
-alert(event.clientX); // undefined, the unknown property is ignored!
+alert(event.clientX); // undefined, noma'lum xususiyat e'tiborsiz qoldirildi!
 */!*
 ```
 
-Technically, we can work around that by assigning directly `event.clientX=100` after creation. So that's a matter of convenience and following the rules. Browser-generated events always have the right type.
+Texnik jihatdan, yaratishdan keyin to'g'ridan-to'g'ri `event.clientX=100` belgilash orqali buni hal qilishimiz mumkin. Demak, bu qulaylik va qoidalarga rioya qilish masalasi. Brauzer tomonidan yaratilgan eventlar har doim to'g'ri turga ega.
 
-The full list of properties for different UI events is in the specification, for instance, [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent).
+Turli UI eventlari uchun xususiyatlarning to'liq ro'yxati spetsifikatsiyada, masalan [MouseEvent](https://www.w3.org/TR/uievents/#mouseevent) da.
 
-## Custom events
+## Maxsus eventlar
 
-For our own, completely new events types like `"hello"` we should use `new CustomEvent`. Technically [CustomEvent](https://dom.spec.whatwg.org/#customevent) is the same as `Event`, with one exception.
+`"hello"` kabi o'zimizning, butunlay yangi event turlari uchun `new CustomEvent` dan foydalanishimiz kerak. Texnik jihatdan [CustomEvent](https://dom.spec.whatwg.org/#customevent) `Event` bilan bir xil, bitta istisno bilan.
 
-In the second argument (object) we can add an additional property `detail` for any custom information that we want to pass with the event.
+Ikkinchi argumentda (obyekt) biz event bilan uzatmoqchi bo'lgan har qanday maxsus ma'lumot uchun qo'shimcha `detail` xususiyatini qo'sha olamiz.
 
-For instance:
+Masalan:
 
 ```html run refresh
-<h1 id="elem">Hello for John!</h1>
+<h1 id="elem">John uchun salom!</h1>
 
 <script>
-  // additional details come with the event to the handler
+  // qo'shimcha tafsilotlar event bilan handlerga keladi
   elem.addEventListener("hello", function(event) {
     alert(*!*event.detail.name*/!*);
   });
@@ -156,25 +155,25 @@ For instance:
 </script>
 ```
 
-The `detail` property can have any data. Technically we could live without, because we can assign any properties into a regular `new Event` object after its creation. But `CustomEvent` provides the special `detail` field for it to evade conflicts with other event properties.
+`detail` xususiyati har qanday ma'lumotga ega bo'lishi mumkin. Texnik jihatdan biz busiz yashashimiz mumkin, chunki yaratilgandan keyin oddiy `new Event` obyektiga har qanday xususiyatlarni belgilashimiz mumkin. Ammo `CustomEvent` boshqa event xususiyatlari bilan ziddiyatlardan qochish uchun buning uchun maxsus `detail` maydonini taqdim etadi.
 
-Besides, the event class describes "what kind of event" it is, and if the event is custom, then we should use `CustomEvent` just to be clear about what it is.
+Bundan tashqari, event sinfi "qanday event" ekanligini tasvirlaydi va agar event maxsus bo'lsa, bu nima ekanligini aniq ko'rsatish uchun `CustomEvent` dan foydalanishimiz kerak.
 
 ## event.preventDefault()
 
-Many browser events have a "default action", such as navigating to a link, starting a selection, and so on.
+Ko'plab brauzer eventlari havolaga o'tish, tanlovni boshlash va boshqalar kabi "standart amal"ga ega.
 
-For new, custom events, there are definitely no default browser actions, but a code that dispatches such event may have its own plans what to do after triggering the event.
+Yangi, maxsus eventlar uchun aniq hech qanday standart brauzer amallari yo'q, lekin bunday eventni jo'natuvchi kod eventni ishga tushirgandan keyin nima qilish kerakligini o'z rejalari bo'lishi mumkin.
 
-By calling `event.preventDefault()`, an event handler may send a signal that those actions should be canceled.
+`event.preventDefault()` ni chaqirish orqali event handleri bu amallar bekor qilinishi kerakligi haqida signal berishi mumkin.
 
-In that case the call to `elem.dispatchEvent(event)` returns `false`. And the code that dispatched it knows that it shouldn't continue.
+Bunday holatda `elem.dispatchEvent(event)` ga chaqiruv `false` qaytaradi. Va uni jo'natgan kod davom etmaslik kerakligini biladi.
 
-Let's see a practical example - a hiding rabbit (could be a closing menu or something else).
+Keling, amaliy misolni ko'raylik - yashirin quyon (yopilayotgan menyu yoki boshqa narsa bo'lishi mumkin).
 
-Below you can see a `#rabbit` and `hide()` function that dispatches `"hide"` event on it, to let all interested parties know that the rabbit is going to hide.
+Quyida siz `#rabbit` va unga `"hide"` eventini jo'natuvchi `hide()` funksiyasini ko'rishingiz mumkin, bu barcha manfaatdor tomonlarga quyonning yashirinishini bildiradi.
 
-Any handler can listen for that event with `rabbit.addEventListener('hide',...)` and, if needed, cancel the action using `event.preventDefault()`. Then the rabbit won't disappear:
+Har qanday handler o'sha eventni `rabbit.addEventListener('hide',...)` bilan tinglashi va kerak bo'lsa `event.preventDefault()` yordamida amaldan voz kechishi mumkin. Shunda quyon yo'qolmaydi:
 
 ```html run refresh autorun
 <pre id="rabbit">
@@ -189,38 +188,37 @@ Any handler can listen for that event with `rabbit.addEventListener('hide',...)`
 <script>
   function hide() {
     let event = new CustomEvent("hide", {
-      cancelable: true // without that flag preventDefault doesn't work
+      cancelable: true // bu bayroqsiz preventDefault ishlamaydi
     });
     if (!rabbit.dispatchEvent(event)) {
-      alert('The action was prevented by a handler');
+      alert('Amal handler tomonidan oldini olindi');
     } else {
       rabbit.hidden = true;
     }
   }
 
   rabbit.addEventListener('hide', function(event) {
-    if (confirm("Call preventDefault?")) {
+    if (confirm("preventDefault ni chaqirasizmi?")) {
       event.preventDefault();
     }
   });
 </script>
 ```
 
-Please note: the event must have the flag `cancelable: true`, otherwise the call `event.preventDefault()` is ignored.
+E'tibor bering: eventda `cancelable: true` bayrog'i bo'lishi kerak, aks holda `event.preventDefault()` chaqiruvi e'tiborsiz qoldiriladi.
 
-## Events-in-events are synchronous
+## Eventlar ichida eventlar sinxrondir
 
-Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then it's handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+Odatda eventlar navbatda qayta ishlanadi. Ya'ni: brauzer `onclick` ni qayta ishlayotgan bo'lsa va yangi event sodir bo'lsa, masalan sichqon harakatlandi, uning qayta ishlanishi navbatga qo'yiladi, tegishli `mousemove` handlerlari `onclick` qayta ishlanishi tugagandan keyin chaqiriladi.
 
-The notable exception is when one event is initiated from within another one, e.g. using `dispatchEvent`. Such events are processed immediately: the new event handlers are called, and then the current event handling is resumed.
+Muhim istisno - bitta event boshqasining ichidan ishga tushirilganda, masalan `dispatchEvent` yordamida. Bunday eventlar darhol qayta ishlanadi: yangi event handlerlari chaqiriladi, keyin joriy event qayta ishlanishi davom etadi.
 
-For instance, in the code below the `menu-open` event is triggered during the `onclick`.
+Masalan, quyidagi kodda `menu-open` eventi `onclick` paytida ishga tushiriladi.
 
-It's processed immediately, without waiting for `onclick` handler to end:
-
+U darhol qayta ishlanadi, `onclick` handlerining tugashini kutmaydi:
 
 ```html run autorun
-<button id="menu">Menu (click me)</button>
+<button id="menu">Menu (meni bosing)</button>
 
 <script>
   menu.onclick = function() {
@@ -233,23 +231,23 @@ It's processed immediately, without waiting for `onclick` handler to end:
     alert(2);
   };
 
-  // triggers between 1 and 2
-  document.addEventListener('menu-open', () => alert('nested'));
+  // 1 va 2 orasida ishga tushadi
+  document.addEventListener('menu-open', () => alert('ichki'));
 </script>
 ```
 
-The output order is: 1 -> nested -> 2.
+Chiqish tartibi: 1 -> ichki -> 2.
 
-Please note that the nested event `menu-open` is caught on the `document`. The propagation and handling of the nested event is finished before the processing gets back to the outer code (`onclick`).
+E'tibor bering, ichki `menu-open` eventi `document` da tutiladi. Ichki eventning tarqalishi va qayta ishlanishi tashqi kodga (`onclick`) qaytishdan oldin tugaydi.
 
-That's not only about `dispatchEvent`, there are other cases. If an event handler calls methods that trigger other events -- they are processed synchronously too, in a nested fashion.
+Bu nafaqat `dispatchEvent` haqida, boshqa holatlar ham bor. Agar event handleri boshqa eventlarni ishga tushiradigan usullarni chaqirsa -- ular ham sinxron tarzda, ichki ko'rinishda qayta ishlanadi.
 
-Let's say we don't like it. We'd want `onclick` to be fully processed first, independently from `menu-open` or any other nested events.
+Aytaylik, bu bizga yoqmaydi. Biz `onclick` ning avval to'liq qayta ishlanishini xohlaymiz, `menu-open` yoki boshqa ichki eventlardan mustaqil ravishda.
 
-Then we can either put the `dispatchEvent` (or another event-triggering call) at the end of `onclick` or, maybe better, wrap it in the zero-delay `setTimeout`:
+Keyin biz yoki `dispatchEvent` ni (yoki boshqa eventni ishga tushiruvchi chaqiruvni) `onclick` ning oxiriga qo'yishimiz yoki, ehtimol yaxshiroq, uni nol kechikishli `setTimeout` ga o'rashimiz mumkin:
 
 ```html run
-<button id="menu">Menu (click me)</button>
+<button id="menu">Menu (meni bosing)</button>
 
 <script>
   menu.onclick = function() {
@@ -262,33 +260,33 @@ Then we can either put the `dispatchEvent` (or another event-triggering call) at
     alert(2);
   };
 
-  document.addEventListener('menu-open', () => alert('nested'));
+  document.addEventListener('menu-open', () => alert('ichki'));
 </script>
 ```
 
-Now `dispatchEvent` runs asynchronously after the current code execution is finished, including `menu.onclick`, so event handlers are totally separate.
+Endi `dispatchEvent` joriy kod bajarilishi tugagandan keyin, `menu.onclick` ni ham qo'shganda, asinxron tarzda ishlaydi, shuning uchun event handlerlari butunlay alohida.
 
-The output order becomes: 1 -> 2 -> nested.
+Chiqish tartibi: 1 -> 2 -> ichki bo'ladi.
 
-## Summary
+## Xulosa
 
-To generate an event from code, we first need to create an event object.
+Koddan event yaratish uchun avval event obyektini yaratishimiz kerak.
 
-The generic `Event(name, options)` constructor accepts an arbitrary event name and the `options` object with two properties:
-- `bubbles: true` if the event should bubble.
-- `cancelable: true` if the `event.preventDefault()` should work.
+Umumiy `Event(name, options)` konstruktor ixtiyoriy event nomi va ikkita xususiyatga ega `options` obyektini qabul qiladi:
+- `bubbles: true` agar event pufaklanishi kerak bo'lsa.
+- `cancelable: true` agar `event.preventDefault()` ishlashi kerak bo'lsa.
 
-Other constructors of native events like `MouseEvent`, `KeyboardEvent` and so on accept properties specific to that event type. For instance, `clientX` for mouse events.
+`MouseEvent`, `KeyboardEvent` va boshqalar kabi mahalliy eventlarning boshqa konstruktorlari o'sha event turiga xos xususiyatlarni qabul qiladi. Masalan, sichqon eventlari uchun `clientX`.
 
-For custom events we should use `CustomEvent` constructor. It has an additional option named `detail`, we should assign the event-specific data to it. Then all handlers can access it as `event.detail`.
+Maxsus eventlar uchun `CustomEvent` konstruktoridan foydalanishimiz kerak. Unda `detail` nomli qo'shimcha variant mavjud, biz eventga xos ma'lumotlarni unga belgilashimiz kerak. Keyin barcha handlerlar uni `event.detail` sifatida olishlari mumkin.
 
-Despite the technical possibility of generating browser events like `click` or `keydown`, we should use them with great care.
+`click` yoki `keydown` kabi brauzer eventlarini yaratishning texnik imkoniyati mavjudligiga qaramay, biz ulardan juda ehtiyotkorlik bilan foydalanishimiz kerak.
 
-We shouldn't generate browser events as it's a hacky way to run handlers. That's bad architecture most of the time.
+Biz brauzer eventlarini yaratmasligimiz kerak, chunki bu handlerlarni ishga tushirishning buzuq usuli. Bu ko'p vaqt yomon arxitektura.
 
-Native events might be generated:
+Mahalliy eventlar yaratilishi mumkin:
 
-- As a dirty hack to make 3rd-party libraries work the needed way, if they don't provide other means of interaction.
-- For automated testing, to "click the button" in the script and see if the interface reacts correctly.
+- Agar uchinchi tomon kutubxonalari boshqa o'zaro ta'sir vositalarini taqdim etmasa, ularni kerakli tarzda ishlash uchun iflos hack sifatida.
+- Avtomatlashtirilgan test qilish uchun, skriptda "tugmani bosish" va interfeys to'g'ri javob berishini ko'rish uchun.
 
-Custom events with our own names are often generated for architectural purposes, to signal what happens inside our menus, sliders, carousels etc.
+O'z nomlarimizga ega maxsus eventlar ko'pincha arxitektura maqsadlari uchun yaratiladi, bizning menyularimiz, slayderlarimiz, karusellarimiz va boshqalarda nima sodir bo'layotganini bildirish uchun.

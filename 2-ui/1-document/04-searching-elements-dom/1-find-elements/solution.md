@@ -1,35 +1,35 @@
-There are many ways to do it.
+Buni qilishning ko'plab usullari mavjud.
 
-Here are some of them:
+Ulardan ba'zilari:
 
 ```js
-// 1. The table with `id="age-table"`.
+// 1. `id="age-table"` bilan jadval.
 let table = document.getElementById('age-table')
 
-// 2. All label elements inside that table
+// 2. Ushbu jadval ichidagi barcha label elementlari
 table.getElementsByTagName('label')
-// or
+// yoki
 document.querySelectorAll('#age-table label')
 
-// 3. The first td in that table (with the word "Age")
+// 3. Ushbu jadvaldagi birinchi td ("Age" so'zi bilan)
 table.rows[0].cells[0]
-// or
+// yoki
 table.getElementsByTagName('td')[0]
-// or
+// yoki
 table.querySelector('td')
 
-// 4. The form with the name "search"
-// assuming there's only one element with name="search" in the document
+// 4. "search" nomi bilan forma
+// hujjatda name="search" bilan faqat bitta element bor deb faraz qilib
 let form = document.getElementsByName('search')[0]
-// or, form specifically
+// yoki, aniq forma uchun
 document.querySelector('form[name="search"]')
 
-// 5. The first input in that form.
+// 5. Ushbu formadagi birinchi input.
 form.getElementsByTagName('input')[0]
-// or
+// yoki
 form.querySelector('input')
 
-// 6. The last input in that form
-let inputs = form.querySelectorAll('input') // find all inputs
-inputs[inputs.length-1] // take the last one
+// 6. Ushbu formadagi oxirgi input
+let inputs = form.querySelectorAll('input') // barcha inputlarni topish
+inputs[inputs.length-1] // oxirgisini olish
 ```

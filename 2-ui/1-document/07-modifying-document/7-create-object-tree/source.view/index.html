@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-</head>
+  <body>
+    <div id="tree"></div>
 
-<body>
-
-  <div id="tree"></div>
-
-  <!-- The result should be:
+    <!-- The result should be:
 <div id="tree">
 <ul>
-  <li>Fish
+  <li>Baliq
     <ul>
-      <li>trout</li>
+      <li>gulmoh</li>
       <li>salmon</li>
     </ul>
   </li>
-  <li>Trees
+  <li>Daraxt
     <ul>
-      <li>Huge
+      <li>Katta
         <ul>
-          <li>sequoia</li>
-          <li>oak</li>
+          <li>sekvoya</li>
+          <li>eman</li>
         </ul>
       </li>
-      <li>Flowering
+      <li>Gullaydigan
         <ul>
-          <li>apple tree</li>
+          <li>olma daraxti</li>
           <li>magnolia</li>
         </ul>
       </li>
@@ -38,31 +36,30 @@
 </div>
 -->
 
-  <script>
-    let data = {
-      "Fish": {
-        "trout": {},
-        "salmon": {}
-      },
-
-      "Tree": {
-        "Huge": {
-          "sequoia": {},
-          "oak": {}
+    <script>
+      let data = {
+        Baliq: {
+          gulmoh: {},
+          salmon: {},
         },
-        "Flowering": {
-          "apple tree": {},
-          "magnolia": {}
-        }
+
+        Daraxt: {
+          Katta: {
+            sekvoya: {},
+            eman: {},
+          },
+          Gullaydigan: {
+            "olma daraxti": {},
+            magnolia: {},
+          },
+        },
+      };
+
+      function createTree(container, data) {
+        /* sizning kodingiz */
       }
-    };
 
-    function createTree(container, data) {
-      /* your code */
-    }
-
-    createTree(document.getElementById('tree'), data);
-  </script>
-
-</body>
+      createTree(document.getElementById("tree"), data);
+    </script>
+  </body>
 </html>

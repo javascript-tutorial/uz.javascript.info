@@ -1,94 +1,96 @@
-# Nullish coalescing operator '??'
+# Nullab birlashtirish operatori '??'
 
 [recent browser="new"]
 
-The nullish coalescing operator is written as two question marks `??`.
+Nullab birlashtirish operatori ikki savol belgisi `??` bilan yoziladi.
 
-As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. We'll say that an expression is "defined" when it's neither `null` nor `undefined`.
+U `null` va `undefined` ni bir xil darajada ko'rib chiqadi, shuning uchun bu maqolada maxsus atama ishlatamiz. Agar ifoda `null` ham, `undefined` ham bo'lmasa, uni "aniqlangan" deb ataymiz.
 
-The result of `a ?? b` is:
-- if `a` is defined, then `a`,
-- if `a` isn't defined, then `b`.
+`a ?? b` ning natijasi:
 
-In other words, `??` returns the first argument if it's not `null/undefined`. Otherwise, the second one.
+- agar `a` aniqlangan bo'lsa, u holda `a`,
+- agar `a` aniqlanmagan bo'lsa, u holda `b`.
 
-The nullish coalescing operator isn't anything completely new. It's just a nice syntax to get the first "defined" value of the two.
+Boshqacha qilib aytganda, `??` agar birinchi argument `null/undefined` bo'lmasa, uni qaytaradi. Aks holda, ikkinchisini qaytaradi.
 
-We can rewrite `result = a ?? b` using the operators that we already know, like this:
+Nullab birlashtirish operatori butunlay yangi narsa emas. Bu shunchaki ikkitadan birinchi "aniqlangan" qiymatni olishning yoqimli sintaksidir.
+
+Biz `result = a ?? b` ni allaqachon bilgan operatorlar yordamida qayta yozishimiz mumkin:
 
 ```js
-result = (a !== null && a !== undefined) ? a : b;
+result = a !== null && a !== undefined ? a : b;
 ```
 
-Now it should be absolutely clear what `??` does. Let's see where it helps.
+Endi `??` nima qilishi mutlaqo aniq bo'lishi kerak. Qayerda yordam berishini ko'rib chiqaylik.
 
-The common use case for `??` is to provide a default value for a potentially undefined variable.
+`??` ning umumiy foydalanish holati - potensial aniqlanmagan o'zgaruvchi uchun standart qiymat berish.
 
-For example, here we show `user` if defined, otherwise `Anonymous`:
+Masalan, bu yerda agar aniqlangan bo'lsa `user` ni, aks holda `Anonymous` ni ko'rsatamiz:
 
 ```js run
 let user;
 
-alert(user ?? "Anonymous"); // Anonymous (user not defined)
+alert(user ?? "Anonymous"); // Anonymous (user aniqlanmagan)
 ```
 
-Here's the example with `user` assigned to a name:
+Bu yerda `user` ga nom tayinlangan misol:
 
 ```js run
 let user = "John";
 
-alert(user ?? "Anonymous"); // John (user defined)
+alert(user ?? "Anonymous"); // John (user aniqlangan)
 ```
 
-We can also use a sequence of `??` to select the first value from a list that isn't `null/undefined`.
+Shuningdek, `null/undefined` bo'lmagan ro'yxatdan birinchi qiymatni tanlash uchun `??` ketma-ketligini ishlatishimiz mumkin.
 
-Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to enter a value.
+Aytaylik, bizda foydalanuvchi ma'lumotlari `firstName`, `lastName` yoki `nickName` o'zgaruvchilarida bor. Agar foydalanuvchi qiymat kiritmaslikni hal qilgan bo'lsa, ularning barchasi aniqlanmagan bo'lishi mumkin.
 
-We'd like to display the user name using one of these variables, or show "Anonymous" if all of them aren't defined.
+Biz ushbu o'zgaruvchilardan birini ishlatib foydalanuvchi nomini ko'rsatmoqchimiz yoki agar ularning barchasi aniqlanmagan bo'lsa "Anonymous" ko'rsatmoqchimiz.
 
-Let's use the `??` operator for that:
+Buning uchun `??` operatoridan foydalanamiz:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first defined value:
+// birinchi aniqlangan qiymatni ko'rsatadi:
 *!*
 alert(firstName ?? lastName ?? nickName ?? "Anonymous"); // Supercoder
 */!*
 ```
 
-## Comparison with ||
+## || bilan taqqoslash
 
-The OR `||` operator can be used in the same way as `??`, as it was described in the [previous chapter](info:logical-operators#or-finds-the-first-truthy-value).
+YOKI `||` operatori `??` bilan bir xil tarzda ishlatilishi mumkin, chunki bu [oldingi bobda](info:logical-operators#or-finds-the-first-truthy-value) tasvirlangan.
 
-For example, in the code above we could replace `??` with `||` and still get the same result:
+Masalan, yuqoridagi kodda biz `??` ni `||` bilan almashtirish va hali ham bir xil natijani olishimiz mumkin:
 
 ```js run
 let firstName = null;
 let lastName = null;
 let nickName = "Supercoder";
 
-// shows the first truthy value:
+// birinchi haqiqiy qiymatni ko'rsatadi:
 *!*
 alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
-Historically, the OR `||` operator was there first. It exists since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+Tarixan YOKI `||` operatori birinchi bo'lib paydo bo'lgan. U JavaScript boshidanoq mavjud, shuning uchun dasturchilar uzoq vaqt davomida bunday maqsadlar uchun foydalanib kelishgan.
 
-On the other hand, the nullish coalescing operator `??` was added to JavaScript only recently, and the reason for that was that people weren't quite happy with `||`.
+Boshqa tomondan, nullab birlashtirish operatori `??` JavaScript-ga yaqinda qo'shilgan va buning sababi odamlar `||` dan butunlay mamnun emas edi.
 
-The important difference between them is that:
-- `||` returns the first *truthy* value.
-- `??` returns the first *defined* value.
+Ularning o'rtasidagi muhim farq:
 
-In other words, `||` doesn't distinguish between `false`, `0`, an empty string `""` and `null/undefined`. They are all the same -- falsy values. If any of these is the first argument of `||`, then we'll get the second argument as the result.
+- `||` birinchi _haqiqiy_ qiymatni qaytaradi.
+- `??` birinchi _aniqlangan_ qiymatni qaytaradi.
 
-In practice though, we may want to use default value only when the variable is `null/undefined`. That is, when the value is really unknown/not set.
+Boshqacha qilib aytganda, `||` `false`, `0`, bo'sh satr `""` va `null/undefined` o'rtasida farq qilmaydi. Ularning barchasi bir xil -- yolg'on qiymatlar. Agar bulardan biri `||` ning birinchi argumenti bo'lsa, natija sifatida ikkinchi argumentni olamiz.
 
-For example, consider this:
+Amalda esa biz standart qiymatni faqat o'zgaruvchi `null/undefined` bo'lgandagina ishlatmoqchi bo'lishimiz mumkin. Ya'ni qiymat haqiqatan ham noma'lum/o'rnatilmagan bo'lganda.
+
+Masalan, buni ko'rib chiqing:
 
 ```js run
 let height = 0;
@@ -97,73 +99,73 @@ alert(height || 100); // 100
 alert(height ?? 100); // 0
 ```
 
-- The `height || 100` checks `height` for being a falsy value, and it's `0`, falsy indeed.
-    - so the result of `||` is the second argument, `100`.
-- The `height ?? 100` checks `height` for being `null/undefined`, and it's not,
-    - so the result is `height` "as is", that is `0`.
+- `height || 100` `height` ning yolg'on qiymat ekanligini tekshiradi va u `0`, haqiqatan ham yolg'on.
+  - shuning uchun `||` ning natijasi ikkinchi argument, `100`.
+- `height ?? 100` `height` ning `null/undefined` ekanligini tekshiradi va u bunday emas,
+  - shuning uchun natija `height` "o'zi", ya'ni `0`.
 
-In practice, the zero height is often a valid value, that shouldn't be replaced with the default. So `??` does just the right thing.
+Amalda nol balandlik ko'pincha to'g'ri qiymat bo'lib, standart bilan almashtirilmasligi kerak. Shuning uchun `??` to'g'ri ishni qiladi.
 
-## Precedence
+## Ustunlik
 
-The precedence of the `??` operator is about the same as `||`, just a bit lower. It equals `5` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table), while `||` is `6`.
+`??` operatorining ustunligi `||` bilan deyarli bir xil, faqat biroz pastroq. [MDN jadvalida](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) u `5` ga teng, `||` esa `6`.
 
-That means that, just like `||`, the nullish coalescing operator `??` is evaluated before `=` and `?`, but after most other operations, such as `+`, `*`.
+Bu shuni anglatadiki, `||` kabi, nullab birlashtirish operatori `??` ham `=` va `?` dan oldin, lekin `+`, `*` kabi boshqa ko'pchilik operatsiyalardan keyin baholanadi.
 
-So if we'd like to choose a value with `??` in an expression with other operators, consider adding parentheses:
+Shuning uchun agar biz boshqa operatorlar bilan ifodada `??` bilan qiymat tanlashni istasak, qavs qo'shishni ko'rib chiqing:
 
 ```js run
 let height = null;
 let width = null;
 
-// important: use parentheses
+// muhim: qavslardan foydalaning
 let area = (height ?? 100) * (width ?? 50);
 
 alert(area); // 5000
 ```
 
-Otherwise, if we omit parentheses, then as `*` has the higher precedence than `??`, it would execute first, leading to incorrect results.
+Aks holda, agar qavslarni tashlab qo'ysak, `*` ning ustunligi `??` dan yuqori bo'lgani uchun u birinchi bo'lib bajariladi va noto'g'ri natijalarga olib keladi.
 
 ```js
-// without parentheses
+// qavslarsiz
 let area = height ?? 100 * width ?? 50;
 
-// ...works the same as this (probably not what we want):
-let area = height ?? (100 * width) ?? 50;
+// ...xuddi shu narsani bajaradi (ehtimol biz istagan narsa emas):
+let area = height ?? 100 * width ?? 50;
 ```
 
-### Using ?? with && or ||
+### ?? ni && yoki || bilan ishlatish
 
-Due to safety reasons, JavaScript forbids using `??` together with `&&` and `||` operators, unless the precedence is explicitly specified with parentheses.
+Xavfsizlik sabablariga ko'ra, JavaScript `??` ni `&&` va `||` operatorlari bilan birga ishlatishni taqiqlaydi, agar ustunlik qavs bilan aniq ko'rsatilmagan bo'lsa.
 
-The code below triggers a syntax error:
+Quyidagi kod sintaksis xatosini keltirib chiqaradi:
 
 ```js run
-let x = 1 && 2 ?? 3; // Syntax error
+let x = 1 && 2 ?? 3; // Sintaksis xatosi
 ```
 
-The limitation is surely debatable, it was added to the language specification with the purpose to avoid programming mistakes, when people start to switch from `||` to `??`.
+Bu cheklov, albatta, munozarali, u odamlar `||` dan `??` ga o'tishni boshlaganda dasturlash xatolarini oldini olish maqsadida til spetsifikatsiyasiga qo'shilgan.
 
-Use explicit parentheses to work around it:
+Buni hal qilish uchun aniq qavslardan foydalaning:
 
 ```js run
 *!*
-let x = (1 && 2) ?? 3; // Works
+let x = (1 && 2) ?? 3; // Ishlaydi
 */!*
 
 alert(x); // 2
 ```
 
-## Summary
+## Xulosa
 
-- The nullish coalescing operator `??` provides a short way to choose the first "defined" value from a list.
+- Nullab birlashtirish operatori `??` ro'yxatdan birinchi "aniqlangan" qiymatni tanlashning qisqa usulini taqdim etadi.
 
-    It's used to assign default values to variables:
+  U o'zgaruvchilarga standart qiymatlarni tayinlash uchun ishlatiladi:
 
-    ```js
-    // set height=100, if height is null or undefined
-    height = height ?? 100;
-    ```
+  ```js
+  // agar height null yoki undefined bo'lsa, height=100 qo'ying
+  height = height ?? 100;
+  ```
 
-- The operator `??` has a very low precedence, only a bit higher than `?` and `=`, so consider adding parentheses when using it in an expression.
-- It's forbidden to use it with `||` or `&&` without explicit parentheses.
+- `??` operatori juda past ustunlikka ega, faqat `?` va `=` dan biroz yuqori, shuning uchun uni ifodada ishlatishda qavs qo'shishni ko'rib chiqing.
+- Uni aniq qavslar bo'lmasa `||` yoki `&&` bilan ishlatish taqiqlangan.

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-Birinchidan, bizning sayyoramiz nomi uchun o'zgaruvchan.
-=======
-## The variable for our planet
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Birinchidan, bizning sayyoramiz nomi uchun o'zgaruvchi.
 
 Bu oddiy:
 
@@ -10,11 +6,7 @@ Bu oddiy:
 let ourPlanetName = "Earth"; // ourPlanetName bu ingliz tilidan bizning saroyamizning ismi degani Earth esa bu Yer
 ```
 
-<<<<<<< HEAD
-E'tibor bering, biz qisqaroq `planet(sayyora)` nomini ishatishimiz mumkin edi, ammo u qaysi sayyorani nazarda tutayotganini aniq bilish mumkin emas. Aniqroq bo'lgani yaxshi. Agar o'zgaruvhi judaUzunO'zgaruvchan bo'lmasa.
-=======
-Note, we could use a shorter name `planet`, but it might not be obvious what planet it refers to. It's nice to be more verbose. At least until the variable isNotTooLong.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+E'tibor bering, biz qisqaroq `planet(sayyora)` nomini ishatishimiz mumkin edi, ammo u qaysi sayyorani nazarda tutayotganini aniq bilish mumkin emas. Aniqroq bo'lgani yaxshi. Agar o'zgaruvhi judaUzunO'zgaruvchi bo'lmasa.
 
 ## The name of the current visitor
 
@@ -24,6 +16,6 @@ let currentUserName = "John"; // currentUser bu ingliz tilidan joriy foydalanuvc
 
 Yana, biz qizqaroq `userName(foydalanuvchining ismi)` nomini ishlatishimiz mumkin edi, agar biz bu foydalanuvchi aniq joriyligini bilsak.
 
-Zamonaviy muharrirlar va avtomatik to'ldiruvchilar uzun o'zgaruvchanlar nomlarini yozishni osonlashtiradi. Ulardan tejamang. 3 ta so'zdan iborat ism yaxshi.
+Zamonaviy muharrirlar va avtomatik to'ldiruvchilar uzun o'zgaruvchilar nomlarini yozishni osonlashtiradi. Ulardan tejamang. 3 ta so'zdan iborat ism yaxshi.
 
 Agar sizning muharriringiz tegishli avtomatik to'ldirishga ega bo'lmasa, [yangisini](/code-editors) yuklab oling.

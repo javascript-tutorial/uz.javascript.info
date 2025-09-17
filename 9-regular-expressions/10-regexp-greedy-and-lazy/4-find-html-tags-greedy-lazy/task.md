@@ -1,15 +1,15 @@
-# Find HTML tags
+# HTML teglarni topish
 
-Create a regular expression to find all (opening and closing) HTML tags with their attributes.
+Barcha (ochish va yopish) HTML teglarini ularning atributlari bilan topish uchun muntazam ifoda yarating.
 
-An example of use:
+Foydalanish misoli:
 
 ```js run
-let regexp = /your regexp/g;
+let regexp = /sizning regexpiyingiz/g;
 
 let str = '<> <a href="/"> <input type="radio" checked> <b>';
 
-alert( str.match(regexp) ); // '<a href="/">', '<input type="radio" checked>', '<b>'
+alert(str.match(regexp)); // '<a href="/">', '<input type="radio" checked>', '<b>'
 ```
 
-Here we assume that tag attributes may not contain `<` and `>` (inside quotes too), that simplifies things a bit.
+Bu erda biz teg atributlarida `<` va `>` (qo'shtirnoq ichida ham) bo'lmasligi mumkin, deb taxmin qilamiz, bu esa ishlarni biroz soddalashtiradi.

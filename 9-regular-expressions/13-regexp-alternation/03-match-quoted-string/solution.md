@@ -1,17 +1,17 @@
-The solution: `pattern:/"(\\.|[^"\\])*"/g`.
+Yechim: `pattern:/"(\\.|[^"\\])*"/g`.
 
-Step by step:
+Bosqichma-bosqich:
 
-- First we look for an opening quote `pattern:"`
-- Then if we have a backslash `pattern:\\` (we have to double it in the pattern because it is a special character), then any character is fine after it (a dot).
-- Otherwise we take any character except a quote (that would mean the end of the string) and a backslash (to prevent lonely backslashes, the backslash is only used with some other symbol after it): `pattern:[^"\\]`
-- ...And so on till the closing quote.
+- Avval biz `pattern:"` ochilish iqtibosini qidiramiz
+- Agar bizda teskari qiyshiq chiziq `pattern:\\` bo'lsa (bu maxsus belgi bo'lgani uchun uni naqshda ikki barobarga qo'yishimiz kerak), undan keyin har qanday belgi yaxshi bo'ladi (nuqta).
+- Aks holda biz qo'shtirnoq (bu qatorning oxirini bildiradi) va teskari chiziqdan tashqari har qanday belgini olamiz (yakka teskari qiyshiq chiziqning oldini olish uchun teskari chiziq faqat undan keyin boshqa belgi bilan ishlatiladi): `pattern:[^"\\]`
+- Yakunlovchi iqtibosgacha shunday.
 
-In action:
+Amalda:
 
 ```js run
 let regexp = /"(\\.|[^"\\])*"/g;
-let str = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';
+let str = '.. "meni sinab ko'ring" .. "\\"Salom\\" deb ayting!" .. "\\\\ \\"" ..';
 
-alert( str.match(regexp) ); // "test me","Say \"Hello\"!","\\ \""
+alert(str.match(regexp)); // "meni sinab ko'ring","\"Salom\" deb ayt!","\\ \""
 ```

@@ -1,10 +1,23 @@
-# Tsiklar: while va for
+# Tsikllar: while va for
 
-Biz kopincha harakatlarni takrorlashimiz kerak.
+Ko'pincha harakatlarni takrorlashga to'g'ri keladi.
 
-Masalan, ro'yxatdan qiymatlarni birin-ketin chiqarish yoki shunchaki 1 dan 10 gacha bo'lgan har bir raqam uchun bir xil kodni ishlatish.
+Masalan, ro'yxatdan tovarlarni birin-ketin chiqarish yoki 1 dan 10 gacha bo'lgan har bir raqam uchun bir xil kodni ishga tushirish.
 
-*Tsikl* - bu bitta kodni bir necha marta takrorlash usuli.
+_Tsikllar_ - bir xil kodni bir necha marta takrorlash usuli.
+
+```smart header="for..of va for..in tsikllari"
+Ilg'or o'quvchilar uchun kichik e'lon.
+
+Bu maqola faqat asosiy tsikllarni qamrab oladi: `while`, `do..while` va `for(..;..;..)`.
+
+Agar siz bu maqolaga boshqa turdagi tsikllarni qidirib kelgan bo'lsangiz, mana ko'rsatmalar:
+
+- Obyekt xossalari bo'ylab tsikl uchun [for..in](info:object#forin) ga qarang.
+- Massivlar va takrorlanadigan obyektlar bo'ylab tsikl uchun [for..of](info:array#loops) va [iterables](info:iterable) ga qarang.
+
+Aks holda, davom eting.
+```
 
 ## "while" tsikli
 
@@ -13,51 +26,43 @@ Masalan, ro'yxatdan qiymatlarni birin-ketin chiqarish yoki shunchaki 1 dan 10 ga
 ```js
 while (condition) {
   // kod
-  // "tsikl tanasi" deb nomlanadi
+  // "tsikl tanasi" deb ataladi
 }
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-`condition` `true` bo'lsa, tsikl tanasidan `kod` bajariladi.
-=======
-While the `condition` is truthy, the `code` from the loop body is executed.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+`condition` haqiqiy bo'lgan vaqtda, tsikl tanasidagi `kod` bajariladi.
 
-Masalan, pastdagi tsiklda `i`, `i < 3` bo'lsa ishlaydi:
+Masalan, quyidagi tsikl `i < 3` bo'lgan vaqtda `i` ni chiqaradi:
 
 ```js run
 let i = 0;
-while (i < 3) { // 0, keyin 1, keyin 2 ni ko'rsatadi
-  alert( i );
+while (i < 3) {
+  // 0, keyin 1, keyin 2 ni ko'rsatadi
+  alert(i);
   i++;
 }
 ```
 
-Tsikl tanasining bitta bajarilishi *takrorlash* deb nomlanadi. Yuqori misoldagi tsikl uchta takrorlashni amalga oshiradi.
+Tsikl tanasining bir marta bajarilishi _iteratsiya_ deb ataladi. Yuqoridagi misoldagi tsikl uch marta iteratsiya qiladi.
 
-Agar yuqoridagi misolda `i++` yo'q bo'lsa, tsikl (nazariy jihatdan) abadiy takrorlanadi. Amalda, brauzer bunday tsikl to'xtatish usullarini taqdim etadi va JavaScript-ning server tomonida biz bu jarayonni to'xtatishimiz mumkin.
+Agar yuqoridagi misolda `i++` bo'lmaganida, tsikl (nazariy jihatdan) abadiy takrorlanar edi. Amalda brauzer bunday tsikllarni to'xtatish usullarini taqdim etadi va server tomonidagi JavaScript-da biz jarayonni to'xtatishimiz mumkin.
 
-Har qanday ifoda yoki o'zgaruvchan faqat taqqoslash emas, balki tsikl sharti bo'lishi mumkin: shart baholanadi va `while` tomonidan mantiqiy shaklga aylantiriladi.
+Faqat taqqoslashlar emas, har qanday ifoda yoki o'zgaruvchi tsikl sharti bo'lishi mumkin: shart baholanadi va `while` tomonidan boolean ga aylantiriladi.
 
-Masalan, `while(i! = 0)` ni yozishning qisqa usuli `while(i)`:
+Masalan, `while (i != 0)` ni yozishning qisqaroq usuli `while (i)`:
 
 ```js run
 let i = 3;
 *!*
-while (i) { // agar i 0 ga aylansa, shart noto'g'ri bo'lib, tsikl to'xtaydi
+while (i) { // i 0 ga aylanganida, shart yolg'on bo'ladi va tsikl to'xtaydi
 */!*
   alert( i );
   i--;
 }
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-````smart header="Bir satrli ifoda uchun qavslar shart emas"
-Agar tsikl tanasida bitta ifoda bo'lsa, biz qavslarni tashlab qo'yishimiz mumkin `{…}`:
-=======
-````smart header="Curly braces are not required for a single-line body"
-If the loop body has a single statement, we can omit the curly braces `{…}`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+````smart header="Bir qatorli tana uchun jingalak qavslar shart emas"
+Agar tsikl tanasi bitta iboraga ega bo'lsa, jingalak qavslarni `{…}` tashlab qo'yishimiz mumkin:
 
 ```js run
 let i = 3;
@@ -67,9 +72,9 @@ while (i) alert(i--);
 ```
 ````
 
-## "Do.. while" tsikli
+## "do..while" tsikli
 
-Tekshuruvni `do...while` sintaksisidan foydalanib, tsikl tanasi ostiga *pastga* ko'chirishimiz mumkin:
+Shart tekshiruvini `do..while` sintaksisi yordamida tsikl tanasining _pastiga_ ko'chirish mumkin:
 
 ```js
 do {
@@ -77,167 +82,158 @@ do {
 } while (condition);
 ```
 
-Dastlab, tsikl tanani bajaradi, so'ngra shartni tekshiradi va to'g'ri bo'lsa, uni qayta-qayta bajaradi.
+Tsikl avval tanani bajaradi, keyin shartni tekshiradi va u haqiqiy bo'lgan vaqtda uni qayta-qayta bajaradi.
 
 Masalan:
 
 ```js run
 let i = 0;
 do {
-  alert( i );
+  alert(i);
   i++;
 } while (i < 3);
 ```
 
-Sintaksisning ushbu shakli faqat to'gri bolishidan qat'i nazar, tsikl tanasi **kamida bir marta** bajarilishini xohlaganingizda ishlatilishingiz mumkin. Odatda, boshqa shaklga afzallik beriladi: `while(…) {…}`.
+Bu sintaksis shakli faqat tsikl tanasini shart haqiqiy bo'lishidan qat'iy nazar **kamida bir marta** bajarishni xohlagan vaqtda ishlatilishi kerak. Odatda boshqa shakl afzal ko'riladi: `while(…) {…}`.
 
-## "For" tsikli
+## "for" tsikli
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-`For` tsikli eng ko'p ishlatiladigan tsikl hisoblanadi.
-=======
-The `for` loop is more complex, but it's also the most commonly used loop.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+`for` tsikli murakkabroq, lekin u eng ko'p ishlatiladigan tsikldir.
 
-Bu shunday ko'rinishga ega:
+U quyidagicha ko'rinadi:
 
 ```js
-for (boshlanishi; shart; qadam) {
+for (begin; condition; step) {
   // ... tsikl tanasi ...
 }
 ```
 
-Keling, ushbu qismlarning ma'nosini misol orqali bilib olaylik. Quyidagi tsikl `alert(i)` `i` uchun `0` dan `3`(lekin shu jumladan emas) gacha ishlaydi:
+Misolda bu qismlarning ma'nosini o'rganamiz. Quyidagi tsikl `i` uchun `0` dan `3` gacha (lekin 3 ni o'z ichiga olmaydi) `alert(i)` ni ishga tushiradi:
 
 ```js run
-for (let i = 0; i < 3; i++) { // 0, keyin 1, keyin 2 ni ko'rsatadi
+for (let i = 0; i < 3; i++) {
+  // 0, keyin 1, keyin 2 ni ko'rsatadi
   alert(i);
 }
 ```
 
-Keling, `for` ifodani qisma ko'rib chiqamiz:
+`for` ifodasini qism-qism ko'rib chiqamiz:
 
-| qism  |          |                                                                            |
-|-------|----------|----------------------------------------------------------------------------|
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-| boshlanishi | `i = 0`    | Tsikldan e'lon qilingandan keyin bir marta bajariladi.                                    |
-| shart | `i < 3`| Har bir tsikl takrorlashdan oldin tekshiriladi. Agar yolg'on bo'lsa, tsikl to'xtaydi.  |
-| qadam | `i++`      | Tananing har bir takrorlanishidan keyin, lekin shart tekshirilguncha bajariladi.
-| tana | `alert(i)`| Shart to'g'ri bo'lsa, qayta-qayta ishlaydi.                        |
-
+| qism      |             |                                                                                         |
+| --------- | ----------- | --------------------------------------------------------------------------------------- |
+| begin     | `let i = 0` | Tsiklga kirishda bir marta bajariladi.                                                  |
+| condition | `i < 3`     | Har bir tsikl iteratsiyasidan oldin tekshiriladi. Agar yolg'on bo'lsa, tsikl to'xtaydi. |
+| body      | `alert(i)`  | Shart haqiqiy bo'lgan vaqtda qayta-qayta ishga tushadi.                                 |
+| step      | `i++`       | Har bir iteratsiyada tanadan keyin bajariladi.                                          |
 
 Umumiy tsikl algoritmi quyidagicha ishlaydi:
-=======
-| begin | `i = 0`    | Executes once upon entering the loop.                                      |
-| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
-| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
-| step| `i++`      | Executes after the body on each iteration. |
 
-The general loop algorithm works like this:
-
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
 ```
-Run begin
-→ (if shart → tanani bajar va qadamni bajar)
-→ (if shart → tanani bajar va qadamni bajar)
-→ (if shart → tanani bajar va qadamni bajar)
+begin ni ishga tushiring
+→ (agar condition → body ni ishga tushiring va step ni ishga tushiring)
+→ (agar condition → body ni ishga tushiring va step ni ishga tushiring)
+→ (agar condition → body ni ishga tushiring va step ni ishga tushiring)
 → ...
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-Agar siz tsiklni boshlagan bo'lsangiz, bu misolga qaytib, uning qog'oz varag'iga qanday qilib bosqichma-bosqich ishlashini yozib olish tushunishga yordam beradi.
-=======
-That is, `begin` executes once, and then it iterates: after each `condition` test, `body` and `step` are executed.
+Ya'ni, `begin` bir marta bajariladi, keyin iteratsiya qiladi: har bir `condition` testidan keyin `body` va `step` bajariladi.
 
-If you are new to loops, it could help to go back to the example and reproduce how it runs step-by-step on a piece of paper.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+Agar siz tsikllarga yangi bo'lsangiz, misolga qaytib, uni qog'oz varaqida qadam-baqadam qanday ishlashini takrorlash yordam berishi mumkin.
 
-Bizning holatimizda aynan nima sodir bo'ladi:
+Bizning holatimizda aynan nima sodir bo'lishi:
 
 ```js
 // for (let i = 0; i < 3; i++) alert(i)
 
-// boshlanishi bajariladi
-let i = 0
-// agar shart → tanani bajaring va qadamni bajarish
-if (i < 3) { alert(i); i++ }
-// agar shart → tanani bajaring va qadamni bajarish
-if (i < 3) { alert(i); i++ }
-// agar shart → tanani bajaring va qadamni bajarish
-if (i < 3) { alert(i); i++ }
-// ...tugaydi, chunki endi i == 3
+// begin ni ishga tushiring
+let i = 0;
+// agar condition → body ni ishga tushiring va step ni ishga tushiring
+if (i < 3) {
+  alert(i);
+  i++;
+}
+// agar condition → body ni ishga tushiring va step ni ishga tushiring
+if (i < 3) {
+  alert(i);
+  i++;
+}
+// agar condition → body ni ishga tushiring va step ni ishga tushiring
+if (i < 3) {
+  alert(i);
+  i++;
+}
+// ...tugadi, chunki endi i == 3
 ```
 
-````smart header="Ichki o'zgaruvchan deklaratsiyasi"
-Bu erda "hisoblagich" o'zgaruvchani `i` tsiklda e'lon qilinadi. Bunga "ichki" o'zgaruvchan deklaratsiya deyiladi. Bunday o'zgaruvchanlar faqat tsikl ichida ko'rinadi.
+````smart header="Inline o'zgaruvchi e'loni"
+Bu yerda "hisoblagich" o'zgaruvchisi `i` to'g'ridan-to'g'ri tsiklda e'lon qilingan. Bu "inline" o'zgaruvchi e'loni deb ataladi. Bunday o'zgaruvchilar faqat tsikl ichida ko'rinadi.
 
 ```js run
 for (*!*let*/!* i = 0; i < 3; i++) {
   alert(i); // 0, 1, 2
 }
-alert(i); // xato, bunday o'zgaruvchan yo'q
+alert(i); // xato, bunday o'zgaruvchi yo'q
 ```
 
-O'zgaruvchani aniqlash o'rniga, mavjud bo'lganidan foydalanishimiz mumkin:
+O'zgaruvchi aniqlash o'rniga, mavjud bo'lganini ishlatishimiz mumkin:
 
 ```js run
 let i = 0;
 
-for (i = 0; i < 3; i++) { // mavjud bo'lgan o'zgaruvchandan
+for (i = 0; i < 3; i++) { // mavjud o'zgaruvchini ishlatish
   alert(i); // 0, 1, 2
 }
 
-alert(i); // 3, chiqariladi, chunki tsiklning tashqarisida e'lon qilingan
+alert(i); // 3, ko'rinadi, chunki tsikldan tashqarida e'lon qilingan
 ```
-
 ````
 
+### Qismlarni tashlab qo'yish
 
-### Parchalarni tashlab ketish
+`for` ning har qanday qismini tashlab qo'yish mumkin.
 
-`For` ning istalgan qismi o'tkazib yuborilishi mumkin.
+Masalan, agar tsikl boshida hech narsa qilishga hojat bo'lmasa, `begin` ni tashlab qo'yishimiz mumkin.
 
-Masalan, agar biz tsiklning boshida hech narsa qilishimiz kerak bo'lmasa, `boshlanishni` ni qoldirib yuborishimiz mumkin.
-
-Bu erda bo'lgani kabi:
+Bu yerda:
 
 ```js run
-let i = 0; // biz i allaqachon e'lon qildik va tayinladik
+let i = 0; // bizda i allaqachon e'lon qilingan va tayinlangan
 
-for (; i < 3; i++) { // "boshlanish" kerak emas
-  alert( i ); // 0, 1, 2
+for (; i < 3; i++) {
+  // "begin" ga hojat yo'q
+  alert(i); // 0, 1, 2
 }
 ```
 
-Shuningdek, biz `qadam` qismini ham olib tashlashimiz mumkin:
+`step` qismini ham olib tashlashimiz mumkin:
 
 ```js run
 let i = 0;
 
-for (; i < 3;) {
-  alert( i++ );
+for (; i < 3; ) {
+  alert(i++);
 }
 ```
 
-Bu tsiklni `while (i < 3)` bilan bir xil qiladi.
+Bu tsiklni `while (i < 3)` ga bir xil qiladi.
 
-Biz aslida hamma narsani olib tashlashimiz mumkin, cheksiz tsikl yaratish uchun:
+Aslida hamma narsani olib tashlash mumkin, cheksiz tsikl yaratish:
 
 ```js
 for (;;) {
-  // cheksiz takrorlaydi
+  // cheksiz takrorlanadi
 }
 ```
 
-Iltimos `for` tsikl uchun, ikkita nuqta-vergul `;` mavjud bo'lishi kerak. Aks holda, sintaksis xatosi bo'lishi mumkin.
+E'tibor bering, `for` da ikkita nuqta-vergul `;` bo'lishi kerak. Aks holda sintaksis xatosi bo'ladi.
 
 ## Tsiklni buzish
 
-Odatda, tsiklning holati noto'g'ri bo'lsa, u to'xtaydi.
+Odatda tsikl sharti yolg'on bo'lganida chiqadi.
 
-Lekin biz har qanday vaqtda tsiklni maxsus `break` direktiva yordamida to'xtatishimiz mumkin.
+Lekin biz maxsus `break` direktivasi yordamida istalgan vaqtda chiqishni majburlab qo'yishimiz mumkin.
 
-Masalan, quyida keltirilgan tsikl foydalanuvchidan raqamlar ketma-ketligini so'raydi, raqam kiritilmaganda "buziladi":
+Masalan, quyidagi tsikl foydalanuvchidan bir qator raqamlarni so'raydi, hech qanday raqam kiritilmaganida "buziladi":
 
 ```js run
 let sum = 0;
@@ -253,57 +249,52 @@ while (true) {
   sum += value;
 
 }
-alert( 'Jami: ' + sum );
+alert( 'Yig\'indi: ' + sum );
 ```
 
-Agar foydalanuvchi bo'sh matn kiritsa yoki kirishni bekor qilsa, `break` direktivasi `(*)` qatorida faollashadi. U tsiklni darhol to'xtatadi, boshqaruvni tsikldan keyingi birinchi satrga uzatadi. Ya'ni, `alert`.
+`break` direktivasi `(*)` qatorida faollashadi, agar foydalanuvchi bo'sh qator kiritsa yoki kiritishni bekor qilsa. U tsiklni darhol to'xtatadi va boshqaruvni tsikldan keyingi birinchi qatorga o'tkazadi. Ya'ni, `alert`.
 
-"Cheksiz tsikl + `break` kerak bo'lganda" kombinatsiyasi tsiklning sharti boshida yoki oxirida emas, balki o'rta yoki hatto tanasining bir necha joyida tekshirilishi kerak bo'lgan holatlar uchun juda yaxshi.
+"Cheksiz tsikl + kerak bo'lganda `break`" kombinatsiyasi tsikl shartini tsiklning boshida yoki oxirida emas, balki o'rtasida yoki hatto tananing bir necha joyida tekshirish kerak bo'lgan vaziyatlar uchun juda yaxshi.
 
-## Keyingi takrorlashga o'tish [#continue]
+## Keyingi iteratsiyaga davom eting [#continue]
 
-`Continue` direktivasi `break` ning "engil versiyasi" dir. Bu butun satrni to'xtata olmaydi. Buning o'rniga, u joriy takrorlashni to'xtatadi va tsiklning yangi takrorlashni boshlashga majbur qiladi (agar shart imkon bersa).
+`continue` direktivasi `break` ning "engilroq versiyasi". U butun tsiklni to'xtatmaydi. Buning o'rniga, u joriy iteratsiyani to'xtatadi va tsiklni yangisini boshlashga majbur qiladi (agar shart ruxsat bersa).
 
-Agar biz uni amaldagi takrorlash bilan tugatgan bo'lsak va keyingisiga o'tishni xohlasak, undan foydalanishimiz mumkin.
+Agar joriy iteratsiya bilan ishimiz tugagan bo'lsa va keyingisiga o'tishni istasak, undan foydalanishimiz mumkin.
 
 Quyidagi tsikl faqat toq qiymatlarni chiqarish uchun `continue` dan foydalanadi:
 
 ```js run no-beautify
 for (let i = 0; i < 10; i++) {
 
-  // agar to'g'ri bo'lsa, tananing qolgan qismini o'tkazib yuboring
+  // agar haqiqiy bo'lsa, tananing qolgan qismini tashlab o'ting
   *!*if (i % 2 == 0) continue;*/!*
 
   alert(i); // 1, keyin 3, 5, 7, 9
 }
 ```
 
-`i` ning juft qiymatlari uchun `continue` direktivasi tanani bajarishini to'xtatadi va boshqaruvni `for` ning keyingi takrorlanishiga o'tkazadi (keyingi raqam bilan). Shunday qilib, `alert` faqat toq qiymatlarni chiqaradi.
+`i` ning juft qiymatlari uchun `continue` direktivasi tanani bajarishni to'xtatadi va boshqaruvni `for` ning keyingi iteratsiyasiga (keyingi raqam bilan) o'tkazadi. Shunday qilib `alert` faqat toq qiymatlar uchun chaqiriladi.
 
-````smart header="`Continue` direktivasi bog'lik tsiklarni kamaytirishga yordam beradi"
+````smart header="`continue` direktivasi joylashishni kamaytiradi"
 Toq qiymatlarni ko'rsatadigan tsikl quyidagicha ko'rinishi mumkin:
 
 ```js run
 for (let i = 0; i < 10; i++) {
-
   if (i % 2) {
-    alert( i );
+    alert(i);
   }
-
 }
 ```
 
-Texnik nuqtai nazardan, bu yuqoridagi misol bilan bir xil. Albatta, biz `continue` dan foydalanish o'rniga `if` blokiga kodni o'rashimiz mumkin.
+Texnik nuqtai nazardan, bu yuqoridagi misolga bir xil. Albatta, biz `continue` ishlatish o'rniga kodni `if` blokiga o'rashimiz mumkin.
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-Ammo yon ta'sir sifatida bu yana bitta uyalash darajasini yaratdi (jingalak qavs ichidagi `alert` chaqiruvi). Agar `if` ichidagi kod bir necha satrdan uzun bo'lsa, bu umumiy kod o'qilishini pasaytirishi mumkin.
-=======
-But as a side-effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
-````
+Lekin yon ta'sir sifatida, bu yana bir darajali joylashish yaratdi (`alert` chaqiruvi jingalak qavslar ichida). Agar `if` ichidagi kod bir necha qatordan uzun bo'lsa, bu umumiy o'qish qobiliyatini kamaytirishi mumkin.
 
-````warn header="'?' Operatorning o'ng tomonida `break/continue` dan foydalana olmaymizmi"
-Iltimos, shuni yodda tutingki, ifodalar bo'lmagan sintaksis konstruktsiyalari uchlik operator bilan ishlatilishi mumkin emas `?`. Xususan, u erda `break/continue` kabi ko'rsatmalarga yo'l qo'yilmaydi.
+`````
+
+````warn header="'?' ning o'ng tomonida `break/continue` yo'q"
+E'tibor bering, ifoda bo'lmagan sintaksis konstruksiyalarni ternary operator `?` bilan ishlatib bo'lmaydi. Xususan, `break/continue` kabi direktivalarga u yerda ruxsat berilmaydi.
 
 Masalan, agar biz ushbu kodni olsak:
 
@@ -315,145 +306,115 @@ if (i > 5) {
 }
 ```
 
-...va savol belgisi yordamida uni qayta yozamiz:
-
+...va uni savol belgisi yordamida qayta yozsak:
 
 ```js no-beautify
-(i > 5) ? alert(i) : *!*continue*/!*; // bu erda davom etishga ruxsat berilmaydi
+(i > 5) ? alert(i) : *!*continue*/!*; // continue bu yerda ruxsat etilmaydi
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-...u ishlashni to'xtatadi. Bu kabi kod sintaksis xatosini keltirib chiqaradi:
+...u ishlamay qoladi: sintaksis xatosi bor.
 
-=======
-...it stops working: there's a syntax error.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
-
-Bu `if` o'rniga `?` savol belgisi operatoridan foydalanmaslikning yana bir sababi.
-````
+Bu `if` o'rniga savol belgisi operatori `?` ishlatmaslikning yana bir sababi.
+`````
 
 ## break/continue uchun yorliqlar
 
-Ba'zan biz birdaniga bir nechta uyali tsikldan chiqib ketishimiz kerak.
+Ba'zan biz bir vaqtning o'zida bir nechta ichma-ich tsikldan chiqishimiz kerak.
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-Masalan, quyidagi kodda biz `(i, j)` koordinatalarini `(0,0)` dan `(3,3)` gacha so'rab, `i` va `j` tsiklga o'tamiz:
-=======
-For example, in the code below we loop over `i` and `j`, prompting for the coordinates `(i, j)` from `(0,0)` to `(2,2)`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+Masalan, quyidagi kodda biz `i` va `j` bo'ylab tsikl qilamiz, `(0,0)` dan `(2,2)` gacha koordinatalar `(i, j)` uchun so'raymiz:
 
 ```js run no-beautify
 for (let i = 0; i < 3; i++) {
-
   for (let j = 0; j < 3; j++) {
+    let input = prompt(`(${i},${j}) koordinatalaridagi qiymat`, "");
 
-    let input = prompt(`Koordinatalardagi qiymat (${i},${j})`, '');
-
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-    // agar men bu erdan Bajarildi (pastda) ga chiqishni xohlasam nima qilishim kerak?
-
-=======
-    // what if we want to exit from here to Done (below)?
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+    // agar biz bu yerdan Done (pastga) chiqishni istasak nima qilamiz?
   }
 }
 
-alert('Bajarildi!');
+alert("Tugadi!");
 ```
 
-Agar foydalanuvchi kirishni bekor qilsa, biz jarayonni to'xtatish usuliga muhtojmiz.
+Agar foydalanuvchi kiritishni bekor qilsa, jarayonni to'xtatish usuli kerak.
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-`input` dan keyin oddiy `break` faqat ichki tsiklni buzadi. Bu etarli emas -- yorliqlar, yordamga keling!
-=======
-The ordinary `break` after `input` would only break the inner loop. That's not sufficient -- labels, come to the rescue!
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+`input` dan keyingi oddiy `break` faqat ichki tsiklni buzadi. Bu yetarli emas -- yorliqlar, yordam bering!
 
-*Yorliq* - bu tsikl oldida ikkita nuqta qo'yilgan identifikator:
+_Yorliq_ - tsikldan oldin ikki nuqta bilan identifikator:
+
 ```js
-yorliqIsmi: for (...) {
+labelName: for (...) {
   ...
 }
 ```
 
-Quyidagi tsikldagi `break <yorliqIsmi>` ifodasi yorliqqa chiqadi:
+Quyidagi tsikldagi `break <labelName>` ifodasi yorliqqa chiqadi:
 
 ```js run no-beautify
-*!*tashqari:*/!* for (let i = 0; i < 3; i++) {
+*!*outer:*/!* for (let i = 0; i < 3; i++) {
 
   for (let j = 0; j < 3; j++) {
 
-    let input = prompt(`Koordinatalardagi qiymat (${i},${j})`, '');
+    let input = prompt(`(${i},${j}) koordinatalaridagi qiymat`, '');
 
-    // agar bo'sh satr yoki bekor qilingan bo'lsa, ikkala tsikldan ham chiqib keting
-    if (!input) *!*break tashqari*/!*; // (*)
+    // agar bo'sh satr yoki bekor qilingan bo'lsa, ikkala tsikldan ham chiqing
+    if (!input) *!*break outer*/!*; // (*)
 
-    // qiymat bilan operatsiyalarni bajaring...
+    // qiymat bilan biror narsa qiling...
   }
 }
-alert('Bajarildi!');
+
+alert('Tugadi!');
 ```
 
-Yuqoridagi kodda `break tashqari` yorlig'i yuqoriga qarab, `tashqari` deb nomlangan va shu tsikldan tashqariga chiqadi.
+Yuqoridagi kodda `break outer` `outer` nomli yorliqni yuqorida qidiradi va o'sha tsikldan chiqadi.
 
-Shunday qilib, boshqaruv to'g'ridan-to'g'ri `(*)` dan `alert('Bajarildi!')` ga o'tadi.
+Shunday qilib boshqaruv to'g'ridan-to'g'ri `(*)` dan `alert('Tugadi!')` ga o'tadi.
 
-Shuningdek, yorliqni alohida satrga ko'chirishimiz mumkin:
+Yorliqni alohida qatorga ham ko'chirishimiz mumkin:
 
 ```js no-beautify
-tashqari:
+outer:
 for (let i = 0; i < 3; i++) { ... }
 ```
 
-`continue` direktivasi yorliq bilan ham ishlatilishi mumkin. Bunday holda, kod bajarilishi yorliqli tsiklning keyingi takrorlanishiga o'tadi.
+`continue` direktivasi ham yorliq bilan ishlatilishi mumkin. Bu holda, kod bajarish yorliqlangan tsiklning keyingi iteratsiyasiga o'tadi.
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-````warn header="Yorliqlar har qanday joyga \"sakrash\" ga ruxsat bermaydi"
-Yorliqlar koddagi o'zboshimchalik bilan har qanday joyga o'tishga imkon bermaydi.
-=======
-````warn header="Labels do not allow to \"jump\" anywhere"
-Labels do not allow us to jump into an arbitrary place in the code.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+````warn header="Yorliqlar "istalgan joyga sakrashga" ruxsat bermaydi"
+Yorliqlar koddagi ixtiyoriy joyga sakrashga ruxsat bermaydi.
 
-Masalan, buni amalga oshirish mumkin emas:
+Masalan, buni qilish mumkin emas:
+
 ```js
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-break label;  // yorliqqa sakraydimi? Yo'q
-=======
-break label; // jump to the label below (doesn't work)
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+break label; // pastdagi yorliqqa sakrash (ishlamaydi)
 
 label: for (...)
 ```
 
-<<<<<<< HEAD:1-js/02-first-steps/12-while-for/article.md
-`break/continue` ga qo'ng'iroq faqat tsiklning ichkaridan amalga oshiriladi va yorliq yo'riqnomaning yuqorisida bo'lishi kerak.
-=======
-A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+`break` direktivasi kod bloki ichida bo'lishi kerak. Texnik jihatdan, har qanday yorliqlangan kod bloki ishlaydi, masalan:
+
 ```js
 label: {
   // ...
-  break label; // works
+  break label; // ishlaydi
   // ...
 }
 ```
 
-...Although, 99.9% of the time `break` used is inside loops, as we've seen in the examples above.
+...Garchi, vaqtning 99.9% da `break` tsikllar ichida ishlatiladi, yuqoridagi misollarda ko'rganimizdek.
 
-A `continue` is only possible from inside a loop.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/02-first-steps/13-while-for/article.md
+`continue` faqat tsikl ichidan mumkin.
 ````
 
 ## Xulosa
 
-Biz tsiklning uchta turini qopladik:
+Biz 3 turdagi tsiklni ko'rib chiqdik:
 
-- `while` -- Shart har bir takrorlashdan oldin tekshiriladi.
-- `do..while` -- Shart har bir takrorlashdan keyin tekshiriladi.
-- `for (;;)` -- Vaziyat har bir takrorlashdan oldin tekshiriladi, qo'shimcha sozlamalar mavjud.
+- `while` -- Har bir iteratsiyadan oldin shart tekshiriladi.
+- `do..while` -- Har bir iteratsiyadan keyin shart tekshiriladi.
+- `for (;;)` -- Har bir iteratsiyadan oldin shart tekshiriladi, qo'shimcha sozlamalar mavjud.
 
-"Cheksiz" tsiklni yaratish uchun odatda `while(true)` konstruktsiyasi ishlatiladi. Bunday tsikl, xuddi boshqalari singari, `break` direktivasi bilan to'xtatilishi mumkin.
+"Cheksiz" tsikl yaratish uchun odatda `while(true)` konstruksiyasi ishlatiladi. Bunday tsikl, boshqalar kabi, `break` direktivasi bilan to'xtatilishi mumkin.
 
-Agar biz amaldagi takrorlashda hech narsa qilishni xohlamasak va keyingisiga o'tishni istasak, biz `continue` direktivasidan foydalanishimiz mumkin.
+Agar joriy iteratsiyada hech narsa qilishni istamasak va keyingisiga o'tishni istasak, `continue` direktivasidan foydalanishimiz mumkin.
 
-`break/continue` direktivalari tsikldan oldin e'lon qilingan yorliqlarni qo'llab-quvvatlaydi. Yorliq - bu `break/continue` ning tashqi tsiklga o'tish uchun ichki tsikldan chiqishning yagona usuli.
+`break/continue` tsikldan oldin yorliqlarni qo'llab-quvvatlaydi. Yorliq - `break/continue` ning ichma-ich tsikldan chiqib tashqi tsiklga o'tishining yagona usuli.

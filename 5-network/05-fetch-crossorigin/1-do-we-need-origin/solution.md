@@ -1,9 +1,9 @@
-We need `Origin`, because sometimes `Referer` is absent. For instance, when we `fetch` HTTP-page from HTTPS (access less secure from more secure), then there's no `Referer`.
+Bizga `Origin` kerak, chunki ba'zida `Referer` yo'q. Misol uchun, biz HTTPS-dan HTTP-sahifani `fetch` paytida (xavfsizroqdan kamroq xavfsizroq kirish), keyin esa `Referer` yo'q.
 
-The [Content Security Policy](http://en.wikipedia.org/wiki/Content_Security_Policy) may forbid sending a `Referer`.
+[Kontent xavfsizligi siyosati](http://en.wikipedia.org/wiki/Content_Security_Policy) “Referer”ni yuborishni taqiqlashi mumkin.
 
-As we'll see, `fetch` has options that prevent sending the `Referer` and even allow to change it (within the same site).
+Ko'rib turganimizdek, `fetch` `Referer`ni yuborishga to'sqinlik qiluvchi va hatto uni o'zgartirishga ruxsat beruvchi variantlarga ega (bir xil sayt ichida).
 
-By specification, `Referer` is an optional HTTP-header.
+Spetsifikatsiyaga ko'ra, `Referer` ixtiyoriy HTTP sarlavhasidir.
 
-Exactly because `Referer` is unreliable, `Origin` was invented. The browser guarantees correct `Origin` for cross-origin requests.
+Aynan `Referer` ishonchsiz bo'lgani uchun `Origin` ixtiro qilingan. Brauzer o'zaro kelib chiqish so'rovlari uchun to'g'ri `Origin` ni kafolatlaydi.

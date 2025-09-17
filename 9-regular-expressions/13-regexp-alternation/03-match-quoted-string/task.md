@@ -1,32 +1,33 @@
-# Find quoted strings
+# Qo'shtirnoq ichidagi satrlarni topish
 
-Create a regexp to find strings in double quotes `subject:"..."`.
+Qo'sh qo'shtirnoq ichidagi satrlarni topish uchun regexp yarating `subject:"..."`.
 
-The strings should support escaping, the same way as JavaScript strings do. For instance, quotes can be inserted as `subject:\"` a newline as `subject:\n`, and the slash itself as `subject:\\`.
+Satrlar JavaScript satrlari kabi escaping ni qo'llab-quvvatlashi kerak. Masalan, qo'shtirnoqlar `subject:\"` sifatida qo'shilishi mumkin, yangi qator `subject:\n` sifatida va slash o'zi `subject:\\` sifatida.
 
 ```js
-let str = "Just like \"here\".";
+let str = 'Xuddi "shu yerda" kabi.';
 ```
 
-Please note, in particular, that an escaped quote `subject:\"` does not end a string.
+E'tibor bering, xususan, escaped qo'shtirnoq `subject:\"` satrni tugatmaydi.
 
-So we should search from one quote to the other ignoring escaped quotes on the way.
+Shuning uchun biz bir qo'shtirnoqdan ikkinchisigacha yo'lda escaped qo'shtirnoqlarni e'tiborsiz qoldirib qidirishimiz kerak.
 
-That's the essential part of the task, otherwise it would be trivial.
+Bu vazifaning muhim qismi, aks holda u oddiy bo'lar edi.
 
-Examples of strings to match:
+Mos keladigan satrlar misollari:
+
 ```js
-.. *!*"test me"*/!* ..  
-.. *!*"Say \"Hello\"!"*/!* ... (escaped quotes inside)
-.. *!*"\\"*/!* ..  (double slash inside)
-.. *!*"\\ \""*/!* ..  (double slash and an escaped quote inside)
+.. *!*"meni sinab ko'r"*/!* ..
+.. *!*"\"Salom\" degin!"*/!* ... (ichida escaped qo'shtirnoqlar)
+.. *!*"\\"*/!* ..  (ichida qo'sh slash)
+.. *!*"\\ \""*/!* ..  (ichida qo'sh slash va escaped qo'shtirnoq)
 ```
 
-In JavaScript we need to double the slashes to pass them right into the string, like this:
+JavaScript da biz slashlarni satrga to'g'ri o'tkazish uchun ularni ikki marta yozishimiz kerak:
 
 ```js run
-let str = ' .. "test me" .. "Say \\"Hello\\"!" .. "\\\\ \\"" .. ';
+let str = ' .. "meni sinab ko'r" .. "\"Salom\" degin!" .. "\\\\ \\"" .. ';
 
-// the in-memory string
-alert(str); //  .. "test me" .. "Say \"Hello\"!" .. "\\ \"" ..
+// xotiradagi satr
+alert(str); //  .. "meni sinab ko'r" .. "\"Salom\" degin!" .. "\\ \"" ..
 ```

@@ -1,9 +1,9 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Show an alert with an external script
+# Tashqi skript bilan ogohlantirishni ko'rsatish
 
-Take the solution of the previous task <info:task/hello-alert>. Modify it by extracting the script content into an external file `alert.js`, residing in the same folder.
+Oldingi vazifa <info:task/hello-alert> yechimini oling. Skript mazmunini bir xil papkada joylashgan tashqi `alert.js` fayliga chiqarib, uni o'zgartiring.
 
-Open the page, ensure that the alert works.
+Sahifani oching va ogohlantirishning ishlashini tekshiring.

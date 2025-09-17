@@ -3,7 +3,7 @@
 Siz nima deb o'ylaysiz? `.catch` bajariladimi? Javobingizni tushuntiring.
 
 ```js
-new Promise(function(resolve, reject) {
+new Promise(function (resolve, reject) {
   setTimeout(() => {
     throw new Error("Whoops!");
   }, 1000);

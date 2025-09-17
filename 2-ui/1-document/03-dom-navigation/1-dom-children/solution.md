@@ -1,27 +1,27 @@
-There are many ways, for instance:
+Masalan, ko'p usullar mavjud:
 
 
-The `<div>` DOM node:
+`<div>` DOM tuguni:
 
 ```js
 document.body.firstElementChild
-// or
+// yoki
 document.body.children[0]
-// or (the first node is space, so we take 2nd)
+// yoki (birinchi tugun bo'sh joy, shuning uchun biz 2-ni olamiz)
 document.body.childNodes[1]
 ```
 
-The `<ul>` DOM node:
+`<ul>` DOM tuguni:
 
 ```js
 document.body.lastElementChild
-// or
+// yoki
 document.body.children[1]
 ```
 
-The second `<li>` (with Pete):
+Ikkinchi `<li>` (Pit bilan):
 
 ```js
-// get <ul>, and then get its last element child
+// <ul> ni oling va keyin uning oxirgi elementi bolasini oling
 document.body.lastElementChild.lastElementChild
 ```

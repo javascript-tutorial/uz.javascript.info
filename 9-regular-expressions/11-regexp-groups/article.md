@@ -1,31 +1,31 @@
-# Capturing groups
+# Ushlash guruhlari
 
-A part of a pattern can be enclosed in parentheses `pattern:(...)`. This is called a "capturing group".
+Naqshning bir qismi qavslar `pattern:(...)` ichiga olinishi mumkin. Bu "ushlash guruhi" deb ataladi.
 
-That has two effects:
+Buning ikkita ta'siri bor:
 
-1. It allows to get a part of the match as a separate item in the result array.
-2. If we put a quantifier after the parentheses, it applies to the parentheses as a whole.
+1. Moslikning bir qismini natijalar massivida alohida element sifatida olish imkonini beradi.
+2. Agar qavslardan keyin miqdorchi qo'ysak, u butun qavslar guruhi uchun qo'llaniladi.
 
-## Examples
+## Misollar
 
-Let's see how parentheses work in examples.
+Qavslar qanday ishlashini misollarda ko'raylik.
 
-### Example: gogogo
+### Misol: gogogo
 
-Without parentheses, the pattern `pattern:go+` means `subject:g` character, followed by `subject:o` repeated one or more times. For instance, `match:goooo` or `match:gooooooooo`.
+Qavslarsiz `pattern:go+` naqshi `subject:g` belgisini, keyin bir yoki ko'p marta takrorlangan `subject:o` ni bildiradi. Masalan, `match:goooo` yoki `match:gooooooooo`.
 
-Parentheses group characters together, so `pattern:(go)+` means `match:go`, `match:gogo`, `match:gogogo` and so on.
+Qavslar belgilarni birlashtirib guruhlaydi, shuning uchun `pattern:(go)+` `match:go`, `match:gogo`, `match:gogogo` va hokazolarni bildiradi.
 
 ```js run
 alert( 'Gogogo now!'.match(/(go)+/ig) ); // "Gogogo"
 ```
 
-### Example: domain
+### Misol: domen
 
-Let's make something more complex -- a regular expression to search for a website domain.
+Keling, murakkabroq narsa yasaylik -- veb-sayt domenini qidiruvchi doimiy ifoda.
 
-For example:
+Masalan:
 
 ```
 mail.com
@@ -33,9 +33,9 @@ users.mail.com
 smith.users.mail.com
 ```
 
-As we can see, a domain consists of repeated words, a dot after each one except the last one.
+Ko'rib turganingizdek, domen takrorlanuvchi so'zlardan iborat, oxirgisidan tashqari har biridan keyin nuqta.
 
-In regular expressions that's `pattern:(\w+\.)+\w+`:
+Doimiy ifodalarda bu `pattern:(\w+\.)+\w+`:
 
 ```js run
 let regexp = /(\w+\.)+\w+/g;
@@ -43,17 +43,17 @@ let regexp = /(\w+\.)+\w+/g;
 alert( "site.com my.site.com".match(regexp) ); // site.com,my.site.com
 ```
 
-The search works, but the pattern can't match a domain with a hyphen, e.g. `my-site.com`, because the hyphen does not belong to class `pattern:\w`.
+Qidiruv ishlaydi, lekin naqsh tire bilan domenga mos kelmaydi, masalan `my-site.com`, chunki tire `pattern:\w` sinfiga tegishli emas.
 
-We can fix it by replacing `pattern:\w` with `pattern:[\w-]` in every word except the last one: `pattern:([\w-]+\.)+\w+`.
+Buni oxirgisidan tashqari har bir so'zda `pattern:\w` ni `pattern:[\w-]` bilan almashtirish orqali tuzatishimiz mumkin: `pattern:([\w-]+\.)+\w+`.
 
-### Example: email
+### Misol: email
 
-The previous example can be extended. We can create a regular expression for emails based on it.
+Oldingi misolni kengaytirish mumkin. Unga asoslanib emaillar uchun doimiy ifoda yaratishimiz mumkin.
 
-The email format is: `name@domain`. Any word can be the name, hyphens and dots are allowed. In regular expressions that's `pattern:[-.\w]+`.
+Email formati: `name@domain`. Har qanday so'z nom bo'lishi mumkin, tireler va nuqtalar ruxsat etiladi. Doimiy ifodalarda bu `pattern:[-.\w]+`.
 
-The pattern:
+Naqsh:
 
 ```js run
 let regexp = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
@@ -61,24 +61,24 @@ let regexp = /[-.\w]+@([\w-]+\.)+[\w-]+/g;
 alert("my@mail.com @ his@site.com.uk".match(regexp)); // my@mail.com, his@site.com.uk
 ```
 
-That regexp is not perfect, but mostly works and helps to fix accidental mistypes. The only truly reliable check for an email can only be done by sending a letter.
+Bu regexp mukammal emas, lekin asosan ishlaydi va tasodifiy xatolarni tuzatishga yordam beradi. Email uchun yagona ishonchli tekshiruv faqat xat yuborish orqali amalga oshirilishi mumkin.
 
-## Parentheses contents in the match
+## Mosliklarda qavslar mazmuni
 
-Parentheses are numbered from left to right. The search engine memorizes the content matched by each of them and allows to get it in the result.
+Qavslar chapdan o'ngga raqamlanadi. Qidiruv dvigateli ularning har birига mos kelgan mazmunni eslab qoladi va natijada olish imkonini beradi.
 
-The method `str.match(regexp)`, if `regexp` has no flag `g`, looks for the first match and returns it as an array:
+`str.match(regexp)` metodi, agar `regexp`da `g` bayrog'i bo'lmasa, birinchi moslikni qidiradi va uni massiv ko'rinishida qaytaradi:
 
-1. At index `0`: the full match.
-2. At index `1`: the contents of the first parentheses.
-3. At index `2`: the contents of the second parentheses.
-4. ...and so on...
+1. `0` indeksida: to'liq moslik.
+2. `1` indeksida: birinchi qavslar mazmuni.
+3. `2` indeksida: ikkinchi qavslar mazmuni.
+4. ...va hokazo...
 
-For instance, we'd like to find HTML tags `pattern:<.*?>`, and process them. It would be convenient to have tag content (what's inside the angles), in a separate variable.
+Masalan, biz HTML teglarini `pattern:<.*?>` topmoqchimiz va ularni qayta ishlamoqchimiz. Teg mazmuni (burchaklar ichidagi narsa)ni alohida o'zgaruvchida bo'lishi qulay bo'lardi.
 
-Let's wrap the inner content into parentheses, like this: `pattern:<(.*?)>`.
+Ichki mazmunni qavslarga o'raylik: `pattern:<(.*?)>`.
 
-Now we'll get both the tag as a whole `match:<h1>` and its contents `match:h1` in the resulting array:
+Endi biz natijalar massivida ham butun teg `match:<h1>` ham uning mazmuni `match:h1` ni olamiz:
 
 ```js run
 let str = '<h1>Hello, world!</h1>';
@@ -89,23 +89,23 @@ alert( tag[0] ); // <h1>
 alert( tag[1] ); // h1
 ```
 
-### Nested groups
+### Ichki guruhlar
 
-Parentheses can be nested. In this case the numbering also goes from left to right.
+Qavslar ichma-ich bo'lishi mumkin. Bu holda raqamlash ham chapdan o'ngga boradi.
 
-For instance, when searching a tag in `subject:<span class="my">` we may be interested in:
+Masalan, `subject:<span class="my">` da tegni qidirishda bizni qiziqtirishi mumkin:
 
-1. The tag content as a whole: `match:span class="my"`.
-2. The tag name: `match:span`.
-3. The tag attributes: `match:class="my"`.
+1. Butun teg mazmuni: `match:span class="my"`.
+2. Teg nomi: `match:span`.
+3. Teg atributlari: `match:class="my"`.
 
-Let's add parentheses for them: `pattern:<(([a-z]+)\s*([^>]*))>`.
+Ular uchun qavslar qo'shaylik: `pattern:<(([a-z]+)\s*([^>]*))>`.
 
-Here's how they are numbered (left to right, by the opening paren):
+Ular qanday raqamlanishi (chapdan o'ngga, ochuvchi qavs bo'yicha):
 
 ![](regexp-nested-groups-pattern.svg)
 
-In action:
+Amalda:
 
 ```js run
 let str = '<span class="my">';
@@ -119,59 +119,59 @@ alert(result[2]); // span
 alert(result[3]); // class="my"
 ```
 
-The zero index of `result` always holds the full match.
+`result` ning nol indeksi har doim to'liq moslikni saqlaydi.
 
-Then groups, numbered from left to right by an opening paren. The first group is returned as `result[1]`. Here it encloses the whole tag content.
+Keyin chapdan o'ngga ochuvchi qavs bo'yicha raqamlangan guruhlar. Birinchi guruh `result[1]` sifatida qaytariladi. Bu yerda u butun teg mazmunini o'rab oladi.
 
-Then in `result[2]` goes the group from the second opening paren `pattern:([a-z]+)` - tag name, then in `result[3]` the tag: `pattern:([^>]*)`.
+Keyin `result[2]` da ikkinchi ochuvchi qavs `pattern:([a-z]+)` dan guruh - teg nomi, keyin `result[3]` da teg: `pattern:([^>]*)`.
 
-The contents of every group in the string:
+Satrdagi har bir guruh mazmuni:
 
 ![](regexp-nested-groups-matches.svg)
 
-### Optional groups
+### Ixtiyoriy guruhlar
 
-Even if a group is optional and doesn't exist in the match (e.g. has the quantifier `pattern:(...)?`), the corresponding `result` array item is present and equals `undefined`.
+Agar guruh ixtiyoriy bo'lsa va moslikda mavjud bo'lmasa (masalan, `pattern:(...)?` miqdorchisiga ega), tegishli `result` massiv elementi mavjud va `undefined` ga teng.
 
-For instance, let's consider the regexp `pattern:a(z)?(c)?`. It looks for `"a"` optionally followed by `"z"` optionally followed by `"c"`.
+Masalan, `pattern:a(z)?(c)?` regexpni ko'rib chiqaylik. U `"a"` ni, ixtiyoriy ravishda `"z"` keyin, ixtiyoriy ravishda `"c"` keyin qidiradi.
 
-If we run it on the string with a single letter `subject:a`, then the result is:
+Agar uni bitta harf `subject:a` bilan satrda ishga tushirsak, natija:
 
 ```js run
 let match = 'a'.match(/a(z)?(c)?/);
 
 alert( match.length ); // 3
-alert( match[0] ); // a (whole match)
+alert( match[0] ); // a (to'liq moslik)
 alert( match[1] ); // undefined
 alert( match[2] ); // undefined
 ```
 
-The array has the length of `3`, but all groups are empty.
+Massiv uzunligi `3`, lekin barcha guruhlar bo'sh.
 
-And here's a more complex match for the string `subject:ac`:
+Va `subject:ac` satr uchun murakkabroq moslik:
 
 ```js run
 let match = 'ac'.match(/a(z)?(c)?/)
 
 alert( match.length ); // 3
-alert( match[0] ); // ac (whole match)
-alert( match[1] ); // undefined, because there's nothing for (z)?
+alert( match[0] ); // ac (to'liq moslik)
+alert( match[1] ); // undefined, chunki (z)? uchun hech narsa yo'q
 alert( match[2] ); // c
 ```
 
-The array length is permanent: `3`. But there's nothing for the group `pattern:(z)?`, so the result is `["ac", undefined, "c"]`.
+Massiv uzunligi doimiy: `3`. Lekin `pattern:(z)?` guruhi uchun hech narsa yo'q, shuning uchun natija `["ac", undefined, "c"]`.
 
-## Searching for all matches with groups: matchAll
+## Guruhlar bilan barcha mosliklarni qidirish: matchAll
 
-```warn header="`matchAll` is a new method, polyfill may be needed"
-The method `matchAll` is not supported in old browsers.
+```warn header="`matchAll` yangi metod, polyfill kerak bo'lishi mumkin"
+`matchAll` metodi eski brauzerlarda qo'llab-quvvatlanmaydi.
 
-A polyfill may be required, such as <https://github.com/ljharb/String.prototype.matchAll>.
+Polyfill kerak bo'lishi mumkin, masalan <https://github.com/ljharb/String.prototype.matchAll>.
 ```
 
-When we search for all matches (flag `pattern:g`), the `match` method does not return contents for groups.
+Barcha mosliklarni qidirishda (`pattern:g` bayrog'i), `match` metodi guruhlar uchun mazmunni qaytarmaydi.
 
-For example, let's find all tags in a string:
+Masalan, satrdagi barcha teglarni topaylik:
 
 ```js run
 let str = '<h1> <h2>';
@@ -181,55 +181,55 @@ let tags = str.match(/<(.*?)>/g);
 alert( tags ); // <h1>,<h2>
 ```
 
-The result is an array of matches, but without details about each of them. But in practice we usually need contents of capturing groups in the result.
+Natija mosliklar massivi, lekin ularning har biri haqida tafsilot yo'q. Lekin amalda biz odatda natijada ushlash guruhlarining mazmuniga muhtojmiz.
 
-To get them, we should search using the method `str.matchAll(regexp)`.
+Ularni olish uchun `str.matchAll(regexp)` metodidan foydalanishimiz kerak.
 
-It was added to JavaScript language long after `match`, as its "new and improved version".
+U JavaScript tiliga `match`dan ancha keyin, uning "yangi va yaxshilangan versiyasi" sifatida qo'shildi.
 
-Just like `match`, it looks for matches, but there are 3 differences:
+`match` kabi u mosliklarni qidiradi, lekin 3 ta farq bor:
 
-1. It returns not an array, but an iterable object.
-2. When the flag `pattern:g` is present, it returns every match as an array with groups.
-3. If there are no matches, it returns not `null`, but an empty iterable object.
+1. U massiv emas, balki iteratsiya qilinadigan obyekt qaytaradi.
+2. `pattern:g` bayrog'i mavjud bo'lganda, u har bir moslikni guruhlar bilan massiv sifatida qaytaradi.
+3. Agar moslik bo'lmasa, `null` emas, balki bo'sh iteratsiya qilinadigan obyekt qaytaradi.
 
-For instance:
+Masalan:
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 
-// results - is not an array, but an iterable object
+// results - massiv emas, balki iteratsiya qilinadigan obyekt
 alert(results); // [object RegExp String Iterator]
 
 alert(results[0]); // undefined (*)
 
-results = Array.from(results); // let's turn it into array
+results = Array.from(results); // uni massivga aylantiraylik
 
-alert(results[0]); // <h1>,h1 (1st tag)
-alert(results[1]); // <h2>,h2 (2nd tag)
+alert(results[0]); // <h1>,h1 (1-teg)
+alert(results[1]); // <h2>,h2 (2-teg)
 ```
 
-As we can see, the first difference is very important, as demonstrated in the line `(*)`. We can't get the match as `results[0]`, because that object isn't pseudoarray. We can turn it into a real `Array` using `Array.from`. There are more details about pseudoarrays and iterables in the article <info:iterable>.
+Ko'rib turganingizdek, birinchi farq juda muhim, `(*)` satrida ko'rsatilganidek. Biz moslikni `results[0]` sifatida ola olmaymiz, chunki bu obyekt psevdo-massiv emas. Uni `Array.from` yordamida haqiqiy `Array` ga aylantirish mumkin. Psevdo-massivlar va iteratsiya qilinadigan obyektlar haqida ko'proq ma'lumot <info:iterable> maqolasida.
 
-There's no need in `Array.from` if we're looping over results:
+Agar natijalarni aylantirayotgan bo'lsak, `Array.from` ga ehtiyoj yo'q:
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 
 for(let result of results) {
   alert(result);
-  // first alert: <h1>,h1
-  // second: <h2>,h2
+  // birinchi alert: <h1>,h1
+  // ikkinchi: <h2>,h2
 }
 ```
 
-...Or using destructuring:
+...Yoki destrukturizatsiya yordamida:
 
 ```js
 let [tag1, tag2] = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
 ```
 
-Every match, returned by `matchAll`, has the same format as returned by `match` without flag `pattern:g`: it's an array with additional properties `index` (match index in the string) and `input` (source string):
+`matchAll` tomonidan qaytarilgan har bir moslik `pattern:g` bayrog'isiz `match` tomonidan qaytarilgan format bilan bir xil: bu qo'shimcha `index` (satrdagi moslik indeksi) va `input` (manba satr) xususiyatlari bilan massiv:
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);
@@ -242,23 +242,23 @@ alert( tag1.index ); // 0
 alert( tag1.input ); // <h1> <h2>
 ```
 
-```smart header="Why is a result of `matchAll` an iterable object, not an array?"
-Why is the method designed like that? The reason is simple - for the optimization.
+```smart header="Nima uchun `matchAll` natijasi massiv emas, balki iteratsiya qilinadigan obyekt?"
+Metod nima uchun shunday yaratilgan? Sabab oddiy - optimallashtirish uchun.
 
-The call to `matchAll` does not perform the search. Instead, it returns an iterable object, without the results initially. The search is performed each time we iterate over it, e.g. in the loop.
+`matchAll` ga chaqiruv qidiruvni amalga oshirmaydi. Buning o'rniga u dastlab natijalarsiz iteratsiya qilinadigan obyekt qaytaradi. Qidiruv har safar ustidan iteratsiya qilganimizda amalga oshiriladi, masalan tsiklda.
 
-So, there will be found as many results as needed, not more.
+Shunday qilib, kerak bo'lgandan ko'p emas, balki kerak bo'lganicha natijalar topiladi.
 
-E.g. there are potentially 100 matches in the text, but in a `for..of` loop we found 5 of them, then decided it's enough and made a `break`. Then the engine won't spend time finding other 95 matches.
+Masalan, matnda potensial 100 ta moslik bor, lekin `for..of` tsiklida ulardan 5 tasini topdik, keyin bu yetarli deb qaror qilib `break` qildik. Keyin dvigatel qolgan 95 ta moslikni topishga vaqt sarflamaydi.
 ```
 
-## Named groups
+## Nomlangan guruhlar
 
-Remembering groups by their numbers is hard. For simple patterns it's doable, but for more complex ones counting parentheses is inconvenient. We have a much better option: give names to parentheses.
+Guruhlarni raqamlari bo'yicha eslash qiyin. Oddiy naqshlar uchun bu mumkin, lekin murakkabroqlari uchun qavslarni sanash noqulay. Bizda ancha yaxshi variant bor: qavslarga nom berish.
 
-That's done by putting `pattern:?<name>` immediately after the opening paren.
+Bu ochuvchi qavsdan keyin darhol `pattern:?<name>` qo'yish orqali amalga oshiriladi.
 
-For example, let's look for a date in the format "year-month-day":
+Masalan, "yil-oy-kun" formatida sanani qidiraylik:
 
 ```js run
 *!*
@@ -273,11 +273,11 @@ alert(groups.month); // 04
 alert(groups.day); // 30
 ```
 
-As you can see, the groups reside in the `.groups` property of the match.
+Ko'rib turganingizdek, guruhlar moslikning `.groups` xususiyatida joylashgan.
 
-To look for all dates, we can add flag `pattern:g`.
+Barcha sanalarni qidirish uchun `pattern:g` bayrog'ini qo'shishimiz mumkin.
 
-We'll also need `matchAll` to obtain full matches, together with groups:
+Shuningdek, guruhlar bilan birga to'liq mosliklarni olish uchun `matchAll` kerak bo'ladi:
 
 ```js run
 let dateRegexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
@@ -290,16 +290,16 @@ for(let result of results) {
   let {year, month, day} = result.groups;
 
   alert(`${day}.${month}.${year}`);
-  // first alert: 30.10.2019
-  // second: 01.01.2020
+  // birinchi alert: 30.10.2019
+  // ikkinchi: 01.01.2020
 }
 ```
 
-## Capturing groups in replacement
+## Almashtirishda ushlash guruhlari
 
-Method `str.replace(regexp, replacement)` that replaces all matches with `regexp` in `str` allows to use parentheses contents in the `replacement` string. That's done using `pattern:$n`, where `pattern:n` is the group number.
+`str` dagi `regexp` bilan barcha mosliklarni `replacement` bilan almashtiradigan `str.replace(regexp, replacement)` metodi `replacement` satrida qavslar mazmunidan foydalanish imkonini beradi. Bu `pattern:$n` yordamida amalga oshiriladi, bu yerda `pattern:n` - guruh raqami.
 
-For example,
+Masalan,
 
 ```js run
 let str = "John Bull";
@@ -308,9 +308,9 @@ let regexp = /(\w+) (\w+)/;
 alert( str.replace(regexp, '$2, $1') ); // Bull, John
 ```
 
-For named parentheses the reference will be `pattern:$<name>`.
+Nomlangan qavslar uchun havola `pattern:$<name>` bo'ladi.
 
-For example, let's reformat dates from "year-month-day" to "day.month.year":
+Masalan, sanalarni "yil-oy-kun"dan "kun.oy.yil"ga qayta formatlaylik:
 
 ```js run
 let regexp = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/g;
@@ -321,44 +321,44 @@ alert( str.replace(regexp, '$<day>.$<month>.$<year>') );
 // 30.10.2019, 01.01.2020
 ```
 
-## Non-capturing groups with ?:
+## ?: bilan ushlamaydigan guruhlar
 
-Sometimes we need parentheses to correctly apply a quantifier, but we don't want their contents in results.
+Ba'zan miqdorchini to'g'ri qo'llash uchun qavslar kerak, lekin natijalarda ularning mazmuni kerak emas.
 
-A group may be excluded by adding `pattern:?:` in the beginning.
+Guruhni boshiga `pattern:?:` qo'shish orqali chiqarib tashlash mumkin.
 
-For instance, if we want to find `pattern:(go)+`, but don't want the parentheses contents (`go`) as a separate array item, we can write: `pattern:(?:go)+`.
+Masalan, agar biz `pattern:(go)+` ni topmoqchi bo'lsak, lekin qavslar mazmuni (`go`) ni massivning alohida elementi sifatida istamасak, yoza olamiz: `pattern:(?:go)+`.
 
-In the example below we only get the name `match:John` as a separate member of the match:
+Quyidagi misolda biz faqat `match:John` nomini moslikning alohida a'zosi sifatida olamiz:
 
 ```js run
 let str = "Gogogo John!";
 
 *!*
-// ?: excludes 'go' from capturing
+// ?: 'go' ni ushlashdan chiqarib tashlaydi
 let regexp = /(?:go)+ (\w+)/i;
 */!*
 
 let result = str.match(regexp);
 
-alert( result[0] ); // Gogogo John (full match)
+alert( result[0] ); // Gogogo John (to'liq moslik)
 alert( result[1] ); // John
-alert( result.length ); // 2 (no more items in the array)
+alert( result.length ); // 2 (massivda boshqa elementlar yo'q)
 ```
 
-## Summary
+## Xulosa
 
-Parentheses group together a part of the regular expression, so that the quantifier applies to it as a whole.
+Qavslar doimiy ifodaning bir qismini birlashtirib guruhlaydi, shunda miqdorchi unga butunlay qo'llaniladi.
 
-Parentheses groups are numbered left-to-right, and can optionally be named with  `(?<name>...)`.
+Qavslar guruhlari chapdan o'ngga raqamlanadi va ixtiyoriy ravishda `(?<name>...)` bilan nomlanishi mumkin.
 
-The content, matched by a group, can be obtained in the results:
+Guruh tomonidan moslashtirilgan mazmunni natijalarda olish mumkin:
 
-- The method `str.match` returns capturing groups only without flag `pattern:g`.
-- The method `str.matchAll` always returns capturing groups.
+- `str.match` metodi faqat `pattern:g` bayrog'isiz ushlash guruhlarini qaytaradi.
+- `str.matchAll` metodi har doim ushlash guruhlarini qaytaradi.
 
-If the parentheses have no name, then their contents is available in the match array by its number. Named parentheses are also available in the property `groups`.
+Agar qavslarning nomi bo'lmasa, ularning mazmuni moslik massivida raqami bo'yicha mavjud. Nomlangan qavslar `groups` xususiyatida ham mavjud.
 
-We can also use parentheses contents in the replacement string in `str.replace`: by the number `$n` or the name `$<name>`.
+Shuningdek, `str.replace` da almashtirish satrida qavslar mazmunidan foydalanishimiz mumkin: raqam `$n` yoki nom `$<name>` bo'yicha.
 
-A group may be excluded from numbering by adding `pattern:?:` in its start. That's used when we need to apply a quantifier to the whole group, but don't want it as a separate item in the results array. We also can't reference such parentheses in the replacement string.
+Guruhni boshiga `pattern:?:` qo'shish orqali raqamlashdan chiqarib tashlash mumkin. Bu butun guruhga miqdorchi qo'llashimiz kerak bo'lganda, lekin uni natijalar massivida alohida element sifatida istamaganimizda ishlatiladi. Shuningdek, bunday qavslarni almashtirish satrida ham ishlatib bo'lmaydi.

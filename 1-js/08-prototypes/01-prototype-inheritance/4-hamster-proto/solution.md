@@ -6,15 +6,11 @@ Keling, `speedy.eat("olma")` chaqiurvida nimalar bo'layotganini diqqat bilan ko'
 
 3. Keyin u prototip zanjiriga ergashib, `hamster` da `stomach` ni topadi.
 
-4. Keyin u *prototipning oshqozoniga* ovqatni qo'shib, ustiga `push` ni chaqiradi.
+4. Keyin u _prototipning oshqozoniga_ ovqatni qo'shib, ustiga `push` ni chaqiradi.
 
 Shunday qilib, barcha hamsterlar bitta oshqozonni bo'lishadi!
 
-<<<<<<< HEAD
 Har safar `stomach` prototipdan olinadigan bo'lsa, u holda `stomach.push` uni "joyida" o'zgartiradi.
-=======
-Both for `lazy.stomach.push(...)` and `speedy.stomach.push()`, the property `stomach` is found in the prototype (as it's not in the object itself), then the new data is pushed into it.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 Iltimos e'tibor bering, `this.stomach =` oddiy tayinlashda bunday narsa bo'lmaydi.
 
@@ -48,11 +44,7 @@ alert( lazy.stomach ); // <nothing>
 
 Endi barchasi yaxshi ishlaydi, chunki `this.stomach=` `stomach` izlamaydi. Qiymat to'g'ridan-to'g'ri `this` obyektiga yoziladi.
 
-<<<<<<< HEAD
 Shuningdek, har bir hamsterning o'z oshqozoniga ega ekanligiga ishonch hosil qilish orqali biz muammodan butunlay qochishimiz mumkin:
-=======
-Also we can totally avoid the problem by making sure that each hamster has their own stomach:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js run
 let hamster = {
@@ -85,8 +77,4 @@ alert( speedy.stomach ); // olma
 alert( lazy.stomach ); // <nothing>
 ```
 
-<<<<<<< HEAD
 Umumiy yechim sifatida, ma'lum bir obyektning holatini tavsiflovchi barcha xususiyatlar, masalan, yuqoridagi `stomach` odatda ushbu obyektga yoziladi. Bu bunday muammolarning oldini oladi.
-=======
-As a common solution, all properties that describe the state of a particular object, like `stomach` above, should be written into that object. That prevents such problems.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

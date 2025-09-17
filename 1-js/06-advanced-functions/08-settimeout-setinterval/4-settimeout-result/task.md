@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -12,7 +12,6 @@ Rejalashtirilgan funktsiya qachon ishlaydi?
 2. Tsikldan oldin.
 3. Tsiklning boshida.
 
-
 `alert` nimani ko'rsatmoqda?
 
 ```js
@@ -21,7 +20,7 @@ let i = 0;
 setTimeout(() => alert(i), 100); // ?
 
 // ushbu funktsiyani bajarish vaqti> 100ms deb taxmin qiling
-for(let j = 0; j < 100000000; j++) {
-  i++; 
+for (let j = 0; j < 100000000; j++) {
+  i++;
 }
 ```

@@ -1,12 +1,15 @@
+Tugmani qo'shish uchun biz `position:absolute` (va panelni `position:relative` qilish) yoki `float:right` dan foydalanishimiz mumkin. `float:right` tugmasi hech qachon matnni bir-biriga yopishtirmasligi afzalligi bor, lekin `position:absolute` ko'proq erkinlik beradi. Demak, tanlov sizniki.
 
-To add the button we can use either `position:absolute` (and make the pane `position:relative`) or `float:right`. The `float:right` has the benefit that the button never overlaps the text, but `position:absolute` gives more freedom. So the choice is yours.
+Keyin har bir panel uchun kod shunday bo'lishi mumkin:
 
-Then for each pane the code can be like:
 ```js
-pane.insertAdjacentHTML("afterbegin", '<button class="remove-button">[x]</button>');
+pane.insertAdjacentHTML(
+  "afterbegin",
+  '<button class="remove-button">[x]</button>'
+);
 ```
 
-Then the `<button>` becomes `pane.firstChild`, so we can add a handler to it like this:
+Keyin `<button>` `pane.firstChild` bo'ladi, shuning uchun biz unga ishlov beruvchini quyidagicha qo'shishimiz mumkin:
 
 ```js
 pane.firstChild.onclick = () => pane.remove();

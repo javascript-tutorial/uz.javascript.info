@@ -1,4 +1,4 @@
-importance: 3
+muhimlik: 3
 
 ---
 
@@ -22,4 +22,4 @@ shuffle(arr);
 // ...
 ```
 
-Barcha element chaqiruvlari teng ehtimolga ega bo'lishi kerak. Masalan, `[1,2,3]` teng ehtimollik bilan `[1,2,3]` yoki `[1,3,2]` yoki `[3,1,2]` va boshqalar sifatida o'zgartirilishi mumkin. 
+Barcha element chaqiruvlari teng ehtimolga ega bo'lishi kerak. Masalan, `[1,2,3]` teng ehtimollik bilan `[1,2,3]` yoki `[1,3,2]` yoki `[3,1,2]` va boshqalar sifatida o'zgartirilishi mumkin.

@@ -1,12 +1,12 @@
 #digit {
-  width: .5em;
+  width: 0.5em;
   overflow: hidden;
   font: 32px monospace;
   cursor: pointer;
 }
 
 #stripe {
-  display: inline-block
+  display: inline-block;
 }
 
 #stripe.animate {

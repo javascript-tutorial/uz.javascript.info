@@ -1,27 +1,27 @@
-# File and FileReader
+# File va FileReader
 
-A [File](https://www.w3.org/TR/FileAPI/#dfn-file) object inherits from `Blob` and is extended with filesystem-related capabilities.
+[File](https://www.w3.org/TR/FileAPI/#dfn-file) obyekti `Blob` dan meros bo'lib oladi va fayl tizimi bilan bog'liq imkoniyatlar bilan kengaytiriladi.
 
-There are two ways to obtain it.
+Uni olishning ikki usuli bor.
 
-First, there's a constructor, similar to `Blob`:
+Birinchisi, `Blob` ga o'xshash konstruktor:
 
 ```js
 new File(fileParts, fileName, [options])
 ```
 
-- **`fileParts`** -- is an array of Blob/BufferSource/String values.
-- **`fileName`** -- file name string.
-- **`options`** -- optional object:
-    - **`lastModified`** -- the timestamp (integer date) of last modification.
+- **`fileParts`** -- Blob/BufferSource/String qiymatlarining arrayi.
+- **`fileName`** -- fayl nomi stringi.
+- **`options`** -- ixtiyoriy obyekt:
+    - **`lastModified`** -- oxirgi o'zgartirishning vaqt belgisi (butun son sana).
 
-Second, more often we get a file from `<input type="file">` or drag'n'drop or other browser interfaces. In that case, the file gets this information from OS.
+Ikkinchisi, ko'pincha biz faylni `<input type="file">` yoki drag'n'drop yoki boshqa brauzer interfeyslaridan olamiz. Bu holda fayl bu ma'lumotni OS dan oladi.
 
-As `File` inherits from `Blob`, `File` objects have the same properties, plus:
-- `name` -- the file name,
-- `lastModified` -- the timestamp of last modification.
+`File` `Blob` dan meros bo'lib olgani uchun `File` obyektlari bir xil xossalarga ega, qo'shimcha:
+- `name` -- fayl nomi,
+- `lastModified` -- oxirgi o'zgartirishning vaqt belgisi.
 
-That's how we can get a `File` object from `<input type="file">`:
+Mana `<input type="file">` dan `File` obyektini qanday olishimiz mumkin:
 
 ```html run
 <input type="file" onchange="showFile(this)">
@@ -30,56 +30,56 @@ That's how we can get a `File` object from `<input type="file">`:
 function showFile(input) {
   let file = input.files[0];
 
-  alert(`File name: ${file.name}`); // e.g my.png
-  alert(`Last modified: ${file.lastModified}`); // e.g 1552830408824
+  alert(`Fayl nomi: ${file.name}`); // masalan my.png
+  alert(`Oxirgi o'zgargan: ${file.lastModified}`); // masalan 1552830408824
 }
 </script>
 ```
 
 ```smart
-The input may select multiple files, so `input.files` is an array-like object with them. Here we have only one file, so we just take `input.files[0]`.
+Input bir nechta fayllarni tanlashi mumkin, shuning uchun `input.files` ular bilan array-ga o'xshash obyekt. Bu yerda bizda faqat bitta fayl bor, shuning uchun biz shunchaki `input.files[0]` ni olamiz.
 ```
 
 ## FileReader
 
-[FileReader](https://www.w3.org/TR/FileAPI/#dfn-filereader) is an object with the sole purpose of reading data from `Blob` (and hence `File` too) objects.
+[FileReader](https://www.w3.org/TR/FileAPI/#dfn-filereader) `Blob` (va shuning uchun `File` ham) obyektlardan ma'lumotlarni o'qishning yagona maqsadi bo'lgan obyekt.
 
-It delivers the data using events, as reading from disk may take time.
+U hodisalar orqali ma'lumotlarni etkazadi, chunki diskdan o'qish vaqt talab qilishi mumkin.
 
-The constructor:
+Konstruktor:
 
 ```js
-let reader = new FileReader(); // no arguments
+let reader = new FileReader(); // argumentsiz
 ```
 
-The main methods:
+Asosiy usullar:
 
-- **`readAsArrayBuffer(blob)`** -- read the data in binary format `ArrayBuffer`.
-- **`readAsText(blob, [encoding])`** -- read the data as a text string with the given encoding (`utf-8` by default).
-- **`readAsDataURL(blob)`** -- read the binary data and encode it as base64 data url.
-- **`abort()`** -- cancel the operation.
+- **`readAsArrayBuffer(blob)`** -- ma'lumotlarni binary format `ArrayBuffer` da o'qish.
+- **`readAsText(blob, [encoding])`** -- ma'lumotlarni berilgan kodlash bilan matn stringi sifatida o'qish (standart bo'yicha `utf-8`).
+- **`readAsDataURL(blob)`** -- binary ma'lumotlarni o'qish va uni base64 data url sifatida kodlash.
+- **`abort()`** -- operatsiyani bekor qilish.
 
-The choice of `read*` method depends on which format we prefer, how we're going to use the data.
+`read*` usulini tanlash biz qanday formatni afzal ko'rishimiz, ma'lumotlarni qanday ishlatishimizga bog'liq.
 
-- `readAsArrayBuffer` -- for binary files, to do low-level binary operations. For high-level operations, like slicing, `File` inherits from `Blob`, so we can call them directly, without reading.
-- `readAsText` -- for text files, when we'd like to get a string.
-- `readAsDataURL` -- when we'd like to use this data in `src` for `img` or another tag. There's an alternative to reading a file for that, as discussed in chapter <info:blob>: `URL.createObjectURL(file)`.
+- `readAsArrayBuffer` -- binary fayllar uchun, past darajadagi binary operatsiyalarni bajarish uchun. Yuqori darajadagi operatsiyalar uchun, masalan slicing, `File` `Blob` dan meros bo'lib oladi, shuning uchun biz ularni o'qimasdan to'g'ridan-to'g'ri chaqirishimiz mumkin.
+- `readAsText` -- matn fayllari uchun, string olishni xohlaganimizda.
+- `readAsDataURL` -- bu ma'lumotlarni `img` yoki boshqa teg uchun `src` da ishlatishni xohlaganimizda. Buning uchun faylni o'qishning muqobil usuli bor, <info:blob> bobida muhokama qilinganidek: `URL.createObjectURL(file)`.
 
-As the reading proceeds, there are events:
-- `loadstart` -- loading started.
-- `progress` -- occurs during reading.
-- `load` -- no errors, reading complete.
-- `abort` -- `abort()` called.
-- `error` -- error has occurred.
-- `loadend` -- reading finished with either success or failure.
+O'qish davom etayotgan vaqtda hodisalar bo'ladi:
+- `loadstart` -- yuklash boshlandi.
+- `progress` -- o'qish davomida sodir bo'ladi.
+- `load` -- xato yo'q, o'qish tugadi.
+- `abort` -- `abort()` chaqirildi.
+- `error` -- xato yuz berdi.
+- `loadend` -- o'qish muvaffaqiyat yoki muvaffaqiyatsizlik bilan tugadi.
 
-When the reading is finished, we can access the result as:
-- `reader.result` is the result (if successful)
-- `reader.error` is the error (if failed).
+O'qish tugaganda natijaga kirish mumkin:
+- `reader.result` natija (agar muvaffaqiyatli bo'lsa)
+- `reader.error` xato (agar muvaffaqiyatsiz bo'lsa).
 
-The most widely used events are for sure `load` and `error`.
+Eng keng ishlatiladigan hodisalar, albatta, `load` va `error`.
 
-Here's an example of reading a file:
+Mana faylni o'qish misoli:
 
 ```html run
 <input type="file" onchange="readFile(this)">
@@ -104,35 +104,34 @@ function readFile(input) {
 </script>
 ```
 
-```smart header="`FileReader` for blobs"
-As mentioned in the chapter <info:blob>, `FileReader` can read not just files, but any blobs.
+```smart header="Blob lar uchun `FileReader`"
+<info:blob> bobida eslatib o'tilganidek, `FileReader` faqat fayllarni emas, har qanday blob larni ham o'qiy oladi.
 
-We can use it to convert a blob to another format:
-- `readAsArrayBuffer(blob)` -- to `ArrayBuffer`,
-- `readAsText(blob, [encoding])` -- to string (an alternative to `TextDecoder`),
-- `readAsDataURL(blob)` -- to base64 data url.
+Biz uni blob ni boshqa formatga aylantirish uchun ishlatishimiz mumkin:
+- `readAsArrayBuffer(blob)` -- `ArrayBuffer` ga,
+- `readAsText(blob, [encoding])` -- stringga (`TextDecoder` ga alternativa),
+- `readAsDataURL(blob)` -- base64 data url ga.
 ```
 
+```smart header="`FileReaderSync` Web Workers ichida mavjud"
+Web Workers uchun `FileReader` ning sinxron varianti ham mavjud, [FileReaderSync](https://www.w3.org/TR/FileAPI/#FileReaderSync) deb ataladi.
 
-```smart header="`FileReaderSync` is available inside Web Workers"
-For Web Workers, there also exists a synchronous variant of `FileReader`, called [FileReaderSync](https://www.w3.org/TR/FileAPI/#FileReaderSync).
+Uning `read*` o'qish usullari hodisalarni yaratmaydi, balki oddiy funksiyalar kabi natijani qaytaradi.
 
-Its reading methods `read*` do not generate events, but rather return a result, as regular functions do.
-
-That's only inside a Web Worker though, because delays in synchronous calls, that are possible while reading from files, in Web Workers are less important. They do not affect the page.
+Bu faqat Web Worker ichida, chunki fayllardan o'qishda mumkin bo'lgan sinxron chaqiruvlardagi kechikishlar Web Workers da kamroq muhim. Ular sahifaga ta'sir qilmaydi.
 ```
 
-## Summary
+## Xulosa
 
-`File` objects inherit from `Blob`.
+`File` obyektlari `Blob` dan meros oladi.
 
-In addition to `Blob` methods and properties, `File` objects also have `name` and `lastModified` properties, plus the internal ability to read from filesystem. We usually get `File` objects from user input, like `<input>` or Drag'n'Drop events (`ondragend`).
+`Blob` usullari va xossalariga qo'shimcha, `File` obyektlari ham `name` va `lastModified` xossalariga ega, shuningdek fayl tizimidan o'qishning ichki imkoniyati. Biz odatda `File` obyektlarini `<input>` yoki Drag'n'Drop hodisalari (`ondragend`) kabi foydalanuvchi kiritishidan olamiz.
 
-`FileReader` objects can read from a file or a blob, in one of three formats:
+`FileReader` obyektlari fayl yoki blob dan uchta formatdan birida o'qiy oladi:
 - String (`readAsText`).
 - `ArrayBuffer` (`readAsArrayBuffer`).
-- Data url, base-64 encoded (`readAsDataURL`).
+- Data url, base-64 kodlangan (`readAsDataURL`).
 
-In many cases though, we don't have to read the file contents. Just as we did with blobs, we can create a short url with `URL.createObjectURL(file)` and assign it to `<a>` or `<img>`. This way the file can be downloaded or shown up as an image, as a part of canvas etc.
+Ko'p hollarda, biz fayl kontentini o'qishimiz shart emas. Blob lar bilan qilganingiz kabi, biz `URL.createObjectURL(file)` bilan qisqa url yaratishimiz va uni `<a>` yoki `<img>` ga tayinlashimiz mumkin. Shunday qilib, fayl yuklab olinishi yoki rasm sifatida, canvas ning bir qismi sifatida ko'rsatilishi mumkin.
 
-And if we're going to send a `File` over a network, that's also easy: network API like `XMLHttpRequest` or `fetch` natively accepts `File` objects.
+Va agar biz `File` ni tarmoq orqali yubormoqchi bo'lsak, bu ham oson: `XMLHttpRequest` yoki `fetch` kabi tarmoq API si `File` obyektlarini tabiiy ravishda qabul qiladi.

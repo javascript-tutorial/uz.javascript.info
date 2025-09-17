@@ -1,11 +1,11 @@
-importance: 3
+muhimlik: 3
 
 ---
 
-# What is the scrollbar width?
+# O'tkazish paneli kengligi qancha?
 
-Write the code that returns the width of a standard scrollbar.
+Standart aylantirish panelining kengligini qaytaradigan kodni yozing.
 
-For Windows it usually varies between `12px` and `20px`. If the browser doesn't reserve any space for it (the scrollbar is half-translucent over the text, also happens), then it may be `0px`.
+Windows uchun u odatda `12px` va `20px` orasida oʻzgarib turadi. Brauzer buning uchun joy ajratmasa (aylantirish paneli matn ustida yarim shaffof bo'ladi, bu ham sodir bo'ladi), u `0px` bo'lishi mumkin.
 
-P.S. The code should work for any HTML document, do not depend on its content.
+P.S. Kod har qanday HTML hujjati uchun ishlashi kerak, uning mazmuniga bog'liq emas.

@@ -1,5 +1,4 @@
-
-1. On click -- replace `innerHTML` of the cell by `<textarea>` with same sizes and no border. Can use JavaScript or CSS to set the right size.
-2. Set `textarea.value` to `td.innerHTML`.
-3. Focus on the textarea.
-4. Show buttons OK/CANCEL under the cell, handle clicks on them.
+1. Bosing -- katakchaning `ichkiHTML` ni bir xil o'lchamdagi va chegarasiz `<textarea>` bilan almashtiring. To'g'ri o'lchamni o'rnatish uchun JavaScript yoki CSS dan foydalanishi mumkin.
+2. `textarea.value` ni `td.innerHTML` qilib belgilang.
+3. Diqqatni matn maydoniga qarating.
+4. Yacheyka ostidagi OK/CANCEL tugmachalarini ko'rsating, ularni bosish bilan ishlang.

@@ -1,14 +1,14 @@
-importance: 1
+muhimlik: 1
 
 ---
 
-# Why does "aaa" remain?
+# Nima uchun "aaa" qoladi?
 
-In the example below, the call `table.remove()` removes the table from the document.
+Quyidagi misolda `table.remove()` chaqiruvi jadvalni hujjatdan olib tashlaydi.
 
-But if you run it, you can see that the text `"aaa"` is still visible.
+Agar siz uni ishga tushirsangiz, `"aaa"` matni hali ham ko'rinib turishini ko'rishingiz mumkin.
 
-Why does that happen?
+Nega bunday bo'ladi?
 
 ```html height=100 run
 <table id="table">
@@ -19,9 +19,9 @@ Why does that happen?
 </table>
 
 <script>
-  alert(table); // the table, as it should be
+  alert(table); // stol, xuddi shunday bo'lishi kerak
 
   table.remove();
-  // why there's still aaa in the document?
+  // nega hujjatda hali ham aaa bor?
 </script>
 ```

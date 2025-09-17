@@ -6,11 +6,11 @@ class FormatError extends SyntaxError {
   }
 }
 
-let err = new FormatError("formatting error");
+let err = new FormatError("formatlashda xatolik");
 
-alert( err.message ); // formatting error
-alert( err.name ); // FormatError
-alert( err.stack ); // stack
+alert(err.message); // formatlashda xatolik
+alert(err.name); // FormatError
+alert(err.stack); // stack
 
-alert( err instanceof SyntaxError ); // true
+alert(err instanceof SyntaxError); // true
 ```

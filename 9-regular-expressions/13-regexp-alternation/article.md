@@ -1,14 +1,14 @@
-# Alternation (OR) |
+# Alternatsiya (OR) |
 
-Alternation is the term in regular expression that is actually a simple "OR".
+Alternatsiya - bu doimiy ifodalardagi atama bo'lib, aslida oddiy `"YOKI"` degani.
 
-In a regular expression it is denoted with a vertical line character `pattern:|`.
+Doimiy ifodada u vertikal chiziq belgisi `pattern:|` bilan belgilanadi.
 
-For instance, we need to find programming languages: HTML, PHP, Java or JavaScript.
+Masalan, bizga dasturlash tillari kerak: HTML, PHP, Java yoki JavaScript.
 
-The corresponding regexp: `pattern:html|php|java(script)?`.
+Tegishli regexp: `pattern:html|php|java(script)?`.
 
-A usage example:
+Foydalanish misoli:
 
 ```js run
 let regexp = /html|php|css|java(script)?/gi;
@@ -18,50 +18,50 @@ let str = "First HTML appeared, then CSS, then JavaScript";
 alert( str.match(regexp) ); // 'HTML', 'CSS', 'JavaScript'
 ```
 
-We already saw a similar thing -- square brackets. They allow to choose between multiple characters, for instance `pattern:gr[ae]y` matches `match:gray` or `match:grey`.
+Biz shunga o'xshash narsani allaqachon ko'rganmiz -- kvadrat qavslar. Ular bir nechta belgi orasidan tanlash imkonini beradi, masalan `pattern:gr[ae]y` `match:gray` yoki `match:grey` ga mos keladi.
 
-Square brackets allow only characters or character classes. Alternation allows any expressions. A regexp `pattern:A|B|C` means one of expressions `A`, `B` or `C`.
+Kvadrat qavslar faqat belgilar yoki belgilar sinflariga ruxsat beradi. Alternatsiya har qanday ifodalarga ruxsat beradi. `pattern:A|B|C` regexp `A`, `B` yoki `C` ifodalaridan birini bildiradi.
 
-For instance:
+Masalan:
 
-- `pattern:gr(a|e)y` means exactly the same as `pattern:gr[ae]y`.
-- `pattern:gra|ey` means `match:gra` or `match:ey`.
+- `pattern:gr(a|e)y` aynan `pattern:gr[ae]y` bilan bir xil ma'noni bildiradi.
+- `pattern:gra|ey` `match:gra` yoki `match:ey` ni bildiradi.
 
-To apply alternation to a chosen part of the pattern, we can enclose it in parentheses:
-- `pattern:I love HTML|CSS` matches `match:I love HTML` or `match:CSS`.
-- `pattern:I love (HTML|CSS)` matches `match:I love HTML` or `match:I love CSS`.
+Naqshning tanlangan qismiga alternatsiyani qo'llash uchun uni qavslarga o'rashimiz mumkin:
+- `pattern:I love HTML|CSS` `match:I love HTML` yoki `match:CSS` ga mos keladi.
+- `pattern:I love (HTML|CSS)` `match:I love HTML` yoki `match:I love CSS` ga mos keladi.
 
-## Example: regexp for time
+## Misol: vaqt uchun regexp
 
-In previous articles there was a task to build a regexp for searching time in the form `hh:mm`, for instance `12:00`. But a simple `pattern:\d\d:\d\d` is too vague. It accepts `25:99` as the time (as 99 minutes match the pattern, but that time is invalid).
+Oldingi maqolalarda `hh:mm` shaklida vaqtni qidirish uchun regexp yaratish vazifasi bor edi, masalan `12:00`. Lekin oddiy `pattern:\d\d:\d\d` juda noaniq. U `25:99` ni vaqt sifatida qabul qiladi (99 daqiqa naqshga mos keladi, lekin bu vaqt noto'g'ri).
 
-How can we make a better pattern?
+Yaxshiroq naqshni qanday yaratish mumkin?
 
-We can use more careful matching. First, the hours:
+Biz yanada ehtiyotkor moslashtirish ishlatishimiz mumkin. Birinchi, soatlar:
 
-- If the first digit is `0` or `1`, then the next digit can be any: `pattern:[01]\d`.
-- Otherwise, if the first digit is `2`, then the next must be `pattern:[0-3]`.
-- (no other first digit is allowed)
+- Agar birinchi raqam `0` yoki `1` bo'lsa, keyingi raqam har qanday bo'lishi mumkin: `pattern:[01]\d`.
+- Aks holda, agar birinchi raqam `2` bo'lsa, keyingi `pattern:[0-3]` bo'lishi kerak.
+- (boshqa birinchi raqamga ruxsat yo'q)
 
-We can write both variants in a regexp using alternation: `pattern:[01]\d|2[0-3]`.
+Biz alternatsiya yordamida ikkala variantni regexpda yozishimiz mumkin: `pattern:[01]\d|2[0-3]`.
 
-Next, minutes must be from `00` to `59`. In the regular expression language that can be written as `pattern:[0-5]\d`: the first digit `0-5`, and then any digit.
+Keyin, daqiqalar `00` dan `59` gacha bo'lishi kerak. Doimiy ifodalar tilida buni `pattern:[0-5]\d` deb yozish mumkin: birinchi raqam `0-5`, keyin har qanday raqam.
 
-If we glue hours and minutes together, we get the pattern: `pattern:[01]\d|2[0-3]:[0-5]\d`.
+Agar soat va daqiqalarni birlashtirsak, naqsh hosil bo'ladi: `pattern:[01]\d|2[0-3]:[0-5]\d`.
 
-We're almost done, but there's a problem. The alternation `pattern:|` now happens to be between `pattern:[01]\d` and `pattern:2[0-3]:[0-5]\d`.
+Deyarli tugadik, lekin muammo bor. Alternatsiya `pattern:|` endi `pattern:[01]\d` va `pattern:2[0-3]:[0-5]\d` orasida sodir bo'lyapti.
 
-That is: minutes are added to the second alternation variant, here's a clear picture:
+Ya'ni: daqiqalar ikkinchi alternatsiya variantiga qo'shilgan, mana aniq rasm:
 
 ```
 [01]\d  |  2[0-3]:[0-5]\d
 ```
 
-That pattern looks for `pattern:[01]\d` or `pattern:2[0-3]:[0-5]\d`.
+Bu naqsh `pattern:[01]\d` yoki `pattern:2[0-3]:[0-5]\d` ni qidiradi.
 
-But that's wrong, the alternation should only be used in the "hours" part of the regular expression, to allow `pattern:[01]\d` OR `pattern:2[0-3]`. Let's correct that by enclosing "hours" into parentheses: `pattern:([01]\d|2[0-3]):[0-5]\d`.
+Lekin bu noto'g'ri, alternatsiya faqat doimiy ifodaning "soatlar" qismida ishlatilishi kerak, `pattern:[01]\d` YOKI `pattern:2[0-3]` ga ruxsat berish uchun. Keling, buni "soatlar"ni qavslarga o'rash orqali tuzataylik: `pattern:([01]\d|2[0-3]):[0-5]\d`.
 
-The final solution:
+Yakuniy yechim:
 
 ```js run
 let regexp = /([01]\d|2[0-3]):[0-5]\d/g;

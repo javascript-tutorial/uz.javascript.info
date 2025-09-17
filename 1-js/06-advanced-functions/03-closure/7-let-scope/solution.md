@@ -1,6 +1,6 @@
-The result is: **error**.
+Natija: **xato**.
 
-Try running it:
+Buni ishga tushirib ko'ring:
 
 ```js run
 let x = 1;
@@ -15,20 +15,20 @@ function func() {
 func();
 ```
 
-In this example we can observe the peculiar difference between a "non-existing" and "uninitialized" variable.
+Ushbu misolda biz "mavjud bo'lmagan" va "ishga tushirilmagan" o'zgaruvchi o'rtasidagi g'alati farqni kuzatishimiz mumkin.
 
-As you may have read in the article [](info:closure), a variable starts in the "uninitialized" state from the moment when the execution enters a code block (or a function). And it stays uninitalized until the corresponding `let` statement.
+[](info:closure) maqolasida o'qiganimizdek, o'zgaruvchi ijro kod blokiga (yoki funktsiyaga) kirgandan boshlab "ishga tushirilmagan" holatda boshlanadi. Va u tegishli `let` ifodagacha ishga tushirilmagan qoladi.
 
-In other words, a variable technically exists, but can't be used before `let`.
+Boshqacha qilib aytganda, o'zgaruvchi texnik jihatdan mavjud, lekin `let` dan oldin ishlatilmaydi.
 
-The code above demonstrates it.
+Yuqoridagi kod buni ko'rsatadi.
 
 ```js
 function func() {
 *!*
-  // the local variable x is known to the engine from the beginning of the function,
-  // but "uninitialized" (unusable) until let ("dead zone")
-  // hence the error
+  // mahalliy x o'zgaruvchisi funktsiya boshidanoq mexanizmga ma'lum,
+  // lekin let gacha "ishga tushirilmagan" (foydalanib bo'lmaydigan) ("o'lik zona")
+  // shuning uchun xato
 */!*
 
   console.log(x); // ReferenceError: Cannot access 'x' before initialization
@@ -37,4 +37,4 @@ function func() {
 }
 ```
 
-This zone of temporary unusability of a variable (from the beginning of the code block till `let`) is sometimes called the "dead zone".
+O'zgaruvchining vaqtinchalik foydalanib bo'lmaydigan bu zonasi (kod bloki boshidan `let` gacha) ba'zan "o'lik zona" (dead zone) deb ataladi.

@@ -1,12 +1,12 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Why do we need Origin?
+# Nima uchun bizga Origin kerak?
 
-As you probably know, there's HTTP-header `Referer`, that usually contains an url of the page which initiated a network request.
+Siz bilganingizdek, odatda tarmoq so'rovini boshlagan sahifaning URL manzilini o'z ichiga olgan `Referer` HTTP sarlavhasi mavjud.
 
-For instance, when fetching `http://google.com` from `http://javascript.info/some/url`, the headers look like this:
+Masalan, `http://javascript.info/some/url` dan `http://google.com` ni olishda sarlavhalar quyidagicha ko`rinadi:
 
 ```
 Accept: */*
@@ -20,9 +20,9 @@ Referer: http://javascript.info/some/url
 */!*
 ```
 
-As you can see, both `Referer` and `Origin` are present.
+Ko'rib turganingizdek, `Referer` ham, `Origin` ham mavjud.
 
-The questions:
+Savollar:
 
-1. Why `Origin` is needed, if `Referer` has even more information?
-2. Is it possible that there's no `Referer` or `Origin`, or is it incorrect?
+1. Agar `Referer` ko'proq ma`lumotga ega bo'lsa, nima uchun `Origin` kerak?
+2. `Referer` yoki `Origin` yo'qligi mumkinmi yoki bu noto'g'ri?

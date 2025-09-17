@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -13,6 +13,6 @@ let arr = ["HTML", "JavaScript", "CSS"];
 
 let sorted = copySorted(arr);
 
-alert( sorted ); // CSS, HTML, JavaScript
-alert( arr ); // HTML, JavaScript, CSS (hech qanday o'zgarish yo'q)
+alert(sorted); // CSS, HTML, JavaScript
+alert(arr); // HTML, JavaScript, CSS (hech qanday o'zgarish yo'q)
 ```

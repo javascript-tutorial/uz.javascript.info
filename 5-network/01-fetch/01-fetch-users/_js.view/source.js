@@ -1,4 +1,3 @@
-
 async function getUsers(names) {
-  /* your code */
+  /* Sizning kodingiz */
 }

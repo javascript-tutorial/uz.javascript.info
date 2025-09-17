@@ -29,25 +29,12 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
     alert( Jan02_1970 );
     ```
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
     1970 yil boshidan beri o'tgan millisekundalar soni *vaqt tamg'asi* deyiladi.
-=======
-    An integer number representing the number of milliseconds that has passed since the beginning of 1970 is called a *timestamp*.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
     Bu sananing engil raqamli tasviri. Biz har doim `new Date(vaqt tamg'asi)` yordamida vaqt tamg'asidan sana yaratishimiz va mavjud `sana` obyektini `Date.getTime()` usuli yordamida vaqt tamg'asiga aylantirishimiz mumkin (pastga qarang).
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 `new Date(datestring)`
 : Agar bitta argument bo'lsa va u matn bo'lsa, u holda `Date.parse` algoritmi bilan tahlil qilinadi (pastga qarang).
-=======
-    Dates before 01.01.1970 have negative timestamps, e.g.:
-    ```js run
-    // 31 Dec 1969
-    let Dec31_1969 = new Date(-24 * 3600 * 1000);
-    alert( Dec31_1969 );
-    ```
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 `new Date(datestring)`
 : If there is a single argument, and it's a string, then it is parsed automatically. The algorithm is the same as `Date.parse` uses, we'll cover it later.
@@ -55,7 +42,6 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
     ```js run
     let date = new Date("2017-01-26");
     alert(date);
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
     // Sananing vaqt qismi GMT yarim tunda deb qabul qilinadi va
     // kod ishlaydigan vaqt zonasiga muvofiq o'rnatiladi.
     // Shunday qilib, natija bo'lishi mumkin
@@ -68,18 +54,6 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
 : Belgilangan komponentlar bilan sanani mahalliy vaqt zonasida yarating. Faqat ikkita birinchi argument majburiydir.
 
     Eslatma:
-=======
-    // The time is not set, so it's assumed to be midnight GMT and
-    // is adjusted according to the timezone the code is run in
-    // So the result could be
-    // Thu Jan 26 2017 11:00:00 GMT+1100 (Australian Eastern Daylight Time)
-    // or
-    // Wed Jan 25 2017 16:00:00 GMT-0800 (Pacific Standard Time)
-    ```
-
-`new Date(year, month, date, hours, minutes, seconds, ms)`
-: Create the date with the given components in the local time zone. Only the first two arguments are obligatory.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
     - `yil` 4 ta raqamdan iborat bo'lishi kerak: `2013` yaxshi, `98` yo'q.
     - Oylarni hisoblash `0` (yanvar) bilan boshlanadi, `11` gacha (dekabr).
@@ -89,19 +63,11 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
     Masalan:
 
     ```js
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
     new Date(2011, 0, 1, 0, 0, 0, 0); // // 1 Yanvar 2011, 00:00:00
     new Date(2011, 0, 1); // bir xil, soat va boshqalar sukut bo'yicha 0 ga teng
     ```
 
     Minimal aniqlik 1 millisoniya (1/1000 soniya)):
-=======
-    new Date(2011, 0, 1, 0, 0, 0, 0); // 1 Jan 2011, 00:00:00
-    new Date(2011, 0, 1); // the same, hours etc are 0 by default
-    ```
-
-    The maximal precision is 1 ms (1/1000 sec):
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
     ```js run
     let date = new Date(2011, 0, 1, 2, 3, 4, 567);
@@ -110,11 +76,7 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
 
 ## Sana tarkibiy qismlariga kirish
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 `Date` obyektidan yil, oy va boshqalarga kirishning ko'plab usullari mavjud. Ammo ularni toifalarga ajratganda osongina eslab qolish mumkin.
-=======
-There are methods to access the year, month and so on from the `Date` object:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 [getFullYear()](mdn:js/Date/getFullYear)
 : Yilni olish (4 ta raqam)
@@ -160,11 +122,7 @@ Ushbu usullardan tashqari, UTC-variantiga ega bo'lmagan ikkita maxsus usul mavju
 : Sana uchun vaqt tamg'asini qaytaradi -- 1970 yil 1 yanvardan boshlab bir necha millisoniyalarda UTC+0.
 
 [getTimezoneOffset()](mdn:js/Date/getTimezoneOffset)
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 : Mahalliy vaqt zonasi va UTC o'rtasidagi farqni daqiqada qaytaradi:
-=======
-: Returns the difference between UTC and the local time zone, in minutes:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
     ```js run
     // agar siz UTC-1 vaqt mintaqasida bo'lsangiz, 60 qaytaradi
@@ -261,33 +219,21 @@ Muhim yon ta'sir: sanalarni olib tashlash mumkin, natijasi ularning millisoniyal
 Vaqtni o'lchash uchun ishlatilishi mumkin:
 
 ```js run
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 let start = new Date(); // hisoblashni boshlang
-=======
-let start = new Date(); // start measuring time
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 // ishni bajariladi
 for (let i = 0; i < 100000; i++) {
   let doSomething = i * i * i;
 }
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 let end = new Date(); // bajarildi
-=======
-let end = new Date(); // end measuring time
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 alert( `Tsikl ${end - start} millisoniyani oldi` );
 ```
 
 ## Date.now()
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 Agar biz faqat farqni o'lchashni xohlasak, bizga `Date` obyekti kerak emas.
-=======
-If we only want to measure time, we don't need the `Date` object.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 Joriy vaqt tamg'asini qaytaradigan `Date.now()` maxsus usuli mavjud.
 
@@ -338,11 +284,7 @@ Bu ikkalasi aynan bir narsani qilishadi, lekin ulardan biri sana ms ni olish uch
 
 Xo'sh, qaysi biri tezroq?
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 Birinchi g'oya ularni ketma-ket ko'p marta ishlatish va vaqt farqini o'lchash bo'lishi mumkin. Bizning ishimiz uchun funktsiyalar juda oddiy, shuning uchun biz buni 100000 marta bajarishimiz kerak.
-=======
-The first idea may be to run them many times in a row and measure the time difference. For our case, functions are very simple, so we have to do it at least 100000 times.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 Keling, o'lchov qilaylik:
 
@@ -372,11 +314,7 @@ Voy-buy! `getTime()` dan foydalanish juda tezroq! Buning sababi shundaki, hech q
 
 Yaxshi, bizda bir narsa bor. Ammo bu hali yaxshi ko'rsatkich emas.
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 Tasavvur qiling-a, `bench(diffSubtract)` ishlayotganda protsessor parallel ravishda nimadir qilgan va u resurslardan foydalangan. Va `bench(diffGetTime)` ishlash tugagach, ish tugadi.
-=======
-Imagine that at the time of running `bench(diffSubtract)` CPU was doing something in parallel, and it was taking resources. And by the time of running `bench(diffGetTime)` that work has finished.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 Zamonaviy ko'p jarayonli OS uchun juda yaxshi stsenariy.
 
@@ -384,11 +322,7 @@ Natijada, birinchi etalonda ikkinchisiga qaraganda kamroq protsessor resurslari 
 
 **Batafsil ishonchliligi uchun, barcha ko'rsatkichlar to'plami bir necha marta takrorlanishi kerak.**
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 Mana kod misoli:
-=======
-For example, like this:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 ```js run
 function diffSubtract(date1, date2) {
@@ -412,11 +346,7 @@ let time1 = 0;
 let time2 = 0;
 
 *!*
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 // bench(upperSlice) va bench(upperLoop) navbati bilan 10 marta ishlaydi
-=======
-// run bench(diffSubtract) and bench(diffGetTime) each 10 times alternating
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 for (let i = 0; i < 10; i++) {
   time1 += bench(diffSubtract);
   time2 += bench(diffGetTime);
@@ -441,13 +371,8 @@ for (let i = 0; i < 10; i++) {
 }
 ```
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 ```warn header="Mikrobenchmarking qilishda ehtiyot bo'ling"
 Zamonaviy JavaScript interpretatorlari ko'plab optimallashtirishlarni amalga oshiradi. Ular "sun'iy sinovlar" natijalarini "odatdagi foydalanish" bilan taqqoslashlari mumkin, ayniqsa, biz juda kichik bir narsaga e'tibor qaratsak. Shunday qilib, agar siz ishlashni jiddiy tushunishni istasangiz, unda JavaScript-ni qanday ishlashini o'rganing. Va keyin sizga mikrobenchmarklar umuman kerak bo'lmaydi.
-=======
-```warn header="Be careful doing microbenchmarking"
-Modern JavaScript engines perform many optimizations. They may tweak results of "artificial tests" compared to "normal usage", especially when we benchmark something very small, such as how an operator works, or a built-in function. So if you seriously want to understand performance, then please study how the JavaScript engine works. And then you probably won't need microbenchmarks at all.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 V8 haqidagi maqolalar to'plamini <http://mrale.ph> sahifasida topishingiz mumkin.
 ```
@@ -458,17 +383,10 @@ V8 haqidagi maqolalar to'plamini <http://mrale.ph> sahifasida topishingiz mumkin
 
 Satr formati quyidagicha bo'lishi kerak: `YYYY-MM-DDTHH: mm: ss.sssZ`, bu yerda:
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 - `YYYY-MM-DD` -- sana: yil-oy-kun.
 - Ajratuvchi sifatida `"T"` belgisi ishlatiladi.
 - `HH:mm:ss.sss` -- vaqt: soat, daqiqa, soniya va millisoniyalar.
 - Ixtiyoriy `"Z"` qismi soat mintaqasini `+-hh:mm` formatida bildiradi. UTC+0 degan ma'noni anglatuvchi bitta `"Z"` harfi.
-=======
-- `YYYY-MM-DD` -- is the date: year-month-day.
-- The character `"T"` is used as the delimiter.
-- `HH:mm:ss.sss` -- is the time: hours, minutes, seconds and milliseconds.
-- The optional `'Z'` part denotes the time zone in the format `+-hh:mm`. A single letter `Z` would mean UTC+0.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md
 
 Shuningdek, `YYYY-MM-DD` yoki `YYYY-MM` yoki hatto `YYYY` kabi qisqaroq variantlar ham mavjud.
 
@@ -501,7 +419,6 @@ alert(date);
 
 E'tibor bering, boshqa ko'plab tizimlardan farqli o'laroq, JavaScript-dagi vaqt tamg'alari bir necha soniyada emas, millisoniyada.
 
-<<<<<<< HEAD:1-js/05-data-types/10-date/article.md
 Bundan tashqari, ba'zida biz aniqroq vaqt o'lchovlariga muhtojmiz. JavaScript-ning o'zida vaqtni mikrosoniyalarda (soniyaning 1 milliondan biri) o'lchash usuli yo'q, lekin ko'pchilik muhitlar uni ta'minlaydi. Masalan, brauzerda [performance.now()](mdn:api/Performance/now) bor, bu sahifani mikrosaniyadagi aniqlik bilan yuklash boshidan millisoniyalar sonini beradi (nuqtadan keyin 3 ta raqam):
 
 ```js run
@@ -512,15 +429,3 @@ alert(`Loading started ${performance.now()}ms ago`);
 ```
 
 Node.js-da `microtime` moduli va boshqa usullar mavjud. Texnik jihatdan har qanday qurilma va muhit yanada aniqroq ishlashga imkon beradi, bu faqat `Date` da emas.
-=======
-Sometimes we need more precise time measurements. JavaScript itself does not have a way to measure time in microseconds (1 millionth of a second), but most environments provide it. For instance, browser has [performance.now()](mdn:api/Performance/now) that gives the number of milliseconds from the start of page loading with microsecond precision (3 digits after the point):
-
-```js run
-alert(`Loading started ${performance.now()}ms ago`);
-// Something like: "Loading started 34731.26000000001ms ago"
-// .26 is microseconds (260 microseconds)
-// more than 3 digits after the decimal point are precision errors, only the first 3 are correct
-```
-
-Node.js has `microtime` module and other ways. Technically, almost any device and environment allows to get more precision, it's just not in `Date`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/05-data-types/11-date/article.md

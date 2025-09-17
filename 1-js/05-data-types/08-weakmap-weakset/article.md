@@ -1,44 +1,44 @@
-# WeakMap and WeakSet
+# WeakMap va WeakSet
 
-As we know from the chapter <info:garbage-collection>, JavaScript engine keeps a value in memory while it is "reachable" and can potentially be used.
+<info:garbage-collection> bo'limidan ma'lumki, JavaScript mexanizmi qiymatni xotirada "yetib boriladigan" bo'lib qolgan va potentsial ravishda ishlatilishi mumkin bo'lgan vaqt davomida saqlaydi.
 
-For instance:
+Misol uchun:
 ```js
 let john = { name: "John" };
 
-// the object can be accessed, john is the reference to it
+// objektga kirish mumkin, john unga havola
 
-// overwrite the reference
+// havolani qayta yozish
 john = null;
 
 *!*
-// the object will be removed from memory
+// objekt xotiradan olib tashlanadi
 */!*
 ```
 
-Usually, properties of an object or elements of an array or another data structure are considered reachable and kept in memory while that data structure is in memory.
+Odatda, objektning xususiyatlari yoki massiv elementlari yoki boshqa ma'lumotlar strukturasi elementlari yetib boriladigan deb hisoblanadi va shu ma'lumotlar strukturasi xotirada bo'lgancha xotirada saqlanadi.
 
-For instance, if we put an object into an array, then while the array is alive, the object will be alive as well, even if there are no other references to it.
+Misol uchun, agar biz objektni massivga qo'ysak, massiv tirik bo'lgancha, objekt ham tirik bo'ladi, hatto unga boshqa havolalar bo'lmasa ham.
 
-Like this:
+Mana bunday:
 
 ```js
 let john = { name: "John" };
 
 let array = [ john ];
 
-john = null; // overwrite the reference
+john = null; // havolani qayta yozish
 
 *!*
-// the object previously referenced by john is stored inside the array
-// therefore it won't be garbage-collected
-// we can get it as array[0]
+// avval john tomonidan havola qilingan objekt massiv ichida saqlanadi
+// shuning uchun u garbage-collection qilinmaydi
+// biz uni array[0] sifatida olishimiz mumkin
 */!*
 ```
 
-Similar to that, if we use an object as the key in a regular `Map`, then while the `Map` exists, that object exists as well. It occupies memory and may not be garbage collected.
+Xuddi shunday, agar biz objektni oddiy `Map` da kalit sifatida ishlatsak, u holda `Map` mavjud bo'lgancha, bu objekt ham mavjud bo'ladi. U xotirani egallaydi va garbage collection qilinmasligi mumkin.
 
-For instance:
+Misol uchun:
 
 ```js
 let john = { name: "John" };
@@ -46,36 +46,36 @@ let john = { name: "John" };
 let map = new Map();
 map.set(john, "...");
 
-john = null; // overwrite the reference
+john = null; // havolani qayta yozish
 
 *!*
-// john is stored inside the map,
-// we can get it by using map.keys()
+// john xarita ichida saqlanadi,
+// biz uni map.keys() dan foydalanib olishimiz mumkin
 */!*
 ```
 
-`WeakMap` is fundamentally different in this aspect. It doesn't prevent garbage-collection of key objects.
+`WeakMap` bu jihatdan tubdan farq qiladi. U kalit objektlarning garbage-collection qilinishiga to'sqinlik qilmaydi.
 
-Let's see what it means on examples.
+Misollar orqali bu nimani anglatishini ko'raylik.
 
 ## WeakMap
 
-The first difference between `Map` and `WeakMap` is that keys must be objects, not primitive values:
+`Map` va `WeakMap` o'rtasidagi birinchi farq shundaki, kalitlar objektlar bo'lishi kerak, primitiv qiymatlar emas:
 
 ```js run
 let weakMap = new WeakMap();
 
 let obj = {};
 
-weakMap.set(obj, "ok"); // works fine (object key)
+weakMap.set(obj, "ok"); // yaxshi ishlaydi (objekt kaliti)
 
 *!*
-// can't use a string as the key
-weakMap.set("test", "Whoops"); // Error, because "test" is not an object
+// satrni kalit sifatida ishlatib bo'lmaydi
+weakMap.set("test", "Whoops"); // Xato, chunki "test" objekt emas
 */!*
 ```
 
-Now, if we use an object as the key in it, and there are no other references to that object -- it will be removed from memory (and from the map) automatically.
+Endi, agar biz objektni unda kalit sifatida ishlatsak va bu objektga boshqa havolalar bo'lmasa -- u xotiradan (va xaritadan) avtomatik ravishda olib tashlanadi.
 
 ```js
 let john = { name: "John" };
@@ -83,103 +83,103 @@ let john = { name: "John" };
 let weakMap = new WeakMap();
 weakMap.set(john, "...");
 
-john = null; // overwrite the reference
+john = null; // havolani qayta yozish
 
-// john is removed from memory!
+// john xotiradan olib tashlandi!
 ```
 
-Compare it with the regular `Map` example above. Now if `john` only exists as the key of `WeakMap` -- it will be automatically deleted from the map (and memory).
+Uni yuqoridagi oddiy `Map` misoli bilan solishtiring. Endi agar `john` faqat `WeakMap` ning kaliti sifatida mavjud bo'lsa -- u xaritadan (va xotiradan) avtomatik ravishda o'chiriladi.
 
-`WeakMap` does not support iteration and methods `keys()`, `values()`, `entries()`, so there's no way to get all keys or values from it.
+`WeakMap` iteratsiyani va `keys()`, `values()`, `entries()` metodlarini qo'llab-quvvatlamaydi, shuning uchun undan barcha kalitlar yoki qiymatlarni olishning imkoni yo'q.
 
-`WeakMap` has only the following methods:
+`WeakMap` faqat quyidagi metodlarga ega:
 
 - `weakMap.get(key)`
 - `weakMap.set(key, value)`
 - `weakMap.delete(key)`
 - `weakMap.has(key)`
 
-Why such a limitation? That's for technical reasons. If an object has lost all other references (like `john` in the code above), then it is to be garbage-collected automatically. But technically it's not exactly specified *when the cleanup happens*.
+Nega bunday cheklash? Bu texnik sabablarga ko'ra. Agar objekt boshqa barcha havolalarni yo'qotgan bo'lsa (yuqoridagi koddagi `john` kabi), u avtomatik ravishda garbage-collection qilinishi kerak. Lekin texnik jihatdan *tozalash qachon sodir bo'lishi* aniq belgilanmagan.
 
-The JavaScript engine decides that. It may choose to perform the memory cleanup immediately or to wait and do the cleaning later when more deletions happen. So, technically, the current element count of a `WeakMap` is not known. The engine may have cleaned it up or not, or did it partially. For that reason, methods that access all keys/values are not supported.
+JavaScript mexanizmi buni hal qiladi. U xotira tozalashni darhol bajarishni yoki kutishni va ko'proq o'chirish sodir bo'lganda tozalashni tanlashi mumkin. Shunday qilib, texnik jihatdan `WeakMap` ning joriy element soni noma'lum. Mexanizm uni tozalagan bo'lishi yoki yo'q, yoki qisman bajargan bo'lishi mumkin. Shu sababdan barcha kalitlar/qiymatlarni oladigan metodlar qo'llab-quvvatlanmaydi.
 
-Now, where do we need such a data structure?
+Endi, bizga bunday ma'lumotlar strukturasi qayerda kerak?
 
-## Use case: additional data
+## Foydalanish holati: qo'shimcha ma'lumotlar
 
-The main area of application for `WeakMap` is an *additional data storage*.
+`WeakMap` ning asosiy qo'llanish sohasi *qo'shimcha ma'lumotlar saqlashi*dir.
 
-If we're working with an object that "belongs" to another code, maybe even a third-party library, and would like to store some data associated with it, that should only exist while the object is alive - then `WeakMap` is exactly what's needed.
+Agar biz boshqa kodga "tegishli" bo'lgan objekt bilan ishlayotgan bo'lsak, hatto uchinchi tomon kutubxonasi bo'lsa ham, va u bilan bog'liq ba'zi ma'lumotlarni saqlashni istasak, bu faqat objekt tirik bo'lgan vaqtda mavjud bo'lishi kerak - u holda `WeakMap` aynan kerak bo'lgan narsadir.
 
-We put the data to a `WeakMap`, using the object as the key, and when the object is garbage collected, that data will automatically disappear as well.
+Biz ma'lumotlarni `WeakMap` ga qo'yamiz, objektni kalit sifatida ishlatamiz va objekt garbage collection qilinganda, bu ma'lumotlar ham avtomatik ravishda yo'qoladi.
 
 ```js
-weakMap.set(john, "secret documents");
-// if john dies, secret documents will be destroyed automatically
+weakMap.set(john, "maxfiy hujjatlar");
+// agar john o'lsa, maxfiy hujjatlar avtomatik ravishda yo'q qilinadi
 ```
 
-Let's look at an example.
+Misolga qaraylik.
 
-For instance, we have code that keeps a visit count for users. The information is stored in a map: a user object is the key and the visit count is the value. When a user leaves (its object gets garbage collected), we don't want to store their visit count anymore.
+Misol uchun, bizda foydalanuvchilar uchun tashrif sonini saqlaydigan kod bor. Ma'lumot xaritada saqlanadi: foydalanuvchi objekti kalit, tashrif soni esa qiymatdir. Foydalanuvchi ketganda (uning objekti garbage collection qilinganda), biz ularning tashrif sonini saqlashni xohlamaymiz.
 
-Here's an example of a counting function with `Map`:
+Mana `Map` bilan sanash funktsiyasining misoli:
 
 ```js
 // 📁 visitsCount.js
 let visitsCountMap = new Map(); // map: user => visits count
 
-// increase the visits count
+// tashrif sonini oshirish
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
   visitsCountMap.set(user, count + 1);
 }
 ```
 
-And here's another part of the code, maybe another file using it:
+Va mana kodning boshqa qismi, ehtimol uni ishlatadigan boshqa fayl:
 
 ```js
 // 📁 main.js
 let john = { name: "John" };
 
-countUser(john); // count his visits
+countUser(john); // uning tashriflarini sanash
 
-// later john leaves us
+// keyinroq john bizni tark etadi
 john = null;
 ```
 
-Now, `john` object should be garbage collected, but remains in memory, as it's a key in `visitsCountMap`.
+Endi `john` objekti garbage collection qilinishi kerak, lekin xotirada qoladi, chunki u `visitsCountMap` da kalit.
 
-We need to clean `visitsCountMap` when we remove users, otherwise it will grow in memory indefinitely. Such cleaning can become a tedious task in complex architectures.
+Foydalanuvchilarni olib tashlaganimizda `visitsCountMap` ni tozlashimiz kerak, aks holda u xotirada cheksiz o'sib boradi. Bunday tozalash murakkab arxitekturalarda zerikarli vazifaga aylanishi mumkin.
 
-We can avoid it by switching to `WeakMap` instead:
+Buning o'rniga `WeakMap` ga o'tish orqali bundan qochishimiz mumkin:
 
 ```js
 // 📁 visitsCount.js
 let visitsCountMap = new WeakMap(); // weakmap: user => visits count
 
-// increase the visits count
+// tashrif sonini oshirish
 function countUser(user) {
   let count = visitsCountMap.get(user) || 0;
   visitsCountMap.set(user, count + 1);
 }
 ```
 
-Now we don't have to clean `visitsCountMap`. After `john` object becomes unreachable, by all means except as a key of `WeakMap`, it gets removed from memory, along with the information by that key from `WeakMap`.
+Endi `visitsCountMap` ni tozlashimiz shart emas. `john` objekti `WeakMap` ning kaliti sifatidagidan boshqa barcha yo'llar bilan yetib borilmaydigan bo'lgandan so'ng, u `WeakMap` dan shu kalit bo'yicha ma'lumotlar bilan birga xotiradan olib tashlanadi.
 
-## Use case: caching
+## Foydalanish holati: keshlash
 
-Another common example is caching. We can store ("cache") results from a function, so that future calls on the same object can reuse it.
+Yana bir keng tarqalgan misol - keshlash. Biz funktsiya natijalarini saqlashimiz ("keshlash") mumkin, shunda bir xil objekt uchun kelajakdagi chaqiruvlar uni qayta ishlatishi mumkin.
 
-To achieve that, we can use `Map` (not optimal scenario):
+Bunga erishish uchun biz `Map` dan foydalanishimiz mumkin (optimal bo'lmagan stsenari):
 
 ```js run
 // 📁 cache.js
 let cache = new Map();
 
-// calculate and remember the result
+// natijani hisoblash va eslab qolish
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculations of the result for */ obj;
+    let result = /* obj uchun natijani hisoblash */;
 
     cache.set(obj, result);
   }
@@ -188,26 +188,26 @@ function process(obj) {
 }
 
 *!*
-// Now we use process() in another file:
+// Endi biz process() ni boshqa faylda ishlatamiz:
 */!*
 
 // 📁 main.js
-let obj = {/* let's say we have an object */};
+let obj = {/* aytaylik bizda objekt bor */};
 
-let result1 = process(obj); // calculated
+let result1 = process(obj); // hisoblandi
 
-// ...later, from another place of the code...
-let result2 = process(obj); // remembered result taken from cache
+// ...keyinroq, kodning boshqa joyidan...
+let result2 = process(obj); // keshdan olingan eslab qolingan natija
 
-// ...later, when the object is not needed any more:
+// ...keyinroq, objekt endi kerak bo'lmaganda:
 obj = null;
 
-alert(cache.size); // 1 (Ouch! The object is still in cache, taking memory!)
+alert(cache.size); // 1 (Voy! Objekt hali ham keshda, xotirani egallaydi!)
 ```
 
-For multiple calls of `process(obj)` with the same object, it only calculates the result the first time, and then just takes it from `cache`. The downside is that we need to clean `cache` when the object is not needed any more.
+Bir xil objekt bilan `process(obj)` ning bir necha marta chaqirilishida, u natijani faqat birinchi marta hisoblaydi, keyin uni `cache` dan oladi. Salbiy tomoni shundaki, objekt endi kerak bo'lmaganda `cache` ni tozlashimiz kerak.
 
-If we replace `Map` with `WeakMap`, then this problem disappears. The cached result will be removed from memory automatically after the object gets garbage collected.
+Agar `Map` ni `WeakMap` bilan almashtirsak, bu muammo yo'qoladi. Keshlangan natija objekt garbage collection qilingandan keyin xotiradan avtomatik ravishda olib tashlanadi.
 
 ```js run
 // 📁 cache.js
@@ -215,10 +215,10 @@ If we replace `Map` with `WeakMap`, then this problem disappears. The cached res
 let cache = new WeakMap();
 */!*
 
-// calculate and remember the result
+// natijani hisoblash va eslab qolish
 function process(obj) {
   if (!cache.has(obj)) {
-    let result = /* calculate the result for */ obj;
+    let result = /* obj uchun natijani hisoblash */;
 
     cache.set(obj, result);
   }
@@ -227,30 +227,30 @@ function process(obj) {
 }
 
 // 📁 main.js
-let obj = {/* some object */};
+let obj = {/* biror objekt */};
 
 let result1 = process(obj);
 let result2 = process(obj);
 
-// ...later, when the object is not needed any more:
+// ...keyinroq, objekt endi kerak bo'lmaganda:
 obj = null;
 
-// Can't get cache.size, as it's a WeakMap,
-// but it's 0 or soon be 0
-// When obj gets garbage collected, cached data will be removed as well
+// cache.size ni olib bo'lmaydi, chunki bu WeakMap,
+// lekin u 0 yoki tez orada 0 bo'ladi
+// obj garbage collection qilinganda, keshlangan ma'lumotlar ham olib tashlanadi
 ```
 
 ## WeakSet
 
-`WeakSet` behaves similarly:
+`WeakSet` xuddi shunday harakat qiladi:
 
-- It is analogous to `Set`, but we may only add objects to `WeakSet` (not primitives).
-- An object exists in the set while it is reachable from somewhere else.
-- Like `Set`, it supports `add`, `has` and `delete`, but not `size`, `keys()` and no iterations.
+- Bu `Set` ga o'xshash, lekin biz `WeakSet` ga faqat objektlar qo'shishimiz mumkin (primitivlar emas).
+- Objekt to'plamda boshqa joydan yetib boriladigan bo'lgancha mavjud.
+- `Set` kabi, u `add`, `has` va `delete` ni qo'llab-quvvatlaydi, lekin `size`, `keys()` va iteratsiyalar yo'q.
 
-Being "weak", it also serves as additional storage. But not for arbitrary data, rather for "yes/no" facts. A membership in `WeakSet` may mean something about the object.
+"Zaif" bo'lib, u ham qo'shimcha saqlash vazifasini bajaradi. Lekin ixtiyoriy ma'lumotlar uchun emas, balki "ha/yo'q" faktlari uchun. `WeakSet` dagi a'zolik objekt haqida biror narsani anglatishi mumkin.
 
-For instance, we can add users to `WeakSet` to keep track of those who visited our site:
+Misol uchun, biz saytimizga tashrif buyurganlarni kuzatib borish uchun foydalanuvchilarni `WeakSet` ga qo'shishimiz mumkin:
 
 ```js run
 let visitedSet = new WeakSet();
@@ -259,33 +259,33 @@ let john = { name: "John" };
 let pete = { name: "Pete" };
 let mary = { name: "Mary" };
 
-visitedSet.add(john); // John visited us
-visitedSet.add(pete); // Then Pete
-visitedSet.add(john); // John again
+visitedSet.add(john); // John bizga tashrif buyurdi
+visitedSet.add(pete); // Keyin Pete
+visitedSet.add(john); // John yana
 
-// visitedSet has 2 users now
+// visitedSet da endi 2 ta foydalanuvchi bor
 
-// check if John visited?
+// John tashrif buyurdimi?
 alert(visitedSet.has(john)); // true
 
-// check if Mary visited?
+// Mary tashrif buyurdimi?
 alert(visitedSet.has(mary)); // false
 
 john = null;
 
-// visitedSet will be cleaned automatically
+// visitedSet avtomatik ravishda tozlanadi
 ```
 
-The most notable limitation of `WeakMap` and `WeakSet` is the absence of iterations, and the inability to get all current content. That may appear inconvenient, but does not prevent `WeakMap/WeakSet` from doing their main job -- be an "additional" storage of data for objects which are stored/managed at another place.
+`WeakMap` va `WeakSet` ning eng muhim cheklovi - iteratsiyalarning yo'qligi va barcha joriy tarkibni olishning imkoni yo'qligidir. Bu noqulay ko'rinishi mumkin, lekin `WeakMap/WeakSet` ning asosiy ishini bajarishga to'sqinlik qilmaydi -- boshqa joyda saqlanadigan/boshqariladigan objektlar uchun ma'lumotlarning "qo'shimcha" saqlash joyi bo'lish.
 
-## Summary
+## Xulosa
 
-`WeakMap` is `Map`-like collection that allows only objects as keys and removes them together with associated value once they become inaccessible by other means.
+`WeakMap` - bu `Map` ga o'xshash to'plam bo'lib, faqat objektlarga kalitlar sifatida ruxsat beradi va ular boshqa yo'llar bilan yetib borilmaydigan bo'lganda ular bilan bog'liq qiymat bilan birga olib tashlaydi.
 
-`WeakSet` is `Set`-like collection that stores only objects and removes them once they become inaccessible by other means.
+`WeakSet` - bu `Set` ga o'xshash to'plam bo'lib, faqat objektlarni saqlaydi va ular boshqa yo'llar bilan yetib borilmaydigan bo'lganda ularni olib tashlaydi.
 
-Their main advantages are that they have weak reference to objects, so they can easily be removed by garbage collector.
+Ularning asosiy afzalliklari shundaki, ular objektlarga zaif havola qiladi, shuning uchun ular garbage collector tomonidan osonlikcha olib tashlanishi mumkin.
 
-That comes at the cost of not having support for `clear`, `size`, `keys`, `values`...
+Bu `clear`, `size`, `keys`, `values`... ga qo'llab-quvvatlash yo'qligining narxiga keladi.
 
-`WeakMap` and `WeakSet` are used as "secondary" data structures in addition to the "primary" object storage. Once the object is removed from the primary storage, if it is only found as the key of `WeakMap` or in a `WeakSet`, it will be cleaned up automatically.
+`WeakMap` va `WeakSet` "asosiy" objekt saqlashga qo'shimcha ravishda "ikkinchi darajali" ma'lumotlar strukturalari sifatida ishlatiladi. Objekt asosiy saqlashdan olib tashlangandan so'ng, agar u faqat `WeakMap` ning kaliti yoki `WeakSet` da topilsa, u avtomatik ravishda tozlanadi.

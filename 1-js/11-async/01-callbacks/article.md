@@ -1,101 +1,66 @@
+# Kirish: callbacklar
 
+```warn header="Bu yerda misollarda brauzer metodlarini ishlatamiz"
+Callbacklar, promiselar va boshqa abstrakt tushunchalardan foydalanishni ko'rsatish uchun biz ba'zi brauzer metodlarini ishlatamiz: xususan, skriptlarni yuklash va oddiy hujjat manipulatsiyalari.
 
-# Tanishtirish: qayta chaqirish
+Agar bu metodlar bilan tanish bo'lmasangiz va misollarda ulardan foydalanish chalkashlik tug'dirsa, darslikning [keyingi qismi](/document)dan bir nechta boblarni o'qishni xohlashingiz mumkin.
 
-<<<<<<< HEAD
-JavaScript-dagi ko'plab harakatlar *asinxron*.
-
-Masalan, `loadScript(src)` funktsiyasini ko'rib chiqing:
-=======
-```warn header="We use browser methods in examples here"
-To demonstrate the use of callbacks, promises and other abstract concepts, we'll be using some browser methods: specifically, loading scripts and performing simple document manipulations.
-
-If you're not familiar with these methods, and their usage in the examples is confusing, you may want to read a few chapters from the [next part](/document) of the tutorial.
-
-Although, we'll try to make things clear anyway. There won't be anything really complex browser-wise.
+Biroq, baribir narsalarni aniq qilishga harakat qilamiz. Brauzer nuqtai nazaridan haqiqatan ham murakkab narsa bo'lmaydi.
 ```
 
-Many functions are provided by JavaScript host environments that allow you to schedule *asynchronous* actions. In other words, actions that we initiate now, but they finish later.
+JavaScript host muhitlari tomonidan *asinxron* harakatlarni rejalashtirish imkonini beruvchi ko'plab funktsiyalar taqdim etiladi. Boshqacha qilib aytganda, biz hozir boshlagan, lekin keyinroq tugaydigan harakatlar.
 
-For instance, one such function is the `setTimeout` function.
+Masalan, bunday funktsiyalardan biri `setTimeout` funktsiyasidir.
 
-There are other real-world examples of asynchronous actions, e.g. loading scripts and modules (we'll cover them in later chapters).
+Asinxron harakatlarning boshqa real dunyo misollari mavjud, masalan skriptlar va modullarni yuklash (biz ularni keyingi boblarda ko'rib chiqamiz).
 
-Take a look at the function `loadScript(src)`, that loads a script with the given `src`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Berilgan `src` bilan skriptni yuklaydigan `loadScript(src)` funktsiyasiga qarang:
 
 ```js
 function loadScript(src) {
-  // creates a <script> tag and append it to the page
-  // this causes the script with given src to start loading and run when complete
+  // <script> tegini yaratadi va uni sahifaga qo'shadi
+  // bu berilgan src bilan skriptni yuklashni boshlaydi va tugagach ishga tushiradi
   let script = document.createElement('script');
   script.src = src;
   document.head.append(script);
 }
 ```
 
-<<<<<<< HEAD
-Funktsiyaning maqsadi yangi skriptni yuklashdir. Hujjatga `<script src ="… ">` qo'shilganda, brauzer uni yuklaydi va bajaradi.
+U hujjatga berilgan `src` bilan yangi, dinamik yaratilgan `<script src="…">` tegini kiritadi. Brauzer uni avtomatik ravishda yuklashni boshlaydi va tugagach bajaradi.
 
-Biz buni quyidagicha ishlatishimiz mumkin:
+Biz bu funktsiyani shunday ishlatishimiz mumkin:
 
 ```js
-// skriptni yuklaydi va bajaradi
+// berilgan yo'ldagi skriptni yuklash va bajarish
 loadScript('/my/script.js');
 ```
 
-Funktsiya "asinxron" deb nomlanadi, chunki harakat (skriptni yuklash) hozir emas, keyinroq tugaydi.
+Skript "asinxron" bajariladi, chunki u hozir yuklashni boshlaydi, lekin funktsiya tugagandan keyin ishga tushadi.
 
-Chaqiruv skriptni yuklashni boshlaydi, so'ngra ijro davom etadi. Skript yuklanayotganda, quyidagi kod bajarilishini tugatishi mumkin va agar yuklash vaqt talab qilsa, boshqa skriptlar ham ishlashi mumkin.
+Agar `loadScript(…)` ostida biron kod bo'lsa, u skript yuklash tugashini kutmaydi.
 
 ```js
 loadScript('/my/script.js');
-// loadScript ostidagi kod skriptni yuklash tugashini kutmaydi
+// loadScript ostidagi kod
+// skript yuklash tugashini kutmaydi
 // ...
 ```
 
-Endi yangi skript yuklanganda undan foydalanishni xohlaymiz deylik. Ehtimol, u yangi funktsiyalarni e'lon qiladi, shuning uchun ularni boshqarishni xohlaymiz.
-=======
-It appends to the document the new, dynamically created, tag `<script src="…">` with given `src`. The browser automatically starts loading it and executes when complete.
+Aytaylik, yangi skriptni u yuklanishi bilanoq ishlatishimiz kerak. U yangi funktsiyalarni e'lon qiladi va biz ularni ishga tushirishni xohlaymiz.
 
-We can use this function like this:
+Lekin agar buni `loadScript(…)` chaqiruvidan keyin darhol qilsak, bu ishlamaydi:
 
 ```js
-// load and execute the script at the given path
-loadScript('/my/script.js');
-```
-
-The script is executed "asynchronously", as it starts loading now, but runs later, when the function has already finished.
-
-If there's any code below `loadScript(…)`, it doesn't wait until the script loading finishes.
-
-```js
-loadScript('/my/script.js');
-// the code below loadScript
-// doesn't wait for the script loading to finish
-// ...
-```
-
-Let's say we need to use the new script as soon as it loads. It declares new functions, and we want to run them.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
-
-Ammo biz buni `loadScript(...)` chaqirig'idan so'ng darhol qilsak, bu ishlamaydi:
-
-```js
-loadScript('/my/script.js'); // skriptda "function newFunction() {…}" bor
+loadScript('/my/script.js'); // skriptda "function newFunction() {…}" mavjud
 
 *!*
 newFunction(); // bunday funktsiya yo'q!
 */!*
 ```
 
-<<<<<<< HEAD
-Tabiiyki, brauzer skriptni yuklashga ulgurmagan bo'lishi mumkin. Shunday qilib, yangi funktsiyani darhol chaqirish muvaffaqiyatsiz tugadi. Hozirda `loadScript` funktsiyasi yukni tugatilishini kuzatish usulini ta'minlamaydi. Skript yuklanadi va oxir-oqibat ishlaydi, barchasi shu. Ammo biz bu qachon yuz berishini bilishni, ushbu buyruq faylidagi yangi funktsiyalar va o'zgaruvchamlardan foydalanishni xohlaymiz.
-=======
-Naturally, the browser probably didn't have time to load the script. As of now, the `loadScript` function doesn't provide a way to track the load completion. The script loads and eventually runs, that's all. But we'd like to know when it happens, to use new functions and variables from that script.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Tabiiyki, brauzer skriptni yuklashga vaqt topmagan bo'lishi mumkin. Hozircha `loadScript` funktsiyasi yuklash tugashini kuzatish usulini taqdim etmaydi. Skript yuklanadi va oxir-oqibat ishga tushadi, hammasi shu. Lekin biz bu qachon sodir bo'lishini bilishni xohlaymiz, o'sha skriptdagi yangi funktsiyalar va o'zgaruvchilardan foydalanish uchun.
 
-Skript yuklanganda bajarilishi kerak bo'lgan `loadScript` ga ikkinchi argument sifatida `callback` funktsiyasini qo'shamiz:
+Skript yuklanganida bajarilishi kerak bo'lgan ikkinchi argument sifatida `loadScript` ga `callback` funktsiyasini qo'shaylik:
 
 ```js
 function loadScript(src, *!*callback*/!*) {
@@ -110,19 +75,21 @@ function loadScript(src, *!*callback*/!*) {
 }
 ```
 
-Endi biz skriptdan yangi funktsiyalarni chaqirmoqchi bo'lsak, uni qayta chaqiruvda yozishimiz kerak:
+`onload` hodisasi <info:onload-onerror#loading-a-script> maqolasida tasvirlangan, u asosan skript yuklangandan va bajarilagandan keyin funktsiyani bajaradi.
+
+Endi agar skriptdan yangi funktsiyalarni chaqirishni xohlasak, buni callbackda yozishimiz kerak:
 
 ```js
 loadScript('/my/script.js', function() {
-  // skript yuklanganidan keyin qayta chaqiruv ishlaydi
-  newFunction(); // hozir u ishlaydi
+  // callback skript yuklanganidan keyin ishga tushadi
+  newFunction(); // endi bu ishlaydi
   ...
 });
 ```
 
-Mana shu g'oya: ikkinchi argument - bu harakat tugagandan so'ng ishlaydigan (odatda noma'lum) funktsiya.
+Bu g'oya: ikkinchi argument funktsiya (odatda anonim) bo'lib, harakat tugallanganda ishga tushadi.
 
-Haqiqiy skript bilan ishlaydigan misol:
+Mana haqiqiy skript bilan ishlaydigan misol:
 
 ```js run
 function loadScript(src, callback) {
@@ -134,48 +101,39 @@ function loadScript(src, callback) {
 
 *!*
 loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', script => {
-<<<<<<< HEAD
-  alert(`Zo'r, endi ${script.src} yuklangan`);
-  alert( _ ); // yuklangan skriptda e'lon qilingan funktsiya
-=======
-  alert(`Cool, the script ${script.src} is loaded`);
-  alert( _ ); // function declared in the loaded script
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+  alert(`Ajoyib, ${script.src} skripti yuklandi`);
+  alert( _ ); // _ yuklangan skriptda e'lon qilingan funktsiya
 });
 */!*
 ```
 
-Bu "qayta chaqiruvga asoslangan" asinxron dasturlash uslubi deb ataladi. Biror narsani asinxron ravishda bajaradigan funktsiya `callback` argumentini berishi kerak, bu yerda biz uni tugatgandan so'ng bajaramiz.
+Bu asinxron dasturlashning "callback-asosidagi" uslubi deb ataladi. Biror narsani asinxron bajaradigan funktsiya `callback` argumentini taqdim etishi kerak, bu yerda biz tugagandan keyin ishga tushadigan funktsiyani joylashtiramiz.
 
-<<<<<<< HEAD
-Bu yerda biz buni `loadScript` da qildik, ammo, albatta, bu umumiy yondashuv.
-=======
-Here we did it in `loadScript`, but of course it's a general approach.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Bu yerda biz buni `loadScript` da qildik, lekin albatta bu umumiy yondashuv.
 
-## Qayta chaqiruvda qayta chaqiruv
+## Callback ichida callback
 
-Qanday qilib biz ikkita skriptni ketma-ket yuklashimiz mumkin: birinchisi, so'ngra ikkinchisi?
+Ikki skriptni ketma-ket qanday yuklashimiz mumkin: birinchi, keyin ikkinchisini undan keyin?
 
-Tabiiy yechim qayta chaqiruvning ichiga ikkinchi `loadScript` chaqiruvini qo'yishdir:
+Tabiiy yechim ikkinchi `loadScript` chaqiruvini callback ichiga qo'yish bo'ladi:
 
 ```js
 loadScript('/my/script.js', function(script) {
 
-  alert(`Zo'r, ${script.src} yuklangan, endi yana bittasini yuklaylik`);
+  alert(`Ajoyib, ${script.src} yuklandi, keling yana birini yuklaylik`);
 
 *!*
   loadScript('/my/script2.js', function(script) {
-    alert(`Zo'r, ikkinchi skript yuklandi`);
+    alert(`Ajoyib, ikkinchi skript yuklandi`);
   });
 */!*
 
 });
 ```
 
-Tashqi `loadScript` tugagandan so'ng, qayta chaqiruv ichki qismini boshlaydi.
+Tashqi `loadScript` tugagandan keyin, callback ichki birini ishga tushiradi.
 
-Agar biz yana bitta skriptni xohlasakchi...?
+Agar yana bitta skript kerak bo'lsa...?
 
 ```js
 loadScript('/my/script.js', function(script) {
@@ -184,7 +142,7 @@ loadScript('/my/script.js', function(script) {
 
 *!*
     loadScript('/my/script3.js', function(script) {
-      // ...barcha skriptlar yuklangandan keyin davom eting
+      // ...barcha skriptlar yuklangandan keyin davom etish
     });
 */!*
 
@@ -193,13 +151,13 @@ loadScript('/my/script.js', function(script) {
 });
 ```
 
-Shunday qilib, har bir yangi harakat qayta chaqiruv ichida. Bu ozgina harakatlar uchun yaxshi, ammo ko'pchilik uchun yaxshi emas, shuning uchun boshqa variantlarni tez orada ko'rib chiqamiz.
+Shunday qilib, har bir yangi harakat callback ichida. Bu kam harakatlar uchun yaxshi, lekin ko'p uchun yaxshi emas, shuning uchun tez orada boshqa variantlarni ko'ramiz.
 
-## Xatolarni boshqarish
+## Xatolarni hal qilish
 
-Yuqoridagi misollarda biz xatolarni hisobga olmadik. Agar skriptni yuklash muvaffaqiyatsiz tugasachi? Bizning chaqiruvimiz bunga munosabat bildirishi kerak.
+Yuqoridagi misollarda biz xatolarni hisobga olmadik. Agar skript yuklash muvaffaqiyatsiz bo'lsa-chi? Bizning callbackimiz bunga javob bera olishi kerak.
 
-Yuklash xatolarini kuzatadigan `loadScript` ning takomillashtirilgan versiyasi:
+Mana yuklash xatolarini kuzatadigan `loadScript` ning yaxshilangan versiyasi:
 
 ```js
 function loadScript(src, callback) {
@@ -208,39 +166,39 @@ function loadScript(src, callback) {
 
 *!*
   script.onload = () => callback(null, script);
-  script.onerror = () => callback(new Error(`Skriptni yuklashda xato ${src}`));
+  script.onerror = () => callback(new Error(`${src} uchun skript yuklash xatosi`));
 */!*
 
   document.head.append(script);
 }
 ```
 
-Muvaffaqiyatli yuklash uchun `callback(null, script)` ni chaqiradi va aks holda `callback(error)` ni chaqiradi.
+U muvaffaqiyatli yuklash uchun `callback(null, script)` ni, aks holda `callback(error)` ni chaqiradi.
 
 Foydalanish:
 ```js
 loadScript('/my/script.js', function(error, script) {
   if (error) {
-    // xatolarni boshqarish
+    // xatoni hal qilish
   } else {
     // skript muvaffaqiyatli yuklandi
   }
 });
 ```
 
-Yana bir marta, biz `loadScript` uchun ishlatgan retsept aslida juda keng tarqalgan. Bu "birinchi xato qayta chaqiruvini qilish" uslubi deb nomlanadi.
+Yana bir bor, `loadScript` uchun ishlatgan retsept aslida juda keng tarqalgan. Bu "error-first callback" uslubi deb ataladi.
 
-Qoidalar quyidagicha:
-1. Agar `callback` ning birinchi argumenti, agar u paydo bo'lsa, xato uchun saqlanadi. Keyin `callback(err)` chaqiriladi.
-2. Ikkinchi argument (agar kerak bo'lsa, keyingisiyam) muvaffaqiyatli natija uchun. Keyin `callback(null, result1, result2…)` chaqiriladi.
+Konventsiya:
+1. `callback` ning birinchi argumenti agar xato yuz bersa, unga ajratilgan. Keyin `callback(err)` chaqiriladi.
+2. Ikkinchi argument (va kerak bo'lsa keyingilari) muvaffaqiyatli natija uchun. Keyin `callback(null, result1, result2…)` chaqiriladi.
 
-Shunday qilib, bitta `callback` funktsiyasi xatolarni xabar qilish va natijalarni qaytarish uchun ishlatiladi.
+Shunday qilib bitta `callback` funktsiyasi ham xatolarni bildirish, ham natijalarni uzatish uchun ishlatiladi.
 
 ## Halokat piramidasi
 
-Bir qarashda, bu asinxron kodni yozishning ishchi usuli. Va haqiqatan ham shunday. Bir yoki ehtimol ikkita ichki chaqiruvlar uchun yaxshi bo'ladi.
+Birinchi qarashda, bu asinxron kodlash uchun mumkin bo'lgan yondashuv ko'rinadi. Va haqiqatan ham shunday. Bir yoki ehtimol ikki ichki chaqiruv uchun yaxshi ko'rinadi.
 
-Ammo ketma-ket keladigan bir nechta asinxron harakatlar uchun bizda shunday kod bo'ladi:
+Lekin bir-biridan keyin keladigan ko'plab asinxron harakatlar uchun bizda bunday kod bo'ladi:
 
 ```js
 loadScript('1.js', function(error, script) {
@@ -259,7 +217,7 @@ loadScript('1.js', function(error, script) {
             handleError(error);
           } else {
   *!*
-            // ...barcha skriptlar yuklangandan keyin davom eting (*)
+            // ...barcha skriptlar yuklangandan keyin davom etish (*)
   */!*
           }
         });
@@ -271,20 +229,14 @@ loadScript('1.js', function(error, script) {
 ```
 
 Yuqoridagi kodda:
-1. Biz `1.js` ni yuklaymiz, keyin xato bo'lmasa.
-2. Biz `2.js` ni yuklaymiz, keyin xato bo'lmasa.
-3. Biz `3.js` ni yuklaymiz, keyin xato bo'lmasa. -- boshqa narsa bajarish `(*)`.
+1. Biz `1.js` ni yuklaymiz, agar xato bo'lmasa...
+2. Biz `2.js` ni yuklaymiz, agar xato bo'lmasa...
+3. Biz `3.js` ni yuklaymiz, agar xato bo'lmasa -- boshqa narsa qilamiz `(*)`.
 
-<<<<<<< HEAD
-Chaqiruvlar uyasi ko'payib borishi bilan, kod yanada chuqurlashadi va boshqarish tobora qiyinlashib boradi, ayniqsa, agar bizda `...` o'rniga haqiqiy kod bo'lsa, bu ko'proq tsiklarni, shartli bayonotlarni va boshqalarni o'z ichiga olishi mumkin.
-=======
-As calls become more nested, the code becomes deeper and increasingly more difficult to manage, especially if we have real code instead of `...` that may include more loops, conditional statements and so on.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Chaqiruvlar ko'proq ichki bo'lgan sari, kod chuqurroq va tobora boshqarish qiyinroq bo'ladi, ayniqsa agar bizda `...` o'rniga ko'proq sikl, shartli ifodalar va boshqalarni o'z ichiga olgan haqiqiy kod bo'lsa.
 
-Buni ba'zida "halokat piramidasi" deb atashadi.
+Bu ba'zan "callback do'zax" yoki "halokat piramidasi" deb ataladi.
 
-<<<<<<< HEAD
-=======
 <!--
 loadScript('1.js', function(error, script) {
   if (error) {
@@ -309,14 +261,13 @@ loadScript('1.js', function(error, script) {
 });
 -->
 
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 ![](callback-hell.svg)
 
-Ichki chaqiruvlarning "piramidasi" har bir asinxron harakat bilan o'ng tomonga o'sib boradi. Tez orada u nazoratdan chiqib ketadi.
+Ichma-ich chaqiruvlarning "piramidasi" har bir asinxron harakat bilan o'ngga o'sib boradi. Tez orada u nazoratdan chiqadi.
 
-Shunday qilib, kodlashning bu usuli juda yaxshi emas.
+Shuning uchun bunday kodlash usuli unchalik yaxshi emas.
 
-Muammoni engillashtirish uchun har qanday harakatni mustaqil funktsiyaga aylantirishimiz mumkin, masalan:
+Har bir harakatni mustaqil funktsiya qilish orqali muammoni engillashtirishga harakat qilishimiz mumkin:
 
 ```js
 loadScript('1.js', step1);
@@ -343,21 +294,17 @@ function step3(error, script) {
   if (error) {
     handleError(error);
   } else {
-    // ...barcha skriptlar yuklangandan keyin davom eting (*)
+    // ...barcha skriptlar yuklangandan keyin davom etish (*)
   }
 }
 ```
 
-Ko'ryapsizmi? Xuddi shu narsani qiladi va endi chuqur uyalar yo'q, chunki biz har bir harakatni alohida yuqori darajadagi funktsiyaga aylantirdik.
+Ko'ryapsizmi? Bu bir xil narsani qiladi va endi chuqur ichki chaqiruvlar yo'q, chunki biz har bir harakatni alohida yuqori darajali funktsiya qildik.
 
-U ishlaydi, lekin kod yirtilib ketgan elektron jadvalga o'xshaydi. O'qish qiyin, va ehtimol siz uni o'qiyotganingizda buyumlar orasidan ko'z bilan sakrash kerakligini payqadingiz. Bu noqulay, ayniqsa o'quvchi kodni yaxshi bilmasa va qayerga ko'z bilan sakrashni bilmasa.
+Bu ishlaydi, lekin kod yirtilib ketgan elektron jadval kabi ko'rinadi. Uni o'qish qiyin va siz ehtimol fark qilgansiz, o'qish paytida qismlar orasida ko'z bilan sakrash kerak. Bu noqulay, ayniqsa o'quvchi kod bilan tanish bo'lmasa va qayerga sakrashni bilmasa.
 
-<<<<<<< HEAD
-Shuningdek, `step*` deb nomlangan funktsiyalar bir martalik ishlatiladi, ular faqat "halokat piramidasi" ni oldini olish uchun yaratilgan. Hech kim ularni harakatlar zanjiridan tashqarida qayta ishlatmoqchi emas. Shunday qilib, bu yerda bir oz nom maydonida tartibsizlik mavjud.
-=======
-Also, the functions named `step*` are all of single use, they are created only to avoid the "pyramid of doom." No one is going to reuse them outside of the action chain. So there's a bit of namespace cluttering here.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Bundan tashqari, `step*` deb nomlangan funktsiyalarning barchasi faqat bir marta ishlatiladi, ular faqat "halokat piramidasi"dan qochish uchun yaratilgan. Ularni harakat zanjiridan tashqarida hech kim qayta ishlatmaydi. Shuning uchun bu yerda biroz namespace ifloslanishi bor.
 
-Yaxshiroq yo'lni topish kerak.
+Bizda yaxshiroq narsa bo'lishini xohlaymiz.
 
-Baxtimizga, bunday piramidalardan saqlanishning boshqa usullari mavjud. Keyingi bobda tasvirlangan "va'dalar" dan foydalanish eng yaxshi usullardan biridir.
+Baxtga qarshi, bunday piramidalardan qochishning boshqa usullari ham bor. Eng yaxshi usullardan biri keyingi bobda tasvirlangan "promiselar"dan foydalanishdir.

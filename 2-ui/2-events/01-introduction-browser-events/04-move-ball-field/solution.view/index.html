@@ -1,75 +1,82 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      #field {
+        width: 200px;
+        height: 150px;
+        border: 10px solid black;
+        background-color: #00ff00;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
 
-<head>
-  <meta charset="utf-8">
-  <style>
-    #field {
-      width: 200px;
-      height: 150px;
-      border: 10px solid black;
-      background-color: #00FF00;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
+      #ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        transition: all 1s;
+      }
+    </style>
+  </head>
 
-    #ball {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 40px;
-      height: 40px;
-      transition: all 1s;
-    }
-  </style>
-</head>
+  <body style="height: 2000px">
+    To'pni u erga ko'chirish uchun maydonni bosing.
+    <br />
 
-<body style="height:2000px">
+    <div id="field">
+      <img src="https://en.js.cx/clipart/ball.svg" id="ball" /> . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
 
-  Click on a field to move the ball there.
-  <br>
+    <script>
+      field.onclick = function (event) {
+        // oynaga nisbatan maydon koordinatalari
+        let fieldCoords = this.getBoundingClientRect();
 
+        // to'pning joylashuvi position:absolute, maydonniki: position:relative
+        // shuning uchun to'p koordinatalari maydonning ichki chap-yuqori burchagiga nisbatan
+        let ballCoords = {
+          top:
+            event.clientY -
+            fieldCoords.top -
+            field.clientTop -
+            ball.clientHeight / 2,
+          left:
+            event.clientX -
+            fieldCoords.left -
+            field.clientLeft -
+            ball.clientWidth / 2,
+        };
 
-  <div id="field">
-    <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-  </div>
+        // yuqori maydon chegarasini kesib o'tishga yo'l qo'ymaslik
+        if (ballCoords.top < 0) ballCoords.top = 0;
 
-  <script>
-    field.onclick = function(event) {
+        // chap maydon chegarasini kesib o'tishga yo'l qo'ymaslik
+        if (ballCoords.left < 0) ballCoords.left = 0;
 
-      // window-relative field coordinates
-      let fieldCoords = this.getBoundingClientRect();
+        // o'ng maydon chegarasini kesib o'tishga yo'l qo'ymaslik
+        if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+          ballCoords.left = field.clientWidth - ball.clientWidth;
+        }
 
-      // the ball has position:absolute, the field: position:relative
-      // so ball coordinates are relative to the field inner left-upper corner
-      let ballCoords = {
-        top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
-        left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2
+        // pastki maydon chegarasini kesib o'tishga yo'l qo'ymaslik
+        if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+          ballCoords.top = field.clientHeight - ball.clientHeight;
+        }
+
+        ball.style.left = ballCoords.left + "px";
+        ball.style.top = ballCoords.top + "px";
       };
-
-      // prevent crossing the top field boundary
-      if (ballCoords.top < 0) ballCoords.top = 0;
-
-      // prevent crossing the left field boundary
-      if (ballCoords.left < 0) ballCoords.left = 0;
-
-
-      // // prevent crossing the right field boundary
-      if (ballCoords.left + ball.clientWidth > field.clientWidth) {
-        ballCoords.left = field.clientWidth - ball.clientWidth;
-      }
-
-      // prevent crossing the bottom field boundary
-      if (ballCoords.top + ball.clientHeight > field.clientHeight) {
-        ballCoords.top = field.clientHeight - ball.clientHeight;
-      }
-
-      ball.style.left = ballCoords.left + 'px';
-      ball.style.top = ballCoords.top + 'px';
-    }
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>

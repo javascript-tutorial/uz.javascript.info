@@ -1,7 +1,7 @@
-
 Ichkarida qanday ishlashini bilish foydalidir.
 
 Faqat `async` chaqiruvini va'da sifatida ko'rib chiqing va unga `.then` qo'shib qo'ying.
+
 ```js run
 async function wait() {
   await new Promise(resolve => setTimeout(resolve, 1000));

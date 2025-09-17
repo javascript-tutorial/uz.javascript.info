@@ -1,55 +1,54 @@
-# Forms: event and method submit
+# Formalar: submit hodisasi va metodi
 
-The `submit` event triggers when the form is submitted, it is usually used to validate the form before sending it to the server or to abort the submission and process it in JavaScript.
+`submit` hodisasi forma yuborilganda ishga tushadi, u odatda formani serverga yuborishdan oldin tekshirish yoki yuborishni bekor qilish va JavaScript da qayta ishlash uchun ishlatiladi.
 
-The method `form.submit()` allows to initiate form sending from JavaScript. We can use it to dynamically create and send our own forms to server.
+`form.submit()` metodi JavaScript dan forma yuborishni boshlash imkonini beradi. Biz uni o'zimizning formalarimizni dinamik yaratish va serverga yuborish uchun ishlatishimiz mumkin.
 
-Let's see more details of them.
+Ularning batafsil ma'lumotlarini ko'raylik.
 
-## Event: submit
+## Hodisa: submit
 
-There are two main ways to submit a form:
+Formani yuborishning ikkita asosiy usuli mavjud:
 
-1. The first -- to click `<input type="submit">` or `<input type="image">`.
-2. The second -- press `key:Enter` on an input field.
+1. Birinchisi -- `<input type="submit">` yoki `<input type="image">` ga bosish.
+2. Ikkinchisi -- input maydonida `key:Enter` tugmasini bosish.
 
-Both actions lead to `submit` event on the form. The handler can check the data, and if there are errors, show them and call `event.preventDefault()`, then the form won't be sent to the server.
+Ikkala harakat ham formada `submit` hodisasiga olib keladi. Ishlov beruvchi ma'lumotlarni tekshirishi mumkin va agar xatolar bo'lsa, ularni ko'rsatishi va `event.preventDefault()` ni chaqirishi mumkin, shunda forma serverga yuborilmaydi.
 
-In the form below:
-1. Go into the text field and press `key:Enter`.
-2. Click `<input type="submit">`.
+Quyidagi formada:
+1. Matn maydoniga boring va `key:Enter` ni bosing.
+2. `<input type="submit">` ga bosing.
 
-Both actions show `alert` and the form is not sent anywhere due to `return false`:
+Ikkala harakat ham `alert` ni ko'rsatadi va `return false` tufayli forma hech qayerga yuborilmaydi:
 
 ```html autorun height=60 no-beautify
 <form onsubmit="alert('submit!');return false">
-  First: Enter in the input field <input type="text" value="text"><br>
-  Second: Click "submit": <input type="submit" value="Submit">
+  Birinchi: Input maydoniga kiriting <input type="text" value="matn"><br>
+  Ikkinchi: "Submit" ga bosing: <input type="submit" value="Yuborish">
 </form>
 ```
 
-````smart header="Relation between `submit` and `click`"
-When a form is sent using `key:Enter` on an input field, a `click` event triggers on the `<input type="submit">`.
+````smart header="`submit` va `click` orasidagi bog'lanish"
+Input maydonida `key:Enter` yordamida forma yuborilganda, `<input type="submit">` da `click` hodisasi ishga tushadi.
 
-That's rather funny, because there was no click at all.
+Bu juda qiziq, chunki hech qanday bosish bo'lmagan.
 
-Here's the demo:
+Mana demo:
 ```html autorun height=60
 <form onsubmit="return false">
- <input type="text" size="30" value="Focus here and press enter">
- <input type="submit" value="Submit" *!*onclick="alert('click')"*/!*>
+ <input type="text" size="30" value="Bu yerga fokus qiling va enter bosing">
+ <input type="submit" value="Yuborish" *!*onclick="alert('bosish')"*/!*>
 </form>
 ```
-
 ````
 
-## Method: submit
+## Metod: submit
 
-To submit a form to the server manually, we can call `form.submit()`.
+Formani serverga qo'lda yuborish uchun `form.submit()` ni chaqirishimiz mumkin.
 
-Then the `submit` event is not generated. It is assumed that if the programmer calls `form.submit()`, then the script already did all related processing.
+Keyin `submit` hodisasi hosil bo'lmaydi. Agar dasturchi `form.submit()` ni chaqirsa, skript allaqachon barcha tegishli qayta ishlashlarni amalga oshirgan deb hisoblanadi.
 
-Sometimes that's used to manually create and send a form, like this:
+Ba'zan bu formani qo'lda yaratish va yuborish uchun ishlatiladi:
 
 ```js run
 let form = document.createElement('form');
@@ -58,7 +57,7 @@ form.method = 'GET';
 
 form.innerHTML = '<input name="q" value="test">';
 
-// the form must be in the document to submit it
+// formani yuborish uchun u hujjatda bo'lishi kerak
 document.body.append(form);
 
 form.submit();

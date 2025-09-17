@@ -1,38 +1,36 @@
-importance: 5
+# Tooltip xatti-harakati
 
----
+Tooltip xatti-harakati uchun JavaScript kodi yarating.
 
-# Tooltip behavior
+Sichqoncha `data-tooltip` ga ega element ustiga kelganda, tooltip uning ustida paydo bo'lishi kerak, va ketganda yashirinishi kerak.
 
-Create JS-code for the tooltip behavior.
+Izohli HTML misoli:
 
-When a mouse comes over an element with `data-tooltip`, the tooltip should appear over it, and when it's gone then hide.
-
-An example of annotated HTML:
 ```html
-<button data-tooltip="the tooltip is longer than the element">Short button</button>
-<button data-tooltip="HTML<br>tooltip">One more button</button>
+<button data-tooltip="tooltip element uzunligidan uzunroq">Qisqa tugma</button>
+<button data-tooltip="HTML<br>tooltip">Yana bir tugma</button>
 ```
 
-Should work like this:
+Quyidagicha ishlashi kerak:
 
 [iframe src="solution" height=200 border=1]
 
-In this task we assume that all elements with `data-tooltip` have only text inside. No nested tags (yet).
+Ushbu vazifada biz `data-tooltip` ga ega barcha elementlarda faqat matn borligini taxmin qilamiz. Ichki teglar yo'q (hozircha).
 
-Details:
+Tafsilotlar:
 
-- The distance between the element and the tooltip should be `5px`.
-- The tooltip should be centered relative to the element, if possible.
-- The tooltip should not cross window edges. Normally it should be above the element, but if the element is at the page top and there's no space for the tooltip, then below it.
-- The tooltip content is given in the `data-tooltip` attribute. It can be arbitrary HTML.
+- Element va tooltip orasidagi masofa `5px` bo'lishi kerak.
+- Tooltip imkon qadar elementga nisbatan markazlashtirilgan bo'lishi kerak.
+- Tooltip oyna chegaralarini kesib o'tmasligi kerak. Odatda u element ustida bo'lishi kerak, lekin agar element sahifa tepasida bo'lsa va tooltip uchun joy bo'lmasa, u holda ostida bo'lishi kerak.
+- Tooltip mazmuni `data-tooltip` atributida berilgan. U ixtiyoriy HTML bo'lishi mumkin.
 
-You'll need two events here:
-- `mouseover` triggers when a pointer comes over an element.
-- `mouseout` triggers when a pointer leaves an element.
+Bu yerda ikkita hodisa kerak bo'ladi:
 
-Please use event delegation: set up two handlers on `document` to track all "overs" and "outs" from elements with `data-tooltip` and manage tooltips from there.
+- `mouseover` ko'rsatkich element ustiga kelganda ishga tushadi.
+- `mouseout` ko'rsatkich elementni tark etganda ishga tushadi.
 
-After the behavior is implemented, even people unfamiliar with JavaScript can add annotated elements.
+Iltimos, hodisa delegatsiyasidan foydalaning: `data-tooltip` ga ega elementlardan barcha "kelish" va "ketish"larni kuzatish va u yerdan tooltiplarni boshqarish uchun `document` da ikkita ishlov beruvchi o'rnating.
 
-P.S. Only one tooltip may show up at a time.
+Xatti-harakat amalga oshirilgandan so'ng, hatto JavaScript bilan tanish bo'lmagan odamlar ham izohli elementlar qo'shishlari mumkin.
+
+P.S. Bir vaqtda faqat bitta tooltip ko'rsatilishi mumkin.

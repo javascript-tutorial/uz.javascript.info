@@ -1,65 +1,65 @@
-# Cross-window communication
+# Cross-window aloqa
 
-The "Same Origin" (same site) policy limits access of windows and frames to each other.
+"Same Origin" (bir xil sayt) siyosati oynalar va ramkalarning bir-biriga kirishini cheklaydi.
 
-The idea is that if a user has two pages open: one from `john-smith.com`, and another one is `gmail.com`, then they wouldn't want a script from `john-smith.com` to read our mail from `gmail.com`. So, the purpose of the "Same Origin" policy is to protect users from information theft.
+G'oya shundaki, agar foydalanuvchida ikkita sahifa ochildi bo'lsa: biri `john-smith.com` dan, ikkinchisi esa `gmail.com` dan, u holda ular `john-smith.com` dan skriptning `gmail.com` dan bizning pochtamizni o'qishini xohlamaydi. Shunday qilib, "Same Origin" siyosatining maqsadi foydalanuvchilarni ma'lumotlar o'g'irlanishidan himoya qilishdir.
 
 ## Same Origin [#same-origin]
 
-Two URLs are said to have the "same origin" if they have the same protocol, domain and port.
+Ikki URL bir xil protokol, domen va portga ega bo'lsa, ularning "bir xil kelib chiqishi" bor deyiladi.
 
-These URLs all share the same origin:
+Bu URLlar hammasi bir xil kelib chiqishni baham ko'radi:
 
 - `http://site.com`
 - `http://site.com/`
 - `http://site.com/my/page.html`
 
-These ones do not:
+Bular esa yo'q:
 
-- <code>http://<b>www.</b>site.com</code> (another domain: `www.` matters)
-- <code>http://<b>site.org</b></code> (another domain: `.org` matters)
-- <code><b>https://</b>site.com</code> (another protocol: `https`)
-- <code>http://site.com:<b>8080</b></code> (another port: `8080`)
+- <code>http://<b>www.</b>site.com</code> (boshqa domen: `www.` muhim)
+- <code>http://<b>site.org</b></code> (boshqa domen: `.org` muhim)
+- <code><b>https://</b>site.com</code> (boshqa protokol: `https`)
+- <code>http://site.com:<b>8080</b></code> (boshqa port: `8080`)
 
-The "Same Origin" policy states that:
+"Same Origin" siyosati quyidagicha:
 
-- if we have a reference to another window, e.g. a popup created by `window.open` or a window inside `<iframe>`, and that window comes from the same origin, then we have full access to that window.
-- otherwise, if it comes from another origin, then we can't access the content of that window: variables, document, anything. The only exception is `location`: we can change it (thus redirecting the user). But we cannot *read* location (so we can't see where the user is now, no information leak).
+- agar bizda boshqa oynaga havola bor bo'lsa, masalan `window.open` tomonidan yaratilgan popup yoki `<iframe>` ichidagi oyna, va bu oyna bir xil kelib chiqishdan kelsa, u holda bizda o'sha oynaga to'liq kirish huquqi bor.
+- aks holda, agar u boshqa kelib chiqishdan kelsa, u holda biz o'sha oynaning kontentiga kira olmaymiz: o'zgaruvchilar, hujjat, hech narsa. Yagona istisno `location`: biz uni o'zgartirishimiz mumkin (shu bilan foydalanuvchini yo'naltirish). Lekin biz location ni *o'qiy* olmaymiz (shuning uchun foydalanuvchi hozir qayerda ekanligini ko'ra olmaymiz, ma'lumot sizib chiqishi yo'q).
 
-### In action: iframe
+### Amalda: iframe
 
-An `<iframe>` tag hosts a separate embedded window, with its own separate `document` and `window` objects.
+`<iframe>` tegi o'zining alohida `document` va `window` obyektlari bilan alohida o'rnatilgan oynani joylashtiradi.
 
-We can access them using properties:
+Biz ularga xossalar orqali kirishimiz mumkin:
 
-- `iframe.contentWindow` to get the window inside the `<iframe>`.
-- `iframe.contentDocument` to get the document inside the `<iframe>`, shorthand for `iframe.contentWindow.document`.
+- `iframe.contentWindow` `<iframe>` ichidagi oynani olish uchun.
+- `iframe.contentDocument` `<iframe>` ichidagi hujjatni olish uchun, `iframe.contentWindow.document` ning qisqartmasi.
 
-When we access something inside the embedded window, the browser checks if the iframe has the same origin. If that's not so then the access is denied (writing to `location` is an exception, it's still permitted).
+O'rnatilgan oyna ichidagi biror narsaga kirganimizda, brauzer iframe ning bir xil kelib chiqishga ega ekanligini tekshiradi. Agar bunday bo'lmasa, kirish rad etiladi (`location` ga yozish istisno, u hali ham ruxsat etilgan).
 
-For instance, let's try reading and writing to `<iframe>` from another origin:
+Masalan, boshqa kelib chiqishdan `<iframe>` ga o'qish va yozishga harakat qilaylik:
 
 ```html run
 <iframe src="https://example.com" id="iframe"></iframe>
 
 <script>
   iframe.onload = function() {
-    // we can get the reference to the inner window
+    // biz ichki oynaga havolani olishimiz mumkin
 *!*
     let iframeWindow = iframe.contentWindow; // OK
 */!*
     try {
-      // ...but not to the document inside it
+      // ...lekin uning ichidagi hujjatga emas
 *!*
       let doc = iframe.contentDocument; // ERROR
 */!*
     } catch(e) {
-      alert(e); // Security Error (another origin)
+      alert(e); // Security Error (boshqa kelib chiqish)
     }
 
-    // also we can't READ the URL of the page in iframe
+    // shuningdek, biz iframe dagi sahifaning URL ini o'qiy olmaymiz
     try {
-      // Can't read URL from the Location object
+      // Location obyektidan URL ni o'qib bo'lmaydi
 *!*
       let href = iframe.contentWindow.location.href; // ERROR
 */!*
@@ -67,65 +67,64 @@ For instance, let's try reading and writing to `<iframe>` from another origin:
       alert(e); // Security Error
     }
 
-    // ...we can WRITE into location (and thus load something else into the iframe)!
+    // ...biz location ga YOZishimiz mumkin (va shu tariqa iframe ga boshqa narsani yuklash)!
 *!*
     iframe.contentWindow.location = '/'; // OK
 */!*
 
-    iframe.onload = null; // clear the handler, not to run it after the location change
+    iframe.onload = null; // handleni tozalash, location o'zgarishidan keyin uni ishga tushirmaslik uchun
   };
 </script>
 ```
 
-The code above shows errors for any operations except:
+Yuqoridagi kod quyidagilar bundan mustasno barcha operatsiyalar uchun xatolarni ko'rsatadi:
 
-- Getting the reference to the inner window `iframe.contentWindow` - that's allowed.
-- Writing to `location`.
+- Ichki oyna `iframe.contentWindow` ga havola olish - bu ruxsat etilgan.
+- `location` ga yozish.
 
-Contrary to that, if the `<iframe>` has the same origin, we can do anything with it:
+Bunga qarama-qarshi ravishda, agar `<iframe>` bir xil kelib chiqishga ega bo'lsa, biz u bilan hamma narsani qila olamiz:
 
 ```html run
-<!-- iframe from the same site -->
+<!-- bir xil saytdan iframe -->
 <iframe src="/" id="iframe"></iframe>
 
 <script>
   iframe.onload = function() {
-    // just do anything
-    iframe.contentDocument.body.prepend("Hello, world!");
+    // har qanday narsani qiling
+    iframe.contentDocument.body.prepend("Salom, dunyo!");
   };
 </script>
 ```
 
 ```smart header="`iframe.onload` vs `iframe.contentWindow.onload`"
-The `iframe.onload` event (on the `<iframe>` tag) is essentially the same as `iframe.contentWindow.onload` (on the embedded window object). It triggers when the embedded window fully loads with all resources.
+`iframe.onload` hodisasi (`<iframe>` tegida) asosan `iframe.contentWindow.onload` (o'rnatilgan oyna obyektida) bilan bir xil. U o'rnatilgan oyna barcha resurslar bilan to'liq yuklanganida ishga tushadi.
 
-...But we can't access `iframe.contentWindow.onload` for an iframe from another origin, so using `iframe.onload`.
+...Lekin boshqa kelib chiqishdan iframe uchun `iframe.contentWindow.onload` ga kira olmaymiz, shuning uchun `iframe.onload` dan foydalanamiz.
 ```
 
-## Windows on subdomains: document.domain
+## Subdomenardagi oynalar: document.domain
 
-By definition, two URLs with different domains have different origins.
+Ta'rifga ko'ra, turli domenlarga ega ikki URL turli kelib chiqishlarga ega.
 
-But if windows share the same second-level domain, for instance `john.site.com`, `peter.site.com` and `site.com` (so that their common second-level domain is `site.com`), we can make the browser ignore that difference, so that they can be treated as coming from the "same origin" for the purposes of cross-window communication.
+Lekin agar oynalar bir xil ikkinchi darajali domenni baham ko'rsa, masalan `john.site.com`, `peter.site.com` va `site.com` (shuning uchun ularning umumiy ikkinchi darajali domeni `site.com`), biz brauzerni bu farqni e'tiborsiz qoldirishga majburlashimiz mumkin, shunda ular cross-window aloqa maqsadlari uchun "bir xil kelib chiqish"dan kelayotgan deb hisoblanishi mumkin.
 
-To make it work, each such window should run the code:
+Buni ishlashi uchun, har bir bunday oyna quyidagi kodni ishga tushirishi kerak:
 
 ```js
 document.domain = 'site.com';
 ```
 
-That's all. Now they can interact without limitations. Again, that's only possible for pages with the same second-level domain.
+Hammasi shu. Endi ular cheklovsiz o'zaro ta'sir qilishlari mumkin. Yana, bu faqat bir xil ikkinchi darajali domenga ega sahifalar uchun mumkin.
 
-## Iframe: wrong document pitfall
+## Iframe: noto'g'ri hujjat tuzoq
 
-When an iframe comes from the same origin, and we may access its  `document`, there's a pitfall. It's not related to cross-origin things, but important to know.
+Iframe bir xil kelib chiqishdan kelganda va biz uning `document` iga kirishimiz mumkin bo'lganda, tuzoq bor. Bu cross-origin narsalar bilan bog'liq emas, lekin bilish muhim.
 
-Upon its creation an iframe immediately has a document. But that document is different from the one that loads into it!
+Yaratilgandan so'ng iframe darhol hujjatga ega bo'ladi. Lekin bu hujjat unga yuklanadigan hujjatdan farq qiladi!
 
-So if we do something with the document immediately, that will probably be lost.
+Shuning uchun agar biz hujjat bilan darhol biror narsa qilsak, bu ehtimol yo'qoladi.
 
-Here, look:
-
+Bu yerda qarang:
 
 ```html run
 <iframe src="/" id="iframe"></iframe>
@@ -135,20 +134,20 @@ Here, look:
   iframe.onload = function() {
     let newDoc = iframe.contentDocument;
 *!*
-    // the loaded document is not the same as initial!
+    // yuklangan hujjat dastlabki bilan bir xil emas!
     alert(oldDoc == newDoc); // false
 */!*
   };
 </script>
 ```
 
-We shouldn't work with the document of a not-yet-loaded iframe, because that's the *wrong document*. If we set any event handlers on it, they will be ignored.
+Biz hali yuklanmagan iframe hujjati bilan ishlamasligimiz kerak, chunki bu *noto'g'ri hujjat*. Agar unga biror hodisa ishlov beruvchilarini o'rnatsak, ular e'tiborsiz qoldiriladi.
 
-How to detect the moment when the document is there?
+Hujjat mavjud bo'lgan paytni qanday aniqlash mumkin?
 
-The right document is definitely at place when `iframe.onload`  triggers. But it only triggers when the whole iframe with all resources is loaded.
+To'g'ri hujjat `iframe.onload` ishga tushganda aniq joyida. Lekin u faqat butun iframe barcha resurslar bilan yuklangandagina ishga tushadi.
 
-We can try to catch the moment earlier using checks in `setInterval`:
+Biz `setInterval` dagi tekshiruvlar yordamida oldinroq paytni ushlashga harakat qilishimiz mumkin:
 
 ```html run
 <iframe src="/" id="iframe"></iframe>
@@ -156,26 +155,26 @@ We can try to catch the moment earlier using checks in `setInterval`:
 <script>
   let oldDoc = iframe.contentDocument;
 
-  // every 100 ms check if the document is the new one
+  // har 100 ms da hujjatning yangi ekanligi tekshiriladi
   let timer = setInterval(() => {
     let newDoc = iframe.contentDocument;
     if (newDoc == oldDoc) return;
 
-    alert("New document is here!");
+    alert("Yangi hujjat bu yerda!");
 
-    clearInterval(timer); // cancel setInterval, don't need it any more
+    clearInterval(timer); // setInterval ni bekor qilish, endi kerak emas
   }, 100);
 </script>
 ```
 
-## Collection: window.frames
+## To'plam: window.frames
 
-An alternative way to get a window object for `<iframe>` -- is to get it from the named collection  `window.frames`:
+`<iframe>` uchun oyna obyektini olishning muqobil usuli -- uni `window.frames` nomli to'plamdan olish:
 
-- By number: `window.frames[0]` -- the window object for the first frame in the document.
-- By name: `window.frames.iframeName` -- the window object for the frame with  `name="iframeName"`.
+- Raqam bo'yicha: `window.frames[0]` -- hujjatdagi birinchi ramka uchun oyna obyekti.
+- Nom bo'yicha: `window.frames.iframeName` -- `name="iframeName"` ga ega ramka uchun oyna obyekti.
 
-For instance:
+Masalan:
 
 ```html run
 <iframe src="/" style="height:80px" name="win" id="iframe"></iframe>
@@ -186,93 +185,92 @@ For instance:
 </script>
 ```
 
-An iframe may have other iframes inside. The corresponding `window` objects form a hierarchy.
+Iframe o'z ichida boshqa iframe larga ega bo'lishi mumkin. Tegishli `window` obyektlari ierarxiya hosil qiladi.
 
-Navigation links are:
+Navigatsiya havolalari:
 
-- `window.frames` -- the collection of "children" windows (for nested frames).
-- `window.parent` -- the reference to the "parent" (outer) window.
-- `window.top` -- the reference to the topmost parent window.
+- `window.frames` -- "bola" oynalar to'plami (ichki ramkalar uchun).
+- `window.parent` -- "ota-ona" (tashqi) oynaga havola.
+- `window.top` -- eng yuqori ota-ona oynasiga havola.
 
-For instance:
+Masalan:
 
 ```js run
 window.frames[0].parent === window; // true
 ```
 
-We can use the `top` property to check if the current document is open inside a frame or not:
+Joriy hujjat ramka ichida ochilgan yoki yo'qligini tekshirish uchun `top` xossasidan foydalanishimiz mumkin:
 
 ```js run
-if (window == top) { // current window == window.top?
-  alert('The script is in the topmost window, not in a frame');
+if (window == top) { // joriy oyna == window.top?
+  alert('Skript eng yuqori oynada, ramkada emas');
 } else {
-  alert('The script runs in a frame!');
+  alert('Skript ramkada ishlayapti!');
 }
 ```
 
-## The "sandbox" iframe attribute
+## "sandbox" iframe xossasi
 
-The `sandbox` attribute allows for the exclusion of certain actions inside an `<iframe>` in order to prevent it executing untrusted code. It "sandboxes" the iframe by treating it as coming from another origin and/or applying other limitations.
+`sandbox` xossasi ishonchsiz kodni bajarishga to'sqinlik qilish uchun `<iframe>` ichida ma'lum harakatlarni istisno qilish imkonini beradi. U iframe ni boshqa kelib chiqishdan kelayotgan deb hisoblash va/yoki boshqa cheklovlarni qo'llash orqali "sandbox"lash qiladi.
 
-There's a "default set" of restrictions applied for `<iframe sandbox src="...">`. But it can be relaxed if we provide a space-separated list of restrictions that should not be applied as a value of the attribute, like this: `<iframe sandbox="allow-forms allow-popups">`.
+`<iframe sandbox src="...">` uchun qo'llaniladigan "standart to'plam" cheklovlar mavjud. Lekin agar biz qo'llanilmasligi kerak bo'lgan cheklovlarning bo'shliq bilan ajratilgan ro'yxatini xossa qiymati sifatida berсак, uni yumshatishimiz mumkin, masalan: `<iframe sandbox="allow-forms allow-popups">`.
 
-In other words, an empty `"sandbox"` attribute puts the strictest limitations possible, but we can put a space-delimited list of those that we want to lift.
+Boshqacha qilib aytganda, bo'sh `"sandbox"` xossasi eng qattiq cheklovlarni qo'yadi, lekin biz olib tashlamoqchi bo'lganlarning bo'shliq bilan ajratilgan ro'yxatini qo'yishimiz mumkin.
 
-Here's a list of limitations:
+Mana cheklovlar ro'yxati:
 
 `allow-same-origin`
-: By default `"sandbox"` forces the "different origin" policy for the iframe. In other words, it makes the browser to treat the `iframe` as coming from another origin, even if its `src` points to the same site. With all implied restrictions for scripts. This option removes that feature.
+: Standart bo'yicha `"sandbox"` iframe uchun "turli kelib chiqish" siyosatini majburlaydi. Boshqacha qilib aytganda, u brauzerni `iframe` ni boshqa kelib chiqishdan kelayotgan deb hisoblashga majbur qiladi, hatto uning `src` si bir xil saytga ishora qilsa ham. Skriptlar uchun barcha nazarda tutilgan cheklovlar bilan. Bu parametr bu xususiyatni olib tashlaydi.
 
 `allow-top-navigation`
-: Allows the `iframe` to change `parent.location`.
+: `iframe` ga `parent.location` ni o'zgartirishga ruxsat beradi.
 
 `allow-forms`
-: Allows to submit forms from `iframe`.
+: `iframe` dan formalarni yuborishga ruxsat beradi.
 
 `allow-scripts`
-: Allows to run scripts from the `iframe`.
+: `iframe` dan skriptlarni ishga tushirishga ruxsat beradi.
 
 `allow-popups`
-: Allows to `window.open` popups from the `iframe`
+: `iframe` dan `window.open` popuplariga ruxsat beradi.
 
-See [the manual](mdn:/HTML/Element/iframe) for more.
+Ko'proq uchun [qo'llanma](mdn:/HTML/Element/iframe)ga qarang.
 
-The example below demonstrates a sandboxed iframe with the default set of restrictions: `<iframe sandbox src="...">`. It has some JavaScript and a form.
+Quyidagi misol standart cheklovlar to'plami bilan sandbox qilingan iframe ni ko'rsatadi: `<iframe sandbox src="...">`. Unda biroz JavaScript va forma bor.
 
-Please note that nothing works. So the default set is really harsh:
+Hech narsa ishlamasligini esda tuting. Shunday qilib standart to'plam haqiqatan ham qattiq:
 
 [codetabs src="sandbox" height=140]
 
-
 ```smart
-The purpose of the `"sandbox"` attribute is only to *add more* restrictions. It cannot remove them. In particular, it can't relax same-origin restrictions if the iframe comes from another origin.
+`"sandbox"` xossasining maqsadi faqat *ko'proq* cheklovlarni *qo'shish*dir. U ularni olib tashlay olmaydi. Xususan, agar iframe boshqa kelib chiqishdan kelsa, u same-origin cheklovlarini yumshatish mumkin emas.
 ```
 
-## Cross-window messaging
+## Cross-window xabar almashish
 
-The `postMessage` interface allows windows to talk to each other no matter which origin they are from.
+`postMessage` interfeysi oynalarga qaysi kelib chiqishdan bo'lishidan qat'i nazar bir-biri bilan gaplashish imkonini beradi.
 
-So, it's a way around the "Same Origin" policy. It allows a window from `john-smith.com` to talk to `gmail.com` and exchange information, but only if they both agree and call corresponding JavaScript functions. That makes it safe for users.
+Shunday qilib, bu "Same Origin" siyosatini chetlab o'tish usuli. U `john-smith.com` dan oynaga `gmail.com` bilan gaplashish va ma'lumot almashish imkonini beradi, lekin faqat ikkisi ham rozi bo'lsa va tegishli JavaScript funksiyalarini chaqirsa. Bu foydalanuvchilar uchun xavfsiz qiladi.
 
-The interface has two parts.
+Interfeys ikki qismdan iborat.
 
 ### postMessage
 
-The window that wants to send a message calls [postMessage](mdn:api/Window.postMessage) method of the receiving window. In other words, if we want to send the message to `win`, we should call  `win.postMessage(data, targetOrigin)`.
+Xabar yubormoqchi bo'lgan oyna qabul qiluvchi oynaning [postMessage](mdn:api/Window.postMessage) usulini chaqiradi. Boshqacha qilib aytganda, agar biz `win` ga xabar yubormoqchi bo'lsak, `win.postMessage(data, targetOrigin)` ni chaqirishimiz kerak.
 
-Arguments:
+Argumentlar:
 
 `data`
-: The data to send. Can be any object, the data is cloned using the "structured serialization algorithm". IE supports only strings, so we should `JSON.stringify` complex objects to support that browser.
+: Yuboriladigan ma'lumotlar. Har qanday obyekt bo'lishi mumkin, ma'lumotlar "tuzilgan seriyalashtirish algoritmi" yordamida nusxalanadi. IE faqat qatorlarni qo'llab-quvvatlaydi, shuning uchun o'sha brauzerni qo'llab-quvvatlash uchun murakkab obyektlarni `JSON.stringify` qilishimiz kerak.
 
 `targetOrigin`
-: Specifies the origin for the target window, so that only a window from the given origin will get the message.
+: Maqsadli oyna uchun kelib chiqishni belgilaydi, shuning uchun faqat berilgan kelib chiqishdan oyna xabarni oladi.
 
-The `targetOrigin` is a safety measure. Remember, if the target window comes from another origin, we can't read it's `location` in the sender window. So we can't be sure which site is open in the intended window right now: the user could navigate away, and the sender window has no idea about it.
+`targetOrigin` xavfsizlik chorasi. Esda tuting, agar maqsadli oyna boshqa kelib chiqishdan kelsa, biz jo'natuvchi oynada uning `location` ini o'qiy olmaymiz. Shuning uchun maqsadli oynada hozir qaysi sayt ochilganiga ishonch hosil qila olmaymiz: foydalanuvchi boshqa joyga o'tgan bo'lishi mumkin va jo'natuvchi oyna bu haqda hech qanday tasavvurga ega emas.
 
-Specifying `targetOrigin` ensures that the window only receives the data if it's still at the right site. Important when the data is sensitive.
+`targetOrigin` ni belgilash oyna faqat to'g'ri saytda bo'lganda ma'lumotlarni olishini ta'minlaydi. Ma'lumotlar nozik bo'lganda muhim.
 
-For instance, here `win` will only receive the message if it has a document from the origin `http://example.com`:
+Masalan, bu yerda `win` faqat `http://example.com` kelib chiqishidan hujjatga ega bo'lsa xabarni oladi:
 
 ```html no-beautify
 <iframe src="http://example.com" name="example">
@@ -284,7 +282,7 @@ For instance, here `win` will only receive the message if it has a document from
 </script>
 ```
 
-If we don't want that check, we can set `targetOrigin` to `*`.
+Agar bu tekshirishni xohlamasak, `targetOrigin` ni `*` ga o'rnatishimiz mumkin.
 
 ```html no-beautify
 <iframe src="http://example.com" name="example">
@@ -298,73 +296,72 @@ If we don't want that check, we can set `targetOrigin` to `*`.
 </script>
 ```
 
-
 ### onmessage
 
-To receive a message, the target window should have a handler on the `message` event. It triggers when `postMessage` is called (and `targetOrigin` check is successful).
+Xabar qabul qilish uchun maqsadli oyna `message` hodisasida ishlov beruvchiga ega bo'lishi kerak. U `postMessage` chaqirilganda (va `targetOrigin` tekshiruvi muvaffaqiyatli bo'lganda) ishga tushadi.
 
-The event object has special properties:
+Hodisa obyekti maxsus xossalarga ega:
 
 `data`
-: The data from `postMessage`.
+: `postMessage` dan ma'lumotlar.
 
 `origin`
-: The origin of the sender, for instance `http://javascript.info`.
+: Jo'natuvchining kelib chiqishi, masalan `http://javascript.info`.
 
 `source`
-: The reference to the sender window. We can immediately `source.postMessage(...)` back if we want.
+: Jo'natuvchi oynaga havola. Agar xohlasak, darhol `source.postMessage(...)` orqali javob berishimiz mumkin.
 
-To assign that handler, we should use `addEventListener`, a short syntax `window.onmessage` does not work.
+Bu ishlov beruvchini tayinlash uchun `addEventListener` dan foydalanishimiz kerak, qisqa sintaksis `window.onmessage` ishlamaydi.
 
-Here's an example:
+Mana misol:
 
 ```js
 window.addEventListener("message", function(event) {
   if (event.origin != 'http://javascript.info') {
-    // something from an unknown domain, let's ignore it
+    // noma'lum domendan biror narsa, uni e'tiborsiz qoldiraylik
     return;
   }
 
-  alert( "received: " + event.data );
+  alert( "qabul qilindi: " + event.data );
 
-  // can message back using event.source.postMessage(...)
+  // event.source.postMessage(...) yordamida qaytib xabar yuborish mumkin
 });
 ```
 
-The full example:
+To'liq misol:
 
 [codetabs src="postmessage" height=120]
 
-## Summary
+## Xulosa
 
-To call methods and access the content of another window, we should first have a reference to it.
+Boshqa oynaning usullarini chaqirish va uning kontentiga kirish uchun avval unga havola bo'lishi kerak.
 
-For popups we have these references:
-- From the opener window: `window.open` -- opens a new window and returns a reference to it,
-- From the popup: `window.opener` -- is a reference to the opener window from a popup.
+Popuplar uchun bizda bu havolalar bor:
+- Ochuvchi oynadan: `window.open` -- yangi oyna ochadi va unga havolani qaytaradi,
+- Popup dan: `window.opener` -- popup dan ochuvchi oynaga havola.
 
-For iframes, we can access parent/children windows using:
-- `window.frames` -- a collection of nested window objects,
-- `window.parent`, `window.top` are the references to parent and top windows,
-- `iframe.contentWindow` is the window inside an `<iframe>` tag.
+Iframe lar uchun biz ota-ona/bola oynalarga kirish uchun:
+- `window.frames` -- ichki oyna obyektlarining to'plami,
+- `window.parent`, `window.top` ota-ona va yuqori oynalarga havolalar,
+- `iframe.contentWindow` `<iframe>` tegi ichidagi oyna.
 
-If windows share the same origin (host, port, protocol), then windows can do whatever they want with each other.
+Agar oynalar bir xil kelib chiqishga ega bo'lsa (host, port, protokol), oynalar bir-biri bilan xohlagan narsalarni qilishlari mumkin.
 
-Otherwise, only possible actions are:
-- Change the `location` of another window (write-only access).
-- Post a message to it.
+Aks holda, faqat mumkin bo'lgan harakatlar:
+- Boshqa oynaning `location` ini o'zgartirish (faqat yozish kirishi).
+- Unga xabar yuborish.
 
-Exceptions are:
-- Windows that share the same second-level domain: `a.site.com` and `b.site.com`. Then setting `document.domain='site.com'` in both of them puts them into the "same origin" state.
-- If an iframe has a `sandbox` attribute, it is forcefully put into the "different origin" state, unless the `allow-same-origin` is specified in the attribute value. That can be used to run untrusted code in iframes from the same site.
+Istisnolar:
+- Bir xil ikkinchi darajali domenni baham ko'radigan oynalar: `a.site.com` va `b.site.com`. Keyin ikkalasida ham `document.domain='site.com'` ni o'rnatish ularni "bir xil kelib chiqish" holatiga qo'yadi.
+- Agar iframe `sandbox` xossasiga ega bo'lsa, xossa qiymatida `allow-same-origin` belgilanmagan bo'lsa, u majburiy ravishda "turli kelib chiqish" holatiga qo'yiladi. Bu bir xil saytdan iframe larda ishonchsiz kodni ishga tushirish uchun ishlatilishi mumkin.
 
-The `postMessage` interface allows two windows with any origins to talk:
+`postMessage` interfeysi har qanday kelib chiqishga ega ikki oynaga gaplashish imkonini beradi:
 
-1. The sender calls `targetWin.postMessage(data, targetOrigin)`.
-2. If `targetOrigin` is not `'*'`, then the browser checks if window `targetWin` has the origin `targetOrigin`.
-3. If it is so, then `targetWin` triggers the `message` event with special properties:
-    - `origin` -- the origin of the sender window (like `http://my.site.com`)
-    - `source` -- the reference to the sender window.
-    - `data` -- the data, any object in everywhere except IE that supports only strings.
+1. Jo'natuvchi `targetWin.postMessage(data, targetOrigin)` ni chaqiradi.
+2. Agar `targetOrigin` `'*'` bo'lmasa, brauzer `targetWin` oynasi `targetOrigin` kelib chiqishiga ega ekanligini tekshiradi.
+3. Agar shunday bo'lsa, `targetWin` maxsus xossalar bilan `message` hodisasini ishga tushiradi:
+    - `origin` -- jo'natuvchi oynaning kelib chiqishi (`http://my.site.com` kabi)
+    - `source` -- jo'natuvchi oynaga havola.
+    - `data` -- ma'lumotlar, faqat qatorlarni qo'llab-quvvatlovchi IE dan tashqari hamma joyda har qanday obyekt.
 
-    We should use `addEventListener` to set the handler for this event inside the target window.
+    Bu hodisa uchun ishlov beruvchini maqsadli oyna ichida o'rnatish uchun `addEventListener` dan foydalanishimiz kerak.

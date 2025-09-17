@@ -2,10 +2,10 @@ importance: 4
 
 ---
 
-# Colored clock with setInterval
+# SetInterval bilan rangli soat
 
-Create a colored clock like here:
+Quyidagi kabi rangli soat yarating:
 
 [iframe src="solution" height=60]
 
-Use HTML/CSS for the styling, JavaScript only updates time in elements.
+Styling uchun HTML/CSS dan foydalaning, JavaScript faqat elementlardagi vaqtni yangilaydi.

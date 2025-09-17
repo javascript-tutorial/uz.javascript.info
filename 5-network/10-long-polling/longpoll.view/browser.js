@@ -1,28 +1,26 @@
-// Sending messages, a simple POST
+// Xabarlarni yuborish, oddiy POST
 function PublishForm(form, url) {
-
   function sendMessage(message) {
     fetch(url, {
-      method: 'POST',
-      body: message
+      method: "POST",
+      body: message,
     });
   }
 
-  form.onsubmit = function() {
+  form.onsubmit = function () {
     let message = form.message.value;
     if (message) {
-      form.message.value = '';
+      form.message.value = "";
       sendMessage(message);
     }
     return false;
   };
 }
 
-// Receiving messages with long polling
+// Uzoq so'rovga ega xabarlarni qabul qilish
 function SubscribePane(elem, url) {
-
   function showMessage(message) {
-    let messageElem = document.createElement('div');
+    let messageElem = document.createElement("div");
     messageElem.append(message);
     elem.append(messageElem);
   }
@@ -31,18 +29,18 @@ function SubscribePane(elem, url) {
     let response = await fetch(url);
 
     if (response.status == 502) {
-      // Connection timeout
-      // happens when the connection was pending for too long
-      // let's reconnect
+      // Ulanish vaqti tugaydi
+      // ulanish juda uzoq vaqt davomida kutilayotganda sodir bo'ladi
+      // qayta ulanamiz
       await subscribe();
     } else if (response.status != 200) {
-      // Show Error
+      // Xatoni ko'rsatish
       showMessage(response.statusText);
-      // Reconnect in one second
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Bir soniyada qayta ulanamiz
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       await subscribe();
     } else {
-      // Got message
+      // xabarni qabul qilamiz
       let message = await response.text();
       showMessage(message);
       await subscribe();
@@ -50,5 +48,4 @@ function SubscribePane(elem, url) {
   }
 
   subscribe();
-
 }

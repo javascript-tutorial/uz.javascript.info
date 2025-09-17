@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -9,6 +9,6 @@ importance: 5
 ```js
 let user = {
   name: "John Smith",
-  age: 35
+  age: 35,
 };
 ```

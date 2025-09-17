@@ -25,21 +25,16 @@ Tuzatishdan keyin ham, `"class Rabbit extends Object"` va `class Rabbit` o'rtasi
 
 Ma'lumki, "kengaytirish" sintaksisida ikkita prototip mavjud:
 
-<<<<<<< HEAD:1-js/09-classes/02-class-inheritance/3-class-extend-object/solution.md
 1. Konstruktor funktsiyalarining `"prototype"` o'rtasida (usullar uchun).
 2. Konstruktor funktsiyalari orasida (statik usullar uchun).
-=======
-1. Between `"prototype"` of the constructor functions (for methods).
-2. Between the constructor functions themselves (for static methods).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c:1-js/09-classes/03-static-properties-methods/3-class-extend-object/solution.md
 
 Bizning holatimizda, `class Rabbit extends Object` uchun bu quyidagilarni anglatadi:
 
 ```js run
 class Rabbit extends Object {}
 
-alert( Rabbit.prototype.__proto__ === Object.prototype ); // (1) true
-alert( Rabbit.__proto__ === Object ); // (2) true
+alert(Rabbit.prototype.__proto__ === Object.prototype); // (1) true
+alert(Rabbit.__proto__ === Object); // (2) true
 ```
 
 Shunday qilib, `Rabbit` endi `Rabbit` orqali `Object` ning statik usullariga kirishni ta'minlaydi:
@@ -80,7 +75,7 @@ Here's the picture:
 
 Shunday qilib, qisqacha aytganda, ikkita farq bor:
 
-| class Rabbit | class Rabbit extends Object  |
-|--------------|------------------------------|
-| --             | konstruktorda `super()` ni chaqirish kerak|
-| `Rabbit.__proto__ === Function.prototype` | `Rabbit.__proto__ === Object` |
+| class Rabbit                              | class Rabbit extends Object                |
+| ----------------------------------------- | ------------------------------------------ |
+| --                                        | konstruktorda `super()` ni chaqirish kerak |
+| `Rabbit.__proto__ === Function.prototype` | `Rabbit.__proto__ === Object`              |

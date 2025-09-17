@@ -1,23 +1,23 @@
-# Parse an expression
+# Ifodani tahlil qilish
 
-An arithmetical expression consists of 2 numbers and an operator between them, for instance:
+Arifmetik ifoda 2 ta raqam va ular orasidagi operatordan iborat, masalan:
 
 - `1 + 2`
 - `1.2 * 3.4`
 - `-3 / -6`
 - `-2 - 2`
 
-The operator is one of: `"+"`, `"-"`, `"*"` or `"/"`.
+Operator quyidagilardan biri: `"+"`, `"-"`, `"*"` yoki `"/"`.
 
-There may be extra spaces at the beginning, at the end or between the parts.
+Boshida, oxirida yoki qismlar o'rtasida qo'shimcha bo'shliqlar bo'lishi mumkin.
 
-Create a function `parse(expr)` that takes an expression and returns an array of 3 items:
+Ifodani qabul qiluvchi va 3 ta elementdan iborat massivni qaytaruvchi `parse(expr)` funksiyasini yarating:
 
-1. The first number.
-2. The operator.
-3. The second number.
+1. Birinchi raqam.
+2. Operator.
+3. Ikkinchi raqam.
 
-For example:
+Masalan:
 
 ```js
 let [a, op, b] = parse("1.2 * 3.4");

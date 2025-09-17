@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -7,6 +7,7 @@ importance: 5
 `Rabbit` kengaytirilgan `Animal` kodi.
 
 Afsuski, `Rabbit` obyektlarini yaratish mumkin emas. Nima bo'ldi? Tuzating.
+
 ```js run
 class Animal {
 
@@ -17,7 +18,7 @@ class Animal {
 }
 
 class Rabbit extends Animal {
-  constructor(name) {  
+  constructor(name) {
     this.name = name;
     this.created = Date.now();
   }

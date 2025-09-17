@@ -11,13 +11,13 @@ Kod oson o'qilish uchun biz kodning bir nechta satrlarga bo'lisni tavsiya etamiz
 ```js
 let message;
 
-if (login == 'Xodim') {
-  message = 'Salom';
-} else if (login == 'Direktor') {
-  message = 'Assalomu aleykum';
-} else if (login == '') {
+if (login == "Xodim") {
+  message = "Salom";
+} else if (login == "Direktor") {
+  message = "Assalomu aleykum";
+} else if (login == "") {
   message = "Kirish yo'q";
 } else {
-  message = '';
+  message = "";
 }
 ```

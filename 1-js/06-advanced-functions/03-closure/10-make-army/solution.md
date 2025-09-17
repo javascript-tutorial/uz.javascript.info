@@ -1,129 +1,148 @@
+`makeArmy` ichida aynan nima sodir bo'lishini ko'rib chiqaylik, va yechim aniq bo'lib qoladi.
 
-Let's examine what exactly happens inside `makeArmy`, and the solution will become obvious.
+1. U bo'sh `shooters` massivini yaratadi:
 
-1. It creates an empty array `shooters`:
+   ```js
+   let shooters = [];
+   ```
 
-    ```js
-    let shooters = [];
-    ```
-2. Fills it with functions via `shooters.push(function)` in the loop.
+2. Sikl orqali `shooters.push(function)` yordamida uni funktsiyalar bilan to'ldiradi.
 
-    Every element is a function, so the resulting array looks like this:
+   Har bir element funktsiya, shuning uchun natijada olingan massiv shunday ko'rinadi:
 
-    ```js no-beautify
-    shooters = [
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); },
-      function () { alert(i); }
-    ];
-    ```
+   ```js no-beautify
+   shooters = [
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+     function () {
+       alert(i);
+     },
+   ];
+   ```
 
-3. The array is returned from the function.
-    
-    Then, later, the call to any member, e.g. `army[5]()` will get the element `army[5]` from the array (which is a function) and calls it.
-    
-    Now why do all such functions show the same value, `10`?
-    
-    That's because there's no local variable `i` inside `shooter` functions. When such a function is called, it takes `i` from its outer lexical environment.
-    
-    Then, what will be the value of `i`?
-    
-    If we look at the source:
-    
-    ```js
-    function makeArmy() {
-      ...
-      let i = 0;
-      while (i < 10) {
-        let shooter = function() { // shooter function
-          alert( i ); // should show its number
-        };
-        shooters.push(shooter); // add function to the array
-        i++;
-      }
-      ...
-    }
-    ```
-    
-    We can see that all `shooter` functions are created in the lexical environment of `makeArmy()` function. But when `army[5]()` is called, `makeArmy` has already finished its job, and the final value of `i` is `10` (`while` stops at `i=10`).
-    
-    As the result, all `shooter` functions get the same value from the outer lexical environment and that is, the last value, `i=10`.
-    
-    ![](lexenv-makearmy-empty.svg)
-    
-    As you can see above, on each iteration of a `while {...}` block, a new lexical environment is created. So, to fix this, we can copy the value of `i` into a variable within the `while {...}` block, like this:
-    
-    ```js run
-    function makeArmy() {
-      let shooters = [];
-    
-      let i = 0;
-      while (i < 10) {
-        *!*
-          let j = i;
-        */!*
-          let shooter = function() { // shooter function
-            alert( *!*j*/!* ); // should show its number
-          };
-        shooters.push(shooter);
-        i++;
-      }
-    
-      return shooters;
-    }
-    
-    let army = makeArmy();
-    
-    // Now the code works correctly
-    army[0](); // 0
-    army[5](); // 5
-    ```
-    
-    Here `let j = i` declares an "iteration-local" variable `j` and copies `i` into it. Primitives are copied "by value", so we actually get an independent copy of `i`, belonging to the current loop iteration.
-    
-    The shooters work correctly, because the value of `i` now lives a little bit closer. Not in `makeArmy()` Lexical Environment, but in the Lexical Environment that corresponds to the current loop iteration:
-    
-    ![](lexenv-makearmy-while-fixed.svg)
-    
-    Such a problem could also be avoided if we used `for` in the beginning, like this:
-    
-    ```js run demo
-    function makeArmy() {
-    
-      let shooters = [];
-    
-    *!*
-      for(let i = 0; i < 10; i++) {
-    */!*
-        let shooter = function() { // shooter function
-          alert( i ); // should show its number
-        };
-        shooters.push(shooter);
-      }
-    
-      return shooters;
-    }
-    
-    let army = makeArmy();
-    
-    army[0](); // 0
-    army[5](); // 5
-    ```
-    
-    That's essentially the same, because `for` on each iteration generates a new lexical environment, with its own variable `i`. So `shooter` generated in every iteration references its own `i`, from that very iteration.
-    
-    ![](lexenv-makearmy-for-fixed.svg)
+3. Massiv funktsiyadan qaytariladi.
 
-Now, as you've put so much effort into reading this, and the final recipe is so simple - just use `for`, you may wonder -- was it worth that?
+   Keyin, keyinroq, istalgan a'zoga chaqiruv, masalan `army[5]()` massivdan `army[5]` elementini oladi (bu funktsiya) va uni chaqiradi.
 
-Well, if you could easily answer the question, you wouldn't read the solution. So, hopefully this task must have helped you to understand things a bit better. 
+   Endi nega bunday barcha funktsiyalar bir xil qiymatni, ya'ni `10` ni ko'rsatadi?
 
-Besides, there are indeed cases when one prefers `while` to `for`, and other scenarios, where such problems are real.
+   Bu `shooter` funktsiyalari ichida mahalliy `i` o'zgaruvchisi yo'qligi sababli. Bunday funktsiya chaqirilganda, u `i` ni o'zining tashqi leksik muhitidan oladi.
 
+   U holda `i` ning qiymati nima bo'ladi?
+
+   Agar manbaga qarasak:
+
+   ```js
+   function makeArmy() {
+     ...
+     let i = 0;
+     while (i < 10) {
+       let shooter = function() { // shooter funktsiyasi
+         alert( i ); // o'z raqamini ko'rsatishi kerak
+       };
+       shooters.push(shooter); // funktsiyani massivga qo'shish
+       i++;
+     }
+     ...
+   }
+   ```
+
+   Ko'ramizki, barcha `shooter` funktsiyalar `makeArmy()` funktsiyasining leksik muhitida yaratilgan. Lekin `army[5]()` chaqirilganda, `makeArmy` allaqachon o'z ishini tugatgan va `i` ning oxirgi qiymati `10` (`while` `i=10` da to'xtaydi).
+
+   Natijada, barcha `shooter` funktsiyalar tashqi leksik muhitdan bir xil qiymatni oladi va bu oxirgi qiymat, ya'ni `i=10`.
+
+   ![](lexenv-makearmy-empty.svg)
+
+   Yuqorida ko'rib turganingizdek, `while {...}` blokining har bir iteratsiyasida yangi leksik muhit yaratiladi. Shuning uchun, buni tuzatish uchun `i` ning qiymatini `while {...}` bloki ichidagi o'zgaruvchiga nusxalashimiz mumkin:
+
+   ```js run
+   function makeArmy() {
+     let shooters = [];
+
+     let i = 0;
+     while (i < 10) {
+       *!*
+         let j = i;
+       */!*
+         let shooter = function() { // shooter funktsiyasi
+           alert( *!*j*/!* ); // o'z raqamini ko'rsatishi kerak
+         };
+       shooters.push(shooter);
+       i++;
+     }
+
+     return shooters;
+   }
+
+   let army = makeArmy();
+
+   // Endi kod to'g'ri ishlaydi
+   army[0](); // 0
+   army[5](); // 5
+   ```
+
+   Bu yerda `let j = i` "iteratsiya-mahalliy" `j` o'zgaruvchisini e'lon qiladi va `i` ni unga nusxalaydi. Primitivlar "qiymat bo'yicha" nusxalanadi, shuning uchun biz aslida joriy sikl iteratsiyasiga tegishli `i` ning mustaqil nusxasini olamiz.
+
+   Shooterlar to'g'ri ishlaydi, chunki `i` ning qiymati endi bir oz yaqinroq joyda yashaydi. `makeArmy()` Leksik muhitida emas, balki joriy sikl iteratsiyasiga mos keladigan Leksik muhitda:
+
+   ![](lexenv-makearmy-while-fixed.svg)
+
+   Agar boshidayoq `for` ishlatganimizda ham bunday muammoning oldini olish mumkin edi:
+
+   ```js run demo
+   function makeArmy() {
+
+     let shooters = [];
+
+   *!*
+     for(let i = 0; i < 10; i++) {
+   */!*
+       let shooter = function() { // shooter funktsiyasi
+         alert( i ); // o'z raqamini ko'rsatishi kerak
+       };
+       shooters.push(shooter);
+     }
+
+     return shooters;
+   }
+
+   let army = makeArmy();
+
+   army[0](); // 0
+   army[5](); // 5
+   ```
+
+   Bu mohiyatan bir xil, chunki `for` har bir iteratsiyada o'zining `i` o'zgaruvchisi bilan yangi leksik muhit yaratadi. Shuning uchun har bir iteratsiyada yaratilgan `shooter` aynan shu iteratsiyadagi o'z `i` siga havola qiladi.
+
+   ![](lexenv-makearmy-for-fixed.svg)
+
+Endi, siz buni o'qishga shuncha harakat qilganingizdan so'ng va oxirgi retsept shuncha oddiy - shunchaki `for` dan foydalaning, siz hayron bo'lishingiz mumkin -- bunga arziydimi?
+
+Albatta, agar siz savolga osonlik bilan javob bera olsangiz, yechimni o'qimagan bo'lardingiz. Shuning uchun, umid qilamanki, bu vazifa sizga narsalarni biroz yaxshiroq tushunishga yordam bergan bo'lishi kerak.
+
+Bundan tashqari, haqiqatan ham `for` dan ko'ra `while` ni afzal ko'radigan holatlar va bunday muammolar haqiqiy bo'lgan boshqa stsenariylar mavjud.

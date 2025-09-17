@@ -1,187 +1,163 @@
 # Naqshlar va bayroqlar
 
-<<<<<<< HEAD
-Doimiy ifodalar - bu mag'lubiyatni izlash va almashtirishning kuchli usuli.
+Doimiy ifodalar - bu matnni izlash va almashtirishning kuchli usuli.
 
-JavaScript-da oddiy ifodalar o'rnatilgan `RegExp` klassidagi obyektlar yordamida va satrlar bilan birlashtirilgan.
+JavaScript-da doimiy ifodalar o'rnatilgan `RegExp` klassidagi obyektlar yordamida amalga oshiriladi va satrlar bilan birlashtirilgan.
 
-Iltimos, muntazam ifodalar dasturlash tillarida turlicha bo'lishiga e'tibor bering. Ushbu qo'llanmada biz JavaScript-ni jamlaymiz. Albatta, umumiy jihatlar juda ko'p, ammo ular Perl, Ruby, PHP va boshqalarda bir-biridan farq qiladi.
+E'tibor bering, doimiy ifodalar dasturlash tillarida turlicha bo'lishi mumkin. Ushbu qo'llanmada biz JavaScript-ni ko'rib chiqamiz. Albatta, umumiy jihatlar juda ko'p, ammo ular Perl, Ruby, PHP va boshqalarda bir-biridan farq qiladi.
 
-## Oddiy ifodalar
-=======
-Regular expressions are patterns that provide a powerful way to search and replace in text.
+## Doimiy ifodalar
 
-In JavaScript, they are available via the [RegExp](mdn:js/RegExp) object, as well as being integrated in methods of strings.
+Doimiy ifoda (shuningdek, "regexp" yoki shunchaki "reg") *naqsh* va ixtiyoriy *bayroqlardan* iborat.
 
-## Regular Expressions
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Doimiy ifoda obyektini yaratish uchun ikkita sintaksis mavjud.
 
-Oddiy ifoda (shuningdek, "regexp" yoki shunchaki "reg") *naqsh* va ixtiyoriy *bayroqlardan* iborat.
-
-<<<<<<< HEAD
-Muntazam ifoda obyektini yaratish uchun ikkita sintaksis mavjud.
-
-Uzoq sintaksis:
-=======
-There are two syntaxes that can be used to create a regular expression object.
-
-The "long" syntax:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Uzun sintaksis:
 
 ```js
 regexp = new RegExp("pattern", "flags");
 ```
 
-<<<<<<< HEAD
 ...Va `"/"` chiziqlaridan foydalangan holda qisqa:
-=======
-And the "short" one, using slashes `"/"`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
 ```js
 regexp = /pattern/; // bayroqlar yo'q
-regexp = /pattern/gmi; // g, m va i bayroqlari bilan (yaqin orada qoplanadi)
+regexp = /pattern/gmi; // g, m va i bayroqlari bilan (tez orada ko'rib chiqamiz)
 ```
 
-<<<<<<< HEAD
-Slashes `"/"` biz JavaScript-ga oddiy ifodani yaratayotganimizni aytadi. Ular matnlar uchun qosh-tirnoqlar bilan bir xil rol o'ynaydi.
+Qiyshiq chiziqlar `"/"` JavaScript-ga biz doimiy ifoda yaratayotganimizni bildiradi. Ular matnlar uchun qo'shtirnoqlar bilan bir xil rol o'ynaydi.
 
 ## Foydalanish
-=======
-Slashes `pattern:/.../` tell JavaScript that we are creating a regular expression. They play the same role as quotes for strings.
 
-In both cases `regexp` becomes an instance of the built-in `RegExp` class.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Bu ikki sintaksis o'rtasidagi asosiy farq shundaki, qiyshiq chiziqlar `/.../` yordamida naqsh ifodalarni kiritishga imkon bermaydi (masalan, `${...}` bilan satr shablon literallari kabi). Ular butunlay statik.
 
-The main difference between these two syntaxes is that pattern using slashes `/.../` does not allow for expressions to be inserted (like string template literals with `${...}`). They are fully static.
-
-Slashes are used when we know the regular expression at the code writing time -- and that's the most common situation. While `new RegExp` is more often used when we need to create a regexp "on the fly" from a dynamically generated string. For instance:
+Qiyshiq chiziqlar kod yozish vaqtida doimiy ifodani bilganimizda ishlatiladi -- va bu eng keng tarqalgan holat. `new RegExp` esa ko'proq dinamik ravishda yaratilgan satrdan "on the fly" doimiy ifoda yaratishimiz kerak bo'lganda ishlatiladi. Masalan:
 
 ```js
-let tag = prompt("What tag do you want to find?", "h2");
+let tag = prompt("Qaysi tegni topishni xohlaysiz?", "h2");
 
-let regexp = new RegExp(`<${tag}>`); // same as /<h2>/ if answered "h2" in the prompt above
+let regexp = new RegExp(`<${tag}>`); // yuqoridagi promptda "h2" javob berilgan bo'lsa /<h2>/ bilan bir xil
 ```
 
-## Flags
+## Bayroqlar
 
-Regular expressions may have flags that affect the search.
+Doimiy ifodalarda qidiruvga ta'sir qiluvchi bayroqlar bo'lishi mumkin.
 
-There are only 6 of them in JavaScript:
+JavaScript-da faqat 6 tasi mavjud:
 
 `pattern:i`
-: With this flag the search is case-insensitive: no difference between `A` and `a` (see the example below).
+: Bu bayroq bilan qidiruv katta-kichik harflarga sezgir emas: `A` va `a` o'rtasida farq yo'q (quyidagi misolga qarang).
 
 `pattern:g`
-: With this flag the search looks for all matches, without it -- only the first match is returned.
+: Bu bayroq bilan qidiruv barcha mosliklarni qidiradi, u bo'lmasa -- faqat birinchi moslik qaytariladi.
 
 `pattern:m`
-: Multiline mode (covered in the chapter <info:regexp-multiline-mode>).
+: Ko'p qatorli rejim (<info:regexp-multiline-mode> bobida ko'rib chiqiladi).
 
 `pattern:s`
-: Enables "dotall" mode, that allows a dot `pattern:.` to match newline character `\n` (covered in the chapter <info:regexp-character-classes>).
+: "Dotall" rejimini yoqadi, bu nuqta `pattern:.` ga yangi qator belgisi `\n` ga mos kelish imkonini beradi (<info:regexp-character-classes> bobida ko'rib chiqiladi).
 
 `pattern:u`
-: Enables full Unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter <info:regexp-unicode>.
+: To'liq Unicode qo'llab-quvvatlashni yoqadi. Bayroq surrogate juftlarni to'g'ri qayta ishlashga imkon beradi. Bu haqda ko'proq <info:regexp-unicode> bobida.
 
 `pattern:y`
-: "Sticky" mode: searching at the exact position in the text  (covered in the chapter <info:regexp-sticky>)
+: "Yopishqoq" rejim: matnda aniq pozitsiyada qidirish (<info:regexp-sticky> bobida ko'rib chiqiladi)
 
-```smart header="Colors"
-From here on the color scheme is:
+```smart header="Ranglar"
+Bu yerdan boshlab rang sxemasi:
 
-- regexp -- `pattern:red`
-- string (where we search) -- `subject:blue`
-- result -- `match:green`
+- doimiy ifoda -- `pattern:qizil`
+- satr (biz qidirgan joy) -- `subject:ko'k`
+- natija -- `match:yashil`
 ```
 
-## Searching: str.match
+## Qidiruv: str.match
 
-As mentioned previously, regular expressions are integrated with string methods.
+Yuqorida aytib o'tilganidek, doimiy ifodalar satr metodlari bilan birlashtirilgan.
 
-The method `str.match(regexp)` finds all matches of `regexp` in the string `str`.
+`str.match(regexp)` metodi `str` satrida `regexp` ning barcha mosliklarini topadi.
 
-It has 3 working modes:
+Uning 3 ta ish rejimi bor:
 
-1. If the regular expression has flag `pattern:g`, it returns an array of all matches:
+1. Agar doimiy ifodada `pattern:g` bayrog'i bo'lsa, u barcha mosliklarning massivini qaytaradi:
     ```js run
     let str = "We will, we will rock you";
 
-    alert( str.match(/we/gi) ); // We,we (an array of 2 substrings that match)
+    alert( str.match(/we/gi) ); // We,we (2 ta mos keluvchi pastki satrlar massivi)
     ```
-    Please note that both `match:We` and `match:we` are found, because flag `pattern:i` makes the regular expression case-insensitive.
+    E'tibor bering, `match:We` ham, `match:we` ham topildi, chunki `pattern:i` bayrog'i doimiy ifodani katta-kichik harflarga sezgir emas qiladi.
 
-2. If there's no such flag it returns only the first match in the form of an array, with the full match at index `0` and some additional details in properties:
+2. Agar bunday bayroq bo'lmasa, u faqat birinchi moslikni massiv ko'rinishida qaytaradi, to'liq moslik `0` indeksida va ba'zi qo'shimcha tafsilotlar xususiyatlarda:
     ```js run
     let str = "We will, we will rock you";
 
-    let result = str.match(/we/i); // without flag g
+    let result = str.match(/we/i); // g bayrog'isiz
 
-    alert( result[0] );     // We (1st match)
+    alert( result[0] );     // We (1-moslik)
     alert( result.length ); // 1
 
-    // Details:
-    alert( result.index );  // 0 (position of the match)
-    alert( result.input );  // We will, we will rock you (source string)
+    // Tafsilotlar:
+    alert( result.index );  // 0 (moslik pozitsiyasi)
+    alert( result.input );  // We will, we will rock you (manba satr)
     ```
-    The array may have other indexes, besides `0` if a part of the regular expression is enclosed in parentheses. We'll cover that in the chapter  <info:regexp-groups>.
+    Massivda `0` dan tashqari boshqa indekslar ham bo'lishi mumkin, agar doimiy ifodaning bir qismi qavslar ichiga olingan bo'lsa. Buni <info:regexp-groups> bobida ko'rib chiqamiz.
 
-3. And, finally, if there are no matches, `null` is returned (doesn't matter if there's flag `pattern:g` or not).
+3. Va nihoyat, agar moslik bo'lmasa, `null` qaytariladi (`pattern:g` bayrog'i bor-yo'qligi muhim emas).
 
-    This a very important nuance. If there are no matches, we don't receive an empty array, but instead receive `null`. Forgetting about that may lead to errors, e.g.:
+    Bu juda muhim noyanslik. Agar moslik bo'lmasa, biz bo'sh massiv emas, balki `null` olamiz. Buni unutish xatolarga olib kelishi mumkin, masalan:
 
     ```js run
     let matches = "JavaScript".match(/HTML/); // = null
 
-    if (!matches.length) { // Error: Cannot read property 'length' of null
-      alert("Error in the line above");
+    if (!matches.length) { // Xato: Cannot read property 'length' of null
+      alert("Yuqoridagi qatorda xato");
     }
     ```
 
-    If we'd like the result to always be an array, we can write it this way:
+    Agar natija har doim massiv bo'lishini xohlasak, uni shunday yozishimiz mumkin:
 
     ```js run
     let matches = "JavaScript".match(/HTML/)*!* || []*/!*;
 
     if (!matches.length) {
-      alert("No matches"); // now it works
+      alert("Moslik yo'q"); // endi ishlaydi
     }
     ```
 
-## Replacing: str.replace
+## Almashtirish: str.replace
 
-The method `str.replace(regexp, replacement)` replaces matches found using `regexp` in string `str` with `replacement` (all matches if there's flag `pattern:g`, otherwise, only the first one).
+`str.replace(regexp, replacement)` metodi `str` satrida `regexp` yordamida topilgan mosliklarni `replacement` bilan almashtiradi (`pattern:g` bayrog'i bo'lsa barcha mosliklarni, aks holda faqat birinchisini).
 
-For instance:
+Masalan:
 
 ```js run
-// no flag g
+// g bayrog'isiz
 alert( "We will, we will".replace(/we/i, "I") ); // I will, we will
 
-// with flag g
+// g bayrog'i bilan
 alert( "We will, we will".replace(/we/ig, "I") ); // I will, I will
 ```
 
-The second argument is the `replacement` string. We can use special character combinations in it to insert fragments of the match:
+Ikkinchi argument `replacement` satridir. Biz unda moslik fragmentlarini kiritish uchun maxsus belgilar kombinatsiyasidan foydalanishimiz mumkin:
 
-| Symbols | Action in the replacement string |
+| Belgilar | Almashtirish satrida harakat |
 |--------|--------|
-|`$&`|inserts the whole match|
-|<code>$&#096;</code>|inserts a part of the string before the match|
-|`$'`|inserts a part of the string after the match|
-|`$n`|if `n` is a 1-2 digit number, then it inserts the contents of n-th parentheses, more about it in the chapter <info:regexp-groups>|
-|`$<name>`|inserts the contents of the parentheses with the given `name`, more about it in the chapter <info:regexp-groups>|
-|`$$`|inserts character `$` |
+|`$&`|butun moslikni kiritadi|
+|<code>$&#096;</code>|moslikdan oldingi satr qismini kiritadi|
+|`$'`|moslikdan keyingi satr qismini kiritadi|
+|`$n`|agar `n` 1-2 raqamli son bo'lsa, n-chi qavs mazmunini kiritadi, bu haqda ko'proq <info:regexp-groups> bobida|
+|`$<name>`|berilgan `name` bilan qavslar mazmunini kiritadi, bu haqda ko'proq <info:regexp-groups> bobida|
+|`$$`|`$` belgisini kiritadi |
 
-An example with `pattern:$&`:
+`pattern:$&` bilan misol:
 
 ```js run
 alert( "I love HTML".replace(/HTML/, "$& and JavaScript") ); // I love HTML and JavaScript
 ```
 
-## Testing: regexp.test
+## Sinash: regexp.test
 
-The method `regexp.test(str)` looks for at least one match, if found, returns `true`, otherwise `false`.
+`regexp.test(str)` metodi kamida bitta moslikni qidiradi, agar topilsa `true`, aks holda `false` qaytaradi.
 
 ```js run
 let str = "I love JavaScript";
@@ -190,14 +166,14 @@ let regexp = /LOVE/i;
 alert( regexp.test(str) ); // true
 ```
 
-Later in this chapter we'll study more regular expressions, walk through more examples, and also meet other methods.
+Ushbu bobning davomida biz ko'proq doimiy ifodalarni o'rganamiz, ko'proq misollar bilan tanishamiz va boshqa metodlar bilan ham uchrashamiz.
 
-Full information about the methods is given in the article <info:regexp-methods>.
+Metodlar haqida to'liq ma'lumot <info:regexp-methods> maqolasida berilgan.
 
-## Summary
+## Xulosa
 
-- A regular expression consists of a pattern and optional flags: `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`.
-- Without flags and special symbols  (that we'll study later), the search by a regexp is the same as a substring search.
-- The method `str.match(regexp)` looks for matches: all of them if there's `pattern:g` flag, otherwise, only the first one.
-- The method `str.replace(regexp, replacement)` replaces matches found using `regexp` with `replacement`: all of them if there's `pattern:g` flag, otherwise only the first one.
-- The method `regexp.test(str)` returns `true` if there's at least one match, otherwise, it returns `false`.
+- Doimiy ifoda naqsh va ixtiyoriy bayroqlardan iborat: `pattern:g`, `pattern:i`, `pattern:m`, `pattern:u`, `pattern:s`, `pattern:y`.
+- Bayroqlar va maxsus belgilarsiz (keyinroq o'rganamiz), regexp bo'yicha qidiruv pastki satr qidiruvi bilan bir xil.
+- `str.match(regexp)` metodi mosliklarni qidiradi: `pattern:g` bayrog'i bo'lsa barchasini, aks holda faqat birinchisini.
+- `str.replace(regexp, replacement)` metodi `regexp` yordamida topilgan mosliklarni `replacement` bilan almashtiradi: `pattern:g` bayrog'i bo'lsa barchasini, aks holda faqat birinchisini.
+- `regexp.test(str)` metodi kamida bitta moslik bo'lsa `true`, aks holda `false` qaytaradi.

@@ -1,19 +1,19 @@
-importance: 4
+muhimlik: 4
 
 ---
 
-# Create a list
+# Roʻyxat yarating
 
-Write an interface to create a list from user input.
+Foydalanuvchi kiritishidan roʻyxat yaratish uchun interfeysni yozing.
 
-For every list item:
+Har bir ro'yxat elementi uchun:
 
-1. Ask a user about its content using `prompt`.
-2. Create the `<li>` with it and add it to `<ul>`.
-3. Continue until the user cancels the input (by pressing `key:Esc` or via an empty entry).
+1. `Prompt` yordamida foydalanuvchidan uning mazmuni haqida so‘rang.
+2. U bilan `<li>` yarating va uni `<ul>`ga qo`shing.
+3. Foydalanuvchi kiritishni bekor qilmaguncha davom eting (`key:Esc` tugmasini bosish yoki bo'sh yozuv orqali).
 
-All elements should be created dynamically.
+Barcha elementlar dinamik ravishda yaratilishi kerak.
 
-If a user types HTML-tags, they should be treated like a text.
+Agar foydalanuvchi HTML-teglarni yozsa, ularga matn sifatida qarash kerak.
 
 [demo src="solution"]

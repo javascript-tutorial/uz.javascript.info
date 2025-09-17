@@ -1,9 +1,9 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Animate the bouncing ball
+# Saqlayotgan to'pni jonlantiring
 
-Make a bouncing ball. Click to see how it should look:
+Tebranuvchi to'p hosil qiling. Qanday ko'rinishini ko'rish uchun bosing:
 
 [iframe height=250 src="solution"]

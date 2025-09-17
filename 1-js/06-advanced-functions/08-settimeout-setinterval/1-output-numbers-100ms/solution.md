@@ -1,11 +1,10 @@
-
 `setInterval` dan foydalanish:
 
 ```js run
 function printNumbers(from, to) {
   let current = from;
 
-  let timerId = setInterval(function() {
+  let timerId = setInterval(function () {
     alert(current);
     if (current == to) {
       clearInterval(timerId);
@@ -18,12 +17,7 @@ function printNumbers(from, to) {
 printNumbers(5, 10);
 ```
 
-<<<<<<< HEAD
 `setTimeout` dan foydalanish:
-=======
-Using nested `setTimeout`:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
-
 
 ```js run
 function printNumbers(from, to) {
@@ -42,31 +36,4 @@ function printNumbers(from, to) {
 printNumbers(5, 10);
 ```
 
-<<<<<<< HEAD
 Shuni esda tutingki, ikkala echimda ham birinchi chiqishdan oldin dastlabki kechikish mavjud. Ba'zan darhol birinchi chiqishni amalga oshirish uchun satr qo'shishimiz kerak, buni bajarish oson.
-=======
-Note that in both solutions, there is an initial delay before the first output. The function is called after `1000ms` the first time.
-
-If we also want the function to run immediately, then we can add an additional call on a separate line, like this:
-
-```js run
-function printNumbers(from, to) {
-  let current = from;
-
-  function go() {
-    alert(current);
-    if (current == to) {
-      clearInterval(timerId);
-    }
-    current++;
-  }
-
-*!*
-  go();
-*/!*
-  let timerId = setInterval(go, 1000);
-}
-
-printNumbers(5, 10);
-```
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c

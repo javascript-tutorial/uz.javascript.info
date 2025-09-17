@@ -1,14 +1,15 @@
-# Find color in the format #abc or #abcdef
+# #abc yoki #abcdef formatida rangni toping
 
-Write a RegExp that matches colors in the format `#abc` or `#abcdef`. That is: `#` followed by 3 or 6 hexadecimal digits.
+`#abc` yoki `#abcdef` formatida ranglarga mos keladigan RegExp yozing. Ya'ni: `#` keyin 3 yoki 6 o'n oltilik raqam.
 
-Usage example:
+Masalan:
+
 ```js
-let regexp = /your regexp/g;
+let regexp = /sizning regepxiyingiz/g;
 
 let str = "color: #3f3; background-color: #AA00ef; and: #abcd";
 
-alert( str.match(regexp) ); // #3f3 #AA00ef
+alert(str.match(regexp)); // #3f3 #AA00ef
 ```
 
-P.S. This should be exactly 3 or 6 hex digits. Values with 4 digits, such as `#abcd`, should not match.
+P.S. Bu aniq 3 yoki 6 hex raqam bo'lishi kerak. `#abcd` kabi 4 ta raqamdan iborat qiymatlar mos kelmasligi kerak.

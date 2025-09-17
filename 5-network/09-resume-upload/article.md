@@ -1,36 +1,36 @@
-# Resumable file upload
+# Qayta boshlanuvchi fayl yuklash
 
-With `fetch` method it's fairly easy to upload a file.
+`fetch` metodi bilan faylni yuklash ancha oson.
 
-How to resume the upload after lost connection? There's no built-in option for that, but we have the pieces to implement it.
+Ulanish uzilganidan keyin yuklashni qanday davom ettirish mumkin? Buning uchun o'rnatilgan opsiya yo'q, lekin buni amalga oshirish uchun kerakli qismlar bizda bor.
 
-Resumable uploads should come with upload progress indication, as we expect big files (if we may need to resume). So, as `fetch` doesn't allow to track upload progress, we'll use [XMLHttpRequest](info:xmlhttprequest).
+Qayta boshlanuvchi yuklashlar yuklash jarayonini ko'rsatish bilan birga kelishi kerak, chunki biz katta fayllarni kutamiz (agar davom ettirish kerak bo'lsa). `fetch` yuklash jarayonini kuzatishga imkon bermagani uchun, biz [XMLHttpRequest](info:xmlhttprequest) dan foydalanamiz.
 
-## Not-so-useful progress event
+## Unchalik foydali bo'lmagan progress eventi
 
-To resume upload, we need to know how much was uploaded till the connection was lost.
+Yuklashni davom ettirish uchun ulanish uzilgunga qadar qancha yuklangani ma'lum bo'lishi kerak.
 
-There's `xhr.upload.onprogress` to track upload progress.
+Yuklash jarayonini kuzatish uchun `xhr.upload.onprogress` mavjud.
 
-Unfortunately, it won't help us to resume the upload here, as it triggers when the data is *sent*, but was it received by the server? The browser doesn't know.
+Afsuski, bu bizga yuklashni davom ettirishda yordam bermaydi, chunki u ma'lumotlar *yuborilganda* ishga tushadi, lekin ular server tomonidan qabul qilindimi? Brauzer buni bilmaydi.
 
-Maybe it was buffered by a local network proxy, or maybe the remote server process just died and couldn't process them, or it was just lost in the middle and didn't reach the receiver.
+Ehtimol, u mahalliy tarmoq proksi tomonidan buferga olingan, yoki masofaviy server jarayoni shunchaki o'lib qoldi va ularni qayta ishlay olmadi, yoki u o'rtada yo'qoldi va qabul qiluvchiga yetmadi.
 
-That's why this event is only useful to show a nice progress bar.
+Shuning uchun bu event faqat chiroyli progress bar ko'rsatish uchun foydali.
 
-To resume upload, we need to know *exactly* the number of bytes received by the server. And only the server can tell that, so we'll make an additional request.
+Yuklashni davom ettirish uchun server tomonidan qabul qilingan baytlarning *aniq* sonini bilishimiz kerak. Va buni faqat server aytishi mumkin, shuning uchun biz qo'shimcha so'rov qilamiz.
 
-## Algorithm
+## Algoritm
 
-1. First, create a file id, to uniquely identify the file we're going to upload:
+1. Birinchidan, yuklashimiz kerak bo'lgan faylni noyob identifikatsiya qilish uchun fayl id'sini yarating:
     ```js
     let fileId = file.name + '-' + file.size + '-' + file.lastModified;
     ```
-    That's needed for resume upload, to tell the server what we're resuming.
+    Bu yuklashni davom ettirish uchun kerak, serverga nimani davom ettirayotganimizni aytish uchun.
 
-    If the name or the size or the last modification date changes, then there'll be another `fileId`.
+    Agar nom yoki hajm yoki oxirgi o'zgarish sanasi o'zgarsa, boshqa `fileId` bo'ladi.
 
-2. Send a request to the server, asking how many bytes it already has, like this:
+2. Serverga so'rov yuboring, u allaqachon qancha baytga ega ekanligini so'rang, masalan:
     ```js
     let response = await fetch('status', {
       headers: {
@@ -38,45 +38,44 @@ To resume upload, we need to know *exactly* the number of bytes received by the 
       }
     });
 
-    // The server has that many bytes
+    // Server shuncha baytga ega
     let startByte = +await response.text();
     ```
 
-    This assumes that the server tracks file uploads by `X-File-Id` header. Should be implemented at server-side.
+    Bu server fayl yuklashlarini `X-File-Id` header bo'yicha kuzatadi deb taxmin qiladi. Server tomonida amalga oshirilishi kerak.
 
-    If the file doesn't yet exist at the server, then the server response should be `0`
+    Agar fayl hali serverda mavjud bo'lmasa, server javobi `0` bo'lishi kerak
 
-3. Then, we can use `Blob` method `slice` to send the file from `startByte`:
+3. Keyin, faylni `startByte` dan yuborish uchun `Blob` metodining `slice` dan foydalanishimiz mumkin:
     ```js
     xhr.open("POST", "upload", true);
 
-    // File id, so that the server knows which file we upload
+    // Fayl id'si, server qaysi faylni yuklayotganimizni bilishi uchun
     xhr.setRequestHeader('X-File-Id', fileId);
 
-    // The byte we're resuming from, so the server knows we're resuming
+    // Davom ettirayotgan bayt, server davom ettirayotganimizni bilishi uchun
     xhr.setRequestHeader('X-Start-Byte', startByte);
 
     xhr.upload.onprogress = (e) => {
-      console.log(`Uploaded ${startByte + e.loaded} of ${startByte + e.total}`);
+      console.log(`${startByte + e.total} dan ${startByte + e.loaded} yuklandi`);
     };
 
-    // file can be from input.files[0] or another source
+    // file input.files[0] yoki boshqa manbadan bo'lishi mumkin
     xhr.send(file.slice(startByte));
     ```
 
-    Here we send the server both file id as `X-File-Id`, so it knows which file we're uploading, and the starting byte as `X-Start-Byte`, so it knows we're not uploading it initially, but resuming.
+    Bu yerda biz serverga fayl id'sini `X-File-Id` sifatida yuboramiz, shuning uchun u qaysi faylni yuklayotganimizni biladi, va boshlang'ich baytni `X-Start-Byte` sifatida yuboramiz, shuning uchun u biz uni dastlab emas, balki davom ettirayotganimizni biladi.
 
-    The server should check its records, and if there was an upload of that file, and the current uploaded size is exactly `X-Start-Byte`, then append the data to it.
+    Server o'z yozuvlarini tekshirishi va agar o'sha faylning yuklashi bo'lgan bo'lsa va joriy yuklangan hajm aynan `X-Start-Byte` ga teng bo'lsa, ma'lumotlarni unga qo'shishi kerak.
 
+Mana Node.js da yozilgan mijoz va server kodi bilan demo.
 
-Here's the demo with both client and server code, written on Node.js.
+Bu saytda faqat qisman ishlaydi, chunki Node.js Nginx nomli boshqa server orqasida joylashgan bo'lib, u yuklashlarni buferga oladi va ularni to'liq tugagandan keyin Node.js ga uzatadi.
 
-It works only partially on this site, as Node.js is behind another server named Nginx, that buffers uploads, passing them to Node.js when fully complete.
-
-But you can download it and run locally for the full demonstration:
+Lekin siz uni yuklab olishingiz va to'liq namoyish uchun mahalliy ravishda ishga tushirishingiz mumkin:
 
 [codetabs src="upload-resume" height=200]
 
-As we can see, modern networking methods are close to file managers in their capabilities -- control over headers, progress indicator, sending file parts, etc.
+Ko'rib turganingizdek, zamonaviy tarmoq metodlari o'z imkoniyatlari bo'yicha fayl menejerlariga yaqin - header'lar ustidan nazorat, progress ko'rsatkichi, fayl qismlarini yuborish va hokazo.
 
-We can implement resumable upload and much more.
+Biz qayta boshlanuvchi yuklash va yana ko'p narsalarni amalga oshirishimiz mumkin.

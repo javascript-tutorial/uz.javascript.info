@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -10,7 +10,7 @@ Keling, yangi `rabbit` obyekti yarataylik:
 function Rabbit(name) {
   this.name = name;
 }
-Rabbit.prototype.sayHi = function() {
+Rabbit.prototype.sayHi = function () {
   alert(this.name);
 };
 

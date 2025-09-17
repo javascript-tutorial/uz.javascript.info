@@ -1,11 +1,12 @@
+# To'pni joylashtirishni boshqarish
 
-First we need to choose a method of positioning the ball.
+Avval to'pni joylashtirishning usulini tanlashimiz kerak.
 
-We can't use `position:fixed` for it, because scrolling the page would move the ball from the field.
+Biz buning uchun `position:fixed` ishlatib bo'lmaydi, chunki sahifani aylantirish to'pni maydondan siljitadi.
 
-So we should use `position:absolute` and, to make the positioning really solid, make `field` itself positioned.
+Shuning uchun biz `position:absolute` ishlatishimiz kerak va joylashtirishni haqiqatan ham mustahkam qilish uchun `field` ning o'zini joylashtirilgan qilishimiz kerak.
 
-Then the ball will be positioned relatively to the field:
+Keyin to'p maydoniga nisbatan joylashtiriladi:
 
 ```css
 #field {
@@ -16,36 +17,36 @@ Then the ball will be positioned relatively to the field:
 
 #ball {
   position: absolute;
-  left: 0; /* relative to the closest positioned ancestor (field) */
+  left: 0; /* eng yaqin joylashtirilgan ajdodga nisbatan (field) */
   top: 0;
-  transition: 1s all; /* CSS animation for left/top makes the ball fly */
+  transition: 1s all; /* left/top uchun CSS animatsiyasi to'pni uchishini ta'minlaydi */
 }
 ```
 
-Next we need to assign the correct `ball.style.left/top`. They contain field-relative coordinates now.
+Keyin biz to'g'ri `ball.style.left/top` tayinlashimiz kerak. Ular endi maydoniga nisbatan koordinatalarni o'z ichiga oladi.
 
-Here's the picture:
+Mana rasm:
 
 ![](move-ball-coords.svg)
 
-We have `event.clientX/clientY` -- window-relative coordinates of the click.
+Bizda `event.clientX/clientY` mavjud -- bosishning oynaga nisbatan koordinatalari.
 
-To get field-relative `left` coordinate of the click, we can substract the field left edge and the border width:
+Bosishning maydoniga nisbatan `left` koordinatasini olish uchun maydon chap chegarasi va chegara kengligini ayirishimiz mumkin:
 
 ```js
 let left = event.clientX - fieldCoords.left - field.clientLeft;
 ```
 
-Normally, `ball.style.left` means the "left edge of the element" (the ball). So if we assign that `left`, then the ball edge, not center, would be under the mouse cursor.
+Odatda, `ball.style.left` "elementni chap chetini" (to'pni) anglatadi. Shuning uchun agar biz o'sha `left` ni tayinlasak, to'pni markazi emas, balki cheti sichqoncha kursori ostida bo'ladi.
 
-We need to move the ball half-width left and half-height up to make it center.
+To'pni markazlashtirish uchun yarim kenglik chapga va yarim balandlik yuqoriga siljitishimiz kerak.
 
-So the final `left` would be:
+Shuning uchun yakuniy `left` quyidagicha bo'ladi:
 
 ```js
 let left = event.clientX - fieldCoords.left - field.clientLeft - ball.offsetWidth/2;
 ```
 
-The vertical coordinate is calculated using the same logic.
+Vertikal koordinata bir xil mantiq bilan hisoblanadi.
 
-Please note that the ball width/height must be known at the time we access `ball.offsetWidth`. Should be specified in HTML or CSS.
+Diqqat qiling, biz `ball.offsetWidth` ga murojaat qilganimizda to'pni kengligi/balandligi ma'lum bo'lishi kerak. HTML yoki CSS da ko'rsatilishi kerak.

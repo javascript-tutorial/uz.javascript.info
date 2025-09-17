@@ -4,7 +4,7 @@ Javob: `1`.
 let i = 3;
 
 while (i) {
-  alert( i-- );
+  alert(i--);
 }
 ```
 
@@ -17,9 +17,9 @@ let i = 3;
 
 alert(i--); // 3 ni ko'rsatadi, i ni 2 ga kamaytiradi
 
-alert(i--) // 2 ni ko'rsatadi, i ni 1 ga kamaytiradi
+alert(i--); // 2 ni ko'rsatadi, i ni 1 ga kamaytiradi
 
-alert(i--) // 1 ni ko'rsatadi, i ni 0 ga kamaytiradi
+alert(i--); // 1 ni ko'rsatadi, i ni 0 ga kamaytiradi
 
 // tugadi, while(i) tekshuruvi esa tsiklni to'xtatadi
 ```

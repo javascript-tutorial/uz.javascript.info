@@ -1,46 +1,46 @@
-# Quantifiers +, *, ? and {n}
+# Miqdorchilar +, *, ? va {n}
 
-Let's say we have a string like `+7(903)-123-45-67` and want to find all numbers in it. But unlike before, we are interested not in single digits, but full numbers: `7, 903, 123, 45, 67`.
+Aytaylik, bizda `+7(903)-123-45-67` kabi satr bor va unda barcha raqamlarni topishni xohlaymiz. Lekin avvalgidan farqli o'laroq, biz alohida raqamlar emas, balki to'liq raqamlar bilan qiziqamiz: `7, 903, 123, 45, 67`.
 
-A number is a sequence of 1 or more digits `pattern:\d`. To mark how many we need, we can append a *quantifier*.
+Raqam - bu 1 yoki undan ko'p raqamlar ketma-ketligi `pattern:\d`. Qanchasi kerakligini belgilash uchun *miqdorchi* qo'shishimiz mumkin.
 
-## Quantity {n}
+## Miqdor {n}
 
-The simplest quantifier is a number in curly braces: `pattern:{n}`.
+Eng oddiy miqdorchi - jingalak qavs ichidagi raqam: `pattern:{n}`.
 
-A quantifier is appended to a character (or a character class, or a `[...]` set etc) and specifies how many we need.
+Miqdorchi belgi (yoki belgilar sinfi, yoki `[...]` to'plam va hokazo)ga qo'shiladi va qancha kerakligini belgilaydi.
 
-It has a few advanced forms, let's see examples:
+Uning bir nechta ilg'or shakllari bor, misollarni ko'raylik:
 
-The exact count: `pattern:{5}`
-: `pattern:\d{5}` denotes exactly 5 digits, the same as `pattern:\d\d\d\d\d`.
+Aniq son: `pattern:{5}`
+: `pattern:\d{5}` aynan 5 ta raqamni bildiradi, `pattern:\d\d\d\d\d` bilan bir xil.
 
-    The example below looks for a 5-digit number:
+    Quyidagi misol 5 xonali raqamni qidiradi:
 
     ```js run
     alert( "I'm 12345 years old".match(/\d{5}/) ); //  "12345"
     ```
 
-    We can add `\b` to exclude longer numbers: `pattern:\b\d{5}\b`.
+    Uzunroq raqamlarni chiqarib tashlash uchun `\b` qo'shishimiz mumkin: `pattern:\b\d{5}\b`.
 
-The range: `pattern:{3,5}`, match 3-5 times
-: To find numbers from 3 to 5 digits we can put the limits into curly braces: `pattern:\d{3,5}`
+Diapazon: `pattern:{3,5}`, 3-5 marta mos keladi
+: 3 dan 5 gacha raqamlarni topish uchun chegaralarni jingalak qavslarga qo'yishimiz mumkin: `pattern:\d{3,5}`
 
     ```js run
     alert( "I'm not 12, but 1234 years old".match(/\d{3,5}/) ); // "1234"
     ```
 
-    We can omit the upper limit.
+    Yuqori chegarani tashlab qo'yishimiz mumkin.
 
-    Then a regexp `pattern:\d{3,}` looks for sequences of digits of length `3` or more:
+    Keyin `pattern:\d{3,}` regexp uzunligi `3` yoki undan ko'p raqamlar ketma-ketligini qidiradi:
 
     ```js run
     alert( "I'm not 12, but 345678 years old".match(/\d{3,}/) ); // "345678"
     ```
 
-Let's return to the string `+7(903)-123-45-67`.
+`+7(903)-123-45-67` satriga qaytaylik.
 
-A number is a sequence of one or more digits in a row. So the regexp is `pattern:\d{1,}`:
+Raqam - bu bir yoki undan ko'p raqamlarning ketma-ketligi. Demak, regexp `pattern:\d{1,}`:
 
 ```js run
 let str = "+7(903)-123-45-67";
@@ -50,14 +50,14 @@ let numbers = str.match(/\d{1,}/g);
 alert(numbers); // 7,903,123,45,67
 ```
 
-## Shorthands
+## Qisqartmalar
 
-There are shorthands for most used quantifiers:
+Ko'p ishlatiladigan miqdorchilar uchun qisqartmalar mavjud:
 
 `pattern:+`
-: Means "one or more", the same as `pattern:{1,}`.
+: "Bir yoki ko'p" degani, `pattern:{1,}` bilan bir xil.
 
-    For instance, `pattern:\d+` looks for numbers:
+    Masalan, `pattern:\d+` raqamlarni qidiradi:
 
     ```js run
     let str = "+7(903)-123-45-67";
@@ -66,11 +66,11 @@ There are shorthands for most used quantifiers:
     ```
 
 `pattern:?`
-: Means "zero or one", the same as `pattern:{0,1}`. In other words, it makes the symbol optional.
+: "Nol yoki bir" degani, `pattern:{0,1}` bilan bir xil. Boshqacha qilib aytganda, belgini ixtiyoriy qiladi.
 
-    For instance, the pattern `pattern:ou?r` looks for `match:o` followed by zero or one `match:u`, and then `match:r`.
+    Masalan, `pattern:ou?r` naqshi `match:o` dan keyin nol yoki bitta `match:u`, keyin `match:r` ni qidiradi.
 
-    So, `pattern:colou?r` finds both `match:color` and `match:colour`:
+    Shunday qilib, `pattern:colou?r` ham `match:color` ham `match:colour` ni topadi:
 
     ```js run
     let str = "Should I write color or colour?";
@@ -79,64 +79,64 @@ There are shorthands for most used quantifiers:
     ```
 
 `pattern:*`
-: Means "zero or more", the same as `pattern:{0,}`. That is, the character may repeat any times or be absent.
+: "Nol yoki ko'p" degani, `pattern:{0,}` bilan bir xil. Ya'ni belgi istalgan marta takrorlanishi yoki umuman bo'lmasligi mumkin.
 
-    For example, `pattern:\d0*` looks for a digit followed by any number of zeroes (may be many or none):
+    Masalan, `pattern:\d0*` raqamdan keyin istalgan miqdordagi nollarni qidiradi (ko'p yoki hech bo'lmasligi mumkin):
 
     ```js run
     alert( "100 10 1".match(/\d0*/g) ); // 100, 10, 1
     ```
 
-    Compare it with `pattern:+` (one or more):
+    Uni `pattern:+` (bir yoki ko'p) bilan solishtiring:
 
     ```js run
     alert( "100 10 1".match(/\d0+/g) ); // 100, 10
-    // 1 not matched, as 0+ requires at least one zero
+    // 1 mos kelmadi, chunki 0+ kamida bitta nol talab qiladi
     ```
 
-## More examples
+## Ko'proq misollar
 
-Quantifiers are used very often. They serve as the main "building block" of complex regular expressions, so let's see more examples.
+Miqdorchilar juda tez-tez ishlatiladi. Ular murakkab doimiy ifodalarning asosiy "qurilish bloki" vazifasini bajaradi, shuning uchun ko'proq misollarni ko'raylik.
 
-**Regexp for decimal fractions (a number with a floating point): `pattern:\d+\.\d+`**
+**O'nli kasrlar uchun regexp (suzuvchi nuqtali raqam): `pattern:\d+\.\d+`**
 
-In action:
+Amalda:
 ```js run
 alert( "0 1 12.345 7890".match(/\d+\.\d+/g) ); // 12.345
 ```
 
-**Regexp for an "opening HTML-tag without attributes", such as `<span>` or `<p>`.**
+**Atributsiz "HTML tegi ochish" uchun regexp, masalan `<span>` yoki `<p>`.**
 
-1. The simplest one: `pattern:/<[a-z]+>/i`
+1. Eng oddiyi: `pattern:/<[a-z]+>/i`
 
     ```js run
     alert( "<body> ... </body>".match(/<[a-z]+>/gi) ); // <body>
     ```
 
-    The regexp looks for character `pattern:'<'` followed by one or more Latin letters, and then  `pattern:'>'`.
+    Regexp `pattern:'<'` belgisini, keyin bir yoki ko'p lotin harflarini, keyin `pattern:'>'` ni qidiradi.
 
-2. Improved: `pattern:/<[a-z][a-z0-9]*>/i`
+2. Yaxshilangan: `pattern:/<[a-z][a-z0-9]*>/i`
 
-    According to the standard, HTML tag name may have a digit at any position except the first one, like `<h1>`.
+    Standartga ko'ra, HTML teg nomi birinchisidan tashqari istalgan pozitsiyada raqamga ega bo'lishi mumkin, masalan `<h1>`.
 
     ```js run
     alert( "<h1>Hi!</h1>".match(/<[a-z][a-z0-9]*>/gi) ); // <h1>
     ```
 
-**Regexp "opening or closing HTML-tag without attributes": `pattern:/<\/?[a-z][a-z0-9]*>/i`**
+**"Atributsiz HTML tegi ochish yoki yopish" uchun regexp: `pattern:/<\/?[a-z][a-z0-9]*>/i`**
 
-We added an optional slash `pattern:/?` near the beginning of the pattern. Had to escape it with a backslash, otherwise JavaScript would think it is the pattern end.
+Biz naqsh boshiga ixtiyoriy qiyshiq chiziq `pattern:/?` qo'shdik. Uni teskari chiziq bilan ekranlashga to'g'ri keldi, aks holda JavaScript uni naqsh oxiri deb o'ylaydi.
 
 ```js run
 alert( "<h1>Hi!</h1>".match(/<\/?[a-z][a-z0-9]*>/gi) ); // <h1>, </h1>
 ```
 
-```smart header="To make a regexp more precise, we often need make it more complex"
-We can see one common rule in these examples: the more precise is the regular expression -- the longer and more complex it is.
+```smart header="Regexpni aniqroq qilish uchun ko'pincha uni murakkabroq qilishimiz kerak"
+Bu misollarda umumiy qoidani ko'rishimiz mumkin: doimiy ifoda qanchalik aniq bo'lsa - shunchalik uzun va murakkab.
 
-For instance, for HTML tags we could use a simpler regexp: `pattern:<\w+>`. But as HTML has stricter restrictions for a tag name, `pattern:<[a-z][a-z0-9]*>` is more reliable.
+Masalan, HTML teglar uchun biz oddiyroq regexpdan foydalanishimiz mumkin: `pattern:<\w+>`. Lekin HTML teg nomi uchun qattiqroq cheklovlarga ega bo'lgani uchun, `pattern:<[a-z][a-z0-9]*>` ishonchlirog'.
 
-Can we use `pattern:<\w+>` or we need `pattern:<[a-z][a-z0-9]*>`?
+`pattern:<\w+>` ishlatamizmi yoki `pattern:<[a-z][a-z0-9]*>` kerakmi?
 
-In real life both variants are acceptable. Depends on how tolerant we can be to "extra" matches and whether it's difficult or not to remove them from the result by other means.
+Haqiqiy hayotda ikkala variant ham qabul qilinadi. Bu "qo'shimcha" mosliklarga qanchalik toqat qilishimiz va ularni boshqa usullar bilan natijadan olib tashlash qiyin yoki yoqligiga bog'liq.
 ```

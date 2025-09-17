@@ -1,44 +1,44 @@
-# Kod tuzulishi
+# Kod tuzilishi
 
-Biz o'rganadigan birinchi narsa bu kodning bloklari.
+Birinchi navbatda biz kodning asosiy qurilish bloklarini o'rganamiz.
 
-## Ifodalar
+## Bayonotlar
 
-Ifodalar - amallarni bajaruvchi sintaksis konstruktsiyalar va buyruqlardir.
+Bayonotlar - bu amallarni bajaradigan sintaksis konstruktsiyalar va buyruqlardir.
 
-Biz allaqachon bir ifoda ko'rgan edik, `alert('Hello, world!')`, qaysiki "Hello, world!" xabarni ko'rsatadi.
+Biz allaqachon `alert('Salom, dunyo!')` bayonotini ko'rdik, u "Salom, dunyo!" xabarini ko'rsatadi.
 
-Bizning kodimizda kerakli kabi ko'p ifodalar bo'lishi mumkin. Ifodalarni nuqtali vergul bilan ajratish mumkin.
+Kodimizda istalgancha ko'p bayonotlarga ega bo'lishimiz mumkin. Bayonotlar nuqta-vergul bilan ajratilishi mumkin.
 
-Misol uchun, bu erda biz "Hello World" ni ikkita alertga(ogohlantirishga) ajratdik:
-
-```js run no-beautify
-alert('Hello'); alert('World');
-```
-
-Odatda, ifodalar, kodni yanada o'qish oson bo'lishi uchun, alohida satrlarga yoziladi:
+Masalan, bu yerda biz "Salom dunyo"ni ikkita alert ga bo'lamiz:
 
 ```js run no-beautify
-alert('Hello');
-alert('World');
+alert('Salom'); alert('Dunyo');
 ```
 
-## Nuqta-vergul [#semicolon]
+Odatda, bayonotlar alohida satrlarda yoziladi, bu kodni o'qishni osonlashtiradi:
 
-Nuqta-vergul ko'p hollarda yozilmashi mumkin, agar satr uzilishi bo'lsa.
+```js run no-beautify
+alert('Salom');
+alert('Dunyo');
+```
+
+## Nuqta-vergullar [#semicolon]
+
+Satr tanaffusi mavjud bo'lgan holatlarda nuqta-vergulni tashlab qoldirish mumkin.
 
 Bu ham ishlaydi:
 
 ```js run no-beautify
-alert('Hello')
-alert('World')
+alert('Salom')
+alert('Dunyo')
 ```
 
-Bu erda JavaScript satr uzilishini "yashirin" nuqta-vergul sifatida izohlaydi. Bu [avtomatik vergul kiritish](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) deyiladi.
+Bu yerda JavaScript satr tanaffusini "yashirin" nuqta-vergul sifatida talqin qiladi. Bu [avtomatik nuqta-vergul qo'yish](https://tc39.github.io/ecma262/#sec-automatic-semicolon-insertion) deb ataladi.
 
-**Ko'p hollarda yangi satrni nuqta-vergul dib nazarda tutadi. Lekin "ko'p hollarda" "har doim" degani emas!**
+**Ko'p hollarda yangi satr nuqta-vergulni bildiradi. Ammo "ko'p hollarda" degani "har doim" degani emas!**
 
-Yangi satr nuqta-vergulni anglatmaydigan holatlar mavjud. Misol uchun:
+Yangi satr nuqta-vergulni bildirmaydigan holatlar mavjud. Masalan:
 
 ```js run no-beautify
 alert(3 +
@@ -46,158 +46,110 @@ alert(3 +
 + 2);
 ```
 
-<<<<<<< HEAD
-Kod `6` ni chiqaradi, chunki JavaScript bu erga nuqta-vergul qo'shmaydi. Agar satr ortiqcha `"+"` bilan tugagan bo'lsa, u "to'liq bo'lmagan ifoda" ekanligi intuitiv ravishda aniq, shuning uchun nuqta-vergul shart emas. Va bu holda, hamma narsa maqsadga muvofiq ishlaydi.
-=======
-The code outputs `6` because JavaScript does not insert semicolons here. It is intuitively obvious that if the line ends with a plus `"+"`, then it is an "incomplete expression", so a semicolon there would be incorrect. And in this case, that works as intended.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Kod `6` ni chiqaradi, chunki JavaScript bu yerda nuqta-vergul qo'ymaydi. Agar satr plyus `"+"` bilan tugasa, u "to'liq bo'lmagan ifoda" ekanligini intuitiv ravishda tushunish mumkin, shuning uchun bu yerda nuqta-vergul noto'g'ri bo'ladi. Va bu holda, bu mo'ljallangandek ishlaydi.
 
-**Ammo shunday holatlar mavjudki, JavaScript haqiqatan ham zarur bo'lgan joyda nuqta-vergulni "unutadi".**
+**Ammo JavaScript haqiqatan ham kerak bo'lgan joyda nuqta-vergulni "taxmin qila olmaydigan" vaziyatlar mavjud.**
 
-Bunday hollarda sodir bo'lgan xatolarni topish va tuzatish juda qiyin.
+Bunday hollarda yuzaga keladigan xatolarni topish va tuzatish juda qiyin.
 
-````smart header="Xatoning misoli"
-Agar bunday aniq xato misolni ko'rishning hohlasangiz, bu kodni tekshiring:
+````smart header="Xato misoli"
+Agar siz bunday xatoning aniq misolini ko'rishni istasangiz, ushbu kodni tekshiring:
 
 ```js run
-alert("Hello");
+alert("Salom");
 
 [1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
-Hali qavs `[]` va 'forEach (har biri uchun)' ma'nosi haqida o'ylashning hojati yo'q. Ularni keyinroq o'rganamiz. Hozircha, faqat kod natija eslab qoling: u `1` keyin `2` ko'rsatadi.
+Hozircha `[]` qavslar va `forEach` ning ma'nosini o'ylashga hojat yo'q. Biz ularni keyinroq o'rganamiz. Hozircha faqat kodni ishga tushirish natijasini eslab qoling: u `Salom`, keyin `1`, keyin `2` ni ko'rsatadi.
 
-Endi koddan oldin `alert(ogohlantirish)` ni qo'shaylik va uni nuqta-vergul bilan *tugatmaylik*:
-
-```js run no-beautify
-alert("Xato bo'ladi")
-=======
-No need to think about the meaning of the brackets `[]` and `forEach` yet. We'll study them later. For now, just remember the result of running the code: it shows `Hello`, then `1`, then `2`.
-
-Now let's remove the semicolon after the `alert`:
+Endi `alert` dan keyingi nuqta-vergulni olib tashlaylik:
 
 ```js run no-beautify
-alert("Hello")
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+alert("Salom")
 
 [1, 2].forEach(alert);
 ```
 
-<<<<<<< HEAD
-Endi kodni ishlatsak, faqat birinchi `alert(ogohlantirish)` ko'rsatiladi va keyin bizda xato bor!
+Yuqoridagi koddan farq faqat bitta belgida: birinchi satr oxiridagi nuqta-vergul yo'qoldi.
 
-Lekin `alert` dan keyin nuqta-vergul qo'shsak, yana hamma narsa yaxshi:
+Agar biz ushbu kodni ishga tushirsak, faqat birinchi `Salom` ko'rsatiladi (va xato bor, uni ko'rish uchun konsolni ochishingiz kerak bo'lishi mumkin). Endi raqamlar yo'q.
 
-```js run
-alert("Hozir barchasi yaxshi");
-=======
-The difference compared to the code above is only one character: the semicolon at the end of the first line is gone.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Buning sababi shundaki, JavaScript kvadrat qavslar `[...]` oldida nuqta-vergulni taxmin qilmaydi. Shunday qilib, oxirgi misoldagi kod bitta bayonot sifatida qabul qilinadi.
 
-If we run this code, only the first `Hello` shows (and there's an error, you may need to open the console to see it). There are no numbers any more.
-
-<<<<<<< HEAD
-Endi biz `1` va `2` dan so'ng "Hozir barchasi yaxshi" xabar bor.
-
-
-Nuqta-vergulsiz variantdagi xatolik JavaScript kvadrat qavslardan oldin nuqta-vergulni avtomatik qo'ymagani uchun yuzaga keladi `[...]`.
-
-Shunday qilib, nuqta-vergul avtomatik joylashtirilmaganligi sababli, birinchi misoldagi kod bitta ifoda sifatida qabul qilinadi. Mana buni interpretator ko'radi:
+Mana dvigatel uni qanday ko'radi:
 
 ```js run no-beautify
-alert("Xato bo'ladi")[1, 2].forEach(alert)
+alert("Salom")[1, 2].forEach(alert);
 ```
 
-Ammo bu bitta emas, ikkita alohida ifoda bo'lishi kerak. Bunday holda birlashish noto'g'ri, shuning uchun xato. Bu turdagi hato boshqa holatlarda ham bo'lishi mumkin.
+G'alati ko'rinadi, to'g'rimi? Bu holda bunday birlashtirish noto'g'ri. Kod to'g'ri ishlashi uchun `alert` dan keyin nuqta-vergul qo'yishimiz kerak.
 
-=======
-That's because JavaScript does not assume a semicolon before square brackets `[...]`. So, the code in the last example is treated as a single statement.
-
-Here's how the engine sees it:
-
-```js run no-beautify
-alert("Hello")[1, 2].forEach(alert);
-```
-
-Looks weird, right? Such merging in this case is just wrong. We need to put a semicolon after `alert` for the code to work correctly.
-
-This can happen in other situations also.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Bu boshqa vaziyatlarda ham sodir bo'lishi mumkin.
 ````
 
-Yangi satrlar bilan ajratilgan bo'lsa ham, ifodalar orasida nuqta-vergul qo'yishni tavsiya etamiz. Ushbu qoida jamiyat tomonidan keng qabul qilingan. Yana bir bor ta'kidlab o'tamiz -- *ko'pincha nuqta-vergul qoldirish mumkin*. Ammo ulardan foydalanish xavfsizroq -- ayniqsa, yangi boshlanuvchilar uchun.
+Biz yangi satrlar bilan ajratilgan bo'lsa ham, bayonotlar orasiga nuqta-vergul qo'yishni tavsiya qilamiz. Bu qoida jamiyat tomonidan keng qabul qilingan. Yana bir bor ta'kidlaymiz -- nuqta-vergullarni ko'p vaqt tashlab qoldirish *mumkin*. Ammo ularni ishlatish xavfsizroq -- ayniqsa yangi boshlovchilar uchun.
 
-<<<<<<< HEAD
-## Izohlar
-=======
-## Comments [#code-comments]
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+## Izohlar [#code-comments]
 
-Vaqt o'tgan sayin dasturlar murakkablashib boradi. Shuning uchun *izohlar* qo'shish kerak bo'ladi, kod nima bajarilishini tasvirlab berish uchun.
+Vaqt o'tishi bilan dasturlar tobora murakkablashib boradi. Kod nima qilishi va nima uchun qilishini tavsiflovchi *izohlar* qo'shish zarur bo'ladi.
 
-Izohlarni scirtlarning istalgan joyiga qo'yish mumkin. Ular uning bajarilishiga ta'sir qilmaydi, chunki interpretator ularni e'tiborsiz qoldiradi.
+Izohlarni skriptning istalgan joyiga qo'yish mumkin. Ular uning bajarilishiga ta'sir qilmaydi, chunki dvigatel ularni shunchaki e'tiborsiz qoldiradi.
 
-**Bir qatorli izohlar ikkita oldinga siljish belgilaridan boshlanadi `//`.**
+**Bir satrli izohlar ikki marta oldinga yo'nalgan chiziq belgilari `//` bilan boshlanadi.**
 
-Satrning qolgan qismi izohdir. O'zining to'liq satrini egallashi yoki ifodadan kegin bolishi mumkin.
+Satrning qolgan qismi izoh hisoblanadi. U butun satrni egallashi yoki bayonotdan keyin kelishi mumkin.
 
-Bu erda bo'lgani kabi:
+Masalan:
 ```js run
-// Ushbu izoh o'ziga xos satrni egallaydi
-alert('Hello');
+// Bu izoh o'z satrini egallaydi
+alert('Salom');
 
-alert('World'); // Ushbu izoh ifodadan keyin
+alert('Dunyo'); // Bu izoh bayonotdan keyin keladi
 ```
 
-**Ko'p qatorli izohlar oldinga siljish belgisi va yulduzcha bilan boshlanadi <code>/&#42;</code> so'ng yulduzcha va oldinga siljish belgisi bilan tugaydi<code>&#42;/</code>.**
+**Ko'p satrli izohlar oldinga yo'nalgan chiziq va yulduzcha <code>/&#42;</code> bilan boshlanadi va yulduzcha va oldinga yo'nalgan chiziq <code>&#42;/</code> bilan tugaydi.**
 
-Shunga o'xshash:
+Masalan:
 
 ```js run
-/* Ikki xabarli misol.
+/* Ikki xabar bilan misol.
 Bu ko'p satrli izoh.
 */
-alert('Hello');
-alert('World');
+alert('Salom');
+alert('Dunyo');
 ```
 
-Izohlarning mazmuni e'tiborga olinmaydi, shuning uchun kodni <code>/&#42; ... &#42;/</code>, u bajarilmaydi.
+Izohlar mazmuni e'tiborga olinmaydi, shuning uchun agar biz <code>/&#42; ... &#42;/</code> ichiga kod qo'ysak, u bajarilmaydi.
 
-
-Ba'zan kodning bir qismini vaqtincha o'chirib qo'yish uchun qulay bo'lishi mumkin:
+Ba'zida kodning bir qismini vaqtincha o'chirib qo'yish foydali bo'lishi mumkin:
 
 ```js run
-/* Kodni izohlash
-alert('Hello');
+/* Kodni izohga aylantirish
+alert('Salom');
 */
-alert('World');
+alert('Dunyo');
 ```
 
-<<<<<<< HEAD
-```smart header="Maxsus klavsishalar kombinatsiyalaridan foydalaning"
-Ko'p matn muharrirlarida, kod satrini bitta satrli izoh uchun: `key:Ctrl+/` tugmachasini bosish orqali izohlash mumkin va shunga o'xshash narsa: "Ctrl+Shift+/" - ko'p satrli izohlar uchun (kod qismini tanlang va maxsus klavsishalar kombinatsiyani bosing). Mac uchun `key:Ctrl` o'rniga `key:Cmd` ni sinab ko'ring.
-=======
-```smart header="Use hotkeys!"
-In most editors, a line of code can be commented out by pressing the `key:Ctrl+/` hotkey for a single-line comment and something like `key:Ctrl+Shift+/` -- for multiline comments (select a piece of code and press the hotkey). For Mac, try `key:Cmd` instead of `key:Ctrl` and `key:Option` instead of `key:Shift`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+```smart header="Tez tugmalardan foydalaning!"
+Ko'pgina muharrirlarda kod satrini `key:Ctrl+/` tez tugmasi bilan bir satrli izohga aylantirish mumkin va `key:Ctrl+Shift+/` kabi tugma -- ko'p satrli izohlar uchun (kod qismini tanlang va tez tugmani bosing). Mac uchun `key:Ctrl` o'rniga `key:Cmd` va `key:Shift` o'rniga `key:Option` dan foydalanib ko'ring.
 ```
 
-````warn header="Izohning ichida izoh qoldirish mumkin emas!"
-Mumkin emas `/*...* /` ichida `/*...*/`.
+````warn header="Ichki izohlar qo'llab-quvvatlanmaydi!"
+Boshqa `/*...*/` ichida `/*...*/` bo'lishi mumkin emas.
 
-Bunday kod xato:
+Bunday kod xato bilan to'xtaydi:
 
 ```js run no-beautify
 /*
-  /* Izohning ichida izoh ?!? */
+  /* ichki izoh ?!? */
 */
-alert( 'World' );
+alert( 'Dunyo' );
 ```
 ````
 
-Iltimos, kodingizni izohlashdan tortinmang.
+Iltimos, kodingizga izoh qo'yishdan tortinmang.
 
-Izohlar umumiy kod hajmini oshiradi, ammo bu umuman muammo emas. Ishlab chiqarish serverida nashr etishdan oldin kodni minimallashtiradigan ko'plab vositalar mavjud. Ular izohlarni olib tashlashadi, shuning uchun ular ishlaydigan skriptlarda ko'rinmaydi. Shuning uchun izohlar ishlab chiqarishga umuman salbiy ta'sir ko'rsatmaydi.
+Izohlar kodning umumiy hajmini oshiradi, ammo bu umuman muammo emas. Kodni ishlab chiqarish serveriga nashr etishdan oldin kichiklashtiruvchi ko'plab vositalar mavjud. Ular izohlarni olib tashlaydi, shuning uchun ular ishlaydigan skriptlarda ko'rinmaydi. Shuning uchun izohlar ishlab chiqarishga umuman salbiy ta'sir qilmaydi.
 
-Keyinchalik o'quv qo'llanmada <info:code-quality> bo'limi paydo bo'ladi, unda yaxshiroq izohlar yozishni tushuntiriladi.
+Keyinchalik o'quv qo'llanmada yaxshiroq izohlar qanday yozish haqida ham tushuntiruvchi <info:code-quality> bobi bo'ladi.

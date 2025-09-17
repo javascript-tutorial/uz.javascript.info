@@ -1,4 +1,3 @@
-
 # Obyektlarni ibtidoiylarga aylantirish
 
 Obyektlar `obj1 + obj2` qo'shilganda, `obj1 - obj2` ayirilganda yoki `alert(obj)` yordamida ekranga chiqarilganda nima bo'ladi?
@@ -70,19 +69,19 @@ Iltimos, diqqat qiling -- faqat uchta ishora mavjud. Bu juda oddiy. Hech qanday 
 
 1. Agar usul mavjud bo'lsa, `obj[Symbol.toPrimitive](hint)` ni chaqiring,
 2. Aks holda, agar ishora `"string"` bo'lsa
-    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
+   - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
 3. Aks holda, agar ishora `"number"` yoki `"default"` bo'lsa
-    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
+   - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
 
 ## Symbol.toPrimitive
 
 Birinchi usuldan boshlaylik. Konvertatsiya usulini quyidagicha nomlash uchun ishlatilishi kerak bo'lgan `Symbol.toPrimitive` belgisi mavjud:
 
 ```js
-obj[Symbol.toPrimitive] = function(hint) {
+obj[Symbol.toPrimitive] = function (hint) {
   // ibtidoiy qiymatni qaytaring
   // hint = "string", "number", "default" dan biri
-}
+};
 ```
 
 Masalan, `user` obyekti buni amalga oshiradi:
@@ -95,7 +94,7 @@ let user = {
   [Symbol.toPrimitive](hint) {
     alert(`hint: ${hint}`);
     return hint == "string" ? `{name: "${this.name}"}` : this.money;
-  }
+  },
 };
 
 // konvertatsiya demo:
@@ -105,7 +104,6 @@ alert(user + 500); // hint: default -> 1500
 ```
 
 Koddan ko'rinib turibdiki, `user` konvertatsiyaga qarab o'z-o'zini tavsiflovchi matnga yoki pul miqdoriga aylanadi. `user[Symbol.toPrimitive]` yagona usuli barcha konvertatsiyaga ishlaydi.
-
 
 ## toString/valueOf
 
@@ -131,8 +129,7 @@ let user = {
   // hint="number" yoki "default" uchun
   valueOf() {
     return this.money;
-  }
-
+  },
 };
 
 alert(user); // toString -> {name: "John"}
@@ -148,7 +145,7 @@ let user = {
 
   toString() {
     return this.name;
-  }
+  },
 };
 
 alert(user); // toString -> John
@@ -156,7 +153,6 @@ alert(user + 500); // toString -> John500
 ```
 
 `Symbol.toPrimitive` va `valueOf` bo'lmasa, `toString` barcha ibtidoiy konversiyalarni boshqaradi.
-
 
 ## ToPrimitive va ToString/ToNumber
 
@@ -172,39 +168,42 @@ Masalan:
 
 - Matematik operatsiyalar (binar plyusdan tashqari) `ToNumber` konvertatsiyasini bajaradi:
 
-    ```js run
-    let obj = {
-      toString() { // toString boshqa usullar bo'lmasa, barcha o'zgarishlarni ko'rib chiqadi
-        return "2";
-      }
-    };
+  ```js run
+  let obj = {
+    toString() {
+      // toString boshqa usullar bo'lmasa, barcha o'zgarishlarni ko'rib chiqadi
+      return "2";
+    },
+  };
 
-    alert(obj * 2); // 4, ToPrimitive "2" ni qaytaradi, keyin u 2 ga aylanadi
-    ```
+  alert(obj * 2); // 4, ToPrimitive "2" ni qaytaradi, keyin u 2 ga aylanadi
+  ```
 
 - Binar plyus ibtidoiylarni tekshiradi -- agar u matn bo'lsa, u holda birikma hosil qiladi, aks holda u `ToNumber` ni bajaradi va raqamlar bilan ishlaydi.
 
-    String misoli:
-    ```js run
-    let obj = {
-      toString() {
-        return "2";
-      }
-    };
+  String misoli:
 
-    alert(obj + 2); // 22 (ToPrimitive matn => birlashtirish qaytarildi)
-    ```
+  ```js run
+  let obj = {
+    toString() {
+      return "2";
+    },
+  };
 
-    Number misoli:
-    ```js run
-    let obj = {
-      toString() {
-        return true;
-      }
-    };
+  alert(obj + 2); // 22 (ToPrimitive matn => birlashtirish qaytarildi)
+  ```
 
-    alert(obj + 2); // 3 (ToPrimitive mantiqiy turdagi qiymat qaytarildi, matn bo'lmasa => ToNumber)
-    ```
+  Number misoli:
+
+  ```js run
+  let obj = {
+    toString() {
+      return true;
+    },
+  };
+
+  alert(obj + 2); // 3 (ToPrimitive mantiqiy turdagi qiymat qaytarildi, matn bo'lmasa => ToNumber)
+  ```
 
 ```smart header="Tarixiy qaydlar"
 Tarixiy sabablarga ko'ra `toString` yoki `valueOf` usullari *ibtidoiylarni* qaytarishi kerak: agar ulardan birortasi obyektni qaytarsa, unda xato bo'lmaydi, ammo bu obyekt e'tiborga olinmaydi (masalan, uslub mavjud bo'lmagandak).
@@ -217,6 +216,7 @@ Aksincha, `Symbol.toPrimitive` ibtidoiylarni qaytarishi *shart*, aks holda xato 
 Obyektni ibtidoiy konvertatsiya qilish ko'plab o'rnatilgan funktsiyalar va operatorlar tomonidan avtomatik ravishda chaqiriladi, ular qiymat sifatida ibtidoiylarni kutadilar.
 
 Uning 3 turi (ishoralari) mavjud:
+
 - `"string"` (`alert` va boshqa matn konvertatsiyalari uchun)
 - `"number"` (matematika uchun)
 - `"default"` (ba'zi operatorlar uchun)
@@ -227,8 +227,8 @@ Konvertatsiya qilish algoritmi:
 
 1. Agar usul mavjud bo'lsa, `obj[Symbol.toPrimitive](hint)` ni chaqiring,
 2. Aks holda, agar ishora `"string"` bo'lsa
-    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
+   - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
 3. Aks holda, agar ishora `"number"` yoki `"default"` bo'lsa
-    - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
+   - mavjud bo'lsa ham, `obj.toString()` va `obj.valueOf()` ni sinab ko'ring.
 
 Amalda, faqat `obj.toString()` ni amalga oshirish juda keng tarqalgan, barcha turdagi transformatsiyalar uchun "universal" usul bo'lib, obyektning "o'qiladigan" ko'rinishini qaytaradigan barcha konvertatsiyalar uchun, koddagi nosozliklarni maqsadida amalga oshirish kifoya.

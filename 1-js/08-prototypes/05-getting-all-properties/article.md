@@ -1,11 +1,10 @@
-
 # Barcha xususiyatlarni olish
 
 Obyektdan kalitlarni/qiymatlarni olishning ko'plab usullari mavjud.
 
 Ularning aksariyati obyektning o'zida ishlaydi, prototipni hisobga olmaganda, keling ularni esga olamiz:
 
-- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- sanab o'tiladigan o'z matnlar nomlari/qiymatlari/kalit-qiymat juftliklari massivini qaytaradi. Ushbu usullar faqat *sanab o'tiladigan* xususiyatlarni va *matnlarni kalit sifatida* ro'yxatini beradi.
+- [Object.keys(obj)](mdn:js/Object/keys) / [Object.values(obj)](mdn:js/Object/values) / [Object.entries(obj)](mdn:js/Object/entries) -- sanab o'tiladigan o'z matnlar nomlari/qiymatlari/kalit-qiymat juftliklari massivini qaytaradi. Ushbu usullar faqat _sanab o'tiladigan_ xususiyatlarni va _matnlarni kalit sifatida_ ro'yxatini beradi.
 
 Agar biz ramziy xususiyatlarni istasak:
 
@@ -15,7 +14,7 @@ Agar biz sanab bo'lmaydigan xususiyatlarni xohlasak:
 
 - [Object.getOwnPropertyNames(obj)](mdn:js/Object/getOwnPropertyNames) -- o'zlarining barcha matn xususiyatlarining nomlarini qaytaradi.
 
-Agar biz *barcha* xususiyatlarni xohlasak:
+Agar biz _barcha_ xususiyatlarni xohlasak:
 
 - [Reflect.ownKeys(obj)](mdn:js/Reflect/ownKeys) -- barcha mulk nomlari massivini qaytaradi.
 
@@ -54,15 +53,15 @@ Shunday qilib, biz meros qilib olingan xususiyatlarni filtrlashimiz mumkin (yoki
 
 ```js run
 let animal = {
-  eats: true
+  eats: true,
 };
 
 let rabbit = {
   jumps: true,
-  __proto__: animal
+  __proto__: animal,
 };
 
-for(let prop in rabbit) {
+for (let prop in rabbit) {
   let isOwn = rabbit.hasOwnProperty(prop);
   alert(`${prop}: ${isOwn}`); // jumps: true, then eats: false
 }

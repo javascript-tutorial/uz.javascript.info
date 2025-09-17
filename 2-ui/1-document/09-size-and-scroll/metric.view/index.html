@@ -1,89 +1,122 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <style type="text/css">
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    #example {
-      width: 300px;
-      height: 200px;
-      overflow: auto;
-      border: 25px solid #E8C48F;
-      padding: 20px;
-    }
-
-    .key {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-  </style>
-
-</head>
-
-<body>
-
-
-  <div id="example">
-    <h3>Introduction</h3>
-    <p>This Ecma Standard is based on several originating technologies, the most well known being JavaScript (Netscape) and JScript (Microsoft). The language was invented by Brendan Eich at Netscape and first appeared in that company's Navigator 2.0 browser.
-      It has appeared in all subsequent browsers from Netscape and in all browsers from Microsoft starting with Internet Explorer 3.0. The development of this Standard started in November 1996. The first edition of this Ecma Standard was adopted by the
-      Ecma General Assembly of June 1997.</p>
-
-    <p>That Ecma Standard was submitted to ISO/IEC JTC 1 for adoption under the fast-track procedure, and approved as international standard ISO/IEC 16262, in April 1998. The Ecma General Assembly of June 1998 approved the second edition of ECMA-262 to keep
-      it fully aligned with ISO/IEC 16262. Changes between the first and the second edition are editorial in nature.</p>
-
-    <p>The third edition of the Standard introduced powerful regular expressions, better string handling, new control statements, try/catch exception handling, tighter definition of errors, formatting for numeric output and minor changes in anticipation
-      of forthcoming internationalisation facilities and future language growth. The third edition of the ECMAScript standard was adopted by the Ecma General Assembly of December 1999 and published as ISO/IEC 16262:2002 in June 2002.</p>
-
-  </div>
-
-
-  <div id="mouse-wrap">Mouse coordinates: <span id="mouse">...</span></div>
-  <div id="info"></div>
-
-
-  <script>
-    let props = {
-      geometry: ['clientLeft', 'clientTop', 'clientWidth', 'clientHeight', 'offsetWidth', 'offsetHeight', 'scrollWidth', 'scrollHeight'],
-      scroll: ['scrollLeft', 'scrollTop'],
-      offsetParent: ['offsetParent', 'offsetLeft', 'offsetTop']
-    };
-
-    info.innerHTML = '<h3>Click to see the value:</h3>';
-    for (let k in props) {
-      info.innerHTML += `<h4>${k}</h4>`;
-      let prop = props[k];
-      for (let i = 0; i < prop.length; i++) {
-        info.innerHTML += "<span class='key'>" + prop[i] + '</span>: <span id="' + prop[i] + '">&nbsp;</span>' + " "
-        i++;
-        if (i < prop.length) {
-          info.innerHTML += "<span class='key'>" + prop[i] + '</span>: <span id="' + prop[i] + '">&nbsp;</span>';
-        }
-        info.innerHTML += "<br/>";
-
+  <head>
+    <meta charset="utf-8" />
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
       }
-    }
 
-    document.onclick = function(event) {
-      let target = event.target;
-      if (!target.classList.contains('key')) return;
+      #example {
+        width: 300px;
+        height: 200px;
+        overflow: auto;
+        border: 25px solid #e8c48f;
+        padding: 20px;
+      }
 
-      let prop = target.innerHTML;
-      let value = example[prop];
-      value = value.tagName || value;
-      document.getElementById(prop).innerHTML = value;
-    };
+      .key {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
 
+  <body>
+    <div id="example">
+      <h3>Introduction</h3>
+      <p>
+        Ushbu Ecma standarti bir nechta ishlab chiqilgan texnologiyalarga
+        asoslangan Eng mashhur JavaScript (Netscape) va JScript (Microsoft). The
+        til Netscape'da Brendan Eich tomonidan ixtiro qilingan va birinchi
+        bo'lib paydo bo'lgan ushbu kompaniyaning Navigator 2.0 brauzeri. U
+        keyingi barchalarida paydo bo'ldi Netscape brauzerlari va Microsoft-dan
+        boshlab barcha brauzerlarda Internet Explorer 3.0. Ushbu standartni
+        ishlab chiqish yilidan boshlangan Noyabr 1996. Ushbu Ecma standartining
+        birinchi nashri tomonidan qabul qilingan Ekma Bosh Assambleyasi 1997 yil
+        iyun.
+      </p>
 
-    document.onmousemove = function(e) {
-      document.getElementById('mouse').innerHTML = Math.round(e.clientX) + ':' + Math.round(e.clientY);
-    };
-  </script>
+      <p>
+        Ushbu Ecma standarti qabul qilish uchun ISO/IEC JTC 1 ga taqdim etilgan
+        tezkor protsedura va ISO/IEC xalqaro standarti sifatida tasdiqlangan
+        16262, 1998 yil aprelda. 1998 yil iyun oyida Ekma Bosh Assambleyasi
+        tasdiqladi ECMA-262 ning ikkinchi nashri uni ISO/IEC bilan to'liq
+        moslashtirish uchun 16262. Birinchi va ikkinchi nashr o'rtasidagi
+        o'zgartirishlar tahririyatda tabiat.
+      </p>
 
-</body>
+      <p>
+        Standartning uchinchi nashri kuchli muntazamlikni taqdim etdi ifodalar,
+        yaxshiroq satr bilan ishlash, yangi boshqaruv bayonotlari, sinab
+        ko'ring/tutib oling istisnolardan foydalanish, xatolarni aniqroq
+        aniqlash, raqamli uchun formatlash ishlab chiqarish va bo'lajaklarni
+        kutishdagi kichik o'zgarishlar xalqarolashtirish imkoniyatlari va
+        kelajakda til o'sishi. Uchinchisi ECMAScript standartining nashri Ecma
+        General tomonidan qabul qilingan Assambleya 1999 yil dekabrda va iyun
+        oyida ISO/IEC 16262:2002 sifatida nashr etilgan 2002 yil.
+      </p>
+    </div>
+
+    <div id="mouse-wrap">Mouse coordinates: <span id="mouse">...</span></div>
+    <div id="info"></div>
+
+    <script>
+      let props = {
+        geometry: [
+          "clientLeft",
+          "clientTop",
+          "clientWidth",
+          "clientHeight",
+          "offsetWidth",
+          "offsetHeight",
+          "scrollWidth",
+          "scrollHeight",
+        ],
+        scroll: ["scrollLeft", "scrollTop"],
+        offsetParent: ["offsetParent", "offsetLeft", "offsetTop"],
+      };
+
+      info.innerHTML = "<h3>Qiymatni ko'rish uchun bosing:</h3>";
+      for (let k in props) {
+        info.innerHTML += `<h4>${k}</h4>`;
+        let prop = props[k];
+        for (let i = 0; i < prop.length; i++) {
+          info.innerHTML +=
+            "<span class='key'>" +
+            prop[i] +
+            '</span>: <span id="' +
+            prop[i] +
+            '">&nbsp;</span>' +
+            " ";
+          i++;
+          if (i < prop.length) {
+            info.innerHTML +=
+              "<span class='key'>" +
+              prop[i] +
+              '</span>: <span id="' +
+              prop[i] +
+              '">&nbsp;</span>';
+          }
+          info.innerHTML += "<br/>";
+        }
+      }
+
+      document.onclick = function (event) {
+        let target = event.target;
+        if (!target.classList.contains("key")) return;
+
+        let prop = target.innerHTML;
+        let value = example[prop];
+        value = value.tagName || value;
+        document.getElementById(prop).innerHTML = value;
+      };
+
+      document.onmousemove = function (e) {
+        document.getElementById("mouse").innerHTML =
+          Math.round(e.clientX) + ":" + Math.round(e.clientY);
+      };
+    </script>
+  </body>
 </html>

@@ -1,3 +1,3 @@
-let table = document.getElementById('bagua-table');
+let table = document.getElementById("bagua-table");
 
-/* your code */
+/* sizning kodingiz */

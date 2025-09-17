@@ -1,3 +1,3 @@
-# Browser: Document, Events, Interfaces 
+# Bauzer: Hujjatlar, Voqealar, Interfeyslar
 
-Learning how to manage the browser page: add elements, manipulate their size and position, dynamically create interfaces and interact with the visitor.
+Brauzer sahifasini qanday boshqarishni o'rganish: elementlarni qo'shish, ularning o'lchamlari va holatini boshqarish, dinamik ravishda interfeyslarni yaratish va tashrif buyuruvchi bilan o'zaro aloqada bo'lish.

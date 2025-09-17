@@ -1,169 +1,169 @@
-# Sets and ranges [...]
+# To'plamlar va diapazonlar [...]
 
-Several characters or character classes inside square brackets `[…]` mean to "search for any character among given".
+Kvadrat qavslar `[…]` ichidagi bir nechta belgilar yoki belgilar sinflari "berilganlar orasidan har qanday belgini qidirish" degani.
 
-## Sets
+## To'plamlar
 
-For instance, `pattern:[eao]` means any of the 3 characters: `'a'`, `'e'`, or `'o'`.
+Masalan, `pattern:[eao]` 3 ta belgidan istalgan birini bildiradi: `'a'`, `'e'`, yoki `'o'`.
 
-That's called a *set*. Sets can be used in a regexp along with regular characters:
+Bu *to'plam* deb ataladi. To'plamlar regexpda oddiy belgilar bilan birga ishlatilishi mumkin:
 
 ```js run
-// find [t or m], and then "op"
+// [t yoki m], keyin "op" ni topish
 alert( "Mop top".match(/[tm]op/gi) ); // "Mop", "top"
 ```
 
-Please note that although there are multiple characters in the set, they correspond to exactly one character in the match.
+E'tibor bering, to'plamda bir nechta belgi bo'lishiga qaramay, ular moslikda aynan bitta belgiga mos keladi.
 
-So the example below gives no matches:
+Shuning uchun quyidagi misol hech qanday moslik bermaydi:
 
 ```js run
-// find "V", then [o or i], then "la"
-alert( "Voila".match(/V[oi]la/) ); // null, no matches
+// "V", keyin [o yoki i], keyin "la" ni topish
+alert( "Voila".match(/V[oi]la/) ); // null, moslik yo'q
 ```
 
-The pattern searches for:
+Naqsh quyidagini qidiradi:
 
 - `pattern:V`,
-- then *one* of the letters `pattern:[oi]`,
-- then `pattern:la`.
+- keyin `pattern:[oi]` harflaridan *bittasi*,
+- keyin `pattern:la`.
 
-So there would be a match for `match:Vola` or `match:Vila`.
+Shunday qilib, `match:Vola` yoki `match:Vila` uchun moslik bo'ladi.
 
-## Ranges
+## Diapazonlar
 
-Square brackets may also contain *character ranges*.
+Kvadrat qavslar *belgilar diapazonlarini* ham o'z ichiga olishi mumkin.
 
-For instance, `pattern:[a-z]` is a character in range from `a` to `z`, and `pattern:[0-5]` is a digit from `0` to `5`.
+Masalan, `pattern:[a-z]` `a` dan `z` gacha oraliqdagi belgi, va `pattern:[0-5]` `0` dan `5` gacha raqam.
 
-In the example below we're searching for `"x"` followed by two digits or letters from `A` to `F`:
+Quyidagi misolda biz `"x"` dan keyin ikki raqam yoki `A` dan `F` gacha harflarni qidirapmiz:
 
 ```js run
 alert( "Exception 0xAF".match(/x[0-9A-F][0-9A-F]/g) ); // xAF
 ```
 
-Here `pattern:[0-9A-F]` has two ranges: it searches for a character that is either a digit from `0` to `9` or a letter from `A` to `F`.
+Bu yerda `pattern:[0-9A-F]` ikki diapazonqa ega: u `0` dan `9` gacha raqam yoki `A` dan `F` gacha harf bo'lgan belgini qidiradi.
 
-If we'd like to look for lowercase letters as well, we can add the range `a-f`: `pattern:[0-9A-Fa-f]`. Or add the flag `pattern:i`.
+Agar kichik harflarni ham qidirishni xohlasak, `a-f` diapazonini qo'shishimiz mumkin: `pattern:[0-9A-Fa-f]`. Yoki `pattern:i` bayrog'ini qo'shish.
 
-We can also use character classes inside `[…]`.
+Shuningdek, `[…]` ichida belgilar sinflaridan ham foydalanishimiz mumkin.
 
-For instance, if we'd like to look for a wordly character `pattern:\w` or a hyphen `pattern:-`, then the set is `pattern:[\w-]`.
+Masalan, agar so'z belgisi `pattern:\w` yoki tire `pattern:-` ni qidirishni xohlasak, to'plam `pattern:[\w-]` bo'ladi.
 
-Combining multiple classes is also possible, e.g. `pattern:[\s\d]` means "a space character or a digit".
+Bir nechta sinflarni birlashtirish ham mumkin, masalan `pattern:[\s\d]` "bo'shliq belgisi yoki raqam" degani.
 
-```smart header="Character classes are shorthands for certain character sets"
-For instance:
+```smart header="Belgilar sinflari ma'lum belgilar to'plamlari uchun qisqartma"
+Masalan:
 
-- **\d** -- is the same as `pattern:[0-9]`,
-- **\w** -- is the same as `pattern:[a-zA-Z0-9_]`,
-- **\s** -- is the same as `pattern:[\t\n\v\f\r ]`, plus few other rare Unicode space characters.
+- **\d** -- `pattern:[0-9]` bilan bir xil,
+- **\w** -- `pattern:[a-zA-Z0-9_]` bilan bir xil,
+- **\s** -- `pattern:[\t\n\v\f\r ]` bilan bir xil, shuningdek bir nechta kam uchraydigan Unicode bo'shliq belgilari.
 ```
 
-### Example: multi-language \w
+### Misol: ko'p tilli \w
 
-As the character class `pattern:\w` is a shorthand for `pattern:[a-zA-Z0-9_]`, it can't find Chinese hieroglyphs, Cyrillic letters, etc.
+`pattern:\w` belgilar sinfi `pattern:[a-zA-Z0-9_]` uchun qisqartma bo'lgani uchun, u xitoy ierogliflarini, kirill harflarini va hokazolarni topa olmaydi.
 
-We can write a more universal pattern, that looks for wordly characters in any language. That's easy with Unicode properties: `pattern:[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]`.
+Biz har qanday tildagi so'z belgilarini qidiradigan universal naqsh yozishimiz mumkin. Unicode xususiyatlari bilan bu oson: `pattern:[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]`.
 
-Let's decipher it. Similar to `pattern:\w`, we're making a set of our own that includes characters with following Unicode properties:
+Keling, buni yechaylik. `pattern:\w` ga o'xshab, biz quyidagi Unicode xususiyatlariga ega belgilarni o'z ichiga olgan o'z to'plamimizni yaratmoqdamiz:
 
-- `Alphabetic` (`Alpha`) - for letters,
-- `Mark` (`M`) - for accents,
-- `Decimal_Number` (`Nd`) - for digits,
-- `Connector_Punctuation` (`Pc`) - for the underscore `'_'` and similar characters,
-- `Join_Control` (`Join_C`) - two special codes `200c` and `200d`, used in ligatures, e.g. in Arabic.
+- `Alphabetic` (`Alpha`) - harflar uchun,
+- `Mark` (`M`) - urg'u belgilari uchun,
+- `Decimal_Number` (`Nd`) - raqamlar uchun,
+- `Connector_Punctuation` (`Pc`) - pastki chiziq `'_'` va shunga o'xshash belgilar uchun,
+- `Join_Control` (`Join_C`) - `200c` va `200d` ikkita maxsus kod, ligaturalarda ishlatiladi, masalan arab tilida.
 
-An example of use:
+Foydalanish misoli:
 
 ```js run
 let regexp = /[\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]/gu;
 
 let str = `Hi 你好 12`;
 
-// finds all letters and digits:
+// barcha harflar va raqamlarni topadi:
 alert( str.match(regexp) ); // H,i,你,好,1,2
 ```
 
-Of course, we can edit this pattern: add Unicode properties or remove them. Unicode properties are covered in more details in the article <info:regexp-unicode>.
+Albatta, biz bu naqshni tahrirlashimiz mumkin: Unicode xususiyatlarini qo'shish yoki olib tashlash. Unicode xususiyatlari <info:regexp-unicode> maqolasida batafsil ko'rib chiqilgan.
 
-```warn header="Unicode properties aren't supported in IE"
-Unicode properties `pattern:p{…}` are not implemented in IE. If we really need them, we can use library [XRegExp](http://xregexp.com/).
+```warn header="Unicode xususiyatlari IE da qo'llab-quvvatlanmaydi"
+Unicode xususiyatlari `pattern:p{…}` IE da amalga oshirilmagan. Agar ular haqiqatan ham kerak bo'lsa, [XRegExp](http://xregexp.com/) kutubxonasidan foydalanishimiz mumkin.
 
-Or just use ranges of characters in a language that interests us, e.g.  `pattern:[а-я]` for Cyrillic letters.
+Yoki bizni qiziqtiradigan tildagi belgilar diapazonlarini ishlatish, masalan kirill harflari uchun `pattern:[а-я]`.
 ```
 
-## Excluding ranges
+## Istisno diapazonlar
 
-Besides normal ranges, there are "excluding" ranges that look like `pattern:[^…]`.
+Oddiy diapazonlardan tashqari, `pattern:[^…]` ko'rinishidagi "istisno" diapazonlar ham mavjud.
 
-They are denoted by a caret character `^` at the start and match any character *except the given ones*.
+Ular boshida karet belgisi `^` bilan belgilanadi va *berilganlardan tashqari* har qanday belgiga mos keladi.
 
-For instance:
+Masalan:
 
-- `pattern:[^aeyo]` -- any character except  `'a'`, `'e'`, `'y'` or `'o'`.
-- `pattern:[^0-9]` -- any character except a digit, the same as `pattern:\D`.
-- `pattern:[^\s]` -- any non-space character, same as `\S`.
+- `pattern:[^aeyo]` -- `'a'`, `'e'`, `'y'` yoki `'o'` dan tashqari har qanday belgi.
+- `pattern:[^0-9]` -- raqamdan tashqari har qanday belgi, `pattern:\D` bilan bir xil.
+- `pattern:[^\s]` -- bo'shliq bo'lmagan har qanday belgi, `\S` bilan bir xil.
 
-The example below looks for any characters except letters, digits and spaces:
+Quyidagi misol harflar, raqamlar va bo'shliqlardan tashqari har qanday belgilarni qidiradi:
 
 ```js run
-alert( "alice15@gmail.com".match(/[^\d\sA-Z]/gi) ); // @ and .
+alert( "alice15@gmail.com".match(/[^\d\sA-Z]/gi) ); // @ va .
 ```
 
-## Escaping in […]
+## […] da ekranlash
 
-Usually when we want to find exactly a special character, we need to escape it like `pattern:\.`. And if we need a backslash, then we use `pattern:\\`, and so on.
+Odatda maxsus belgini aniq topishni xohlaganimizda, uni `pattern:\.` kabi ekranlashimiz kerak. Va agar teskari chiziq kerak bo'lsa, `pattern:\\` ishlatamiz va hokazo.
 
-In square brackets we can use the vast majority of special characters without escaping:
+Kvadrat qavslarda biz ko'pgina maxsus belgilarni ekranlamay ishlatishimiz mumkin:
 
-- Symbols `pattern:. + ( )` never need escaping.
-- A hyphen `pattern:-` is not escaped in the beginning or the end (where it does not define a range).
-- A caret `pattern:^` is only escaped in the beginning (where it means exclusion).
-- The closing square bracket `pattern:]` is always escaped (if we need to look for that symbol).
+- `pattern:. + ( )` belgilari hech qachon ekranlanmaydi.
+- Tire `pattern:-` boshida yoki oxirida ekranlanmaydi (bu yerda u diapazon belgilamaydi).
+- Karet `pattern:^` faqat boshida ekranlanadi (bu yerda u istisno bildiradi).
+- Yopuvchi kvadrat qavs `pattern:]` har doim ekranlanadi (agar shu belgini qidirishimiz kerak bo'lsa).
 
-In other words, all special characters are allowed without escaping, except when they mean something for square brackets.
+Boshqacha qilib aytganda, kvadrat qavslar uchun biror ma'no bildirmagan holda, barcha maxsus belgilarga ruxsat beriladi.
 
-A dot `.` inside square brackets means just a dot. The pattern `pattern:[.,]` would look for one of characters: either a dot or a comma.
+Kvadrat qavslar ichidagi nuqta `.` shunchaki nuqta degani. `pattern:[.,]` naqshi belgilardan birini qidiradi: nuqta yoki vergul.
 
-In the example below the regexp `pattern:[-().^+]` looks for one of the characters `-().^+`:
+Quyidagi misolda `pattern:[-().^+]` regexp `-().^+` belgilaridan birini qidiradi:
 
 ```js run
-// No need to escape
+// Ekranlash kerak emas
 let regexp = /[-().^+]/g;
 
-alert( "1 + 2 - 3".match(regexp) ); // Matches +, -
+alert( "1 + 2 - 3".match(regexp) ); // +, - ni topadi
 ```
 
-...But if you decide to escape them "just in case", then there would be no harm:
+...Lekin agar siz ularni "har holda" ekranlashga qaror qilsangiz, hech qanday zarar bo'lmaydi:
 
 ```js run
-// Escaped everything
+// Hamma narsani ekranlash
 let regexp = /[\-\(\)\.\^\+]/g;
 
-alert( "1 + 2 - 3".match(regexp) ); // also works: +, -
+alert( "1 + 2 - 3".match(regexp) ); // ham ishlaydi: +, -
 ```
 
-## Ranges and flag "u"
+## Diapazonlar va "u" bayrog'i
 
-If there are surrogate pairs in the set, flag `pattern:u` is required for them to work correctly.
+Agar to'plamda surrogate juftliklar bo'lsa, ularning to'g'ri ishlashi uchun `pattern:u` bayrog'i kerak.
 
-For instance, let's look for `pattern:[𝒳𝒴]` in the string `subject:𝒳`:
+Masalan, `subject:𝒳` satrida `pattern:[𝒳𝒴]` ni qidiraylik:
 
 ```js run
-alert( '𝒳'.match(/[𝒳𝒴]/) ); // shows a strange character, like [?]
-// (the search was performed incorrectly, half-character returned)
+alert( '𝒳'.match(/[𝒳𝒴]/) ); // g'alati belgi ko'rsatadi, [?] kabi
+// (qidiruv noto'g'ri amalga oshirildi, yarim belgi qaytarildi)
 ```
 
-The result is incorrect, because by default regular expressions "don't know" about surrogate pairs.
+Natija noto'g'ri, chunki sukut bo'yicha doimiy ifodalar surrogate juftliklar haqida "bilmaydi".
 
-The regular expression engine thinks that `[𝒳𝒴]` -- are not two, but four characters:
-1. left half of `𝒳` `(1)`,
-2. right half of `𝒳` `(2)`,
-3. left half of `𝒴` `(3)`,
-4. right half of `𝒴` `(4)`.
+Doimiy ifoda dvigateli `[𝒳𝒴]` -- ikkita emas, balki to'rtta belgi deb o'ylaydi:
+1. `𝒳` ning chap yarmi `(1)`,
+2. `𝒳` ning o'ng yarmi `(2)`,
+3. `𝒴` ning chap yarmi `(3)`,
+4. `𝒴` ning o'ng yarmi `(4)`.
 
-We can see their codes like this:
+Ularning kodlarini quyidagicha ko'rishimiz mumkin:
 
 ```js run
 for(let i=0; i<'𝒳𝒴'.length; i++) {
@@ -171,27 +171,27 @@ for(let i=0; i<'𝒳𝒴'.length; i++) {
 };
 ```
 
-So, the example above finds and shows the left half of `𝒳`.
+Shunday qilib, yuqoridagi misol `𝒳` ning chap yarmini topadi va ko'rsatadi.
 
-If we add flag `pattern:u`, then the behavior will be correct:
+Agar biz `pattern:u` bayrog'ini qo'shsak, harakat to'g'ri bo'ladi:
 
 ```js run
 alert( '𝒳'.match(/[𝒳𝒴]/u) ); // 𝒳
 ```
 
-The similar situation occurs when looking for a range, such as `[𝒳-𝒴]`.
+`[𝒳-𝒴]` kabi diapazonni qidirishda ham xuddi shunday vaziyat yuz beradi.
 
-If we forget to add flag `pattern:u`, there will be an error:
+Agar biz `pattern:u` bayrog'ini qo'shishni unutsak, xato bo'ladi:
 
 ```js run
-'𝒳'.match(/[𝒳-𝒴]/); // Error: Invalid regular expression
+'𝒳'.match(/[𝒳-𝒴]/); // Xato: Invalid regular expression
 ```
 
-The reason is that without flag `pattern:u` surrogate pairs are perceived as two characters, so `[𝒳-𝒴]` is interpreted as `[<55349><56499>-<55349><56500>]` (every surrogate pair is replaced with its codes). Now it's easy to see that the range `56499-55349` is invalid: its starting code `56499` is greater than the end `55349`. That's the formal reason for the error.
+Sababi shundaki, `pattern:u` bayrog'isiz surrogate juftliklar ikkita belgi sifatida qabul qilinadi, shuning uchun `[𝒳-𝒴]` `[<55349><56499>-<55349><56500>]` sifatida talqin qilinadi (har bir surrogate juftlik o'z kodlari bilan almashtiriladi). Endi `56499-55349` diapazonining noto'g'ri ekanligini osongina ko'rish mumkin: boshlang'ich kodi `56499` oxirgi `55349`dan katta. Bu xatoning rasmiy sababi.
 
-With the flag `pattern:u` the pattern works correctly:
+`pattern:u` bayrog'i bilan naqsh to'g'ri ishlaydi:
 
 ```js run
-// look for characters from 𝒳 to 𝒵
+// 𝒳 dan 𝒵 gacha belgilarni qidirish
 alert( '𝒴'.match(/[𝒳-𝒵]/u) ); // 𝒴
 ```

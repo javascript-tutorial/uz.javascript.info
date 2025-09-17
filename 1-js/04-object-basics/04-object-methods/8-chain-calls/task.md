@@ -1,4 +1,4 @@
-importance: 2
+muhimlik: 2
 
 ---
 
@@ -9,15 +9,16 @@ Yuqoriga va pastga tushishga imkon beradigan `ladder` obyekti mavjud:
 ```js
 let ladder = {
   step: 0,
-  up() { 
+  up() {
     this.step++;
   },
-  down() { 
+  down() {
     this.step--;
   },
-  showStep: function() { // joriy qadamni ko'rsatadi
-    alert( this.step );
-  }
+  showStep: function () {
+    // joriy qadamni ko'rsatadi
+    alert(this.step);
+  },
 };
 ```
 

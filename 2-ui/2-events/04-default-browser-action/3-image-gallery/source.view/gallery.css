@@ -6,7 +6,7 @@ body {
 
 h2 {
   font: bold 190%/100% sans-serif;
-  margin: 0 0 .2em;
+  margin: 0 0 0.2em;
 }
 
 h2 em {
@@ -31,5 +31,5 @@ h2 em {
 }
 
 #thumbs a:hover {
-  border-color: #FF9900;
+  border-color: #ff9900;
 }

@@ -1,21 +1,20 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Get the attribute
+# Attributni olish
 
-Write the code to select the element with `data-widget-name` attribute from the document and to read its value.
+Hujjatdan `data-widget-name` atributiga ega elementni tanlash va uning qiymatini o‘qish uchun kodni yozing.
 
 ```html run
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
+    <div data-widget-name="menu">Jansni tanlang</div>
 
-  <div data-widget-name="menu">Choose the genre</div>
-
-  <script>
-    /* your code */
-  </script>
-</body>
+    <script>
+      /* Sizning kodingiz */
+    </script>
+  </body>
 </html>
 ```

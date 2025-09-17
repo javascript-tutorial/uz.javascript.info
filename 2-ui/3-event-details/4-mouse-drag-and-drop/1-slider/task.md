@@ -2,15 +2,15 @@ importance: 5
 
 ---
 
-# Slider
+# Slayder
 
-Create a slider:
+Slayder yarating
 
 [iframe src="solution" height=60 border=1]
 
-Drag the blue thumb with the mouse and move it.
+Moviy bosh barmog'ingizni sichqoncha bilan torting va harakatlantiring.
 
-Important details:
+Muhim tafsilotlar:
 
-- When the mouse button is pressed, during the dragging the mouse may go over or below the slider. The slider will still work (convenient for the user).
-- If the mouse moves very fast to the left or to the right, the thumb should stop exactly at the edge.
+- Sichqoncha tugmasi bosilganda, sichqonchani sudrab borishda slayderning ustiga yoki pastga tushishi mumkin. Slayder hali ham ishlaydi (foydalanuvchi uchun qulay).
+- Sichqoncha chapga yoki o'ngga juda tez harakat qilsa, bosh barmog'i aynan chetida to'xtab turishi kerak.

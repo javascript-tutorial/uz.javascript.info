@@ -5,19 +5,19 @@ libs:
 
 # Currying
 
-[Currying](https://en.wikipedia.org/wiki/Currying) is an advanced technique of working with functions. It's used not only in JavaScript, but in other languages as well.
+[Currying](https://en.wikipedia.org/wiki/Currying) - bu funktsiyalar bilan ishlashning ilg'or texnikasi. U nafaqat JavaScript da, balki boshqa tillarda ham qo'llaniladi.
 
-Currying is a transformation of functions that translates a function from callable as `f(a, b, c)` into callable as `f(a)(b)(c)`.
+Currying - bu funktsiyalarni o'zgartirish bo'lib, funktsiyani `f(a, b, c)` sifatida chaqiriladigan holatdan `f(a)(b)(c)` sifatida chaqiriladigan holga o'tkazadi.
 
-Currying doesn't call a function. It just transforms it.
+Currying funktsiyani chaqirmaydi. U faqat uni o'zgartiradi.
 
-Let's see an example first, to better understand what we're talking about, and then practical applications.
+Nima haqida gapirayotganimizni yaxshiroq tushunish uchun avval misolni ko'raylik, keyin amaliy dasturlarni.
 
-We'll create a helper function `curry(f)` that performs currying for a two-argument `f`. In other words, `curry(f)` for two-argument `f(a, b)` translates it into a function that runs as `f(a)(b)`:
+Ikki argumentli `f` uchun currying bajaradigan yordamchi `curry(f)` funktsiyasini yaratamiz. Boshqacha qilib aytganda, ikki argumentli `f(a, b)` uchun `curry(f)` uni `f(a)(b)` sifatida ishlaydigan funktsiyaga aylantiradi:
 
 ```js run
 *!*
-function curry(f) { // curry(f) does the currying transform
+function curry(f) { // curry(f) currying o'zgartirishini bajaradi
   return function(a) {
     return function(b) {
       return f(a, b);
@@ -26,7 +26,7 @@ function curry(f) { // curry(f) does the currying transform
 }
 */!*
 
-// usage
+// foydalanish
 function sum(a, b) {
   return a + b;
 }
@@ -36,30 +36,30 @@ let curriedSum = curry(sum);
 alert( curriedSum(1)(2) ); // 3
 ```
 
-As you can see, the implementation is straightforward: it's just two wrappers.
+Ko'rib turganingizdek, amalga oshirish oddiy: bu faqat ikkita wrapper.
 
-- The result of `curry(func)` is a wrapper `function(a)`.
-- When it is called like `curriedSum(1)`, the argument is saved in the Lexical Environment, and a new wrapper is returned `function(b)`.
-- Then this wrapper is called with `2` as an argument, and it passes the call to the original `sum`.
+- `curry(func)` natijasi `function(a)` wrapperi.
+- U `curriedSum(1)` kabi chaqirilganda, argument Leksik muhitda saqlanadi va yangi wrapper `function(b)` qaytariladi.
+- Keyin bu wrapper `2` argumenti bilan chaqiriladi va u chaqiruvni asl `sum` ga o'tkazadi.
 
-More advanced implementations of currying, such as [_.curry](https://lodash.com/docs#curry) from lodash library, return a wrapper that allows a function to be called both normally and partially:
+Currying ning rivojlangan implementatsiyalari, masalan lodash kutubxonasidan [_.curry](https://lodash.com/docs#curry), funktsiyani ham odatiy, ham qisman chaqirish imkonini beruvchi wrapper qaytaradi:
 
 ```js run
 function sum(a, b) {
   return a + b;
 }
 
-let curriedSum = _.curry(sum); // using _.curry from lodash library
+let curriedSum = _.curry(sum); // lodash kutubxonasidan _.curry dan foydalanish
 
-alert( curriedSum(1, 2) ); // 3, still callable normally
-alert( curriedSum(1)(2) ); // 3, called partially
+alert( curriedSum(1, 2) ); // 3, hali ham odatiy chaqiriladigan
+alert( curriedSum(1)(2) ); // 3, qisman chaqirilgan
 ```
 
-## Currying? What for?
+## Currying? Nima uchun?
 
-To understand the benefits we need a worthy real-life example.
+Foydalari tushunish uchun bizga haqiqiy hayotdan munosib misol kerak.
 
-For instance, we have the logging function `log(date, importance, message)` that formats and outputs the information. In real projects such functions have many useful features like sending logs over the network, here we'll just use `alert`:
+Masalan, bizda ma'lumotni formatlash va chiqarish uchun `log(date, importance, message)` log funktsiyasi bor. Haqiqiy loyihalarda bunday funktsiyalar tarmoq orqali loglarni yuborish kabi ko'p foydali xususiyatlarga ega, bu yerda biz faqat `alert` dan foydalanamiz:
 
 ```js
 function log(date, importance, message) {
@@ -67,37 +67,37 @@ function log(date, importance, message) {
 }
 ```
 
-Let's curry it!
+Uni curry qilaylik!
 
 ```js
 log = _.curry(log);
 ```
 
-After that `log` works normally:
+Bundan keyin `log` odatiy ishlaydi:
 
 ```js
 log(new Date(), "DEBUG", "some debug"); // log(a, b, c)
 ```
 
-...But also works in the curried form:
+...Lekin curry qilingan shaklda ham ishlaydi:
 
 ```js
 log(new Date())("DEBUG")("some debug"); // log(a)(b)(c)
 ```
 
-Now we can easily make a convenience function for current logs:
+Endi joriy loglar uchun qulaylik funktsiyasini osonlik bilan yarata olamiz:
 
 ```js
-// logNow will be the partial of log with fixed first argument
+// logNow - birinchi argumenti qo'zg'almas log qismi bo'ladi
 let logNow = log(new Date());
 
-// use it
+// uni ishlatish
 logNow("INFO", "message"); // [HH:mm] INFO message
 ```
 
-Now `logNow` is `log` with fixed first argument, in other words "partially applied function" or "partial" for short.
+Endi `logNow` - bu birinchi argumenti qo'zg'almas `log`, boshqacha qilib aytganda "qisman qo'llanilgan funktsiya" yoki qisqacha "partial".
 
-We can go further and make a convenience function for current debug logs:
+Davom etib, joriy debug loglar uchun qulaylik funktsiyasini yarata olamiz:
 
 ```js
 let debugNow = logNow("DEBUG");
@@ -105,15 +105,15 @@ let debugNow = logNow("DEBUG");
 debugNow("message"); // [HH:mm] DEBUG message
 ```
 
-So:
-1. We didn't lose anything after currying: `log` is still callable normally.
-2. We can easily generate partial functions such as for today's logs.
+Shunday qilib:
+1. Currying dan keyin hech narsani yo'qotmadik: `log` hali ham odatiy chaqiriladigan.
+2. Bugungi loglar kabi partial funktsiyalarni osonlik bilan yarata olamiz.
 
-## Advanced curry implementation
+## Rivojlangan curry implementatsiyasi
 
-In case you'd like to get in to the details, here's the "advanced" curry implementation for multi-argument functions that we could use above.
+Agar tafsilotlarni bilishni xohlasangiz, yuqorida ishlatishimiz mumkin bo'lgan ko'p argumentli funktsiyalar uchun "rivojlangan" curry implementatsiyasi:
 
-It's pretty short:
+Bu juda qisqa:
 
 ```js
 function curry(func) {
@@ -131,7 +131,7 @@ function curry(func) {
 }
 ```
 
-Usage examples:
+Foydalanish misollari:
 
 ```js
 function sum(a, b, c) {
@@ -140,17 +140,17 @@ function sum(a, b, c) {
 
 let curriedSum = curry(sum);
 
-alert( curriedSum(1, 2, 3) ); // 6, still callable normally
-alert( curriedSum(1)(2,3) ); // 6, currying of 1st arg
-alert( curriedSum(1)(2)(3) ); // 6, full currying
+alert( curriedSum(1, 2, 3) ); // 6, hali ham odatiy chaqiriladigan
+alert( curriedSum(1)(2,3) ); // 6, 1-argumentni curry qilish
+alert( curriedSum(1)(2)(3) ); // 6, to'liq curry
 ```
 
-The new `curry` may look complicated, but it's actually easy to understand.
+Yangi `curry` murakkab ko'rinishi mumkin, lekin aslida tushunish oson.
 
-The result of `curry(func)` call is the wrapper `curried` that looks like this:
+`curry(func)` chaqiruvining natijasi shunday ko'rinadigan `curried` wrapperi:
 
 ```js
-// func is the function to transform
+// func - o'zgartiriladigan funktsiya
 function curried(...args) {
   if (args.length >= func.length) { // (1)
     return func.apply(this, args);
@@ -162,27 +162,27 @@ function curried(...args) {
 };
 ```
 
-When we run it, there are two `if` execution branches:
+Uni ishga tushirganda, ikkita `if` bajarilish shoxchasi mavjud:
 
-1. If passed `args` count is the same or more than the original function has in its definition (`func.length`) , then just pass the call to it using `func.apply`. 
-2. Otherwise, get a partial: we don't call `func` just yet. Instead, another wrapper is returned, that will re-apply `curried` providing previous arguments together with the new ones. 
+1. Agar uzatilgan `args` soni asl funktsiya ta'rifidagi (`func.length`) bilan bir xil yoki ko'p bo'lsa, u holda `func.apply` yordamida chaqiruvni unga o'tkazing.
+2. Aks holda, partial oling: biz `func` ni hali chaqirmaymiz. Buning o'rniga, oldingi argumentlarni yangilari bilan birga taqdim etib, `curried` ni qayta qo'llaydigan boshqa wrapper qaytariladi.
 
-Then, if we call it, again, we'll get either a new partial (if not enough arguments) or, finally, the result.
+Keyin, agar uni yana chaqirsak, yangi partial (agar argumentlar yetarli bo'lmasa) yoki nihoyat, natijani olamiz.
 
-```smart header="Fixed-length functions only"
-The currying requires the function to have a fixed number of arguments.
+```smart header="Faqat qat'iy uzunlikdagi funktsiyalar"
+Currying funktsiyaning qat'iy argumentlar soniga ega bo'lishini talab qiladi.
 
-A function that uses rest parameters, such as `f(...args)`, can't be curried this way.
+`f(...args)` kabi rest parametrlaridan foydalanadigan funktsiya bu usul bilan curry qilinmaydi.
 ```
 
-```smart header="A little more than currying"
-By definition, currying should convert `sum(a, b, c)` into `sum(a)(b)(c)`.
+```smart header="Currying dan biroz ko'proq"
+Ta'rifga ko'ra, currying `sum(a, b, c)` ni `sum(a)(b)(c)` ga aylantirishi kerak.
 
-But most implementations of currying in JavaScript are advanced, as described: they also keep the function callable in the multi-argument variant.
+Lekin JavaScript da currying ning aksariyat implementatsiyalari tasvirlangandek rivojlangan: ular funktsiyani ko'p argumentli variantda ham chaqiriladigan qilib saqlaydi.
 ```
 
-## Summary
+## Xulosa
 
-*Currying* is a transform that makes `f(a,b,c)` callable as `f(a)(b)(c)`. JavaScript implementations usually both keep the function callable normally and return the partial if the arguments count is not enough.
+*Currying* - bu `f(a,b,c)` ni `f(a)(b)(c)` sifatida chaqiriladigan qiladigan o'zgartirish. JavaScript implementatsiyalari odatda funktsiyani ham odatiy chaqiriladigan qilib saqlaydi, ham argumentlar soni yetarli bo'lmasa partial qaytaradi.
 
-Currying allows us to easily get partials. As we've seen in the logging example, after currying the three argument universal function `log(date, importance, message)` gives us partials when called with one argument (like `log(date)`) or two arguments (like `log(date, importance)`).  
+Currying bizga partiallarni osonlik bilan olish imkonini beradi. Log misolida ko'rganimizdek, currying dan keyin uch argumentli universal `log(date, importance, message)` funktsiyasi bir argument bilan chaqirilganda (masalan `log(date)`) yoki ikki argument bilan (masalan `log(date, importance)`) bizga partiallar beradi.

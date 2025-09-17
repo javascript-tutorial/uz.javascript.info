@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -23,4 +23,3 @@ switch (browser) {
     alert( "Ushbu sahifa yaxshi ko'rinadi deb umid qilamiz!" );
 }
 ```
-

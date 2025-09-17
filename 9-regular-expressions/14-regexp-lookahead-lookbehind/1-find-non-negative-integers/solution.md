@@ -1,9 +1,8 @@
+Butun son uchun regexp `pattern:\d+` dir.
 
-The regexp for an integer number is `pattern:\d+`.
+Biz uning oldiga salbiy orqaga qarashni qo'yish orqali salbiy sonlarni chiqarib tashlashimiz mumkin: `pattern:(?<!-)\d+`.
 
-We can exclude negatives by prepending it with the negative lookbehind: `pattern:(?<!-)\d+`.
-
-Although, if we try it now, we may notice one more "extra" result:
+Biroq, agar biz buni hozir sinab ko'rsak, yana bitta "ortiqcha" natijani payqashimiz mumkin:
 
 ```js run
 let regexp = /(?<!-)\d+/g;
@@ -13,11 +12,11 @@ let str = "0 12 -5 123 -18";
 console.log( str.match(regexp) ); // 0, 12, 123, *!*8*/!*
 ```
 
-As you can see, it matches `match:8`, from `subject:-18`. To exclude it, we need to ensure that the regexp starts matching a number not from the middle of another (non-matching) number.
+Ko'rib turganimizdek, u `subject:-18` dan `match:8` ga mos keladi. Buni chiqarib tashlash uchun regexp sonni boshqa (mos kelmaydigan) sonning o'rtasidan emas, balki boshidan boshlashini ta'minlashimiz kerak.
 
-We can do it by specifying another negative lookbehind: `pattern:(?<!-)(?<!\d)\d+`. Now `pattern:(?<!\d)` ensures that a match does not start after another digit, just what we need.
+Buni boshqa salbiy orqaga qarashni belgilash orqali qilishimiz mumkin: `pattern:(?<!-)(?<!\d)\d+`. Endi `pattern:(?<!\d)` moslik boshqa raqamdan keyin boshlanmasligini ta'minlaydi, aynan bizga kerak bo'lgan narsa.
 
-We can also join them into a single lookbehind here:
+Biz ularni bu yerda bitta orqaga qarashga birlashtirishimiz ham mumkin:
 
 ```js run
 let regexp = /(?<![-\d])\d+/g;

@@ -1,4 +1,4 @@
-The easiest way to walk the object is to use recursion.
+Ob'ektni yurishning eng oson usuli - rekursiyadan foydalanish.
 
-1. [The solution with innerHTML](sandbox:innerhtml).
-2. [The solution with DOM](sandbox:build-tree-dom).
+1. [innerHTML bilan yechim](sandbox:innerhtml).
+2. [DOM bilan yechim](sandbox:build-tree-dom).

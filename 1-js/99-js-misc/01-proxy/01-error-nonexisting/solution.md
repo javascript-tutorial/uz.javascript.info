@@ -1,7 +1,6 @@
-
 ```js run
 let user = {
-  name: "John"
+  name: "John",
 };
 
 function wrap(target) {
@@ -10,14 +9,14 @@ function wrap(target) {
       if (prop in target) {
         return Reflect.get(target, prop, receiver);
       } else {
-        throw new ReferenceError(`Property doesn't exist: "${prop}"`)
+        throw new ReferenceError(`Xususiyat mavjud emas: "${prop}"`);
       }
-    }
+    },
   });
 }
 
 user = wrap(user);
 
 alert(user.name); // John
-alert(user.age); // ReferenceError: Property doesn't exist: "age"
+alert(user.age); // ReferenceError: Xususiyat mavjud emas: "age"
 ```

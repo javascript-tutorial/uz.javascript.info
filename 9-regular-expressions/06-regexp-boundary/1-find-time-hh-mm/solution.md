@@ -1,6 +1,5 @@
-
-The answer: `pattern:\b\d\d:\d\d\b`.
+Javob: `pattern:\b\d\d:\d\d\b`.
 
 ```js run
-alert( "Breakfast at 09:00 in the room 123:456.".match( /\b\d\d:\d\d\b/ ) ); // 09:00
+alert("Nonushta soat 09:00 da 123:456 xonada. ".match(/\b\d\d:\d\d\b/)); // 09:00
 ```

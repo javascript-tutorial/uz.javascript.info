@@ -1,19 +1,22 @@
-importance: 3
+muhimlik: 3
 
 ---
 
 # Make external links orange
 
-Make all external links orange by altering their `style` property.
+Tashqi havolalarni to'q sariq rangga aylantiring
 
-A link is external if:
-- Its `href` has `://` in it
-- But doesn't start with `http://internal.com`.
+`Uslub` xususiyatini oʻzgartirib, barcha tashqi havolalarni toʻq sariq rangga aylantiring.
+
+Havola tashqi hisoblanadi, agar:
+
+- Uning `href`ida `://` mavjud
+- Lekin `http://internal.com` bilan boshlanmaydi.
 
 Example:
 
 ```html run
-<a name="list">the list</a>
+<a name="list">Ro'yxat:</a>
 <ul>
   <li><a href="http://google.com">http://google.com</a></li>
   <li><a href="/tutorial">/tutorial.html</a></li>
@@ -24,9 +27,9 @@ Example:
 </ul>
 
 <script>
-  // setting style for a single link
-  let link = document.querySelector('a');
-  link.style.color = 'orange';
+  // bitta havola uchun uslubni sozlash
+  let link = document.querySelector("a");
+  link.style.color = "orange";
 </script>
 ```
 

@@ -1,17 +1,17 @@
-The images ribbon can be represented as `ul/li` list of images `<img>`.
+Tasvirlar tasmasi `<img>` `ul/li` tasvirlar ro`yxati sifatida ko`rsatilishi mumkin.
 
-Normally, such a ribbon is wide, but we put a fixed-size `<div>` around to "cut" it, so that only a part of the ribbon is visible:
+Odatda, bunday lenta keng bo'ladi, lekin biz uni "kesish" uchun atrofga qattiq o'lchamdagi `<div>` qo'yamiz, shunda lentaning faqat bir qismi ko'rinadi:
 
 ![](carousel1.svg)
 
-To make the list show horizontally we need to apply correct CSS properties for `<li>`, like `display: inline-block`.
+Roʻyxatni gorizontal koʻrsatish uchun ʻ<li>ʻ uchun toʻgʻri CSS xususiyatlarini qoʻllashimiz kerak, masalan, `display: inline-block`.
 
-For `<img>` we should also adjust `display`, because by default it's `inline`. There's extra space reserved under `inline` elements for "letter tails", so we can use `display:block` to remove it.
+`<img>` uchun biz `displey`ni ham sozlashimiz kerak, chunki sukut bo'yicha u `inline`. “Inline” elementlari ostida “harf dumlari” uchun qoʻshimcha joy ajratilgan, shuning uchun uni olib tashlash uchun “display:block” dan foydalanishimiz mumkin.
 
-To do the scrolling, we can shift `<ul>`. There are many ways to do it, for instance by changing `margin-left` or (better performance) use `transform: translateX()`:
+O'tkazish uchun biz `<ul>` ni siljitishimiz mumkin. Buni qilishning ko'plab usullari mavjud, masalan, `margin-left` ni o'zgartirish yoki (yaxshiroq ishlash) `transform: translateX()` dan foydalanish:
 
 ![](carousel2.svg)
 
-The outer `<div>` has a fixed width, so "extra" images are cut.
+Tashqi `<div>` belgilangan kenglikka ega, shuning uchun "qo'shimcha" tasvirlar kesiladi.
 
-The whole carousel is a self-contained "graphical component" on the page, so we'd better wrap it into a single `<div class="carousel">` and style things inside it.
+Butun karusel sahifadagi mustaqil `grafik komponent` dir, shuning uchun uni bitta `<div class="carousel">`ga o'rab, ichidagi narsalarni stilize qilganimiz ma'qul.

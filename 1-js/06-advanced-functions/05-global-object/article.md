@@ -1,227 +1,88 @@
+# Global objekt
 
-# Global obyekt
+Global objekt hamma joyda mavjud bo'lgan o'zgaruvchilar va funktsiyalarni taqdim etadi. Sukut bo'yicha, bular tilga yoki muhitga o'rnatilgan elementlardir.
 
-<<<<<<< HEAD
-Global obyekt dasturning istalgan joyida mavjud bo'lgan o'zgaruvchanlar va funktsiyalarni taqdim etadi. Odatiy bo'lib, ular til yoki ishlash muhitiga o'rnatilganlardir.
+Brauzerde u `window` deb ataladi, Node.js da `global`, boshqa muhitlarda boshqa nom bo'lishi mumkin.
 
-Brauzerda u "window" deb nomlangan, Node.js uchun "global", boshqa muhitlar uchun u boshqa nomga ega bo'lishi mumkin.
+Yaqinda tilga `globalThis` qo'shildi - bu global objekt uchun standartlashtirilgan nom bo'lib, barcha muhitlarda qo'llab-quvvatlanishi kerak. U barcha asosiy brauzerlarda qo'llab-quvvatlanadi.
 
-Masalan, biz `alert` ni `window` usuli sifatida chaqira olamiz:
+Biz bu yerda `window` ishlatamiz, muhitimiz brauzer deb taxmin qilib. Agar skriptingiz boshqa muhitlarda ishlashi mumkin bo'lsa, `globalThis` ishlatish yaxshiroq.
+
+Global objektning barcha xususiyatlariga to'g'ridan-to'g'ri kirish mumkin:
 
 ```js run
 alert("Salom");
-
-// bilan bir xil
+// quyidagiga teng
 window.alert("Salom");
 ```
 
-Biz `Array` kabi boshqa o'rnatilgan funktsiyalarga `window.Array` deb murojaat qilishimiz va unda o'z xususiyatlarimizni yaratishimiz mumkin.
-
-## Brauzer: "window" obyekti
-
-Tarixiy sabablarga ko'ra brauzer ichidagi `window` obyekti biroz chalkash.
-
-1. U global obyekt rolini o'ynashdan tashqari, "brauzer oynasi" funksiyasini taqdim etadi.
-
-    Brauzer oynasiga xos xususiyatlar va usullarga kirish uchun `window` dan foydalanishimiz mumkin:
-
-    ```js run
-    alert(window.innerHeight); // brauzer oynasining balandligini ko'rsatadi
-
-    window.open('http://google.com'); // yangi brauzer oynasini ochadi
-    ```
-
-2. Yuqori darajadagi `var` o'zgaruvchanlari va funktsiyalar deklaratsiyalari avtomatik ravishda `window` ning xususiyatlariga aylanadi.
-
-    Masalan:
-    ```js untrusted run no-strict refresh
-    var x = 5;
-
-    alert(window.x); // 5 (var x window xususiyatiga aylanadi)
-
-    window.x = 0;
-
-    alert(x); // 0, o'zgaruvchan modifikatsiya qilingan
-    ```
-
-    Iltimos, e'tibor bering, bu zamonaviyroq `let/const` deklaratsiyalari bilan bo'lmaydi:
-
-    ```js untrusted run no-strict refresh
-    let x = 5;
-
-    alert(window.x); // undefined ("let" window xususiyatini yaratmaydi)
-    ```
-
-3. Shuningdek, barcha skriptlar bir xil global muhitga ega, shuning uchun bitta `<script>` da e'lon qilingan o'zgaruvchanlar boshqasida ham ko'rinadi:
-
-    ```html run
-    <script>
-      var a = 1;
-      let b = 2;
-    </script>
-=======
-The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.
-
-In a browser it is named `window`, for Node.js it is `global`, for other environments it may have another name.
-
-Recently, `globalThis` was added to the language, as a standardized name for a global object, that should be supported across all environments. It's supported in all major browsers.
-
-We'll use `window` here, assuming that our environment is a browser. If your script may run in other environments, it's better to use `globalThis` instead.
-
-All properties of the global object can be accessed directly:
-
-```js run
-alert("Hello");
-// is the same as
-window.alert("Hello");
-```
-
-In a browser, global functions and variables declared with `var` (not `let/const`!) become the property of the global object:
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Brauzerde `var` bilan e'lon qilingan global funktsiyalar va o'zgaruvchilar (`let/const` emas!) global objektning xususiyatiga aylanadi:
 
 ```js run untrusted refresh
 var gVar = 5;
 
-<<<<<<< HEAD
-4. Va ahamiyatsiz narsa, ammo baribir: global miqyosda `this` ning qiymati `window` dir.
-
-    ```js untrusted run no-strict refresh
-    alert(this); // window
-    ```
-
-Nima uchun bunday qilingan? Til yaratilishida bir nechta jihatlarni bitta `window` obyektiga birlashtirish g'oyasi "narsalarni soddalashtirish" edi. Ammo o'shandan beri ko'p narsalar o'zgardi. Kichkina skriptlar to'g'ri arxitekturani talab qiladigan katta dasturlarga aylandi.
-
-Turli xil skriptlar (ehtimol turli manbalardan) bir-birining o'zgaruvchanlarini ko'rishlari yaxshi emasmi?
-
-Yo'q, unday emas, chunki bu nomlash nizolariga olib kelishi mumkin: bir xil o'zgaruvchan nom turli xil maqsadlarda ikkita skriptda ishlatilishi mumkin, shuning uchun ular bir-biriga zid keladi.
-
-Hozirgi vaqtda ko'p maqsadli `window` tilda dizayndagi xato deb hisoblanadi.
-
-Yaxshiyamki, "JavaScript modullari" deb nomlangan yechim mavjud.
-
-Agar biz `type="module"` atributini `<script>` yorlig'iga o'rnatgan bo'lsak, unda bunday skript o'zining `window` ga aralashmaydigan, o'zining yuqori darajadagi ko'lami (leksik muhiti) bo'lgan alohida "modul" hisoblanadi.
-
-- Modulda `var x` `window` ning xususiyatiga aylanmaydi:
-
-    ```html run
-    <script type="module">
-      var x = 5;
-
-      alert(window.x); // undefined
-    </script>
-    ```
-
-- Bir-birining o'zgaruvchanlanlarini ko'rmaydigan ikkita modul:
-=======
-alert(window.gVar); // 5 (became a property of the global object)
+alert(window.gVar); // 5 (global objektning xususiyatiga aylandi)
 ```
 
-The same effect have function declarations (statements with `function` keyword in the main code flow, not function expressions).
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+Funktsiya e'lonlari ham xuddi shu ta'sirga ega (asosiy kod oqimidagi `function` kalit so'zi bilan iboralar, funktsiya ifodalari emas).
 
-Please don't rely on that! This behavior exists for compatibility reasons. Modern scripts use [JavaScript modules](info:modules) where such a thing doesn't happen.
+Bunga tayanmang! Bu xatti-harakat moslashish sabablari uchun mavjud. Zamonaviy skriptlar [JavaScript modullari](info:modules)dan foydalanadi, bu yerda bunday narsa sodir bo'lmaydi.
 
-If we used `let` instead, such thing wouldn't happen:
+Agar `let` ishlatganimizda, bunday narsa sodir bo'lmasdi:
 
-<<<<<<< HEAD
-- Va oxirgi kichik narsa, moduldagi `this` ning yuqori darajadagi qiymati `undefined` (nima uchun u baribir `window` bo'lishi kerak?):
-=======
 ```js run untrusted refresh
 let gLet = 5;
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
 
-alert(window.gLet); // undefined (doesn't become a property of the global object)
+alert(window.gLet); // undefined (global objektning xususiyatiga aylanmaydi)
 ```
 
-<<<<<<< HEAD
-**`<script type="module">` dan foydalanib, tilning dizayndagi nuqsonlarini yuqori darajadagi muhitni `window` dan ajratish yo'li bilan tuzatadi.**
-
-Keyinchalik modullarning ko'proq xususiyatlarini [](info:modules) bo'limida ko'rib chiqamiz.
-
-## Global obyektdan to'g'ri foydalanish
-
-1. Odatda global o'zgaruvchanlardan foydalanish tavsiya etilmaydi. Iloji boricha kamroq global o'zgaruvchanlar bo'lishi kerak, ammo agar biz global ko'rinadigan narsani yaratishimiz kerak bo'lsa, uni `window` (yoki Node.js da `global`) ga qo'yishimiz mumkin.
-
-    Bu yerda biz boshqa foydalanuvchi skriptlaridan foydalanish uchun mavjud foydalanuvchi haqidagi ma'lumotlarni global obyektga joylashtiramiz:
-
-    ```js run
-    // uni "window" ga aniq belgilang
-    window.currentUser = {
-      name: "John",
-      age: 30
-    };
-
-    // keyin, boshqa joyda, boshqa skriptda
-    alert(window.currentUser.name); // John
-    ```
-
-2. Zamonaviy til xususiyatlarini qo'llab-quvvatlashi uchun global obyektni sinab ko'rishimiz mumkin.
-
-    Masalan, o'rnatilgan `Promise` obyekti mavjudligini tekshirib ko'ring (u eski brauzerlarda mavjud emas):
-    ```js run
-    if (!window.Promise) {
-      alert("Sizning brauzeringiz haqiqatan ham eski!");
-    }
-    ```
-
-3. Biz "polifillarni" yaratishimiz mumkin: atrof-muhit tomonidan qo'llab-quvvatlanmaydigan funktsiyalarni qo'shing (masalan, eski brauzer), ammo zamonaviy standartda mavjud.
-
-    ```js run
-    if (!window.Promise) {
-      window.Promise = ... // zamonaviy til xususiyatini maxsus amalga oshirish
-    }
-    ```
-
-...Va, albatta, agar biz brauzerda bo'lsak, brauzer oynasi xususiyatlariga (global obyekt sifatida emas) kirish uchun `window` dan foydalanish juda yaxshi.
-=======
-If a value is so important that you'd like to make it available globally, write it directly as a property:
+Agar qiymat shunchalik muhim bo'lsa, uni global qilib qo'yishni xohlasangiz, uni to'g'ridan-to'g'ri xususiyat sifatida yozing:
 
 ```js run
 *!*
-// make current user information global, to let all scripts access it
+// joriy foydalanuvchi ma'lumotlarini global qilish, barcha skriptlar kirishi uchun
 window.currentUser = {
   name: "John"
 };
 */!*
 
-// somewhere else in code
+// kodning boshqa joyida
 alert(currentUser.name);  // John
 
-// or, if we have a local variable with the name "currentUser"
-// get it from window explicitly (safe!)
+// yoki, agar bizda "currentUser" nomli mahalliy o'zgaruvchi bo'lsa
+// uni window dan aniq oling (xavfsiz!)
 alert(window.currentUser.name); // John
 ```
 
-That said, using global variables is generally discouraged. There should be as few global variables as possible. The code design where a function gets "input" variables and produces certain "outcome" is clearer, less prone to errors and easier to test than if it uses outer or global variables.
+Shunga qaramay, global o'zgaruvchilardan foydalanish odatda tavsiya etilmaydi. Iloji boricha kam global o'zgaruvchilar bo'lishi kerak. Funktsiya "kirish" o'zgaruvchilarini olib, ma'lum "natija"ni ishlab chiqaradigan kod dizayni tashqi yoki global o'zgaruvchilardan foydalanishdan ko'ra aniqroq, xatolarga kam moyil va sinovdan o'tkazish osonroq.
 
-## Using for polyfills
+## Polyfilllar uchun foydalanish
 
-We use the global object to test for support of modern language features.
+Biz zamonaviy til xususiyatlarini qo'llab-quvvatlashni sinash uchun global objektdan foydalanamiz.
 
-For instance, test if a built-in `Promise` object exists (it doesn't in really old browsers):
+Masalan, o'rnatilgan `Promise` objekti mavjudligini sinash (u haqiqatan ham eski brauzerlarda yo'q):
 ```js run
 if (!window.Promise) {
-  alert("Your browser is really old!");
+  alert("Sizning brauzeringiz juda eski!");
 }
 ```
 
-If there's none (say, we're in an old browser), we can create "polyfills": add functions that are not supported by the environment, but exist in the modern standard.
+Agar yo'q bo'lsa (masalan, biz eski brauzerdamiz), biz "polyfilllar" yarata olamiz: muhit tomonidan qo'llab-quvvatlanmaydigan, lekin zamonaviy standartda mavjud funktsiyalarni qo'shish.
 
 ```js run
 if (!window.Promise) {
-  window.Promise = ... // custom implementation of the modern language feature
+  window.Promise = ... // zamonaviy til xususiyatining maxsus implementatsiyasi
 }
 ```
 
-## Summary
+## Xulosa
 
-- The global object holds variables that should be available everywhere.
+- Global objekt hamma joyda mavjud bo'lishi kerak bo'lgan o'zgaruvchilarni saqlaydi.
 
-    That includes JavaScript built-ins, such as `Array` and environment-specific values, such as `window.innerHeight` -- the window height in the browser.
-- The global object has a universal name `globalThis`.
+    Bu JavaScript o'rnatilgan elementlarini, masalan `Array` va muhitga xos qiymatlarni, masalan `window.innerHeight` -- brauzerdagi oyna balandligini o'z ichiga oladi.
+- Global objektning universal nomi `globalThis`.
 
-    ...But more often is referred by "old-school" environment-specific names, such as `window` (browser) and `global` (Node.js).
-- We should store values in the global object only if they're truly global for our project. And keep their number at minimum.
-- In-browser, unless we're using [modules](info:modules), global functions and variables declared with `var` become a property of the global object.
-- To make our code future-proof and easier to understand, we should access properties of the global object directly, as `window.x`.
->>>>>>> fb4fc33a2234445808100ddc9f5e4dcec8b3d24c
+    ...Lekin ko'pincha "eski maktab" muhitga xos nomlar bilan ataladi, masalan `window` (brauzer) va `global` (Node.js).
+- Biz global objektda faqat loyihamiz uchun haqiqatan ham global bo'lgan qiymatlarni saqlashimiz kerak. Va ularning sonini minimumda ushlab turishimiz kerak.
+- Brauzerde, [modullar](info:modules)dan foydalanmasak, `var` bilan e'lon qilingan global funktsiyalar va o'zgaruvchilar global objektning xususiyatiga aylanadi.
+- Kodimizni kelajakka bardoshli va tushunish oson qilish uchun, global objektning xususiyatlariga to'g'ridan-to'g'ri `window.x` kabi kirishimiz kerak.

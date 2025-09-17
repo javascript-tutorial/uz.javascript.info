@@ -1,94 +1,76 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <table id="bagua-table">
+      <tr>
+        <th colspan="3">
+          <em>Bagua</em> jadvali: Yo'nalish, Element, Rang, Ma'no
+        </th>
+      </tr>
+      <tr>
+        <td class="nw">
+          <strong>Shimoli-g'arbiy</strong> <br />Metal <br />Kumush
+          <br />Oqsoqollar
+        </td>
+        <td class="n">
+          <strong>Shimoliy</strong> <br />Suv <br />Ko'k <br />O'zgarish
+        </td>
+        <td class="ne">
+          <strong>Shimoli-sharqiy</strong> <br />Yer <br />Sariq <br />Yo'nalish
+        </td>
+      </tr>
+      <tr>
+        <td class="w">
+          <strong>G'arbiy</strong> <br />Metal <br />Oltin <br />Yoshlik
+        </td>
+        <td class="c">
+          <strong>Markaz</strong> <br />Hammasi <br />Binafsha <br />Uyg'unlik
+        </td>
+        <td class="e">
+          <strong>Sharqiy</strong> <br />Yog'och <br />Ko'k <br />Kelajak
+        </td>
+      </tr>
+      <tr>
+        <td class="sw">
+          <strong>Janubi-g'arbiy</strong> <br />Yer <br />Jigarrang
+          <br />Xotirjamlik
+        </td>
+        <td class="s">
+          <strong>Janubiy</strong> <br />Olov <br />To'q sariq
+          <br />Shon-shuhrat
+        </td>
+        <td class="se">
+          <strong>Janubi-sharqiy</strong> <br />Yog'och <br />Yashil <br />Sevgi
+        </td>
+      </tr>
+    </table>
 
-<body>
-  <link type="text/css" rel="stylesheet" href="bagua.css">
+    <script>
+      let table = document.getElementById("bagua-table");
+      let selectedTd;
 
+      table.onclick = function (event) {
+        let target = event.target;
 
-  <table id="bagua-table">
-    <tr>
-      <th colspan="3"><em>Bagua</em> Chart: Direction, Element, Color, Meaning</th>
-    </tr>
-    <tr>
-      <td class="nw"><strong>Northwest</strong>
-        <br>Metal
-        <br>Silver
-        <br>Elders
-      </td>
-      <td class="n"><strong>North</strong>
-        <br>Water
-        <br>Blue
-        <br>Change
-      </td>
-      <td class="ne"><strong>Northeast</strong>
-        <br>Earth
-        <br>Yellow
-        <br>Direction
-      </td>
-    </tr>
-    <tr>
-      <td class="w"><strong>West</strong>
-        <br>Metal
-        <br>Gold
-        <br>Youth
-      </td>
-      <td class="c"><strong>Center</strong>
-        <br>All
-        <br>Purple
-        <br>Harmony
-      </td>
-      <td class="e"><strong>East</strong>
-        <br>Wood
-        <br>Blue
-        <br>Future
-      </td>
-    </tr>
-    <tr>
-      <td class="sw"><strong>Southwest</strong>
-        <br>Earth
-        <br>Brown
-        <br>Tranquility
-      </td>
-      <td class="s"><strong>South</strong>
-        <br>Fire
-        <br>Orange
-        <br>Fame
-      </td>
-      <td class="se"><strong>Southeast</strong>
-        <br>Wood
-        <br>Green
-        <br>Romance
-      </td>
-    </tr>
-
-  </table>
-
-  <script>
-    let table = document.getElementById('bagua-table');
-
-    let selectedTd;
-
-    table.onclick = function(event) {
-      let target = event.target;
-
-      while (target != this) {
-        if (target.tagName == 'TD') {
-          highlight(target);
-          return;
+        while (target != this) {
+          if (target.tagName == "TD") {
+            highlight(target);
+            return;
+          }
+          target = target.parentNode;
         }
-        target = target.parentNode;
+      };
+
+      function highlight(node) {
+        if (selectedTd) {
+          selectedTd.classList.remove("highlight");
+        }
+        selectedTd = node;
+        selectedTd.classList.add("highlight");
       }
-    }
-
-    function highlight(node) {
-      if (selectedTd) {
-        selectedTd.classList.remove('highlight');
-      }
-      selectedTd = node;
-      selectedTd.classList.add('highlight');
-    }
-  </script>
-
-</body>
-
+    </script>
+  </body>
 </html>

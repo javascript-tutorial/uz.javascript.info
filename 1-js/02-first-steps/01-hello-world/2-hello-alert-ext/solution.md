@@ -1,8 +1,7 @@
-The HTML code:
+HTML kodi:
 
 [html src="index.html"]
 
-For the file `alert.js` in the same folder:
+Xuddi shu papkadagi `alert.js` fayli uchun:
 
 [js src="alert.js"]
-

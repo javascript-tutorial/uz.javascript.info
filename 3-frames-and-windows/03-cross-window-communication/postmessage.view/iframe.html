@@ -1,18 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-</head>
-
-<body>
-
-  Receiving iframe.
-  <script>
-    window.addEventListener('message', function(event) {
-      alert(`Received ${event.data} from ${event.origin}`);
-    });
-  </script>
-
-</body>
+  <body>
+    iframe qabul qilinmoqda.
+    <script>
+      window.addEventListener("message", function (event) {
+        alert(`${event.origin} dan ${event.data} qabul qilindi`);
+      });
+    </script>
+  </body>
 </html>

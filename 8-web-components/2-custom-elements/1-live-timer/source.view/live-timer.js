@@ -1,7 +1,5 @@
 class LiveTimer extends HTMLElement {
-
-  /* your code here */
-
+  /* sizning kodingiz */
 }
 
 customElements.define("live-timer", LiveTimer);

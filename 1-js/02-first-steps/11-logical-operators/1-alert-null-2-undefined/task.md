@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -7,6 +7,5 @@ importance: 5
 Quyidagi kod qanday natijani chiqaradi?
 
 ```js
-alert( null || 2 || undefined );
+alert(null || 2 || undefined);
 ```
-

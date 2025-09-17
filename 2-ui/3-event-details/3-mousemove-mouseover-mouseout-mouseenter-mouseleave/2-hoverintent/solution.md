@@ -1,18 +1,18 @@
+Algoritm oddiy ko'rinadi:
 
-The algorithm looks simple:
-1. Put `onmouseover/out` handlers on the element. Also can use `onmouseenter/leave` here, but they are less universal, won't work if we introduce delegation.
-2. When a mouse cursor entered the element, start measuring the speed on `mousemove`.
-3. If the speed is slow, then run `over`.
-4. When we're going out of the element, and `over` was executed, run `out`.
+1. Elementga `onmouseover/out` ishlov beruvchilarini o'rnating. Bu yerda `onmouseenter/leave` dan ham foydalanish mumkin, lekin ular kamroq universal, agar delegatsiyani joriy qilsak ishlamaydi.
+2. Sichqoncha kursori elementga kirganda, `mousemove` da tezlikni o'lchashni boshlang.
+3. Agar tezlik sekin bo'lsa, `over` ni ishga tushiring.
+4. Elementdan chiqayotganda va `over` bajarilgan bo'lsa, `out` ni ishga tushiring.
 
-But how to measure the speed?
+Lekin tezlikni qanday o'lchash kerak?
 
-The first idea can be: run a function every `100ms` and measure the distance between previous and new coordinates. If it's small, then the speed is small.
+Birinchi g'oya quyidagicha bo'lishi mumkin: har `100ms` da funksiyani ishga tushirish va oldingi va yangi koordinatalar orasidagi masofani o'lchash. Agar u kichik bo'lsa, tezlik kichik.
 
-Unfortunately, there's no way to get "current mouse coordinates" in JavaScript. There's no function like `getCurrentMouseCoordinates()`.
+Afsuski, JavaScript da "joriy sichqoncha koordinatalarini" olishning imkoni yo'q. `getCurrentMouseCoordinates()` kabi funksiya yo'q.
 
-The only way to get coordinates is to listen for mouse events, like `mousemove`, and take coordinates from the event object.
+Koordinatalarni olishning yagona yo'li - `mousemove` kabi sichqoncha hodisalarini tinglash va koordinatalarni hodisa obyektidan olish.
 
-So let's set a handler on `mousemove` to track coordinates and remember them. And then compare them, once per `100ms`.
+Shuning uchun koordinatalarni kuzatish va eslab qolish uchun `mousemove` ga ishlov beruvchi o'rnatamiz. Keyin ularni har `100ms` da bir marta solishtiramiz.
 
-P.S. Please note: the solution tests use `dispatchEvent` to see if the tooltip works right.
+P.S. Diqqat qiling: yechim testlari tooltip to'g'ri ishlayotganini ko'rish uchun `dispatchEvent` dan foydalanadi.

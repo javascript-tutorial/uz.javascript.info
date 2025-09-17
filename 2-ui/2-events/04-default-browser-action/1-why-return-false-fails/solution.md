@@ -1,16 +1,18 @@
-When the browser reads the `on*` attribute like `onclick`, it creates the handler from its content.
+# onclick atributi va ishlov beruvchilar
 
-For `onclick="handler()"` the function will be:
+Brauzer `onclick` kabi `on*` atributini o'qiganda, u uning mazmunidan ishlov beruvchi yaratadi.
+
+`onclick="handler()"` uchun funksiya quyidagicha bo'ladi:
 
 ```js
 function(event) {
-  handler() // the content of onclick
+  handler() // onclick ning mazmuni
 }
 ```
 
-Now we can see that the value returned by `handler()` is not used and does not affect the result.
+Endi ko'rishimiz mumkinki, `handler()` tomonidan qaytarilgan qiymat ishlatilmaydi va natijaga ta'sir qilmaydi.
 
-The fix is simple:
+Tuzatish oddiy:
 
 ```html run
 <script>
@@ -23,16 +25,16 @@ The fix is simple:
 <a href="https://w3.org" onclick="*!*return handler()*/!*">w3.org</a>
 ```
 
-Also we can use `event.preventDefault()`, like this:
+Shuningdek, biz `event.preventDefault()` dan foydalanishimiz mumkin:
 
 ```html run
 <script>
-*!*
-  function handler(event) {
-    alert("...");
-    event.preventDefault();
-  }
-*/!*
+  *!*
+    function handler(event) {
+      alert("...");
+      event.preventDefault();
+    }
+  */!*
 </script>
 
 <a href="https://w3.org" onclick="*!*handler(event)*/!*">w3.org</a>

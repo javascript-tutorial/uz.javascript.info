@@ -10,10 +10,10 @@ const user = {
 };
 
 *!*
-// works
+// ishlaydi
 user.name = "Pete";
 */!*
 
-// error
+// xato
 user = 123;
 ```

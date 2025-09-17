@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -12,18 +12,17 @@ Ishlaydimi? Bu nimani ko'rsatadi?
 function Counter() {
   let count = 0;
 
-  this.up = function() {
+  this.up = function () {
     return ++count;
   };
-  this.down = function() {
+  this.down = function () {
     return --count;
   };
 }
 
 let counter = new Counter();
 
-alert( counter.up() ); // ?
-alert( counter.up() ); // ?
-alert( counter.down() ); // ?
+alert(counter.up()); // ?
+alert(counter.up()); // ?
+alert(counter.down()); // ?
 ```
-

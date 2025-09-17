@@ -1,1 +1,1 @@
-// Your code
+// sizning kodingiz

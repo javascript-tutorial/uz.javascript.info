@@ -1,13 +1,10 @@
 Iltimos, yechimning nozik, ammo muhim tafsilotlariga e'tibor bering. Biz `value` ni `prompt` dan so'ng darhol raqamga aylantirmaymiz, chunki `value = +value` dan keyin biz bo'sh satrni (to'xtash belgisi) noldan (amaldagi raqam) ajrata olmaymiz. Buni biz keyinroq qilamiz.
 
-
 ```js run demo
 function sumInput() {
- 
   let numbers = [];
 
   while (true) {
-
     let value = prompt("Iltimos, raqamni kiriting", 0);
 
     // bekor qilishimiz kerakmi?
@@ -23,6 +20,5 @@ function sumInput() {
   return sum;
 }
 
-alert( sumInput() ); 
+alert(sumInput());
 ```
-

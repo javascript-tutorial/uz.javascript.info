@@ -1,4 +1,4 @@
-importance: 3
+muhimlik: 3
 
 ---
 
@@ -14,6 +14,5 @@ let shoppingCart = fruits;
 shoppingCart.push("Banan");
 
 // fruits ning ichida nma bor?
-alert( fruits.length ); // ?
+alert(fruits.length); // ?
 ```
-

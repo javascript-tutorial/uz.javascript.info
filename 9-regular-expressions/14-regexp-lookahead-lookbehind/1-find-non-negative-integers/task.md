@@ -1,14 +1,15 @@
-# Find non-negative integers
+# Manfiy bo'lmagan butun sonlarni toping
 
-There's a string of integer numbers.
+Butun sonlar qatori mavjud.
 
-Create a regexp that looks for only non-negative ones (zero is allowed).
+Faqat salbiy bo'lmaganlarni qidiradigan regexp yarating (nolga ruxsat beriladi).
 
-An example of use:
+Foydalanish misoli:
+
 ```js
-let regexp = /your regexp/g;
+let regexp = /sizning regexp/g;
 
 let str = "0 12 -5 123 -18";
 
-alert( str.match(regexp) ); // 0, 12, 123
+alert(str.match(regexp)); // 0, 12, 123
 ```

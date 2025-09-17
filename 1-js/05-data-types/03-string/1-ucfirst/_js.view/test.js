@@ -1,9 +1,9 @@
-describe("ucFirst", function() {
-  it('Birinchi belgini kattalashtiradi', function() {
+describe("ucFirst", function () {
+  it("Birinchi belgini kattalashtiradi", function () {
     assert.strictEqual(ucFirst("john"), "John");
   });
 
-  it("Bo'sh matnda o'lmaydi", function() {
+  it("Bo'sh matnda o'lmaydi", function () {
     assert.strictEqual(ucFirst(""), "");
   });
 });

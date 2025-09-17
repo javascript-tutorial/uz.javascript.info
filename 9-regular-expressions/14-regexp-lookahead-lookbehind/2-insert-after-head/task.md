@@ -1,13 +1,13 @@
-# Insert After Head
+# Boshdan keyin kiriting
 
-We have a string with an HTML Document.
+Bizda HTML hujjati bo'lgan qator mavjud.
 
-Write a regular expression that inserts `<h1>Hello</h1>` immediately after `<body>` tag. The tag may have attributes.
+`<body>` tegidan keyin darhol `<h1>Salom</h1>` qo`shiladigan oddiy iborani yozing. Teg atributlarga ega bo'lishi mumkin.
 
-For instance:
+Masalan:
 
 ```js
-let regexp = /your regular expression/;
+let regexp = /sizning muntazam ifodangiz/;
 
 let str = `
 <html>
@@ -17,14 +17,16 @@ let str = `
 </html>
 `;
 
-str = str.replace(regexp, `<h1>Hello</h1>`);
+str = str.replace(regexp, `<h1>Salom</h1>`);
 ```
 
-After that the value of `str` should be:
+Shundan so'ng "str" ​​qiymati quyidagicha bo'lishi kerak:
+
 ```html
 <html>
-  <body style="height: 200px"><h1>Hello</h1>
-  ...
+  <body style="height: 200px">
+    <h1>Salom</h1>
+    ...
   </body>
 </html>
 ```

@@ -1,11 +1,11 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Show a note near the element (absolute)
+# Element yaqinidagi eslatmani ko'rsatish (mutlaq)
 
-Modify the solution of the [previous task](info:task/position-at) so that the note uses `position:absolute` instead of `position:fixed`.
+[oldingi vazifa](ma'lumot:task/position-at) yechimini shunday o'zgartiringki, eslatmada `position: fixed` o'rniga "position: absolute" ishlatiladi.
 
-That will prevent its "runaway" from the element when the page scrolls.
+Bu sahifa aylantirilganda uning elementdan "qochib ketishini" oldini oladi.
 
-Take the solution of that task as a starting point. To test the scroll, add the style `<body style="height: 2000px">`.
+Ushbu vazifaning yechimini boshlang'ich nuqtasi sifatida oling. O'tkazishni sinab ko'rish uchun `<body style="height: 2000px">` uslubini qo'shing.

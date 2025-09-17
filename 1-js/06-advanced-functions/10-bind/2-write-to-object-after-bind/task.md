@@ -1,20 +1,19 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Funktsiyani usul sifatida bog'lang 
+# Funktsiyani usul sifatida bog'lang
 
 Chiqish qanday bo'ladi?
 
 ```js
 function f() {
-  alert( this ); // ?
+  alert(this); // ?
 }
 
 let user = {
-  g: f.bind(null)
+  g: f.bind(null),
 };
 
 user.g();
 ```
-

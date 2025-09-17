@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -8,7 +8,6 @@ importance: 5
 
 ```js run
 for (let i = 0; i < 3; i++) {
-  alert( `number ${i}!` );
+  alert(`raqam ${i}!`);
 }
 ```
-

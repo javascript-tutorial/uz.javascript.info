@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -10,8 +10,8 @@ Bizning jamoamizning ish haqini saqlaydigan ob'ektimiz bor:
 let salaries = {
   John: 100,
   Ann: 160,
-  Pete: 130
-}
+  Pete: 130,
+};
 ```
 
 Barcha ish haqlarini yig'indisi uchun kodni yozing va `sum` o'zgaruvchisida saqlang. Yuqoridagi misolda `390` bo'lishi kerak.

@@ -1,11 +1,11 @@
+---
 importance: 4
-
 ---
 
-# Where's the "document" in the hierarchy?
+# Ierarxiyada "document" qayerda?
 
-Which class does the `document` belong to?
+`document` qaysi sinfga tegishli?
 
-What's its place in the DOM hierarchy?
+Uning DOM ierarxiyasidagi o'rni qanday?
 
-Does it inherit from `Node` or `Element`, or maybe `HTMLElement`?
+U `Node` yoki `Element`dan, yoki ehtimol `HTMLElement`dan meros oladimi?

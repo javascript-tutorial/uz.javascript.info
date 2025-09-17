@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -11,4 +11,3 @@ Olingan qiymat raqam sifatida qaytarilishi kerak.
 Shuningdek, tashrif buyuruvchi bo'sh qatorni kiritish yoki "CANCEL" tugmasini bosib jarayonni to'xtatishi mumkin. Bunday holda, funktsiya `null` ga qaytishi kerak.
 
 [demo]
-

@@ -2,11 +2,9 @@ Yechim:
 
 ```js run demo
 function delay(f, ms) {
-
-  return function() {
+  return function () {
     setTimeout(() => f.apply(this, arguments), ms);
   };
-
 }
 
 let f1000 = delay(alert, 1000);
@@ -22,13 +20,11 @@ Biz hali ham `this` dan oraliq o'zgaruvchanni ishlatib o'tishimiz mumkin, ammo b
 
 ```js
 function delay(f, ms) {
-
-  return function(...args) {
+  return function (...args) {
     let savedThis = this; // buni oraliq o'zgaruvchanga saqlang
-    setTimeout(function() {
+    setTimeout(function () {
       f.apply(savedThis, args); // bu yerda ishlating
     }, ms);
   };
-
 }
 ```

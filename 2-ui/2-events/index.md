@@ -1,3 +1,3 @@
-# Introduction to Events
+# Voqealarga kirish
 
-An introduction to browser events, event properties and handling patterns.
+Brauzer hodisalari, hodisalar xususiyatlari va ishlov berish naqshlari bilan tanishish.

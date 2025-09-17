@@ -1,39 +1,38 @@
-# Events: change, input, cut, copy, paste
+# Hodisalar: change, input, cut, copy, paste
 
-Let's cover various events that accompany data updates.
+Ma'lumot yangilanishlari bilan birga keladigan turli hodisalarni ko'rib chiqamiz.
 
-## Event: change
+## Hodisa: change
 
-The `change` event triggers when the element has finished changing.
+`change` hodisasi element o'zgarishni tugatganda ishga tushadi.
 
-For text inputs that means that the event occurs when it loses focus.
+Matn inputlari uchun bu hodisaning fokusni yo'qotganda sodir bo'lishini anglatadi.
 
-For instance, while we are typing in the text field below -- there's no event. But when we move the focus somewhere else, for instance, click on a button -- there will be a `change` event:
+Masalan, quyidagi matn maydonida yozayotganimizda -- hodisa bo'lmaydi. Lekin fokusni boshqa joyga, masalan tugmaga bosganimizda -- `change` hodisasi bo'ladi:
 
 ```html autorun height=40 run
 <input type="text" onchange="alert(this.value)">
-<input type="button" value="Button">
+<input type="button" value="Tugma">
 ```
 
-For other elements: `select`, `input type=checkbox/radio` it triggers right after the selection changes:
+Boshqa elementlar uchun: `select`, `input type=checkbox/radio` tanlash o'zgarishidan keyin darhol ishga tushadi:
 
 ```html autorun height=40 run
 <select onchange="alert(this.value)">
-  <option value="">Select something</option>
-  <option value="1">Option 1</option>
-  <option value="2">Option 2</option>
-  <option value="3">Option 3</option>
+  <option value="">Biror narsani tanlang</option>
+  <option value="1">1-variant</option>
+  <option value="2">2-variant</option>
+  <option value="3">3-variant</option>
 </select>
 ```
 
+## Hodisa: input
 
-## Event: input
+`input` hodisasi foydalanuvchi tomonidan qiymat o'zgartirilgandan keyin har safar ishga tushadi.
 
-The `input` event triggers every time after a value is modified by the user.
+Klaviatura hodisalaridan farqli o'laroq, u har qanday qiymat o'zgarishida, hatto klaviatura harakatlarini o'z ichiga olmaganlarida ham ishga tushadi: sichqoncha bilan joylashtirish yoki matnni aytish uchun nutqni tanish texnologiyasidan foydalanish.
 
-Unlike keyboard events, it triggers on any value change, even those that does not involve keyboard actions: pasting with a mouse or using speech recognition to dictate the text.
-
-For instance:
+Masalan:
 
 ```html autorun height=40 run
 <input type="text" id="input"> oninput: <span id="result"></span>
@@ -44,25 +43,25 @@ For instance:
 </script>
 ```
 
-If we want to handle every modification of an `<input>` then this event is the best choice.
+Agar biz `<input>` ning har bir o'zgarishini qayta ishlamoqchi bo'lsak, bu hodisa eng yaxshi tanlovdir.
 
-On the other hand, `input` event doesn't trigger on keyboard input and other actions that do not involve value change, e.g. pressing arrow keys `key:⇦` `key:⇨` while in the input.
+Boshqa tomondan, `input` hodisasi klaviatura kiritish va qiymat o'zgarishini o'z ichiga olmaydigan boshqa harakatlarda, masalan inputda bo'lganida o'q tugmalarini `key:⇦` `key:⇨` bosganda ishga tushmaydi.
 
-```smart header="Can't prevent anything in `oninput`"
-The `input` event occurs after the value is modified.
+```smart header="`oninput` da hech narsaning oldini ololmaymiz"
+`input` hodisasi qiymat o'zgartirilgandan keyin sodir bo'ladi.
 
-So we can't use `event.preventDefault()` there -- it's just too late, there would be no effect.
+Shuning uchun biz u yerda `event.preventDefault()` dan foydalana olmaymiz -- bu juda kech, hech qanday ta'sir bo'lmaydi.
 ```
 
-## Events: cut, copy, paste
+## Hodisalar: cut, copy, paste
 
-These events occur on cutting/copying/pasting a value.
+Bu hodisalar qiymatni kesish/nusxalash/joylashtirish paytida sodir bo'ladi.
 
-They belong to [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) class and provide access to the data that is copied/pasted.
+Ular [ClipboardEvent](https://www.w3.org/TR/clipboard-apis/#clipboard-event-interfaces) sinfiga tegishli va nusxalangan/joylashtirilgan ma'lumotlarga kirish imkonini beradi.
 
-We also can use `event.preventDefault()` to abort the action, then nothing gets copied/pasted.
+Harakatni bekor qilish uchun `event.preventDefault()` dan ham foydalanishimiz mumkin, shunda hech narsa nusxalanmaydi/joylanmaydi.
 
-For instance, the code below prevents all such events and shows what we are trying to cut/copy/paste:
+Masalan, quyidagi kod barcha bunday hodisalarning oldini oladi va biz nima kesishga/nusxalashga/joylashtirshga harakat qilayotganimizni ko'rsatadi:
 
 ```html autorun height=40 run
 <input type="text" id="input">
@@ -74,22 +73,22 @@ For instance, the code below prevents all such events and shows what we are tryi
 </script>
 ```
 
-Please note, that it's possible to copy/paste not just text, but everything. For instance, we can copy a file in the OS file manager, and paste it.
+Diqqat qiling, nafaqat matn, balki hamma narsani nusxalash/joylashtirish mumkin. Masalan, biz OS fayl menejerida faylni nusxalashimiz va uni joylashtirshimiz mumkin.
 
-That's because `clipboardData` implements `DataTransfer` interface, commonly used for drag'n'drop and copy/pasting. It's bit beyound our scope now, but you can find its methods [in the specification](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface).
+Buning sababi `clipboardData` odatda drag'n'drop va nusxalash/joylashtirish uchun ishlatiladigan `DataTransfer` interfeysini amalga oshiradi. Bu hozir bizning qamrov doiramizdan biroz tashqarida, lekin siz uning metodlarini [spetsifikatsiyada](https://html.spec.whatwg.org/multipage/dnd.html#the-datatransfer-interface) topishingiz mumkin.
 
-```warn header="ClipboardAPI: user safety restrictions"
-The clipboard is a "global" OS-level thing. So most browsers allow read/write access to the clipboard only in the scope of certain user actions for the safety, e.g. in `onclick` event handlers.
+```warn header="ClipboardAPI: foydalanuvchi xavfsizligi cheklovlari"
+Clipboard "global" OS darajasidagi narsa. Shuning uchun ko'pgina brauzerlar xavfsizlik uchun clipboard ga o'qish/yozish kirishiga faqat ma'lum foydalanuvchi harakatlari doirasida ruxsat beradi, masalan `onclick` hodisa ishlov beruvchilarida.
 
-Also it's forbidden to generate "custom" clipboard events with `dispatchEvent` in all browsers except Firefox.
+Shuningdek, Firefox bundan mustasno barcha brauzerlarda `dispatchEvent` bilan "maxsus" clipboard hodisalarini yaratish taqiqlangan.
 ```
 
-## Summary
+## Xulosa
 
-Data change events:
+Ma'lumot o'zgarishi hodisalari:
 
-| Event | Description | Specials |
+| Hodisa | Tavsif | Xususiyatlar |
 |---------|----------|-------------|
-| `change`| A value was changed. | For text inputs triggers on focus loss. |
-| `input` | For text inputs on every change. | Triggers immediately unlike `change`. |
-| `cut/copy/paste` | Cut/copy/paste actions. | The action can be prevented. The `event.clipboardData` property gives read/write access to the clipboard. |
+| `change`| Qiymat o'zgartirildi. | Matn inputlari uchun fokus yo'qotilganda ishga tushadi. |
+| `input` | Matn inputlari uchun har o'zgarishda. | `change` dan farqli o'laroq darhol ishga tushadi. |
+| `cut/copy/paste` | Kesish/nusxalash/joylashtirish harakatlari. | Harakatning oldini olish mumkin. `event.clipboardData` xossasi clipboard ga o'qish/yozish kirishini beradi. |

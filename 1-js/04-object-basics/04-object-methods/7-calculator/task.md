@@ -1,4 +1,4 @@
-importance: 5
+muhimlik: 5
 
 ---
 
@@ -16,9 +16,8 @@ let calculator = {
 };
 
 calculator.read();
-alert( calculator.sum() );
-alert( calculator.mul() );
+alert(calculator.sum());
+alert(calculator.mul());
 ```
 
 [demo]
-

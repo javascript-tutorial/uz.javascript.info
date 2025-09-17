@@ -28,7 +28,7 @@ body {
 #prompt-form-container:before {
   display: inline-block;
   height: 100%;
-  content: '';
+  content: "";
   vertical-align: middle;
 }
 

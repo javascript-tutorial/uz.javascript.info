@@ -1,12 +1,11 @@
-importance: 3
+muhimlik: 3
 
 ---
 
-# VA(&&) ogohlantirishlarining natijasi nima?
+# VA (&&) ogohlantirishlarining natijasi nima?
 
 Quyidagi kod nimani chiqaradi?
 
 ```js
-alert( alert(1) && alert(2) );
+alert(alert(1) && alert(2));
 ```
-

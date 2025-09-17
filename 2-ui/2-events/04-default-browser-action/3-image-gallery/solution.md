@@ -1,1 +1,1 @@
-The solution is to assign the handler to the container and track clicks. If a click is on the `<a>` link, then change `src` of `#largeImg` to the `href` of the thumbnail.
+Yechim ishlov beruvchini konteynerga tayinlash va sekin urishlarni kuzatishdir. Agar `<a>` havolasi bosilgan bo'lsa, u holda `#largeImg` `src` ni eskizning `href`iga o'zgartiring.

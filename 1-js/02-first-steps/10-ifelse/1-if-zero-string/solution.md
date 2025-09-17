@@ -6,7 +6,6 @@ Biz ishlatish va tekshirishimiz mumkin:
 
 ```js run
 if ("0") {
-  alert( 'Hello' );
+  alert("Salom");
 }
 ```
-

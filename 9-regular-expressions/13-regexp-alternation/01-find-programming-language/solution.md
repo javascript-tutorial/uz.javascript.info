@@ -1,33 +1,32 @@
+Birinchi g'oya tillarni o'rtalarida `|` bilan ro'yxatlash bo'lishi mumkin.
 
-The first idea can be to list the languages with `|` in-between.
-
-But that doesn't work right:
+Ammo bu to'g'ri ishlamaydi:
 
 ```js run
 let regexp = /Java|JavaScript|PHP|C|C\+\+/g;
 
 let str = "Java, JavaScript, PHP, C, C++";
 
-alert( str.match(regexp) ); // Java,Java,PHP,C,C
+alert(str.match(regexp)); // Java,Java,PHP,C,C
 ```
 
-The regular expression engine looks for alternations one-by-one. That is: first it checks if we have  `match:Java`, otherwise -- looks for `match:JavaScript` and so on.
+Muntazam ifoda dvigateli alternativlarni birin-ketin qidiradi. Ya'ni: avval `match:Java` bor-yo'qligini tekshiradi, aks holda -- `match:JavaScript` ni qidiradi va hokazo.
 
-As a result, `match:JavaScript` can never be found, just because `match:Java` is checked first.
+Natijada, `match:JavaScript` hech qachon topila olmaydi, chunki `match:Java` birinchi bo'lib tekshiriladi.
 
-The same with `match:C` and `match:C++`.
+`match:C` va `match:C++` bilan ham xuddi shunday.
 
-There are two solutions for that problem:
+Bu muammo uchun ikkita yechim bor:
 
-1. Change the order to check the longer match first: `pattern:JavaScript|Java|C\+\+|C|PHP`.
-2. Merge variants with the same start: `pattern:Java(Script)?|C(\+\+)?|PHP`.
+1. Uzunroq moslikni birinchi tekshirish uchun tartibni o'zgartirish: `pattern:JavaScript|Java|C\+\+|C|PHP`.
+2. Bir xil boshlanish bilan variantlarni birlashtirish: `pattern:Java(Script)?|C(\+\+)?|PHP`.
 
-In action:
+Amalda:
 
 ```js run
 let regexp = /Java(Script)?|C(\+\+)?|PHP/g;
 
 let str = "Java, JavaScript, PHP, C, C++";
 
-alert( str.match(regexp) ); // Java,JavaScript,PHP,C,C++
+alert(str.match(regexp)); // Java,JavaScript,PHP,C,C++
 ```

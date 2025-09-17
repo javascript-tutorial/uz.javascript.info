@@ -38,9 +38,9 @@ Qulaylik uchun uni bir nechta satrlarga ajratamiz:
 ```js
 let sorted = word // PAN
   .toLowerCase() // pan
-  .split('') // ['p','a','n']
+  .split("") // ['p','a','n']
   .sort() // ['a','n','p']
-  .join(''); // anp
+  .join(""); // anp
 ```
 
 Ikki xil so'z `'PAN'` va `'nap'` bir xil harflar tartibida `'anp'` shaklini oladi.
@@ -73,5 +73,5 @@ function aclean(arr) {
 
 let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
 
-alert( aclean(arr) );
+alert(aclean(arr));
 ```

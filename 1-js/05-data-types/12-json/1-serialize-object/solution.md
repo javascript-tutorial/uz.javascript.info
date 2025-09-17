@@ -1,5 +1,3 @@
-
-
 ```js
 let user = {
   name: "John Smith",
@@ -10,4 +8,3 @@ let user = {
 let user2 = JSON.parse(JSON.stringify(user));
 */!*
 ```
-

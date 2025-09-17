@@ -6,20 +6,19 @@ Buni amalga oshirish uchun misol kodi:
 
 ```js run
 let urls = [
-  'https://api.github.com/users/iliakan',
-  'https://api.github.com/users/remy',
-  'https://api.github.com/users/jeresig'
+  "https://api.github.com/users/iliakan",
+  "https://api.github.com/users/remy",
+  "https://api.github.com/users/jeresig",
 ];
 
 // fetch so'rovlarni qilish
-Promise.all(urls.map(url => fetch(url)))
+Promise.all(urls.map((url) => fetch(url)))
   // har bir javobni response.json() ga map qilish
-  .then(responses => Promise.all(
-    responses.map(r => r.json())
-  ))
+  .then((responses) => Promise.all(responses.map((r) => r.json())))
   // har bir foydalanuvchining ismini ko'rsatish
-  .then(users => {  // (*)
-    for(let user of users) {
+  .then((users) => {
+    // (*)
+    for (let user of users) {
       alert(user.name);
     }
   });

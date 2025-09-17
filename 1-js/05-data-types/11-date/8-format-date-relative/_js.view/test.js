@@ -1,18 +1,23 @@
-describe("formatDate", function() {
-  it("shows 1ms ago as \"right now\"", function() {
-    assert.equal(formatDate(new Date(new Date - 1)), 'right now');
+describe("formatDate", function () {
+  it('1ms oldini "hozir" deb ko\'rsatadi', function () {
+    assert.equal(formatDate(new Date(new Date() - 1)), "hozir");
   });
 
-  it('"30 seconds ago"', function() {
-    assert.equal(formatDate(new Date(new Date - 30 * 1000)), "30 sec. ago");
+  it('"30 soniya oldin"', function () {
+    assert.equal(formatDate(new Date(new Date() - 30 * 1000)), "30 son. oldin");
   });
 
-  it('"5 minutes ago"', function() {
-    assert.equal(formatDate(new Date(new Date - 5 * 60 * 1000)), "5 min. ago");
+  it('"5 daqiqa oldin"', function () {
+    assert.equal(
+      formatDate(new Date(new Date() - 5 * 60 * 1000)),
+      "5 daq. oldin"
+    );
   });
 
-  it("older dates as DD.MM.YY HH:mm", function() {
-    assert.equal(formatDate(new Date(2014, 2, 1, 11, 22, 33)), "01.03.14 11:22");
+  it("eski sanalarni DD.MM.YY HH:mm formatida", function () {
+    assert.equal(
+      formatDate(new Date(2014, 2, 1, 11, 22, 33)),
+      "01.03.14 11:22"
+    );
   });
-
 });

@@ -1,28 +1,28 @@
-importance: 5
+muhimlik: 5
 
 ---
 
-# Position the note inside (absolute)
+# Eslatmani ichida joylashtirish (absolute)
 
-Extend the previous task <info:task/position-at-absolute>: teach the function  `positionAt(anchor, position, elem)` to insert `elem` inside the `anchor`.
+Oldingi vazifani <info:task/position-at-absolute> kengaytiring: `positionAt(anchor, position, elem)` funksiyasiga `elem` ni `anchor` ichiga qo'yishni o'rgating.
 
-New values for `position`:
+`position` uchun yangi qiymatlar:
 
-- `top-out`, `right-out`, `bottom-out` -- work the same as before, they insert the `elem` over/right/under `anchor`.
-- `top-in`, `right-in`, `bottom-in` -- insert `elem` inside the `anchor`: stick it to the upper/right/bottom edge.
+- `top-out`, `right-out`, `bottom-out` -- avvalgidek ishlaydi, ular `elem` ni `anchor` ning ustiga/o'ngiga/ostiga qo'yadi.
+- `top-in`, `right-in`, `bottom-in` -- `elem` ni `anchor` ichiga qo'yadi: uni yuqori/o'ng/pastki chetiga yopishtirib qo'yadi.
 
-For instance:
+Masalan:
 
 ```js
-// shows the note above blockquote
+// eslatmani blockquote ustida ko'rsatadi
 positionAt(blockquote, "top-out", note);
 
-// shows the note inside blockquote, at the top
+// eslatmani blockquote ichida, yuqorida ko'rsatadi
 positionAt(blockquote, "top-in", note);
 ```
 
-The result:
+Natija:
 
 [iframe src="solution" height="310" border="1" link]
 
-As the source code, take the solution of the task <info:task/position-at-absolute>.
+Manba kod sifatida <info:task/position-at-absolute> vazifasining yechimini oling.

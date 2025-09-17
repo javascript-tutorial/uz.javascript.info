@@ -1,16 +1,16 @@
-# Arrow functions, the basics
+# Arrow funksiyalar, asoslar
 
-There's another very simple and concise syntax for creating functions, that's often better than Function Expressions.
+Funksiya yaratishning yana bir juda oddiy va qisqa sintaksisi bor, u ko'pincha Funksiya ifodalaridan yaxshiroqdir.
 
-It's called "arrow functions", because it looks like this:
+U "arrow funksiyalar" deb ataladi, chunki u quyidagicha ko'rinadi:
 
 ```js
 let func = (arg1, arg2, ..., argN) => expression
 ```
 
-...This creates a function `func` that accepts arguments `arg1..argN`, then evaluates the `expression` on the right side with their use and returns its result.
+...Bu `arg1..argN` argumentlarini qabul qiladigan `func` funksiyasini yaratadi, keyin ulardan foydalanib o'ng tomondagi `expression` ni baholaydi va natijasini qaytaradi.
 
-In other words, it's the shorter version of:
+Boshqacha qilib aytganda, bu quyidagining qisqaroq versiyasi:
 
 ```js
 let func = function(arg1, arg2, ..., argN) {
@@ -18,94 +18,93 @@ let func = function(arg1, arg2, ..., argN) {
 };
 ```
 
-Let's see a concrete example:
+Konkret misolni ko'ramiz:
 
 ```js run
 let sum = (a, b) => a + b;
 
-/* This arrow function is a shorter form of:
+/* Bu arrow funksiya quyidagining qisqa shakli:
 
 let sum = function(a, b) {
   return a + b;
 };
 */
 
-alert( sum(1, 2) ); // 3
+alert(sum(1, 2)); // 3
 ```
 
-As you can, see `(a, b) => a + b` means a function that accepts two arguments named `a` and `b`. Upon the execution, it evaluates the expression `a + b` and returns the result.
+Ko'rib turganingizdek, `(a, b) => a + b` `a` va `b` nomli ikkita argumentni qabul qiladigan funksiyani anglatadi. Bajarilishda u `a + b` ifadasini baholaydi va natijani qaytaradi.
 
-- If we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
+- Agar bizda faqat bitta argument bo'lsa, parametrlar atrofidagi qavslarni tashlab qo'yish mumkin, bu uni yanada qisqaroq qiladi.
 
-    For example:
+  Masalan:
 
-    ```js run
-    *!*
-    let double = n => n * 2;
-    // roughly the same as: let double = function(n) { return n * 2 }
-    */!*
+  ```js run
+  *!*
+  let double = n => n * 2;
+  // taxminan bunday: let double = function(n) { return n * 2 }
+  */!*
 
-    alert( double(3) ); // 6
-    ```
+  alert( double(3) ); // 6
+  ```
 
-- If there are no arguments, parentheses will be empty (but they should be present):
+- Agar argumentlar bo'lmasa, qavslar bo'sh bo'ladi (lekin ular bo'lishi kerak):
 
-    ```js run
-    let sayHi = () => alert("Hello!");
+  ```js run
+  let sayHi = () => alert("Salom!");
 
-    sayHi();
-    ```
+  sayHi();
+  ```
 
-Arrow functions can be used in the same way as Function Expressions.
+Arrow funksiyalarni Funksiya ifodalari bilan bir xil tarzda ishlatish mumkin.
 
-For instance, to dynamically create a function:
+Masalan, funksiyani dinamik yaratish uchun:
 
 ```js run
-let age = prompt("What is your age?", 18);
+let age = prompt("Yoshingiz necha?", 18);
 
-let welcome = (age < 18) ?
-  () => alert('Hello') :
-  () => alert("Greetings!");
+let welcome =
+  age < 18 ? () => alert("Salom") : () => alert("Assalomu alaykum!");
 
 welcome();
 ```
 
-Arrow functions may appear unfamiliar and not very readable at first, but that quickly changes as the eyes get used to the structure.
+Arrow funksiyalar dastlab notanish va unchalik o'qilishi mumkin emas, lekin ko'zlar tuzilishga o'rganib qolgach, bu tezda o'zgaradi.
 
-They are very convenient for simple one-line actions, when we're just too lazy to write many words.
+Ular oddiy bir qatorli harakatlar uchun juda qulay, biz ko'p so'z yozishga dangasamiz.
 
-## Multiline arrow functions
+## Ko'p qatorli arrow funksiyalar
 
-The examples above took arguments from the left of `=>` and evaluated the right-side expression with them.
+Yuqoridagi misollar `=>` ning chap tomonidan argumentlarni oldi va ular bilan o'ng tomondagi ifodani baholadi.
 
-Sometimes we need something a little bit more complex, like multiple expressions or statements. It is also possible, but we should enclose them in curly braces. Then use a normal `return` within them.
+Ba'zan bizga biroz murakkabroq narsa kerak bo'ladi, masalan bir nechta ifodalar yoki iboralar. Bu ham mumkin, lekin biz ularni jingalak qavslar ichiga olishimiz kerak. Keyin ular ichida oddiy `return` dan foydalaning.
 
-Like this:
+Quyidagicha:
 
 ```js run
-let sum = (a, b) => {  // the curly brace opens a multiline function
+let sum = (a, b) => {  // jingalak qavs ko'p qatorli funksiyani ochadi
   let result = a + b;
 *!*
-  return result; // if we use curly braces, then we need an explicit "return" 
+  return result; // agar jingalak qavslardan foydalansak, aniq "return" kerak
 */!*
 };
 
 alert( sum(1, 2) ); // 3
 ```
 
-```smart header="More to come"
-Here we praised arrow functions for brevity. But that's not all!
+```smart header="Ma'lumot o'rnida"
+Bu yerda biz arrow funksiyalarni qisqaligi uchun maqtadik. Lekin hammasi shu emas!
 
-Arrow functions have other interesting features.
+Arrow funksiyalar boshqa qiziqarli xususiyatlarga ega.
 
-To study them in-depth, we first need to get to know some other aspects of JavaScript, so we'll return to arrow functions later in the chapter <info:arrow-functions>.
+Ularni chuqur o'rganish uchun avval JavaScript-ning boshqa jihatlarini bilishimiz kerak, shuning uchun arrow funksiyalarga keyinroq <info:arrow-functions> bobida qaytamiz.
 
-For now, we can already use arrow functions for one-line actions and callbacks.
+Hozircha biz arrow funksiyalarni bir qatorli harakatlar va callbacklar uchun ishlatishimiz mumkin.
 ```
 
-## Summary
+## Xulosa
 
-Arrow functions are handy for one-liners. They come in two flavors:
+Arrow funksiyalar bir qatorlilar uchun qulay. Ular ikki xil bo'ladi:
 
-1. Without curly braces: `(...args) => expression` -- the right side is an expression: the function evaluates it and returns the result.
-2. With curly braces: `(...args) => { body }` -- brackets allow us to write multiple statements inside the function, but we need an explicit `return` to return something.
+1. Jingalak qavslarsiz: `(...args) => expression` -- o'ng tomon ifoda: funksiya uni baholaydi va natijani qaytaradi.
+2. Jingalak qavslar bilan: `(...args) => { body }` -- qavslar bizga funksiya ichida bir nechta iboralarni yozishga imkon beradi, lekin biror narsani qaytarish uchun aniq `return` kerak.

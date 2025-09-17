@@ -6,15 +6,16 @@ Buning uchun kod:
 
 ```js run
 let urls = [
-  'https://api.github.com/users/iliakan',
-  'https://api.github.com/users/remy',
-  'https://api.github.com/users/jeresig'
+  "https://api.github.com/users/iliakan",
+  "https://api.github.com/users/remy",
+  "https://api.github.com/users/jeresig",
 ];
 
-Promise.all(urls.map(url => fetch(url)))
+Promise.all(urls.map((url) => fetch(url)))
   // har bir javob uchun uning holati ko'rsatilgan
-  .then(responses => { // (*)
-    for(let response of responses) {
+  .then((responses) => {
+    // (*)
+    for (let response of responses) {
       alert(`${response.url}: ${response.status}`);
     }
   });
@@ -37,7 +38,7 @@ let urls = [
 
 Promise.all(...) // URL-larni olish uchun sizning kodingiz...
   // ...va natijada olingan a'zolar massivi sifatida fetch xatolarini o'tkazing...
-  .then(responses => {  
+  .then(responses => {
     // 3 urls => 3 massiv a'zolari
     alert(responses[0].status); // 200
     alert(responses[1].status); // 200

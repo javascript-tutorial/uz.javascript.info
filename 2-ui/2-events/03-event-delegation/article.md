@@ -1,91 +1,90 @@
+# Hodisa delegatsiyasi
 
-# Event delegation
+Ushlash va bubbling bizga *hodisa delegatsiyasi* deb ataladigan eng kuchli hodisa qayta ishlash shakllaridan birini amalga oshirishga imkon beradi.
 
-Capturing and bubbling allow us to implement one of most powerful event handling patterns called *event delegation*.
+G'oya shundaki, agar bizda o'xshash tarzda qayta ishlanadigan ko'plab elementlar bo'lsa, ularning har biriga ishlov beruvchi tayinlash o'rniga -- ularning umumiy ajdodiga bitta ishlov beruvchi qo'yamiz.
 
-The idea is that if we have a lot of elements handled in a similar way, then instead of assigning a handler to each of them -- we put a single handler on their common ancestor.
+Ishlov beruvchida biz `event.target` dan hodisa qayerda sodir bo'lganini bilish va uni qayta ishlash uchun foydalanamiz.
 
-In the handler we get `event.target` to see where the event actually happened and handle it.
+Misolni ko'raylik -- qadimgi Xitoy falsafasini aks ettiruvchi [Ba-Gua diagrammasi](http://en.wikipedia.org/wiki/Ba_gua).
 
-Let's see an example -- the [Ba-Gua diagram](http://en.wikipedia.org/wiki/Ba_gua) reflecting the ancient Chinese philosophy.
-
-Here it is:
+Mana u:
 
 [iframe height=350 src="bagua" edit link]
 
-The HTML is like this:
+HTML quyidagicha:
 
 ```html
 <table>
   <tr>
-    <th colspan="3"><em>Bagua</em> Chart: Direction, Element, Color, Meaning</th>
+    <th colspan="3"><em>Bagua</em> jadvali: Yo'nalish, Element, Rang, Ma'no</th>
   </tr>
   <tr>
-    <td class="nw"><strong>Northwest</strong><br>Metal<br>Silver<br>Elders</td>
+    <td class="nw"><strong>Shimoli-g'arbiy</strong><br>Metal<br>Kumush<br>Oqsoqollar</td>
     <td class="n">...</td>
     <td class="ne">...</td>
   </tr>
-  <tr>...2 more lines of this kind...</tr>
-  <tr>...2 more lines of this kind...</tr>
+  <tr>...bundan yana 2 ta qator...</tr>
+  <tr>...bundan yana 2 ta qator...</tr>
 </table>
 ```
 
-The table has 9 cells, but there could be 99 or 9999, doesn't matter.
+Jadvalda 9 ta katak bor, lekin 99 yoki 9999 ta bo'lishi ham mumkin, farqi yo'q.
 
-**Our task is to highlight a cell `<td>` on click.**
+**Bizning vazifamiz bosishda `<td>` katakni ajratib ko'rsatishdir.**
 
-Instead of assign an `onclick` handler to each `<td>` (can be many) -- we'll setup the "catch-all" handler on `<table>` element.
+Har bir `<td>` ga `onclick` ishlov beruvchi tayinlash o'rniga (ko'p bo'lishi mumkin) -- biz `<table>` elementiga "hammani ushlash" ishlov beruvchisini o'rnatamiz.
 
-It will use `event.target` to get the clicked element and highlight it.
+U bosilgan elementni olish va uni ajratib ko'rsatish uchun `event.target` dan foydalanadi.
 
-The code:
+Kod:
 
 ```js
 let selectedTd;
 
 *!*
 table.onclick = function(event) {
-  let target = event.target; // where was the click?
+  let target = event.target; // bosish qayerda bo'ldi?
 
-  if (target.tagName != 'TD') return; // not on TD? Then we're not interested
+  if (target.tagName != 'TD') return; // TD da emas? Demak bizga kerak emas
 
-  highlight(target); // highlight it
+  highlight(target); // uni ajratib ko'rsat
 };
 */!*
 
 function highlight(td) {
-  if (selectedTd) { // remove the existing highlight if any
+  if (selectedTd) { // agar mavjud ajratish bo'lsa, uni olib tashlang
     selectedTd.classList.remove('highlight');
   }
   selectedTd = td;
-  selectedTd.classList.add('highlight'); // highlight the new td
+  selectedTd.classList.add('highlight'); // yangi td ni ajratib ko'rsat
 }
 ```
 
-Such a code doesn't care how many cells there are in the table. We can add/remove `<td>` dynamically at any time and the highlighting will still work.
+Bunday kod jadvalda nechta katak borligiga ahamiyat bermaydi. Biz istalgan vaqtda `<td>` ni dinamik ravishda qo'shishimiz/olib tashlashimiz mumkin va ajratish hali ham ishlaydi.
 
-Still, there's a drawback.
+Ammo kamchilik ham bor.
 
-The click may occur not on the `<td>`, but inside it.
+Bosish `<td>` da emas, balki uning ichida sodir bo'lishi mumkin.
 
-In our case if we take a look inside the HTML, we can see nested tags inside `<td>`, like `<strong>`:
+Bizning holatda, agar HTML ichiga qarasak, `<td>` ichida `<strong>` kabi ichki teglar borligini ko'rishimiz mumkin:
 
 ```html
 <td>
 *!*
-  <strong>Northwest</strong>
+  <strong>Shimoli-g'arbiy</strong>
 */!*
   ...
 </td>
 ```
 
-Naturally, if a click happens on that `<strong>` then it becomes the value of `event.target`.
+Tabiiyki, agar bosish o'sha `<strong>` da sodir bo'lsa, u `event.target` qiymati bo'ladi.
 
 ![](bagua-bubble.svg)
 
-In the handler `table.onclick` we should take such `event.target` and find out whether the click was inside `<td>` or not.
+`table.onclick` ishlov beruvchisida biz bunday `event.target` ni olib, bosish `<td>` ichida bo'ldi yoki yo'qligini aniqlashimiz kerak.
 
-Here's the improved code:
+Mana yaxshilangan kod:
 
 ```js
 table.onclick = function(event) {
@@ -99,33 +98,33 @@ table.onclick = function(event) {
 };
 ```
 
-Explanations:
-1. The method `elem.closest(selector)` returns the nearest ancestor that matches the selector. In our case we look for `<td>` on the way up from the source element.
-2. If `event.target` is not inside any `<td>`, then the call returns immediately, as there's nothing to do.
-3. In case of nested tables, `event.target` may be a `<td>`, but lying outside of the current table. So we check if that's actually *our table's* `<td>`.
-4. And, if it's so, then highlight it.
+Tushuntirishlar:
+1. `elem.closest(selector)` metodi selectorga mos keladigan eng yaqin ajdodni qaytaradi. Bizning holatda biz manba elementdan yuqoriga yo'lda `<td>` ni qidiramiz.
+2. Agar `event.target` hech qanday `<td>` ichida bo'lmasa, chaqiruv darhol qaytadi, chunki qiladigan ish yo'q.
+3. Ichki jadvallar holatida, `event.target` `<td>` bo'lishi mumkin, lekin joriy jadvaldan tashqarida yotishi mumkin. Shuning uchun bu haqiqatan ham *bizning jadvalimizning* `<td>` ekanligini tekshiramiz.
+4. Va agar shunday bo'lsa, uni ajratib ko'rsatamiz.
 
-As the result, we have a fast, efficient highlighting code, that doesn't care about the total number of `<td>` in the table.
+Natijada bizda tez va samarali ajratish kodi bor, u jadvaldagi `<td>` larning umumiy soniga ahamiyat bermaydi.
 
-## Delegation example: actions in markup
+## Delegatsiya misoli: markup da harakatlar
 
-There are other uses for event delegation.
+Hodisa delegatsiyasining boshqa foydalanish usullari ham bor.
 
-Let's say, we want to make a menu with buttons "Save", "Load", "Search" and so on. And there's an object with methods `save`, `load`, `search`... How to match them?
+Aytaylik, biz "Saqlash", "Yuklash", "Qidirish" va hokazo tugmalari bilan menyu yaratmoqchimiz. Va `save`, `load`, `search`... metodlariga ega obyekt bor. Ularni qanday moslashtiramiz?
 
-The first idea may be to assign a separate handler to each button. But there's a more elegant solution. We can add a handler for the whole menu and `data-action` attributes for buttons that has the method to call:
+Birinchi g'oya har bir tugmaga alohida ishlov beruvchi tayinlash bo'lishi mumkin. Lekin yanada nafis yechim bor. Biz butun menyu uchun ishlov beruvchi qo'shishimiz va chaqiriladigan metodni ko'rsatuvchi tugmalar uchun `data-action` atributlarini qo'shishimiz mumkin:
 
 ```html
-<button *!*data-action="save"*/!*>Click to Save</button>
+<button *!*data-action="save"*/!*>Saqlash uchun bosing</button>
 ```
 
-The handler reads the attribute and executes the method. Take a look at the working example:
+Ishlov beruvchi atributni o'qiydi va metodini bajaradi. Ishlayotgan misolni ko'ring:
 
 ```html autorun height=60 run untrusted
 <div id="menu">
-  <button data-action="save">Save</button>
-  <button data-action="load">Load</button>
-  <button data-action="search">Search</button>
+  <button data-action="save">Saqlash</button>
+  <button data-action="load">Yuklash</button>
+  <button data-action="search">Qidirish</button>
 </div>
 
 <script>
@@ -136,15 +135,15 @@ The handler reads the attribute and executes the method. Take a look at the work
     }
 
     save() {
-      alert('saving');
+      alert('saqlash');
     }
 
     load() {
-      alert('loading');
+      alert('yuklash');
     }
 
     search() {
-      alert('searching');
+      alert('qidirish');
     }
 
     onClick(event) {
@@ -161,37 +160,37 @@ The handler reads the attribute and executes the method. Take a look at the work
 </script>
 ```
 
-Please note that `this.onClick` is bound to `this` in `(*)`. That's important, because otherwise `this` inside it would reference the DOM element (`elem`), not the `Menu` object, and `this[action]` would not be what we need.
+Diqqat qiling, `this.onClick` `(*)` da `this` ga bog'langan. Bu muhim, chunki aks holda undagi `this` `Menu` obyekti emas, balki DOM elementini (`elem`) ko'rsatadi va `this[action]` bizga kerak bo'lgan narsa bo'lmaydi.
 
-So, what advantages does delegation give us here?
+Xo'sh, delegatsiya bizga bu yerda qanday afzalliklar beradi?
 
 ```compare
-+ We don't need to write the code to assign a handler to each button. Just make a method and put it in the markup.
-+ The HTML structure is flexible, we can add/remove buttons at any time.
++ Har bir tugmaga ishlov beruvchi tayinlash uchun kod yozishimiz shart emas. Shunchaki metod yaratib, uni markup ga qo'yamiz.
++ HTML tuzilishi moslashuvchan, biz istalgan vaqtda tugmalarni qo'shishimiz/olib tashlashimiz mumkin.
 ```
 
-We could also use classes `.action-save`, `.action-load`, but an attribute `data-action` is better semantically. And we can use it in CSS rules too.
+Biz `.action-save`, `.action-load` kabi sinflardan ham foydalanishimiz mumkin edi, lekin `data-action` atributi semantik jihatdan yaxshiroq. Va uni CSS qoidalarida ham ishlatishimiz mumkin.
 
-## The "behavior" pattern
+## "Xatti-harakat" namunasi
 
-We can also use event delegation to add "behaviors" to elements *declaratively*, with special attributes and classes.
+Biz hodisa delegatsiyasidan elementlarga maxsus atributlar va sinflar bilan *deklarativ* tarzda "xatti-harakatlar" qo'shish uchun ham foydalanishimiz mumkin.
 
-The pattern has two parts:
-1. We add a custom attribute to an element that describes its behavior.
-2. A document-wide handler tracks events, and if an event happens on an attributed element -- performs the action.
+Namuna ikki qismdan iborat:
+1. Biz elementga uning xatti-harakatini tavsiflovchi maxsus atribut qo'shamiz.
+2. Hujjat darajasidagi ishlov beruvchi hodisalarni kuzatib turadi va agar hodisa atributli elementda sodir bo'lsa -- harakatni bajaradi.
 
-### Behavior: Counter
+### Xatti-harakat: Hisoblagich
 
-For instance, here the attribute `data-counter` adds a behavior: "increase value on click" to buttons:
+Masalan, bu yerda `data-counter` atributi tugmalarga "bosishda qiymatni oshirish" xatti-harakatini qo'shadi:
 
 ```html run autorun height=60
-Counter: <input type="button" value="1" data-counter>
-One more counter: <input type="button" value="2" data-counter>
+Hisoblagich: <input type="button" value="1" data-counter>
+Yana bir hisoblagich: <input type="button" value="2" data-counter>
 
 <script>
   document.addEventListener('click', function(event) {
 
-    if (event.target.dataset.counter != undefined) { // if the attribute exists...
+    if (event.target.dataset.counter != undefined) { // agar atribut mavjud bo'lsa...
       event.target.value++;
     }
 
@@ -199,27 +198,27 @@ One more counter: <input type="button" value="2" data-counter>
 </script>
 ```
 
-If we click a button -- its value is increased. Not buttons, but the general approach is important here.
+Agar tugmani bossak -- uning qiymati oshadi. Tugmalar emas, balki umumiy yondashuv muhim.
 
-There can be as many attributes with `data-counter` as we want. We can add new ones to HTML at any moment. Using the event delegation we "extended" HTML, added an attribute that describes a new behavior.
+Biz xohlagancha `data-counter` atributiga ega bo'lishimiz mumkin. Biz istalgan vaqtda HTML ga yangisini qo'shishimiz mumkin. Hodisa delegatsiyasidan foydalanib, biz HTML ni "kengaytirdik", yangi xatti-harakatni tavsiflovchi atribut qo'shdik.
 
-```warn header="For document-level handlers -- always `addEventListener`"
-When we assign an event handler to the `document` object, we should always use `addEventListener`, not `document.on<event>`, because the latter will cause conflicts: new handlers overwrite old ones.
+```warn header="Hujjat darajasidagi ishlov beruvchilar uchun -- doim `addEventListener`"
+`document` obyektiga hodisa ishlov beruvchisini tayinlashda, biz doim `addEventListener` dan foydalanishimiz kerak, `document.on<event>` dan emas, chunki ikkinchisi konfliktlarga olib keladi: yangi ishlov beruvchilar eskisini ustiga yozadi.
 
-For real projects it's normal that there are many handlers on `document` set by different parts of the code.
+Haqiqiy loyihalar uchun `document` da kodning turli qismlari tomonidan o'rnatilgan ko'plab ishlov beruvchilar bo'lishi normal holdir.
 ```
 
-### Behavior: Toggler
+### Xatti-harakat: Almashtiruvchi
 
-One more example of behavior. A click on an element with the attribute `data-toggle-id` will show/hide the element with the given `id`:
+Xatti-harakatning yana bir misoli. `data-toggle-id` atributi bilan elementga bosish berilgan `id` ga ega elementni ko'rsatadi/yashiradi:
 
 ```html autorun run height=60
 <button *!*data-toggle-id="subscribe-mail"*/!*>
-  Show the subscription form
+  Obuna formasini ko'rsatish
 </button>
 
 <form id="subscribe-mail" hidden>
-  Your mail: <input type="email">
+  Sizning emailingiz: <input type="email">
 </form>
 
 <script>
@@ -236,37 +235,37 @@ One more example of behavior. A click on an element with the attribute `data-tog
 </script>
 ```
 
-Let's note once again what we did. Now, to add toggling functionality to an element -- there's no need to know JavaScript, just use the attribute `data-toggle-id`.
+Yana bir bor ta'kidlaymiz, biz nima qildik. Endi elementga almashtirish funksiyasini qo'shish uchun -- JavaScript bilish shart emas, faqat `data-toggle-id` atributidan foydalaning.
 
-That may become really convenient -- no need to write JavaScript for every such element. Just use the behavior. The document-level handler makes it work for any element of the page.
+Bu haqiqatan ham qulay bo'lishi mumkin -- har bir bunday element uchun JavaScript yozish shart emas. Shunchaki xatti-harakatdan foydalaning. Hujjat darajasidagi ishlov beruvchi uni sahifaning har qanday elementi uchun ishlashini ta'minlaydi.
 
-We can combine multiple behaviors on a single element as well.
+Bitta elementda bir nechta xatti-harakatlarni birlashtirish ham mumkin.
 
-The "behavior" pattern can be an alternative to mini-fragments of JavaScript.
+"Xatti-harakat" namunasi JavaScript mini-fragmentlariga muqobil bo'lishi mumkin.
 
-## Summary
+## Xulosa
 
-Event delegation is really cool! It's one of the most helpful patterns for DOM events.
+Hodisa delegatsiyasi juda zo'r! Bu DOM hodisalari uchun eng foydali shakllardan biridir.
 
-It's often used to add the same handling for many similar elements, but not only for that.
+U ko'pincha ko'plab o'xshash elementlar uchun bir xil qayta ishlashni qo'shish uchun ishlatiladi, lekin faqat buning uchun emas.
 
-The algorithm:
+Algoritm:
 
-1. Put a single handler on the container.
-2. In the handler -- check the source element `event.target`.
-3. If the event happened inside an element that interests us, then handle the event.
+1. Konteynerga bitta ishlov beruvchi qo'ying.
+2. Ishlov beruvchida -- manba element `event.target` ni tekshiring.
+3. Agar hodisa bizni qiziqtiruvchi element ichida sodir bo'lgan bo'lsa, hodisani qayta ishlang.
 
-Benefits:
+Afzalliklari:
 
 ```compare
-+ Simplifies initialization and saves memory: no need to add many handlers.
-+ Less code: when adding or removing elements, no need to add/remove handlers.
-+ DOM modifications: we can mass add/remove elements with `innerHTML` and the like.
++ Initsializatsiyani soddalashtiradi va xotirani tejaydi: ko'plab ishlov beruvchilarni qo'shish shart emas.
++ Kamroq kod: elementlarni qo'shish yoki olib tashlashda ishlov beruvchilarni qo'shish/olib tashlash shart emas.
++ DOM modifikatsiyalari: biz `innerHTML` va shunga o'xshash narsalar bilan ommaviy ravishda elementlarni qo'shish/olib tashlashimiz mumkin.
 ```
 
-The delegation has its limitations of course:
+Delegatsiyaning cheklovlari ham bor, albatta:
 
 ```compare
-- First, the event must be bubbling. Some events do not bubble. Also, low-level handlers should not use `event.stopPropagation()`.
-- Second, the delegation may add CPU load, because the container-level handler reacts on events in any place of the container, no matter whether they interest us or not. But usually the load is negligible, so we don't take it into account.
+- Birinchidan, hodisa bubbling bo'lishi kerak. Ba'zi hodisalar bubble qilmaydi. Shuningdek, past darajali ishlov beruvchilar `event.stopPropagation()` dan foydalanmasligi kerak.
+- Ikkinchidan, delegatsiya CPU yukini qo'shishi mumkin, chunki konteyner darajasidagi ishlov beruvchi konteynerning istalgan joyidagi hodisalarga javob beradi, ular bizni qiziqtirsa ham qiziqtirmasa ham. Lekin odatda yuk ahamiyatsiz, shuning uchun biz uni hisobga olmaymiz.
 ```

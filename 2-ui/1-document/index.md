@@ -1,3 +1,3 @@
-# Document
+# Hujjat
 
-Here we'll learn to manipulate a web-page using JavaScript.
+Bu erda biz JavaScript yordamida veb-sahifani boshqarishni o'rganamiz.

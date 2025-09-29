@@ -4,10 +4,17 @@ Biz ko'plab taqqoslash operatorlarini matematikadan bilamiz.
 
 JavaScript da ular quyidagicha yoziladi:
 
+<<<<<<< HEAD
 - Katta/kichik: <code>a &gt; b</code>, <code>a &lt; b</code>.
 - Katta/kichik yoki teng: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
 - Teng: `a == b`, iltimos, qo'sh tenglik belgisi `==` tenglik testini anglatishini unutmang, bitta `a = b` esa tayinlashni anglatadi.
 - Teng emas: Matematikada belgilanishi <code>&ne;</code>, lekin JavaScript da <code>a != b</code> deb yoziladi.
+=======
+- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
+- Not equals: In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Ushbu maqolada biz turli xil taqqoslashlar, JavaScript ularni qanday amalga oshirishi, shu jumladan muhim o'ziga xosliklar haqida ko'proq bilib olamiz.
 

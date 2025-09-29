@@ -142,7 +142,11 @@ Funktsiyadan foydalanishni hujjatlashtiring
 
     Aytgancha, [WebStorm](https://www.jetbrains.com/webstorm/) kabi ko'plab tahrirlovchilar ularni ham tushunishlari mumkin va ularni avtomatik to'ldirish va ba'zi bir avtomatik kodlarni tekshirish uchun ishlatishlari mumkin.
 
+<<<<<<< HEAD
     Shuningdek, [JSDoc 3] (https://github.com/jsdoc3/jsdoc) kabi vositalar mavjud, ular izohlardan HTML-hujjatlarni yaratishlari mumkin. JSDoc haqida ko'proq ma'lumotni <http://usejsdoc.org/> sahifasida o'qishingiz mumkin.
+=======
+Also, there are tools like [JSDoc 3](https://github.com/jsdoc/jsdoc) that can generate HTML-documentation from the comments. You can read more information about JSDoc at <https://jsdoc.app>.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Nima uchun vazifa shu tarzda hal qilinadi?
 : Yozilgan kod muhim. Ammo nima yozilganini tushunish uchun _yozilmagan_ narsalar yanada muhimroq bo'lishi mumkin. Nima uchun vazifa aynan shu tarzda hal qilinadi? Kod hech qanday javob bermaydi.

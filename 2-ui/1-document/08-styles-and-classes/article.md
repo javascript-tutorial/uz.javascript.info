@@ -128,8 +128,21 @@ setTimeout(() => (document.body.style.display = ""), 1000); // normalga qaytaris
 
 Agar `style.display` ni bo'sh satrga o'rnatdik, brauzer CSS sinflarini va o'zining o'rnatilgan uslublarini normal ravishda qo'llaydi, go'yo bunday `style.display` xususiyati umuman yo'qdek.
 
+<<<<<<< HEAD
 ````smart header="`style.cssText`bilan to'liq qayta yozish"
 Odatda biz alohida uslub xususiyatlarini belgilash uchun`style.\*`dan foydalanamiz. Biz`div.style="color: red; width: 100px"`kabi to'liq uslubni o'rnatay olmaymiz, chunki`div.style` obyekt va u faqat o'qish uchun.
+=======
+Also there is a special method for that, `elem.style.removeProperty('style property')`. So, We can remove a property like this:
+
+```js run
+document.body.style.background = 'red'; //set background to red
+
+setTimeout(() => document.body.style.removeProperty('background'), 1000); // remove background after 1 second
+```
+
+````smart header="Full rewrite with `style.cssText`"
+Normally, we use `style.*` to assign individual style properties. We can't set the full style like `div.style="color: red; width: 100px"`, because `div.style` is an object, and it's read-only.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 To'liq uslubni satr sifatida o'rnatish uchun maxsus `style.cssText` xususiyati mavjud:
 
@@ -261,6 +274,7 @@ Shunday qilib, hozirda `getComputedStyle` aslida xususiyatning hal qilingan qiym
 ````warn header="`getComputedStyle` to'liq xususiyat nomini talab qiladi"
 Biz har doim xohlagan aniq xususiyatni so'rashimiz kerak, masalan `paddingLeft` yoki `marginTop` yoki `borderTopWidth`. Aks holda to'g'ri natija kafolatlanmaydi.
 
+<<<<<<< HEAD
 Masalan, agar `paddingLeft/paddingTop` xususiyatlari bo'lsa, `getComputedStyle(elem).padding` uchun nimani olishimiz kerak? Hech narsa yoki ma'lum paddinglardan "yaratilgan" qiymatmi? Bu yerda standart qoida yo'q.
 
 Boshqa nomuvofiqliklar ham bor. Misol tariqasida, ba'zi brauzerlar (Chrome) quyidagi hujjatda `10px` ko'rsatadi, ba'zilari (Firefox) esa ko'rsatmaydi:
@@ -277,6 +291,10 @@ Boshqa nomuvofiqliklar ham bor. Misol tariqasida, ba'zi brauzerlar (Chrome) quyi
 </script>
 ```
 `````
+=======
+For instance, if there are properties `paddingLeft/paddingTop`, then what should we get for `getComputedStyle(elem).padding`? Nothing, or maybe a "generated" value from known paddings? There's no standard rule here.
+````
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```smart header="`:visited`havolalarga qo'llaniladigan uslublar yashirin!"
 Tashrif buyurilgan havolalar`:visited` CSS psevdosinfi yordamida ranglanishi mumkin.

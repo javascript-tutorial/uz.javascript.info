@@ -131,7 +131,17 @@ Async skriptlar sahifaga mustaqil uchinchi tomon skriptlarini: hisoblagichlar, r
 <script async src="https://google-analytics.com/analytics.js"></script>
 ```
 
+<<<<<<< HEAD
 ## Dinamik skriptlar
+=======
+```smart header="The `async` attribute is only for external scripts"
+Just like `defer`, the `async` attribute is ignored if the `<script>` tag has no `src`.
+```
+
+## Dynamic scripts
+
+There's one more important way of adding a script to the page.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Sahifaga skript qo'shishning yana bir muhim usuli bor.
 
@@ -185,12 +195,21 @@ Lekin ular orasida muhim farqlar ham bor:
 | `async` | *Birinchi-yuklangan tartib*. Ularning hujjat tartibida ahamiyati yo'q -- qaysi biri birinchi yuklanadi, birinchi ishlaydi |  Ahamiyatsiz. Hujjat hali to'liq yuklanmagan vaqtda yuklash va bajarish mumkin. Bu skriptlar kichik yoki keshlangan va hujjat etarlicha uzun bo'lganda sodir bo'ladi. |
 | `defer` | *Hujjat tartibida* (hujjatdagi ketma-ketlikda). |  Hujjat yuklangan va tahlil qilinganidan keyin bajariladi (kerak bo'lsa kutadi), `DOMContentLoaded` dan oldin. |
 
+<<<<<<< HEAD
 Amalda, `defer` butun DOM ga muhtoj skriptlar va/yoki nisbiy bajarilish tartibda muhim bo'lgan skriptlar uchun ishlatiladi.
+=======
+In practice, `defer` is used for scripts that need the whole DOM and/or their relative execution order is important.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Va `async` mustaqil skriptlar uchun, masalan hisoblagichlar yoki reklamalar uchun ishlatiladi. Ularning nisbiy bajarilish tartibida ahamiyati yo'q.
 
+<<<<<<< HEAD
 **Skriptsiz sahifa foydalanishga yaroqli bo'lishi kerak**
 E'tibor bering: agar siz `defer` yoki `async` dan foydalansangiz, foydalanuvchi sahifani skript yuklanishidan *oldin* ko'radi.
+=======
+```warn header="Page without scripts should be usable"
+Please note: if you're using `defer` or `async`, then user will see the page *before* the script loads.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Bunday holatda, ba'zi grafik komponentlar hali ishga tushirilmagan bo'lishi mumkin.
 

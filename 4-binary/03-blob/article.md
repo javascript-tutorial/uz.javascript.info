@@ -100,7 +100,11 @@ blob:https://javascript.info/1e67e00e-860d-40a5-89ae-6ab0cbee6273
 
 Yaratilgan URL (va shuning uchun u bilan havola) faqat joriy hujjat ichida, u ochiq bo'lgan vaqtda amal qiladi. Va u `<img>`, `<a>`, asosan URL kutadigan boshqa har qanday obyektda `Blob` ga murojaat qilish imkonini beradi.
 
+<<<<<<< HEAD
 Biroq, yon ta'sir bor. `Blob` uchun mapping mavjud bo'lsa-yu, `Blob` ning o'zi xotirada joylashgan. Brauzer uni bo'shatish mumkin emas.
+=======
+There's a side effect though. While there's a mapping for a `Blob`, the `Blob` itself resides in the memory. The browser can't free it.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Hujjat yuklanishida mapping avtomatik ravishda tozalanadi, shuning uchun `Blob` obyektlar o'shanda bo'shatiladi. Lekin agar ilova uzoq umr ko'rsa, bu tez sodir bo'lmaydi.
 
@@ -209,6 +213,7 @@ Sahifani skrinshot qilish uchun biz <https://github.com/niklasvh/html2canvas> ka
 
 `Blob` konstruktori har qanday `BufferSource` dan boshlab deyarli har qanday narsadan blob yaratish imkonini beradi.
 
+<<<<<<< HEAD
 Lekin agar bizga past darajadagi qayta ishlash kerak bo'lsa, `blob.arrayBuffer()` dan eng past darajadagi `ArrayBuffer` ni olishimiz mumkin:
 
 ```js
@@ -220,6 +225,46 @@ blob.arrayBuffer().then(buffer => /* ArrayBuffer ni qayta ishlang */);
 ```
 
 ## Blob dan stream ga
+=======
+But if we need to perform low-level processing, we can get the lowest-level `ArrayBuffer` from `blob.arrayBuffer()`:
+
+```js
+// get arrayBuffer from blob
+const bufferPromise = await blob.arrayBuffer();
+
+// or
+blob.arrayBuffer().then(buffer => /* process the ArrayBuffer */);
+```
+
+## From Blob to stream
+
+When we read and write to a blob of more than `2 GB`, the use of `arrayBuffer` becomes more memory intensive for us. At this point, we can directly convert the blob to a stream.
+
+A stream is a special object that allows to read from it (or write into it) portion by portion. It's outside of our scope here, but here's an example, and you can read more at <https://developer.mozilla.org/en-US/docs/Web/API/Streams_API>. Streams are convenient for data that is suitable for processing piece-by-piece.
+
+The `Blob` interface's `stream()` method returns a `ReadableStream` which upon reading returns the data contained within the `Blob`.
+
+Then we can read from it, like this:
+
+```js
+// get readableStream from blob
+const readableStream = blob.stream();
+const stream = readableStream.getReader();
+
+while (true) {
+  // for each iteration: value is the next blob fragment
+  let { done, value } = await stream.read();
+  if (done) {
+    // no more data in the stream
+    console.log('all blob processed.');
+    break;
+  }
+
+   // do something with the data portion we've just read from the blob
+  console.log(value);
+}
+```
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 `2 GB` dan ortiq blob ga o'qish va yozishda `arrayBuffer` dan foydalanish biz uchun ko'proq xotira talab qiladi. Bu vaqtda biz blob ni to'g'ridan-to'g'ri stream ga aylantira olamiz.
 
@@ -234,6 +279,7 @@ Keyin biz undan shunday o'qiy olamiz:
 const readableStream = blob.stream();
 const stream = readableStream.getReader();
 
+<<<<<<< HEAD
 while (true) {
   // har bir takrorlash uchun: value keyingi blob fragmenti
   let { done, value } = await stream.read();
@@ -262,3 +308,9 @@ Biz `Blob` va past darajadagi binary ma'lumot turlari orasida osongina aylantira
 - `blob.arrayBuffer()` yordamida Blob dan `ArrayBuffer` ni qaytarib olishimiz va keyin past darajadagi binary qayta ishlash uchun uning ustida view yaratishimiz mumkin.
 
 Katta blob ni boshqarish kerak bo'lganda konversiya stream lar juda foydali. Siz blob dan osongina `ReadableStream` yaratishingiz mumkin. `Blob` interfeysining `stream()` usuli o'qilganda blob ichidagi ma'lumotlarni qaytaradigan `ReadableStream` ni qaytaradi.
+=======
+- We can make a `Blob` from a typed array using `new Blob(...)` constructor.
+- We can get back `ArrayBuffer` from a Blob using `blob.arrayBuffer()`, and then create a view over it for low-level binary processing.
+
+Conversion streams are very useful when we need to handle large blob. You can easily create a `ReadableStream` from a blob. The `Blob` interface's `stream()` method returns a `ReadableStream` which upon reading returns the data contained within the blob.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19

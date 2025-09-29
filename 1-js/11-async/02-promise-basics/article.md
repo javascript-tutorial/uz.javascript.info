@@ -35,8 +35,13 @@ Xulosa qilish uchun: executor avtomatik ravishda ishlaydi va ishni bajarishga ha
 
 `new Promise` konstruktor tomonidan qaytarilgan `promise` objekti quyidagi ichki xususiyatlarga ega:
 
+<<<<<<< HEAD
 - `state` — dastlab `"pending"`, keyin `resolve` chaqirilganda `"fulfilled"` ga yoki `reject` chaqirilganda `"rejected"` ga o'zgaradi.
 - `result` — dastlab `undefined`, keyin `resolve(value)` chaqirilganda `value` ga yoki `reject(error)` chaqirilganda `error` ga o'zgaradi.
+=======
+- `state` — initially `"pending"`, then changes to either `"fulfilled"` when `resolve` is called or `"rejected"` when `reject` is called.
+- `result` — initially `undefined`, then changes to `value` when `resolve(value)` is called or `error` when `reject(error)` is called.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Shunday qilib executor oxir-oqibat `promise` ni quyidagi holatlardan biriga o'tkazadi:
 
@@ -60,7 +65,11 @@ Yuqoridagi kodni ishga tushirish orqali ikkita narsani ko'rishimiz mumkin:
 1. Executor avtomatik va darhol chaqiriladi (`new Promise` tomonidan).
 2. Executor ikkita argument oladi: `resolve` va `reject`. Bu funktsiyalar JavaScript mexanizmi tomonidan oldindan belgilangan, shuning uchun biz ularni yaratishimiz shart emas. Tayyor bo'lganda ulardan faqat birini chaqirishimiz kerak.
 
+<<<<<<< HEAD
     Bir soniyalik "qayta ishlash"dan keyin executor natijani ishlab chiqarish uchun `resolve("done")` ni chaqiradi. Bu `promise` objektining holatini o'zgartiradi:
+=======
+    After one second of "processing", the executor calls `resolve("done")` to produce the result. This changes the state of the `promise` object:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     ![](promise-resolve-1.svg)
 
@@ -127,9 +136,15 @@ Bu yaxshi. Biz darhol hal qilingan promise ga ega bo'lamiz.
 Promise objektining `state` va `result` xususiyatlari ichki. Biz ularga to'g'ridan-to'g'ri kira olmaymiz. Buning uchun `.then`/`.catch`/`.finally` metodlaridan foydalanishimiz mumkin. Ular quyida tasvirlangan.
 ```
 
+<<<<<<< HEAD
 ## Iste'molchilar: then, catch
 
 Promise objekt executor ("ishlab chiqaruvchi kod" yoki "qo'shiqchi") va natija yoki xatoni qabul qiladigan iste'mol qiluvchi funktsiyalar ("muxlislar") o'rtasidagi bog'lanish vazifasini bajaradi. Iste'mol qiluvchi funktsiyalar `.then` va `.catch` metodlari yordamida ro'yxatga olinishi (obuna bo'lishi) mumkin.
+=======
+## Consumers: then, catch
+
+A Promise object serves as a link between the executor (the "producing code" or "singer") and the consuming functions (the "fans"), which will receive the result or error. Consuming functions can be registered (subscribed) using the methods `.then` and `.catch`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ### then
 
@@ -144,9 +159,15 @@ promise.then(
 );
 ```
 
+<<<<<<< HEAD
 `.then` ning birinchi argumenti promise hal qilinganda ishlaydigan va natijani qabul qiladigan funktsiya.
 
 `.then` ning ikkinchi argumenti promise rad etilganda ishlaydigan va xatoni qabul qiladigan funktsiya.
+=======
+The first argument of `.then` is a function that runs when the promise is resolved and receives the result.
+
+The second argument of `.then` is a function that runs when the promise is rejected and receives the error.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Masalan, mana muvaffaqiyatli hal qilingan promise ga javob:
 
@@ -211,10 +232,15 @@ promise.catch(alert); // 1 soniyadan keyin "Error: Whoops!" ni ko'rsatadi
 
 `.catch(f)` chaqiruvi `.then(null, f)` ning to'liq analogi, bu faqat qisqartma.
 
+<<<<<<< HEAD
 ## Tozalash: finally
+=======
+## Cleanup: finally
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Oddiy `try {...} catch {...}` da `finally` bo'limi bo'lgani kabi, promise-larda ham `finally` bor.
 
+<<<<<<< HEAD
 `.finally(f)` chaqiruvi `.then(f, f)` ga o'xshash ma'noda, ya'ni `f` har doim ishlaydi, promise bajarilganda: hal qilingan yoki rad etilgan bo'lsin.
 
 `finally` ning g'oyasi oldingi amallar tugagandan keyin tozalash/yakunlash bajarish uchun handler o'rnatishdir.
@@ -233,10 +259,31 @@ new Promise((resolve, reject) => {
   // promise bajarilganda ishlaydi, muvaffaqiyatli yoki yo'qligi muhim emas
   .finally(() => yuklanish indikatorini to'xtatish)
   // shuning uchun yuklanish indikatori har doim davom etishdan oldin to'xtatiladi
+=======
+The call `.finally(f)` is similar to `.then(f, f)` in the sense that `f` runs always, when the promise is settled: be it resolve or reject.
+
+The idea of `finally` is to set up a handler for performing cleanup/finalizing after the previous operations are complete.
+
+E.g. stopping loading indicators, closing no longer needed connections, etc.
+
+Think of it as a party finisher. Irresepective of whether a party was good or bad, how many friends were in it, we still need (or at least should) do a cleanup after it.
+
+The code may look like this:
+
+```js
+new Promise((resolve, reject) => {
+  /* do something that takes time, and then call resolve or maybe reject */
+})
+*!*
+  // runs when the promise is settled, doesn't matter successfully or not
+  .finally(() => stop loading indicator)
+  // so the loading indicator is always stopped before we go on
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 */!*
   .then(result => natijani ko'rsatish, err => xatoni ko'rsatish)
 ```
 
+<<<<<<< HEAD
 E'tibor bering, `finally(f)` aynan `then(f,f)` ning taxallusi emas.
 
 Muhim farqlar bor:
@@ -248,10 +295,24 @@ Muhim farqlar bor:
 
     Masalan, bu yerda natija `finally` orqali `then` ga o'tkaziladi:
 
+=======
+Please note that `finally(f)` isn't exactly an alias of `then(f,f)` though.
+
+There are important differences:
+
+1. A `finally` handler has no arguments. In `finally` we don't know whether the promise is successful or not. That's all right, as our task is usually to perform "general" finalizing procedures.
+
+    Please take a look at the example above: as you can see, the `finally` handler has no arguments, and the promise outcome is handled by the next handler.
+2. A `finally` handler "passes through" the result or error to the next suitable handler.
+
+    For instance, here the result is passed through `finally` to `then`:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
     ```js run
     new Promise((resolve, reject) => {
       setTimeout(() => resolve("value"), 2000);
     })
+<<<<<<< HEAD
       .finally(() => alert("Promise tayyor")) // birinchi bo'lib ishga tushadi
       .then(result => alert(result)); // <-- .then "value" ni ko'rsatadi
     ```
@@ -261,11 +322,23 @@ Muhim farqlar bor:
     Bu juda qulay, chunki `finally` promise natijasini qayta ishlash uchun mo'ljallanmagan. Aytilganidek, bu natija qanday bo'lishidan qat'i nazar, umumiy tozalash qilish joyi.
 
     Va mana xato misoli, uni `finally` orqali `catch` ga qanday o'tkazilishini ko'rish uchun:
+=======
+      .finally(() => alert("Promise ready")) // triggers first
+      .then(result => alert(result)); // <-- .then shows "value"
+    ```
+
+    As you can see, the `value` returned by the first promise is passed through `finally` to the next `then`.
+
+    That's very convenient, because `finally` is not meant to process a promise result. As said, it's a place to do generic cleanup, no matter what the outcome was.
+
+    And here's an example of an error, for us to see how it's passed through `finally` to `catch`:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     ```js run
     new Promise((resolve, reject) => {
       throw new Error("error");
     })
+<<<<<<< HEAD
       .finally(() => alert("Promise tayyor")) // birinchi bo'lib ishga tushadi
       .catch(err => alert(err));  // <-- .catch xatoni ko'rsatadi
     ```
@@ -288,6 +361,30 @@ Agar promise kutilayotgan bo'lsa, `.then/catch/finally` handlerlari uning natija
 Ba'zan promise ga handler qo'shganimizda u allaqachon hal qilingan bo'lishi mumkin.
 
 Bunday holatda, bu handlerlar shunchaki darhol ishlaydi:
+=======
+      .finally(() => alert("Promise ready")) // triggers first
+      .catch(err => alert(err));  // <-- .catch shows the error
+    ```
+
+3. A `finally` handler also shouldn't return anything. If it does, the returned value is silently ignored.
+
+    The only exception to this rule is when a `finally` handler throws an error. Then this error goes to the next handler, instead of any previous outcome.
+
+To summarize:
+
+- A `finally` handler doesn't get the outcome of the previous handler (it has no arguments). This outcome is passed through instead, to the next suitable handler.
+- If a `finally` handler returns something, it's ignored.
+- When `finally` throws an error, then the execution goes to the nearest error handler.
+
+These features are helpful and make things work just the right way if we use `finally` how it's supposed to be used: for generic cleanup procedures.
+
+````smart header="We can attach handlers to settled promises"
+If a promise is pending, `.then/catch/finally` handlers wait for its outcome.
+
+Sometimes, it might be that a promise is already settled when we add a handler to it.
+
+In such case, these handlers just run immediately:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 // promise yaratilishi bilanoq darhol hal qilinadi
@@ -301,11 +398,19 @@ E'tibor bering, bu promise-larni haqiqiy hayotdagi "obuna ro'yxati" stsenariyasi
 Promise-lar yanada moslashuvchan. Biz istalgan vaqtda handlerlarni qo'shishimiz mumkin: agar natija allaqachon mavjud bo'lsa, ular shunchaki bajariladi.
 ````
 
+<<<<<<< HEAD
 ## Misol: loadScript [#loadscript]
 
 Keyinchalik, promise-lar asinxron kodni yozishda qanday yordam berishining ko'proq amaliy misollarini ko'raylik.
 
 Bizda oldingi bobdan skriptni yuklash uchun `loadScript` funktsiyasi bor.
+=======
+## Example: loadScript [#loadscript]
+
+Next, let's see more practical examples of how promises can help us write asynchronous code.
+
+We've got the `loadScript` function for loading a script from the previous chapter.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Mana callback-asosidagi variant, uni esga olish uchun:
 

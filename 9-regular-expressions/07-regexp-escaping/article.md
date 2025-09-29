@@ -4,9 +4,15 @@ Ko'rib turganimizdek, teskari chiziq `pattern:\` belgilar sinflarini belgilash u
 
 Regexpda maxsus ma'noga ega bo'lgan boshqa maxsus belgilar ham bor. Ular yanada kuchli qidiruvlar uchun ishlatiladi. Mana ularning to'liq ro'yxati: `pattern:[ \ ^ $ . | ? * + ( )`.
 
+<<<<<<< HEAD
 Ro'yxatni yodlashga harakat qilmang -- tez orada har birini alohida ko'rib chiqamiz va siz ularni avtomatik ravishda yoddan bilasiz.
 
 ## Ekranlash
+=======
+There are other special characters as well, that have special meaning in a regexp, such as `pattern:[ ] { } ( ) \ ^ $ . | ? * +`. They are used to do more powerful searches.
+
+Don't try to remember the list -- soon we'll deal with each of them, and you'll know them by heart automatically.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Aytaylik, biz tom ma'noda nuqtani topmoqchimiz. "Har qanday belgi" emas, balki shunchaki nuqta.
 

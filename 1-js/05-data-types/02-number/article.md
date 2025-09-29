@@ -2,9 +2,15 @@
 
 Zamonaviy JavaScript-da ikki turdagi raqamlar mavjud:
 
+<<<<<<< HEAD
 1. JavaScript-da oddiy raqamlar 64-bitli [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) formatida saqlanadi, bu "ikki aniqlikdagi suzuvchi nuqta raqamlari" deb ham ataladi. Bular biz ko'pincha ishlatadigan raqamlar va bu bobda ular haqida gaplashamiz.
 
 2. BigInt raqamlari ixtiyoriy uzunlikdagi butun sonlarni ifodalaydi. Ular ba'zan kerak bo'ladi, chunki oddiy butun son raqami xavfsiz ravishda <code>(2<sup>53</sup>-1)</code> dan oshib ketishi yoki <code>-(2<sup>53</sup>-1)</code> dan kichik bo'lishi mumkin emas, buni <info:types> bobida eslatgan edik. Bigint'lar bir nechta maxsus sohalarda ishlatilganligi sababli, ularga maxsus <info:bigint> bobini bag'ishlaymiz.
+=======
+1. Regular numbers in JavaScript are stored in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), also known as "double precision floating point numbers". These are numbers that we're using most of the time, and we'll talk about them in this chapter.
+
+2. BigInt numbers represent integers of arbitrary length. They are sometimes needed because a regular integer number can't safely exceed <code>(2<sup>53</sup>-1)</code> or be less than <code>-(2<sup>53</sup>-1)</code>, as we mentioned earlier in the chapter <info:types>. As bigints are used in a few special areas, we devote them to a special chapter <info:bigint>.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Demak, bu yerda oddiy raqamlar haqida gaplashamiz. Ular haqidagi bilimlarimizni kengaytiraylik.
 
@@ -22,7 +28,11 @@ Shuningdek, biz ajratuvchi sifatida pastki chiziq `_` dan foydalanishimiz mumkin
 let billion = 1_000_000_000;
 ```
 
+<<<<<<< HEAD
 Bu yerda pastki chiziq `_` "[sintaktik shakar](https://en.wikipedia.org/wiki/Syntactic_sugar)" rolini o'ynaydi, u raqamni o'qishga osonroq qiladi. JavaScript dvigateli raqamlar orasidagi `_` ni shunchaki e'tiborsiz qoldiradi, shuning uchun bu yuqoridagi bilan aynan bir xil bir milliarddir.
+=======
+Here the underscore `_` plays the role of the "[syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)", it makes the number more readable. The JavaScript engine simply ignores `_` between digits, so it's exactly the same one billion as above.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Haqiqiy hayotda biz nollarning uzun ketma-ketliklarini yozishdan qochamiz. Bunga dangasamiz. Bir milliard uchun `"1bn"` yoki 7 milliard 300 million uchun `"7.3bn"` kabi narsalar yozishga harakat qilamiz. Ko'pchilik katta raqamlar uchun ham xuddi shunday.
 
@@ -37,16 +47,25 @@ alert(7.3e9); // 7.3 milliard (7300000000 yoki 7_300_000_000 bilan bir xil)
 Boshqacha qilib aytganda, `e` raqamni berilgan nollar soni bilan `1` ga ko'paytiradi.
 
 ```js
+<<<<<<< HEAD
 1e3 === 1 * 1000; // e3 *1000 ni anglatadi
 1.23e6 === 1.23 * 1000000; // e6 *1000000 ni anglatadi
 ```
 
 Endi juda kichik narsani yozaylik. Aytaylik, 1 mikrosekund (sekundning milliondan bir qismi):
+=======
+1e3 === 1 * 1000; // e3 means *1000
+1.23e6 === 1.23 * 1000000; // e6 means *1000000
+```
+
+Now let's write something very small. Say, 1 microsecond (one-millionth of a second):
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js
 let mсs = 0.000001;
 ```
 
+<<<<<<< HEAD
 Xuddi avvalgidek, `"e"` dan foydalanish yordam berishi mumkin. Nollarni aniq yozishdan qochish uchun xuddi shunday yoza olamiz:
 
 ```js
@@ -54,10 +73,20 @@ let mcs = 1e-6; // 1 dan chapga beshta nol
 ```
 
 Agar biz `0.000001` dagi nollarni sansak, ulardan 6 ta bor. Demak, tabiiy ravishda bu `1e-6`.
+=======
+Just like before, using `"e"` can help. If we'd like to avoid writing the zeroes explicitly, we could write the same as:
+
+```js
+let mcs = 1e-6; // five zeroes to the left from 1
+```
+
+If we count the zeroes in `0.000001`, there are 6 of them. So naturally it's `1e-6`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Boshqacha qilib aytganda, `"e"` dan keyingi salbiy raqam berilgan nollar soni bilan 1 ga bo'lishni anglatadi:
 
 ```js
+<<<<<<< HEAD
 // -3 berilgan 3 ta nol bilan 1 ga bo'ladi
 1e-3 === 1 / 1000; // 0.001
 
@@ -66,6 +95,16 @@ Boshqacha qilib aytganda, `"e"` dan keyingi salbiy raqam berilgan nollar soni bi
 
 // kattaroq raqam bilan misol
 1234e-2 === 1234 / 100; // 12.34, kasr nuqtasi 2 marta siljiydi
+=======
+// -3 divides by 1 with 3 zeroes
+1e-3 === 1 / 1000; // 0.001
+
+// -6 divides by 1 with 6 zeroes
+1.23e-6 === 1.23 / 1000000; // 0.00000123
+
+// an example with a bigger number
+1234e-2 === 1234 / 100; // 12.34, decimal point moves 2 times
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 ### Hex, binary va octal raqamlar
@@ -103,13 +142,23 @@ alert(num.toString(16)); // ff
 alert(num.toString(2)); // 11111111
 ```
 
+<<<<<<< HEAD
 `base` `2` dan `36` gacha o'zgarishi mumkin. Standart bo'yicha bu `10`.
+=======
+The `base` can vary from `2` to `36`. By default, it's `10`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Buning umumiy foydalanish holatlari:
 
+<<<<<<< HEAD
 - **base=16** hex ranglar, belgi kodlashlari va hokazo uchun ishlatiladi, raqamlar `0..9` yoki `A..F` bo'lishi mumkin.
 - **base=2** asosan bitli operatsiyalarni disk raskadka qilish uchun, raqamlar `0` yoki `1` bo'lishi mumkin.
 - **base=36** maksimal, raqamlar `0..9` yoki `A..Z` bo'lishi mumkin. Butun Lotin alifbosi raqamni ifodalash uchun ishlatiladi. `36` uchun qiziqarli, lekin foydali holat - uzun raqamli identifikatorni qisqaroq narsaga aylantirish kerak bo'lganda, masalan, qisqa url yaratish uchun. Uni shunchaki `36` asosli raqam tizimida ifodalash mumkin:
+=======
+- **base=16** is used for hex colors, character encodings etc, digits can be `0..9` or `A..F`.
+- **base=2** is mostly for debugging bitwise operations, digits can be `0` or `1`.
+- **base=36** is the maximum, digits can be `0..9` or `A..Z`. The whole Latin alphabet is used to represent a number. A funny, but useful case for `36` is when we need to turn a long numeric identifier into something shorter, for example, to make a short url. Can simply represent it in the numeral system with base `36`:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
   ```js run
   alert((123456).toString(36)); // 2n9c
@@ -118,9 +167,16 @@ Buning umumiy foydalanish holatlari:
 ```warn header="Usulni chaqirish uchun ikkita nuqta"
 E'tibor bering, `123456..toString(36)` dagi ikkita nuqta xato emas. Agar biz yuqoridagi misoldagi `toString` kabi raqamda to'g'ridan-to'g'ri usulni chaqirmoqchi bo'lsak, undan keyin ikkita nuqta `..` qo'yishimiz kerak.
 
+<<<<<<< HEAD
 Agar bitta nuqta qo'ysak: `123456.toString(36)`, u holda xato bo'ladi, chunki JavaScript sintaksisi birinchi nuqtadan keyin kasr qismini nazarda tutadi. Va agar yana bir nuqta qo'ysak, JavaScript kasr qismi bo'sh ekanligini biladi va endi usulni ishlatadi.
 
 Shuningdek, `(123456).toString(36)` deb yoza olamiz.
+=======
+If we placed a single dot: `123456.toString(36)`, then there would be an error, because JavaScript syntax implies the decimal part after the first dot. And if we place one more dot, then JavaScript knows that the decimal part is empty and now uses the method.
+
+Also could write `(123456).toString(36)`.
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 ## Yaxlitlash
@@ -136,13 +192,18 @@ Yaxlitlash uchun bir nechta o'rnatilgan funksiyalar mavjud:
 : Yuqoriga yaxlitlaydi: `3.1` `4` ga aylanadi, `-1.1` `-1` ga aylanadi.
 
 `Math.round`
+<<<<<<< HEAD
 : Eng yaqin butun songa yaxlitlaydi: `3.1` `3` ga aylanadi, `3.6` `4` ga aylanadi. O'rta holatlarda `3.5` `4` gacha yaxlitlanadi, `-3.5` `-3` gacha yaxlitlanadi.
+=======
+: Rounds to the nearest integer: `3.1` becomes `3`, `3.6` becomes `4`. In the middle cases `3.5` rounds up to `4`, and `-3.5` rounds up to `-3`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 `Math.trunc` (Internet Explorer tomonidan qo'llab-quvvatlanmaydi)
 : Yaxlitlashsiz kasr nuqtasidan keyin hamma narsani olib tashlaydi: `3.1` `3` ga aylanadi, `-1.1` `-1` ga aylanadi.
 
 Ular orasidagi farqlarni umumlashtiradigan jadval:
 
+<<<<<<< HEAD
 |        | `Math.floor` | `Math.ceil` | `Math.round` | `Math.trunc` |
 | ------ | ------------ | ----------- | ------------ | ------------ |
 | `3.1`  | `3`          | `4`         | `3`          | `3`          |
@@ -151,6 +212,16 @@ Ular orasidagi farqlarni umumlashtiradigan jadval:
 | `-1.1` | `-2`         | `-1`        | `-1`         | `-1`         |
 | `-1.5` | `-2`         | `-1`        | `-1`         | `-1`         |
 | `-1.6` | `-2`         | `-1`        | `-2`         | `-1`         |
+=======
+|   | `Math.floor` | `Math.ceil` | `Math.round` | `Math.trunc` |
+|---|---------|--------|---------|---------|
+|`3.1`|  `3`    |   `4`  |    `3`  |   `3`   |
+|`3.5`|  `3`    |   `4`  |    `4`  |   `3`   |
+|`3.6`|  `3`    |   `4`  |    `4`  |   `3`   |
+|`-1.1`|  `-2`    |   `-1`  |    `-1`  |   `-1`   |
+|`-1.5`|  `-2`    |   `-1`  |    `-1`  |   `-1`   |
+|`-1.6`|  `-2`    |   `-1`  |    `-2`  |   `-1`   |
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Bu funksiyalar raqamning kasr qismi bilan ishlashning barcha mumkin bo'lgan usullarini qamrab oladi. Lekin agar raqamni kasr nuqtasidan keyin `n-chi` raqamga yaxlitlashni istasak-chi?
 
@@ -162,8 +233,14 @@ Buning ikki usuli bor:
 
    Masalan, raqamni kasr nuqtasidan keyin 2-raqamga yaxlitlash uchun biz raqamni `100` ga ko'paytirib, yaxlitlash funksiyasini chaqirib, keyin orqaga bo'lishimiz mumkin.
 
+<<<<<<< HEAD
    ```js run
    let num = 1.23456;
+=======
+    For example, to round the number to the 2nd digit after the decimal, we can multiply the number by `100`, call the rounding function and then divide it back.
+    ```js run
+    let num = 1.23456;
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
    alert(Math.round(num * 100) / 100); // 1.23456 -> 123.456 -> 123 -> 1.23
    ```
@@ -182,20 +259,34 @@ Buning ikki usuli bor:
    alert(num.toFixed(1)); // "12.4"
    ```
 
+<<<<<<< HEAD
    E'tibor bering, `toFixed` ning natijasi satrdir. Agar kasr qismi kerakligidan qisqaroq bo'lsa, oxiriga nollar qo'shiladi:
+=======
+    Please note that the result of `toFixed` is a string. If the decimal part is shorter than required, zeroes are appended to the end:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
    ```js run
    let num = 12.34;
    alert(num.toFixed(5)); // "12.34000", aynan 5 ta raqam qilish uchun nollar qo'shildi
    ```
 
+<<<<<<< HEAD
    Biz uni unary plus yoki `Number()` chaqiruvi yordamida raqamga aylantira olamiz, masalan `+num.toFixed(5)` deb yoza olamiz.
+=======
+    We can convert it to a number using the unary plus or a `Number()` call, e.g. write `+num.toFixed(5)`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ## Noaniq hisoblar
 
+<<<<<<< HEAD
 Ichki jihatdan raqam 64-bitli [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754) formatida ifodalanadi, shuning uchun raqamni saqlash uchun aniq 64 bit mavjud: ulardan 52 tasi raqamlarni saqlash uchun, 11 tasi kasr nuqtasining o'rnini saqlash uchun va 1 bit belgi uchun ishlatiladi.
 
 Agar raqam haqiqatan ham juda katta bo'lsa, u 64-bitli xotirani to'ldirib, maxsus raqamli qiymat `Infinity` ga aylanishi mumkin:
+=======
+Internally, a number is represented in 64-bit format [IEEE-754](https://en.wikipedia.org/wiki/IEEE_754), so there are exactly 64 bits to store a number: 52 of them are used to store the digits, 11 of them store the position of the decimal point, and 1 bit is for the sign.
+
+If a number is really huge, it may overflow the 64-bit storage and become a special numeric value `Infinity`:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 alert(1e500); // Infinity
@@ -203,7 +294,11 @@ alert(1e500); // Infinity
 
 Kamroq aniq bo'lishi mumkin, lekin tez-tez sodir bo'ladigan narsa - aniqlik yo'qolishi.
 
+<<<<<<< HEAD
 Ushbu (noto'g'ri!) tenglik testini ko'rib chiqing:
+=======
+Consider this (falsy!) equality test:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 alert(0.1 + 0.2 == 0.3); // *!*false*/!*
@@ -217,12 +312,34 @@ G'alati! U holda `0.3` bo'lmasa nima?
 alert(0.1 + 0.2); // 0.30000000000000004
 ```
 
+<<<<<<< HEAD
 Voy! Tasavvur qiling, siz elektron xarid saytini yaratyapsiz va tashrif buyuruvchi savatiga `$0.10` va `$0.20` tovarlarni qo'yadi. Buyurtma umumiy summasi `$0.30000000000000004` bo'ladi. Bu har kimni hayratga soladi.
+=======
+Ouch! Imagine you're making an e-shopping site and the visitor puts `$0.10` and `$0.20` goods into their cart. The order total will be `$0.30000000000000004`. That would surprise anyone.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Lekin nima uchun bunday bo'ladi?
 
 Raqam xotirada binary shaklda, bitlar ketma-ketligi - birlar va nollar sifatida saqlanadi. Lekin o'nli raqam tizimida oddiy ko'rinadigan `0.1`, `0.2` kabi kasrlar aslida binary shaklida cheksiz kasrlardir.
 
+<<<<<<< HEAD
+=======
+```js run
+alert(0.1.toString(2)); // 0.0001100110011001100110011001100110011001100110011001101
+alert(0.2.toString(2)); // 0.001100110011001100110011001100110011001100110011001101
+alert((0.1 + 0.2).toString(2)); // 0.0100110011001100110011001100110011001100110011001101
+```
+
+What is `0.1`? It is one divided by ten `1/10`, one-tenth. In the decimal numeral system, such numbers are easily representable. Compare it to one-third: `1/3`. It becomes an endless fraction `0.33333(3)`.
+
+So, division by powers `10` is guaranteed to work well in the decimal system, but division by `3` is not. For the same reason, in the binary numeral system, the division by powers of `2` is guaranteed to work, but `1/10` becomes an endless binary fraction.
+
+There's just no way to store *exactly 0.1* or *exactly 0.2* using the binary system, just like there is no way to store one-third as a decimal fraction.
+
+The numeric format IEEE-754 solves this by rounding to the nearest possible number. These rounding rules normally don't allow us to see that "tiny precision loss", but it exists.
+
+We can see this in action:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js run
 alert((0.1).toString(2)); // 0.0001100110011001100110011001100110011001100110011001101
 alert((0.2).toString(2)); // 0.001100110011001100110011001100110011001100110011001101
@@ -235,12 +352,16 @@ Demak, `10` ning darajalariga bo'lish o'nli tizimda yaxshi ishlashi kafolatlanga
 
 Binary tizim yordamida _aniq 0.1_ yoki _aniq 0.2_ ni saqlashning hech qanday usuli yo'q, xuddi o'nli kasr sifatida uchdan birini saqlashning imkoni yo'qligi kabi.
 
+<<<<<<< HEAD
 IEEE-754 raqamli formati buni eng yaqin mumkin bo'lgan raqamga yaxlitlash orqali hal qiladi. Bu yaxlitlash qoidalari odatda bizga "kichik aniqlik yo'qolishi" ni ko'rishga imkon bermaydi, lekin u mavjud.
 
 Buni amalda ko'rishimiz mumkin:
 
 ```js run
 alert((0.1).toFixed(20)); // 0.10000000000000000555
+=======
+PHP, Java, C, Perl, and Ruby give exactly the same result, because they are based on the same numeric format.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 Va ikkita raqamni qo'shganimizda, ularning "aniqlik yo'qolishlari" qo'shiladi.
@@ -257,7 +378,11 @@ Muammoni hal qila olamizmi? Albatta, eng ishonchli usul - natijani [toFixed(n)](
 
 ```js run
 let sum = 0.1 + 0.2;
+<<<<<<< HEAD
 alert(sum.toFixed(2)); // "0.30"
+=======
+alert( sum.toFixed(2) ); // "0.30"
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 E'tibor bering, `toFixed` har doim satr qaytaradi. U kasr nuqtasidan keyin 2 ta raqam borligini ta'minlaydi. Bu elektron xarid qilish saytimiz bo'lsa va `$0.30` ko'rsatish kerak bo'lsa, aslida qulay. Boshqa holatlarda uni raqamga aylantirish uchun unary plus ishlatishimiz mumkin:
@@ -274,7 +399,11 @@ alert((0.1 * 10 + 0.2 * 10) / 10); // 0.3
 alert((0.28 * 100 + 0.14 * 100) / 100); // 0.4200000000000001
 ```
 
+<<<<<<< HEAD
 Demak, ko'paytirish/bo'lish yondashuvi xatoni kamaytiradi, lekin uni butunlay olib tashlamaydi.
+=======
+So, the multiply/divide approach reduces the error, but doesn't remove it totally.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Ba'zan kasrlardan butunlay qochishga harakat qilishimiz mumkin. Masalan, agar do'kon bilan ish qilayotgan bo'lsak, narxlarni dollar o'rniga sentda saqlashimiz mumkin. Lekin agar 30% chegirma qo'llasak-chi? Amalda kasrlardan butunlay qochish kamdan-kam mumkin. Kerak bo'lganda "dumlarni" kesish uchun shunchaki yaxlitlang.
 
@@ -296,7 +425,11 @@ Raqamlarning ichki ko'rinishining yana bir qiziq natijasi - ikkita nolning mavju
 
 Buning sababi shundaki, belgi bitta bit bilan ifodalanadi, shuning uchun nolni o'z ichiga olgan har qanday raqam uchun o'rnatilishi yoki o'rnatilmasligi mumkin.
 
+<<<<<<< HEAD
 Ko'p hollarda bu farq sezilmaydi, chunki operatorlar ularni bir xil deb ko'rishga moslashtirilgan.
+=======
+In most cases, the distinction is unnoticeable, because operators are suited to treat them as the same.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 ## Testlar: isFinite va isNaN
@@ -317,9 +450,13 @@ Ular `number` tipiga tegishli, lekin "oddiy" raqamlar emas, shuning uchun ularni
 
   Lekin bizga bu funksiya kerakmi? `=== NaN` solishtiruvidan foydalana olmaymizmi? Afsuski yo'q. `NaN` qiymati o'ziga ham teng kelmasligida noyobdir:
 
+<<<<<<< HEAD
   ```js run
   alert(NaN === NaN); // false
   ```
+=======
+    But do we need this function? Can't we just use the comparison `=== NaN`? Unfortunately not. The value `NaN` is unique in that it does not equal anything, including itself:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 - `isFinite(value)` o'z argumentini raqamga aylantiradi va agar u oddiy raqam bo'lsa `true` qaytaradi, `NaN/Infinity/-Infinity` bo'lmasa:
 
@@ -338,6 +475,7 @@ let num = +prompt("Raqam kiriting", "");
 alert(isFinite(num));
 ```
 
+<<<<<<< HEAD
 E'tibor bering, bo'sh yoki faqat bo'shliq bo'lgan satr `isFinite` ni o'z ichiga olgan barcha raqamli funksiyalarda `0` deb hisoblanadi.
 
 ````smart header="`Number.isNaN`va`Number.isFinite`"
@@ -348,12 +486,51 @@ E'tibor bering, bo'sh yoki faqat bo'shliq bo'lgan satr `isFinite` ni o'z ichiga 
   ```js run
   alert(Number.isNaN(NaN)); // true
   alert(Number.isNaN("str" / 2)); // true
+=======
+Please note that an empty or a space-only string is treated as `0` in all numeric functions including `isFinite`.
+
+````smart header="`Number.isNaN` and `Number.isFinite`"
+[Number.isNaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isNaN) and [Number.isFinite](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isFinite) methods are the more "strict" versions of `isNaN` and `isFinite` functions. They do not autoconvert their argument into a number, but check if it belongs to the `number` type instead.
+
+- `Number.isNaN(value)` returns `true` if the argument belongs to the `number` type and it is `NaN`. In any other case, it returns `false`.
+
+    ```js run
+    alert( Number.isNaN(NaN) ); // true
+    alert( Number.isNaN("str" / 2) ); // true
+
+    // Note the difference:
+    alert( Number.isNaN("str") ); // false, because "str" belongs to the string type, not the number type
+    alert( isNaN("str") ); // true, because isNaN converts string "str" into a number and gets NaN as a result of this conversion
+    ```
+
+- `Number.isFinite(value)` returns `true` if the argument belongs to the `number` type and it is not `NaN/Infinity/-Infinity`. In any other case, it returns `false`.
+
+    ```js run
+    alert( Number.isFinite(123) ); // true
+    alert( Number.isFinite(Infinity) ); // false
+    alert( Number.isFinite(2 / 0) ); // false
+
+    // Note the difference:
+    alert( Number.isFinite("123") ); // false, because "123" belongs to the string type, not the number type
+    alert( isFinite("123") ); // true, because isFinite converts string "123" into a number 123
+    ```
+
+In a way, `Number.isNaN` and `Number.isFinite` are simpler and more straightforward than `isNaN` and `isFinite` functions. In practice though, `isNaN` and `isFinite` are mostly used, as they're shorter to write.
+````
+
+```smart header="Comparison with `Object.is`"
+There is a special built-in method `Object.is` that compares values like `===`, but is more reliable for two edge cases:
+
+1. It works with `NaN`: `Object.is(NaN, NaN) === true`, that's a good thing.
+2. Values `0` and `-0` are different: `Object.is(0, -0) === false`, technically that's correct because internally the number has a sign bit that may be different even if all other bits are zeroes.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
   // Farqga e'tibor bering:
   alert(Number.isNaN("str")); // false, chunki "str" string tipiga tegishli, number tipiga emas
   alert(isNaN("str")); // true, chunki isNaN "str" satrini raqamga aylantiradi va bu aylantirishning natijasida NaN ni oladi
   ```
 
+<<<<<<< HEAD
 - `Number.isFinite(value)` agar argument `number` tipiga tegishli bo'lsa va u `NaN/Infinity/-Infinity` bo'lmasa `true` qaytaradi. Boshqa barcha hollarda `false` qaytaradi.
 
   ```js run
@@ -379,6 +556,9 @@ Ma'lum ma'noda `Number.isNaN` va `Number.isFinite` `isNaN` va `isFinite` funksiy
 Boshqa barcha hollarda `Object.is(a, b)` `a === b` bilan bir xil.
 
 Biz bu yerda `Object.is` ni eslatamiz, chunki u JavaScript spetsifikatsiyasida tez-tez ishlatiladi. Ichki algoritm ikkita qiymatni aynan bir xil ekanligi uchun solishtirishga kerak bo'lganda, u `Object.is` dan foydalanadi (ichki jihatdan [SameValue](https://tc39.github.io/ecma262/#sec-samevalue) deb ataladi).
+=======
+We mention `Object.is` here, because it's often used in JavaScript specification. When an internal algorithm needs to compare two values for being exactly the same, it uses `Object.is` (internally called [SameValue](https://tc39.github.io/ecma262/#sec-samevalue)).
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 ## parseInt va parseFloat
@@ -391,7 +571,11 @@ alert( +"100px" ); // NaN
 
 Yagona istisno - satrning boshida yoki oxirida bo'shliqlar, ular e'tiborga olinmaydi.
 
+<<<<<<< HEAD
 Lekin haqiqiy hayotda bizda ko'pincha CSS dagi `"100px"` yoki `"12pt"` kabi birliklardagi qiymatlar bor. Shuningdek, ko'plab mamlakatlarda valyuta belgisi miqdordan keyin keladi, shuning uchun bizda `"19€"` bor va undan raqamli qiymat chiqarishni istaydi.
+=======
+But in real life, we often have values in units, like `"100px"` or `"12pt"` in CSS. Also in many countries, the currency symbol goes after the amount, so we have `"19€"` and would like to extract a numeric value out of that.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 `parseInt` va `parseFloat` buning uchun.
 
@@ -437,8 +621,13 @@ Bir nechta misol:
     alert( Math.random() ); // ... (har qanday tasodifiy raqamlar)
     ```
 
+<<<<<<< HEAD
 `Math.max(a, b, c...)` va `Math.min(a, b, c...)`
 : Ixtiyoriy miqdordagi argumentlardan eng katta va eng kichigini qaytaradi.
+=======
+`Math.max(a, b, c...)` and `Math.min(a, b, c...)`
+: Returns the greatest and smallest from the arbitrary number of arguments.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     ```js run
     alert( Math.max(3, 5, -10, 0, 1) ); // 5
@@ -467,7 +656,18 @@ Turli raqam tizimlari uchun:
 - `parseInt(str, base)` `str` satrini berilgan `base` asosli raqam tizimida butun songa tahlil qiladi, `2 ≤ base ≤ 36`.
 - `num.toString(base)` raqamni berilgan `base` asosli raqam tizimida satrga aylantiradi.
 
+<<<<<<< HEAD
 Oddiy raqam testlari uchun:
+=======
+For regular number tests:
+
+- `isNaN(value)` converts its argument to a number and then tests it for being `NaN`
+- `Number.isNaN(value)` checks whether its argument belongs to the `number` type, and if so, tests it for being `NaN`
+- `isFinite(value)` converts its argument to a number and then tests it for not being `NaN/Infinity/-Infinity`
+- `Number.isFinite(value)` checks whether its argument belongs to the `number` type, and if so, tests it for not being `NaN/Infinity/-Infinity`
+
+For converting values like `12pt` and `100px` to a number:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 - `isNaN(value)` o'z argumentini raqamga aylantiradi va keyin uni `NaN` ekanligini tekshiradi
 - `Number.isNaN(value)` argumenti `number` tipiga tegishli ekanligini tekshiradi va agar shunday bo'lsa, uni `NaN` ekanligini tekshiradi
@@ -480,9 +680,13 @@ Oddiy raqam testlari uchun:
 
 Kasrlar uchun:
 
+<<<<<<< HEAD
 - `Math.floor`, `Math.ceil`, `Math.trunc`, `Math.round` yoki `num.toFixed(precision)` yordamida yaxlitlang.
 - Kasrlar bilan ishlashda aniqlik yo'qolishi borligini eslashni unutmang.
 
 Ko'proq matematik funksiyalar:
 
 - Kerak bo'lganda [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) obyektiga qarang. Kutubxona juda kichik, lekin asosiy ehtiyojlarni qoplashi mumkin.
+=======
+- See the [Math](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Math) object when you need them. The library is very small but can cover basic needs.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19

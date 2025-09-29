@@ -16,7 +16,11 @@ Bu quvvat odatda an'anaviy mijoz-server ilovalari uchun ortiqcha hisoblanadi. In
 
 IndexedDB uchun spetsifikatsiyada <https://www.w3.org/TR/IndexedDB> tasvirlangan mahalliy interfeys hodisalarga asoslangan.
 
+<<<<<<< HEAD
 Shuningdek, biz `async/await`ni promise-ga asoslangan wrapper yordamida ishlatishimiz mumkin, masalan <https://github.com/jakearchibald/idb>. Bu juda qulay, lekin wrapper mukammal emas, u barcha holatlar uchun hodisalarni almashtira olmaydi. Shuning uchun biz hodisalardan boshlaymiz va IndexedDb-ni tushungandan so'ng, wrapper-dan foydalanamiz.
+=======
+We can also use `async/await` with the help of a promise-based wrapper, like <https://github.com/jakearchibald/idb>. That's pretty convenient, but the wrapper is not perfect, it can't replace events for all cases. So we'll start with events, and then, after we gain an understanding of IndexedDB, we'll use the wrapper.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```smart header="Ma'lumotlar qayerda?"
 Texnik jihatdan, ma'lumotlar odatda tashrif buyuruvchining uy katalogida, brauzer sozlamalari, kengaytmalar va boshqalar bilan birga saqlanadi.
@@ -106,8 +110,13 @@ let deleteRequest = indexedDB.deleteDatabase(name)
 // deleteRequest.onsuccess/onerror natijani kuzatib boradi
 ```
 
+<<<<<<< HEAD
 ```warn header="Biz ma'lumotlar bazasining eski versiyasini ocha olmaymiz"
 Agar joriy foydalanuvchi ma'lumotlar bazasi `open` chaqiruvida ko'rsatilganidan yuqori versiyaga ega bo'lsa, masalan, mavjud DB versiyasi `3`, va biz `open(...2)` ni sinab ko'rsak, bu xato bo'ladi, `openRequest.onerror` ishga tushadi.
+=======
+```warn header="We can't open a database using an older open call version"
+If the current user database has a higher version than in the `open` call, e.g. the existing DB version is `3`, and we try to `open(...2)`, then that's an error, `openRequest.onerror` triggers.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Bu kamdan-kam hollarda sodir bo'ladi, lekin bunday holat tashrif buyuruvchi eskirgan JavaScript kodini yuklayotganda, masalan, proksi keshidan sodir bo'lishi mumkin. Shunday qilib, kod eski, lekin uning ma'lumotlar bazasi yangi.
 
@@ -193,11 +202,20 @@ Kalit quyidagi turlardan biri bo'lishi kerak - raqam, sana, satr, ikkilik yoki m
 
 ![](indexeddb-structure.svg)
 
+<<<<<<< HEAD
 Ko'p o'tmay ko'rib chiqamizki, biz do'konga qiymat qo'shganimizda kalitni taqdim etishimiz mumkin, `localStorage`ga o'xshash. Lekin ob'ektlarni saqlashda, IndexedDB ob'ekt xususiyatini kalit sifatida o'rnatishga imkon beradi, bu ancha qulaydir. Yoki biz kalitlarni avtomatik generatsiya qilishimiz mumkin.
 
 Lekin avval ob'ekt do'konini yaratishimiz kerak.
 
 Ob'ekt do'konini yaratish sintaksisi:
+=======
+As we'll see very soon, we can provide a key when we add a value to the store, similar to `localStorage`. But when we store objects, IndexedDB allows setting up an object property as the key, which is much more convenient. Or we can auto-generate keys.
+
+But we need to create an object store first.
+
+The syntax to create an object store:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 db.createObjectStore(name[, keyOptions]);
 ```
@@ -211,7 +229,12 @@ E'tibor bering, operatsiya sinxron, `await` kerak emas.
 
 Agar biz `keyOptions`ni taqdim etmasak, keyinroq ob'ektni saqlashda kalitni aniq ko'rsatishimiz kerak bo'ladi.
 
+<<<<<<< HEAD
 Masalan, bu ob'ekt do'koni `id` xususiyatini kalit sifatida ishlatadi:
+=======
+For instance, this object store uses `id` property as the key:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 db.createObjectStore('books', {keyPath: 'id'});
 ```
@@ -220,9 +243,16 @@ db.createObjectStore('books', {keyPath: 'id'});
 
 Bu texnik cheklov. Ishlovchidan tashqarida biz ma'lumotlarni qo'shish/olib tashlash/yangilash imkoniga ega bo'lamiz, lekin ob'ekt do'konlari faqat versiya yangilanishi paytida yaratilishi/olib tashlanishi/o'zgartirilishi mumkin.
 
+<<<<<<< HEAD
 Ma'lumotlar bazasi versiyasini yangilashni amalga oshirish uchun ikkita asosiy yondashuv mavjud:
 1. Biz versiya bo'yicha yangilash funksiyalarini amalga oshirishimiz mumkin: 1 dan 2 ga, 2 dan 3 ga, 3 dan 4 ga va hokazo. Keyin `upgradeneeded`da biz versiyalarni solishtirish (masalan, eski 2, hozir 4) va har bir oraliq versiya uchun versiya bo'yicha yangilashlarni bosqichma-bosqich ishga tushirishimiz mumkin (2 dan 3 ga, keyin 3 dan 4 ga).
 2. Yoki biz shunchaki ma'lumotlar bazasini tekshirishimiz mumkin: mavjud ob'ekt do'konlari ro'yxatini `db.objectStoreNames` sifatida olishimiz mumkin. Bu ob'ekt mavjudligini tekshirish uchun `contains(name)` metodini taqdim etuvchi [DOMStringList](https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#domstringlist) hisoblanadi. Va keyin nima mavjud va nima yo'qligiga qarab yangilashlarni amalga oshirishimiz mumkin.
+=======
+To perform a database version upgrade, there are two main approaches:
+
+1. We can implement per-version upgrade functions: from 1 to 2, from 2 to 3, from 3 to 4 etc. Then, in `upgradeneeded` we can compare versions (e.g. old 2, now 4) and run per-version upgrades step by step, for every intermediate version (2 to 3, then 3 to 4).
+2. Or we can just examine the database: get a list of existing object stores as `db.objectStoreNames`. That object is a [DOMStringList](https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#domstringlist) that provides `contains(name)` method to check for existance. And then we can do updates depending on what exists and what doesn't.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Kichik ma'lumotlar bazalari uchun ikkinchi variant oddiyroq bo'lishi mumkin.
 
@@ -240,7 +270,11 @@ openRequest.onupgradeneeded = function() {
 };
 ```
 
+<<<<<<< HEAD
 Ob'ekt do'konini o'chirish uchun:
+=======
+To delete an object store:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js
 db.deleteObjectStore('books')
@@ -252,9 +286,16 @@ db.deleteObjectStore('books')
 
 Tranzaksiya - bu operatsiyalar guruhi bo'lib, ular yoki hammasi muvaffaqiyatli bo'lishi yoki hammasi muvaffaqiyatsiz bo'lishi kerak.
 
+<<<<<<< HEAD
 Masalan, odam biror narsa sotib olganda bizga kerak:
 1. Ularning hisobidan pulni ayirish.
 2. Mahsulotni ularning inventariga qo'shish.
+=======
+For instance, when a person buys something, we need to:
+
+1. Subtract the money from their account.
+2. Add the item to their inventory.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Agar biz 1-operatsiyani bajarib, keyin nimadir noto'g'ri ketsa, masalan, elektr o'chib qolsa va 2-sini bajara olmasak, bu juda yomon bo'ladi. Ikkalasi ham muvaffaqiyatli bo'lishi kerak (xarid yakunlandi, yaxshi!) yoki ikkalasi ham muvaffaqiyatsiz bo'lishi kerak (hech bo'lmaganda odam pulini saqlab qoldi, shuning uchun ular qayta urinib ko'rishlari mumkin).
 
@@ -273,7 +314,11 @@ db.transaction(store[, type]);
   - `readonly` -- faqat o'qish, sukut bo'yicha.
   - `readwrite` -- faqat ma'lumotlarni o'qish va yozish mumkin, lekin ob'ekt do'konlarini yaratish/olib tashlash/o'zgartirish mumkin emas.
 
+<<<<<<< HEAD
 `versionchange` tranzaksiya turi ham mavjud: bunday tranzaksiyalar hamma narsani qila oladi, lekin biz ularni qo'lda yarata olmaymiz. IndexedDB ma'lumotlar bazasini ochishda `updateneeded` ishlovchisi uchun avtomatik ravishda `versionchange` tranzaksiyasini yaratadi. Shuning uchun bu ma'lumotlar bazasi tuzilmasini yangilash, ob'ekt do'konlarini yaratish/olib tashlash imkoniyatiga ega bo'lgan yagona joy.
+=======
+There's also `versionchange` transaction type: such transactions can do everything, but we can't create them manually. IndexedDB automatically creates a `versionchange` transaction when opening the database, for `upgradeneeded` handler. That's why it's a single place where we can update the database structure, create/remove object stores.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```smart header="Nima uchun har xil turdagi tranzaksiyalar mavjud?"
 Ishlash - tranzaksiyalarni `readonly` va `readwrite` deb belgilash zarurligining sababi.
@@ -609,7 +654,12 @@ Indekslar kuzatilayotgan ob'ekt maydoni bo'yicha ichkarida tartiblangan, bizning
 
 - **`delete(query)`** -- so'rov bo'yicha mos qiymatlarni o'chirish.
 
+<<<<<<< HEAD
 Masalan:
+=======
+For instance:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 // id='js' bo'lgan kitobni o'chirish
 books.delete('js');
@@ -627,7 +677,12 @@ request.onsuccess = function() {
 };
 ```
 
+<<<<<<< HEAD
 Hamma narsani o'chirish uchun:
+=======
+To delete everything:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 books.clear(); // saqlashni tozalash.
 ```
@@ -646,7 +701,12 @@ Kursorlar bu masalani hal qilish vositasini taqdim etadi.
 
 Ob'ekt do'koni kalit bo'yicha ichkarida tartiblanganligi sababli, kursor do'konni kalit tartibida aylanib chiqadi (sukut bo'yicha o'sish tartibida).
 
+<<<<<<< HEAD
 Sintaksis:
+=======
+The syntax:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 // getAll kabi, lekin kursor bilan:
 let request = store.openCursor(query, [direction]);
@@ -744,7 +804,6 @@ try {
 } catch(err) {
   console.log('xato', err.message);
 }
-
 ```
 
 Shunday qilib, bizda barcha "oddiy async kod" va "try..catch" narsalari mavjud.
@@ -767,11 +826,19 @@ window.addEventListener('unhandledrejection', event => {
 
 ### "Nofaol tranzaksiya" tuzog'i
 
+<<<<<<< HEAD
 Allaqachon bilganimizdek, brauzer joriy kod va mikrotasklar bilan ishini tugatishi bilan tranzaksiya avtomatik commit qilinadi. Shunday qilib, agar biz tranzaksiya o'rtasiga `fetch` kabi *macrotask* qo'ysak, tranzaksiya uning tugashini kutmaydi. U shunchaki avto-commit qiladi. Shunday qilib, undagi keyingi so'rov muvaffaqiyatsiz bo'ladi.
 
 Promise wrapper va `async/await` uchun vaziyat bir xil.
 
 Mana tranzaksiya o'rtasida `fetch` misoli:
+=======
+As we already know, a transaction auto-commits as soon as the browser is done with the current code and microtasks. So if we put a *macrotask* like `fetch` in the middle of a transaction, then the transaction won't wait for it to finish. It just auto-commits. So the next request in it would fail.
+
+For a promise wrapper and `async/await` the situation is the same.
+
+Here's an example of `fetch` in the middle of the transaction:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js
 let transaction = db.transaction("inventory", "readwrite");
@@ -786,9 +853,16 @@ await inventory.add({ id: 'js', price: 10, created: new Date() }); // Xato
 
 `fetch` `(*)` dan keyingi `inventory.add` "nofaol tranzaksiya" xatosi bilan muvaffaqiyatsiz bo'ladi, chunki tranzaksiya o'sha vaqtda allaqachon commit qilingan va yopilgan.
 
+<<<<<<< HEAD
 Yechim mahalliy IndexedDB bilan ishlashda bilan bir xil: yangi tranzaksiya yarating yoki narsalarni ajrating.
 1. Ma'lumotlarni tayyorlang va avval kerak bo'lgan hamma narsani oling.
 2. Keyin ma'lumotlar bazasida saqlang.
+=======
+The workaround is the same as when working with native IndexedDB: either make a new transaction or just split things apart.
+
+1. Prepare the data and fetch all that's needed first.
+2. Then save in the database.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ### Mahalliy ob'ektlarni olish
 

@@ -2,7 +2,11 @@
 
 `XMLHttpRequest` - bu JavaScript da HTTP so'rovlar qilish imkonini beruvchi o'rnatilgan brauzer obyekti.
 
+<<<<<<< HEAD
 Nomida "XML" so'zi bo'lishiga qaramay, u nafaqat XML formatida, balki har qanday ma'lumotlar bilan ishlashi mumkin. Biz fayllarni yuklash/yuklab olish, jarayonni kuzatish va boshqa ko'p narsalarni qilishimiz mumkin.
+=======
+Despite having the word "XML" in its name, it can operate on any data, not only in XML format. We can upload/download files, track progress and much more.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Hozirda `XMLHttpRequest` ni bir oz eskirgan holda qoldiradigan boshqa, zamonaviyroq `fetch` metodi mavjud.
 

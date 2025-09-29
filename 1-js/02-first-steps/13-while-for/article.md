@@ -6,8 +6,25 @@ Masalan, ro'yxatdan tovarlarni birin-ketin chiqarish yoki 1 dan 10 gacha bo'lgan
 
 _Tsikllar_ - bir xil kodni bir necha marta takrorlash usuli.
 
+<<<<<<< HEAD
 ```smart header="for..of va for..in tsikllari"
 Ilg'or o'quvchilar uchun kichik e'lon.
+=======
+```smart header="The for..of and for..in loops"
+A small announcement for advanced readers.
+
+This article covers only basic loops: `while`, `do..while` and `for(..;..;..)`.
+
+If you came to this article searching for other types of loops, here are the pointers:
+
+- See [for..in](info:object#forin) to loop over object properties.
+- See [for..of](info:array#loops) and [iterables](info:iterable) for looping over arrays and iterable objects.
+
+Otherwise, please read on.
+```
+
+## The "while" loop
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Bu maqola faqat asosiy tsikllarni qamrab oladi: `while`, `do..while` va `for(..;..;..)`.
 
@@ -119,12 +136,21 @@ for (let i = 0; i < 3; i++) {
 
 `for` ifodasini qism-qism ko'rib chiqamiz:
 
+<<<<<<< HEAD
 | qism      |             |                                                                                         |
 | --------- | ----------- | --------------------------------------------------------------------------------------- |
 | begin     | `let i = 0` | Tsiklga kirishda bir marta bajariladi.                                                  |
 | condition | `i < 3`     | Har bir tsikl iteratsiyasidan oldin tekshiriladi. Agar yolg'on bo'lsa, tsikl to'xtaydi. |
 | body      | `alert(i)`  | Shart haqiqiy bo'lgan vaqtda qayta-qayta ishga tushadi.                                 |
 | step      | `i++`       | Har bir iteratsiyada tanadan keyin bajariladi.                                          |
+=======
+| part  |          |                                                                            |
+|-------|----------|----------------------------------------------------------------------------|
+| begin | `let i = 0`    | Executes once upon entering the loop.                                      |
+| condition | `i < 3`| Checked before every loop iteration. If false, the loop stops.              |
+| body | `alert(i)`| Runs again and again while the condition is truthy.                         |
+| step| `i++`      | Executes after the body on each iteration. |
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Umumiy tsikl algoritmi quyidagicha ishlaydi:
 
@@ -188,9 +214,13 @@ alert(i); // 3, ko'rinadi, chunki tsikldan tashqarida e'lon qilingan
 ```
 ````
 
+<<<<<<< HEAD
 ### Qismlarni tashlab qo'yish
 
 `for` ning har qanday qismini tashlab qo'yish mumkin.
+=======
+### Skipping parts
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Masalan, agar tsikl boshida hech narsa qilishga hojat bo'lmasa, `begin` ni tashlab qo'yishimiz mumkin.
 
@@ -289,7 +319,12 @@ for (let i = 0; i < 10; i++) {
 
 Texnik nuqtai nazardan, bu yuqoridagi misolga bir xil. Albatta, biz `continue` ishlatish o'rniga kodni `if` blokiga o'rashimiz mumkin.
 
+<<<<<<< HEAD
 Lekin yon ta'sir sifatida, bu yana bir darajali joylashish yaratdi (`alert` chaqiruvi jingalak qavslar ichida). Agar `if` ichidagi kod bir necha qatordan uzun bo'lsa, bu umumiy o'qish qobiliyatini kamaytirishi mumkin.
+=======
+But as a side effect, this created one more level of nesting (the `alert` call inside the curly braces). If the code inside of `if` is longer than a few lines, that may decrease the overall readability.
+````
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 `````
 
@@ -306,7 +341,11 @@ if (i > 5) {
 }
 ```
 
+<<<<<<< HEAD
 ...va uni savol belgisi yordamida qayta yozsak:
+=======
+...and rewrite it using a question mark:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js no-beautify
 (i > 5) ? alert(i) : *!*continue*/!*; // continue bu yerda ruxsat etilmaydi
@@ -341,6 +380,11 @@ Agar foydalanuvchi kiritishni bekor qilsa, jarayonni to'xtatish usuli kerak.
 
 _Yorliq_ - tsikldan oldin ikki nuqta bilan identifikator:
 
+<<<<<<< HEAD
+=======
+A *label* is an identifier with a colon before a loop:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 labelName: for (...) {
   ...
@@ -363,7 +407,11 @@ Quyidagi tsikldagi `break <labelName>` ifodasi yorliqqa chiqadi:
   }
 }
 
+<<<<<<< HEAD
 alert('Tugadi!');
+=======
+alert('Done!');
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 Yuqoridagi kodda `break outer` `outer` nomli yorliqni yuqorida qidiradi va o'sha tsikldan chiqadi.
@@ -384,13 +432,22 @@ Yorliqlar koddagi ixtiyoriy joyga sakrashga ruxsat bermaydi.
 
 Masalan, buni qilish mumkin emas:
 
+<<<<<<< HEAD
+=======
+For example, it is impossible to do this:
+
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 break label; // pastdagi yorliqqa sakrash (ishlamaydi)
 
 label: for (...)
 ```
 
+<<<<<<< HEAD
 `break` direktivasi kod bloki ichida bo'lishi kerak. Texnik jihatdan, har qanday yorliqlangan kod bloki ishlaydi, masalan:
+=======
+A `break` directive must be inside a code block. Technically, any labelled code block will do, e.g.:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js
 label: {
@@ -400,7 +457,11 @@ label: {
 }
 ```
 
+<<<<<<< HEAD
 ...Garchi, vaqtning 99.9% da `break` tsikllar ichida ishlatiladi, yuqoridagi misollarda ko'rganimizdek.
+=======
+...Although, 99.9% of the time `break` is used inside loops, as we've seen in the examples above.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 `continue` faqat tsikl ichidan mumkin.
 ````

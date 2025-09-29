@@ -281,11 +281,19 @@ Ularning eng yaxshi tomoni shundaki, uslublarni tekshirishda o'zgaruvchan yoki f
 
 Bu erda eng taniqli linting vositalari:
 
+<<<<<<< HEAD
 - [JSLint](http://www.jslint.com/) -- birinchi lintlardan biri.
 - [JSHint](http://www.jshint.com/) -- JSLint-dan ko'proq sozlamalar.
 - [ESLint](http://eslint.org/) -- ehtimol eng yangi.
 
 Ularning barchasi ishni bajarishi mumkin. Muallif [ESLint](http://eslint.org/) dan foydalanadi.
+=======
+- [JSLint](https://www.jslint.com/) -- one of the first linters.
+- [JSHint](https://jshint.com/) -- more settings than JSLint.
+- [ESLint](https://eslint.org/) -- probably the newest one.
+
+All of them can do the job. The author uses [ESLint](https://eslint.org/).
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Aksariyat linterslar ko'plab taniqli muharrirlar bilan birlashtirilgan: muharriridagi plaginni yoqing va uslubni sozlang.
 
@@ -315,7 +323,11 @@ Masalan, ESLint uchun quyidagilarni bajarishingiz kerak:
 
 Bu erda `"extends"` direktivasi "eslint:recommended" sozlamalar to'plamiga asoslanganligini bildiradi. Shundan so'ng biz o'zimiznikini aniqlaymiz.
 
+<<<<<<< HEAD
 Shuningdek, uslublar qoidalari to'plamlarini Internetdan yuklab olish va oldingilarni o'rniga ularni kengaytirish mumkin. O'rnatish haqida batafsil ma'lumot uchun <http://eslint.org/docs/user-guide/getting-started> ga qarang.
+=======
+It is also possible to download style rule sets from the web and extend them instead. See <https://eslint.org/docs/user-guide/getting-started> for more details about installation.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Shuningdek, ba'zi bir IDE-larda ichki linting mavjud, bu qulay, ammo ESLint kabi moslashtirilmaydi.
 

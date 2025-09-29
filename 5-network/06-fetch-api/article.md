@@ -20,10 +20,17 @@ let promise = fetch(url, {
     // request body ga bog'liq holda
     "Content-Type": "text/plain;charset=UTF-8"
   },
+<<<<<<< HEAD
   body: undefined // string, FormData, Blob, BufferSource, yoki URLSearchParams
   referrer: "about:client", // yoki Referer header yubormaslik uchun "",
   // yoki joriy origin dan url
   referrerPolicy: "no-referrer-when-downgrade", // no-referrer, origin, same-origin...
+=======
+  body: undefined, // string, FormData, Blob, BufferSource, or URLSearchParams
+  referrer: "about:client", // or "" to send no Referer header,
+  // or an url from the current origin
+  referrerPolicy: "strict-origin-when-cross-origin", // no-referrer-when-downgrade, no-referrer, origin, same-origin...
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
   mode: "cors", // same-origin, no-cors
   credentials: "same-origin", // omit, include
   cache: "default", // no-store, reload, no-cache, force-cache, yoki only-if-cached
@@ -51,7 +58,11 @@ Odatda bu header avtomatik o'rnatiladi va so'rov qilgan sahifaning url'ini o'z i
 
 **`referrer` opsiyasi istalgan `Referer` ni (joriy origin ichida) o'rnatish yoki uni olib tashlash imkonini beradi.**
 
+<<<<<<< HEAD
 Hech qanday referer yubormaslik uchun bo'sh string o'rnating:
+=======
+To send no referrer, set an empty string:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```js
 fetch('/page', {
 *!*
@@ -84,6 +95,7 @@ Aniq `Referer` qiymatini o'rnatish imkonini beruvchi `referrer` opsiyasidan farq
 
 Mumkin bo'lgan qiymatlar [Referrer Policy spetsifikatsiyasi](https://w3c.github.io/webappsec-referrer-policy/)da tasvirlangan:
 
+<<<<<<< HEAD
 - **`"no-referrer-when-downgrade"`** -- standart qiymat: to'liq `Referer` har doim yuboriladi, faqat HTTPS dan HTTP ga (kamroq xavfsiz protokolga) so'rov yuborganimizda bundan mustasno.
 - **`"no-referrer"`** -- hech qachon `Referer` yubormaslik.
 - **`"origin"`** -- `Referer` da faqat origin yuborish, to'liq sahifa URL emas, masalan `http://site.com/path` o'rniga faqat `http://site.com`.
@@ -92,19 +104,38 @@ Mumkin bo'lgan qiymatlar [Referrer Policy spetsifikatsiyasi](https://w3c.github.
 - **`"strict-origin"`** -- faqat origin yuborish, HTTPS→HTTP so'rovlar uchun `Referer` yo'q.
 - **`"strict-origin-when-cross-origin"`** -- same-origin uchun to'liq `Referer` yuborish, cross-origin uchun faqat origin, agar HTTPS→HTTP so'rov bo'lmasa, unda hech narsa yubormaslik.
 - **`"unsafe-url"`** -- har doim to'liq url ni `Referer` da yuborish, hatto HTTPS→HTTP so'rovlar uchun ham.
+=======
+- **`"strict-origin-when-cross-origin"`** -- the default value: for same-origin send the full `Referer`, for cross-origin send only the origin, unless it's HTTPS→HTTP request, then send nothing.
+- **`"no-referrer-when-downgrade"`** -- full `Referer` is always sent, unless we send a request from HTTPS to HTTP (to the less secure protocol).
+- **`"no-referrer"`** -- never send `Referer`.
+- **`"origin"`** -- only send the origin in `Referer`, not the full page URL, e.g. only `http://site.com` instead of `http://site.com/path`.
+- **`"origin-when-cross-origin"`** -- send the full `Referer` to the same origin, but only the origin part for cross-origin requests (as above).
+- **`"same-origin"`** -- send the full `Referer` to the same origin, but no `Referer` for cross-origin requests.
+- **`"strict-origin"`** -- send only the origin, not the `Referer` for HTTPS→HTTP requests.
+- **`"unsafe-url"`** -- always send the full url in `Referer`, even for HTTPS→HTTP requests.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Mana barcha kombinatsiyalar bilan jadval:
 
 | Qiymat | Bir xil origin ga | Boshqa origin ga | HTTPS→HTTP |
 |--------|------------------|------------------|------------|
 | `"no-referrer"` | - | - | - |
+<<<<<<< HEAD
 | `"no-referrer-when-downgrade"` yoki `""` (standart) | to'liq | to'liq | - |
+=======
+| `"no-referrer-when-downgrade"` | full | full | - |
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 | `"origin"` | origin | origin | origin |
 | `"origin-when-cross-origin"` | to'liq | origin | origin |
 | `"same-origin"` | to'liq | - | - |
 | `"strict-origin"` | origin | origin | - |
+<<<<<<< HEAD
 | `"strict-origin-when-cross-origin"` | to'liq | origin | - |
 | `"unsafe-url"` | to'liq | to'liq | to'liq |
+=======
+| `"strict-origin-when-cross-origin"` or `""` (default) | full | origin | - |
+| `"unsafe-url"` | full | full | full |
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Faraz qilaylik, bizda saytdan tashqarida ma'lum bo'lmasligi kerak bo'lgan URL strukturasiga ega admin zonasi bor.
 
@@ -145,9 +176,15 @@ Bu opsiya `fetch` uchun URL uchinchi tomondan kelganda va cross-origin imkoniyat
 
 `credentials` opsiyasi `fetch` so'rov bilan cookie va HTTP-Authorization header'larini yuborishini belgilaydi.
 
+<<<<<<< HEAD
 - **`"same-origin"`** -- standart, cross-origin so'rovlar uchun yubormaslik,
 - **`"include"`** -- har doim yuborish, JavaScript javobga kirishi uchun cross-origin serverdan `Accept-Control-Allow-Credentials` talab qiladi, bu <info:fetch-crossorigin> bobida ko'rilgan,
 - **`"omit"`** -- hech qachon yubormaslik, hatto same-origin so'rovlar uchun ham.
+=======
+- **`"same-origin"`** -- the default, don't send for cross-origin requests,
+- **`"include"`** -- always send, requires `Access-Control-Allow-Credentials` from cross-origin server in order for JavaScript to access the response, that was covered in the chapter <info:fetch-crossorigin>,
+- **`"omit"`** -- never send, even for same-origin requests.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ## cache
 
@@ -178,7 +215,11 @@ Odatda, `fetch` HTTP-redirectlarni (301, 302 va boshqalar) shaffof ravishda kuza
 
 [Spetsifikatsiya](https://w3c.github.io/webappsec-subresource-integrity/)da tasvirlanganidek, qo'llab-quvvatlanadigan hash-funktsiyalar SHA-256, SHA-384 va SHA-512, brauzerga qarab boshqalari ham bo'lishi mumkin.
 
+<<<<<<< HEAD
 Masalan, biz fayl yuklamoqdamiz va uning SHA-256 checksum'i "abcdef" ekanligini bilamiz (haqiqiy checksum uzunroq, albatta).
+=======
+For example, we're downloading a file, and we know that its SHA-256 checksum is "abcdef" (a real checksum is longer, of course).
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Biz uni `integrity` opsiyasiga quyidagicha qo'yishimiz mumkin:
 

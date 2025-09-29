@@ -57,7 +57,11 @@ alert(getMaxSubSum([100, -9, 2, -3, 5])); // 100
 
 Bu yechimning vaqt murakkabligi [O(n<sup>2</sup>)](https://en.wikipedia.org/wiki/Big_O_notation). Boshqacha qilib aytganda, agar array hajmini 2 marta oshirsak, algoritm 4 marta sekinroq ishlaydi.
 
+<<<<<<< HEAD
 Katta array'lar (1000, 10000 yoki undan ko'p elementlar) uchun bunday algoritmlar jiddiy sekinlikka olib kelishi mumkin.
+=======
+For big arrays (1000, 10000 or more items) such algorithms can lead to serious sluggishness.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 # Tez yechim
 
@@ -90,4 +94,8 @@ alert(getMaxSubSum([-1, -2, -3])); // 0
 
 Algoritm aynan 1 marta array'ni o'tishni talab qiladi, shuning uchun vaqt murakkabligi O(n).
 
+<<<<<<< HEAD
 Algoritm haqida batafsil ma'lumotni bu yerda topishingiz mumkin: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). Agar hali ham nima uchun ishlashi aniq bo'lmasa, yuqoridagi misollarda algoritmni kuzatib boring, qanday ishlashini ko'ring - bu har qanday so'zdan yaxshiroq.
+=======
+You can find more detailed information about the algorithm here: [Maximum subarray problem](http://en.wikipedia.org/wiki/Maximum_subarray_problem). If it's still not obvious why that works, then please trace the algorithm on the examples above, see how it works, that's better than any words.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19

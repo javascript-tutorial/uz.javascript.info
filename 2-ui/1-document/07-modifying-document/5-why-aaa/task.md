@@ -22,6 +22,10 @@ Nega bunday bo'ladi?
   alert(table); // stol, xuddi shunday bo'lishi kerak
 
   table.remove();
+<<<<<<< HEAD
   // nega hujjatda hali ham aaa bor?
+=======
+  // why there's still "aaa" in the document?
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 </script>
 ```

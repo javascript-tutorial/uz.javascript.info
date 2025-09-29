@@ -38,6 +38,7 @@ button.onclick = () => {
 
 Shunday qilib foydalanuvchilar keraksiz popuplardan ma'lum darajada himoyalangan, lekin funksionallik to'liq o'chirilmagan.
 
+<<<<<<< HEAD
 Agar popup `onclick` dan ochilsa, lekin `setTimeout` dan keyin nima bo'ladi? Bu biroz murakkab.
 
 Bu kodni sinab ko'ring:
@@ -58,6 +59,8 @@ setTimeout(() => window.open('http://google.com'), 1000);
 
 Farqi shundaki, Firefox 2000ms yoki undan kam timeout ni maqbul deb hisoblaydi, lekin undan keyin -- "ishonch"ni olib tashlaydi, endi bu "foydalanuvchi harakatidan tashqarida" deb hisoblaydi. Shuning uchun birinchisi bloklanadi, ikkinchisi esa yo'q.
 
+=======
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ## window.open
 
 Popup ochish sintaksisi: `window.open(url, name, params)`:
@@ -88,7 +91,13 @@ Shuningdek, odatda ishlatilmaydigan kamroq qo'llab-quvvatlanadigan brauzerga xos
 
 ## Misol: minimalistik oyna
 
+<<<<<<< HEAD
 Keling, minimal xususiyatlar to'plami bilan oyna ochamiz, shunchaki brauzer qaysi birlarini o'chirishga ruxsat berishini ko'rish uchun:
+=======
+## Example: a minimalistic window
+
+Let's open a window with minimal set of features, just to see which of them browser allows to disable:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
@@ -119,7 +128,11 @@ Qoldirilgan sozlamalar uchun qoidalar:
 
 ## Oynadan popup ga kirish
 
+<<<<<<< HEAD
 `open` chaqiruvi yangi oynaga havola qaytaradi. U xususiyatlarini boshqarish, joylashuvni o'zgartirish va hatto ko'proq narsalar uchun ishlatilishi mumkin.
+=======
+The `open` call returns a reference to the new window. It can be used to manipulate its properties, change location and even more.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Bu misolda biz popup kontentini JavaScript dan yaratamiz:
 
@@ -237,7 +250,11 @@ Biz <info:size-and-scroll-window> bobida oynani aylantirish haqida allaqachon ga
 
 Nazariy jihatdan, oynaga fokus/fokusni yo'qotish uchun `window.focus()` va `window.blur()` usullari mavjud. Va shuningdek tashrif buyuruvchi oynaga fokuslanish va boshqa joyga o'tish paytini ushlash uchun `focus/blur` hodisalari ham bor.
 
+<<<<<<< HEAD
 Garchi, amalda ular jiddiy cheklangan, chunki o'tmishda yomon sahifalar ularni suiiste'mol qilgan.
+=======
+Although, in practice they are severely limited, because in the past evil pages abused them.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Masalan, bu kodga qarang:
 
@@ -255,10 +272,17 @@ Shunga qaramay, bunday chaqiruvlar ishlaydigan va foydali bo'lishi mumkin bo'lga
 
 Masalan:
 
+<<<<<<< HEAD
 - Popup ochganimizda, unda `newWindow.focus()` ni ishga tushirish yaxshi fikr bo'lishi mumkin. Har ehtimolga qarshi, ba'zi OS/brauzer kombinatsiyalari uchun bu foydalanuvchi endi yangi oynada ekanligini ta'minlaydi.
 - Agar tashrif buyuruvchi haqiqatda bizning veb-ilovamizni ishlatayotganini kuzatishni xohlasak, `window.onfocus/onblur` ni kuzatishimiz mumkin. Bu bizga sahifa ichidagi faoliyatlar, animatsiyalar va hokazolarni to'xtatish/davom ettirish imkonini beradi. Lekin esda tutingki, `blur` hodisasi tashrif buyuruvchi oynadan chiqib ketganini anglatadi, lekin ular uni hali ham kuzatishlari mumkin. Oyna fonda, lekin hali ham ko'rinadigan bo'lishi mumkin.
 
 ## Xulosa
+=======
+- When we open a popup, it might be a good idea to run `newWindow.focus()` on it. Just in case, for some OS/browser combinations it ensures that the user is in the new window now.
+- If we want to track when a visitor actually uses our web-app, we can track `window.onfocus/onblur`. That allows us to suspend/resume in-page activities, animations etc. But please note that the `blur` event means that the visitor switched out from the window, but they still may observe it. The window is in the background, but still may be visible.
+
+## Summary
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Popup oynalar kamdan-kam ishlatiladi, chunki muqobillar mavjud: ma'lumotni sahifa ichida yoki iframe da yuklash va ko'rsatish.
 

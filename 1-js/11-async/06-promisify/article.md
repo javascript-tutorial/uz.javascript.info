@@ -118,7 +118,11 @@ Ba'zi hollarda, `err` umuman yo'q bo'lishi mumkin: `callback(result)`, yoki qayt
 Promisifikatsiya funktsiyalaridan biroz moslashuvchan bo'lgan modullar ham mavjud, masalan, [es6-promisify](https://github.com/digitaldesignlabs/es6-promisify). Node.js-da buning uchun o'rnatilgan `util.promisify` funktsiyasi mavjud.
 
 ```smart
+<<<<<<< HEAD
 Promisifikatsiya - bu ajoyib yondashuv, ayniqsa `async/await` dan foydalanganda (keyingi bobga qarang), ammo qayta chaqiruvlarni to'liq almashtirish emas.
+=======
+Promisification is a great approach, especially when you use `async/await` (covered later in the chapter <info:async-await>), but not a total replacement for callbacks.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Yodda tuting, va'da faqat bitta natijaga ega bo'lishi mumkin, ammo texnik qayta chaqiruv ko'p marta chaqirilishi mumkin.
 

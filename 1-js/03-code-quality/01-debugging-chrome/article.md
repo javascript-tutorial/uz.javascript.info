@@ -38,7 +38,11 @@ Agar biz `Esc` tugmachasini bossak, u holda konsol quyida ochiladi. Biz u erga b
 
 Ifoda bajarilgandan so'ng uning natijasi quyida ko'rsatiladi.
 
+<<<<<<< HEAD
 Masalan, bu yerda `1+2` ning natijasi `3` ga teng, va `hello("debugger")` hech narsa qaytarmaydi, shuning uchun natijasi `undefined`:
+=======
+For example, here `1+2` results in `3`, while the function call `hello("debugger")` returns nothing, so the result is `undefined`:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ![](chrome-sources-console.svg)
 
@@ -58,10 +62,15 @@ Kod to'xtatib turilsa, biz mavjud o'zgaruvchanlarni tekshirib ko'rishimiz, konso
 
 Biz har doim o'ng oynada to'xtash nuqtalarining ro'yxatini topishimiz mumkin. Bu turli xil fayllarda juda ko'p to'xtash nuqtalari mavjud bo'lganda foydalidir. Bu bizga quyidagilarga imkon beradi:
 
+<<<<<<< HEAD
 - Koddagi to'xtash nuqtasiga tezda o'tish (o'ng oynada uni bosish orqali).
 - Tekshirish nuqtasini olib tashlab, uni o'chirib qo'yish.
 - Sichqonchaning o'ng tugmachasini bosib, remove(o'chirish)-ni tanlab, to'xtash nuqtasini olib tashlash.
 - ...Va hokazo.
+=======
+```smart header="Conditional breakpoints"
+*Right click* on the line number allows to create a *conditional* breakpoint. It only triggers when the given expression, that you should provide when you create it, is truthy.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```smart header="Shartli to'xtash nuqtalari"
 Satr raqamidagi *o'ng tugmachani* bosish *shartli* to'xtash nuqtasini yaratishga imkon beradi. Bu faqat berilgan ifoda haqiqat bo'lganda boshlanadi.
@@ -69,7 +78,11 @@ Satr raqamidagi *o'ng tugmachani* bosish *shartli* to'xtash nuqtasini yaratishga
 Bu faqat ma'lum bir o'zgaruvchan qiymat yoki funktsiya parametrlari uchun to'xtashimiz kerak bo'lganda qulay.
 ```
 
+<<<<<<< HEAD
 ## Koddagi nosozliklarni tuzatuvchi buyrug'i
+=======
+## The command "debugger"
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Kodni quyidagi kabi `koddagi nosozliklarni tuzatuvchi` buyrug'i yordamida to'xtatib turishimiz mumkin:
 
@@ -85,9 +98,13 @@ function hello(name) {
 }
 ```
 
+<<<<<<< HEAD
 Bu biz kod muharririda bo'lganimizda va brauzerga o'tishni xohlamasak va to'xtash nuqtasini o'rnatish uchun ishlab chiquvchi vositalarida skriptni qidirishni istamasak, bu juda qulay.
 
 ## Kodni to'xtatib turing va atrofga nazar tashlang
+=======
+Such command works only when the development tools are open, otherwise the browser ignores it.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Bizning misolimizda sahifani yuklash paytida `hello()` chaqiriladi, shuning uchun koddagi nosozliklarni tuzatuvchi faollashtirishning eng oson usuli bu sahifani qayta yuklashdir. Keling, `key:F5` (Windows, Linux) yoki `key:Cmd+R` (Mac) bosing.
 
@@ -99,7 +116,11 @@ Iltimos, ma'lumotlar ochiladigan sahifalarni o'ng tomonga oching (o'qlar bilan b
 
 1. **`Watch` -- har qanday ifodalar uchun joriy qiymatlarni ko'rsatadi.**
 
+<<<<<<< HEAD
    Siz ortiqcha `+` tugmachasini bosishingiz va ifodani kiritishingiz mumkin. Koddagi nosozliklarni tuzatuvchi har qanday vaqtda o'z qiymatini ko'rsatadi, uni bajarish jarayonida avtomatik ravishda qayta hisoblab chiqadi.
+=======
+    You can click the plus `+` and input an expression. The debugger will show its value, automatically recalculating it in the process of execution.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 2. **`Call Stack` -- ulanish chaqiruvlar zanjirini ko'rsatadi.**
 
@@ -136,6 +157,7 @@ O'ng oynaning yuqori qismida buning uchun tugmalar mavjud. Keling, ularni o'rgan
 <span class="devtools" style="background-position:-72px -76px"></span> -- qadam qo'yish, tezkor tugma `key:F11`.
 : Oldingi bilan bir xil, ammo ichki qadam vazifalariga "qadam qo'yadi". Buni bosish barcha skript harakatlariga birma-bir qadam qo'yadi.
 
+<<<<<<< HEAD
 <span class="devtools" style="background-position:-104px -76px"></span> -- joriy funktsiyani oxirigacha bajarishni davom etish, tezkor tugma `key:Shift+F11`.
 : Ijro etilish joriy funktsiyalarning oxirgi satrda to'xtaydi. Biz tasodifan <span class="devtools" style="background-position:-72px -76px"></span> yordamida ichki chaqiruvni kiritganimizda bu juda qulay, ammo bu bizni qiziqtirmaydi va biz oxirigacha davom etishni imkoni boricha tezda xohlaymiz.
 
@@ -144,11 +166,40 @@ O'ng oynaning yuqori qismida buning uchun tugmalar mavjud. Keling, ularni o'rgan
 
 <span class="devtools" style="background-position:-264px -4px"></span> -- xatolik yuz berganda avtomatik to'xtatishni yoqish/o'chirish.
 : Yoqilganda va dasturchi vositalari ochiq bo'lsa, skript xatosi avtomatik ravishda bajarilishini to'xtatadi. Keyin nima o'zgarganligini ko'rish uchun o'zgaruvchanlarni tahlil qilishimiz mumkin. Shunday qilib, agar bizning skriptimiz xato bilan to'xtasa, biz koddagi nosozliklarni tuzatuvchi vositasini ochib, ushbu parametrni yoqib, sahifani qayta yuklashimiz mumkin, u qayerda to'xtashini va o'sha paytda qanday qiymatda ekanligini bilib olishimiz mumkin.
+=======
+<span class="devtools" style="background-position:-62px -192px"></span> -- "Step over": run the next command, but *don't go into a function*, hotkey `key:F10`.
+: Similar to the previous "Step" command, but behaves differently if the next statement is a function call (not a built-in, like `alert`, but a function of our own).
+
+    If we compare them, the "Step" command goes into a nested function call and pauses the execution at its first line, while "Step over" executes the nested function call invisibly to us, skipping the function internals.
+
+    The execution is then paused immediately after that function call.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```smart header="Bu erda davom eting"
 Kod satriga sichqonchaning o'ng tugmasi bilan bosish kontekst menyusini "Bu erda davom eting" ochadi.
 
+<<<<<<< HEAD
 Bu biz bir necha qadam oldinga siljishni xohlaganimizda qulay, ammo biz to'xtash nuqtasini o'rnatishga dangasa bo'lsak.
+=======
+<span class="devtools" style="background-position:-4px -194px"></span> -- "Step into", hotkey `key:F11`.
+: That's similar to "Step", but behaves differently in case of asynchronous function calls. If you're only starting to learn JavaScript, then you can ignore the difference, as we don't have asynchronous calls yet.
+
+    For the future, just note that "Step" command ignores async actions, such as `setTimeout` (scheduled function call), that execute later. The "Step into" goes into their code, waiting for them if necessary. See [DevTools manual](https://developers.google.com/web/updates/2018/01/devtools#async) for more details.
+
+<span class="devtools" style="background-position:-32px -194px"></span> -- "Step out": continue the execution till the end of the current function, hotkey `key:Shift+F11`.
+: Continue the execution and stop it at the very last line of the current function. That's handy when we accidentally entered a nested call using <span class="devtools" style="background-position:-200px -190px"></span>, but it does not interest us, and we want to continue to its end as soon as possible.
+
+<span class="devtools" style="background-position:-61px -74px"></span> -- enable/disable all breakpoints.
+: That button does not move the execution. Just a mass on/off for breakpoints.
+
+<span class="devtools" style="background-position:-90px -146px"></span> -- enable/disable automatic pause in case of an error.
+: When enabled, if the developer tools is open, an error during the script execution automatically pauses it. Then we can analyze variables in the debugger to see what went wrong. So if our script dies with an error, we can open debugger, enable this option and reload the page to see where it dies and what's the context at that moment.
+
+```smart header="Continue to here"
+Right click on a line of code opens the context menu with a great option called "Continue to here".
+
+That's handy when we want to move multiple steps forward to the line, but we're too lazy to set a breakpoint.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 ```
 
 ## Konsolga chiqarish
@@ -172,9 +223,13 @@ Agar bizning kodimizga kiritish yetarli bo'lsa, biz nima sodir bo'layotganini ko
 
 Ko'rib turganimizdek, skriptni to'xtatib turishning uchta asosiy usuli mavjud:
 
+<<<<<<< HEAD
 1. To'xtash nuqtasi.
 2. "Koddagi nosozliklarni tuzatuvchi" ifodalari.
 3. Xato (agar dasturchi vositalari ochiq bo'lsa va <span class ="devtools" style ="background-position: -264px -4px"></span> tugmasi "yoqilgan" bo'lsa)
+=======
+When paused, we can debug: examine variables and trace the code to see where the execution goes wrong.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Keyin biz o'zgaruvchanlarni ko'rib chiqamiz va bajarilish qayerda noto'g'ri ketayotganini bilib olamiz.
 

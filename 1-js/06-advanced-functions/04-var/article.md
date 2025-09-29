@@ -1,7 +1,17 @@
 
 # Eski "var"
 
+<<<<<<< HEAD
 [O'zgaruvchanlar](info:variables) haqidagi birinchi bobda biz o'zgaruvchanlarni e'lon qilishning uchta usulini eslatib o'tdik:
+=======
+```smart header="This article is for understanding old scripts"
+The information in this article is useful for understanding old scripts.
+
+That's not how we write new code.
+```
+
+In the very first chapter about [variables](info:variables), we mentioned three ways of variable declaration:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 1. `let`
 2. `const`
@@ -47,7 +57,7 @@ Agar biz 2-satrda `let test` dan foydalansak, u holda `alert` ko'rinmaydi. Ammo 
 
 Xuddi shu narsa tsiklar uchun: `var` blok-yoki tsikl-lokal bo'lishi mumkin emas:
 
-```js
+```js run
 for (var i = 0; i < 10; i++) {
   var one = 1;
   // ...
@@ -138,7 +148,7 @@ Buni quyidagi misol bilan namoyish qilish yaxshiroqdir:
 
 ```js run
 function sayHi() {
-  alert(phrase);  
+  alert(phrase);
 
 *!*
   var phrase = "Salom";
@@ -184,4 +194,77 @@ Yuqoridagi ikkala misolda ham `alert` xatosiz ishlaydi, chunki `phrase` o'zgaruv
 
 Global obyekt bilan bog'liq yana bir kichik farq bor, buni keyingi bobda ko'rib chiqamiz.
 
+<<<<<<< HEAD
 Ushbu farqlar, aslida, ko'pincha yomon narsadir. Blok darajasidagi o'zgaruvchanlar - bu juda yaxshi narsa. Shuning uchun `let` standartga ancha oldin kiritilgan va endi o'zgaruvchanni e'lon qilishning asosiy usuli (`const` bilan birga).
+=======
+```js run
+(function() {
+
+  var message = "Hello";
+
+  alert(message); // Hello
+
+})();
+```
+
+Here, a Function Expression is created and immediately called. So the code executes right away and has its own private variables.
+
+The Function Expression is wrapped with parenthesis `(function {...})`, because when JavaScript engine encounters `"function"` in the main code, it understands it as the start of a Function Declaration. But a Function Declaration must have a name, so this kind of code will give an error:
+
+```js run
+// Tries to declare and immediately call a function
+function() { // <-- SyntaxError: Function statements require a function name
+
+  var message = "Hello";
+
+  alert(message); // Hello
+
+}();
+```
+
+Even if we say: "okay, let's add a name", that won't work, as JavaScript does not allow Function Declarations to be called immediately:
+
+```js run
+// syntax error because of parentheses below
+function go() {
+
+}(); // <-- can't call Function Declaration immediately
+```
+
+So, the parentheses around the function is a trick to show JavaScript that the function is created in the context of another expression, and hence it's a Function Expression: it needs no name and can be called immediately.
+
+There exist other ways besides parentheses to tell JavaScript that we mean a Function Expression:
+
+```js run
+// Ways to create IIFE
+
+*!*(*/!*function() {
+  alert("Parentheses around the function");
+}*!*)*/!*();
+
+*!*(*/!*function() {
+  alert("Parentheses around the whole thing");
+}()*!*)*/!*;
+
+*!*!*/!*function() {
+  alert("Bitwise NOT operator starts the expression");
+}();
+
+*!*+*/!*function() {
+  alert("Unary plus starts the expression");
+}();
+```
+
+In all the above cases we declare a Function Expression and run it immediately. Let's note again: nowadays there's no reason to write such code.
+
+## Summary
+
+There are two main differences of `var` compared to `let/const`:
+
+1. `var` variables have no block scope, their visibility is scoped to current function, or global, if declared outside function.
+2. `var` declarations are processed at function start (script start for globals).
+
+There's one more very minor difference related to the global object, that we'll cover in the next chapter.
+
+These differences make `var` worse than `let` most of the time. Block-level variables is such a great thing. That's why `let` was introduced in the standard long ago, and is now a major way (along with `const`) to declare a variable.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19

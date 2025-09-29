@@ -8,7 +8,11 @@ Quyidagi vazifani misol sifatida olaylik.
 
 Bizda matn bor va barcha qo'shtirnoqlar `"..."` ni guillemet belgilari bilan almashtirish kerak: `«...»`. Ular ko'plab mamlakatlarda tipografiya uchun afzalroq.
 
+<<<<<<< HEAD
 Masalan: `"Hello, world"` `«Hello, world»` ga aylanishi kerak. Boshqa qo'shtirnoqlar ham mavjud, masalan `„Witam, świat!"` (polyakcha) yoki `「你好，世界」` (xitoycha), lekin bizning vazifamiz uchun `«...»` ni tanlaymiz.
+=======
+For instance: `"Hello, world"` should become `«Hello, world»`. There exist other quotes, such as `„Witaj, świecie!”` (Polish) or `「你好，世界」` (Chinese), but for our task let's choose `«...»`.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Birinchi navbatda qo'shtirnoqlangan satrlarni topish, keyin ularni almashtirish kerak.
 

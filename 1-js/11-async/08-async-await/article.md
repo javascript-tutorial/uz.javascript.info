@@ -121,16 +121,34 @@ showAvatar();
 
 Juda toza va o'qish oson, to'g'rimi? Oldingiga qaraganda ancha yaxshi.
 
+<<<<<<< HEAD
 ````smart header="`await` yuqori darajadagi kodda ishlamaydi"
 `await` dan foydalanishni yangi boshlagan odamlar, biz `await` dan yuqori darajadagi kodda foydalana olmasligimizni unutishadi. Masalan, bu ishlamaydi:
 
 ```js run
 // yuqori darajadagi kodda sintaksis xatosi
+=======
+````smart header="Modern browsers allow top-level `await` in modules"
+In modern browsers, `await` on top level works just fine, when we're inside a module. We'll cover modules in article <info:modules-intro>.
+
+For instance:
+
+```js run module
+// we assume this code runs at top level, inside a module
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 let response = await fetch('/article/promise-chaining/user.json');
 let user = await response.json();
+
+console.log(user);
 ```
 
+<<<<<<< HEAD
 Biz buni noma'lum async funktsiyasiga o'rashimiz mumkin, masalan:
+=======
+If we're not using modules, or [older browsers](https://caniuse.com/mdn-javascript_operators_await_top_level) must be supported, there's a universal recipe: wrapping into an anonymous async function.
+
+Like this:
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js
 (async () => {
@@ -140,7 +158,6 @@ Biz buni noma'lum async funktsiyasiga o'rashimiz mumkin, masalan:
 })();
 ```
 
-P.S. New feature: starting from V8 engine version 8.9+, top-level await works in [modules](info:modules).
 ````
 ````smart header="`await` \"thenables\" ni qabul qiladi"
 `promise.then` singari, `await` ham ishlatilishi mumkin bo'lgan obyektlardan foydalanishga imkon beradi (`then` usuli bilan chaqirish mumkin). G'oya shundan iboratki, uchinchi tomon obyekti va'da bo'lmasligi mumkin, ammo va'daga mos kelishi mumkin: agar u `.then` ni qo'llab-quvvatlasa, `await` bilan ishlatish kifoya.
@@ -299,7 +316,12 @@ Masalan, bizda:
 - `setTimeout(handler, 0)`, nol kechikish bilan `handler` ni ishga tushirishi kerak.
 - `let x = await f()`, function `f()` bu async, lekin darhol qaytadi.
 
+<<<<<<< HEAD
 Kodda `await` ning *ostida* `setTimeout` bo'lsa, qaysi biri birinchi ishlaydi?
+=======
+1. If it's an error, an exception is generated — same as if `throw error` were called at that very place.
+2. Otherwise, it returns the result.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 ```js run
 async function f() {

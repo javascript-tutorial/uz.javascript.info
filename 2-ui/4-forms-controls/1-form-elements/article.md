@@ -153,7 +153,11 @@ Forma boshqaruvlari haqida gaplashaylik.
 
 ### input va textarea
 
+<<<<<<< HEAD
 Biz ularning qiymatiga `input.value` (string) yoki checkbox lar uchun `input.checked` (boolean) sifatida kirishimiz mumkin.
+=======
+We can access their value as `input.value` (string) or `input.checked` (boolean) for checkboxes and radio buttons.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Mana bunday:
 
@@ -242,7 +246,11 @@ Bu sintaksis ixtiyoriy. Biz `document.createElement('option')` dan foydalanishim
 - `defaultSelected` -- agar `true` bo'lsa, `selected` HTML-atributi yaratiladi,
 - `selected` -- agar `true` bo'lsa, option tanlangan.
 
+<<<<<<< HEAD
 `defaultSelected` va `selected` orasidagi farq shundaki, `defaultSelected` HTML-atributni o'rnatadi (uni `option.getAttribute('selected')` dan foydalanib olishimiz mumkin), `selected` esa option tanlanganligini yoki tanlanmaganligini belgilaydi.
+=======
+The difference between `defaultSelected` and `selected` is that `defaultSelected` sets the HTML-attribute (that we can get using `option.getAttribute('selected')`), while `selected` sets whether the option is selected or not.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Amalda, odatda ikkala qiymatni ham `true` yoki `false` ga o'rnatish kerak. (Yoki, shunchaki ularni o'tkazib yuborish; ikkalasi ham standart ravishda `false`.)
 

@@ -2,9 +2,15 @@
 
 HTML sahifaning hayot tsikli uchta muhim hodisaga ega:
 
+<<<<<<< HEAD
 - `DOMContentLoaded` -- brauzer HTML ni to'liq yukladi va DOM daraxti qurildi, lekin tashqi resurslar (rasmlar `<img>` va stil fayllari) hali yuklanmagandir.
 - `load` -- nafaqat HTML, balki barcha tashqi resurslar ham yuklandi: rasmlar, stillar va boshqalar.
 - `beforeunload/unload` -- foydalanuvchi sahifani tark etmoqda.
+=======
+- `DOMContentLoaded` -- the browser fully loaded HTML, and the DOM tree is built, but external resources like pictures `<img>` and stylesheets may not yet have loaded.
+- `load` -- not only HTML is loaded, but also all the external resources: images, styles etc.
+- `beforeunload/unload` -- the user is leaving the page.
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
 Har bir hodisa foydali bo'lishi mumkin:
 
@@ -85,7 +91,11 @@ Lekin bu yerda tuzoq bor. Agar stildan keyin skript bo'lsa, u holda skript stil 
 ```html
 <link type="text/css" rel="stylesheet" href="style.css">
 <script>
+<<<<<<< HEAD
   // skript stil yuklangunga qadar bajarilinaydi
+=======
+  // the script doesn't execute until the stylesheet is loaded
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
   alert(getComputedStyle(document.body).marginTop);
 </script>
 ```
@@ -110,8 +120,13 @@ Quyidagi misol rasm o'lchamlarini to'g'ri ko'rsatadi, chunki `window.onload` bar
 
 ```html
 <script>
+<<<<<<< HEAD
   window.onload = function() { // window.addEventListener('load', (event) => { bilan bir xil
     alert('Sahifa yuklandi');
+=======
+  window.onload = function() { // can also use window.addEventListener('load', (event) => {
+    alert('Page loaded');
+>>>>>>> 51bc6d3cdc16b6eb79cb88820a58c4f037f3bf19
 
     // rasm shu vaqtda yuklangan
     alert(`Rasm o'lchami: ${img.offsetWidth}x${img.offsetHeight}`);
@@ -178,6 +193,26 @@ window.onbeforeunload = function() {
 
 Xatti-harakat o'zgartirildi, chunki ba'zi veb-masterlar bu hodisa ishlov beruvchisidan noto'g'ri va bezovta qiluvchi xabarlarni ko'rsatish uchun suiiste'mol qilishgan. Shuning uchun eski brauzerlar hali ham buni xabar sifatida ko'rsatishi mumkin, lekin bundan tashqari -- foydalanuvchiga ko'rsatiladigan xabarni sozlashning iloji yo'q.
 
+````warn header="The `event.preventDefault()` doesn't work from a `beforeunload` handler"
+That may sound weird, but most browsers ignore `event.preventDefault()`.
+
+Which means, following code may not work:
+```js run
+window.addEventListener("beforeunload", (event) => {
+  // doesn't work, so this event handler doesn't do anything
+	event.preventDefault();
+});
+```
+
+Instead, in such handlers one should set `event.returnValue` to a string to get the result similar to the code above:
+```js run
+window.addEventListener("beforeunload", (event) => {
+  // works, same as returning from window.onbeforeunload
+	event.returnValue = "There are unsaved changes. Leave now?";
+});
+```
+````
+
 ## readyState
 
 Agar biz `DOMContentLoaded` ishlov beruvchisini hujjat yuklangandan keyin o'rnatsak nima bo'ladi?
@@ -238,7 +273,7 @@ Mana `<iframe>`, `<img>` va hodisalarni qayd etuvchi ishlov beruvchilar bilan hu
 
 <iframe src="iframe.html" onload="log('iframe onload')"></iframe>
 
-<img src="http://en.js.cx/clipart/train.gif" id="img">
+<img src="https://en.js.cx/clipart/train.gif" id="img">
 <script>
   img.onload = () => log('img onload');
 </script>

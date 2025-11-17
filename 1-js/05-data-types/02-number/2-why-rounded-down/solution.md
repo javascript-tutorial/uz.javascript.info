@@ -27,5 +27,9 @@ alert((6.35 * 10).toFixed(20)); // 63.50000000000000000000
 E'tibor bering, `63.5` hech qanday aniq yo'qotishlarga ega emas. Buning sababi, `0,5` kasr qismi aslida `1/2` dir. `2` kuchlariga bo'linadigan qismlar ikkilik tizimda to'liq ifodalanadi, endi biz uni yaxlitlashimiz mumkin:
 
 ```js run
+<<<<<<< HEAD
 alert(Math.round(6.35 * 10) / 10); // 6.35 -> 63.5 -> 64(yaxlitlangan) -> 6.4
+=======
+alert( Math.round(6.35 * 10) / 10 ); // 6.35 -> 63.5 -> 64(rounded) -> 6.4
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```

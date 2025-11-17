@@ -22,7 +22,7 @@ Dasturchilar uchun vositalar standart ravishda Console yorlig'ida ochiladi.
 
 Bu shunday ko'rinadi:
 
-![chrome](chrome.png)
+![chrome](chrome.webp)
 
 Dasturchilar vositalarining aniq ko'rinishi sizning Chrome versiyangizga bog'liq. U vaqti-vaqti bilan o'zgarib turadi, ammo shunga o'xshash bo'lishi kerak.
 
@@ -49,7 +49,11 @@ Ularning tashqi ko'rinishi va hissi o'xshash. Ushbu vositalardan birini qanday i
 
 Safari (Windows/Linux tomonidan qo'llab-quvvatlanmaydigan Mac brauzeri) bu yerda biroz o'ziga xosdir. Avval "Dasturchi menyusini" yoqishimiz kerak.
 
+<<<<<<< HEAD
 Preferences ni oching va "Advanced" oynasiga o'ting. Pastki qismida belgilash katakchasi mavjud:
+=======
+Open Settings and go to the "Advanced" pane. There's a checkbox at the bottom:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ![safari](safari.png)
 

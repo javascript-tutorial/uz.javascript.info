@@ -44,7 +44,11 @@ Boshqa server bilan muloqot qilishning bir yo'li `<form>` ni u yerga yuborish ed
 <iframe name="iframe"></iframe>
 */!*
 
+<<<<<<< HEAD
 <!-- form dinamik ravishda yaratilishi va JavaScript orqali yuborilishi mumkin -->
+=======
+<!-- a form could be dynamically generated and submitted by JavaScript -->
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 *!*
 <form target="iframe" method="POST" action="http://another.com/…">
 */!*
@@ -169,6 +173,7 @@ Cross-origin so'rov uchun, sukut bo'yicha JavaScript faqat "xavfsiz" deb ataladi
 
 - `Cache-Control`
 - `Content-Language`
+- `Content-Length`
 - `Content-Type`
 - `Expires`
 - `Last-Modified`
@@ -176,6 +181,7 @@ Cross-origin so'rov uchun, sukut bo'yicha JavaScript faqat "xavfsiz" deb ataladi
 
 Boshqa har qanday javob header'iga kirish xatolikka olib keladi.
 
+<<<<<<< HEAD
 ```smart
 Ro'yxatda `Content-Length` header'i yo'q!
 
@@ -183,6 +189,9 @@ Bu header to'liq javob uzunligini o'z ichiga oladi. Shunday qilib, agar biz biro
 ```
 
 JavaScript'ga boshqa har qanday javob header'iga kirish imkonini berish uchun, server `Access-Control-Expose-Headers` header'ini yuborishi kerak. U kirish mumkin bo'lishi kerak bo'lgan xavfsiz bo'lmagan header nomlari ro'yxatini vergul bilan ajratilgan holda o'z ichiga oladi.
+=======
+To grant JavaScript access to any other response header, the server must send the `Access-Control-Expose-Headers` header. It contains a comma-separated list of unsafe header names that should be made accessible.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Masalan:
 
@@ -190,14 +199,19 @@ Masalan:
 200 OK
 Content-Type:text/html; charset=UTF-8
 Content-Length: 12345
+Content-Encoding: gzip
 API-Key: 2c9de507f2c54aa1
 Access-Control-Allow-Origin: https://javascript.info
 *!*
-Access-Control-Expose-Headers: Content-Length,API-Key
+Access-Control-Expose-Headers: Content-Encoding,API-Key
 */!*
 ```
 
+<<<<<<< HEAD
 Bunday `Access-Control-Expose-Headers` header bilan script javobning `Content-Length` va `API-Key` header'larini o'qishi mumkin.
+=======
+With such an `Access-Control-Expose-Headers` header, the script is allowed to read the `Content-Encoding` and `API-Key` headers of the response.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ## "Xavfsiz bo'lmagan" so'rovlar
 
@@ -207,10 +221,18 @@ Bir muncha vaqt oldin hech kim veb-sahifa bunday so'rovlarni qila olishini tasav
 
 Shunday qilib, tushunmovchiliklar oldini olish uchun, eski paytlarda qilinishi mumkin bo'lmagan har qanday "xavfsiz bo'lmagan" so'rov uchun brauzer bunday so'rovlarni darhol bajarmaydi. Avval u ruxsat so'rash uchun dastlabki, "preflight" deb ataladigan so'rovni yuboradi.
 
+<<<<<<< HEAD
 Preflight so'rov `OPTIONS` metodini, body'siz va ikkita header bilan ishlatadi:
 
 - `Access-Control-Request-Method` header xavfsiz bo'lmagan so'rovning metodini o'z ichiga oladi.
 - `Access-Control-Request-Headers` header uning xavfsiz bo'lmagan HTTP-header'larining vergul bilan ajratilgan ro'yxatini taqdim etadi.
+=======
+A preflight request uses the method `OPTIONS`, no body and three headers:
+
+- `Access-Control-Request-Method` header has the method of the unsafe request.
+- `Access-Control-Request-Headers` header provides a comma-separated list of its unsafe HTTP-headers.
+- `Origin` header tells from where the request came. (such as `https://javascript.info`)
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Agar server so'rovlarni xizmat qilishga rozilashsa, u bo'sh body, 200 status va header'lar bilan javob berishi kerak:
 

@@ -63,7 +63,11 @@ alert( rabbit.eats ); // true (**)
 alert( rabbit.jumps ); // true
 ````
 
+<<<<<<< HEAD
 Bu yerda `(*)` satri `animal` `rabbit` ning prototipi sifatida o'rnatadi.
+=======
+Here the line `(*)` sets `animal` to be the prototype of `rabbit`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Keyin, `alert` `rabbit.eats` `(**)` xususiyatini o'qishga harakat qiladi, u `rabbit` da mavjud emas, shuning uchun JavaScript `[[Prototype]]` ma'lumotnomasiga amal qiladi va uni `animal` da topadi (pastdan yuqoriga qarang):
 
@@ -140,9 +144,14 @@ Bundan tashqari, bu aniq bo'lishi mumkin, ammo baribir: bitta `[[Prototype]]` bo
 
 ## Yozishda prototipdan foydalanilmaydi
 
+<<<<<<< HEAD
 Prototip faqat o'qish xususiyatlari uchun ishlatiladi.
 
 Yozish/o'chirish operatsiyalari to'g'ridan-to'g'ri obyekt bilan ishlaydi.
+=======
+```smart header="`__proto__` is a historical getter/setter for `[[Prototype]]`"
+It's a common mistake of novice developers not to know the difference between these two.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Quyidagi misolda biz `walk` usulini `rabbit` ga tayinlaymiz:
 
@@ -256,8 +265,86 @@ Natijada, usullar birgalikda ishlatiladi, ammo obyekt holatida emas.
 
 ## Xulosa
 
+<<<<<<< HEAD
 - JavaScript-da barcha obyektlar yashiringan `[[Prototype]]` xususiyatiga ega, bu boshqa obyekt yoki `null`.
 - Bunga kirish uchun `obj .__ proto__` dan foydalanishimiz mumkin (tarixiy getter/setter, boshqa usullar mavjud, yaqin orada ko'rib chiqilishi kerak).
 - `[[Prototype]]` ga havola qilingan obyekt "prototip" deb nomlanadi.
 - Agar biz `obj` xususiyatini o'qishni yoki usulni chaqirishni xohlasak va u mavjud bo'lmasa, JavaScript uni prototipda topishga harakat qiladi. Yozish/o'chirish operatsiyalari to'g'ridan-to'g'ri obyektda ishlaydi, ular prototipdan foydalanmaydi (agar xususiyat aslida setter bo'lmasa).
 - Agar biz `obj.method()` deb nomlasak va `usul` prototipdan olingan bo'lsa, `this` `obj` ga hali ham murojaat qiladi. Shunday qilib, usullar, agar ular meros qilib olingan bo'lsa ham, har doim ham mavjud obyekt bilan ishlaydi.
+=======
+The `for..in` loop iterates over inherited properties too.
+
+For instance:
+
+```js run
+let animal = {
+  eats: true
+};
+
+let rabbit = {
+  jumps: true,
+  __proto__: animal
+};
+
+*!*
+// Object.keys only returns own keys
+alert(Object.keys(rabbit)); // jumps
+*/!*
+
+*!*
+// for..in loops over both own and inherited keys
+for(let prop in rabbit) alert(prop); // jumps, then eats
+*/!*
+```
+
+If that's not what we want, and we'd like to exclude inherited properties, there's a built-in method [obj.hasOwnProperty(key)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty): it returns `true` if `obj` has its own (not inherited) property named `key`.
+
+So we can filter out inherited properties (or do something else with them):
+
+```js run
+let animal = {
+  eats: true
+};
+
+let rabbit = {
+  jumps: true,
+  __proto__: animal
+};
+
+for(let prop in rabbit) {
+  let isOwn = rabbit.hasOwnProperty(prop);
+
+  if (isOwn) {
+    alert(`Our: ${prop}`); // Our: jumps
+  } else {
+    alert(`Inherited: ${prop}`); // Inherited: eats
+  }
+}
+```
+
+Here we have the following inheritance chain: `rabbit` inherits from `animal`, that inherits from `Object.prototype` (because `animal` is a literal object `{...}`, so it's by default), and then `null` above it:
+
+![](rabbit-animal-object.svg)
+
+Note, there's one funny thing. Where is the method `rabbit.hasOwnProperty` coming from? We did not define it. Looking at the chain we can see that the method is provided by `Object.prototype.hasOwnProperty`. In other words, it's inherited.
+
+...But why does `hasOwnProperty` not appear in the `for..in` loop like `eats` and `jumps` do, if `for..in` lists inherited properties?
+
+The answer is simple: it's not enumerable. Just like all other properties of `Object.prototype`, it has `enumerable:false` flag. And `for..in` only lists enumerable properties. That's why it and the rest of the `Object.prototype` properties are not listed.
+
+```smart header="Almost all other key/value-getting methods ignore inherited properties"
+Almost all other key/value-getting methods, such as `Object.keys`, `Object.values` and so on ignore inherited properties.
+
+They only operate on the object itself. Properties from the prototype are *not* taken into account.
+```
+
+## Summary
+
+- In JavaScript, all objects have a hidden `[[Prototype]]` property that's either another object or `null`.
+- We can use `obj.__proto__` to access it (a historical getter/setter, there are other ways, to be covered soon).
+- The object referenced by `[[Prototype]]` is called a "prototype".
+- If we want to read a property of `obj` or call a method, and it doesn't exist, then JavaScript tries to find it in the prototype.
+- Write/delete operations act directly on the object, they don't use the prototype (assuming it's a data property, not a setter).
+- If we call `obj.method()`, and the `method` is taken from the prototype, `this` still references `obj`. So methods always work with the current object even if they are inherited.
+- The `for..in` loop iterates over both its own and its inherited properties. All other key/value-getting methods only operate on the object itself.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533

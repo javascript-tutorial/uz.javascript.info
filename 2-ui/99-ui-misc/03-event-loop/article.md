@@ -16,7 +16,11 @@ Dvigatelning umumiy algoritmi:
     - ularni bajaring, eng eski vazifadan boshlab.
 2. Vazifa paydo bo'lguncha uyqu, keyin 1-qadamga o'ting.
 
+<<<<<<< HEAD
 Bu sahifani ko'rib chiqayotganda ko'rgan narsalarimizning rasmiylashtirishidir. JavaScript dvigateli ko'p vaqt hech narsa qilmaydi, u faqat skript/ishlov beruvchi/hodisa faollashgandagina ishlaydi.
+=======
+That's a formalization of what we see when browsing a page. The JavaScript engine does nothing most of the time, it only runs if a script/handler/event activates.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Vazifalar misollari:
 
@@ -29,6 +33,7 @@ Vazifalar o'rnatiladi -- dvigatel ularni boshqaradi -- keyin ko'proq vazifalarni
 
 Dvigatel band bo'lganida vazifa kelishi mumkin, u holda u navbatga qo'yiladi.
 
+<<<<<<< HEAD
 Vazifalar navbat hosil qiladi, "macrotask queue" deb ataladi (v8 terminologiyasi):
 
 ![](eventLoop.svg)
@@ -36,12 +41,27 @@ Vazifalar navbat hosil qiladi, "macrotask queue" deb ataladi (v8 terminologiyasi
 Masalan, dvigatel `script` ni bajarayotgan vaqtda foydalanuvchi sichqonchasini harakatlantirib `mousemove` ga sabab bo'lishi va `setTimeout` vaqti kelishi mumkin va hokazo, bu vazifalar yuqoridagi rasmda ko'rsatilganidek navbat hosil qiladi.
 
 Navbatdagi vazifalar "birinchi kelgan - birinchi xizmat ko'rsatilgan" asosida qayta ishlanadi. Brauzer dvigateli `script` bilan ishini tugatganda, u `mousemove` hodisasini, keyin `setTimeout` ishlov beruvchisini va hokazolarni boshqaradi.
+=======
+The tasks form a queue, the so-called "macrotask queue" ([v8](https://v8.dev/) term):
+
+![](eventLoop.svg)
+
+For instance, while the engine is busy executing a `script`, a user may move their mouse causing `mousemove`, and `setTimeout` may be due and so on, these tasks form a queue, as illustrated in the picture above.
+
+Tasks from the queue are processed on a "first come – first served" basis. When the engine browser is done with the `script`, it handles `mousemove` event, then `setTimeout` handler, and so on.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Hozirgacha, juda oddiy, shunday emasmi?
 
+<<<<<<< HEAD
 Yana ikkita tafsilot:
 1. Dvigatel vazifani bajarayotgan vaqtda render hech qachon sodir bo'lmaydi. Vazifa qanchalik uzoq davom etishidan qat'i nazar. DOM ga o'zgarishlar faqat vazifa tugagandan keyin bo'yaladi.
 2. Agar vazifa juda uzoq davom etsa, brauzer foydalanuvchi hodisalarini qayta ishlash kabi boshqa vazifalarni bajara olmaydi. Shuning uchun bir muncha vaqtdan keyin u "Page Unresponsive" kabi ogohlantirish beradi va vazifani butun sahifa bilan birga o'ldirishni taklif qiladi. Bu juda ko'p murakkab hisob-kitoblar yoki cheksiz siklga olib keladigan dasturlash xatosi bo'lganda sodir bo'ladi.
+=======
+Two more details:
+1. Rendering never happens while the engine executes a task. It doesn't matter if the task takes a long time. Changes to the DOM are painted only after the task is complete.
+2. If a task takes too long, the browser can't do other tasks, such as processing user events. So after some time, it raises an alert like "Page Unresponsive", suggesting killing the task with the whole page. That happens when there are a lot of complex calculations or a programming error leading to an infinite loop.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Bu nazariya edi. Endi bu bilimni qanday qo'llashimizni ko'raylik.
 
@@ -53,7 +73,11 @@ Masalan, sintaksis-ta'kidlash (bu sahifadagi kod misollarini ranglash uchun ishl
 
 Dvigatel sintaksis ta'kidlash bilan band bo'lganida, u boshqa DOM bilan bog'liq ishlarni bajara olmaydi, foydalanuvchi hodisalarini qayta ishlay olmaydi va hokazo. Bu hatto brauzerning biroz "hiqichoq" yoki "osilib qolishiga" sabab bo'lishi mumkin, bu qabul qilinishi mumkin emas.
 
+<<<<<<< HEAD
 Katta vazifani bo'laklarga bo'lish orqali muammolardan qochishimiz mumkin. Dastlabki 100 qatorni ta'kidlaymiz, keyin keyingi 100 qator uchun `setTimeout` (nol kechikish bilan) rejalashtiramiz va hokazo.
+=======
+We can avoid problems by splitting the big task into pieces. Highlight the first 100 lines, then schedule `setTimeout` (with zero-delay) for the next 100 lines, and so on.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Bu yondashuvni namoyish qilish uchun, soddalik uchun, matn ta'kidlash o'rniga `1` dan `1000000000` gacha sanash funksiyasini olaylik.
 

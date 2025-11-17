@@ -1,6 +1,10 @@
 # Long Polling (Uzoq so'rov)
 
+<<<<<<< HEAD
 Long polling - bu WebSocket yoki Server Side Events kabi maxsus protokollardan foydalanmagan holda server bilan doimiy aloqani ta'minlashning eng oddiy usuli.
+=======
+Long polling is the simplest way of having persistent connection with server, that doesn't use any specific protocol like WebSocket or Server Sent Events.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Amalga oshirish juda oson bo'lib, ko'p hollarda yetarlicha yaxshi.
 
@@ -29,7 +33,11 @@ Jarayon:
 3. Xabar paydo bo'lganda - server so'rovga u bilan javob beradi.
 4. Brauzer darhol yangi so'rov yaratadi.
 
+<<<<<<< HEAD
 Brauzer so'rov yuborgan va server bilan kutilayotgan ulanishga ega bo'lgan vaziyat bu usul uchun standartdir. Faqat xabar yetkazilganda ulanish qayta tiklanadi.
+=======
+This situation, where the browser has sent a request and keeps a pending connection with the server, is standard for this method. Only when a message is delivered, the connection is closed and reestablished.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ![](long-polling.svg)
 

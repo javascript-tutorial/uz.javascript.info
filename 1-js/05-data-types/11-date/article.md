@@ -53,7 +53,14 @@ Yangi `Sana` obyektini yaratish uchun quyidagi argumentlardan biri bilan `new Da
 `new Date(yil, oy, sana, saot, daqiqa, soniya, millisoniya)`
 : Belgilangan komponentlar bilan sanani mahalliy vaqt zonasida yarating. Faqat ikkita birinchi argument majburiydir.
 
+<<<<<<< HEAD
     Eslatma:
+=======
+    - The `year` should have 4 digits. For compatibility, 2 digits are also accepted and considered `19xx`, e.g. `98` is the same as `1998` here, but always using 4 digits is strongly encouraged.
+    - The `month` count starts with `0` (Jan), up to `11` (Dec).
+    - The `date` parameter is actually the day of month, if absent then `1` is assumed.
+    - If `hours/minutes/seconds/ms` is absent, they are assumed to be equal `0`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
     - `yil` 4 ta raqamdan iborat bo'lishi kerak: `2013` yaxshi, `98` yo'q.
     - Oylarni hisoblash `0` (yanvar) bilan boshlanadi, `11` gacha (dekabr).
@@ -374,7 +381,11 @@ for (let i = 0; i < 10; i++) {
 ```warn header="Mikrobenchmarking qilishda ehtiyot bo'ling"
 Zamonaviy JavaScript interpretatorlari ko'plab optimallashtirishlarni amalga oshiradi. Ular "sun'iy sinovlar" natijalarini "odatdagi foydalanish" bilan taqqoslashlari mumkin, ayniqsa, biz juda kichik bir narsaga e'tibor qaratsak. Shunday qilib, agar siz ishlashni jiddiy tushunishni istasangiz, unda JavaScript-ni qanday ishlashini o'rganing. Va keyin sizga mikrobenchmarklar umuman kerak bo'lmaydi.
 
+<<<<<<< HEAD
 V8 haqidagi maqolalar to'plamini <http://mrale.ph> sahifasida topishingiz mumkin.
+=======
+The great pack of articles about V8 can be found at <https://mrale.ph>.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```
 
 ## Date.parse matndan
@@ -405,7 +416,7 @@ Vaqt belgisidan darhol yangi `Date` obyektini yaratishimiz mumkin:
 ```js run
 let date = new Date( Date.parse('2012-01-26T13:51:50.417-07:00') );
 
-alert(date);  
+alert(date);
 ```
 
 ## Xulosa

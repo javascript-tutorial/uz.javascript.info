@@ -58,7 +58,7 @@ Agar bu amallarni alohida qatorlarga qo'ysak, `this` albatta yo'qoladi:
 let user = {
   name: "John",
   hi() { alert(this.name); }
-}
+};
 
 *!*
 // metodni olish va chaqirishni ikki qatorga ajratish
@@ -86,7 +86,11 @@ Reference Type qiymati uch qiymatli kombinatsiya `(base, name, strict)` dir, bu 
 (user, "hi", true)
 ```
 
+<<<<<<< HEAD
 Reference Type da qavs `()` chaqirilganda, ular objekt va uning metodi haqidagi to'liq ma'lumotni oladi va to'g'ri `this` ni o'rnatishi mumkin (bu holda `=user`).
+=======
+When parentheses `()` are called on the Reference Type, they receive the full information about the object and its method, and can set the right `this` (`user` in this case).
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Reference type nuqta `.` dan chaqiruv qavslari `()` ga ma'lumot uzatish maqsadida maxsus "vositachi" ichki tur.
 

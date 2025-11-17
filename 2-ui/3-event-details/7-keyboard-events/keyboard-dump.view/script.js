@@ -5,6 +5,7 @@ let lastTime = Date.now();
 function handle(e) {
   if (form.elements[e.type + "Ignore"].checked) return;
 
+<<<<<<< HEAD
   let text =
     e.type +
     " key=" +
@@ -16,6 +17,18 @@ function handle(e) {
     (e.altKey ? " altKey" : "") +
     (e.metaKey ? " metaKey" : "") +
     (e.repeat ? " (repeat)" : "") +
+=======
+  area.scrollTop = 1e6;
+
+  let text = e.type +
+    ' key=' + e.key +
+    ' code=' + e.code +
+    (e.shiftKey ? ' shiftKey' : '') +
+    (e.ctrlKey ? ' ctrlKey' : '') +
+    (e.altKey ? ' altKey' : '') +
+    (e.metaKey ? ' metaKey' : '') +
+    (e.repeat ? ' (repeat)' : '') +
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
     "\n";
 
   if (area.value && Date.now() - lastTime > 250) {

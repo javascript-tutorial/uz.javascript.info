@@ -2,7 +2,11 @@
 
 O'rnatilgan `<template>` elementi HTML markup shablonlari uchun saqlash joyi vazifasini bajaradi. Brauzer uning mazmunini e'tiborsiz qoldiradi, faqat sintaksis to'g'riligini tekshiradi, lekin biz JavaScript-da unga kirishimiz va boshqa elementlar yaratish uchun ishlatishimiz mumkin.
 
+<<<<<<< HEAD
 Nazariy jihatdan, biz HTML markup saqlash maqsadlari uchun HTML da istalgan ko'rinmas elementni yaratishimiz mumkin edi. `<template>`ning nima maxsus tomoni bor?
+=======
+A built-in `<template>` element serves as a storage for HTML markup templates. The browser ignores its contents, only checks for syntax validity, but we can access and use it in JavaScript, to create other elements.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Birinchidan, uning mazmuni har qanday to'g'ri HTML bo'lishi mumkin, hatto u odatda to'g'ri o'ralgan tegni talab qilsa ham.
 

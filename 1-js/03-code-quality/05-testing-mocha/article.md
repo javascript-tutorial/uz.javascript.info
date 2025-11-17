@@ -50,9 +50,14 @@ describe("pow", function () {
 
 Spetsifikatsiyada yuqorida ko'rishingiz mumkin bo'lgan uchta asosiy qurilish bloklari mavjud:
 
+<<<<<<< HEAD
 `describe("sarlavha", function() { ... })`
 : What functionality we're describing. Uses to group "workers" -- the `it` blocks. In our case we're describing the function `pow`.
 Biz qaysi funktsiyalarni tasvirlaymiz. Bizning holatda biz `pow` funktsiyasini tasvirlaymiz. Ishchi otlarni - `it` bloklarni guruhlash uchun ishlatiladi.
+=======
+`describe("title", function() { ... })`
+: What functionality we're describing? In our case we're describing the function `pow`. Used to group "workers" -- the `it` blocks.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 `it("sarlavha", function() { ... })`
 : `it` blokining birinchi argumentida biz _inson tilida_ funktsiyadan foydalanishning aniq usulini tasvirlaymiz, ikkinchisida esa bu ishni sinab ko'radigan funktsiyani yozamiz.
@@ -68,6 +73,7 @@ Biz qaysi funktsiyalarni tasvirlaymiz. Bizning holatda biz `pow` funktsiyasini t
 
 Rivojlanish oqimi odatda quyidagicha ko'rinadi:
 
+<<<<<<< HEAD
 1. Dastlabki spetsifikatsiya asosiy funksiyani tekshiradigan testlar bilan yoziladi.
 2. Dastlabki dastur yaratiladi.
 3. Uning ishlashini tekshirish uchun biz spetsifikatsiyani boshqaradigan sinov tizimini [Mocha](http://mochajs.org/) (yaqinda batafsil ma'lumot) ishlatamiz. Xatolar ko'rsatiladi. Hamma narsa ishlamaguncha biz tuzatishlar kiritamiz.
@@ -75,12 +81,25 @@ Rivojlanish oqimi odatda quyidagicha ko'rinadi:
 5. Sinov kodida hali amalga oshirilmagan bo'lishi mumkin bo'lgan foydalanishning yangi usullarini qo'shamiz. Testlar "tushib" (xatolar berish) boshlaydi.
 6. 3-ga o'ting, testlar xato qilmaguncha dasturni yangilang.
 7. Dastur tayyor bo'lguncha 3-6 bosqichlarni takrorlang.
+=======
+1. An initial spec is written, with tests for the most basic functionality.
+2. An initial implementation is created.
+3. To check whether it works, we run the testing framework [Mocha](https://mochajs.org/) (more details soon) that runs the spec. While the functionality is not complete, errors are displayed. We make corrections until everything works.
+4. Now we have a working initial implementation with tests.
+5. We add more use cases to the spec, probably not yet supported by the implementations. Tests start to fail.
+6. Go to 3, update the implementation till tests give no errors.
+7. Repeat steps 3-6 till the functionality is ready.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Shunday qilib, rivojlanish _takrorlanadigan_. Biz spetsifikatsiyani yozamiz, uni amalga oshiramiz, testlar o'tganligiga ishonch hosil qilamiz, so'ngra ko'proq testlarni yozamiz, ularning ishlashiga ishonch hosil qilamiz va hokazo. Oxirida bizda ishlaydigan dastur ham, testlar ham mavjud.
 
 Bizning holatlarimizda birinchi qadam tugallandi: bizda `pow` uchun boshlang'ich spetsifikatsiya mavjud. Keling, amalga oshiraylik. Ammo bundan oldin testlarning ishlayotganligini ko'rish uchun spetsifikatsiyani "nolga" o'tkazamiz (barchasi muvaffaqiyatsiz bo'ladi).
 
+<<<<<<< HEAD
 ## Amaldagi spetsifikatsiya
+=======
+The first step is already complete: we have an initial spec for `pow`. Now, before making the implementation, let's use a few JavaScript libraries to run the tests, just to see that they are working (they will all fail).
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Bu qo'llanmada biz testlar uchun quyidagi JavaScript kutubxonalaridan foydalanamiz:
 
@@ -88,7 +107,13 @@ Bu qo'llanmada biz testlar uchun quyidagi JavaScript kutubxonalaridan foydalanam
 - [Chai](http://chaijs.com) -- ko'plab tasdiqlar bilan kutubxona. Bu juda ko'p tasdiqlardan foydalanishga imkon beradi, hozirda bizga faqat `assert.equal` kerak.
 - [Sinon](http://sinonjs.org/) -- funksiyalarni kuzatish, ichki xususiyatlarni taqlid qilish va boshqa ko'p narsalarni ko'rish imkonini beruvchi kutubxona. Keyinchalik biz uchun foydali bo'ladi.
 
+<<<<<<< HEAD
 Ushbu kutubxonalar brauzerda ham, serverda ham sinov uchun javob beradi. Bu erda biz brauzer variantini ko'rib chiqamiz.
+=======
+- [Mocha](https://mochajs.org/) -- the core framework: it provides common testing functions including `describe` and `it` and the main function that runs tests.
+- [Chai](https://www.chaijs.com/) -- the library with many assertions. It allows to use a lot of different assertions, for now we need only `assert.equal`.
+- [Sinon](https://sinonjs.org/) -- a library to spy over functions, emulate built-in functions and more, we'll need it much later.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Ushbu framework-lar va `pow` spetsifikatsiya bilan to'liq HTML-sahifa:
 
@@ -333,6 +358,7 @@ Yangi qo'shilgan testlar muvaffaqiyatsiz tugadi, chunki bizning dasturimiz ularn
 
 ```smart header="Boshqa tasdiqlar"
 
+<<<<<<< HEAD
 Iltimos, `assert.isNaN` tasdiqiga e'tibor bering: u `NaN` ni tekshiradi.
 
 Chai-da boshqa tasdiqlar ham mavjud, masalan:
@@ -343,6 +369,16 @@ Chai-da boshqa tasdiqlar ham mavjud, masalan:
 - `assert.isTrue(qiymat)` -- `qiymat === true` tekshiradi
 - `assert.isFalse(qiymat)` -- `qiymat === false` tekshiradi
 - ...to'liq ro'yxat [hujjatlar](http://chaijs.com/api/assert/)
+=======
+There are other assertions in [Chai](https://www.chaijs.com/) as well, for instance:
+
+- `assert.equal(value1, value2)` -- checks the equality  `value1 == value2`.
+- `assert.strictEqual(value1, value2)` -- checks the strict equality `value1 === value2`.
+- `assert.notEqual`, `assert.notStrictEqual` -- inverse checks to the ones above.
+- `assert.isTrue(value)` -- checks that `value === true`
+- `assert.isFalse(value)` -- checks that `value === false`
+- ...the full list is in the [docs](https://www.chaijs.com/api/assert/)
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```
 
 Shunday qilib, biz `pow` ga bir nechta satr qo'shishimiz kerak:

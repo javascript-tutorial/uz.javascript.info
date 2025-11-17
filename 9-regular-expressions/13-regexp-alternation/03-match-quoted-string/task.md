@@ -2,7 +2,11 @@
 
 Qo'sh qo'shtirnoq ichidagi satrlarni topish uchun regexp yarating `subject:"..."`.
 
+<<<<<<< HEAD
 Satrlar JavaScript satrlari kabi escaping ni qo'llab-quvvatlashi kerak. Masalan, qo'shtirnoqlar `subject:\"` sifatida qo'shilishi mumkin, yangi qator `subject:\n` sifatida va slash o'zi `subject:\\` sifatida.
+=======
+The strings should support escaping, the same way as JavaScript strings do. For instance, quotes can be inserted as `subject:\"` a newline as `subject:\n`, and the backslash itself as `subject:\\`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js
 let str = 'Xuddi "shu yerda" kabi.';
@@ -17,6 +21,7 @@ Bu vazifaning muhim qismi, aks holda u oddiy bo'lar edi.
 Mos keladigan satrlar misollari:
 
 ```js
+<<<<<<< HEAD
 .. *!*"meni sinab ko'r"*/!* ..
 .. *!*"\"Salom\" degin!"*/!* ... (ichida escaped qo'shtirnoqlar)
 .. *!*"\\"*/!* ..  (ichida qo'sh slash)
@@ -24,6 +29,15 @@ Mos keladigan satrlar misollari:
 ```
 
 JavaScript da biz slashlarni satrga to'g'ri o'tkazish uchun ularni ikki marta yozishimiz kerak:
+=======
+.. *!*"test me"*/!* ..  
+.. *!*"Say \"Hello\"!"*/!* ... (escaped quotes inside)
+.. *!*"\\"*/!* ..  (double backslash inside)
+.. *!*"\\ \""*/!* ..  (double backslash and an escaped quote inside)
+```
+
+In JavaScript we need to double the backslashes to pass them right into the string, like this:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js run
 let str = ' .. "meni sinab ko'r" .. "\"Salom\" degin!" .. "\\\\ \\"" .. ';

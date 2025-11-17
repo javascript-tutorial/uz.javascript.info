@@ -23,9 +23,15 @@ Controller juda oddiy obyekt.
 - `controller.signal` `"abort"` event'ini chiqaradi.
 - `controller.signal.aborted` xususiyati `true` bo'ladi.
 
+<<<<<<< HEAD
 Umuman olganda, jarayonda ikkita tomon bor:
 1. Bekor qilinadigan operatsiyani bajaradigan tomon, u `controller.signal` ustiga listener o'rnatadi.
 2. Bekor qiladigan tomon: kerak bo'lganda `controller.abort()` ni chaqiradi.
+=======
+Generally, we have two parties in the process:
+1. The one that performs a cancelable operation, it sets a listener on `controller.signal`.
+2. The one that cancels: it calls `controller.abort()` when needed.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Mana to'liq misol (hali `fetch` bo'lmagan):
 
@@ -33,10 +39,17 @@ Mana to'liq misol (hali `fetch` bo'lmagan):
 let controller = new AbortController();
 let signal = controller.signal;
 
+<<<<<<< HEAD
 // Bekor qilinadigan operatsiyani bajaradigan tomon
 // "signal" obyektini oladi
 // va controller.abort() chaqirilganda ishga tushishi uchun listener o'rnatadi
 signal.addEventListener('abort', () => alert("to'xtatildi!"));
+=======
+// The party that performs a cancelable operation
+// gets the "signal" object
+// and sets the listener to trigger when controller.abort() is called
+signal.addEventListener('abort', () => alert("abort!"));
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 // Boshqa tomon, bekor qiladigan (keyinchalik istalgan paytda):
 controller.abort(); // to'xtatildi!
@@ -142,6 +155,12 @@ let results = await Promise.all([...fetchJobs, ourJob]);
 
 ## Xulosa
 
+<<<<<<< HEAD
 - `AbortController` - `abort()` metodi chaqirilganda o'zining `signal` xususiyatida `abort` event'ini yaratadigan oddiy obyekt (va shuningdek `signal.aborted` ni `true` ga o'rnatadi).
 - `fetch` u bilan integratsiyalashgan: biz `signal` xususiyatini opsiya sifatida beramiz, so'ngra `fetch` uni tinglaydi, shuning uchun `fetch`'ni to'xtatish mumkin.
 - Biz `AbortController`ni o'z kodimizda ishlatishimiz mumkin. "`abort()` ni chaqirish" -> "`abort` event'ini tinglash" o'zaro ta'siri oddiy va universal. Biz uni hatto `fetch`siz ham ishlatishimiz mumkin.
+=======
+- `AbortController` is a simple object that generates an `abort` event on its `signal` property when the `abort()` method is called (and also sets `signal.aborted` to `true`).
+- `fetch` integrates with it: we pass the `signal` property as the option, and then `fetch` listens to it, so it's possible to abort the `fetch`.
+- We can use `AbortController` in our code. The "call `abort()`" -> "listen to `abort` event" interaction is simple and universal. We can use it even without `fetch`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533

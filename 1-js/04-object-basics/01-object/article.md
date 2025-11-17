@@ -44,7 +44,11 @@ Natijada olingan `user` obyektini "name" va "age" yorliqlari bilan belgilangan i
 
 ![user object](object-user.svg)
 
+<<<<<<< HEAD
 Biz undan istalgan vaqtda fayllarni qo'shish, olib tashlash va o'qishimiz mumkin.
+=======
+We can add, remove and read files from it at any time.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Xossa qiymatlari nuqta notation orqali kirish mumkin:
 
@@ -62,7 +66,11 @@ user.isAdmin = true;
 
 ![user object 2](object-user-isadmin.svg)
 
+<<<<<<< HEAD
 Xossani olib tashlash uchun `delete` operatoridan foydalanishimiz mumkin:
+=======
+To remove a property, we can use the `delete` operator:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js
 delete user.age;
@@ -203,13 +211,21 @@ let bag = {
 };
 ```
 
+<<<<<<< HEAD
 Kvadrat qavslar nuqta notationdan ancha kuchliroq. Ular har qanday xossa nomlari va o'zgaruvchilarga ruxsat beradi. Lekin ular yozish uchun ham noqulayroq.
+=======
+Square brackets are much more powerful than dot notation. They allow any property names and variables. But they are also more cumbersome to write.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Shuning uchun ko'p hollarda, xossa nomlari ma'lum va oddiy bo'lganda, nuqta ishlatiladi. Va agar bizga murakkabroq narsa kerak bo'lsa, kvadrat qavslarga o'tamiz.
 
 ## Xossa qiymati qisqartmasi
 
+<<<<<<< HEAD
 Haqiqiy kodda biz ko'pincha mavjud o'zgaruvchilarni xossa nomlari uchun qiymat sifatida ishlatamiz.
+=======
+In real code, we often use existing variables as values for property names.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Masalan:
 
@@ -255,7 +271,13 @@ let user = {
 
 Bizga ma'lumki, o'zgaruvchi "for", "let", "return" va hokazo kabi tilning zahiralangan so'zlariga teng nomga ega bo'la olmaydi.
 
+<<<<<<< HEAD
 Lekin obyekt xossasi uchun bunday cheklov yo'q:
+=======
+As we already know, a variable cannot have a name equal to one of the language-reserved words like "for", "let", "return" etc.
+
+But for an object property, there's no such restriction:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js run
 // bu xossalar yaxshi
@@ -327,7 +349,11 @@ alert("blabla" in user); // false, user.blabla mavjud emas
 
 E'tibor bering, `in` ning chap tomonida _xossa nomi_ bo'lishi kerak. Bu odatda qo'shtirnoqli satr.
 
+<<<<<<< HEAD
 Agar qo'shtirnoqlarni tashlab qo'ysak, bu o'zgaruvchi tekshirilishi kerak bo'lgan haqiqiy nomni o'z ichiga olishi kerakligini anglatadi. Masalan:
+=======
+If we omit quotes, that means a variable should contain the actual name to be tested. For instance:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js run
 let user = { age: 30 };
@@ -358,7 +384,11 @@ Bunday vaziyatlar juda kam uchraydi, chunki `undefined` aniq tayinlanmasligi ker
 
 ## "for..in" tsikli [#forin]
 
+<<<<<<< HEAD
 Obyektning barcha kalitlari bo'ylab yurish uchun tsiklning maxsus shakli mavjud: `for..in`. Bu biz ilgari o'rgangan `for(;;)` konstruksiyasidan butunlay boshqa narsa.
+=======
+## The "for..in" loop [#forin]
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Sintaksis:
 
@@ -413,7 +443,11 @@ for (let code in codes) {
 */!*
 ```
 
+<<<<<<< HEAD
 Obyekt foydalanuvchiga variantlar ro'yxatini taklif qilish uchun ishlatilishi mumkin. Agar biz asosan nemis auditoriyasi uchun sayt yaratayotgan bo'lsak, ehtimol `49` birinchi bo'lishini xohlaymiz.
+=======
+The object may be used to suggest a list of options to the user. If we're making a site mainly for a German audience then we probably want `49` to be the first.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Lekin kodni ishga tushirsak, butunlay boshqa rasmni ko'ramiz:
 
@@ -425,6 +459,7 @@ Telefon kodlari o'sish tartibida saralanadi, chunki ular butun sonlar. Shuning u
 ````smart header="Butun son xossalari? Bu nima?"
 Bu yerdagi "butun son xossasi" atamasi o'zgarishsiz butun songa aylantirilishi va undan qaytarilishi mumkin bo'lgan satrni anglatadi.
 
+<<<<<<< HEAD
 Shunday qilib, `"49"` butun son xossa nomi, chunki u butun son raqamiga aylantirilganda va orqaga qaytarilganda, u bir xil bo'lib qoladi. Lekin `"+49"` va `"1.2"` emas:
 
 ```js run
@@ -433,6 +468,16 @@ Shunday qilib, `"49"` butun son xossa nomi, chunki u butun son raqamiga aylantir
 alert( String(Math.trunc(Number("49"))) ); // "49", bir xil, butun son xossasi
 alert( String(Math.trunc(Number("+49"))) ); // "49", bir xil emas "+49" ⇒ butun son xossasi emas
 alert( String(Math.trunc(Number("1.2"))) ); // "1", bir xil emas "1.2" ⇒ butun son xossasi emas
+=======
+So, `"49"` is an integer property name, because when it's transformed to an integer number and back, it's still the same. But `"+49"` and `"1.2"` are not:
+
+```js run
+// Number(...) explicitly converts to a number
+// Math.trunc is a built-in function that removes the decimal part
+alert( String(Math.trunc(Number("49"))) ); // "49", same, integer property
+alert( String(Math.trunc(Number("+49"))) ); // "49", not same "+49" ⇒ not integer property
+alert( String(Math.trunc(Number("1.2"))) ); // "1", not same "1.2" ⇒ not integer property
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```
 ````
 
@@ -479,8 +524,14 @@ Obyektlar bir nechta maxsus xususiyatlarga ega assotsiativ massivlardir.
 
 Ular xossalarni (kalit-qiymat juftliklarini) saqlaydi, bu yerda:
 
+<<<<<<< HEAD
 - Xossa kalitlari satrlar yoki symbollar bo'lishi kerak (odatda satrlar).
 - Qiymatlar har qanday tipda bo'lishi mumkin.
+=======
+To access a property, we can use:
+- The dot notation: `obj.property`.
+- Square brackets notation `obj["property"]`. Square brackets allow taking the key from a variable, like `obj[varWithKey]`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Xossaga kirish uchun biz quyidagilardan foydalanishimiz mumkin:
 

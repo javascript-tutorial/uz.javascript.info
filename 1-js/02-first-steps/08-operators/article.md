@@ -52,9 +52,15 @@ Qoldiq operatori `%`, ko'rinishiga qaramay, foizlar bilan bog'liq emas.
 Masalan:
 
 ```js run
+<<<<<<< HEAD
 alert(5 % 2); // 1, 5 ni 2 ga bo'lishdan qoldiq
 alert(8 % 3); // 2, 8 ni 3 ga bo'lishdan qoldiq
 alert(8 % 4); // 0, 8 ni 4 ga bo'lishdan qoldiq
+=======
+alert( 5 % 2 ); // 1, the remainder of 5 divided by 2
+alert( 8 % 3 ); // 2, the remainder of 8 divided by 3
+alert( 8 % 4 ); // 0, the remainder of 8 divided by 4
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```
 
 ### Daraja \*\*
@@ -71,7 +77,11 @@ alert(2 ** 3); // 2³ = 8
 alert(2 ** 4); // 2⁴ = 16
 ```
 
+<<<<<<< HEAD
 Matematikadagi kabi, daraja operatori butun bo'lmagan sonlar uchun ham aniqlangan.
+=======
+Just like in maths, the exponentiation operator is defined for non-integer numbers as well.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Masalan, kvadrat ildiz ½ darajaga ko'tarishdir:
 
@@ -84,7 +94,11 @@ alert(8 ** (1 / 3)); // 2 (1/3 daraja kub ildiz bilan bir xil)
 
 Keling, maktab arifmetikasidan tashqari JavaScript operatorlarining xususiyatlari bilan tanishaylik.
 
+<<<<<<< HEAD
 Odatda, plyus operatori `+` raqamlarni qo'shadi.
+=======
+Let's meet the features of JavaScript operators that are beyond school arithmetics.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Ammo, agar binary `+` stringlarga qo'llanilsa, u ularni birlashtiradi (konkatenatsiya):
 
@@ -194,6 +208,7 @@ JavaScript da ko'plab operatorlar mavjud. Har bir operator tegishli ustunlik raq
 
 Mana [ustunlik jadvalidan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence) ko'chirma (buni eslab qolish shart emas, lekin unary operatorlar tegishli binary operatorlardan yuqoriroq ekanligini unutmang):
 
+<<<<<<< HEAD
 | Ustunlik | Nomi         | Belgi |
 | -------- | ------------ | ----- |
 | ...      | ...          | ...   |
@@ -209,10 +224,31 @@ Mana [ustunlik jadvalidan](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 | ...      | ...          | ...   |
 
 Ko'rib turganimizdek, "unary plyus" `14` ustunlikka ega, bu "qo'shish" (binary plyus)ning `11` ustunligidan yuqori. Shuning uchun `"+apples + +oranges"` ifodasida unary plyuslar qo'shishdan oldin ishlaydi.
+=======
+| Precedence | Name | Sign |
+|------------|------|------|
+| ... | ... | ... |
+| 14 | unary plus | `+` |
+| 14 | unary negation | `-` |
+| 13 | exponentiation | `**` |
+| 12 | multiplication | `*` |
+| 12 | division | `/` |
+| 11 | addition | `+` |
+| 11 | subtraction | `-` |
+| ... | ... | ... |
+| 2 | assignment | `=` |
+| ... | ... | ... |
+
+As we can see, the "unary plus" has a priority of `14` which is higher than the `11` of "addition" (binary plus). That's why, in the expression `"+apples + +oranges"`, unary pluses work before the addition.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ## Tayinlash
 
+<<<<<<< HEAD
 Shuni ta'kidlash kerakki, tayinlash `=` ham operator. U ustunlik jadvalida juda past `2` ustunlik bilan ro'yxatga olingan.
+=======
+Let's note that an assignment `=` is also an operator. It is listed in the precedence table with the very low priority of `2`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Shuning uchun biz o'zgaruvchini tayinlaganimizda, masalan `x = 2 * 2 + 1`, avval hisob-kitoblar bajariladi va keyin `=` baholanib, natijani `x` ga saqlaydi.
 
@@ -307,9 +343,15 @@ Bunday operatorlar oddiy tayinlash bilan bir xil ustunlikka ega, shuning uchun u
 ```js run
 let n = 2;
 
+<<<<<<< HEAD
 n *= 3 + 5; // o'ng qism birinchi baholanadi, n *= 8 bilan bir xil
 
 alert(n); // 16
+=======
+n *= 3 + 5; // right part evaluated first, same as n *= 8
+
+alert( n ); // 16
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```
 
 ## Oshirish/kamaytirish
@@ -442,7 +484,11 @@ Operatorlar ro'yxati:
 - RIGHT SHIFT ( `>>` )
 - ZERO-FILL RIGHT SHIFT ( `>>>` )
 
+<<<<<<< HEAD
 Bu operatorlar juda kamdan-kam ishlatiladi, eng past (bitli) darajada raqamlar bilan urishga to'g'ri kelganda. Biz bu operatorlarga tez orada muhtoj bo'lmaymiz, chunki veb-ishlanmada ular kam qo'llaniladi, lekin kriptografiya kabi ba'zi maxsus sohalarda foydali. Ehtiyoj tug'ilganda MDN dagi [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) bobini o'qishingiz mumkin.
+=======
+These operators are used very rarely, when we need to fiddle with numbers on the very lowest (bitwise) level. We won't need these operators any time soon, as web development has little use of them, but in some special areas, such as cryptography, they are useful. You can read the [Bitwise Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) chapter on MDN when a need arises.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ## Vergul
 

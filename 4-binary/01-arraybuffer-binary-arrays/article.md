@@ -30,7 +30,11 @@ Keling, mumkin bo'lgan chalkashlik manbasini bartaraf etaylik. `ArrayBuffer` nin
 
 **`ArrayBuffer` ni boshqarish uchun bizga "view" obyektidan foydalanishimiz kerak.**
 
+<<<<<<< HEAD
 View obyekt o'zida hech narsani saqlamaydi. Bu `ArrayBuffer` da saqlangan baytlarning talqinini beradigan "ko'zoynak"dir.
+=======
+A view object does not store anything on its own. It's the "eyeglasses" that give an interpretation of the bytes stored in the `ArrayBuffer`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Masalan:
 
@@ -70,7 +74,11 @@ for(let num of view) {
 
 ## TypedArray
 
+<<<<<<< HEAD
 Bu barcha view larning (`Uint8Array`, `Uint32Array` va hokazo) umumiy atamasi [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects). Ular bir xil usullar va xossalar to'plamini baham ko'radi.
+=======
+The common term for all these views (`Uint8Array`, `Uint32Array`, etc) is [TypedArray](https://tc39.github.io/ecma262/#sec-typedarray-objects). They share the same set of methods and properties.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Esda tuting, `TypedArray` deb nomlangan konstruktor yo'q, bu shunchaki `ArrayBuffer` ustidagi view lardan birini ifodalash uchun umumiy "soyabon" atama: `Int8Array`, `Uint8Array` va hokazo, to'liq ro'yxat tez orada keladi.
 
@@ -126,9 +134,15 @@ new TypedArray();
 
 Biz `ArrayBuffer` ni eslatmasdan to'g'ridan-to'g'ri `TypedArray` yaratishimiz mumkin. Lekin view asosiy `ArrayBuffer` siz mavjud bo'la olmaydi, shuning uchun birinchisidan tashqari (berilgan vaqtda) barcha hollarda avtomatik yaratiladi.
 
+<<<<<<< HEAD
 `ArrayBuffer` ga kirish uchun xossalar mavjud:
 - `arr.buffer` -- `ArrayBuffer` ga ishora qiladi.
 - `arr.byteLength` -- `ArrayBuffer` ning uzunligi.
+=======
+To access the underlying `ArrayBuffer`, there are following properties in `TypedArray`:
+- `buffer` -- references the `ArrayBuffer`.
+- `byteLength` -- the length of the `ArrayBuffer`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Shunday qilib, biz har doim bir view dan boshqasiga o'tishimiz mumkin:
 ```js

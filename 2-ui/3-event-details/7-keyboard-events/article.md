@@ -104,7 +104,11 @@ Shunday qilib, `event.code` kutilmagan joylashuv uchun noto'g'ri belgiga mos kel
 
 Joylashuvga bog'liq belgilarni ishonchli kuzatish uchun `event.key` yaxshiroq usul bo'lishi mumkin.
 
+<<<<<<< HEAD
 Boshqa tomondan, `event.code` har doim bir xil bo'lib, jismoniy tugma joylashuviga bog'langanligining afzalligi bor, hatto tashrif buyuruvchi tillarni o'zgartirsa ham. Shuning uchun unga tayanadigan tezkor tugmalar til almashtirilgan holatda ham yaxshi ishlaydi.
+=======
+On the other hand, `event.code` has the benefit of staying always the same, bound to the physical key location. So hotkeys that rely on it work well even in case of a language switch.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Biz joylashuvga bog'liq tugmalarni qayta ishlamoqchimizmi? U holda `event.key` yo'li.
 
@@ -135,21 +139,31 @@ Masalan, quyidagi `<input>` telefon raqamini kutadi, shuning uchun raqamlar, `+`
 ```html autorun height=60 run
 <script>
 function checkPhoneKey(key) {
-  return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-';
+  return (key >= '0' && key <= '9') || ['+','(',')','-'].includes(key);
 }
 </script>
 <input *!*onkeydown="return checkPhoneKey(event.key)"*/!* placeholder="Telefon, iltimos" type="tel">
 ```
 
+<<<<<<< HEAD
 Diqqat qiling, `key:Backspace`, `key:Left`, `key:Right`, `key:Ctrl+V` kabi maxsus tugmalar kirishda ishlamaydi. Bu qat'iy filtr `checkPhoneKey` ning yon ta'siri.
 
 Uni biroz yumshatamiz:
+=======
+The `onkeydown` handler here uses `checkPhoneKey` to check for the key pressed. If it's valid (from `0..9` or one of `+-()`), then it returns `true`, otherwise `false`.
+
+As we know, the `false` value returned from the event handler, assigned using a DOM property or an attribute, such as above, prevents the default action, so nothing appears in the `<input>` for keys that don't pass the test. (The `true` value returned doesn't affect anything, only returning `false` matters)
+
+Please note that special keys, such as `key:Backspace`, `key:Left`, `key:Right`, do not work in the input. That's a side effect of the strict filter `checkPhoneKey`. These keys make it return `false`.
+
+Let's relax the filter a little bit by allowing arrow keys `key:Left`, `key:Right` and `key:Delete`, `key:Backspace`:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```html autorun height=60 run
 <script>
 function checkPhoneKey(key) {
-  return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-' ||
-    key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
+  return (key >= '0' && key <= '9') ||
+    ['+','(',')','-',*!*'ArrowLeft','ArrowRight','Delete','Backspace'*/!*].includes(key);
 }
 </script>
 <input onkeydown="return checkPhoneKey(event.key)" placeholder="Telefon, iltimos" type="tel">
@@ -157,7 +171,13 @@ function checkPhoneKey(key) {
 
 Endi o'qlar va o'chirish yaxshi ishlaydi.
 
+<<<<<<< HEAD
 ...Lekin biz hali ham sichqonchani ishlatib va o'ng bosish + Joylashtirish orqali har qanday narsani kiritishimiz mumkin. Shuning uchun filtr 100% ishonchli emas. Biz uni shunday qoldirishimiz mumkin, chunki ko'p hollarda ishlaydi. Yoki muqobil yondashuv `input` hodisasini kuzatish bo'ladi -- u har qanday o'zgarishdan keyin ishga tushadi. U yerda biz yangi qiymatni tekshirishimiz va noto'g'ri bo'lganda uni ajratib ko'rsatish/o'zgartirishimiz mumkin.
+=======
+Even though we have the key filter, one still can enter anything using a mouse and right-click + Paste. Mobile devices provide other means to enter values. So the filter is not 100% reliable.
+
+The alternative approach would be to track the `oninput` event -- it triggers *after* any modification. There we can check the new `input.value` and modify it/highlight the `<input>` when it's invalid. Or we can use both event handlers together.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ## Meros
 

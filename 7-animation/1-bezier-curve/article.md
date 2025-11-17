@@ -4,7 +4,17 @@ Bezier egri chiziqlari kompyuter grafikasida shakllar chizish, CSS animatsiyalar
 
 Ular juda oddiy narsa bo'lib, bir marta o'rganib, keyin vektor grafikalari va ilg'or animatsiyalar dunyosida o'zingizni qulay his qilishga arziydi.
 
+<<<<<<< HEAD
 ## Nazorat nuqtalari
+=======
+```smart header="Some theory, please"
+This article provides a theoretical, but very needed insight into what Bezier curves are, while [the next one](info:css-animations#bezier-curve) shows how we can use them for CSS animations.
+
+Please take your time to read and understand the concept, it'll serve you well.
+```
+
+## Control points
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 [Bezier egri chizig'i](https://en.wikipedia.org/wiki/B%C3%A9zier_curve) nazorat nuqtalari bilan aniqlanadi.
 

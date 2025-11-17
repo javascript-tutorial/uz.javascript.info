@@ -2,6 +2,7 @@
 
 JavaScript-dagi ikkita eng ko'p ishlatiladigan ma'lumotlar tuzilmasi `Object` va `Array`.
 
+<<<<<<< HEAD
 Obyektlar ko'plab ma'lumotlarni bitta obyektga to'plashimizga imkon beradi va massivlar ro'yxatlangan to'plamlarni saqlashga imkon beradi. Shunday qilib, biz obyekt yoki massiv yaratib, uni bitta shaxs sifatida boshqarishimiz yoki uni funktsiya chaqiruviga o'tkazishimiz mumkin.
 
 *Destrukturalashtirish* - bu maxsus sintaksis, bu massivlarni yoki moslamalarni bir dasta o'zgaruvchanga "ochish" imkonini beradi, chunki ba'zida ular qulayroq bo'ladi. Destruktirizatsiya, shuningdek, juda ko'p parametrlarga, standart qiymatlarga ega bo'lgan murakkab funktsiyalar bilan juda yaxshi ishlaydi va tez orada biz ularni qanday ishlashini ko'rib chiqamiz.
@@ -13,6 +14,24 @@ Qanday qilib massivning o'zgaruvchanga destrukturalashtirishga misol:
 ```js
 // bizda ism va familiya ko'rsatilgan massiv mavjud
 let arr = ["Ilya", "Kantor"]
+=======
+- Objects allow us to create a single entity that stores data items by key.
+- Arrays allow us to gather data items into an ordered list.
+
+However, when we pass these to a function, we may not need all of it. The function might only require certain elements or properties.
+
+*Destructuring assignment* is a special syntax that allows us to "unpack" arrays or objects into a bunch of variables, as sometimes that's more convenient.
+
+Destructuring also works well with complex functions that have a lot of parameters, default values, and so on. Soon we'll see that.
+
+## Array destructuring
+
+Here's an example of how an array is destructured into variables:
+
+```js
+// we have an array with a name and surname
+let arr = ["John", "Smith"]
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 *!*
 // destrukturalashtirish
@@ -33,10 +52,19 @@ alert(firstName); // John
 alert(surname);  // Smith
 ```
 
+<<<<<<< HEAD
 ````smart header="\"destrukturalashtirish\" degani \ "halokat \" degani emas."
 U "destrukturalashtirish" deb nomlanadi, chunki u elementlarni o'zgaruvchanga nusxalash orqali "buzadi". Ammo massivning o'zi o'zgartirilmaydi.
 
 Bu shunchaki yozishning qisqa usuli:
+=======
+As you can see, the syntax is simple. There are several peculiar details though. Let's see more examples to understand it better.
+
+````smart header="\"Destructuring\" does not mean \"destructive\"."
+It's called "destructuring assignment," because it "destructurizes" by copying items into variables. However, the array itself is not modified.
+
+It's just a shorter way to write:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ```js
 // let [firstName, surname] = arr;
 let firstName = arr[0];
@@ -56,7 +84,11 @@ let [firstName, , title] = ["Julius", "Caesar", "Consul", "of the Roman Republic
 alert( title ); // Consul
 ```
 
+<<<<<<< HEAD
 Yuqoridagi kodda massivning ikkinchi elementi o'tkazib yuboriladi, uchinchisiga `title` beriladi va massivning qolgan qismi ham o'tkazib yuboriladi.
+=======
+In the code above, the second element of the array is skipped, the third one is assigned to `title`, and the rest of the array items are also skipped (as there are no variables for them).
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 ````
 
 ````smart header="O'ng tomondagi har qanday ketma-ket saraluvchanlar bilan ishlaydi"
@@ -67,11 +99,16 @@ Yuqoridagi kodda massivning ikkinchi elementi o'tkazib yuboriladi, uchinchisiga 
 let [a, b, c] = "abc"; // ["a", "b", "c"]
 let [one, two, three] = new Set([1, 2, 3]);
 ```
-That works, because internally a destructuring assignment works by iterating over the right value. It's kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
+That works, because internally a destructuring assignment works by iterating over the right value. It's a kind of syntax sugar for calling `for..of` over the value to the right of `=` and assigning the values.
 ````
 
 
+<<<<<<< HEAD
 ````smart header="Chap tarafdagi har qanday narsaga tayinlang"
+=======
+````smart header="Assign to anything at the left-side"
+We can use any "assignables" on the left side.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Biz chap tomonda har qanday "tayinlanadigan" narsalardan foydalanishimiz mumkin.
 
@@ -86,11 +123,18 @@ alert(user.surname); // Smith
 
 ````
 
+<<<<<<< HEAD
 ````smart header=".entries() bilan tsiklash"
 
 Oldingi bobda biz [Object.entries(obj)](mdn:js/Object/entries) usulini ko'rdik.
 
 Obyektning kalitlari va qiymatlari ustida tsiklash uchun biz uni destrukturalashtiramiz:
+=======
+````smart header="Looping with .entries()"
+In the previous chapter, we saw the [Object.entries(obj)](mdn:js/Object/entries) method.
+
+We can use it with destructuring to loop over the keys-and-values of an object:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js run
 let user = {
@@ -98,7 +142,11 @@ let user = {
   age: 30
 };
 
+<<<<<<< HEAD
 // kalitlari va qiymatlari ustida tsiklash
+=======
+// loop over the keys-and-values
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 *!*
 for (let [key, value] of Object.entries(user)) {
 */!*
@@ -139,18 +187,37 @@ If we'd like also to gather all that follows -- we can add one more parameter th
 let [name1, name2, *!*...rest*/!*] = ["Julius", "Caesar", *!*"Consul", "of the Roman Republic"*/!*];
 
 *!*
+<<<<<<< HEAD
 // "qolganlar" turi massiv ekanligini unutmang.
+=======
+// rest is an array of items, starting from the 3rd one
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 alert(rest[0]); // Consul
 alert(rest[1]); // of the Roman Republic
 alert(rest.length); // 2
 */!*
 ```
 
+<<<<<<< HEAD
 `Rest` qiymati - bu qolgan qator elementlari massivi. Biz "rest" o'rniga boshqa har qanday o'zgaruvchan nomdan foydalanishimiz mumkin, shunchaki uning oldida uchta nuqta borligiga va destrukturalashtirishning oxirgi o'rinda turganiga ishonch hosil qiling.
+=======
+The value of `rest` is the array of the remaining array elements.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ### Sukut bo'yicha tayinlangan qiymatlar
 
+<<<<<<< HEAD
 Agar massiv qiymatlar kamroq bo'lsa, tayinlashga nisbatan, xato bo'lmaydi. Yo'q qiymatlar `undefined` hisoblanadi:
+=======
+```js run
+let [name1, name2, *!*...titles*/!*] = ["Julius", "Caesar", "Consul", "of the Roman Republic"];
+// now titles = ["Consul", "of the Roman Republic"]
+```
+
+### Default values
+
+If the array is shorter than the list of variables on the left, there will be no errors. Absent values are considered undefined:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js run
 *!*
@@ -197,7 +264,11 @@ Asosiy sintaksis:
 let {var1, var2} = {var1:…, var2:…}
 ```
 
+<<<<<<< HEAD
 O'ng tomonda mavjud bo'lgan obyektimiz bor, biz uni o'zgaruvchanlarga bo'lishni xohlaymiz. Chap tomonda tegishli xususiyatlar uchun "shablon" mavjud. Oddiy holatda, bu o'zgaruvchanlar nomlari ro'yxati `{...}`.
+=======
+We should have an existing object on the right side, that we want to split into variables. The left side contains an object-like "pattern" for corresponding properties. In the simplest case, that's a list of variable names in `{...}`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 Masalan:
 
@@ -217,7 +288,13 @@ alert(width);  // 100
 alert(height); // 200
 ```
 
+<<<<<<< HEAD
 Tegishli o'zgaruvchilarga `options.title`,` options.width` va `options.height` xususiyatlari tayinlaniladi. Tartib muhim emas. Bu ham ishlaydi:
+=======
+Properties `options.title`, `options.width` and `options.height` are assigned to the corresponding variables.
+
+The order does not matter. This works too:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js
 // let{...} da xususiyatlar tartibini o'zgartirdi
@@ -364,9 +441,15 @@ alert( title ); // Menu
 
 ## Ichki destrukturalashtirish
 
+<<<<<<< HEAD
 Agar obyektda yoki massivda boshqa obyektlar va massivlar bo'lsa, biz chuqurroq qismlarni ajratib olish uchun murakkabroq chap tomon shablonlardan foydalanishimiz mumkin.
 
 Quyidagi kodda `options` `size` xususiyatida yana bir obyekt va `items` xususiyatidagi massiv mavjud. Biriktirishning chap tomonidagi shablon bir xil tuzilishga ega:
+=======
+If an object or an array contains other nested objects and arrays, we can use more complex left-side patterns to extract deeper portions.
+
+In the code below `options` has another object in the property `size` and an array in the property `items`. The pattern on the left side of the assignment has the same structure to extract values from them:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js run
 let options = {
@@ -375,7 +458,11 @@ let options = {
     height: 200
   },
   items: ["Cake", "Donut"],
+<<<<<<< HEAD
   extra: true    // biz yo'q qilmaydigan qo'shimcha narsa
+=======
+  extra: true
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 };
 
 // aniqlik uchun bir nechta chiziqlar bo'yicha destrukturalashtirish
@@ -395,9 +482,13 @@ alert(item1);  // Cake
 alert(item2);  // Donut
 ```
 
+<<<<<<< HEAD
 `extra` dan tashqari barcha `options` obyekti tegishli o'zgaruvchanlarga tayinlangan.
 
 `size` va `items` ning o'zi buzilmaganligini unutmang.
+=======
+All properties of `options` object except `extra` which is absent in the left part, are assigned to corresponding variables:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ![](destructuring-complex.svg)
 
@@ -411,11 +502,17 @@ Hatto bu erda ham shunday bo'ladi:
 let { size } = options;
 ```
 
+<<<<<<< HEAD
 ## Smart funktsiya parametrlari
 
 Funktsiya ko'p parametrlarga ega bo'lishi mumkin bo'lgan vaqtlar mavjud, ularning aksariyati ixtiyoriydir. Bu, ayniqsa, foydalanuvchi interfeyslariga taalluqlidir. Menyu yaratadigan funktsiyani tasavvur qiling. Uning kengligi, balandligi, sarlavhasi, buyumlar ro'yxati va boshqalar bo'lishi mumkin.
 
 Bunday funktsiyani yozishning yomon usuli:
+=======
+There are times when a function has many parameters, most of which are optional. That's especially true for user interfaces. Imagine a function that creates a menu. It may have a width, a height, a title, an item list and so on.
+
+Here's a bad way to write such a function:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js
 function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
@@ -423,7 +520,7 @@ function showMenu(title = "Untitled", width = 200, height = 100, items = []) {
 }
 ```
 
-In real-life, the problem is how to remember the order of arguments. Usually IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
+In real-life, the problem is how to remember the order of arguments. Usually, IDEs try to help us, especially if the code is well-documented, but still... Another problem is how to call a function when most parameters are ok by default.
 
 Like this?
 
@@ -488,7 +585,13 @@ function({
 })
 ```
 
+<<<<<<< HEAD
 Iltimos, shuni unutmangki, bunday destrukturalashtirish `showMenu()` ning argumentiga ega. Agar biz barcha qiymatlarni sukut bo'yicha tayinlangan bo'lishini xohlasak, unda bo'sh obyektni ko'rsatishimiz kerak:
+=======
+Then, for an object of parameters, there will be a variable `varName` for the property `incomingProperty`, with `defaultValue` by default.
+
+Please note that such destructuring assumes that `showMenu()` does have an argument. If we want all values by default, then we should specify an empty object:
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 ```js
 showMenu({}); // ok, all values are default
@@ -515,7 +618,7 @@ Yuqoridagi kodda barcha argumentlar obyekti sukut bo'yicha `{}` dir, shuning uch
 - Destrukturalashtirish obyektni yoki massivni ko'plab o'zgaruvchanlarga zudlik bilan xaritalashga imkon beradi.
 - Obyekt sintaksis:
     ```js
-    let {prop : varName = default, ...rest} = object
+    let {prop : varName = defaultValue, ...rest} = object
     ```
 
     Bu shuni anglatadiki, `prop` xususiyati `varName` o'zgaruvchaniga o'tishi kerak va agar bunday xususiyat bo'lmasa, u holda `default` qiymati ishlatilishi kerak.
@@ -523,9 +626,13 @@ Yuqoridagi kodda barcha argumentlar obyekti sukut bo'yicha `{}` dir, shuning uch
 - Massiv sintaksis:
 
     ```js
-    let [item1 = default, item2, ...rest] = array
+    let [item1 = defaultValue, item2, ...rest] = array
     ```
 
+<<<<<<< HEAD
     Birinchi element `item1` ga o'tadi; ikkinchisi `item2` ga o'tadi, qolganlari esa `rest` massivini yaratadi.
+=======
+    The first item goes to `item1`; the second goes into `item2`, and all the rest makes the array `rest`.
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 - Keyinchalik murakkab holatlar uchun chap tomon o'ng tomoni bilan bir xil tuzilishga ega bo'lishi kerak.

@@ -3,7 +3,11 @@ parent.onmouseover = parent.onmouseout = parent.onmousemove = handler;
 
 function handler(event) {
   let type = event.type;
+<<<<<<< HEAD
   while (type < 11) type += " ";
+=======
+  while (type.length < 11) type += ' ';
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
   log(type + " target=" + event.target.id);
   return false;

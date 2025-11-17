@@ -36,7 +36,11 @@ Qo'shimcha ravishda, hosila xususiyatlar mavjud:
 ```online
 Misol uchun, ushbu tugmani bosing va uning oyna koordinatalarini ko'ring:
 
+<<<<<<< HEAD
 <p><input id="brTest" type="button" value="Bu tugma uchun button.getBoundingClientRect() yordamida koordinatalar olish" onclick='showRect(this)'/></p>
+=======
+<p><input id="brTest" type="button" style="max-width: 90vw;" value="Get coordinates using button.getBoundingClientRect() for this button" onclick='showRect(this)'/></p>
+>>>>>>> 5e893cffce8e2346d4e50926d5148c70af172533
 
 <script>
 function showRect(elem) {

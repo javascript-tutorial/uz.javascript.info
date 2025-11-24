@@ -9,10 +9,15 @@ Ammo bu real hayot uchun yetarli emas. Shuning uchun `Map` va `Set` ham mavjud.
 
 ## Map
 
+<<<<<<< HEAD
 [Map](mdn:js/Map) - bu `Object` kabi kalitli ma'lumotlar to'plamidir. Lekin asosiy farq shundaki, `Map` har qanday turdagi kalitlarga ruxsat beradi.
+=======
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an `Object`. But the main difference is that `Map` allows keys of any type.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Metodlar va xususiyatlar:
 
+<<<<<<< HEAD
 - `new Map()` -- xaritani yaratadi.
 - `map.set(key, value)` -- kalit bo'yicha qiymatni saqlaydi.
 - `map.get(key)` -- kalit bo'yicha qiymatni qaytaradi, agar `key` xaritada mavjud bo'lmasa `undefined` qaytaradi.
@@ -20,6 +25,15 @@ Metodlar va xususiyatlar:
 - `map.delete(key)` -- kalit bo'yicha qiymatni o'chiradi.
 - `map.clear()` -- xaritadagi hamma narsani o'chiradi.
 - `map.size` -- hozirgi elementlar sonini qaytaradi.
+=======
+- [`new Map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element (the key/value pair) by the key.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Misol uchun:
 
@@ -99,15 +113,27 @@ map.set('1', 'str1')
 ```
 ````
 
+<<<<<<< HEAD
 ## Map ustida iteratsiya
 
 `Map` ustida sikl uchun 3 ta metod mavjud:
+=======
+## Iteration over Map
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 - `map.keys()` -- kalitlar uchun iterable qaytaradi,
 - `map.values()` -- qiymatlar uchun iterable qaytaradi,
 - `map.entries()` -- `[key, value]` yozuvlari uchun iterable qaytaradi, u `for..of` da standart bo'yicha ishlatiladi.
 
+<<<<<<< HEAD
 Misol uchun:
+=======
+- [`map.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/keys) -- returns an iterable for keys,
+- [`map.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/values) -- returns an iterable for values,
+- [`map.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/entries) -- returns an iterable for entries `[key, value]`, it's used by default in `for..of`.
+
+For instance:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 let recipeMap = new Map([
@@ -160,7 +186,11 @@ let map = new Map([
 alert( map.get('1') ); // str1
 ```
 
+<<<<<<< HEAD
 Agar bizda oddiy objekt bor va undan `Map` yaratmoqchi bo'lsak, u holda [Object.entries(obj)](mdn:js/Object/entries) o'rnatilgan metodidan foydalanishimiz mumkin, u objekt uchun aynan shu formatdagi kalit/qiymat juftliklari massivini qaytaradi.
+=======
+If we have a plain object, and we'd like to create a `Map` from it, then we can use built-in method [Object.entries(obj)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries) that returns an array of key/value pairs for an object exactly in that format.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Shunday qilib objektdan xarita yaratishimiz mumkin:
 
@@ -230,16 +260,29 @@ Bu bir xil, chunki `Object.fromEntries` argument sifatida iterable objektni kuta
 
 ## Set
 
+<<<<<<< HEAD
 `Set` - bu maxsus turdagi to'plam - "qiymatlar to'plami" (kalitsiz), bu erda har bir qiymat faqat bir marta paydo bo'lishi mumkin.
+=======
+A [`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) is a special type collection - "set of values" (without keys), where each value may occur only once.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Uning asosiy metodlari:
 
+<<<<<<< HEAD
 - `new Set(iterable)` -- to'plamni yaratadi va agar `iterable` objekt berilgan bo'lsa (odatda massiv), undan qiymatlarni to'plamga nusxa ko'chiradi.
 - `set.add(value)` -- qiymat qo'shadi, to'plamning o'zini qaytaradi.
 - `set.delete(value)` -- qiymatni o'chiradi, chaqiruv momentida `value` mavjud bo'lsa `true`, aks holda `false` qaytaradi.
 - `set.has(value)` -- qiymat to'plamda mavjud bo'lsa `true`, aks holda `false` qaytaradi.
 - `set.clear()` -- to'plamdan hamma narsani o'chiradi.
 - `set.size` -- elementlar soni.
+=======
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- creates the set, and if an `iterable` object is provided (usually an array), copies values from it into the set.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- adds a value, returns the set itself.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- removes everything from the set.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- is the elements count.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Asosiy xususiyat shundaki, bir xil qiymat bilan `set.add(value)` ning takrorlangan chaqiruvlari hech narsa qilmaydi. Shuning uchun har bir qiymat `Set` da faqat bir marta paydo bo'ladi.
 
@@ -269,7 +312,11 @@ for (let user of set) {
 }
 ```
 
+<<<<<<< HEAD
 `Set` ga alternativa foydalanuvchilar massivi bo'lishi mumkin va har bir kiritishda [arr.find](mdn:js/Array/find) dan foydalanib dublikatlarni tekshiradigan kod. Lekin ishlash ancha yomonroq bo'ladi, chunki bu metod har bir elementni tekshirib, butun massiv bo'ylab yuradi. `Set` noyoblikni tekshirish uchun ichki jihatdan ancha yaxshi optimallashtirilgan.
+=======
+The alternative to `Set` could be an array of users, and the code to check for duplicates on every insertion using [arr.find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find). But the performance would be much worse, because this method walks through the whole array checking every element. `Set` is much better optimized internally for uniqueness checks.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Set ustida iteratsiya
 
@@ -288,20 +335,35 @@ set.forEach((value, valueAgain, set) => {
 
 Qiziq narsani qayd eting. `forEach` ga uzatilgan callback funktsiyasi 3 ta argumentga ega: `value`, keyin *bir xil qiymat* `valueAgain`, keyin maqsad objekt. Haqiqatan ham, bir xil qiymat argumentlarda ikki marta paydo bo'ladi.
 
+<<<<<<< HEAD
 Bu `Map` bilan moslashish uchun, bu erda `forEach` ga uzatilgan callback uchta argumentga ega. Albatta, biroz g'alati ko'rinadi. Lekin `Map` ni `Set` bilan oson almashtirish va aksincha yordam berishi mumkin.
+=======
+That's for compatibility with `Map` where the callback passed `forEach` has three arguments. Looks a bit strange, for sure. But this may help to replace `Map` with `Set` in certain cases with ease, and vice versa.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 `Map` da iteratorlar uchun bir xil metodlar `Set` da ham qo'llab-quvvatlanadi:
 
+<<<<<<< HEAD
 - `set.keys()` -- qiymatlar uchun iterable objektni qaytaradi,
 - `set.values()` -- `set.keys()` bilan bir xil, `Map` bilan moslashish uchun,
 - `set.entries()` -- `[value, value]` yozuvlari uchun iterable objektni qaytaradi, `Map` bilan moslashish uchun mavjud.
+=======
+- [`set.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys) -- returns an iterable object for values,
+- [`set.values()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/values) -- same as `set.keys()`, for compatibility with `Map`,
+- [`set.entries()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/entries) -- returns an iterable object for entries `[value, value]`, exists for compatibility with `Map`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Xulosa
 
+<<<<<<< HEAD
 `Map` -- kalitli qiymatlar to'plami.
+=======
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) -- is a collection of keyed values.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Metodlar va xususiyatlar:
 
+<<<<<<< HEAD
 - `new Map([iterable])` -- xaritani yaratadi, boshlash uchun ixtiyoriy `iterable` (masalan, massiv) `[key,value]` juftliklari bilan.
 - `map.set(key, value)` -- kalit bo'yicha qiymatni saqlaydi, xaritaning o'zini qaytaradi.
 - `map.get(key)` -- kalit bo'yicha qiymatni qaytaradi, agar `key` xaritada mavjud bo'lmasa `undefined`.
@@ -309,21 +371,43 @@ Metodlar va xususiyatlar:
 - `map.delete(key)` -- kalit bo'yicha qiymatni o'chiradi, chaqiruv momentida `key` mavjud bo'lsa `true`, aks holda `false` qaytaradi.
 - `map.clear()` -- xaritadagi hamma narsani o'chiradi.
 - `map.size` -- hozirgi elementlar sonini qaytaradi.
+=======
+- [`new Map([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/Map) -- creates the map, with optional `iterable` (e.g. array) of `[key,value]` pairs for initialization.
+- [`map.set(key, value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/set) -- stores the value by the key, returns the map itself.
+- [`map.get(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get) -- returns the value by the key, `undefined` if `key` doesn't exist in map.
+- [`map.has(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/has) -- returns `true` if the `key` exists, `false` otherwise.
+- [`map.delete(key)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/delete) -- removes the element by the key, returns `true` if `key` existed at the moment of the call, otherwise `false`.
+- [`map.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/clear) -- removes everything from the map.
+- [`map.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/size) -- returns the current element count.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Oddiy `Object` dan farqlari:
 
 - Har qanday kalitlar, objektlar kalit bo'lishi mumkin.
 - Qo'shimcha qulay metodlar, `size` xususiyati.
 
+<<<<<<< HEAD
 `Set` -- noyob qiymatlar to'plami.
+=======
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) -- is a collection of unique values.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Metodlar va xususiyatlar:
 
+<<<<<<< HEAD
 - `new Set([iterable])` -- to'plamni yaratadi, boshlash uchun ixtiyoriy `iterable` (masalan, massiv) qiymatlar bilan.
 - `set.add(value)` -- qiymat qo'shadi (`value` mavjud bo'lsa hech narsa qilmaydi), to'plamning o'zini qaytaradi.
 - `set.delete(value)` -- qiymatni o'chiradi, chaqiruv momentida `value` mavjud bo'lsa `true`, aks holda `false` qaytaradi.
 - `set.has(value)` -- qiymat to'plamda mavjud bo'lsa `true`, aks holda `false` qaytaradi.
 - `set.clear()` -- to'plamdan hamma narsani o'chiradi.
 - `set.size` -- elementlar soni.
+=======
+- [`new Set([iterable])`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set) -- creates the set, with optional `iterable` (e.g. array) of values for initialization.
+- [`set.add(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/add) -- adds a value (does nothing if `value` exists), returns the set itself.
+- [`set.delete(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/delete) -- removes the value, returns `true` if `value` existed at the moment of the call, otherwise `false`.
+- [`set.has(value)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has) -- returns `true` if the value exists in the set, otherwise `false`.
+- [`set.clear()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/clear) -- removes everything from the set.
+- [`set.size`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size) -- is the elements count.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 `Map` va `Set` ustida iteratsiya har doim kiritish tartibida bo'ladi, shuning uchun biz bu to'plamlar tartibsiz deb ayta olmaymiz, lekin elementlarni qayta tartiblay olmaymiz yoki raqami bo'yicha to'g'ridan-to'g'ri element olishimiz mumkin emas.

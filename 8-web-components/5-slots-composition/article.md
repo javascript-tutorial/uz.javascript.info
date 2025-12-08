@@ -129,7 +129,12 @@ Masalan, bu yerdagi ikkinchi `<span>` e'tiborga olinmaydi (`<user-card>` ning yu
 
 Agar light DOM da bir xil slot nomiga ega bir nechta element bo'lsa, ular slotga birin-ketin qo'shiladi.
 
+<<<<<<< HEAD
 Masalan, bu:
+=======
+For example, this:
+
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```html
 <user-card>
   <span slot="username">Jon</span>
@@ -267,8 +272,13 @@ To'g'ri slotlar bilan shadow DOM shabloni:
 </template>
 ```
 
+<<<<<<< HEAD
 1. `<span slot="title">` `<slot name="title">` ga boradi.
 2. Shablonda ko'plab `<li slot="item">` bor, lekin shablonda faqat bitta `<slot name="item">`. Shuning uchun barcha bunday `<li slot="item">` lar `<slot name="item">` ga birin-ketin qo'shiladi va shunday qilib ro'yxat hosil bo'ladi.
+=======
+1. `<span slot="title">` goes into `<slot name="title">`.
+2. There are many `<li slot="item">` in the `<custom-menu>`, but only one `<slot name="item">` in the template. So all such `<li slot="item">` are appended to `<slot name="item">` one after another, thus forming the list.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Tekislangan DOM quyidagicha bo'ladi:
 
@@ -380,7 +390,11 @@ Agar biz JavaScript dan light DOM ning ichki o'zgarishlarini kuzatishni xohlasak
 
 Nihoyat, slot bilan bog'liq JavaScript metodlarini eslatib o'taylik.
 
+<<<<<<< HEAD
 Avval ko'rganimizdek, JavaScript "haqiqiy" DOM ga, tekislashsiz qaradi. Lekin agar shadow daraxt `{mode: 'open'}` ga ega bo'lsa, biz qaysi elementlar slotga tayinlanganini va aksincha, element bo'yicha slotni aniqlay olamiz:
+=======
+As we've seen before, JavaScript looks at the "real" DOM, without flattening. But, if the shadow tree has `{mode: 'open'}`, then we can figure out which elements assigned to a slot and, vice-versa, the slot by the element inside it:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 - `node.assignedSlot` -- `node` tayinlangan `<slot>` elementini qaytaradi.
 - `slot.assignedNodes({flatten: true/false})` -- slotga tayinlangan DOM tugunlari. `flatten` opsiyasi sukut bo'yicha `false`. Agar aniq ravishda `true` ga o'rnatilsa, u tekislangan DOM ga chuqurroq qaradi, ichki komponentlar holatida ichki slotlarni va hech qanday tugun tayinlanmagan bo'lsa zaxira kontentni qaytaradi.

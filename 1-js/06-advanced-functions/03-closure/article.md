@@ -8,7 +8,11 @@ Lekin agar funktsiya yaratilgandan so'ng tashqi o'zgaruvchilar o'zgarsa nima bo'
 
 Va agar funktsiya argument sifatida uzatilib, kodning boshqa joyidan chaqirilsa, u yangi joydagi tashqi o'zgaruvchilarga kirish huquqiga ega bo'ladimi?
 
+<<<<<<< HEAD
 Ushbu stsenariylar va yanada murakkab holatlarni tushunish uchun bilimimizni kengaytiraylik.
+=======
+And what if a function is passed along as an argument and called from another place of code, will it get access to outer variables at the new place?
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```smart header="Bu yerda `let/const` o'zgaruvchilar haqida gaplashamiz"
 JavaScript da o'zgaruvchi e'lon qilishning 3 xil usuli bor: `let`, `const` (zamonaviy usullar) va `var` (o'tmishdan qolgan).

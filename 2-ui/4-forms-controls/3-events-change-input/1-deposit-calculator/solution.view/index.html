@@ -130,8 +130,31 @@
         return new Intl.NumberFormat("uz-UZ").format(amount) + " so'm";
       }
 
+<<<<<<< HEAD
       // Boshlang'ich hisoblash
       calculate();
     </script>
   </body>
+=======
+      let interest = form.interest.value * 0.01;
+
+      if (!interest) return;
+
+      let years = form.months.value / 12;
+      if (!years) return;
+
+      let result = Math.round(initial * (1 + interest) ** years);
+
+      let height = result / form.money.value * 100 + 'px';
+      document.getElementById('height-after').style.height = height;
+      document.getElementById('money-before').innerHTML = form.money.value;
+      document.getElementById('money-after').innerHTML = result;
+    }
+
+    calculate();
+  </script>
+
+
+</body>
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 </html>

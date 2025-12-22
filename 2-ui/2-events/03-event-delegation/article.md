@@ -2,7 +2,11 @@
 
 Ushlash va bubbling bizga *hodisa delegatsiyasi* deb ataladigan eng kuchli hodisa qayta ishlash shakllaridan birini amalga oshirishga imkon beradi.
 
+<<<<<<< HEAD
 G'oya shundaki, agar bizda o'xshash tarzda qayta ishlanadigan ko'plab elementlar bo'lsa, ularning har biriga ishlov beruvchi tayinlash o'rniga -- ularning umumiy ajdodiga bitta ishlov beruvchi qo'yamiz.
+=======
+Capturing and bubbling allow us to implement one of the most powerful event handling patterns called *event delegation*.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Ishlov beruvchida biz `event.target` dan hodisa qayerda sodir bo'lganini bilish va uni qayta ishlash uchun foydalanamiz.
 

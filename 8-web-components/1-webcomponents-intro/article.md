@@ -26,9 +26,15 @@ Xalqaro Kosmik Stansiya:
 
 ...Va bu narsa uchadi, odamlarni kosmosda tirik saqlaydi!
 
+<<<<<<< HEAD
 Bunday murakkab qurilmalar qanday yaratiladi?
 
 Bizning ishlab chiqishimizni bir xil darajada ishonchli va kengaytiriladigan qilish uchun qaysi prinsiplarni qarz olishimiz mumkin? Yoki hech bo'lmaganda unga yaqin.
+=======
+How are such complex devices created?
+
+Which principles could we borrow to make our development same-level reliable and scalable? Or, at least, close to it?
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Komponent arxitekturasi
 

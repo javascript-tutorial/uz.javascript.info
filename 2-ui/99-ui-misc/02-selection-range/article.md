@@ -218,7 +218,11 @@ Yuqoridagi misolda yaratilgan range obyektining quyidagi xossalari bor:
 
 Range larni boshqarish uchun ko'plab qulay usullar mavjud.
 
+<<<<<<< HEAD
 Biz allaqachon `setStart` va `setEnd` ni ko'rdik, mana boshqa shunga o'xshash usullar.
+=======
+There are many convenient methods to manipulate ranges.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Range boshlanishini o'rnatish:
 
@@ -352,7 +356,11 @@ Asosiy selection xossalari:
 
 ```smart header="Selection tugashi/boshlanishi vs Range"
 
+<<<<<<< HEAD
 Selection langar/fokusi bilan `Range` boshlanish/tugashi o'rtasida muhim farqlar bor.
+=======
+There's an important difference between a selection anchor/focus compared with a `Range` start/end.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Bilganimizdek, `Range` obyektlari har doim tugashdan oldin boshlanishga ega. 
 
@@ -405,8 +413,13 @@ Dan <input id="from" disabled> – Gacha <input id="to" disabled>
 
 Tanlangan kontentni nusxalashning ikkita yondashuvi mavjud:
 
+<<<<<<< HEAD
 1. Uni matn sifatida olish uchun `document.getSelection().toString()` dan foydalanishimiz mumkin.
 2. Aks holda, to'liq DOM ni nusxalash uchun, masalan formatlashni saqlashimiz kerak bo'lsa, `getRangesAt(...)` bilan asosiy range larni olishimiz mumkin. `Range` obyekti, o'z navbatida, uning kontentini nusxalaydigan va `DocumentFragment` obyekti sifatida qaytaradigan `cloneContents()` usuliga ega, buni boshqa joyga kiritishimiz mumkin.
+=======
+1. We can use `document.getSelection().toString()` to get it as text.
+2. Otherwise, to copy the full DOM, e.g. if we need to keep formatting, we can get the underlying ranges with `getRangeAt(...)`. A `Range` object, in turn, has `cloneContents()` method that clones its content and returns as `DocumentFragment` object, that we can insert elsewhere.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Mana tanlangan kontentni ham matn, ham DOM tugunlari sifatida nusxalash demosi:
 
@@ -436,7 +449,11 @@ Matn sifatida: <span id="astext"></span>
 
 ## Selection usullari
 
+<<<<<<< HEAD
 Biz range lar qo'shish/olib tashlash orqali tanlash bilan ishlashimiz mumkin:
+=======
+We can work with the selection by adding/removing ranges:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 - `getRangeAt(i)` -- i-chi range ni olish, `0` dan boshlab. Firefox bundan mustasno barcha brauzerlarda faqat `0` ishlatiladi.
 - `addRange(range)` -- tanlashga `range` qo'shish. Agar tanlash allaqachon bog'langan range ga ega bo'lsa, Firefox bundan mustasno barcha brauzerlar chaqiruvni e'tiborsiz qoldiradi.

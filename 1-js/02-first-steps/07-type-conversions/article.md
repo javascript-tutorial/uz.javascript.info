@@ -6,8 +6,13 @@ Masalan, `alert` har qanday qiymatni ko'rsatish uchun avtomatik ravishda stringg
 
 Shuningdek, qiymatni kutilayotgan turga aniq o'zgartirishimiz kerak bo'lgan holatlar ham bor.
 
+<<<<<<< HEAD
 ```smart header="Obyektlar haqida hali gapirmayapmiz"
 Ushbu bobda biz obyektlarni ko'rib chiqmaymiz. Hozircha biz faqat primitiv turlar haqida gaplashamiz.
+=======
+```smart header="Not talking about objects yet"
+In this chapter, we won't cover objects. For now, we'll just be talking about primitives.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Keyinchalik, obyektlar haqida o'rganganimizdan so'ng, <info:object-toprimitive> bobida obyektlar qanday mos kelishini ko'ramiz.
 ```
@@ -34,7 +39,11 @@ String o'zgartirish asosan aniq. `false` `"false"` ga aylanadi, `null` `"null"` 
 
 ## Raqamli o'zgartirish
 
+<<<<<<< HEAD
 Raqamli o'zgartirish matematik funktsiyalar va ifodalarda avtomatik ravishda sodir bo'ladi.
+=======
+Numeric conversion in mathematical functions and expressions happens automatically.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Masalan, bo'lish `/` raqam bo'lmagan qiymatlarga qo'llanilganda:
 
@@ -69,8 +78,13 @@ Raqamli o'zgartirish qoidalari:
 |-------|-------------|
 |`undefined`|`NaN`|
 |`null`|`0`|
+<<<<<<< HEAD
 |<code>true&nbsp;va&nbsp;false</code> | `1` va `0` |
 | `string` | Boshi va oxiridagi bo'shliqlar (bo'shliqlar, tab `\t`, yangi satrlar `\n` va hokazo) olib tashlanadi. Agar qolgan string bo'sh bo'lsa, natija `0` bo'ladi. Aks holda, stringdan raqam "o'qiladi". Xato `NaN` beradi. |
+=======
+|<code>true&nbsp;and&nbsp;false</code> | `1` and `0` |
+| `string` | Whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from the start and end are removed. If the remaining string is empty, the result is `0`. Otherwise, the number is "read" from the string. An error gives `NaN`. |
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Misollar:
 
@@ -130,7 +144,11 @@ O'zgartirish qoidalarga amal qiladi:
 |`undefined`|`NaN`|
 |`null`|`0`|
 |<code>true&nbsp;/&nbsp;false</code> | `1 / 0` |
+<<<<<<< HEAD
 | `string` | String "aynan shunday" o'qiladi, ikkala tarafdagi bo'shliqlar (bo'shliqlar, tab `\t`, yangi satrlar `\n` va hokazo) e'tiborga olinmaydi. Bo'sh string `0` ga aylanadi. Xato `NaN` beradi. |
+=======
+| `string` | The string is read "as is", whitespaces (includes spaces, tabs `\t`, newlines `\n` etc.) from both sides are ignored. An empty string becomes `0`. An error gives `NaN`. |
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 **`Boolean o'zgartirish`** -- Mantiqiy amallarda sodir bo'ladi. `Boolean(value)` bilan bajarilishi mumkin.
 

@@ -18,11 +18,16 @@ Asosiy Drag'n'Drop algoritmi quyidagicha ko'rinadi:
 2. Keyin `mousemove` da uni `position:absolute` bilan `left/top` ni o'zgartirib harakat qildiring.
 3. `mouseup` da - drag'n'drop ni tugatish bilan bog'liq barcha harakatlarni bajaring.
 
+<<<<<<< HEAD
 Bular asoslar. Keyinroq boshqa xususiyatlarni, masalan ular ustidan sudrab o'tayotganda joriy pastki elementlarni ajratib ko'rsatishni qanday qo'shishni ko'ramiz.
+=======
+These are the basics. Later we'll see how to add other features, such as highlighting current underlying elements while we drag over them.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 To'pni sudrab olib ketish amalga oshirilishi:
 
 ```js
+<<<<<<< HEAD
 ball.onmousedown = function(event) { 
   // (1) harakatga tayyorlash: absolyut qiling va z-index orqali yuqoriga
   ball.style.position = 'absolute';
@@ -31,6 +36,16 @@ ball.onmousedown = function(event) {
   // uni har qanday joriy ota-onalardan to'g'ridan-to'g'ri body ga ko'chiring
   // uni body ga nisbatan joylashtirilgan qilish uchun
   document.body.append(ball);  
+=======
+ball.onmousedown = function(event) {
+  // (1) prepare to moving: make absolute and on top by z-index
+  ball.style.position = 'absolute';
+  ball.style.zIndex = 1000;
+
+  // move it out of any current parents directly into body
+  // to make it positioned relative to the body
+  document.body.append(ball);
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
   // to'pni (pageX, pageY) koordinatalarida markazlashtiradi
   function moveAt(pageX, pageY) {
@@ -93,14 +108,22 @@ Shuning uchun biz uni ushlash uchun `document` ga tinglashimiz kerak.
 
 ## To'g'ri joylashtiruv
 
+<<<<<<< HEAD
 Yuqoridagi misollarda to'p doim shunday harakat qiltirilganki, uning markazi ko'rsatkich ostida bo'ladi:
+=======
+In the examples above the ball is always moved so that its center is under the pointer:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js
 ball.style.left = pageX - ball.offsetWidth / 2 + 'px';
 ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
 ```
 
+<<<<<<< HEAD
 Yomon emas, lekin yon ta'sir bor. Drag'n'drop ni boshlash uchun biz to'pni istalgan joyiga `mousedown` qilishimiz mumkin. Lekin agar uni chekkasidan "olsak", to'p to'satdan sichqoncha ko'rsatkichi ostida markazlashish uchun "sakraydi".
+=======
+Not bad, but there's a side effect. To initiate the drag'n'drop, we can `mousedown` anywhere on the ball. But if "take" it from its edge, then the ball suddenly "jumps" to become centered under the mouse pointer.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Agar biz elementning ko'rsatkichga nisbatan boshlang'ich siljishini saqlasak yaxshiroq bo'lardi.
 
@@ -219,7 +242,11 @@ Shuning uchun potentsial tashlanadigan narsalarga ishlov beruvchilar qo'yish bos
 
 Xo'sh, nima qilish kerak?
 
+<<<<<<< HEAD
 `document.elementFromPoint(clientX, clientY)` deb ataladigan usul bor. U berilgan oynaga nisbatan koordinatalardagi eng ichki elementni qaytaradi (yoki koordinatalar oynadan tashqarida bo'lsa `null`).
+=======
+There's a method called `document.elementFromPoint(clientX, clientY)`. It returns the most nested element on given window-relative coordinates (or `null` if given coordinates are out of the window). If there are multiple overlapping elements on the same coordinates, then the topmost one is returned.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Biz uni istalgan sichqoncha hodisa ishlov beruvchida ko'rsatkich ostidagi potentsial tashlanadigan narsani aniqlash uchun ishlatishimiz mumkin:
 

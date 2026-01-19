@@ -6,11 +6,19 @@ Ularning qiziq tomoni shundaki, ma'lumotlar sahifani yangilashdan keyin ham (`se
 
 Bizda allaqachon cookie'lar bor. Nima uchun qo'shimcha obyektlar kerak?
 
+<<<<<<< HEAD
 - Cookie'lardan farqli o'laroq, veb-saqlash obyektlari har bir so'rov bilan serverga yuborilmaydi. Shu sababli biz ancha ko'p ma'lumot saqlashimiz mumkin. Ko'pchilik brauzerlar kamida 2 megabayt ma'lumotga (yoki undan ko'piga) ruxsat beradi va buni sozlash uchun sozlamalar mavjud.
 - Shuningdek cookie'lardan farqli o'laroq, server HTTP sarlavhalar orqali saqlash obyektlarini boshqara olmaydi. Hammasi JavaScript'da amalga oshiriladi.
 - Saqlash origin'ga (domen/protokol/port uchtaligi) bog'langan. Ya'ni turli protokollar yoki subdomenlar turli saqlash obyektlariga ega bo'ladi, ular bir-birlarining ma'lumotlariga kira olmaydi.
 
 Ikkala saqlash obyekti ham bir xil metodlar va xususiyatlarni taqdim etadi:
+=======
+- Unlike cookies, web storage objects are not sent to server with each request. Because of that, we can store much more. Most modern browsers allow at least 5 megabytes of data (or more) and have settings to configure that.
+- Also unlike cookies, the server can't manipulate storage objects via HTTP headers. Everything's done in JavaScript.
+- The storage is bound to the origin (domain/protocol/port triplet). That is, different protocols or subdomains infer different storage objects, they can't access data from each other.
+
+Both storage objects provide the same methods and properties:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 - `setItem(key, value)` -- kalit/qiymat juftligini saqlash.
 - `getItem(key)` -- kalit bo'yicha qiymatni olish.
@@ -63,7 +71,12 @@ delete localStorage.test;
 
 Bu tarixiy sabablarga ko'ra ruxsat etilgan va asosan ishlaydi, lekin odatda tavsiya etilmaydi, chunki:
 
+<<<<<<< HEAD
 1. Agar kalit foydalanuvchi tomonidan yaratilgan bo'lsa, u har qanday narsa bo'lishi mumkin, masalan `length` yoki `toString`, yoki `localStorage`ning boshqa ichki metodi. Bunday holda `getItem/setItem` yaxshi ishlaydi, obyekt kabi kirish esa muvaffaqiyatsiz bo'ladi:
+=======
+1. If the key is user-generated, it can be anything, like `length` or `toString`, or another built-in method of `localStorage`. In that case `getItem/setItem` work fine, while object-like access fails:
+
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
     ```js run
     let key = 'length';
     localStorage[key] = 5; // Xatolik, length tayinlab bo'lmaydi
@@ -119,11 +132,19 @@ for(let key of keys) {
 
 Ikkinchisi ishlaydi, chunki `Object.keys` faqat obyektga tegishli kalitlarni qaytaradi, prototipni e'tiborsiz qoldiradi.
 
+<<<<<<< HEAD
 ## Faqat stringlar
 
 Iltimos, e'tibor bering, kalit ham, qiymat ham string bo'lishi kerak.
 
 Agar boshqa turdagi bo'lsa, masalan raqam yoki obyekt, u avtomatik ravishda stringga aylantiriladi:
+=======
+## Strings only
+
+Please note that both key and value must be strings.
+
+If they were any other type, like a number, or an object, they would get converted to a string automatically:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 localStorage.user = {name: "John"};
@@ -178,7 +199,11 @@ Aynan shuning uchun `sessionStorage` nafaqat origin'ga, balki brauzer tabiga ham
 
 ## Storage hodisasi
 
+<<<<<<< HEAD
 `localStorage` yoki `sessionStorage`da ma'lumotlar yangilanganda, [storage](https://www.w3.org/TR/webstorage/#the-storage-event) hodisasi ishga tushadi va quyidagi xususiyatlarga ega:
+=======
+When the data gets updated in `localStorage` or `sessionStorage`, [storage](https://html.spec.whatwg.org/multipage/webstorage.html#the-storageevent-interface) event triggers, with properties:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 - `key` – o'zgartirilgan kalit (agar `.clear()` chaqirilsa `null`).
 - `oldValue` – eski qiymat (kalit yangi qo'shilgan bo'lsa `null`).
@@ -199,8 +224,13 @@ Quyidagi kodni sinab ko'rish uchun ushbu sahifani ikkita brauzer oynasida ochish
 Agar ikkala oyna ham `window.onstorage`ni tinglayotgan bo'lsa, har biri boshqasida sodir bo'lgan yangilanishlarga javob beradi.
 
 ```js run
+<<<<<<< HEAD
 // boshqa hujjatlardan bir xil saqlashga kiritilgan yangilanishlarda ishga tushadi
 window.onstorage = event => { // window.addEventListener('storage', event => { bilan bir xil
+=======
+// triggers on updates made to the same storage from other documents
+window.onstorage = event => { // can also use window.addEventListener('storage', event => {
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
   if (event.key != 'now') return;
   alert(event.key + ':' + event.newValue + " at " + event.url);
 };
@@ -218,11 +248,20 @@ Zamonaviy brauzerlar shuningdek [Broadcast channel API](mdn:/api/Broadcast_Chann
 
 ## Xulosa
 
+<<<<<<< HEAD
 Veb-saqlash obyektlari `localStorage` va `sessionStorage` brauzerda kalit/qiymat saqlash imkonini beradi.
 - `key` ham, `value` ham string bo'lishi kerak.
 - Chegara 5mb+, brauzerga bog'liq.
 - Ularning muddati tugamaydi.
 - Ma'lumotlar origin'ga (domen/port/protokol) bog'langan.
+=======
+Web storage objects `localStorage` and `sessionStorage` allow to store key/value pairs in the browser.
+
+- Both `key` and `value` must be strings.
+- The limit is 5mb+, depends on the browser.
+- They do not expire.
+- The data is bound to the origin (domain/port/protocol).
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 | `localStorage` | `sessionStorage` |
 |----------------|------------------|

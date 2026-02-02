@@ -48,9 +48,15 @@ let guestList = "Mehmonlar: // Xato: Unexpected token ILLEGAL
   * John";
 ```
 
+<<<<<<< HEAD
 Bitta va qo'sh qo'shtirnoqlar tilning yaratilishi qadimgi davrlaridan keladi, o'sha paytda ko'p qatorli satrlar ehtiyoji hisobga olinmagan edi. Teskari qo'shtirnoqlar ancha keyinroq paydo bo'lgan va shuning uchun ko'proq imkoniyatlarga ega.
 
 Teskari qo'shtirnoqlar shuningdek birinchi teskari qo'shtirnoqdan oldin "shablon funksiyasini" belgilashga imkon beradi. Sintaksis: <code>func&#96;string&#96;</code>. `func` funksiyasi avtomatik ravishda chaqiriladi, satr va kiritilgan ifodalarni oladi va ularni qayta ishlashi mumkin. Bu xususiyat "teglangan shablonlar" deb ataladi, u kamdan-kam uchraydi, lekin bu haqda MDN da o'qishingiz mumkin: [Template literals](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
+=======
+Single and double quotes come from ancient times of language creation, when the need for multiline strings was not taken into account. Backticks appeared much later and thus are more versatile.
+
+Backticks also allow us to specify a "template function" before the first backtick. The syntax is: <code>func&#96;string&#96;</code>. The function `func` is called automatically, receives the string and embedded expressions and can process them. This feature is called "tagged templates", it's rarely seen, but you can read about it in the MDN: [Template literals](mdn:/JavaScript/Reference/Template_literals#Tagged_templates).
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Maxsus belgilar
 
@@ -59,10 +65,17 @@ Bitta va qo'sh qo'shtirnoqlar bilan ham ko'p qatorli satrlarni "yangi qator belg
 ```js run
 let guestList = "Mehmonlar:\n * John\n * Pete\n * Mary";
 
+<<<<<<< HEAD
 alert(guestList); // ko'p qatorli mehmonlar ro'yxati, yuqoridagi bilan bir xil
 ```
 
 Oddiy misolda, bu ikki qator teng, shunchaki boshqacha yozilgan:
+=======
+alert(guestList); // a multiline list of guests, same as above
+```
+
+As a simpler example, these two lines are equal, just written differently:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 let str1 = "Salom\nDunyo"; // "yangi qator belgisi" yordamida ikki qator
@@ -74,6 +87,7 @@ Dunyo`;
 alert(str1 == str2); // true
 ```
 
+<<<<<<< HEAD
 Boshqa, kamroq uchraydigan maxsus belgilar ham bor:
 
 | Belgi                                  | Tavsif                                                                                                                                                                                                                   |
@@ -96,6 +110,30 @@ alert(`Teskari chiziq: \\`); // Teskari chiziq: \
 "Qochgan" qo'shtirnoqlar `\'`, `\"`, <code>\\`</code> bir xil qo'shtirnoqli satrga qo'shtirnoq kiritish uchun ishlatiladi.
 
 Masalan:
+=======
+There are other, less common special characters:
+
+| Character | Description |
+|-----------|-------------|
+|`\n`|New line|
+|`\r`|In Windows text files a combination of two characters `\r\n` represents a new break, while on non-Windows OS it's just `\n`. That's for historical reasons, most Windows software also understands `\n`. |
+|`\'`,&nbsp;`\"`,&nbsp;<code>\\`</code>|Quotes|
+|`\\`|Backslash|
+|`\t`|Tab|
+|`\b`, `\f`, `\v`| Backspace, Form Feed, Vertical Tab -- mentioned for completeness, coming from old times, not used nowadays (you can forget them right now). |
+
+As you can see, all special characters start with a backslash character `\`. It is also called an "escape character".
+
+Because it's so special, if we need to show an actual backslash `\` within the string, we need to double it:
+
+```js run
+alert( `The backslash: \\` ); // The backslash: \
+```
+
+So-called "escaped" quotes `\'`, `\"`, <code>\\`</code> are used to insert a quote into the same-quoted string.
+
+For instance:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 alert("Men*!*'*/!*m Walrus!"); // *!*Men'm*/!* Walrus!
@@ -106,6 +144,7 @@ Ko'rib turganingizdek, ichki qo'shtirnoqdan oldin teskari chiziq `\'` qo'yishimi
 Albatta, faqat o'rab turgan qo'shtirnoqlar bilan bir xil qo'shtirnoqlarni qochirish kerak. Shuning uchun yanada nafis yechim sifatida biz qo'sh qo'shtirnoq yoki teskari qo'shtirnoqga o'tishimiz mumkin:
 
 ```js run
+<<<<<<< HEAD
 alert("Men'm Walrus!"); // Men'm Walrus!
 ```
 
@@ -118,6 +157,12 @@ Bu maxsus belgilardan tashqari, Unicode kodlari uchun maxsus notation `\u…` ha
 ```js run
 alert(`Men\n`.length); // 3
 ```
+=======
+alert( "I'm the Walrus!" ); // I'm the Walrus!
+```
+
+Besides these special characters, there's also a special notation for Unicode codes `\u…`, it's rarely used and is covered in the optional chapter about [Unicode](info:unicode).
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 E'tibor bering, `\n` bitta "maxsus" belgi, shuning uchun uzunlik haqiqatan ham `3`.
 
@@ -144,15 +189,25 @@ alert( str[str.length - 1] ); // m
 alert( str.at(-1) );
 ````
 
+<<<<<<< HEAD
 Ko'rib turganingizdek, `.at(pos)` usuli salbiy pozitsiyaga imkon berishning afzalligiga ega. Agar `pos` salbiy bo'lsa, u satr oxiridan hisoblanadi.
+=======
+Please note that `str.length` is a numeric property, not a function. There is no need to add parenthesis after it. Not `.length()`, but `.length`.
+```
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Demak `.at(-1)` oxirgi belgini, `.at(-2)` undan oldingi belgini va hokazo anglatadi.
 
+<<<<<<< HEAD
 Kvadrat qavslar salbiy indekslar uchun har doim `undefined` qaytaradi, masalan:
+=======
+To get a character at position `pos`, use square brackets `[pos]` or call the method [str.at(pos)](mdn:js/String/at). The first character starts from the zero position:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 let str = `Salom`;
 
+<<<<<<< HEAD
 alert(str[-2]); // undefined
 alert(str.at(-2)); // l
 ```
@@ -162,6 +217,35 @@ Shuningdek, `for..of` yordamida belgilar bo'ylab iteratsiya qilishimiz mumkin:
 ```js run
 for (let char of "Salom") {
   alert(char); // S,a,l,o,m (char "S" bo'ladi, keyin "a", keyin "l" va hokazo)
+=======
+// the first character
+alert( str[0] ); // H
+alert( str.at(0) ); // H
+
+// the last character
+alert( str[str.length - 1] ); // o
+alert( str.at(-1) );
+```
+
+As you can see, the `.at(pos)` method has a benefit of allowing negative position. If `pos` is negative, then it's counted from the end of the string.
+
+So `.at(-1)` means the last character, and `.at(-2)` is the one before it, etc.
+
+The square brackets always return `undefined` for negative indexes, for instance:
+
+```js run
+let str = `Hello`;
+
+alert( str[-2] ); // undefined
+alert( str.at(-2) ); // l
+```
+
+We can also iterate over characters using `for..of`:
+
+```js run
+for (let char of "Hello") {
+  alert(char); // H,e,l,l,o (char becomes "H", then "e", then "l" etc)
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 }
 ```
 
@@ -204,7 +288,11 @@ alert("Interface".toLowerCase()); // interface
 Yoki agar bitta belgini kichik harfga o'tkazmoqchi bo'lsak:
 
 ```js run
+<<<<<<< HEAD
 alert("Interface"[0].toLowerCase()); // 'i'
+=======
+alert( 'Interface'[0].toLowerCase() ); // 'i'
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ## Substring qidirish
@@ -324,8 +412,13 @@ alert("Widget".includes("id", 3)); // false, 3-pozitsiyadan "id" yo'q
 [str.startsWith](mdn:js/String/startsWith) va [str.endsWith](mdn:js/String/endsWith) usullari aynan ular aytganini qiladi:
 
 ```js run
+<<<<<<< HEAD
 alert("*!*Wid*/!*get".startsWith("Wid")); // true, "Widget" "Wid" bilan boshlanadi
 alert("Wid*!*get*/!*".endsWith("get")); // true, "Widget" "get" bilan tugaydi
+=======
+alert( "*!*Wid*/!*get".startsWith("Wid") ); // true, "Widget" starts with "Wid"
+alert( "Wid*!*get*/!*".endsWith("get") ); // true, "Widget" ends with "get"
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ## Substring olish
@@ -360,9 +453,15 @@ JavaScript-da substring olish uchun 3 ta usul mavjud: `substring`, `substr` va `
     ```
 
 `str.substring(start [, end])`
+<<<<<<< HEAD
 : `start` va `end` _orasidagi_ satr qismini qaytaradi (`end` ni o'z ichiga olmaydi).
 
     Bu deyarli `slice` bilan bir xil, lekin `start` ning `end` dan katta bo'lishiga imkon beradi (bu holda u shunchaki `start` va `end` qiymatlarini almashtiradi).
+=======
+: Returns the part of the string *between* `start` and `end` (not including `end`).
+
+    This is almost the same as `slice`, but it allows `start` to be greater than `end` (in this case it simply swaps `start` and `end` values).
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
     Masalan:
 
@@ -398,9 +497,21 @@ JavaScript-da substring olish uchun 3 ta usul mavjud: `substring`, `substr` va `
     alert( str.substr(-4, 2) ); // 'gi', 4-pozitsiyadan 2 ta belgi ol
     ```
 
+<<<<<<< HEAD
     Bu usul til spetsifikatsiyasining [Ilova B](https://tc39.es/ecma262/#sec-string.prototype.substr) da joylashgan. Bu faqat brauzer-joylashtirilgan JavaScript dvigatellari uni qo'llab-quvvatlashi kerakligini anglatadi va uni ishlatish tavsiya etilmaydi. Amalda u hamma joyda qo'llab-quvvatlanadi.
 
 Har qanday chalkashlikdan qochish uchun bu usullarni takrorlaylik:
+=======
+    This method resides in the [Annex B](https://tc39.es/ecma262/#sec-string.prototype.substr) of the language specification. It means that only browser-hosted Javascript engines should support it, and it's not recommended to use it. In practice, it's supported everywhere.
+
+Let's recap these methods to avoid any confusion:
+
+| method | selects... | negatives |
+|--------|-----------|-----------|
+| `slice(start, end)` | from `start` to `end` (not including `end`) | allows negatives |
+| `substring(start, end)` | between `start` and `end` (not including `end`)| negative values mean `0` |
+| `substr(start, length)` | from `start` get `length` characters | allows negative `start` |
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 | usul                    | tanlaydi...                                            | salbiylar                         |
 | ----------------------- | ------------------------------------------------------ | --------------------------------- |
@@ -408,12 +519,18 @@ Har qanday chalkashlikdan qochish uchun bu usullarni takrorlaylik:
 | `substring(start, end)` | `start` va `end` orasida (`end` ni o'z ichiga olmaydi) | salbiy qiymatlar `0` ni anglatadi |
 | `substr(start, length)` | `start` dan `length` ta belgi ol                       | salbiy `start` ga ruxsat beradi   |
 
+<<<<<<< HEAD
 ```smart header="Qaysi birini tanlash kerak?"
 Ularning barchasi ishni bajara oladi. Rasmiy ravishda `substr` ning kichik kamchiligi bor: u JavaScript spetsifikatsiyasining asosiy qismida emas, balki brauzer-only xususiyatlarini qamrab oluvchi Ilova B da tasvirlangan va asosan tarixiy sabablarga ko'ra mavjud. Shuning uchun brauzer bo'lmagan muhitlar uni qo'llab-quvvatlamasligi mumkin. Lekin amalda u hamma joyda ishlaydi.
 
 Qolgan ikki variantdan `slice` biroz moslashuvchanroq, u salbiy argumentlarga imkon beradi va yozish qisqaroq.
 
 Shuning uchun amaliy foydalanish uchun faqat `slice` ni yodlab qolish kifoya.
+=======
+Of the other two variants, `slice` is a little bit more flexible, it allows negative arguments and shorter to write.
+
+So, for practical use it's enough to remember only `slice`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ```
 
 ## Satrlarni solishtirish
@@ -436,6 +553,7 @@ Garchi, ba'zi g'alatiliklar bor.
 
    Bu mamlakat nomlarini saralasak g'alati natijalarga olib kelishi mumkin. Odatda odamlar `Zealand` ning ro'yxatda `Österreich` dan keyin kelishini kutadilar.
 
+<<<<<<< HEAD
 Nima sodir bo'lishini tushunish uchun JavaScript-da satrlar [UTF-16](https://en.wikipedia.org/wiki/UTF-16) yordamida kodlanishini bilishimiz kerak. Ya'ni: har bir belgining mos raqamli kodi bor.
 
 Kod uchun belgini va teskarisini olish imkonini beradigan maxsus usullar mavjud:
@@ -448,6 +566,20 @@ Kod uchun belgini va teskarisini olish imkonini beradigan maxsus usullar mavjud:
     alert( "Z".codePointAt(0) ); // 90
     alert( "z".codePointAt(0) ); // 122
     alert( "z".codePointAt(0).toString(16) ); // 7a (agar hex qiymat kerak bo'lsa)
+=======
+To understand what happens, we should be aware that strings in Javascript are encoded using [UTF-16](https://en.wikipedia.org/wiki/UTF-16). That is: each character has a corresponding numeric code.
+
+There are special methods that allow to get the character for the code and back:
+
+`str.codePointAt(pos)`
+: Returns a decimal number representing the code for the character at position `pos`:
+
+    ```js run
+    // different case letters have different codes
+    alert( "Z".codePointAt(0) ); // 90
+    alert( "z".codePointAt(0) ); // 122
+    alert( "z".codePointAt(0).toString(16) ); // 7a (if we need a hexadecimal value)
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
     ```
 
 `String.fromCodePoint(code)`
@@ -455,10 +587,17 @@ Kod uchun belgini va teskarisini olish imkonini beradigan maxsus usullar mavjud:
 
     ```js run
     alert( String.fromCodePoint(90) ); // Z
+<<<<<<< HEAD
     alert( String.fromCodePoint(0x5a) ); // Z (argument sifatida hex qiymatdan ham foydalanish mumkin)
     ```
 
 Endi `65..220` kodli belgilarni (lotin alifbosi va biroz qo'shimcha) ko'rib, ulardan satr yasaylik:
+=======
+    alert( String.fromCodePoint(0x5a) ); // Z (we can also use a hex value as an argument)
+    ```
+
+Now let's see the characters with codes `65..220` (the latin alphabet and a little bit extra) by making a string of them:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 let str = "";
@@ -466,9 +605,15 @@ let str = "";
 for (let i = 65; i <= 220; i++) {
   str += String.fromCodePoint(i);
 }
+<<<<<<< HEAD
 alert(str);
 // Chiqish:
 // ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+=======
+alert( str );
+// Output:
+// ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 // ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜ
 ```
 
@@ -487,7 +632,11 @@ Satrlarni solishtirish uchun "to'g'ri" algoritm ko'ringanidan murakkabroq, chunk
 
 Shuning uchun brauzer qaysi tilda solishtirish kerakligini bilishi kerak.
 
+<<<<<<< HEAD
 Yaxshiyamki, zamonaviy brauzerlar [ECMA-402](https://www.ecma-international.org/publications-and-standards/standards/ecma-402/) xalqarolashtirish standartini qo'llab-quvvatlaydi.
+=======
+Luckily, modern browsers support the internationalization standard [ECMA-402](https://www.ecma-international.org/publications-and-standards/standards/ecma-402/).
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 U turli tillarda satrlarni ularning qoidalariga ko'ra solishtiradigan maxsus usulni taqdim etadi.
 
@@ -505,6 +654,7 @@ alert("Österreich".localeCompare("Zealand")); // -1
 
 Bu usul aslida [hujjatlarda](mdn:js/String/localeCompare) ko'rsatilgan ikkita qo'shimcha argumentga ega, bu tilni belgilash (sukut bo'yicha muhitdan olinadi, harflar tartibi tilga bog'liq) va registr sezgirlik yoki `"a"` va `"á"` bir xil deb qaralishi kerakmi kabi qo'shimcha qoidalarni o'rnatish imkonini beradi.
 
+<<<<<<< HEAD
 ## Xulosa
 
 - 3 turdagi qo'shtirnoq bor. Teskari qo'shtirnoqlar satrning bir nechta qatorga cho'zilishi va ifodalarni `${…}` kiritish imkonini beradi.
@@ -524,3 +674,24 @@ Satrlarda bir nechta boshqa foydali usullar ham bor:
 Satrlar muntazam ifodalar bilan qidirish/almashtirish uchun usullar ham bor. Lekin bu katta mavzu, shuning uchun u alohida o'quv qo'llanma bo'limida <info:regular-expressions> tushuntirilgan.
 
 Shuningdek, hozir satrlar Unicode kodlashiga asoslanganligini va shuning uchun solishtirishlar bilan muammolar borligini bilish muhim. Unicode haqida ko'proq ma'lumot <info:unicode> bobida.
+=======
+## Summary
+
+- There are 3 types of quotes. Backticks allow a string to span multiple lines and embed expressions `${…}`.
+- We can use special characters, such as a line break `\n`.
+- To get a character, use: `[]` or `at` method.
+- To get a substring, use: `slice` or `substring`.
+- To lowercase/uppercase a string, use: `toLowerCase/toUpperCase`.
+- To look for a substring, use: `indexOf`, or `includes/startsWith/endsWith` for simple checks.
+- To compare strings according to the language, use: `localeCompare`, otherwise they are compared by character codes.
+
+There are several other helpful methods in strings:
+
+- `str.trim()` -- removes ("trims") spaces from the beginning and end of the string.
+- `str.repeat(n)` -- repeats the string `n` times.
+- ...and more to be found in the [manual](mdn:js/String).
+
+Strings also have methods for doing search/replace with regular expressions. But that's big topic, so it's explained in a separate tutorial section <info:regular-expressions>.
+
+Also, as of now it's important to know that strings are based on Unicode encoding, and hence there're issues with comparisons. There's more about Unicode in the chapter <info:unicode>.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3

@@ -17,6 +17,7 @@ undefined + 1 = NaN // (6)
 " \t \n" - 2 = -2 // (7)
 ```
 
+<<<<<<< HEAD
 ## Tushuntirishlar
 
 1. String bilan qo'shish `"" + 1` `1` ni stringga o'zgartiradi: `"" + 1 = "1"`, va keyin bizda `"1" + 0` bo'ladi, xuddi shu qoida qo'llaniladi.
@@ -32,3 +33,12 @@ undefined + 1 = NaN // (6)
 6. `undefined` raqamli o'zgartirishdan keyin `NaN` ga aylanadi.
 
 7. String raqamga o'zgartirilganda string boshi va oxiridagi bo'shliq belgilari olib tashlanadi. Bu yerda butun string `\t`, `\n` va ularning orasidagi "oddiy" bo'shliq kabi bo'shliq belgilaridan iborat. Shuning uchun, bo'sh stringga o'xshab, u `0` ga aylanadi.
+=======
+1. The addition with a string `"" + 1` converts `1` to a string: `"" + 1 = "1"`, and then we have `"1" + 0`, the same rule is applied.
+2. The subtraction `-` (like most math operations) only works with numbers, it converts an empty string `""` to `0`.
+3. The addition with a string appends the number `5` to the string.
+4. The subtraction always converts to numbers, so it makes `"  -9  "` a number `-9` (ignoring spaces around it).
+5. `null` becomes `0` after the numeric conversion.
+6. `undefined` becomes `NaN` after the numeric conversion.
+7. Space characters are trimmed off string start and end when a string is converted to a number. Here the whole string consists of space characters, such as `\t`, `\n` and a "regular" space between them. So, similarly to an empty string, it becomes `0`.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3

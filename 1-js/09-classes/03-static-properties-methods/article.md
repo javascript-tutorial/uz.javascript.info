@@ -2,7 +2,13 @@
 
 Shuningdek, biz usulni `"prototype"` ga emas, balki klassning funktsiyasiga tayinlashimiz mumkin. Bunday usullar _statik_ deb nomlanadi.
 
+<<<<<<< HEAD
 Misol:
+=======
+We can also assign a method to the class as a whole. Such methods are called *static*.
+
+In a class declaration, they are prepended by `static` keyword, like this:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 class User {
@@ -30,9 +36,17 @@ User.staticMethod(); // true
 
 `User.staticMethod()` ichidagi `this` qiymati `User` klass konstruktoridir ("nuqta oldidagi obyekt" qoidasi).
 
+<<<<<<< HEAD
 Odatda, statik usullar klassga tegishli funktsiyalarni amalga oshirish uchun ishlatiladi, lekin uning biron bir alohida obyektiga emas.
 
 Masalan, bizda `Article` obyektlari mavjud va ularni taqqoslash funktsiyasi zarur. Tabiiy tanlov quyidagicha `Article.compare` bo'ladi:
+=======
+Usually, static methods are used to implement functions that belong to the class as a whole, but not to any particular object of it.
+
+For instance, we have `Article` objects and need a function to compare them.
+
+A natural solution would be to add `Article.compare` static method:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 class Article {
@@ -62,9 +76,17 @@ articles.sort(Article.compare);
 alert( articles[0].title ); // CSS
 ```
 
+<<<<<<< HEAD
 Bu yerda `Article.compare` maqolalarni "ustidan" taqqoslash vositasi sifatida turadi. Bu maqola usuli uchun emas, balki butun klass uchun.
 
 Yana bir misol "fabrika" deb nomlangan usul bo'lishi mumkin. Tasavvur qiling, bizga maqola yaratishning bir necha yo'li bor:
+=======
+Here `Article.compare` method stands "above" articles, as a means to compare them. It's not a method of an article, but rather of the whole class.
+
+Another example would be a so-called "factory" method.
+
+Let's say, we need multiple ways to create an article:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 1. Berilgan parametrlar bo'yicha yaratish (`title`, `date` va hokazo).
 2. Bugungi sana bilan bo'sh maqola yarating.
@@ -72,7 +94,11 @@ Yana bir misol "fabrika" deb nomlangan usul bo'lishi mumkin. Tasavvur qiling, bi
 
 Birinchi usul konstruktor tomonidan amalga oshirilishi mumkin. Va ikkinchisi uchun biz klassning statik usulini yaratishimiz mumkin.
 
+<<<<<<< HEAD
 `Article.createTodays()` singari bu yerda:
+=======
+Such as `Article.createTodays()` here:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run
 class Article {
@@ -99,12 +125,32 @@ Endi har safar bugungi dayjestni yaratishimiz kerak bo'lsa, biz `Article.createT
 Ma'lumotlar bazasi bilan bog'liq klasslarda statik usullar ma'lumotlar bazasidan yozuvlarni qidirish/saqlash/olib tashlash uchun quyidagi kabi qo'llaniladi:
 
 ```js
+<<<<<<< HEAD
 // Article - maqolalarni boshqarish uchun maxsus klass deb taxmin qilamiz
 // maqolani olib tashlash uchun statik usul:
 Article.remove({ id: 12345 });
 ```
 
 ## Statik xususiyatlar
+=======
+// assuming Article is a special class for managing articles
+// static method to remove the article by id:
+Article.remove({id: 12345});
+```
+
+````warn header="Static methods aren't available for individual objects"
+Static methods are callable on classes, not on individual objects.
+
+E.g. such code won't work:
+
+```js
+// ...
+article.createTodays(); /// Error: article.createTodays is not a function
+```
+````
+
+## Static properties
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 [recent browser=Chrome]
 

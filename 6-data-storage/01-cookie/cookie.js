@@ -1,4 +1,5 @@
 function getCookie(name) {
+<<<<<<< HEAD
   let matches = document.cookie.match(
     new RegExp(
       "(?:^|; )" +
@@ -6,6 +7,11 @@ function getCookie(name) {
         "=([^;]*)"
     )
   );
+=======
+  let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + "=([^;]*)"
+  ));
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 

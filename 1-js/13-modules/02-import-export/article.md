@@ -47,7 +47,7 @@ Bundan tashqari, biz `export` ni alohida-alohida qo'yishimiz mumkin.
 
 Bu yerda biz avval e'lon qilamiz, keyin eksport qilamiz:
 
-```js  
+```js
 // 📁 say.js
 function sayHi(user) {
   alert(`Salom, ${user}!`);
@@ -94,6 +94,7 @@ Bir qarashda "hamma narsani import qilish" juda ajoyib narsa bo'lib tuyuladi, qi
 
 Xo'sh, ozgina sabablar bor.
 
+<<<<<<< HEAD
 1. Zamonaviy qurilish vositalari ([webpack](http://webpack.github.io) va boshqalar) modullarni birlashtiradilar va yuklashni tezlashtirish va foydalanilmayotgan narsalarni olib tashlash uchun ularni optimallashtirish.
 
     Aytaylik, biz o'z loyihamizga uchinchi tomon kutubxonasini qo'shdik `lib.js` ko'plab funktsiyalar bilan:
@@ -113,6 +114,16 @@ Xo'sh, ozgina sabablar bor.
 
 2. Import qilinadigan narsalarning aniq ro'yxati qisqartirilgan ismlarni beradi: `lib.sayHi()` o'rniga `sayHi()`.
 3. Aniq import kod tuzilishi haqida yaxshiroq ma'lumot beradi: nima ishlatiladi va qayerda. Bu kodni qo'llab-quvvatlash va qayta ishlashni osonlashtiradi.
+=======
+1. Explicitly listing what to import gives shorter names: `sayHi()` instead of `say.sayHi()`.
+2. Explicit list of imports gives better overview of the code structure: what is used and where. It makes code support and refactoring easier.
+
+```smart header="Don't be afraid to import too much"
+Modern build tools, such as [webpack](https://webpack.js.org/) and others, bundle modules together and optimize them to speedup loading. They also remove unused imports.
+
+For instance, if you `import * as library` from a huge code library, and then use only few methods, then unused ones [will not be included](https://github.com/webpack/webpack/tree/main/examples/harmony-unused#examplejs) into the optimized bundle.
+```
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ## Import "qanday qilib"
 
@@ -228,7 +239,7 @@ Bu juda yaxshi, chunki `standart eksport` har bir fayl uchun bittadan, shuning u
 export class { // Xato! (standart bo'lmagan eksport uchun nom kerak)
   constructor() {}
 }
-```     
+```
 
 ### "Standart" taxallus
 
@@ -331,7 +342,7 @@ Tasavvur qiling, biz "paket" yozmoqdamiz: ko'pgina modullarga ega papka, asosan 
 Direkrora tuzilishi shunday bo'lishi mumkin:
 ```
 auth/
-    index.js  
+    index.js
     user.js
     helpers.js
     tests/
@@ -369,7 +380,7 @@ export {User};
 
 ```js
 // 📁 auth/index.js
-// re-export login/logout 
+// re-export login/logout
 export {login, logout} from './helpers.js';
 // yoki barcha yordamchilarni qayta eksport qilish uchun foydalanishimiz mumkin:
 // export * from './helpers.js';
@@ -379,8 +390,12 @@ export {default as User} from './user.js';
 ...
 ```
 
+<<<<<<< HEAD
 ````warn header="Qayta eksport qilish juda qiyin"
 Iltimos, diqqat qiling: `export User from './user.js'` ishlamaydi. Bu aslida sintaksis xatosi. Standart eksportni qayta eksport qilish uchun uni yuqoridagi misolda bo'lgani kabi `{default as ...}` deb aniq aytib o'tishimiz kerak.
+=======
+The notable difference of `export ... from` compared to `import/export` is that re-exported modules aren't available in the current file. So inside the above example of `auth/index.js` we can't use re-exported `login/logout` functions.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Bundan tashqari, yana bir g'alati narsa bor: `export * from './user.js'` standart eksportdan tashqari faqat nomlangan eksportni qayta eksport qiladi. Yana bir bor buni aniq aytib o'tishimiz kerak.
 
@@ -395,9 +410,31 @@ Sukut bo'yicha faqat qayta eksport qilishda aniq ko'rsatilishi kerak: `import * 
 
 ## Xulosa
 
+<<<<<<< HEAD
 `Eksportning` quyidagi turlari mavjud:
 
 - Deklaratsiyadan oldin:
+=======
+    To re-export the default export, we have to write `export {default as User}`, as in the example above.
+
+2. `export * from './user.js'` re-exports only named exports, but ignores the default one.
+
+    If we'd like to re-export both named and default exports, then two statements are needed:
+    ```js
+    export * from './user.js'; // to re-export named exports
+    export {default} from './user.js'; // to re-export the default export
+    ```
+
+Such oddities of re-exporting a default export are one of the reasons why some developers don't like default exports and prefer named ones.
+
+## Summary
+
+Here are all types of `export` that we covered in this and previous articles.
+
+You can check yourself by reading them and recalling what they mean:
+
+- Before declaration of a class/function/..:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
   - `export [default] class/function/variable ...`
 - Mustaqil:
   - `export {x [as y], ...}`.
@@ -408,6 +445,7 @@ Sukut bo'yicha faqat qayta eksport qilishda aniq ko'rsatilishi kerak: `import * 
 
 Import:
 
+<<<<<<< HEAD
 - Moduldan nomlangan eksport:
   - `import {x [as y], ...} from "mod"`
 - Standart eksport: 
@@ -417,6 +455,17 @@ Import:
   - `import * as obj from "mod"`
 - Faqat modulni olib keling/baholang, import qilmang:
   - `import "mod"`
+=======
+- Importing named exports:
+  - `import {x [as y], ...} from "module"`
+- Importing the default export:
+  - `import x from "module"`
+  - `import {default as x} from "module"`
+- Import all:
+  - `import * as obj from "module"`
+- Import the module (its code runs), but do not assign any of its exports to variables:
+  - `import "module"`
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 Import/eksport ifodalarini boshqa kodning ostiga yoki undan keyin qo'yishimiz mumkin, bu muhim emas.
 

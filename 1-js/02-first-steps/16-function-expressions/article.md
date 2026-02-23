@@ -12,9 +12,15 @@ function sayHi() {
 
 Funksiya yaratishning yana bir sintaksisi bor, u _Funksiya ifodasi_ deb ataladi.
 
+<<<<<<< HEAD
 Bu bizga har qanday ifoda o'rtasida yangi funksiya yaratishga imkon beradi.
 
 Masalan:
+=======
+It allows us to create a new function in the middle of any expression.
+
+For example:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js
 let sayHi = function () {
@@ -22,9 +28,25 @@ let sayHi = function () {
 };
 ```
 
+<<<<<<< HEAD
 Bu yerda `sayHi` o'zgaruvchisi qiymat olayotganini ko'ramiz, yangi funksiya `function() { alert("Salom"); }` sifatida yaratilgan.
 
 Funksiya yaratish tayinlash ifodasining kontekstida (`=` ning o'ng tomonida) sodir bo'lgani uchun, bu *Funksiya ifodasi*dir.
+=======
+Here we can see a variable `sayHi` getting a value, the new function, created as `function() { alert("Hello"); }`.
+
+As the function creation happens in the context of the assignment expression (to the right side of `=`), this is a *Function Expression*.
+
+Please note, there's no name after the `function` keyword. Omitting a name is allowed for Function Expressions.
+
+Here we immediately assign it to the variable, so the meaning of these code samples is the same: "create a function and put it into the variable `sayHi`".
+
+In more advanced situations, that we'll come across later, a function may be created and immediately called or scheduled for a later execution, not stored anywhere, thus remaining anonymous.
+
+## Function is a value
+
+Let's reiterate: no matter how the function is created, a function is a value. Both examples above store a function in the `sayHi` variable.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 E'tibor bering, `function` kalit so'zidan keyin nom yo'q. Funksiya ifodalari uchun nomni tashlab qo'yish ruxsat etilgan.
 
@@ -76,6 +98,7 @@ Bu yerda batafsil nima sodir bo'ladi:
 2. `(2)` qator uni `func` o'zgaruvchisiga nusxalaydi. Yana e'tibor bering: `sayHi` dan keyin qavslar yo'q. Agar bo'lganida, `func = sayHi()` `sayHi()` _chaqiruv natijasini_ `func` ga yozar edi, `sayHi` _funksiyasining_ o'zini emas.
 3. Endi funksiyani ham `sayHi()`, ham `func()` sifatida chaqirish mumkin.
 
+<<<<<<< HEAD
 Birinchi qatorda `sayHi` ni e'lon qilish uchun Funksiya ifodasidan ham foydalanishimiz mumkin edi:
 
 ```js
@@ -85,13 +108,29 @@ let sayHi = function () {
 };
 
 let func = sayHi; //(2)
+=======
+We could also have used a Function Expression to declare `sayHi`, in the first line:
+
+```js
+let sayHi = function() { // (1) create
+  alert( "Hello" );
+};
+
+let func = sayHi;  //(2)
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 // ...
 ```
 
 Hammasi bir xil ishlaydi.
 
+<<<<<<< HEAD
 ````smart header="Nima uchun oxirida nuqta-vergul bor?"
 Siz hayron bo'lishingiz mumkin, nega Funksiya ifodalari oxirida nuqta-vergul `;` bor, lekin Funksiya e'lonlarida yo'q:
+=======
+
+````smart header="Why is there a semicolon at the end?"
+You might wonder, why do Function Expressions have a semicolon `;` at the end, but Function Declarations do not:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js
 function sayHi() {
@@ -103,9 +142,15 @@ let sayHi = function() {
 }*!*;*/!*
 ```
 
+<<<<<<< HEAD
 Javob oddiy: Funksiya ifodasi bu yerda tayinlash ifodasining ichida `function(…) {…}` sifatida yaratilgan: `let sayHi = …;`. Nuqta-vergul `;` ifoda oxirida tavsiya etiladi, u funksiya sintaksisining qismi emas.
 
 Nuqta-vergul oddiy tayinlash uchun ham bo'lardi, masalan `let sayHi = 5;`, va funksiya tayinlash uchun ham bor.
+=======
+The answer is simple: a Function Expression is created here as `function(…) {…}` inside the assignment statement: `let sayHi = …;`. The semicolon `;` is recommended at the end of the statement, it's not a part of the function syntax.
+
+The semicolon would be there for a simpler assignment, such as `let sayHi = 5;`, and it's also there for a function assignment.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 ````
 
 ## Callback funksiyalar
@@ -145,13 +190,21 @@ function showCancel() {
 ask("Rozimisiz?", showOk, showCancel);
 ```
 
+<<<<<<< HEAD
 Amalda bunday funksiyalar juda foydali. Haqiqiy hayotdagi `ask` va yuqoridagi misol o'rtasidagi asosiy farq shundaki, haqiqiy funksiyalar foydalanuvchi bilan oddiy `confirm` dan ko'ra murakkabroq usullar bilan muloqot qiladi. Brauzerde bunday funksiyalar odatda chiroyli ko'rinishdagi savol oynasini chizadi. Lekin bu boshqa hikoya.
+=======
+In practice, such functions are quite useful. The major difference between a real-life `ask` and the example above is that real-life functions use more complex ways to interact with the user than a simple `confirm`. In the browser, such functions usually draw a nice-looking question window. But that's another story.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 **`ask` ning `showOk` va `showCancel` argumentlari _callback funksiyalar_ yoki shunchaki *callback*lar deb ataladi.**
 
 G'oya shundan iboratki, biz funksiyani uzatamiz va kerak bo'lsa keyinroq "chaqirib olinishini" kutamiz. Bizning holimizda `showOk` "ha" javobi uchun callback bo'ladi va `showCancel` "yo'q" javobi uchun.
 
+<<<<<<< HEAD
 Funksiya ifodalaridan foydalanib ekvivalent, qisqaroq funksiya yozishimiz mumkin:
+=======
+We can use Function Expressions to write an equivalent, shorter function:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ```js run no-beautify
 function ask(question, yes, no) {
@@ -188,6 +241,7 @@ Birinchidan, sintaksis: kodni ularni qanday farqlash.
 
 - _Funksiya e'loni:_ asosiy kod oqimida alohida ifoda sifatida e'lon qilingan funksiya:
 
+<<<<<<< HEAD
   ```js
   // Funksiya e'loni
   function sum(a, b) {
@@ -196,6 +250,17 @@ Birinchidan, sintaksis: kodni ularni qanday farqlash.
   ```
 
 - _Funksiya ifodasi:_ ifoda ichida yoki boshqa sintaksis konstruksiyasi ichida yaratilgan funksiya. Bu yerda funksiya "tayinlash ifodasining" `=` o'ng tomonida yaratilgan:
+=======
+- *Function Declaration:* a function, declared as a separate statement, in the main code flow:
+
+    ```js
+    // Function Declaration
+    function sum(a, b) {
+      return a + b;
+    }
+    ```
+- *Function Expression:* a function, created inside an expression or inside another syntax construct. Here, the function is created on the right side of the "assignment expression" `=`:
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
   ```js
   // Funksiya ifodasi
@@ -293,8 +358,13 @@ if (age < 18) {
 */!*
                            //  |
   function welcome() {     //  |
+<<<<<<< HEAD
     alert("Salom!");       //  |  Funksiya e'loni e'lon qilingan
   }                        //  |  blokda hamma joyda mavjud
+=======
+    alert("Hello!");       //  |  Function Declaration is available
+  }                        //  |  everywhere in the block where it's declared
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
                            //  |
 *!*
   welcome();               // /   (ishlaydi)
@@ -303,7 +373,11 @@ if (age < 18) {
 } else {
 
   function welcome() {
+<<<<<<< HEAD
     alert("Assalomu alaykum!");
+=======
+    alert("Greetings!");
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
   }
 }
 
@@ -362,7 +436,12 @@ welcome(); // endi yaxshi
 ```smart header="Funksiya e'loni va Funksiya ifodasini qachon tanlash kerak?"
 Qoida sifatida, funksiya e'lon qilish kerak bo'lganda, birinchi navbatda Funksiya e'loni sintaksisini ko'rib chiqish kerak. Bu bizga kodimizni qanday tashkil qilishda ko'proq erkinlik beradi, chunki biz bunday funksiyalarni ular e'lon qilinishidan oldin chaqirishimiz mumkin.
 
+<<<<<<< HEAD
 Bu o'qish uchun ham yaxshiroq, chunki kodda `function f(…) {…}` ni qidirish `let f = function(…) {…};` dan osonroq. Funksiya e'lonlari ko'proq "ko'zga tashlanadigan".
+=======
+```smart header="When to choose Function Declaration versus Function Expression?"
+As a rule of thumb, when we need to declare a function, the first thing to consider is Function Declaration syntax. It gives more freedom in how to organize our code, because we can call such functions before they are declared.
+>>>>>>> d78b01e9833009fab534462e05c03cffc51bf0e3
 
 ...Lekin agar Funksiya e'loni qandaydir sabab bilan bizga mos kelmasa yoki bizga shartli e'lon kerak bo'lsa (biz hozirgina misolni ko'rdik), u holda Funksiya ifodasidan foydalanish kerak.
 ```

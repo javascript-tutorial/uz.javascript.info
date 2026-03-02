@@ -80,13 +80,21 @@ Shuni ta'kidlaymizki, animatsiya qilinmaydigan xususiyatlar mavjud. Ammo, [ko'pg
 
 ## transition-duration
 
+<<<<<<< HEAD
 `transition-duration`da biz animatsiya qancha davom etishini belgilashimiz mumkin. Vaqt [CSS vaqt formatida](http://www.w3.org/TR/css3-values/#time) bo'lishi kerak: soniyalarda `s` yoki millisioniyalarda `ms`.
+=======
+In `transition-duration` we can specify how long the animation should take. The time should be in [CSS time format](https://www.w3.org/TR/css3-values/#time): in seconds `s` or milliseconds `ms`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## transition-delay
 
 `transition-delay`da biz animatsiya *oldidan* kechikishni belgilashimiz mumkin. Masalan, agar `transition-delay` `1s` va `transition-duration` `2s` bo'lsa, animatsiya xususiyat o'zgarishidan 1 soniya keyin boshlanadi va umumiy davomiyligi 2 soniya bo'ladi.
 
+<<<<<<< HEAD
 Manfiy qiymatlar ham mumkin. Keyin animatsiya darhol ko'rsatiladi, lekin animatsiyaning boshlang'ich nuqtasi berilgan qiymatdan (vaqt) keyin bo'ladi. Masalan, agar `transition-delay` `-1s` va `transition-duration` `2s` bo'lsa, animatsiya yarim yo'ldan boshlanadi va umumiy davomiyligi 1 soniya bo'ladi.
+=======
+Negative values are also possible. Then the animation is shown immediately, but the starting point of the animation will be after given value (time). For example, if `transition-delay` is `-1s` and `transition-duration` is `2s`, then animation starts from the halfway point and total duration will be 1 second.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Bu yerda animatsiya CSS `translate` xususiyatidan foydalanib raqamlarni `0`dan `9`gacha siljitadi:
 
@@ -168,7 +176,11 @@ CSS `transition` shu egri chiziqqa asoslangan:
 .train {
   left: 0;
   transition: left 5s cubic-bezier(0, 0, 1, 1);
+<<<<<<< HEAD
   /* JavaScript left ni 450px ga o'rnatadi */
+=======
+  /* click on a train sets left to 450px, thus triggering the animation */
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 }
 ```
 
@@ -191,7 +203,11 @@ CSS:
 .train {
   left: 0;
   transition: left 5s cubic-bezier(0, .5, .5, 1);
+<<<<<<< HEAD
   /* JavaScript left ni 450px ga o'rnatadi */
+=======
+  /* click on a train sets left to 450px, thus triggering the animation */
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 }
 ```
 
@@ -208,13 +224,16 @@ Boshqa nomlar quyidagi `cubic-bezier` uchun qisqartmalar:
 
 `*` -- sukut bo'yicha, agar timing funksiyasi bo'lmasa, `ease` ishlatiladi.
 
+<<<<<<< HEAD
 Shunday qilib, sekinlashayotgan poyezd uchun `ease-out` ishlatishimiz mumkin:
 
+=======
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```css
 .train {
   left: 0;
   transition: left 5s ease-out;
-  /* transition: left 5s cubic-bezier(0, .5, .5, 1); */
+  /* same as transition: left 5s cubic-bezier(0, .5, .5, 1); */
 }
 ```
 
@@ -224,12 +243,21 @@ Lekin u biroz boshqacha ko'rinadi.
 
 Egri chiziqdagi nazorat nuqtalari har qanday `y` koordinatlariga ega bo'lishi mumkin: hatto manfiy yoki kattaroq. Keyin Bezier egri chizig'i ham juda past yoki baland cho'ziladi va animatsiya normal oralig'idan tashqariga chiqadi.
 
+<<<<<<< HEAD
 Quyidagi misolda animatsiya kodi:
+=======
+In the example below the animation code is:
+
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```css
 .train {
   left: 100px;
   transition: left 5s cubic-bezier(.5, -1, .5, 2);
+<<<<<<< HEAD
   /* JavaScript left ni 400px ga o'rnatadi */
+=======
+  /* click on a train sets left to 450px */
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 }
 ```
 
@@ -253,11 +281,27 @@ Bilganimizdek, `y` "animatsiya jarayonining tugallanishini" o'lchaydi. `y = 0` q
 
 Bu, albatta, "yumshoq" variant. Agar biz `-99` va `99` kabi `y` qiymatlarini qo'ysak, poyezd oraliqdan ancha tashqariga chiqib ketardi.
 
+<<<<<<< HEAD
 Lekin muayyan vazifa uchun Bezier egri chizig'ini qanday yaratamiz? Ko'pgina vositalar mavjud. Masalan, buni <http://cubic-bezier.com/> saytida qilishimiz mumkin.
+=======
+But how do we make a Bezier curve for a specific task? There are many tools.
+
+- For instance, we can do it on the site <https://cubic-bezier.com>.
+- Browser developer tools also have special support for Bezier curves in CSS:
+    1. Open the developer tools with `key:F12` (Mac: `key:Cmd+Opt+I`).
+    2. Select the `Elements` tab, then pay attention to the `Styles` sub-panel at the right side.
+    3. CSS properties with a word `cubic-bezier` will have an icon before this word.
+    4. Click this icon to edit the curve.
+
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ### Qadamlar
 
+<<<<<<< HEAD
 Timing funksiyasi `steps(qadamlar soni[, start/end])` animatsiyani qadamlarga bo'lish imkonini beradi.
+=======
+The timing function `steps(number of steps[, start/end])` allows splitting an transition into multiple steps.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Keling, buni raqamlar misolida ko'raylik.
 
@@ -265,7 +309,23 @@ Mana animatsiyasiz raqamlar ro'yxati, faqat manba sifatida:
 
 [codetabs src="step-list"]
 
+<<<<<<< HEAD
 Biz raqamlarni diskret tarzda paydo qilish uchun qizil "oyna"dan tashqaridagi ro'yxat qismini ko'rinmas qilamiz va har qadamda ro'yxatni chapga siljitamiz.
+=======
+In the HTML, a stripe of digits is enclosed into a fixed-length `<div id="digits">`:
+
+```html
+<div id="digit">
+  <div id="stripe">0123456789</div>
+</div>
+```
+
+The `#digit` div has a fixed width and a border, so it looks like a red window.
+
+We'll make a timer: the digits will appear one by one, in a discrete way.
+
+To achieve that, we'll hide the `#stripe` outside of `#digit` using `overflow: hidden`, and then shift the `#stripe` to the left step-by-step.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 9 qadam bo'ladi, har bir raqam uchun qadam-harakat:
 
@@ -276,23 +336,36 @@ Biz raqamlarni diskret tarzda paydo qilish uchun qizil "oyna"dan tashqaridagi ro
 }
 ```
 
+<<<<<<< HEAD
 Amalda:
 
 [codetabs src="step"]
 
 `steps(9, start)` ning birinchi argumenti qadamlar soni. Transformatsiya 9 qismga bo'linadi (har biri 10%). Vaqt intervali ham avtomatik ravishda 9 qismga bo'linadi, shuning uchun `transition: 9s` bizga butun animatsiya uchun 9 soniya beradi -- har raqam uchun 1 soniya.
+=======
+The first argument of `steps(9, start)` is the number of steps. The transform will be split into 9 parts (10% each). The time interval is automatically divided into 9 parts as well, so `transition: 9s` gives us 9 seconds for the whole animation – 1 second per digit.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Ikkinchi argument ikkita so'zdan biri: `start` yoki `end`.
 
 `start` degani, animatsiya boshida biz birinchi qadamni darhol qilishimiz kerak.
 
+<<<<<<< HEAD
 Buni animatsiya davomida kuzatishimiz mumkin: raqamni bossak, u darhol `1`ga o'zgaradi (birinchi qadam), keyin keyingi soniya boshida o'zgaradi.
+=======
+In action:
+
+[codetabs src="step"]
+
+A click on the digit changes it to `1` (the first step) immediately, and then changes in the beginning of the next second.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Jarayon quyidagicha boradi:
 
 - `0s` -- `-10%` (1-soniyaning boshida birinchi o'zgarish, darhol)
 - `1s` -- `-20%`
 - ...
+<<<<<<< HEAD
 - `8s` -- `-80%`
 - (oxirgi soniya yakuniy qiymatni ko'rsatadi).
 
@@ -302,24 +375,53 @@ Shunday qilib, jarayon quyidagicha boradi:
 
 - `0s` -- `0`
 - `1s` -- `-10%` (1-soniya oxirida birinchi o'zgarish)
+=======
+- `8s` -- `-90%`
+- (the last second shows the final value).
+
+Here, the first change was immediate because of `start` in the `steps`.
+
+The alternative value `end` would mean that the change should be applied not in the beginning, but at the end of each second.
+
+So the process for `steps(9, end)` would go like this:
+
+- `0s` -- `0` (during the first second nothing changes)
+- `1s` -- `-10%` (first change at the end of the 1st second)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 - `2s` -- `-20%`
 - ...
 - `9s` -- `-90%`
 
+<<<<<<< HEAD
 Mana `steps(9, end)` amalda (birinchi raqam o'zgarishi orasidagi pauza'ga e'tibor bering):
 
 [codetabs src="step-end"]
 
 Qisqartma qiymatlari ham mavjud:
+=======
+Here's `steps(9, end)` in action (note the pause before the first digit change):
+
+[codetabs src="step-end"]
+
+There are also some pre-defined shorthands for `steps(...)`:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 - `step-start` -- `steps(1, start)` bilan bir xil. Ya'ni, animatsiya darhol boshlanadi va 1 qadam oladi. Shunday qilib, u darhol boshlanadi va tugaydi, go'yo animatsiya yo'qdek.
 - `step-end` -- `steps(1, end)` bilan bir xil: animatsiyani `transition-duration` oxirida bitta qadamda amalga oshiring.
 
+<<<<<<< HEAD
 Bu qiymatlar kamdan-kam ishlatiladi, chunki bu haqiqatan ham animatsiya emas, balki bitta qadam o'zgarishi.
 
 ## transitionend hodisasi
 
 CSS animatsiyasi tugaganda `transitionend` hodisasi ishga tushadi.
+=======
+These values are rarely used, as they represent not a real animation, but rather a single-step change. We mention them here for completeness.
+
+## Event: "transitionend"
+
+When the CSS animation finishes, the `transitionend` event triggers.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 U animatsiya tugagandan keyin harakat qilish uchun keng qo'llaniladi. Shuningdek, biz animatsiyalarni birlashtirishimiz mumkin.
 
@@ -406,9 +508,96 @@ Mana tushuntirishlar bilan misol:
 
 Saytlaringizda hamma narsa doimiy harakatda bo'lmasa, ehtimol sizga `@keyframes` tez-tez kerak bo'lmaydi.
 
+<<<<<<< HEAD
 ## Xulosa
 
 CSS animatsiyalari bitta yoki bir nechta CSS xususiyatlarining silliq (yoki yo'q) animatsiya o'zgarishlariga imkon beradi.
+=======
+## Performance
+
+Most CSS properties can be animated, because most of them are numeric values. For instance, `width`, `color`, `font-size` are all numbers. When you animate them, the browser gradually changes these numbers frame by frame, creating a smooth effect.
+
+However, not all animations will look as smooth as you'd like, because different CSS properties cost differently to change.
+
+In more technical details, when there's a style change, the browser goes through 3 steps to render the new look:
+
+1. **Layout**: re-compute the geometry and position of each element, then
+2. **Paint**: re-compute how everything should look like at their places, including background, colors,
+3. **Composite**: render the final results into pixels on screen, apply CSS transforms if they exist.
+
+During a CSS animation, this process repeats every frame. However, CSS properties that never affect geometry or position, such as `color`, may skip the Layout step. If a `color` changes, the browser  doesn't calculate any new geometry, it goes to Paint -> Composite. And there are few properties that directly go to Composite. You can find a longer list of CSS properties and which stages they trigger at <https://csstriggers.com>.
+
+The calculations may take time, especially on pages with many elements and a complex layout. And the delays are actually visible on most devices, leading to "jittery", less fluid animations.
+
+Animations of properties that skip the Layout step are faster. It's even better if Paint is skipped too.
+
+The `transform` property is a great choice, because:
+- CSS transforms affect the target element box as a whole (rotate, flip, stretch, shift it).
+- CSS transforms never affect neighbour elements.
+
+...So browsers apply `transform` "on top" of existing Layout and Paint calculations, in the Composite stage.
+
+In other words, the browser calculates the Layout (sizes, positions), paints it with colors, backgrounds, etc at the Paint stage, and then applies `transform` to element boxes that need it.
+
+Changes (animations) of the `transform` property never trigger Layout and Paint steps. More than that, the browser  leverages the graphics accelerator (a special chip on the CPU or graphics card) for CSS transforms, thus making them very efficient.
+
+Luckily, the `transform` property is very powerful. By using `transform` on an element, you could rotate and flip it, stretch and shrink it, move it around, and [much more](https://developer.mozilla.org/docs/Web/CSS/transform#syntax). So instead of `left/margin-left` properties we can use `transform: translateX(…)`, use `transform: scale` for increasing element size, etc.
+
+The `opacity` property also never triggers Layout (also skips Paint in Mozilla Gecko). We can use it for show/hide or fade-in/fade-out effects.
+
+Paring `transform` with `opacity` can usually solve most of our needs, providing fluid, good-looking animations.
+
+For example, here clicking on the `#boat` element adds the class with `transform: translateX(300px)` and `opacity: 0`, thus making it move `300px` to the right and disappear:
+
+```html run height=260 autorun no-beautify
+<img src="https://js.cx/clipart/boat.png" id="boat">
+
+<style>
+#boat {
+  cursor: pointer;
+  transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+}
+
+.move {
+  transform: translateX(300px);
+  opacity: 0;
+}
+</style>
+<script>
+  boat.onclick = () => boat.classList.add('move');
+</script>
+```
+
+Here's a more complex example, with `@keyframes`:
+
+```html run height=80 autorun no-beautify
+<h2 onclick="this.classList.toggle('animated')">click me to start / stop</h2>
+<style>
+  .animated {
+    animation: hello-goodbye 1.8s infinite;
+    width: fit-content;
+  }
+  @keyframes hello-goodbye {
+    0% {
+      transform: translateY(-60px) rotateX(0.7turn);
+      opacity: 0;
+    }
+    50% {
+      transform: none;
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(230px) rotateZ(90deg) scale(0.5);
+      opacity: 0;
+    }
+  }
+</style>
+```
+
+## Summary
+
+CSS animations allow smoothly (or step-by-step) animated changes of one or multiple CSS properties.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Ular ko'pchilik animatsiya vazifalari uchun yaxshi. Shuningdek, biz animatsiyalar uchun JavaScript'dan foydalanishimiz mumkin, keyingi bob bunga bag'ishlangan.
 
@@ -421,6 +610,12 @@ JavaScript animatsiyalariga nisbatan CSS animatsiyalarining cheklovlari:
 - Faqat xususiyat o'zgarishlari emas. Biz JavaScript'da animatsiyaning bir qismi sifatida yangi elementlar yaratishimiz mumkin.
 ```
 
+<<<<<<< HEAD
 Animatsiyalarning aksariyati ushbu bobda tasvirlanganidek CSS yordamida amalga oshirilishi mumkin. Va `transitionend` hodisasi animatsiyadan keyin JavaScript'ni ishga tushirish imkonini beradi, shuning uchun u kod bilan yaxshi integratsiya qilinadi.
+=======
+In early examples in this chapter, we animate `font-size`, `left`, `width`, `height`, etc. In real life projects, we should use `transform: scale()` and `transform: translate()` for better performance.
+
+The majority of animations can be implemented using CSS as described in this chapter. And the `transitionend` event allows JavaScript to be run after the animation, so it integrates fine with the code.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Lekin keyingi bobda biz murakkabroq holatlarni qamrab olish uchun JavaScript animatsiyalarini qilamiz.

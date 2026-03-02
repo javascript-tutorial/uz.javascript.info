@@ -326,7 +326,11 @@ welcome(); // Salom, Mehmon (ichki chaqiruv ishlamoqda)
 
 Endi u ishlaydi, chunki `"func"` nomi funktsional-lokal hisoblanadi. U tashqaridan olinmaydi (va u yerda ko'rinmaydi). Spetsifikatsiya har doim mavjud funktsiyaga murojaat qilishiga kafolat beradi.
 
+<<<<<<< HEAD
 Tashqi kod hali ham `sayHi` yoki `welcome` o'zgaruvchanga ega. Va `func` - bu "ichki funktsiya nomi", funktsiya o'zini o'zi ichkaridan chaqira oladi.
+=======
+The outer code still has its variable `sayHi` or `welcome`. And `func` is an "internal function name", the way for the function to call itself reliably.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```smart header="Funktsiya deklaratsiyasi uchun bunday narsa yo'q"
 Bu yerda tasvirlangan "ichki ism" xususiyati faqat funktsiya ifodalari uchun mavjud, funktsiya deklaratsiyalari uchun emas. Funktsiya deklaratsiyalari uchun yana bitta "ichki" ism qo'shish uchun sintaksis imkoniyati mavjud emas.

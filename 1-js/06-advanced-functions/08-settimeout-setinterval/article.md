@@ -27,7 +27,11 @@ Odatda, bu funktsiya. Tarixiy sabablarga ko'ra kod matnni o'tkazish mumkin, ammo
 : Ishlashdan oldin kechikish, millisekundlarda (1000 ms = 1 soniya), sukut bo'yicha 0.
 
 `arg1`, `arg2`...
+<<<<<<< HEAD
 : Funktsiya uchun argumentlar (IE9- da qo'llab-quvvatlanmaydi)
+=======
+: Arguments for the function
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Masalan, ushbu kod bir soniyadan so'ng `sayHi()` ni chaqiradi:
 
@@ -102,7 +106,11 @@ alert(timerId); // bir xil identifikator (bekor qilinganidan keyin null bo'lmayd
 
 Shunga qaramay, ushbu usullar uchun universal spetsifikatsiya mavjud emas, shuning uchun hammasi yaxshi.
 
+<<<<<<< HEAD
 Brauzerlar uchun taymerlar HTML5 standartidagi [taymerlar bo'limida](https://www.w3.org/TR/html5/webappapis.html#timers) tasvirlangan.
+=======
+For browsers, timers are described in the [timers section](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) of HTML Living Standard.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## setInterval
 
@@ -218,7 +226,11 @@ Va bu yerda `setTimeout` rekursivi uchun rasm:
 
 ![](settimeout-interval.svg)
 
+<<<<<<< HEAD
 **Rekursiv `setTimeout` belgilangan kechikishni kafolatlaydi (bu yerda 100ms).**
+=======
+**The nested `setTimeout` ensures a minimum delay (100ms here) between the end of one call and the beginning of the subsequent one.**
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Buning sababi, avvalgi chaqiruv oxirida yangi chaqiruv rejalashtirilgan.
 
@@ -232,7 +244,11 @@ setTimeout(function() {...}, 100);
 
 `setInterval` uchun funktsiya `clearInterval` chaqirilguncha xotirada qoladi.
 
+<<<<<<< HEAD
 Yon ta'siri bor. Funktsiya tashqi leksik muhitga murojaat qiladi, shuning uchun u yashab turib, tashqi o'zgaruvchanlar ham yashaydi. Ular funktsiyadan ko'ra ko'proq xotirani olishlari mumkin. Shunday qilib, biz endi rejalashtirilgan funktsiyaga muhtoj bo'lmaganda, juda kichik bo'lsa ham, uni bekor qilish yaxshiroqdir.
+=======
+There's a side effect. A function references the outer lexical environment, so, while it lives, outer variables live too. They may take much more memory than the function itself. So when we don't need the scheduled function anymore, it's better to cancel it, even if it's very small.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ````
 
 ## Zero delay setTimeout
@@ -255,7 +271,12 @@ Birinchi satr "chaqiruvni 0ms dan keyin kalendarga kiritadi". Ammo rejalashtiruv
 
 ### CPU vazifalarni ajratish
 
+<<<<<<< HEAD
 `setTimeout` dan foydalanib, CPU och vazifalarni ajratish uchun hiyla-nayrang bor.
+=======
+````smart header="Zero delay is in fact not zero (in a browser)"
+In the browser, there's a limitation of how often nested timers can run. The [HTML Living Standard](https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers) says: "after five nested timers, the interval is forced to be at least 4 milliseconds.".
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Masalan, sintaksisni ta'kidlaydigan skript (ushbu sahifadagi kod misollarini ranglash uchun ishlatiladi) juda og'ir protsessorga ega. Kodni ajratib ko'rsatish uchun u tahlilni amalga oshiradi, ko'plab rangli elementlarni yaratadi, ularni hujjatga qo'shadi -- ko'p narsalarni talab qiladigan katta matn uchun. Hatto brauzer "osilib qolishi" mumkin, bu esa juda yomon.
 
@@ -390,9 +411,16 @@ Brauzer ichidagi skriptlarning yana bir foydasi shundaki, ular foydalanuvchi uch
 
 Shunday qilib, agar biz bitta katta funktsiyani bajaradigan bo'lsak, u biror narsani o'zgartirgan bo'lsa ham, o'zgarishlar tugamaguncha hujjatda aks etmaydi.
 
+<<<<<<< HEAD
 Mana demo:
 ```html run
 <div id="progress"></div>
+=======
+For example, the in-browser timer may slow down for a lot of reasons:
+- The CPU is overloaded.
+- The browser tab is in the background mode.
+- The laptop is on battery saving mode.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 <script>
   let i = 0;

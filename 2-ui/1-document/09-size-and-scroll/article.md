@@ -14,7 +14,11 @@ Xususiyatlarni namoyish etish uchun namuna element sifatida quyidagini ishlatami
   #example {
     width: 300px;
     height: 200px;
+<<<<<<< HEAD
     border: 25px solid #e8c48f;
+=======
+    border: 25px solid #E8C48F;
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
     padding: 20px;
     overflow: auto;
   }
@@ -105,7 +109,11 @@ Geometrik xususiyatlar faqat ko'rsatilgan elementlar uchun hisoblanadi.
 
 Agar element (yoki uning ajdodlaridan biri) `display:none` ga ega bo'lsa yoki hujjatda bo'lmasa, barcha geometrik xususiyatlar nolga teng (`offsetParent` uchun `null`).
 
+<<<<<<< HEAD
 Masalan, biz element yaratganimizda, lekin uni hali hujjatga qo'ymaganimizda yoki u (yoki uning ajdodi) `display:none` ga ega bo'lganda `offsetParent` `null` va `offsetWidth`, `offsetHeight` `0` bo'ladi.
+=======
+For example, `offsetParent` is `null`, and `offsetWidth`, `offsetHeight` are `0` when we created an element, but haven't inserted it into the document yet, or it (or its ancestor) has `display:none`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Biz buni element yashirin ekanligini tekshirish uchun ishlatishimiz mumkin:
 
@@ -115,7 +123,11 @@ function isHidden(elem) {
 }
 ```
 
+<<<<<<< HEAD
 E'tibor bering, bunday `isHidden` ekranda bo'lgan, lekin nol o'lchamga ega elementlar (bo'sh `<div>` kabi) uchun `true` qaytaradi.
+=======
+Please note that such `isHidden` returns `true` for elements that are on-screen, but have zero sizes.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ````
 
 ## clientTop/Left

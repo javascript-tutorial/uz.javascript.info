@@ -23,8 +23,13 @@ function showMessage() {
 `function` kalit so'zi birinchi o'rinda turadi, keyin _funksiya nomi_, so'ngra qavslar orasida _parametrlar_ ro'yxati (vergul bilan ajratilgan, yuqoridagi misolda bo'sh, keyinroq misollarni ko'ramiz) va nihoyat jingalak qavslar orasida funksiya kodi, "funksiya tanasi" deb ham ataladi.
 
 ```js
+<<<<<<< HEAD
 function name(parameter1, parameter2, ...parameterN) {
   // tana
+=======
+function name(parameter1, parameter2, ... parameterN) {
+ // body
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 }
 ```
 
@@ -176,12 +181,21 @@ Qiymat funksiya parametri sifatida uzatilganda, u _argument_ deb ham ataladi.
 
 Boshqacha qilib aytganda, bu atamalarni to'g'ri qo'yish uchun:
 
+<<<<<<< HEAD
 - Parametr - funksiya e'lonidagi qavslar ichida ko'rsatilgan o'zgaruvchi (bu e'lon vaqtidagi atama).
 - Argument - funksiya chaqirilganda uzatiladigan qiymat (bu chaqiruv vaqtidagi atama).
+=======
+- A parameter is the variable listed inside the parentheses in the function declaration (it's a declaration time term).
+- An argument is the value that is passed to the function when it is called (it's a call time term).
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Biz funksiyalarni parametrlarini ko'rsatib e'lon qilamiz, keyin argumentlarni uzatib chaqiramiz.
 
+<<<<<<< HEAD
 Yuqoridagi misolda shunday deyish mumkin: "`showMessage` funksiyasi ikkita parametr bilan e'lon qilingan, keyin ikkita argument bilan chaqirilgan: `from` va `"Salom"`".
+=======
+In the example above, one might say: "the function `showMessage` is declared with two parameters, then called with two arguments: `from` and `"Hello"`".
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## Standart qiymatlar
 
@@ -205,7 +219,17 @@ function showMessage(from, *!*text = "matn berilmagan"*/!*) {
 showMessage("Ann"); // Ann: matn berilmagan
 ```
 
+<<<<<<< HEAD
 Endi agar `text` parametri uzatilmasa, u `"matn berilmagan"` qiymatini oladi.
+=======
+Now if the `text` parameter is not passed, it will get the value `"no text given"`.
+
+The default value also jumps in if the parameter exists, but strictly equals `undefined`, like this:
+
+```js
+showMessage("Ann", undefined); // Ann: no text given
+```
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Parametr mavjud bo'lsa ham, lekin qat'iy ravishda `undefined` ga teng bo'lsa ham standart qiymat ishlaydi:
 
@@ -230,10 +254,48 @@ Yuqoridagi misolda, agar `text` parametri berilsa, `anotherFunction()` umuman ch
 Boshqa tomondan, `text` yo'qolgan har safar u mustaqil ravishda chaqiriladi.
 ```
 
+<<<<<<< HEAD
 ````smart header="Eski JavaScript kodidagi standart parametrlar"
 Bir necha yil oldin JavaScript standart parametrlar sintaksisini qo'llab-quvvatlamagan edi. Shuning uchun odamlar ularni belgilashning boshqa usullarini ishlatganlar.
 
 Hozir biz ularni eski skriptlarda uchratishimiz mumkin.
+=======
+````smart header="Default parameters in old JavaScript code"
+Several years ago, JavaScript didn't support the syntax for default parameters. So people used other ways to specify them.
+
+Nowadays, we can come across them in old scripts.
+
+For example, an explicit check for `undefined`:
+
+```js
+function showMessage(from, text) {
+*!*
+  if (text === undefined) {
+    text = 'no text given';
+  }
+*/!*
+
+  alert( from + ": " + text );
+}
+```
+
+...Or using the `||` operator:
+
+```js
+function showMessage(from, text) {
+  // If the value of text is falsy, assign the default value
+  // this assumes that text == "" is the same as no text at all
+  text = text || 'no text given';
+  ...
+}
+```
+````
+
+
+### Alternative default parameters
+
+Sometimes it makes sense to assign default values for parameters at a later stage after the function declaration.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Masalan, `undefined` uchun aniq tekshiruv:
 
@@ -283,7 +345,11 @@ function showMessage(text) {
 showMessage(); // bo'sh xabar
 ```
 
+<<<<<<< HEAD
 ...Yoki `||` operatoridan foydalanishimiz mumkin:
+=======
+...Or we could use the `||` operator:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js
 function showMessage(text) {
@@ -461,7 +527,11 @@ Bu misollar prefikslarning umumiy ma'nolarini nazarda tutadi. Siz va jamoangiz b
 ```smart header="O'ta qisqa funksiya nomlari"
 *Juda tez-tez* ishlatiladigan funksiyalar ba'zan o'ta qisqa nomlarga ega.
 
+<<<<<<< HEAD
 Masalan, [jQuery](https://jquery.com/) freymvorki `$` bilan funksiya aniqlaydi. [Lodash](https://lodash.com/) kutubxonasining asosiy funksiyasi `_` deb nomlangan.
+=======
+For example, the [jQuery](https://jquery.com/) framework defines a function with `$`. The [Lodash](https://lodash.com/) library has its core function named `_`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Bular istisnolar. Umuman funksiya nomlari qisqa va tavsiflovchi bo'lishi kerak.
 ```
@@ -528,7 +598,11 @@ function name(vergul, bilan, ajratilgan, parametrlar) {
 
 Kodni toza va tushunish oson qilish uchun funksiyada asosan mahalliy o'zgaruvchilar va parametrlardan foydalanish tavsiya etiladi, tashqi o'zgaruvchilardan emas.
 
+<<<<<<< HEAD
 Parametrlar oladigan, ular bilan ishlaydigan va natija qaytaradigan funksiyani tushunish har doim parametr olmaydigan, lekin yon ta'sir sifatida tashqi o'zgaruvchilarni o'zgartiradigan funksiyadan osondir.
+=======
+It is always easier to understand a function which gets parameters, works with them and returns a result than a function which gets no parameters, but modifies outer variables as a side effect.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Funksiyani nomlash:
 

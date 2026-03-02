@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 # Sichqoncha hodisalari
+=======
+
+# Mouse events
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Ushbu bobda sichqoncha hodisalari va ularning xossalari haqida batafsil ma'lumot beramiz.
 
@@ -39,9 +44,15 @@ Bitta harakat bir nechta hodisalarni boshlagan hollarda, ularning tartibi belgil
 ```online
 Quyidagi tugmani bosing va hodisalarni ko'rasiz. Ikki marta bosishni ham sinab ko'ring.
 
+<<<<<<< HEAD
 Quyidagi test stendida barcha sichqoncha hodisalari qayd qilinadi va agar ular orasida 1 soniyadan ko'proq kechikish bo'lsa, ular gorizontal chiziq bilan ajratiladi.
 
 Shuningdek, sichqoncha tugmasini aniqlashga imkon beruvchi `button` xossasini ko'rishimiz mumkin, u quyida tushuntiriladi.
+=======
+On the teststand below, all mouse events are logged, and if there is more than a 1 second delay between them, they are separated by a horizontal rule.
+
+Also, we can see the `button` property that allows us to detect the mouse button; it's explained below.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 <input onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" value="Menga o'ng yoki chap sichqoncha tugmasi bilan bosing" type="button"> <input onclick="logClear('test')" value="Tozalash" type="button"> <form id="testform" name="testform"> <textarea style="font-size:12px;height:150px;width:360px;"></textarea></form>
 ```
@@ -52,7 +63,11 @@ Bosishga bog'liq hodisalar doim aynan qaysi sichqoncha tugmasini olish imkonini 
 
 Biz odatda uni `click` va `contextmenu` hodisalari uchun ishlatmaymiz, chunki birinchisi faqat chap bosishda, ikkinchisi esa faqat o'ng bosishda sodir bo'ladi.
 
+<<<<<<< HEAD
 Boshqa tomondan, `mousedown` va `mouseup` ishlov beruvchilari `event.button` ga muhtoj bo'lishi mumkin, chunki bu hodisalar har qanday tugmada ishga tushadi, shuning uchun `button` "o'ng-mousedown" va "chap-mousedown" o'rtasida farq qilish imkonini beradi.
+=======
+On the other hand, `mousedown` and `mouseup` handlers may need `event.button`, because these events trigger on any button, so `button` allows to distinguish between "right-mousedown" and "left-mousedown".
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 `event.button` ning mumkin bo'lgan qiymatlari:
 
@@ -154,7 +169,11 @@ Va agar sichqoncha markazda bo'lsa, hujjatda qaysi joyda bo'lishidan qat'i nazar
 
 ## mousedown da tanlovni oldini olish
 
+<<<<<<< HEAD
 Ikki marta sichqoncha bosish ba'zi interfeyslarda bezovta qiluvchi yon ta'sirga ega: u matnni tanlaydi.
+=======
+Double mouse click has a side effect that may be disturbing in some interfaces: it selects text.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Masalan, quyidagi matnni ikki marta bosish bizning ishlov beruvchimizdan tashqari uni tanlaydi:
 

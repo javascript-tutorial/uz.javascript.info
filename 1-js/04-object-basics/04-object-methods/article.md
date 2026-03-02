@@ -51,7 +51,7 @@ let user = {
 // birinchi, e'lon qiling
 function sayHi() {
   alert("Hello!");
-};
+}
 
 // keyin usul sifatida qo'shing
 user.sayHi = sayHi;
@@ -91,7 +91,11 @@ let user = {
 
 Ko'rsatilganidek, biz `"function"` ni qoldirib, faqat `sayHi()` yozishimiz mumkin.
 
+<<<<<<< HEAD
 Rostini aytsam, yozuvlar bir-biriga to'liq o'xshash emas. Obyektni meros qilib olish bilan bog'liq nozik farqlar mavjud (keyinroq ko'rib chiqiladi), ammo hozircha ularning ahamiyati yo'q. Deyarli barcha hollarda qisqa sintaksisga ustunlik beriladi.
+=======
+To tell the truth, the notations are not fully identical. There are subtle differences related to object inheritance (to be covered later), but for now they do not matter. In almost all cases, the shorter syntax is preferred.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ## "this" usullarda
 

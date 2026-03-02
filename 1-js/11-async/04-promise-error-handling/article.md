@@ -292,6 +292,7 @@ Node.js kabi brauzerdan tashqari muhitda ishlov berilmagan xatolarni kuzatib bor
 
 ## Xulosa
 
+<<<<<<< HEAD
 - `.catch` tutqichlari har qanday rad etishni tutib qoladi: `reject()` chaqiruvi yoki ishlov beruvchiga xato tashlanadi.
 - Biz xatolarni ko'rib chiqishni va ularni qanday boshqarishni bilishni xohlagan joylarga `.catch` ni aniq joylashtirishimiz kerak. Ishlovchi xatolarni tahlil qilishi kerak (maxsus xato klasslari yordam beradi) va noma'lumlarini qayta tiklashi kerak.
 - Xatolarni qanday hal qilishni bilmasak, `.catch` dan foydalanmaslik odatiy holdir (barcha xatolar tiklanmaydi).
@@ -336,3 +337,10 @@ Bu yerda `(1)` satrida biz hujjatni xiralashtirish orqali yuklanishni ko'rsatami
 Promise bajarilgandan so'ng, u muvaffaqiyatli fetch yoki xato bo'ladimi, `finally` `(2)` satrida boshlanadi va ko'rsatkichni to'xtatadi.
 
 `finally` dan nol-tanaffus promiseni qaytarish bilan `(*)` brauzerning kichik hiyla-nayranglari mavjud. Buning sababi shundaki, ba'zi brauzerlar (masalan, Chrome) hujjatdagi o'zgarishlarni bo'yash uchun tashqarida promise qiymatlariga "biroz vaqt" kerak. Shunday qilib, zanjirga o'tmasdan oldin ko'rsatkich vizual ravishda to'xtatilishini ta'minlaydi.
+=======
+- `.catch` handles errors in promises of all kinds: be it a `reject()` call, or an error thrown in a handler.
+- `.then` also catches errors in the same manner, if given the second argument (which is the error handler).
+- We should place `.catch` exactly in places where we want to handle errors and know how to handle them. The handler should analyze errors (custom error classes help) and rethrow unknown ones (maybe they are programming mistakes).
+- It's ok not to use `.catch` at all, if there's no way to recover from an error.
+- In any case we should have the `unhandledrejection` event handler (for browsers, and analogs for other environments) to track unhandled errors and inform the user (and probably our server) about them, so that our app never "just dies".
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11

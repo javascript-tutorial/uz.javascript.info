@@ -8,7 +8,14 @@ Qiyshiq chiziq `/` JavaScript regexp `pattern:/.../` ichida ekranlanishi kerak, 
 
 Bizga raqam, operator, keyin yana raqam kerak. Va ular orasida ixtiyoriy bo'shliqlar.
 
+<<<<<<< HEAD
 To'liq doimiy ifoda: `pattern:-?\d+(\.\d+)?\s*[-+*/]\s*-?\d+(\.\d+)?`.
+=======
+It has 3 parts, with `pattern:\s*` between them:
+1. `pattern:-?\d+(\.\d+)?` - the first number,
+2. `pattern:[-+*/]` - the operator,
+3. `pattern:-?\d+(\.\d+)?` - the second number.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Unda `pattern:\s*` bilan ajratilgan 3 ta qism bor:
 
@@ -56,4 +63,18 @@ function parse(expr) {
 }
 
 alert(parse("-1.23 * 3.45")); // -1.23, *, 3.45
+```
+
+As an alternative to using the non-capturing `?:`, we could name the groups, like this:
+
+```js run
+function parse(expr) {
+	let regexp = /(?<a>-?\d+(?:\.\d+)?)\s*(?<operator>[-+*\/])\s*(?<b>-?\d+(?:\.\d+)?)/;
+
+	let result = expr.match(regexp);
+
+	return [result.groups.a, result.groups.operator, result.groups.b];
+}
+
+alert( parse("-1.23 * 3.45") );  // -1.23, *, 3.45;
 ```

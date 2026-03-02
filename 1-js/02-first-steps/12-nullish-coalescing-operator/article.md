@@ -4,7 +4,11 @@
 
 Nullab birlashtirish operatori ikki savol belgisi `??` bilan yoziladi.
 
+<<<<<<< HEAD
 U `null` va `undefined` ni bir xil darajada ko'rib chiqadi, shuning uchun bu maqolada maxsus atama ishlatamiz. Agar ifoda `null` ham, `undefined` ham bo'lmasa, uni "aniqlangan" deb ataymiz.
+=======
+As it treats `null` and `undefined` similarly, we'll use a special term here, in this article. For brevity, we'll say that a value is "defined" when it's neither `null` nor `undefined`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 `a ?? b` ning natijasi:
 
@@ -23,14 +27,24 @@ result = a !== null && a !== undefined ? a : b;
 
 Endi `??` nima qilishi mutlaqo aniq bo'lishi kerak. Qayerda yordam berishini ko'rib chiqaylik.
 
+<<<<<<< HEAD
 `??` ning umumiy foydalanish holati - potensial aniqlanmagan o'zgaruvchi uchun standart qiymat berish.
 
 Masalan, bu yerda agar aniqlangan bo'lsa `user` ni, aks holda `Anonymous` ni ko'rsatamiz:
+=======
+The common use case for `??` is to provide a default value.
+
+For example, here we show `user` if its value isn't `null/undefined`, otherwise `Anonymous`:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js run
 let user;
 
+<<<<<<< HEAD
 alert(user ?? "Anonymous"); // Anonymous (user aniqlanmagan)
+=======
+alert(user ?? "Anonymous"); // Anonymous (user is undefined)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```
 
 Bu yerda `user` ga nom tayinlangan misol:
@@ -38,14 +52,24 @@ Bu yerda `user` ga nom tayinlangan misol:
 ```js run
 let user = "John";
 
+<<<<<<< HEAD
 alert(user ?? "Anonymous"); // John (user aniqlangan)
+=======
+alert(user ?? "Anonymous"); // John (user is not null/undefined)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```
 
 Shuningdek, `null/undefined` bo'lmagan ro'yxatdan birinchi qiymatni tanlash uchun `??` ketma-ketligini ishlatishimiz mumkin.
 
+<<<<<<< HEAD
 Aytaylik, bizda foydalanuvchi ma'lumotlari `firstName`, `lastName` yoki `nickName` o'zgaruvchilarida bor. Agar foydalanuvchi qiymat kiritmaslikni hal qilgan bo'lsa, ularning barchasi aniqlanmagan bo'lishi mumkin.
 
 Biz ushbu o'zgaruvchilardan birini ishlatib foydalanuvchi nomini ko'rsatmoqchimiz yoki agar ularning barchasi aniqlanmagan bo'lsa "Anonymous" ko'rsatmoqchimiz.
+=======
+Let's say we have a user's data in variables `firstName`, `lastName` or `nickName`. All of them may be not defined, if the user decided not to fill in the corresponding values.
+
+We'd like to display the user name using one of these variables, or show "Anonymous" if all of them are `null/undefined`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Buning uchun `??` operatoridan foydalanamiz:
 
@@ -77,7 +101,11 @@ alert(firstName || lastName || nickName || "Anonymous"); // Supercoder
 */!*
 ```
 
+<<<<<<< HEAD
 Tarixan YOKI `||` operatori birinchi bo'lib paydo bo'lgan. U JavaScript boshidanoq mavjud, shuning uchun dasturchilar uzoq vaqt davomida bunday maqsadlar uchun foydalanib kelishgan.
+=======
+Historically, the OR `||` operator was there first. It's been there since the beginning of JavaScript, so developers were using it for such purposes for a long time.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Boshqa tomondan, nullab birlashtirish operatori `??` JavaScript-ga yaqinda qo'shilgan va buning sababi odamlar `||` dan butunlay mamnun emas edi.
 
@@ -108,11 +136,19 @@ Amalda nol balandlik ko'pincha to'g'ri qiymat bo'lib, standart bilan almashtiril
 
 ## Ustunlik
 
+<<<<<<< HEAD
 `??` operatorining ustunligi `||` bilan deyarli bir xil, faqat biroz pastroq. [MDN jadvalida](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) u `5` ga teng, `||` esa `6`.
+=======
+The precedence of the `??` operator is the same as `||`. They both equal `3` in the [MDN table](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table).
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Bu shuni anglatadiki, `||` kabi, nullab birlashtirish operatori `??` ham `=` va `?` dan oldin, lekin `+`, `*` kabi boshqa ko'pchilik operatsiyalardan keyin baholanadi.
 
+<<<<<<< HEAD
 Shuning uchun agar biz boshqa operatorlar bilan ifodada `??` bilan qiymat tanlashni istasak, qavs qo'shishni ko'rib chiqing:
+=======
+So we may need to add parentheses in expressions like this:
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 ```js run
 let height = null;
@@ -130,8 +166,13 @@ Aks holda, agar qavslarni tashlab qo'ysak, `*` ning ustunligi `??` dan yuqori bo
 // qavslarsiz
 let area = height ?? 100 * width ?? 50;
 
+<<<<<<< HEAD
 // ...xuddi shu narsani bajaradi (ehtimol biz istagan narsa emas):
 let area = height ?? 100 * width ?? 50;
+=======
+// ...works this way (not what we want):
+let area = height ?? (100 * width) ?? 50;
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```
 
 ### ?? ni && yoki || bilan ishlatish

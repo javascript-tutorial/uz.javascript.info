@@ -24,7 +24,11 @@ var gVar = 5;
 alert(window.gVar); // 5 (global objektning xususiyatiga aylandi)
 ```
 
+<<<<<<< HEAD
 Funktsiya e'lonlari ham xuddi shu ta'sirga ega (asosiy kod oqimidagi `function` kalit so'zi bilan iboralar, funktsiya ifodalari emas).
+=======
+Function declarations have the same effect (statements with `function` keyword in the main code flow, not function expressions).
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Bunga tayanmang! Bu xatti-harakat moslashish sabablari uchun mavjud. Zamonaviy skriptlar [JavaScript modullari](info:modules)dan foydalanadi, bu yerda bunday narsa sodir bo'lmaydi.
 

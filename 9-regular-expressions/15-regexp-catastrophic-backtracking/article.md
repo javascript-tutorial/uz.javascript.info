@@ -282,7 +282,11 @@ alert( "JavaScript".match(/(?=(\w+))\1Script/)); // null
 Biz `pattern:\w` o'rniga `pattern:(?=(\w+))\1` ga murakkabroq muntazam ifoda qo'yishimiz mumkin, agar undan keyin `pattern:+` uchun orqaga qaytishni taqiqlashimiz kerak bo'lsa.
 
 ```smart
+<<<<<<< HEAD
 Egalik kvantifikatorlari va oldinga qarash o'rtasidagi munosabat haqida ko'proq ma'lumot [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](http://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) va [Mimicking Atomic Groups](http://blog.stevenlevithan.com/archives/mimic-atomic-groups) maqolalarida.
+=======
+There's more about the relation between possessive quantifiers and lookahead in articles [Regex: Emulate Atomic Grouping (and Possessive Quantifiers) with LookAhead](https://instanceof.me/post/52245507631/regex-emulate-atomic-grouping-with-lookahead) and [Mimicking Atomic Groups](https://blog.stevenlevithan.com/archives/mimic-atomic-groups).
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```
 
 Keling, orqaga qaytishni oldini olish uchun oldinga qarishdan foydalanib birinchi misolni qayta yozaylik:

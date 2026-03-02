@@ -59,7 +59,15 @@ alert( str.match(/\d+\b(?!€)/g) ); // 2 (narx mos kelmaydi)
 
 ## Orqaga qarash
 
+<<<<<<< HEAD
 Oldinga qarash "nima keyin keladi" uchun shart qo'shish imkonini beradi.
+=======
+```warn header="Lookbehind browser compatibility"
+Please Note: Lookbehind is not supported in non-V8 browsers, such as Safari, Internet Explorer.
+```
+
+Lookahead allows to add a condition for "what follows".
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Orqaga qarash o'xshash, lekin orqaga qaradi. Ya'ni, faqat undan oldin biror narsa bo'lgan holda naqshga mos kelish imkonini beradi.
 

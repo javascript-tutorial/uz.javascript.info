@@ -11,6 +11,7 @@
       <div id="brick"></div>
     </div>
 
+<<<<<<< HEAD
     <script>
       brick.onclick = function () {
         animate({
@@ -23,6 +24,23 @@
                   Math.pow(b, 2)
                 );
               }
+=======
+<body>
+
+
+  <div id="path">
+    <div id="brick"></div>
+  </div>
+
+  <script>
+    brick.onclick = function() {
+      animate({
+        duration: 3000,
+        timing: function bounce(timeFraction) {
+          for (let a = 0, b = 1; 1; a += b, b /= 2) {
+            if (timeFraction >= (7 - 4 * a) / 11) {
+              return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
             }
           },
           draw: function (progress) {

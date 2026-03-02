@@ -4,6 +4,7 @@ body {
   font: 75%/120% sans-serif;
 }
 
+<<<<<<< HEAD
 h2 {
   font: bold 190%/100% sans-serif;
   margin: 0 0 0.2em;
@@ -14,6 +15,8 @@ h2 em {
   color: #999999;
 }
 
+=======
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 #largeImg {
   border: solid 1px #ccc;
   width: 550px;
@@ -31,5 +34,19 @@ h2 em {
 }
 
 #thumbs a:hover {
+<<<<<<< HEAD
   border-color: #ff9900;
 }
+=======
+  border-color: #FF9900;
+}
+
+#thumbs li {
+  list-style: none;
+}
+
+#thumbs {
+  margin: 0;
+  padding: 0;
+}
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11

@@ -103,7 +103,11 @@ Buning sababi, `sayHiMiksin` ning usullari `[[HomeObject]]` ga o'rnatilgan. Dema
 
 ## EventMiksin
 
+<<<<<<< HEAD
 Endi haqiqiy hayot uchun miksin yasaymiz.
+=======
+As `super` looks for parent methods in `[[HomeObject]].[[Prototype]]`, that means it searches `sayHiMixin.[[Prototype]]`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Ko'p obyektlarning muhim xususiyati hodisalar bilan ishlashdir.
 

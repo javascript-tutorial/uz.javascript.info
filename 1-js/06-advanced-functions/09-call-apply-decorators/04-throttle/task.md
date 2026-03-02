@@ -8,7 +8,13 @@ importance: 5
 
 **`debounce` bilan farq -- agar sovuq vaqt davomida e'tiborsiz qilingan chaqiruv oxirgi bo'lsa, u kechikish oxirida amalga oshiriladi.**
 
+<<<<<<< HEAD
 Keling, ushbu talabni yaxshiroq tushunish va qayerdan kelib chiqqanligini bilish uchun real dasturni tekshirib ko'raylik.
+=======
+Compared to the debounce decorator, the behavior is completely different:
+- `debounce` runs the function once after the "cooldown" period. Good for processing the final result.
+- `throttle` runs it not more often than given `ms` time. Good for regular updates that shouldn't be very often.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 **Masalan, biz sichqoncha harakatlarini kuzatishni xohlaymiz.**
 

@@ -54,7 +54,11 @@ Zamonaviy JavaScript-ning barcha xususiyatlarini to'liq yoqish uchun skriptlarni
 
 Direktiva skriptning yuqorisida yoki funksiya tanasining boshida bo'lishi kerak.
 
+<<<<<<< HEAD
 `"use strict"` bo'lmasa ham, hamma narsa ishlaydi, lekin ba'zi xususiyatlar eski uslubda, "mos" tarzda ishlaydi. Biz odatda zamonaviy xatti-harakatni afzal ko'ramiz.
+=======
+Without `"use strict"`, everything still works, but some features behave in the old-fashioned, "compatible" way. We'd generally prefer the modern behavior.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Tilning ba'zi zamonaviy xususiyatlari (kelajakda o'rganadigan sinflar kabi) qat'iy rejimni bilvosita yoqadi.
 
@@ -105,6 +109,7 @@ Batafsil: <info:variables> va <info:types>.
 Biz brauzerni ish muhiti sifatida ishlatamoqdamiz, shuning uchun asosiy UI funksiyalar quyidagicha bo'ladi:
 
 [`prompt(question, [default])`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt)
+<<<<<<< HEAD
 : `question` so'rash va tashrif buyuruvchi kiritgan narsani yoki "bekor qilish"ni bossalar `null` ni qaytarish.
 
 [`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
@@ -112,6 +117,15 @@ Biz brauzerni ish muhiti sifatida ishlatamoqdamiz, shuning uchun asosiy UI funks
 
 [`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
 : `message` ni chiqarish.
+=======
+: Ask a `question`, and return either what the visitor entered or `null` if they clicked "cancel".
+
+[`confirm(question)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)
+: Ask a `question` and suggest to choose between Ok and Cancel. The choice is returned as `true/false`.
+
+[`alert(message)`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)
+: Output a `message`.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Bu funksiyalarning barchasi _modal_, ular kod bajarilishini to'xtatadi va tashrif buyuruvchi javob berguncha sahifa bilan o'zaro ta'sirni oldini oladi.
 
@@ -144,8 +158,13 @@ Arifmetik
 Tayinlashlar
 : Oddiy tayinlash: `a = b` va birlashtirilganlar `a *= 2` kabi.
 
+<<<<<<< HEAD
 Bitli
 : Bitli operatorlar eng past, bit darajasida 32-bitli butun sonlar bilan ishlaydi: kerak bo'lganda [hujjatlarga](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) qarang.
+=======
+Bitwise
+: Bitwise operators work with 32-bit integers at the lowest, bit-level: see the [docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#bitwise_operators) when they are needed.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Shartli
 : Uchta parametrli yagona operator: `cond ? resultA : resultB`. Agar `cond` haqiqiy bo'lsa, `resultA` ni qaytaradi, aks holda `resultB` ni.
@@ -256,9 +275,15 @@ JavaScript-da funksiya yaratishning uchta usulini ko'rib chiqdik:
 
 3. Arrow funksiyalar:
 
+<<<<<<< HEAD
    ```js
    // o'ng tomonda ifoda
    let sum = (a, b) => a + b;
+=======
+    ```js
+    // expression on the right side
+    let sum = (a, b) => a + b;
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
    // yoki { ... } bilan ko'p qatorli sintaksis, bu yerda return kerak:
    let sum = (a, b) => {

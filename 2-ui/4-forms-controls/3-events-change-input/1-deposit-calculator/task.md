@@ -15,8 +15,15 @@ Har qanday kirish o'zgarishi darhol qayta ishlanishi kerak.
 Formula quyidagicha:
 
 ```js
+<<<<<<< HEAD
 // boshlang'ich: boshlang'ich pul summasi
 // qiziqish: masalan. 0,05 yiliga 5% degani
 // yillar: necha yil kutish kerak
 let result = Math.round(initial * (1 + interest * years));
+=======
+// initial: the initial money sum
+// interest: e.g. 0.05 means 5% per year
+// years: how many years to wait
+let result = Math.round(initial * (1 + interest) ** years);
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 ```

@@ -8,7 +8,11 @@ Biz nafaqat o'z maqsadlarimiz uchun ixtiro qilgan butunlay yangi eventlarni, bal
 
 ## Event konstruktor
 
+<<<<<<< HEAD
 O'rnatilgan event sinflari DOM element sinflariga o'xshash ierarxiya hosil qiladi. Ildizi o'rnatilgan [Event](http://www.w3.org/TR/dom/#event) sinfi.
+=======
+Built-in event classes form a hierarchy, similar to DOM element classes. The root is the built-in [Event](https://dom.spec.whatwg.org/#events) class.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Biz `Event` obyektlarini quyidagicha yaratishimiz mumkin:
 
@@ -209,7 +213,11 @@ E'tibor bering: eventda `cancelable: true` bayrog'i bo'lishi kerak, aks holda `e
 
 ## Eventlar ichida eventlar sinxrondir
 
+<<<<<<< HEAD
 Odatda eventlar navbatda qayta ishlanadi. Ya'ni: brauzer `onclick` ni qayta ishlayotgan bo'lsa va yangi event sodir bo'lsa, masalan sichqon harakatlandi, uning qayta ishlanishi navbatga qo'yiladi, tegishli `mousemove` handlerlari `onclick` qayta ishlanishi tugagandan keyin chaqiriladi.
+=======
+Usually events are processed in a queue. That is: if the browser is processing `onclick` and a new event occurs, e.g. mouse moved, then its handling is queued up, corresponding `mousemove` handlers will be called after `onclick` processing is finished.
+>>>>>>> ff804bc19351b72bc5df7766f4b9eb8249a3cb11
 
 Muhim istisno - bitta event boshqasining ichidan ishga tushirilganda, masalan `dispatchEvent` yordamida. Bunday eventlar darhol qayta ishlanadi: yangi event handlerlari chaqiriladi, keyin joriy event qayta ishlanishi davom etadi.
 

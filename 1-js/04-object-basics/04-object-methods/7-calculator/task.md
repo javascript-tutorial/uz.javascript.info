@@ -6,9 +6,15 @@ muhimlik: 5
 
 Uch usul bilan `calculator` obyektini yarating:
 
+<<<<<<< HEAD
 - `read()` ikkita qiymatni so'raydi va ularni obyekt xususiyatlari sifatida saqlaydi.
 - `sum()` saqlangan qiymatlar yig'indisini qaytaradi.
 - `mul()` saqlangan qiymatlarni ko'paytiradi va natijani qaytaradi.
+=======
+- `read()` prompts for two values and saves them as object properties with names `a` and `b` respectively.
+- `sum()` returns the sum of saved values.
+- `mul()` multiplies saved values and returns the result.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js
 let calculator = {

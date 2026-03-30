@@ -21,14 +21,22 @@ alert( rabbit.hasOwnProperty('name') ); // true
 
 Ammo bu hali hammasi emas.
 
+<<<<<<< HEAD
 Tuzatishdan keyin ham, `"class Rabbit extends Object"` va `class Rabbit` o'rtasida hali ham muhim farq bor.
+=======
+Even after the fix, there's still an important difference between `"class Rabbit extends Object"` and `class Rabbit`.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Ma'lumki, "kengaytirish" sintaksisida ikkita prototip mavjud:
 
 1. Konstruktor funktsiyalarining `"prototype"` o'rtasida (usullar uchun).
 2. Konstruktor funktsiyalari orasida (statik usullar uchun).
 
+<<<<<<< HEAD
 Bizning holatimizda, `class Rabbit extends Object` uchun bu quyidagilarni anglatadi:
+=======
+In the case of `class Rabbit extends Object` it means:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run
 class Rabbit extends Object {}
@@ -37,7 +45,11 @@ alert(Rabbit.prototype.__proto__ === Object.prototype); // (1) true
 alert(Rabbit.__proto__ === Object); // (2) true
 ```
 
+<<<<<<< HEAD
 Shunday qilib, `Rabbit` endi `Rabbit` orqali `Object` ning statik usullariga kirishni ta'minlaydi:
+=======
+So `Rabbit` now provides access to the static methods of `Object` via `Rabbit`, like this:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run
 class Rabbit extends Object {}
@@ -67,7 +79,11 @@ alert ( Rabbit.getOwnPropertyNames({a: 1, b: 2})); // Error
 
 Shunday qilib, `Rabbit` bu holda `Object` ning statik usullariga kirishni ta'minlamaydi.
 
+<<<<<<< HEAD
 Aytgancha, `Function.prototype` "umumiy" funktsiya usullariga ega, masalan `call`, `bind` va boshqalar. Ikkala holatda ham ular mavjud, chunki `Object` konstruktori `Object.__ proto__ = == Funktsiya.prototype`.
+=======
+By the way, `Function.prototype` also has "generic" function methods, like `call`, `bind` etc. They are ultimately available in both cases, because for the built-in `Object` constructor, `Object.__proto__ === Function.prototype`.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Here's the picture:
 

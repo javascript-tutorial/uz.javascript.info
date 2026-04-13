@@ -68,9 +68,13 @@ if (cond) {
 
 ## "Else" ifodasi
 
+<<<<<<< HEAD
 `If` ifodasi ixtiyoriy `else` blokini o'z ichiga olishi mumkin. U shart noto'g'ri bo'lganida amalga oshiriladi.
 
 Masalan:
+=======
+The `if` statement may contain an optional `else` block. It executes when the condition is falsy.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run
 let year = prompt(
@@ -214,10 +218,17 @@ alert(message);
 
 Avvaliga nima bo'layotganini tushunish qiyin bo'lishi mumkin. Ammo yaqindan ko'rib chiqqach, bu oddiy testlar ketma-ketligi ekanligini ko'rishimiz mumkin:
 
+<<<<<<< HEAD
 1. Birinchi savol belgisi `age < 3` ni tekshiradi.
 2. Agar rost bo'lsa -- u qaytadi `'Salom bolakay!'`. Aks holda, u yo'g'on ichakdan '":"' keyingi ifodaga davom etadi, `age < 18` ni tekshirishadi.
 3. Agar shu rost bo'lsa -- u qaytadi `'Salom!'`. Aks holda, u yo'g'on ichakdan '":"' keyingi ifodaga davom etadi, `age < 100` ni tekshirishadi.
 4. Agar shu rost bo'lsa -- u qaytadi `'Assalomu aleykum!'`. Aks holda, u yo'g'on ichakdan '":"' ohirgi ifodaga davom etadi, `Qanday g'ayrioddiy yosh!` ni qaytaradi.
+=======
+1. The first question mark checks whether `age < 3`.
+2. If true -- it returns `'Hi, baby!'`. Otherwise, it continues to the expression after the colon ":", checking `age < 18`.
+3. If that's true -- it returns `'Hello!'`. Otherwise, it continues to the expression after the next colon ":", checking `age < 100`.
+4. If that's true -- it returns `'Greetings!'`. Otherwise, it continues to the expression after the last colon ":", returning `'What an unusual age!'`.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Bu `if..else` yordamida qanday ko'rinishga ega:
 

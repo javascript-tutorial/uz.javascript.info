@@ -4,10 +4,17 @@ Biz ko'plab taqqoslash operatorlarini matematikadan bilamiz.
 
 JavaScript da ular quyidagicha yoziladi:
 
+<<<<<<< HEAD
 - Katta/kichik: <code>a &gt; b</code>, <code>a &lt; b</code>.
 - Katta/kichik yoki teng: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
 - Teng: `a == b`, iltimos, qo'sh tenglik belgisi `==` tenglik testini anglatishini unutmang, bitta `a = b` esa tayinlashni anglatadi.
 - Teng emas: Matematikada belgilanishi <code>&ne;</code>, lekin JavaScript da <code>a != b</code> deb yoziladi.
+=======
+- Greater/less than: <code>a &gt; b</code>, <code>a &lt; b</code>.
+- Greater/less than or equals: <code>a &gt;= b</code>, <code>a &lt;= b</code>.
+- Equals: `a == b`, please note the double equality sign `==` means the equality test, while a single one `a = b` means an assignment.
+- Not equals: In maths the notation is <code>&ne;</code>, but in JavaScript it's written as <code>a != b</code>.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Ushbu maqolada biz turli xil taqqoslashlar, JavaScript ularni qanday amalga oshirishi, shu jumladan muhim o'ziga xosliklar haqida ko'proq bilib olamiz.
 
@@ -209,8 +216,16 @@ Nega biz bu misollarni ko'rib chiqdik? Bu o'ziga xosliklarni har doim eslab turi
 
 ## Xulosa
 
+<<<<<<< HEAD
 - Taqqoslash operatorlari boolean qiymat qaytaradi.
 - Stringlar "lug'at" tartibida harf-harf taqqoslanadi.
 - Turli turdagi qiymatlar taqqoslanganda, ular raqamlarga aylantiriladi (qattiq tenglik tekshiruvidan tashqari).
 - `null` va `undefined` qiymatlari bir-biriga `==` teng va boshqa hech qanday qiymatga teng emas.
 - Vaqti-vaqti bilan `null/undefined` bo'lishi mumkin bo'lgan o'zgaruvchilar bilan `>` yoki `<` kabi taqqoslashlarni ishlatishda ehtiyot bo'ling. `null/undefined` ni alohida tekshirish yaxshi g'oya.
+=======
+- Comparison operators return a boolean value.
+- Strings are compared letter-by-letter in the "dictionary" order.
+- When values of different types are compared, they get converted to numbers (with the exclusion of a strict equality check).
+- The values `null` and `undefined` are equal `==` to themselves and each other, but do not equal any other value.
+- Be careful when using comparisons like `>` or `<` with variables that can occasionally be `null/undefined`. Checking for `null/undefined` separately is a good idea.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf

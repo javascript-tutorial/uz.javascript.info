@@ -66,7 +66,11 @@ Skript fayllari HTML-ga `src` atributi bilan biriktiriladi:
 <script src="/path/to/script.js"></script>
 ```
 
+<<<<<<< HEAD
 Bu yerda `/path/to/script.js` - skript fayliga (sayt ildizidan) mutlaq yo'l.
+=======
+Here, `/path/to/script.js` is an absolute path to the script from the site root. One can also provide a relative path from the current page. For instance, `src="script.js"`, just like `src="./script.js"`, would mean a file `"script.js"` in the current folder.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Joriy sahifadan nisbiy yo'lni ham ko'rsatish mumkin. Masalan, `src="script.js"` joriy papkada joylashgan `"script.js"` faylini bildiradi.
 

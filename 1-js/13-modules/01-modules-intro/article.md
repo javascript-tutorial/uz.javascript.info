@@ -10,11 +10,19 @@ Ammo oxir-oqibat skriptlar tobora murakkablashib bordi, shuning uchun hamjamiyat
 
 Masalan:
 
+<<<<<<< HEAD
 - [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- dastlab kutubxona tomonidan amalga oshirilgan eng qadimgi modul tizimlaridan biri [request.js](http://requirejs.org/).
 - [CommonJS](http://wiki.commonjs.org/wiki/Modules/1.1) -- Node.js server uchun yaratilgan modul tizimi.
 - [UMD](https://github.com/umdjs/umd) -- yana bitta modul tizimi, universal sifatida tavsiya etilgan, AMD va CommonJS bilan mos keladi.
 
 Endi bularning barchasi asta-sekin tarixning bir qismiga aylanadi, ammo biz ularni eski skriptlarda topishimiz mumkin. Til darajasidagi modul tizimi standartda 2015 yilda paydo bo'lgan va o'sha paytdan boshlab asta-sekin rivojlanib borgan va hozirda barcha yirik brauzerlar va Node.js tomonidan qo'llab quvatlanadi.
+=======
+- [AMD](https://en.wikipedia.org/wiki/Asynchronous_module_definition) -- one of the most ancient module systems, initially implemented by the library [require.js](https://requirejs.org/).
+- [CommonJS](https://wiki.commonjs.org/wiki/Modules/1.1) -- the module system created for Node.js server.
+- [UMD](https://github.com/umdjs/umd) -- one more module system, suggested as a universal one, compatible with AMD and CommonJS.
+
+Now these all slowly became a part of history, but we still can find them in old scripts.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ## Modul nima?
 
@@ -160,7 +168,11 @@ alert(admin.name); // Pete
 
 Shunday qilib, yana takrorlaymiz -- modul faqat bir marta bajariladi. Eksportlar yaratiladi, so'ngra ular importchilar o'rtasida taqsimlanadi, shuning uchun agar biror narsa `admin` obyektini o'zgartirsa, boshqa modullar buni ko'rishadi.
 
+<<<<<<< HEAD
 Bunday xatti-harakatlar konfiguratsiyani talab qiladigan modullar uchun juda yaxshi. Birinchi importda kerakli xususiyatlarni o'rnatishimiz mumkin, keyin esa keyingi importda u tayyor bo'ladi.
+=======
+That's exactly because the module is executed only once. Exports are generated, and then they are shared between importers, so if something changes the `admin` object, other importers will see that.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Masalan, `admin.js` moduli ma'lum funktsiyalarni taqdim etishi mumkin, ammo hisobga olish ma'lumotlari `admin` obyektiga tashqaridan kirishini kutadi:
 
@@ -225,7 +237,11 @@ Modulda yuqori darajadagi `this`, modul bo'lmagan skriptlardagi global obyektdan
 
 Brauzerga xos bo'lgan `type="module"` skriptlarining bir nechta farqlari mavjud.
 
+<<<<<<< HEAD
 Agar siz birinchi marta o'qiyotgan bo'lsangiz yoki JavaScript-ni brauzerda ishlatmasangiz, ularni hozircha o'tkazib yuborishingiz mumkin.
+=======
+You may want to skip this section for now if you're reading for the first time, or if you don't use JavaScript in a browser.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ### Modul skriptlari keyinga qoldiriladi
 
@@ -236,7 +252,11 @@ Boshqa so'zlar bilan aytganda:
 - modul skriptlari HTML hujjat to'liq tayyor bo'lguncha kutib turadi.
 - nisbiy tartib saqlanib qoladi: hujjatda birinchi bo'lib turgan skriptlar birinchi bajariladi.
 
+<<<<<<< HEAD
 Yon effekt sifatida modul skriptlari doimo HTML ostidagi elementlarni ko'radi.
+=======
+As a side effect, module scripts always "see" the fully loaded HTML-page, including HTML elements below them.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Masalan:
 

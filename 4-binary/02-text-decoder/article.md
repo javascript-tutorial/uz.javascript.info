@@ -2,7 +2,11 @@
 
 Agar binary ma'lumot aslida string bo'lsa nima bo'ladi? Masalan, biz matnli ma'lumotlarga ega faylni oldik.
 
+<<<<<<< HEAD
 O'rnatilgan [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) obyekti buffer va kodlashni hisobga olgan holda qiymatni haqiqiy JavaScript string ga o'qish imkonini beradi.
+=======
+The built-in [TextDecoder](https://encoding.spec.whatwg.org/#interface-textdecoder) object allows one to read the value into an actual JavaScript string, given the buffer and the encoding.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Avval uni yaratishimiz kerak:
 ```js

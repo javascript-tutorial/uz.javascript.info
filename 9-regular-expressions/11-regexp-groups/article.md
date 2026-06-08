@@ -209,9 +209,15 @@ alert(results[0]); // <h1>,h1 (1-teg)
 alert(results[1]); // <h2>,h2 (2-teg)
 ```
 
+<<<<<<< HEAD
 Ko'rib turganingizdek, birinchi farq juda muhim, `(*)` satrida ko'rsatilganidek. Biz moslikni `results[0]` sifatida ola olmaymiz, chunki bu obyekt psevdo-massiv emas. Uni `Array.from` yordamida haqiqiy `Array` ga aylantirish mumkin. Psevdo-massivlar va iteratsiya qilinadigan obyektlar haqida ko'proq ma'lumot <info:iterable> maqolasida.
 
 Agar natijalarni aylantirayotgan bo'lsak, `Array.from` ga ehtiyoj yo'q:
+=======
+As we can see, the first difference is very important, as demonstrated in the line `(*)`. We can't get the match as `results[0]`, because that object is a pseudoarray. We can turn it into a real `Array` using `Array.from`. There are more details about pseudoarrays and iterables in the article <info:iterable>.
+
+There's no need for `Array.from` if we're looping over results:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run
 let results = '<h1> <h2>'.matchAll(/<(.*?)>/gi);

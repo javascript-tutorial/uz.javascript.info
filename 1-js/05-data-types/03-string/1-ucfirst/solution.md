@@ -8,12 +8,16 @@ let newStr = str[0].toUpperCase() + str.slice(1);
 
 Ammo kichik bir muammo bor. Agar `str` bo'sh bo'lsa, unda `str[0]` aniqlanmagan(undefined), shuning uchun xato bo'ladi.
 
+<<<<<<< HEAD
 Bu yerda ikkita variant mavjud:
 
 1. `str.charAt(0)` dan foydalanish, chunki u har doim matni qaytaradi (ehtimol bo'sh).
 2. Bo'sh satr uchun test qo'shish.
 
 Mana, ikkinchi variant:
+=======
+The easiest way out is to add a test for an empty string, like this:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js run demo
 function ucFirst(str) {

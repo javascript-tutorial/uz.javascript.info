@@ -6,7 +6,11 @@ Birinchi tur _ma'lumotlar xususiyatlari_. Biz allaqachon ular bilan qanday ishla
 
 Ikkinchi turdagi xususiyatlar - bu yangi narsa. Bu _kiruvchi xususiyatlar_. Ular asosan qiymatni olish va sozlash bo'yicha ishlaydigan funktsiyalardir, ammo tashqi kodning odatiy xususiyatlariga o'xshaydi.
 
+<<<<<<< HEAD
 ## Getters va setters
+=======
+The second type of property is something new. It's an *accessor property*. They are essentially functions that execute on getting and setting a value, but look like regular properties to an external code.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Kiruvchi xususiyatlari "getter" va "setter" usullari bilan ifodalanadi. Obyektda ular `get` va `set` bilan belgilanadi:
 

@@ -32,7 +32,19 @@ describe("Ladder", function () {
     assert.equal(ladder.down().up().up().up().step, 2);
   });
 
+<<<<<<< HEAD
   after(function () {
+=======
+  it('showStep() should return this', function() {
+    assert.equal(ladder.showStep(), ladder);
+  });
+ 
+  it('up().up().down().showStep().down().showStep()', function () {
+    assert.equal(ladder.up().up().down().showStep().down().showStep().step, 0)
+  });
+  
+  after(function() {
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
     ladder.step = 0;
     alert.restore();
   });

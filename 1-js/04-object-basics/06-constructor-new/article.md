@@ -1,6 +1,10 @@
 # Konstruktor, operator "new"
 
+<<<<<<< HEAD
 Oddiy `{...}` sintaksisi bitta obyektni yaratishga imkon beradi. Ammo ko'pincha biz shunga o'xshash ko'plab obyektlarni yaratishimiz kerak, masalan, bir nechta foydalanuvchi yoki menyu elementlari va boshqalar.
+=======
+The regular `{...}` syntax allows us to create one object. But often we need to create many similar objects, like multiple users or menu items and so on.
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Buni konstruktor funktsiyalari va `"new"` operator yordamida amalga oshirish mumkin.
 
@@ -168,8 +172,13 @@ alert(new SmallUser().name); // Elbek
 
 Odatda konstruktorlarda `return` ifodasi mavjud emas. Ushbu blokda tilni o'rganishdagi bo'shliqlarni qoldirmaslik uchun obyektni qaytarish bilan bog'liq alohida xatti-harakatlar haqida so'z yuritdik.
 
+<<<<<<< HEAD
 ````smart header="Qavslar chushirib qo'yish"
 Aytgancha, agar bizda argument bo'lmasa, qavslarni `new` dan keyin olib tashlashimiz mumkin:
+=======
+````smart header="Omitting parentheses"
+By the way, we can omit parentheses after `new`:
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 ```js
 let user = new User; // <-- qavslar yo'q

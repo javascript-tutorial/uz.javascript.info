@@ -13,7 +13,13 @@ alert(d1);
 Shuningdek, biz satrdan sana yaratishimiz mumkin, masalan:
 
 ```js run
+<<<<<<< HEAD
 //new Date(sana_satri)
 let d2 = new Date("February 20, 2012 03:12:00");
 alert(d2);
+=======
+//new Date(datastring)
+let d2 = new Date("2012-02-20T03:12");
+alert( d2 );
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 ```

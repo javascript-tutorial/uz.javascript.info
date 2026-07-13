@@ -23,11 +23,21 @@ let ladder = {
   }
 };
 
-ladder.up().up().down().up().down().showStep(); // 1
+ladder.up().up().down().showStep().down().showStep(); // shows 1 then 0
 ```
 
 Biz har bir satr uchun bitta chaqiruv yozishimiz mumkin. Uzoq zanjirlar uchun o'qilishni oson qiladi:
 
 ```js
+<<<<<<< HEAD
 ladder.up().up().down().up().down().showStep(); // 1
+=======
+ladder
+  .up()
+  .up()
+  .down()
+  .showStep() // 1
+  .down()
+  .showStep(); // 0
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 ```

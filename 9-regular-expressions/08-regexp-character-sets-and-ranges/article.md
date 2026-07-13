@@ -87,8 +87,13 @@ alert( str.match(regexp) ); // H,i,你,好,1,2
 
 Albatta, biz bu naqshni tahrirlashimiz mumkin: Unicode xususiyatlarini qo'shish yoki olib tashlash. Unicode xususiyatlari <info:regexp-unicode> maqolasida batafsil ko'rib chiqilgan.
 
+<<<<<<< HEAD
 ```warn header="Unicode xususiyatlari IE da qo'llab-quvvatlanmaydi"
 Unicode xususiyatlari `pattern:p{…}` IE da amalga oshirilmagan. Agar ular haqiqatan ham kerak bo'lsa, [XRegExp](http://xregexp.com/) kutubxonasidan foydalanishimiz mumkin.
+=======
+```warn header="Unicode properties aren't supported in IE"
+Unicode properties `pattern:p{…}` are not implemented in IE. If we really need them, we can use library [XRegExp](https://xregexp.com/).
+>>>>>>> 52c1e61915bc8970a950a3f59bd845827e49b4bf
 
 Yoki bizni qiziqtiradigan tildagi belgilar diapazonlarini ishlatish, masalan kirill harflari uchun `pattern:[а-я]`.
 ```

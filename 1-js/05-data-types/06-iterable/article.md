@@ -26,10 +26,17 @@ let range = {
 
 `range` ni ketma-ket sarraluvchan qilish uchun (va shunday qilib `for..of` ishlash uchun) biz obyektga `Symbol.iterator` nomli usulni qo'shishimiz kerak (buning uchun maxsus o'rnatilgan belgi).
 
+<<<<<<< HEAD
 1. `for..of` boshlanganda, u ushbu usulni bir marta chaqiradi (yoki topilmasa xatoni). Usul _ketma-ket sarraluvchan_ -- obyektni `next` usuli bilan qaytarishi kerak.
 2. Aytgancha, `for..of` _faqat qaytib kelgan obyekt bilan ishlaydi_.
 3. Agar `for..of` keyingi qiymatni xohlasa, u obyektda `next()` ni chaqiradi.
 4. `next()` ning natijasi `{done: Boolean, value: any}` shaklida bo'lishi kerak, bu yerda `done = true` takrorlanish tugaganligini anglatadi, aks holda `value` yangi qiymat bo'lishi kerak.
+=======
+1. When `for..of` starts, it calls that method once (or errors if not found). The method must return an *iterator* -- an object with the method `next`.
+2. Onward, `for..of` works *only with that returned object*.
+3. When `for..of` wants the next value, it calls `next()` on that object.
+4. The result of `next()` must have the form `{done: Boolean, value: any}`, where `done=true` means that the loop is finished, otherwise `value` is the next value.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 `range` uchun to'liq dastur:
 
@@ -39,10 +46,18 @@ let range = {
   to: 5,
 };
 
+<<<<<<< HEAD
 // 1. for..of chaqiruvi this ni chaqiradi
 range[Symbol.iterator] = function () {
   // ...ketma-ket sarraluvchan obyektini qaytaradi:
   // 2. for..of faqat ushbu ketma-ket sarraluvchan bilan ishlaydi, undan keyingi qiymatlarni so'raydi
+=======
+// 1. call to for..of initially calls this
+range[Symbol.iterator] = function() {
+
+  // ...it returns the iterator object:
+  // 2. Onward, for..of works only with the iterator object below, asking it for next values
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
   return {
     current: this.from,
     last: this.to,
@@ -172,7 +187,11 @@ Tabiiyki, bu xususiyatlar birlashtirilishi mumkin. Masalan, satrlar ketma-ket sa
 
 Ammo ketma-ket sarraluvchan massivga-o'xshash bo'lmasligi mumkin. Va aksincha, massivga-o'xshash ketma-ket sarraluvchan bo'lmasligi mumkin.
 
+<<<<<<< HEAD
 Masalan, yuqoridagi misolda `range` ketma-ket sarraluvchan, lekin massivga-o'xshash emas, chunki u indekslangan xususiyatlarga va `uzunlikka` ega emas.
+=======
+But an iterable may not be array-like. And vice versa an array-like may not be iterable.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Va bu yerda obyekt massivga-o'xshash, ketma-ket sarraluvchan obyekt emas:
 
@@ -214,8 +233,13 @@ alert(arr.pop()); // World (usul ishlaydi)
 
 Xuddi shu narsa ketma-ket sarraluvchan uchun sodir bo'ladi:
 
+<<<<<<< HEAD
 ```js
 // ushbu range yuqoridagi misoldan olingan deb taxmin qilsak
+=======
+```js run
+// assuming that range is taken from the example above
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 let arr = Array.from(range);
 alert(arr); // 1,2,3,4,5 (toString massivning konversiyasi ishlaydi)
 ```
@@ -230,8 +254,13 @@ Ikkinchi argument `mapFn` massivga qo'shilishdan oldin har bir elementga tatbiq 
 
 Masalan:
 
+<<<<<<< HEAD
 ```js
 // ushbu range yuqoridagi misoldan olingan deb taxmin qilsak
+=======
+```js run
+// assuming that range is taken from the example above
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 // har bir sonning kvadrati
 let arr = Array.from(range, (num) => num * num);
@@ -267,7 +296,11 @@ for (let char of str) {
 alert(chars);
 ```
 
+<<<<<<< HEAD
 ...Ammo qisqaroq.
+=======
+...But it is shorter.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Hatto surrogat juftlarini qo'llab-quvvatlaydigan `slice` yaratishimiz mumkin:
 

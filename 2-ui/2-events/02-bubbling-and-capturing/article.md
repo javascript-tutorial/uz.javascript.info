@@ -119,27 +119,46 @@ Bubbling ni oldini olishning haqiqiy zarurati odatda yo'q. Bu talab qilinadigan 
 
 "Capturing" deb ataladigan hodisa qayta ishlashning yana bir fazasi mavjud. U haqiqiy kodda kamdan-kam qo'llaniladi, lekin ba'zan foydali bo'lishi mumkin.
 
+<<<<<<< HEAD
 Standart [DOM Events](http://www.w3.org/TR/DOM-Level-3-Events/) hodisa tarqalishining 3 fazasini tasvirlaydi:
+=======
+The standard [DOM Events](https://www.w3.org/TR/DOM-Level-3-Events/) describes 3 phases of event propagation:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 1. Capturing fazasi -- hodisa elementga pastga boradi.
 2. Target fazasi -- hodisa target elementga yetdi.
 3. Bubbling fazasi -- hodisa elementdan yuqoriga bubble qiladi.
 
+<<<<<<< HEAD
 Mana jadval ichidagi `<td>` ga bosishning spetsifikatsiyadan olingan rasmi:
+=======
+Here's the picture, taken from the specification, of the capturing `(1)`, target `(2)` and bubbling `(3)` phases for a click event on a `<td>` inside a table:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ![](eventflow.svg)
 
 Ya'ni: `<td>` ga bosish uchun hodisa avval ajdodlar zanjiri orqali elementga pastga boradi (capturing fazasi), keyin target ga yetadi va u yerda ishga tushadi (target fazasi), so'ngra yuqoriga boradi (bubbling fazasi), yo'lda ishlov beruvchilarni chaqiradi.
 
+<<<<<<< HEAD
 **Ilgari biz faqat bubbling haqida gapirdik, chunki capturing fazasi kamdan-kam ishlatiladi. Odatda u bizga ko'rinmaydi.**
 
 `on<event>`-xossasi yoki HTML atributlari yordamida yoki ikki argumentli `addEventListener(event, handler)` dan foydalanib qo'shilgan ishlov beruvchilar capturing haqida hech narsa bilmaydi, ular faqat 2-chi va 3-chi fazalarda ishlaydi.
+=======
+Until now, we only talked about bubbling, because the capturing phase is rarely used.
+
+In fact, the capturing phase was invisible for us, because handlers added using `on<event>`-property or using HTML attributes or using two-argument `addEventListener(event, handler)` don't know anything about capturing, they only run on the 2nd and 3rd phases.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Capturing fazasida hodisani ushlash uchun ishlov beruvchining `capture` parametrini `true` qilib o'rnatishimiz kerak:
 
 ```js
 elem.addEventListener(..., {capture: true})
+<<<<<<< HEAD
 // yoki, shunchaki "true" {capture: true} ning taxallusi
+=======
+
+// or, just "true" is an alias to {capture: true}
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 elem.addEventListener(..., true)
 ```
 
@@ -178,9 +197,16 @@ Kod hujjatdagi *har* elementga bosish ishlov beruvchisini o'rnatadi, qaysi biri 
 
 Agar siz `<p>` ga bossangiz, ketma-ketlik quyidagicha bo'ladi:
 
+<<<<<<< HEAD
 1. `HTML` -> `BODY` -> `FORM` -> `DIV` (capturing fazasi, birinchi tinglovchi):
 2. `P` (target fazasi, ikki marta ishga tushadi, chunki biz ikkita tinglovchi o'rnatdik: capturing va bubbling)
 3. `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling fazasi, ikkinchi tinglovchi).
+=======
+1. `HTML` -> `BODY` -> `FORM` -> `DIV -> P` (capturing phase, the first listener):
+2. `P` -> `DIV` -> `FORM` -> `BODY` -> `HTML` (bubbling phase, the second listener).
+
+Please note, the `P` shows up twice, because we've set two listeners: capturing and bubbling. The target triggers at the end of the first and at the beginning of the second phase.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 `event.eventPhase` xossasi mavjud bo'lib, u hodisa qaysi fazada ushlanganligining raqamini aytadi. Lekin u kamdan-kam ishlatiladi, chunki biz odatda buni ishlov beruvchida bilamiz.
 
@@ -188,8 +214,13 @@ Agar siz `<p>` ga bossangiz, ketma-ketlik quyidagicha bo'ladi:
 Agar biz `addEventListener(..., true)` qilsak, ishlov beruvchini to'g'ri olib tashlash uchun `removeEventListener(..., true)` da bir xil fazani eslatishimiz kerak.
 ```
 
+<<<<<<< HEAD
 ````smart header="Bir elementda va bir fazada tinglovchilar o'rnatilgan tartibda ishlaydi"
 Agar bizda `addEventListener` bilan bir xil elementga tayinlangan bir xil fazada bir nechta hodisa ishlov beruvchi bo'lsa, ular yaratilgan tartibda ishlaydi:
+=======
+````smart header="Listeners on the same element and same phase run in their set order"
+If we have multiple event handlers on the same phase, assigned to the same element with `addEventListener`, they run in the same order as they are created:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
 elem.addEventListener("click", e => alert(1)); // birinchi bo'lib ishga tushishi kafolatlanagan
@@ -197,7 +228,16 @@ elem.addEventListener("click", e => alert(2));
 ```
 ````
 
+<<<<<<< HEAD
 ## Xulosa
+=======
+```smart header="The `event.stopPropagation()` during the capturing also prevents the bubbling"
+The `event.stopPropagation()` method and its sibling `event.stopImmediatePropagation()` can also be called on the capturing phase. Then not only the futher capturing is stopped, but the bubbling as well.
+
+In other words, normally the event goes first down ("capturing") and then up ("bubbling"). But if `event.stopPropagation()` is called during the capturing phase, then the event travel stops, no bubbling will occur.
+```
+
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Hodisa sodir bo'lganda -- u sodir bo'lgan eng ichki element "target element" (`event.target`) sifatida belgilanadi.
 
@@ -215,7 +255,11 @@ Har qanday hodisa ishlov beruvchi `event.stopPropagation()` ni chaqirib hodisani
 
 Capturing fazasi juda kamdan-kam ishlatiladi, odatda biz hodisalarni bubbling da qayta ishlaymiz. Va buning ortida mantiq bor.
 
+<<<<<<< HEAD
 Haqiqiy dunyoda baxtsiz hodisa sodir bo'lganda, mahalliy hokimiyat avval javob beradi. Ular hodisa sodir bo'lgan hududni eng yaxshi biladi. Keyin kerak bo'lsa yuqori darajadagi hokimiyat.
+=======
+The capturing phase is used very rarely, usually we handle events on bubbling. And there's a logical explanation for that.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Hodisa ishlov beruvchilari uchun ham xuddi shunday. Ma'lum bir elementga ishlov beruvchi o'rnatgan kod element va uning nima qilishi haqida maksimal tafsilotlarni biladi. Ma'lum bir `<td>` dagi ishlov beruvchi aynan o'sha `<td>` uchun mos kelishi mumkin, u haqida hamma narsani biladi, shuning uchun birinchi imkoniyatni olishi kerak. Keyin uning bevosita ota-onasi ham kontekst haqida biladi, lekin biroz kamroq, va hokazo umumiy tushunchalarni qayta ishlovchi va oxirgi ishlaydigan eng yuqori elementgacha.
 

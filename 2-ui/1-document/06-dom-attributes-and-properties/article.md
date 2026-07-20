@@ -162,7 +162,11 @@ Quyidagi misolda `id` atribut sifatida o'zgartiriladi va xususiyat ham o'zgargan
 </script>
 ```
 
+<<<<<<< HEAD
 Ammo istisnolar mavjud, masalan `input.value` faqat atribut -> xususiyatga sinxronlanadi, lekin orqaga emas:
+=======
+But there are exclusions, for instance `input.value` synchronizes only from attribute -> property, but not back:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```html run
 <input>

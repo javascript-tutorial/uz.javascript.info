@@ -121,7 +121,11 @@ alert(Object.getOwnPropertyNames(User.prototype)); // constructor, sayHi
 
 ## Faqat sintaksis shakar emas
 
+<<<<<<< HEAD
 Ba'zan odamlar `class` JavaScript-dagi "sintaksis shakar" deb aytishadi, chunki biz aslida `class` kalit so'zisiz bir xil narsani e'lon qilishimiz mumkin edi:
+=======
+Sometimes people say that `class` is a "syntactic sugar" (syntax that is designed to make things easier to read, but doesn't introduce anything new), because we could actually declare the same thing without using the `class` keyword at all:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js run
 // sof funktsiyalarda class User qayta yozish

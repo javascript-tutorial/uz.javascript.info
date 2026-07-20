@@ -124,7 +124,11 @@ Bu "sof, klassik, faqat-boolean YOKI" bilan solishtirganda qiziqarli foydalanish
 
    Bu shuni anglatadiki, `||` o'z argumentlarini birinchi haqiqiy qiymatga yetguncha qayta ishlaydi, keyin qiymat darhol qaytariladi, boshqa argumentga tegmasdan turib.
 
+<<<<<<< HEAD
    Bu xususiyatning ahamiyati, agar operand oddiy qiymat emas, balki o'zgaruvchi tayinlash yoki funksiya chaqiruvi kabi yon ta'sirli ifoda bo'lsa yaqqol ko'rinadi.
+=======
+    The importance of this feature becomes obvious if an operand isn't just a value, but an expression with a side effect, such as a variable assignment or a function call.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
    Quyidagi misolda faqat ikkinchi xabar chop etiladi:
 

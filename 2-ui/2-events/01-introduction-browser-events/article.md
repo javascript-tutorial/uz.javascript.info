@@ -24,7 +24,11 @@ Eng foydali DOM hodisalarning ro'yxati, shunchaki ko'rib chiqish uchun:
 **CSS hodisalari:**
 - `transitionend` -- CSS-animatsiya tugaganda.
 
+<<<<<<< HEAD
 Boshqa ko'plab hodisalar ham mavjud. Keyingi boblarda ma'lum hodisalarning tafsilotlariga to'xtalamiz.
+=======
+There are many other events. We'll get into more details of particular events in upcoming chapters.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## Hodisa ishlov beruvchilari
 
@@ -160,7 +164,11 @@ button.onclick = sayThanks;
 button.onclick = sayThanks();
 ```
 
+<<<<<<< HEAD
 Agar qavs qo'shsak, `sayThanks()` funksiya chaqiruvi bo'ladi. Demak, oxirgi qator aslida funksiya bajarilishining *natijasini*, ya'ni `undefined` ni (funksiya hech narsa qaytarmaydi) oladi va uni `onclick` ga tayinlaydi. Bu ishlamaydi.
+=======
+If we add parentheses, then `sayThanks()` becomes a function call. So the last line actually takes the *result* of the function execution, that is `undefined` (as the function returns nothing), and assigns it to `onclick`. That doesn't work.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ...Boshqa tomondan, markupda bizga qavslar kerak:
 
@@ -195,7 +203,11 @@ Ishlov beruvchini `elem.onclick` ga tayinlang, `elem.ONCLICK` ga emas, chunki DO
 
 ## addEventListener
 
+<<<<<<< HEAD
 Yuqorida aytilgan ishlov beruvchilarni tayinlash usullarining asosiy muammosi -- biz bitta hodisaga bir nechta ishlov beruvchi tayinlay olmaymiz.
+=======
+The fundamental problem of the aforementioned ways to assign handlers is that we *can't assign multiple handlers to one event*.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Aytaylik, bizning kodimizning bir qismi bosishda tugmani ajratib ko'rsatmoqchi, boshqasi esa bir xil bosishda xabar ko'rsatmoqchi.
 
@@ -207,7 +219,11 @@ input.onclick = function() { alert(1); }
 input.onclick = function() { alert(2); } // avvalgi ishlov beruvchini almashtiradi
 ```
 
+<<<<<<< HEAD
 Veb standartlari ishlab chiquvchilari buni uzoq vaqt oldin tushunib, `addEventListener` va `removeEventListener` maxsus metodlari yordamida ishlov beruvchilarni boshqarishning muqobil usulini taklif qildilar. Ular bunday muammodan xoli.
+=======
+Developers of web standards understood that long ago and suggested an alternative way of managing handlers using the special methods `addEventListener` and `removeEventListener` which aren't bound by such constraint.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Ishlov beruvchi qo'shish sintaksisi:
 
@@ -261,7 +277,11 @@ input.removeEventListener("click", handler);
 Diqqat qiling -- agar biz funksiyani o'zgaruvchida saqlamasak, uni olib tashlay olmaymiz. `addEventListener` tomonidan tayinlangan ishlov beruvchilarni "qayta o'qish" imkoni yo'q.
 ````
 
+<<<<<<< HEAD
 `addEventListener` ga bir nechta chaqiruv bir nechta ishlov beruvchi qo'shishga imkon beradi:
+=======
+Multiple calls to `addEventListener` allow it to add multiple handlers, like this:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```html run no-beautify
 <input id="elem" type="button" value="Menga bosing"/>
@@ -288,7 +308,11 @@ Yuqoridagi misolda ko'rib turganimizdek, biz ishlov beruvchilarni *ham* DOM-xoss
 ````warn header="Ba'zi hodisalar uchun ishlov beruvchilar faqat `addEventListener` bilan ishlaydi"
 DOM-xossasi orqali tayinlab bo'lmaydigan hodisalar mavjud. Faqat `addEventListener` bilan.
 
+<<<<<<< HEAD
 Masalan, hujjat yuklanganda va DOM qurilganda ishga tushadigan `DOMContentLoaded` hodisasi.
+=======
+For instance, the `DOMContentLoaded` event, that triggers when the document is loaded and the DOM has been built.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
 // hech qachon ishlamaydi
@@ -334,10 +358,17 @@ Hodisa obyektidan ko'rsatkich koordinatalarini olish misoli:
 `event.currentTarget`
 : Hodisani qayta ishlovchi element. Bu `this` bilan aynan bir xil, agar ishlov beruvchi o'q funksiya bo'lmasa yoki uning `this` boshqa narsaga bog'lanmagan bo'lsa, u holda biz elementni `event.currentTarget` dan olishimiz mumkin.
 
+<<<<<<< HEAD
 `event.clientX / event.clientY`
 : Ko'rsatkich hodisalari uchun kursorning oynaga nisbatan koordinatalari.
 
 Ko'proq xossalar mavjud. Ularning ko'pchiligi hodisa turiga bog'liq: klaviatura hodisalarida bir xossalar to'plami, ko'rsatkich hodisalarida - boshqasi, biz ularni keyinroq turli hodisalarni batafsil ko'rib chiqishda o'rganamiz.
+=======
+`event.clientX` / `event.clientY`
+: Window-relative coordinates of the cursor, for pointer events.
+
+There are more properties. Many of them depend on the event type: keyboard events have one set of properties, pointer events - another one, we'll study them later when as we move on to the details of different events.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ````smart header="Hodisa obyekti HTML ishlov beruvchilarida ham mavjud"
 Agar biz HTML da ishlov beruvchi tayinlasak, `event` obyektini ham ishlatishimiz mumkin:
@@ -369,7 +400,13 @@ Masalan:
 </script>
 ```
 
+<<<<<<< HEAD
 Ko'rib turganimizdek, `addEventListener` ishlov beruvchi sifatida obyektni qabul qilganda, u hodisa holatida `obj.handleEvent(event)` ni chaqiradi.
+=======
+As we can see, when `addEventListener` receives an object as the handler, it calls `obj.handleEvent(event)` in case of an event.
+
+We could also use objects of a custom class, like this:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Buning uchun sinfdan ham foydalanishimiz mumkin:
 
@@ -392,6 +429,7 @@ Buning uchun sinfdan ham foydalanishimiz mumkin:
 
 *!*
   let menu = new Menu();
+
   elem.addEventListener('mousedown', menu);
   elem.addEventListener('mouseup', menu);
 */!*

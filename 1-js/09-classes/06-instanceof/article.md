@@ -61,14 +61,26 @@ Iltimos, `arr` ham `Object` klassga tegishli ekanligini unutmang. Buning sababi,
      }
    }
 
+<<<<<<< HEAD
    let obj = { canEat: true };
    alert(obj instanceof Animal); // true: Animal[Symbol.hasInstance](obj) chaqirildi
    ```
+=======
+    ```js run
+    // set up instanceof check that assumes that
+    // anything with canEat property is an animal
+    class Animal {
+      static [Symbol.hasInstance](obj) {
+        if (obj.canEat) return true;
+      }
+    }
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 2. Ko'pgina klasslarda `Symbol.hasInstance` mavjud emas. Bunday holda, `Class.prototype` prototip zanjiridagi prototiplardan biriga to'g'ri keladimi-yo'qligini tekshirib ko'ring.
 
    Boshqacha qilib aytganda, taqqoslang:
 
+<<<<<<< HEAD
    ```js
    obj.__proto__ === Class.prototype?
    obj.__proto__.__proto__ === Class.prototype?
@@ -77,6 +89,9 @@ Iltimos, `arr` ham `Object` klassga tegishli ekanligini unutmang. Buning sababi,
    // if any answer is true, return true
    // otherwise, if we reached the end of the chain, return false
    ```
+=======
+2. Most classes do not have `Symbol.hasInstance`. In that case, the standard logic is used: `obj instanceof Class` checks whether `Class.prototype` is equal to one of the prototypes in the `obj` prototype chain.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
    Yuqoridagi misolda `Rabbit.prototype === rabbit.__proto__`, shuning uchun darhol javob beradi.
 
@@ -95,7 +110,17 @@ Iltimos, `arr` ham `Object` klassga tegishli ekanligini unutmang. Buning sababi,
    // rabbit.__proto__.__proto__ === Animal.prototype (mutanosiblik!)
    ```
 
+<<<<<<< HEAD
 Quyida `rabbit instanceof Animal` ning `Animal.prototype` bilan taqqoslagani tasvirlangan:
+=======
+    // rabbit.__proto__ === Animal.prototype (no match)
+    *!*
+    // rabbit.__proto__.__proto__ === Animal.prototype (match!)
+    */!*
+    ```
+
+Here's the illustration of what `rabbit instanceof Animal` compares with `Animal.prototype`:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ![](instanceof.svg)
 

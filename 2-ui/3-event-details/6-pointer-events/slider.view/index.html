@@ -5,22 +5,45 @@
   <div class="thumb"></div>
 </div>
 
+<p style="border:1px solid gray" onmousemove="this.textContent = new Date()">Mouse over here to see the date</p>
+
 <script>
   let thumb = slider.querySelector(".thumb");
   let shiftX;
 
+<<<<<<< HEAD
   thumb.onpointerdown = function (event) {
     event.preventDefault(); // tanlov boshlanishini oldini olish (brauzer harakati)
+=======
+  function onThumbDown(event) {
+    event.preventDefault(); // prevent selection start (browser action)
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
     shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
     thumb.setPointerCapture(event.pointerId);
+
+    thumb.onpointermove = onThumbMove;
+
+    thumb.onpointerup = event => {
+      // dragging finished, no need to track pointer any more
+      // ...any other "drag end" logic here...
+      thumb.onpointermove = null;
+      thumb.onpointerup = null;
+    }
   };
 
+<<<<<<< HEAD
   thumb.onpointermove = function (event) {
     let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
 
     // agar ko'rsatgich slayderdan tashqarida bo'lsa => chegaralar ichida bo'lishi uchun chap tomonni sozlang
+=======
+  function onThumbMove(event) {
+    let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+
+    // if the pointer is out of slider => adjust left to be within the boundaries
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
     if (newLeft < 0) {
       newLeft = 0;
     }
@@ -31,6 +54,8 @@
 
     thumb.style.left = newLeft + "px";
   };
+
+  thumb.onpointerdown = onThumbDown;
 
   thumb.ondragstart = () => false;
 </script>

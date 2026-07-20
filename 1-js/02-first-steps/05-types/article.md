@@ -47,7 +47,11 @@ Oddiy sonlardan tashqari, ushbu ma'lumot turiga tegishli "maxsus raqamli qiymatl
     alert( "not a number" / 2 ); // NaN, bunday bo'lish xato
     ```
 
+<<<<<<< HEAD
     `NaN` yopishqoq. `NaN` ustidagi har qanday keyingi matematik amal `NaN` ni qaytaradi:
+=======
+    `NaN` is sticky. Any further mathematical operation on `NaN` returns `NaN`:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
     ```js run
     alert( NaN + 1 ); // NaN
@@ -55,7 +59,11 @@ Oddiy sonlardan tashqari, ushbu ma'lumot turiga tegishli "maxsus raqamli qiymatl
     alert( "not a number" / 2 - 1 ); // NaN
     ```
 
+<<<<<<< HEAD
     Demak, agar matematik ifodaning biror joyida `NaN` bo'lsa, u butun natijaga tarqaladi (bunga faqat bitta istisno bor: `NaN ** 0` bu `1`).
+=======
+    So, if there's a `NaN` somewhere in a mathematical expression, it propagates to the whole result (there's only one exception to that: `NaN ** 0` is `1`).
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```smart header="Matematik amallar xavfsiz"
 JavaScript da matematik amallar "xavfsiz". Biz hamma narsani qilishimiz mumkin: nolga bo'lish, raqamli bo'lmagan stringlarni raqam sifatida qarash va hokazo.
@@ -69,9 +77,26 @@ Raqamlar bilan ishlash haqida ko'proq ma'lumotni <info:number> bobida ko'ramiz.
 
 ## BigInt [#bigint-type]
 
+<<<<<<< HEAD
 JavaScript da "number" turi <code>(2<sup>53</sup>-1)</code> dan kattaroq (`9007199254740991`) yoki manfiylar uchun <code>-(2<sup>53</sup>-1)</code> dan kichikroq butun qiymatlarni xavfsiz ifodalay olmaydi.
 
 Aniq qilib aytganda, "number" turi kattaroq butun sonlarni saqlashi mumkin (<code>1.7976931348623157 * 10<sup>308</sup></code> gacha), ammo xavfsiz butun sonlar diapazoni <code>±(2<sup>53</sup>-1)</code> dan tashqarida aniqlik xatosi bo'ladi, chunki barcha raqamlar belgilangan 64-bitli xotiraga sig'maydi. Shuning uchun "taxminiy" qiymat saqlanishi mumkin.
+=======
+In JavaScript, the "number" type cannot safely represent integer values larger than <code>(2<sup>53</sup>-1)</code> (that's `9007199254740991`), or less than <code>-(2<sup>53</sup>-1)</code> for negatives.
+
+To be really precise, the "number" type can store larger integers (up to <code>1.7976931348623157 * 10<sup>308</sup></code>), but outside of the safe integer range <code>±(2<sup>53</sup>-1)</code> there'll be a precision error, because not all digits fit into the fixed 64-bit storage. So an "approximate" value may be stored.
+
+For example, these two numbers (right above the safe range) are the same:
+
+```js
+console.log(9007199254740991 + 1); // 9007199254740992
+console.log(9007199254740991 + 2); // 9007199254740992
+```
+
+So to say, all odd integers greater than <code>(2<sup>53</sup>-1)</code> can't be stored at all in the "number" type.
+
+For most purposes <code>±(2<sup>53</sup>-1)</code> range is quite enough, but sometimes we need the entire range of really big integers, e.g. for cryptography or microsecond-precision timestamps.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Masalan, bu ikki raqam (xavfsiz diapazondan yuqorida) bir xil:
 
@@ -95,9 +120,15 @@ const bigInt = 1234567890123456789012345678901234567890n;
 
 `BigInt` sonlari kamdan-kam kerak bo'lganligi sababli, biz ularni bu yerda ko'rib chiqmaymiz, balki ularga alohida bob <info:bigint> ajratdik. Bunday katta sonlar kerak bo'lganda uni o'qing.
 
+<<<<<<< HEAD
 ## String (satr)
 
 JavaScript da string qo'shtirnoqlar bilan o'ralgan bo'lishi kerak.
+=======
+## String
+
+A string in JavaScript must be surrounded by quotes.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
 let str = "Hello";
@@ -219,9 +250,15 @@ Shunday muhim bo'lganligi sababli, obyektlar maxsus munosabatga loyiq. Primitiv 
 
 ## typeof operatori [#type-typeof]
 
+<<<<<<< HEAD
 `typeof` operatori operandning turini qaytaradi. Turli turdagi qiymatlarni turlicha qayta ishlashni xohlaganda yoki shunchaki tezkor tekshirish qilishni xohlaganda foydali.
 
 `typeof x` ga murojaat string ko'rinishida tur nomini qaytaradi:
+=======
+The `typeof` operator returns the type of the operand. It's useful when we want to process values of different types differently or just want to do a quick check.
+
+A call to `typeof x` returns a string with the type name:
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ```js
 typeof undefined // "undefined"
@@ -251,21 +288,58 @@ typeof alert // "function"  (3)
 
 Oxirgi uchta satr qo'shimcha tushuntirish talab qilishi mumkin:
 
+<<<<<<< HEAD
 1. `Math` matematik amallarni ta'minlovchi o'rnatilgan obyekt. Biz uni <info:number> bobida o'rganamiz. Bu yerda u shunchaki obyekt misoli sifatida xizmat qiladi.
 2. `typeof null` ning natijasi `"object"`. Bu JavaScript ning eng dastlabki kunlaridan kelib chiqqan va muvofiqlik uchun saqlangan `typeof` dagi rasman tan olingan xato. Albatta, `null` obyekt emas. Bu o'zining alohida turiga ega maxsus qiymat. `typeof` ning xatti-harakati bu yerda noto'g'ri.
 3. `typeof alert` ning natijasi `"function"`, chunki `alert` funksiya. Biz funksiyalarni keyingi boblarda o'rganamiz, u yerda JavaScript da maxsus "function" turi yo'qligini ham ko'ramiz. Funksiyalar obyekt turiga tegishli. Ammo `typeof` ularni boshqacha ko'rib, `"function"` qaytaradi. Bu ham JavaScript ning eski kunlaridan kelib chiqqan. Texnik jihatdan bunday xatti-harakat to'g'ri emas, ammo amalda qulay bo'lishi mumkin.
 
 ```smart header="`typeof(x)` sintaksisi"
 Siz boshqa sintaksisga ham duch kelishingiz mumkin: `typeof(x)`. Bu `typeof x` bilan bir xil.
+=======
+1. `Math` is a built-in object that provides mathematical operations. We will learn it in the chapter <info:number>. Here, it serves just as an example of an object.
+2. The result of `typeof null` is `"object"`. That's an officially recognized error in `typeof`, coming from very early days of JavaScript and kept for compatibility. Definitely, `null` is not an object. It is a special value with a separate type of its own. The behavior of `typeof` is wrong here.
+3. The result of `typeof alert` is `"function"`, because `alert` is a function. We'll study functions in the next chapters where we'll also see that there's no special "function" type in JavaScript. Functions belong to the object type. But `typeof` treats them differently, returning `"function"`. That also comes from the early days of JavaScript. Technically, such behavior isn't correct, but can be convenient in practice.
+
+```smart header="The `typeof(x)` syntax"
+You may also come across another syntax: `typeof(x)`. It's the same as `typeof x`.
+
+To put it clear: `typeof` is an operator, not a function. The parentheses here aren't a part of `typeof`. It's the kind of parentheses used for mathematical grouping.
+
+Usually, such parentheses contain a mathematical expression, such as `(2 + 2)`, but here they contain only one argument `(x)`. Syntactically, they allow to avoid a space between the `typeof` operator and its argument, and some people like it.
+
+Some people prefer `typeof(x)`, although the `typeof x` syntax is much more common.
+```
+
+## Summary
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Aniq qilib aytganda: `typeof` operator, funksiya emas. Bu yerdagi qavslar `typeof` ning bir qismi emas. Bu matematik guruhlash uchun ishlatiladigan qavslar turi.
 
+<<<<<<< HEAD
 Odatda, bunday qavslar `(2 + 2)` kabi matematik ifodani o'z ichiga oladi, ammo bu yerda ular faqat bitta argument `(x)` ni o'z ichiga oladi. Sintaktik jihatdan ular `typeof` operatori va uning argumenti orasidagi bo'shliqdan qochishga imkon beradi va ba'zi odamlar buni yoqtiradi.
+=======
+- Seven primitive data types:
+    - `number` for numbers of any kind: integer or floating-point, integers are limited by <code>±(2<sup>53</sup>-1)</code>.
+    - `bigint` for integer numbers of arbitrary length.
+    - `string` for strings. A string may have zero or more characters, there's no separate single-character type.
+    - `boolean` for `true`/`false`.
+    - `null` for unknown values -- a standalone type that has a single value `null`.
+    - `undefined` for unassigned values -- a standalone type that has a single value `undefined`.
+    - `symbol` for unique identifiers.
+- And one non-primitive data type:
+    - `object` for more complex data structures.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Ba'zi odamlar `typeof(x)` ni afzal ko'radi, garchi `typeof x` sintaksisi ancha keng tarqalgan.
 ```
 
+<<<<<<< HEAD
 ## Xulosa
+=======
+- Usually used as `typeof x`, but `typeof(x)` is also possible.
+- Returns a string with the name of the type, like `"string"`.
+- For `null` returns `"object"` -- this is an error in the language, it's not actually an object.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 JavaScript da 8 ta asosiy ma'lumot turi mavjud.
 

@@ -41,8 +41,13 @@ Obyektlar ibtidoiylarga qaraganda "og'irroq". Ular ichki texnikani qo'llab-quvva
 
 JavaScript-ni yaratuvchisi duch kelgan paradoks:
 
+<<<<<<< HEAD
 - Matn yoki raqam kabi ibtidoiylar bilan ishlashni istagan juda ko'p narsa bor. Agar ular bilan usullar orqali ishlashimiz mumkin bo'lsa, bu ajoyib bo'lar edi.
 - Ibtidoiylar imkon qadar tez va yengil bo'lishi kerak.
+=======
+- There are many things one would want to do with a primitive, like a string or a number. It would be great to access them using methods.
+- Primitives must be as fast and lightweight as possible.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Yechim biroz noqulay ko'rinadi, ammo bu yerda:
 
@@ -50,7 +55,11 @@ Yechim biroz noqulay ko'rinadi, ammo bu yerda:
 2. Til matnlar, raqamlar, mantiqiy turdagi qiymatlar va belgilarning usullari va xususiyatlariga kirishga imkon beradi.
 3. Bu sodir bo'lganda, qo'shimcha funktsiyalarni ta'minlaydigan maxsus "o'ralish-obyekti" yaratiladi va keyin yo'q qilinadi.
 
+<<<<<<< HEAD
 "O'ralish-obyekti" har bir ibtidoiy tur uchun har xil va ular quyidagicha nomlanadi: `String`, `Number`, `Boolean` va `Symbol`. Shunday qilib, ular turli xil usullar to'plamini taqdim etadilar.
+=======
+The "object wrappers" are different for each primitive type and are called: `String`, `Number`, `Boolean`, `Symbol` and `BigInt`. Thus, they provide different sets of methods.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Masalan, [str.toUpperCase()](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) usuli mavjud , bu tepa registr matni qaytaradi.
 
@@ -106,10 +115,17 @@ if (zero) {
 }
 ```
 
+<<<<<<< HEAD
 Boshqa tomondan, xuddi shu `String/Number/Boolean` funktsiyalaridan `new` dan foydalanish umuman foydali narsadir. Ular qiymatni tegishli turga o'zgartiradilar: matnga, raqamga yoki mantiqiy qiymatga(ibtidoiy).
 
 Misol uchun, quyidagi butunlay joizdir:
 
+=======
+On the other hand, using the same functions `String/Number/Boolean` without `new` is totally fine and useful thing. They convert a value to the corresponding type: to a string, a number, or a boolean (primitive).
+
+For example, this is entirely valid:
+
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```js
 let num = Number("123"); // matni raqamga aylantirish
 ```

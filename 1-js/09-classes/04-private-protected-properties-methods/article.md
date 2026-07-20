@@ -110,8 +110,13 @@ class CoffeeMachine {
 // kofe mashinasini yarating
 let coffeeMachine = new CoffeeMachine(100);
 
+<<<<<<< HEAD
 // suv qo'shing
 coffeeMachine.waterAmount = -10; // Error: Salbiy suv
+=======
+// add water
+coffeeMachine.waterAmount = -10; // _waterAmount will become 0, not -10
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 ```
 
 Endi kirish nazorat ostida, shuning uchun suvni noldan pastga o'rnatish muvaffaqiyatsiz tugadi.

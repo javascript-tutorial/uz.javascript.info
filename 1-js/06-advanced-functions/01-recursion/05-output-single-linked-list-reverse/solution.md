@@ -32,7 +32,11 @@ printReverseList(list);
 
 # Tsikldan foydalanish
 
+<<<<<<< HEAD
 To'g'ridan-to'g'ri chiqishdan ko'ra tsikl varianti biroz murakkabroq.
+=======
+The loop variant is also a little bit more complicated than the direct output.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 Bizning `ro'yxatimizdan` oxirgi qiymatni olishning imkoni yo'q. Shuningdek, biz "orqaga qaytishimiz" mumkin emas.
 

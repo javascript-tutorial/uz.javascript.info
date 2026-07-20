@@ -141,7 +141,11 @@ switch (a) {
 
 Endi `3` va `5` holat bir xil xabarni ko'rsatadi.
 
+<<<<<<< HEAD
 Holatning "guruhlash" qobiliyati - bu `switch/case` ning `break`siz ishlashining yon ta'siri. Bu erda `3` holatning bajarilishi `(*)` satridan boshlanadi va `5` holatidan o'tadi, chunki `break` yo'q.
+=======
+The ability to "group" cases is a side effect of how `switch/case` works without `break`. Here the execution of `case 3` starts from the line `(*)` and goes through `case 5`, because there's no `break`.
+>>>>>>> 725653fd99b19d42195e837ac3bb23c1784f8f6e
 
 ## Turi muhim
 

@@ -13,5 +13,10 @@ function loadJson(url) {
   });
 }
 
+<<<<<<< HEAD
 loadJson("no-such-user.json").catch(alert); // Error: 404
+=======
+loadJson('https://javascript.info/no-such-user.json')
+  .catch(alert); // Error: 404
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```

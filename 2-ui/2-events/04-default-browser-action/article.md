@@ -17,7 +17,11 @@ Brauzerni harakat qilishini istamasligimizni aytishning ikki yo'li bor:
 - Asosiy usul `event` obyektidan foydalanishdir. `event.preventDefault()` metodi mavjud.
 - Agar ishlov beruvchi `on<event>` yordamida tayinlangan bo'lsa (`addEventListener` orqali emas), u holda `false` qaytarish ham bir xil ishlaydi.
 
+<<<<<<< HEAD
 Bu HTML kodida havolaga bosish yo'naltirish olib kelmaydi, brauzer hech narsa qilmaydi:
+=======
+In this HTML, a click on a link doesn't lead to navigation; the browser doesn't do anything:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```html autorun height=60 no-beautify
 <a href="/" onclick="return false">Bu yerga bosing</a>
@@ -96,7 +100,11 @@ Buning sababi `mousedown` da brauzer harakati bekor qilingandir. Boshqa yo'l bil
 
 `addEventListener` ning ixtiyoriy `passive: true` parametri brauzerni ishlov beruvchi `preventDefault()` ni chaqirmasligini bildiradi.
 
+<<<<<<< HEAD
 Bu nima uchun kerak bo'lishi mumkin?
+=======
+Why might that be needed?
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Mobil qurilmalarda `touchmove` kabi ba'zi hodisalar mavjud (foydalanuvchi barmog'ini ekran bo'ylab siljitganda), ular sukut bo'yicha scroll qilishga sabab bo'ladi, lekin bu scroll `preventDefault()` yordamida ishlov beruvchida oldini olish mumkin.
 

@@ -153,7 +153,11 @@ Brauzeringizga qarab, yuqoridagi `iframe` yo bo'sh yoki brauzer o'sha sahifani b
 
 ## O'chirilgan funksionallik bilan ko'rsatish
 
+<<<<<<< HEAD
 `X-Frame-Options` sarlavhasining yon ta'siri bor. Boshqa saytlar bizning sahifamizni ramkada ko'rsata olmaydi, hatto ularda buning uchun yaxshi sabablari bo'lsa ham.
+=======
+The `X-Frame-Options` header has a side effect. Other sites won't be able to show our page in a frame, even if they have good reasons to do so.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Shuning uchun boshqa yechimlar mavjud... Masalan, biz sahifani `height: 100%; width: 100%;` stillari bilan `<div>` bilan "qoplashimiz" mumkin, shunda u barcha bosishlarni to'sadi. Agar `window == top` bo'lsa yoki himoya kerak emasligini aniqlasak, o'sha `<div>` olib tashlanishi kerak.
 

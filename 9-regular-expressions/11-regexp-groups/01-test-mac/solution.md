@@ -9,7 +9,7 @@ Keling, o'yin barcha matnni qamrab olishi kerakligini ko'rsatamiz: boshidan bosh
 Nihoyat:
 
 ```js run
-let regexp = /^[0-9a-fA-F]{2}(:[0-9a-fA-F]{2}){5}$/i;
+let regexp = /^[0-9a-f]{2}(:[0-9a-f]{2}){5}$/i;
 
 alert(regexp.test("01:32:54:67:89:AB")); // true
 

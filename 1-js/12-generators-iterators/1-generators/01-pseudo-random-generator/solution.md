@@ -2,8 +2,13 @@
 function* pseudoRandom(seed) {
   let value = seed;
 
+<<<<<<< HEAD
   while (true) {
     value = (value * 16807) % 2147483647;
+=======
+  while(true) {
+    value = value * 16807 % 2147483647;
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
     yield value;
   }
 }

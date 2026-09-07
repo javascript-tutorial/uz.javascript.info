@@ -60,8 +60,13 @@ Shuningdek, `id` nomi bilan global o'zgaruvchi mavjud bo'lib, u elementga havola
 </script>
 ```
 
+<<<<<<< HEAD
 ```warn header="Elementlarga murojaat qilish uchun id nomli global o'zgaruvchilardan foydalanmang"
 Bu xatti-harakat [spetsifikatsiyada](http://www.whatwg.org/specs/web-apps/current-work/#dom-window-nameditem) tasvirlangan, shuning uchun bu standart hisoblanadi. Lekin u asosan muvofiqlik uchun qo'llab-quvvatlanadi.
+=======
+```warn header="Please don't use id-named global variables to access elements"
+This behavior is described [in the specification](https://html.spec.whatwg.org/multipage/window-object.html#named-access-on-the-window-object), but it is supported mainly for compatibility.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Brauzer JS va DOM nomlar maydonlarini aralashtirish orqali bizga yordam berishga harakat qiladi. Bu HTML ga kiritilgan oddiy skriptlar uchun yaxshi, lekin umuman yaxshi narsa emas. Nom to'qnashuvi bo'lishi mumkin. Bundan tashqari, kimdir JS kodini o'qiganda va HTML ko'rinishda bo'lmasa, o'zgaruvchi qayerdan kelganini bilish qiyin.
 
@@ -122,7 +127,11 @@ Boshqacha qilib aytganda, natija `elem.querySelectorAll(css)[0]` bilan bir xil, 
 
 Oldingi metodlar DOM ni qidirardi.
 
+<<<<<<< HEAD
 [elem.matches(css)](http://dom.spec.whatwg.org/#dom-element-matches) hech narsani qidirmaydi, u shunchaki `elem` berilgan CSS-selektorga mos kelishini tekshiradi. U `true` yoki `false` qaytaradi.
+=======
+The [elem.matches(css)](https://dom.spec.whatwg.org/#dom-element-matches) does not look for anything, it merely checks if `elem` matches the given CSS-selector. It returns `true` or `false`.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Bu metod elementlar ustida takrorlash (massivdagi kabi yoki boshqa narsa) va bizni qiziqtiradigan narsalarni filtrlashga harakat qilganda foydali bo'ladi.
 
@@ -159,8 +168,13 @@ Masalan:
 
 <div class="contents">
   <ul class="book">
+<<<<<<< HEAD
     <li class="chapter">1-bob</li>
     <li class="chapter">2-bob</li>
+=======
+    <li class="chapter">Chapter 1</li>
+    <li class="chapter">Chapter 2</li>
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
   </ul>
 </div>
 

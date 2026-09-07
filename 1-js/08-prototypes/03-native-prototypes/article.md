@@ -2,7 +2,11 @@
 
 `"prototype"` xususiyati JavaScript-ning o'zi tomonidan keng qo'llaniladi. Konstruktorning barcha funktsiyalari undan foydalanadi.
 
+<<<<<<< HEAD
 Avval oddiy narsalar uchun, keyin esa murakkab narsalar uchun qanday ekanligini bilib olamiz.
+=======
+First we'll look at the details, and then how to use it for adding new capabilities to built-in objects.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ## Object.prototype
 

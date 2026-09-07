@@ -16,7 +16,7 @@ alert( /^Mary/.test(str1) ); // true
 Xuddi shunday, satr `snow` bilan tugaydimi deb `pattern:snow$` yordamida tekshirishimiz mumkin:
 
 ```js run
-let str1 = "it's fleece was white as snow";
+let str1 = "its fleece was white as snow";
 alert( /snow$/.test(str1) ); // true
 ```
 

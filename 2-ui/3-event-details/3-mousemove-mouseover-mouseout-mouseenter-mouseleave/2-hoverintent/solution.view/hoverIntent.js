@@ -86,7 +86,7 @@ class HoverIntent {
     if (speed < this.sensitivity) {
       clearInterval(this.checkSpeedInterval);
       this.isHover = true;
-      this.over.call(this.elem, event);
+      this.over.call(this.elem);
     } else {
       // tez suring, oldingi kabi yangi koordinatalarni eslab qoling
       this.prevX = this.lastX;

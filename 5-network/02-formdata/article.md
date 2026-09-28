@@ -167,7 +167,11 @@ Server form ma'lumotlari va faylini odatiy form yuborish kabi o'qiydi.
 
 [FormData](https://xhr.spec.whatwg.org/#interface-formdata) obyektlari HTML formani olish va uni `fetch` yoki boshqa tarmoq usuli bilan yuborish uchun ishlatiladi.
 
+<<<<<<< HEAD
 Biz HTML formidan `new FormData(form)` yaratishimiz mumkin yoki umuman formasiz obyekt yaratib, keyin metodlar bilan maydonlar qo'shishimiz mumkin:
+=======
+We can either create `new FormData(form)` from an HTML form, or create an object without a form at all, and then append fields with methods:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 - `formData.append(name, value)`
 - `formData.append(name, blob, fileName)`

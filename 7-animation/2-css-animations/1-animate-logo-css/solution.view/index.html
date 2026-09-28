@@ -28,12 +28,34 @@
       flyjet.onclick = function () {
         let ended = false;
 
+<<<<<<< HEAD
         flyjet.addEventListener("transitionend", function () {
           if (!ended) {
             ended = true;
             alert("Done!");
           }
         });
+=======
+  <img id="flyjet" src="https://en.js.cx/clipart/flyjet.jpg">
+
+  <script>
+    let ended = false; // will change to true after the animation finishes
+
+    flyjet.onclick = function() {
+
+      flyjet.addEventListener('transitionend', function() {
+        if (!ended) { // check to show the message only once
+          ended = true;
+          alert('Done!');
+        }
+      });
+
+      flyjet.classList.add('growing');
+    }
+  </script>
+
+</body>
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
         flyjet.classList.add("growing");
       };

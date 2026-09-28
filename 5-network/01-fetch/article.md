@@ -191,12 +191,21 @@ Bu header'lar to'g'ri va xavfsiz HTTP'ni ta'minlaydi, shuning uchun ular faqat b
 
 `POST` so'rovini yoki boshqa method bilan so'rov yaratish uchun `fetch` opsiyalaridan foydalanishimiz kerak:
 
+<<<<<<< HEAD
 - **`method`** -- HTTP-method, masalan `POST`,
 - **`body`** -- so'rov tanasi, quyidagilardan biri:
   - string (masalan JSON-kodlangan),
   - `FormData` obyekti, ma'lumotlarni `form/multipart` sifatida yuborish uchun,
   - ikkilik ma'lumotlarni yuborish uchun `Blob`/`BufferSource`,
   - ma'lumotlarni `x-www-form-urlencoded` kodlashda yuborish uchun [URLSearchParams](info:url), kamdan-kam ishlatiladi.
+=======
+- **`method`** -- HTTP-method, e.g. `POST`,
+- **`body`** -- the request body, one of:
+  - a string (e.g. JSON-encoded),
+  - `FormData` object, to submit the data as `multipart/form-data`,
+  - `Blob`/`BufferSource` to send binary data,
+  - [URLSearchParams](info:url), to submit the data in `x-www-form-urlencoded` encoding, rarely used.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 JSON format ko'pincha ishlatiladi.
 
@@ -295,6 +304,7 @@ fetch(url, options)
   .then(result => /* natijani qayta ishlash */)
 ```
 
+<<<<<<< HEAD
 Response xususiyatlari:
 - `response.status` -- javobning HTTP kodi,
 - `response.ok` -- agar status 200-299 bo'lsa `true`.
@@ -306,6 +316,19 @@ Response body'ni olish usullari:
 - **`response.formData()`** -- javobni `FormData` obyekti sifatida qaytarish (form/multipart kodlash, keyingi bobga qarang),
 - **`response.blob()`** -- javobni [Blob](info:blob) sifatida qaytarish (turi bilan ikkilik ma'lumot),
 - **`response.arrayBuffer()`** -- javobni [ArrayBuffer](info:arraybuffer-binary-arrays) sifatida qaytarish (past darajadagi ikkilik ma'lumot),
+=======
+Response properties:
+- `response.status` -- HTTP code of the response,
+- `response.ok` -- `true` if the status is 200-299.
+- `response.headers` -- Map-like object with HTTP headers.
+
+Methods to get response body:
+- **`response.text()`** -- return the response as text,
+- **`response.json()`** -- parse the response as JSON object,
+- **`response.formData()`** -- return the response as `FormData` object (`multipart/form-data` encoding, see the next chapter),
+- **`response.blob()`** -- return the response as [Blob](info:blob) (binary data with type),
+- **`response.arrayBuffer()`** -- return the response as [ArrayBuffer](info:arraybuffer-binary-arrays) (low-level binary data),
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Hozircha Fetch opsiyalari:
 - `method` -- HTTP-method,

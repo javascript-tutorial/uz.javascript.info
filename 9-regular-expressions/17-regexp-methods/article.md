@@ -232,10 +232,17 @@ Funksiyadan foydalanish bizga yakuniy almashtirish kuchini beradi, chunki u mosl
 
 Bu usul asosan `str.replace` bilan bir xil, ikkita katta farq bilan:
 
+<<<<<<< HEAD
 1. Agar birinchi argument satr bo'lsa, u satrning *barcha takrorlanishlarini* almashtiradi, `replace` esa faqat *birinchi takrorlanishni* almashtiradi.
 2. Agar birinchi argument `g` bayrog'isiz muntazam ifoda bo'lsa, xatolik bo'ladi. `g` bayrog'i bilan u `replace` kabi ishlaydi.
 
 `replaceAll` ning asosiy foydalanish holati satrning barcha takrorlanishlarini almashtirish.
+=======
+1. If the first argument is a string, it replaces *all occurrences* of the string, while `replace` replaces only the *first occurrence*.
+2. If the first argument is a regular expression without the `g` flag, there'll be an error. With `g` flag, it works the same as `replace`.
+
+The main use case for `replaceAll` is replacing all occurrences of a string.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Masalan:
 

@@ -51,7 +51,11 @@ DOM HTML ni teglarning daraxt tuzilishi sifatida ifodalaydi. Qanday ko'rinishi:
 <div className="domtree"></div>
 
 <script>
+<<<<<<< HEAD
 {`let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"Bug'u haqida"}]},{"name":"#text","nodeType":3,"content":"\\n"}]},{"name":"#text","nodeType":3,"content":"\\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\\n  Bug'u haqidagi haqiqat.\\n\\n\\n"}]}]}
+=======
+let node1 = {"name":"HTML","nodeType":1,"children":[{"name":"HEAD","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  "},{"name":"TITLE","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"About elk"}]},{"name":"#text","nodeType":3,"content":"\n"}]},{"name":"#text","nodeType":3,"content":"\n"},{"name":"BODY","nodeType":1,"children":[{"name":"#text","nodeType":3,"content":"\n  The truth about elk.\n"}]}]}
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 drawHtmlTree(node1, 'div.domtree', 690, 320);`}
 </script>
@@ -211,7 +215,11 @@ Butun hujjatni ifodalovchi `document` obyekti ham rasman DOM tuguni hisoblanadi.
 
 ## O'zingiz ko'ring
 
+<<<<<<< HEAD
 DOM tuzilishini real vaqtda ko'rish uchun [Live DOM Viewer](http://software.hixie.ch/utilities/js/live-dom-viewer/) ni sinab ko'ring. Shunchaki hujjatni yozing va u bir zumda DOM sifatida ko'rsatiladi.
+=======
+To see the DOM structure in real-time, try [Live DOM Viewer](https://software.hixie.ch/utilities/js/live-dom-viewer/). Just type in the document, and it will show up as a DOM at an instant.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 DOM ni o'rganishning boshqa usuli - brauzer dasturchi vositalaridan foydalanish. Aslida, biz rivojlanishda shu usuldan foydalanamiz.
 

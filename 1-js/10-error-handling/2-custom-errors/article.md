@@ -21,6 +21,7 @@ Ichki sifatida biz `JSON.parse` dan foydalanamiz. Agar u noto'g'ri shakllangan `
 
 Ammo `json` sintaktik jihatdan to'g'ri bo'lsa ham, bu uning haqiqiy foydalanuvchi ekanligini anglatmaydi, to'g'rimi? Kerakli ma'lumotlarni o'tkazib yuborishi mumkin. Masalan, u bizning foydalanuvchilarimiz uchun muhim bo'lgan `name` va `age` xususiyatlariga ega bo'lmasligi mumkin.
 
+<<<<<<< HEAD
 Bizning `readUser(json)` funktsiyasi nafaqat JSONni o'qiydi, balki ma'lumotlarni tekshiradi ("tasdiqlaydi"). Agar talab qilinadigan maydonlar bo'lmasa yoki format noto'g'ri bo'lsa, demak bu xato. Va bu `SyntaxError` emas, chunki ma'lumotlar sintaktik jihatdan to'g'ri, ammo boshqa bir xato. Biz buni `ValidationError` deb ataymiz va buning uchun klass yaratamiz. Bunday xato, shuningdek, hatolik to'g'risidagi ma'lumotni o'z ichiga olishi kerak.
 
 Bizning `ValidationError` klassi o'rnatilgan `Error` klassidan olinishi kerak.
@@ -28,6 +29,11 @@ Bizning `ValidationError` klassi o'rnatilgan `Error` klassidan olinishi kerak.
 Ushbu klass ichki o'rnatilgan, ammo biz nima kengaytirayotganimizni tushunish uchun uning taxminiy kodi bizning ko'z oldida bo'lishi kerak.
 
 Mana:
+=======
+Our `ValidationError` class should inherit from the `Error` class.
+
+The `Error` class is built-in, but here's its approximate code so we can understand what we're extending:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js
 // O'rnatilgan Xatolar sinfi uchun "pseudocode" JavaScript-ning o'zi tomonidan belgilanadi
@@ -42,7 +48,7 @@ class Error {
 
 Keling, undan `ValidationError` ni meros qilib olamiz:
 
-```js run untrusted
+```js run
 *!*
 class ValidationError extends Error {
 */!*
@@ -122,15 +128,23 @@ Quyidagi kabi `err.name` ga qarashimiz mumkin:
 // (err instanceof SyntaxError) ning o'rniga
 } else if (err.name == "SyntaxError") { // (*)
 // ...
-```  
+```
 
 `instanceof` versiyasi ancha yaxshi, chunki kelajakda biz `ValidationError` ni kengaytiramiz, uning `TypeRequiredError` kabi pastki turlarini yaratamiz. Va `instanceof` tekshiruvi yangi meros klasslari uchun ishlashni davom ettiradi. Demak, bu kelajakka ishonchli.
 
+<<<<<<< HEAD
 Bundan tashqari, agar `catch` noma'lum xatoga duch kelsa, uni `(**)` satrida qayta tiklashi muhimdir. `catch` faqat tasdiqlash va sintaksis xatolarini qanday boshqarishni biladi, boshqa turlarni (koddagi xato yoki shunga o'xshash sabablarga ko'ra) boshqara ololmaydi.
+=======
+Also it's important that if `catch` meets an unknown error, then it rethrows it in the line `(**)`. The `catch` block only knows how to handle validation and syntax errors, other kinds (caused by a typo in the code or other unknown reasons) should fall through.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ## Keyinchalik meros
 
+<<<<<<< HEAD
 `ValidationError` klassi juda umumiy. Ko'p narsalar noto'g'ri ketishi mumkin. Xususiyat yo'q bo'lishi yoki noto'g'ri formatda bo'lishi mumkin (masalan, `age` uchun matn qiymati). Keling, aniq xususiyatlar uchun aniqroq `PropertyRequiredError` klassini yarataylik. Unda yetishmayotgan mulk to'g'risida qo'shimcha ma'lumotlar mavjud.
+=======
+The `ValidationError` class is very generic. Many things may go wrong. The property may be absent or it may be in a wrong format (like a string value for `age` instead of a number). Let's make a more concrete class `PropertyRequiredError`, exactly for absent properties. It will carry additional information about the property that's missing.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```js run
 class ValidationError extends Error {

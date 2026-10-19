@@ -23,10 +23,17 @@ function accept(req, res) {
 }
 
 function onConnect(ws) {
+<<<<<<< HEAD
   ws.on("message", function (message) {
     let name =
       message.match(/([\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]+)$/gu) || "Guest";
     ws.send(`Serverdan salom, ${name}!`);
+=======
+  ws.on('message', function (message) {
+    message = message.toString();
+    let name = message.match(/([\p{Alpha}\p{M}\p{Nd}\p{Pc}\p{Join_C}]+)$/gu) || "Guest";
+    ws.send(`Hello from server, ${name}!`);
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
     setTimeout(() => ws.close(1000, "Xayr!"), 5000);
   });

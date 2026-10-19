@@ -14,7 +14,11 @@ Ushbu bobda biz ular nima ekanligini ko'rib chiqamiz va eng ko'p ishlatiladigan 
 
 Turli DOM tugunlari turli xususiyatlarga ega bo'lishi mumkin. Masalan, `<a>` tegiga mos keladigan element tuguni havola bilan bog'liq xususiyatlarga ega, `<input>` ga mos keluvchisi esa input bilan bog'liq xususiyatlarga ega va hokazo. Matn tugunlari element tugunlari bilan bir xil emas. Lekin ular orasida umumiy xususiyatlar va metodlar ham mavjud, chunki barcha DOM tugun klasslari yagona ierarxiyani tashkil qiladi.
 
+<<<<<<< HEAD
 Har bir DOM tuguni tegishli o'rnatilgan klassga tegishli.
+=======
+The root of the hierarchy is [EventTarget](https://dom.spec.whatwg.org/#eventtarget), that is inherited by  [Node](https://dom.spec.whatwg.org/#interface-node), and other DOM nodes inherit from it.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Ierarxiyaning ildizi [EventTarget](https://dom.spec.whatwg.org/#eventtarget) bo'lib, undan [Node](http://dom.spec.whatwg.org/#interface-node) meros oladi va boshqa DOM tugunlari undan meros oladi.
 
@@ -24,6 +28,7 @@ Mana rasm, tushuntirishlar keyinroq:
 
 Klasslar:
 
+<<<<<<< HEAD
 - [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- ildiz "mavhum" klass. Bu klassning obyektlari hech qachon yaratilmaydi. U asos bo'lib xizmat qiladi, shunda barcha DOM tugunlari "hodisalar" deb ataladigan narsani qo'llab-quvvatlaydi, biz ularni keyinroq o'rganamiz.
 - [Node](http://dom.spec.whatwg.org/#interface-node) -- bu ham "mavhum" klass bo'lib, DOM tugunlari uchun asos bo'lib xizmat qiladi. U asosiy daraxt funksionalligini taqdim etadi: `parentNode`, `nextSibling`, `childNodes` va hokazo (bular getter'lardir). `Node` klassining obyektlari hech qachon yaratilmaydi. Lekin undan meros oladigan aniq tugun klasslari mavjud, ya'ni: matn tugunlari uchun `Text`, element tugunlari uchun `Element` va izoh tugunlari uchun `Comment` kabi boshqa ekzotik klasslar.
 - [Element](http://dom.spec.whatwg.org/#interface-element) -- DOM elementlari uchun asos klass. U element darajasidagi navigatsiyani taqdim etadi, masalan `nextElementSibling`, `children` va `getElementsByTagName`, `querySelector` kabi qidiruv metodlari. Brauzer nafaqat HTML, balki XML va SVG ni ham qo'llab-quvvatlaydi. `Element` klassi aniqroq klasslar uchun asos bo'lib xizmat qiladi: `SVGElement`, `XMLElement` va `HTMLElement`.
@@ -34,6 +39,41 @@ Klasslar:
     - ...va hokazo, har bir tegning aniq xususiyatlar va metodlarni taqdim etishi mumkin bo'lgan o'z klassi bor.
 
 Shunday qilib, berilgan tugunning barcha xususiyatlar va metodlari to'plami merosxo'rlik natijasida hosil bo'ladi.
+=======
+- [EventTarget](https://dom.spec.whatwg.org/#eventtarget) -- is the root "abstract" class for everything.
+
+    Objects of that class are never created. It serves as a base, so that all DOM nodes support so-called "events", we'll study them later.
+
+- [Node](https://dom.spec.whatwg.org/#interface-node) -- is also an "abstract" class, serving as a base  for DOM nodes.
+
+    It provides the core tree functionality: `parentNode`, `nextSibling`, `childNodes` and so on (they are getters). Objects of `Node` class are never created. But there are other classes that inherit from it (and so inherit the `Node` functionality).
+
+- [Document](https://dom.spec.whatwg.org/#interface-document), for historical reasons often inherited by `HTMLDocument` (though the latest spec doesn't dictate it) -- is a document as a whole.
+
+    The `document` global object belongs exactly to this class. It serves as an entry point to the DOM.
+
+- [CharacterData](https://dom.spec.whatwg.org/#interface-characterdata) -- an "abstract" class, inherited by:
+    - [Text](https://dom.spec.whatwg.org/#interface-text) -- the class corresponding to a text inside elements, e.g. `Hello` in `<p>Hello</p>`.
+    - [Comment](https://dom.spec.whatwg.org/#interface-comment) -- the class for comments. They are not shown, but each comment becomes a member of DOM.
+
+- [Element](https://dom.spec.whatwg.org/#interface-element) -- is the base class for DOM elements.
+
+    It provides element-level navigation like `nextElementSibling`, `children` and searching methods like `getElementsByTagName`, `querySelector`.
+
+    A browser supports not only HTML, but also XML and SVG. So the `Element` class serves as a base for more specific classes: `SVGElement`, `XMLElement` (we don't need them here) and `HTMLElement`.
+
+- Finally, [HTMLElement](https://html.spec.whatwg.org/multipage/dom.html#htmlelement) is the basic class for all HTML elements. We'll work with it most of the time.
+
+    It is inherited by concrete HTML elements:
+    - [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) -- the class for `<input>` elements,
+    - [HTMLBodyElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlbodyelement) -- the class for `<body>` elements,
+    - [HTMLAnchorElement](https://html.spec.whatwg.org/multipage/semantics.html#htmlanchorelement) -- the class for `<a>` elements,
+    - ...and so on.
+
+There are many other tags with their own classes that may have specific properties and methods, while some elements, such as `<span>`, `<section>`, `<article>` do not have any specific properties, so they are instances of `HTMLElement` class.
+
+So, the full set of properties and methods of a given node comes as the result of the chain of inheritance.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Masalan, `<input>` element uchun DOM obyektini ko'rib chiqaylik. U [HTMLInputElement](https://html.spec.whatwg.org/multipage/forms.html#htmlinputelement) klassiga tegishli.
 
@@ -134,14 +174,22 @@ Masalan:
 
 ```html run
 <body>
-  <script>  
+  <script>
   let elem = document.body;
 
+<<<<<<< HEAD
   // bu nima ekanligini tekshiraylik?
   alert(elem.nodeType); // 1 => element
 
   // va birinchi bola bu...
   alert(elem.firstChild.nodeType); // 3 => matn
+=======
+  // let's examine: what type of node is in elem?
+  alert(elem.nodeType); // 1 => element
+
+  // and its first child is...
+  alert(elem.firstChild.nodeType); // 3 => text
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
   // hujjat obyekti uchun tur 9
   alert( document.nodeType ); // 9

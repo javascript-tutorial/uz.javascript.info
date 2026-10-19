@@ -4,7 +4,11 @@ muhimlik: 4
 
 # Massivdan kalitli obyekt yaratish
 
+<<<<<<< HEAD
 Aytaylik, bizga `{id:..., name:..., age... }` shaklida foydalanuvchilar massivi keldi.
+=======
+Let's say we received an array of users in the form `{id:..., name:..., age:... }`.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Undan obyekt yaratiladigan `groupById(arr)` funksiyasini yarating, bu yerda `id` kalit bo'lib, massiv elementlari qiymat bo'ladi.
 

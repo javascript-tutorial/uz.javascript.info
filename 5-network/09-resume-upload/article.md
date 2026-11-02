@@ -48,7 +48,7 @@ Yuklashni davom ettirish uchun server tomonidan qabul qilingan baytlarning *aniq
 
 3. Keyin, faylni `startByte` dan yuborish uchun `Blob` metodining `slice` dan foydalanishimiz mumkin:
     ```js
-    xhr.open("POST", "upload", true);
+    xhr.open("POST", "upload");
 
     // Fayl id'si, server qaysi faylni yuklayotganimizni bilishi uchun
     xhr.setRequestHeader('X-File-Id', fileId);

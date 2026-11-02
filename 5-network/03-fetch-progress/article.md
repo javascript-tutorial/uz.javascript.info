@@ -6,7 +6,11 @@ Diqqat qiling: hozirda `fetch` uchun *yuborish* jarayonini kuzatish imkoni yo'q.
 
 Yuklash jarayonini kuzatish uchun `response.body` xususiyatidan foydalanishimiz mumkin. Bu `ReadableStream` -- kelganda body ni qism-qism taqdim etadigan maxsus obyekt. Readable stream'lar [Streams API](https://streams.spec.whatwg.org/#rs-class) spetsifikatsiyasida tasvirlangan.
 
+<<<<<<< HEAD
 `response.text()`, `response.json()` va boshqa metodlardan farqli o'laroq, `response.body` o'qish jarayoni ustidan to'liq nazoratni beradi va biz istalgan paytda qancha iste'mol qilinganini hisoblashimiz mumkin.
+=======
+To track download progress, we can use `response.body` property. It's a `ReadableStream` -- a special object that provides body chunk-by-chunk, as it comes. Readable streams are described in the [Streams API](https://streams.spec.whatwg.org/#rs-class) specification.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 `response.body` dan javobni o'qiydigan kodning eskizi:
 

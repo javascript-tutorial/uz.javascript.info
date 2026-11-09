@@ -79,7 +79,11 @@ Bu bir nechta mustaqil qayta chizishlar birlashtirilishi kerak, brauzer uchun qa
 
 Yodda tutish kerak bo'lgan yana bir narsa bor. Ba'zida CPU yuklanadi yoki kamroq tez qayta chizish uchun boshqa sabablar bor (masalan, brauzer yorlig'i yashiringanda), shuning uchun biz uni har `20ms`da ishlatmasligimiz kerak.
 
+<<<<<<< HEAD
 Lekin buni JavaScript-da qanday bilamiz? [Animation timing](http://www.w3.org/TR/animation-timing/) spetsifikatsiyasi mavjud bo'lib, u `requestAnimationFrame` funksiyasini taqdim etadi. U bu barcha masalalarni va undan ham ko'pini hal qiladi.
+=======
+But how do we know about that in JavaScript? There's a specification [Animation timing](https://www.w3.org/TR/animation-timing/) that provides the function `requestAnimationFrame`. It addresses all these issues and even more.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Sintaksis:
 ```js
@@ -96,7 +100,11 @@ Qaytarilgan qiymat `requestId` chaqiruvni bekor qilish uchun ishlatilishi mumkin
 cancelAnimationFrame(requestId);
 ```
 
+<<<<<<< HEAD
 `callback` bitta argumentni oladi -- sahifa yuklanishining boshlanishidan o'tgan vaqt mikrosoniyalarda. Bu vaqtni [performance.now()](mdn:api/Performance/now) ni chaqirish orqali ham olish mumkin.
+=======
+The `callback` gets one argument -- the time passed from the beginning of the page load in milliseconds. This time can also be obtained by calling [performance.now()](mdn:api/Performance/now).
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Odatda `callback` juda tez ishlaydi, CPU yuklanmagan yoki noutbukning batareyasi deyarli tugamagan yoki boshqa sabab bo'lmasa.
 
@@ -159,7 +167,11 @@ function animate({timing, draw, duration}) {
     }
     ```
 
+<<<<<<< HEAD
     Uning grafigi:
+=======
+    Its graph:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
     ![](linear.svg)
 
     Bu `transition-timing-function: linear` kabi. Quyida ko'rsatilgan qiziqarli variantlar bor.
@@ -282,7 +294,7 @@ Tasavvur qiling, biz to'pni tashlaymiz. U pastga tushadi, keyin bir necha marta 
 
 ```js
 function bounce(timeFraction) {
-  for (let a = 0, b = 1, result; 1; a += b, b /= 2) {
+  for (let a = 0, b = 1; 1; a += b, b /= 2) {
     if (timeFraction >= (7 - 4 * a) / 11) {
       return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2)
     }
@@ -451,4 +463,8 @@ Albatta biz uni yaxshilashimiz, ko'proq xususiyatlar qo'shishimiz mumkin, lekin 
 
 JavaScript animatsiyalari har qanday timing funksiyasidan foydalanishi mumkin. Biz ularni yanada ko'p qirrali qilish uchun ko'plab misollar va transformatsiyalarni ko'rib chiqdik. CSS dan farqli o'laroq, biz bu yerda Bezier egri chiziqlari bilan cheklanmaymiz.
 
+<<<<<<< HEAD
 `draw` haqida ham xuddi shunday: biz CSS xususiyatlari emas, balki har qanday narsani animatsiya qilishimiz mumkin.
+=======
+The same is true about `draw`: we can animate anything, not just CSS properties.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47

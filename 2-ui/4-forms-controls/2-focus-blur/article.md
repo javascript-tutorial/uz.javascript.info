@@ -89,8 +89,15 @@ Agar biz inputga biror narsa kiritsak va keyin `key:Tab` dan foydalanishga harak
 
 Diqqat qiling, `onblur` da `event.preventDefault()` ni chaqirish orqali "fokusni yo'qotishning oldini ololmaymiz", chunki `onblur` element fokusni yo'qotgandan *keyin* ishlaydi.
 
+<<<<<<< HEAD
 ```warn header="JavaScript tomonidan boshlangan fokus yo'qolishi"
 Fokus yo'qolishi ko'p sabablarga ko'ra sodir bo'lishi mumkin.
+=======
+In practice though, one should think well, before implementing something like this, because we generally *should show errors* to the user, but *should not prevent their progress* in filling our form. They may want to fill other fields first.
+
+```warn header="JavaScript-initiated focus loss"
+A focus loss can occur for many reasons.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Ulardan biri tashrif buyuruvchi boshqa joyga bosganda. Lekin JavaScript ning o'zi ham bunga sabab bo'lishi mumkin, masalan:
 

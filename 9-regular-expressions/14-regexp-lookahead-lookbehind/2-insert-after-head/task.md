@@ -20,7 +20,11 @@ let str = `
 str = str.replace(regexp, `<h1>Salom</h1>`);
 ```
 
+<<<<<<< HEAD
 Shundan so'ng "str" ​​qiymati quyidagicha bo'lishi kerak:
+=======
+After that the value of `str` should be:
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 ```html
 <html>

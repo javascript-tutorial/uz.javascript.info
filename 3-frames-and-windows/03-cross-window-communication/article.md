@@ -116,7 +116,18 @@ document.domain = 'site.com';
 
 Hammasi shu. Endi ular cheklovsiz o'zaro ta'sir qilishlari mumkin. Yana, bu faqat bir xil ikkinchi darajali domenga ega sahifalar uchun mumkin.
 
+<<<<<<< HEAD
 ## Iframe: noto'g'ri hujjat tuzoq
+=======
+```warn header="Deprecated, but still working"
+The `document.domain` property is in the process of being removed from the [specification](https://html.spec.whatwg.org/multipage/origin.html#relaxing-the-same-origin-restriction). The cross-window messaging (explained soon below) is the suggested replacement.
+
+That said, as of now all browsers support it. And the support will be kept for the future, not to break old code that relies on `document.domain`.
+```
+
+
+## Iframe: wrong document pitfall
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Iframe bir xil kelib chiqishdan kelganda va biz uning `document` iga kirishimiz mumkin bo'lganda, tuzoq bor. Bu cross-origin narsalar bilan bog'liq emas, lekin bilish muhim.
 
@@ -266,7 +277,11 @@ Argumentlar:
 `targetOrigin`
 : Maqsadli oyna uchun kelib chiqishni belgilaydi, shuning uchun faqat berilgan kelib chiqishdan oyna xabarni oladi.
 
+<<<<<<< HEAD
 `targetOrigin` xavfsizlik chorasi. Esda tuting, agar maqsadli oyna boshqa kelib chiqishdan kelsa, biz jo'natuvchi oynada uning `location` ini o'qiy olmaymiz. Shuning uchun maqsadli oynada hozir qaysi sayt ochilganiga ishonch hosil qila olmaymiz: foydalanuvchi boshqa joyga o'tgan bo'lishi mumkin va jo'natuvchi oyna bu haqda hech qanday tasavvurga ega emas.
+=======
+The `targetOrigin` is a safety measure. Remember, if the target window comes from another origin, we can't read its `location` in the sender window. So we can't be sure which site is open in the intended window right now: the user could navigate away, and the sender window has no idea about it.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 `targetOrigin` ni belgilash oyna faqat to'g'ri saytda bo'lganda ma'lumotlarni olishini ta'minlaydi. Ma'lumotlar nozik bo'lganda muhim.
 

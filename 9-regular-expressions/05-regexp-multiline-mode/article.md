@@ -16,7 +16,7 @@ let str = `1st place: Winnie
 3rd place: Eeyore`;
 
 *!*
-alert( str.match(/^\d/gm) ); // 1, 2, 3
+console.log( str.match(/^\d/gm) ); // 1, 2, 3
 */!*
 ```
 
@@ -28,7 +28,7 @@ let str = `1st place: Winnie
 3rd place: Eeyore`;
 
 *!*
-alert( str.match(/^\d/g) ); // 1
+console.log( str.match(/^\d/g) ); // 1
 */!*
 ```
 
@@ -51,7 +51,7 @@ let str = `Winnie: 1
 Piglet: 2
 Eeyore: 3`;
 
-alert( str.match(/\d$/gm) ); // 1,2,3
+console.log( str.match(/\d$/gm) ); // 1,2,3
 ```
 
 `pattern:m` bayrog'isiz dollar `pattern:$` faqat butun matn oxirida mos keladi, shuning uchun faqat eng oxirgi raqam topiladi.
@@ -75,7 +75,7 @@ let str = `Winnie: 1
 Piglet: 2
 Eeyore: 3`;
 
-alert( str.match(/\d\n/gm) ); // 1\n,2\n
+console.log( str.match(/\d\n/g) ); // 1\n,2\n
 ```
 
 Ko'rib turganingizdek, 3 o'rniga 2 ta moslik bor.

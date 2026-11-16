@@ -127,6 +127,7 @@ HTML belgilashda bunday qisqich quyidagicha ko'rinadi:
 ...
 ```
 
+<<<<<<< HEAD
 Yaxshiroq o'qilishi va ayni paytda uni chiroylashtiramiz uchun saytimizda JavaScript sintaksis ta'kidlash kutubxonasidan, masalan [Prism.js](https://prismjs.com/) dan foydalanamiz. Yuqoridagi qisqich uchun Prism da sintaksis ta'kidlashni olish uchun `Prism.highlightElem(pre)` chaqiriladi, bu bunday `pre` elementlarining mazmunini tekshiradi va rangli sintaksis ta'kidlash uchun maxsus teglar va stillarni qo'shadi, xuddi bu sahifadagi misollarda ko'rganingizdek.
 
 Aynan qachon bu ta'kidlash usulini ishga tushirishimiz kerak? Biz buni `DOMContentLoaded` hodisasida qilishimiz yoki skriptni sahifaning pastki qismiga qo'yishimiz mumkin. DOM tayyor bo'lgan paytda biz `pre[class*="language"]` elementlarini qidiribo, ularga `Prism.highlightElem` chaqirishimiz mumkin:
@@ -134,6 +135,15 @@ Aynan qachon bu ta'kidlash usulini ishga tushirishimiz kerak? Biz buni `DOMConte
 ```js
 // sahifadagi barcha kod qisqichlarini ta'kidlash
 document.querySelectorAll('pre[class*="language"]').forEach(Prism.highlightElem);
+=======
+For better readability and at the same time, to beautify it, we'll be using a JavaScript syntax highlighting library on our site, like [Prism.js](https://prismjs.com/). To get syntax highlighting for above snippet in Prism, `Prism.highlightElement(pre)` is called, which examines the contents of such `pre` elements and adds special tags and styles for colored syntax highlighting into those elements, similar to what you see in examples here, on this page.
+
+When exactly should we run that highlighting method? Well, we can do it on `DOMContentLoaded` event, or put the script at the bottom of the page. The moment our DOM is ready, we can search for elements `pre[class*="language"]` and call `Prism.highlightElement` on them:
+
+```js
+// highlight all code snippets on the page
+document.querySelectorAll('pre[class*="language"]').forEach(elem => Prism.highlightElement(elem));
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 Hozircha hammasi oddiy, shunday emasmi? Biz HTML da kod qisqichlarini topamiz va ularni ta'kidlaymiz.
@@ -145,9 +155,15 @@ let article = /* serverdan yangi kontent yuklash */
 articleElem.innerHTML = article;
 ```
 
+<<<<<<< HEAD
 Yangi `article` HTML kod qisqichlarini o'z ichiga olishi mumkin. Ularga `Prism.highlightElem` chaqirishimiz kerak, aks holda ular ta'kidlanmaydi.
 
 **Dinamik yuklangan maqola uchun `Prism.highlightElem` ni qayerda va qachon chaqirish kerak?**
+=======
+The new `article` HTML may contain code snippets. We need to call `Prism.highlightElement` on them, otherwise they won't get highlighted.
+
+**Where and when to call `Prism.highlightElement` for a dynamically loaded article?**
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Biz bu chaqiruvni maqola yuklaydigan kodga qo'shishimiz mumkin:
 
@@ -156,7 +172,12 @@ let article = /* serverdan yangi kontent yuklash */
 articleElem.innerHTML = article;
 
 let snippets = articleElem.querySelectorAll('pre[class*="language-"]');
+<<<<<<< HEAD
 snippets.forEach(Prism.highlightElem);
+=======
+snippets.forEach(elem => Prism.highlightElement(elem));
+*/!*
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ...Lekin tasavvur qiling, kodda kontent yuklaydigan ko'p joylar bor - maqolalar, viktorinalar, forum postlari va hokazo. Ta'kidlash chaqiruvini har yerga qo'yishimiz kerakmi, yuklagandan keyin kontentdagi kodni ta'kidlash uchun? Bu unchalik qulay emas.

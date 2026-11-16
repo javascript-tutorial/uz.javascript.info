@@ -9,8 +9,13 @@ function pow(x, n) {
   return result;
 }
 
+<<<<<<< HEAD
 let x = prompt("x?", "");
 let n = prompt("n?", "");
+=======
+let x = +prompt("x?", '');
+let n = +prompt("n?", '');
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 if (n < 1) {
   alert(`${n} darajasi quvvatlanmaydi,

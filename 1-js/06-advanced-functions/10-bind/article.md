@@ -123,7 +123,11 @@ funcUser(); // John
 */!*
 ```
 
+<<<<<<< HEAD
 Bu yerda `func.bind(user)` `func` ning "bog'langan varianti" sifatida, sobit `this=user` bilan.
+=======
+Here `func.bind(user)` is a "bound variant" of `func`, with fixed `this=user`.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 
 Barcha argumentlar asl `func` ga uzatiladi, masalan:
 
@@ -178,8 +182,13 @@ let user = {
 
 let say = user.say.bind(user);
 
+<<<<<<< HEAD
 say("Salom"); // Salom, John ("Salom" say ga bog'landi)
 say("Hayir"); // Hayir, John ("Hayir" say ga bog'landi)
+=======
+say("Hello"); // Hello, John! ("Hello" argument is passed to say)
+say("Bye"); // Bye, John! ("Bye" is passed to say)
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ```
 
 ````smart header="Qulaylik usuli: `bindAll`"
@@ -193,7 +202,11 @@ for (let key in user) {
 }
 ```
 
+<<<<<<< HEAD
 JavaScript kutubxonalari, shuningdek, qulay ommaviy biriktirish uchun funktsiyalarni taqdim etadi, masalan, [_.bindAll(obj)](http://lodash.com/docs#bindAll) lodash-da.
+=======
+JavaScript libraries also provide functions for convenient mass binding , e.g. [_.bindAll(object, methodNames)](https://lodash.com/docs#bindAll) in lodash.
+>>>>>>> 20208769e528337949e946f526534d61d38bac47
 ````
 
 ## Xulosa
